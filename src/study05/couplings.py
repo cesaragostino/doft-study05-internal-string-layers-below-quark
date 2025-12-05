@@ -40,6 +40,7 @@ def build_string_couplings(
     couplings: List[Coupling] = []
     for i in range(max(0, N - 1)):
         k_ij = k_scale * rng.uniform(0.5, 1.5)
+        k_ij *= rng.uniform(0.95, 1.05)  # mild disorder to break degeneracies
         couplings.append(Coupling(i=(layer, i), j=(layer, i + 1), k_ij=float(k_ij)))
     return couplings
 
@@ -53,7 +54,7 @@ def build_inter_layer_coupling(
     rng: np.random.Generator | None = None,
 ) -> InterLayerCoupling:
     rng = rng_or_default(rng)
-    M = rng.choice([1, 2])  # at least one memory term if coupling exists
+    M = rng.choice([0, 1, 2], p=[0.3, 0.5, 0.2])
     taus, amps = [], []
     for _ in range(int(M)):
         tau = rng.uniform(0.5, 5.0) / (2 * np.pi * f_deep)
@@ -66,7 +67,7 @@ def build_inter_layer_coupling(
     max_links = min(N_deep, N_shallow)
     coupling_matrix: Dict[Tuple[int, int], float] = {}
     for idx in range(max_links):
-        strength = rng.uniform(0.1, 1.0)
+        strength = rng.uniform(0.2, 3.0)
         coupling_matrix[(idx, idx)] = float(strength)
 
     delay = rng.uniform(0.5, 2.0) / (2 * np.pi * f_deep)

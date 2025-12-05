@@ -4,8 +4,8 @@ Lightweight simulator of coupled oscillators with internal layers (S1, S2, optio
 
 ## Layout
 - Code: `src/study05/`
-- Input draws/parameters: `data/raw/`
-- Processed results and plots: `data/processed/`
+- Input draws/parameters: `data/raw/<case>/`
+- Processed results and plots: `data/processed/<case>/`
 
 ## Requirements
 - Python 3.8+ with `numpy`; `matplotlib` is optional (only needed for plots).
@@ -18,13 +18,14 @@ PYTHONPATH=src python3 -m study05.run_sweep \
   --runs 50 \
   --seed 123 \
   --band-min 0.0 \
-  --band-max 3.0
+  --band-max 5.0
 ```
 This:
-- Stores parameters in `data/raw/study05_sweep_params.json`.
-- Stores results in `data/processed/study05_sweep_results.json`.
-- If you omit `--no-plots`, also writes plots to `data/processed/`.
+- Stores parameters in `data/raw/<case>/study05_sweep_params.json`.
+- Stores results in `data/processed/<case>/study05_sweep_results.json`.
+- If you omit `--no-plots`, also writes plots to `data/processed/<case>/`.
 
 Useful variations:
 - `--case CaseB_3layers` to include S3.
 - Tune `--n-*` for modes per layer (Q defaults to 4 string modes) and `--max-complexity` (defaults to 12; set lower for stricter filtering).
+- Narrow the band back to `--band-max 3.0` after exploring mode density.

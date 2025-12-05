@@ -42,7 +42,7 @@ def generate_configuration(
     max_complexity: int = DEFAULT_MAX_COMPLEXITY,
     attempts: int = 30,
     k_scale_q: float = 0.1,
-    k_scale_internal: float = 1.0,
+    k_scale_internal: float = 0.5,
 ) -> Optional[SimulationConfig]:
     """Generate a configuration satisfying the complexity constraint."""
     rng = rng_or_default(rng)

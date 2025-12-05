@@ -22,6 +22,7 @@ from study05.sweep import SimulationConfig, generate_configuration, state_matrix
 
 DEFAULT_RAW_DIR = Path("data/raw")
 DEFAULT_PROCESSED_DIR = Path("data/processed")
+TARGET_ENERGY_GEV = 2.0
 
 
 def _serialize_run_config(config: SimulationConfig) -> Dict:
@@ -42,6 +43,23 @@ def _ensure_dirs(raw_dir: Path, processed_dir: Path) -> None:
     processed_dir.mkdir(parents=True, exist_ok=True)
 
 
+def _case_dirs(raw_dir: Path, processed_dir: Path, case: str) -> tuple[Path, Path]:
+    raw_case = raw_dir / case
+    processed_case = processed_dir / case
+    _ensure_dirs(raw_case, processed_case)
+    return raw_case, processed_case
+
+
+def _rescale_energies(energies: np.ndarray, target: float = TARGET_ENERGY_GEV) -> tuple[np.ndarray, float]:
+    """Rescale energies so a reference low mode lands near target."""
+    energies_sorted = np.sort(energies[energies > 0])
+    if energies_sorted.size == 0:
+        return energies, 1.0
+    ref = energies_sorted[min(2, energies_sorted.size - 1)]  # median of lowest three (or lowest if <3)
+    scale = target / ref if ref > 0 else 1.0
+    return energies * scale, scale
+
+
 def run_sweep(
     case: str,
     runs: int,
@@ -59,7 +77,7 @@ def run_sweep(
     processed_dir: Path = DEFAULT_PROCESSED_DIR,
 ):
     rng = np.random.default_rng(seed)
-    _ensure_dirs(raw_dir, processed_dir)
+    raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, case)
 
     run_inputs: List[Dict] = []
     run_outputs: List[Dict] = []
@@ -97,6 +115,8 @@ def run_sweep(
         energies_gev = energies_all[nonzero_mask]
         weights_filtered = [w for keep, w in zip(nonzero_mask, weights_full) if keep]
 
+        energies_gev, scale = _rescale_energies(energies_gev, target=TARGET_ENERGY_GEV)
+
         band_mask = (energies_gev >= band_min) & (energies_gev <= band_max)
         band_indices = np.where(band_mask)[0]
         band_energies = energies_gev[band_indices]
@@ -121,6 +141,7 @@ def run_sweep(
                 "n_modes": len(config.modes),
                 "n_memory_terms": config.memory_terms,
                 "complexity": config.complexity,
+                "energy_scale": scale,
                 "energies_gev": energies_gev.tolist(),
                 "band_energies_gev": band_energies.tolist(),
                 "band_masses_kg": analysis.energies_to_masses_kg(band_energies).tolist(),
@@ -151,8 +172,8 @@ def run_sweep(
         "runs": run_outputs,
     }
 
-    raw_path = raw_dir / "study05_sweep_params.json"
-    processed_path = processed_dir / "study05_sweep_results.json"
+    raw_path = raw_case_dir / "study05_sweep_params.json"
+    processed_path = processed_case_dir / "study05_sweep_results.json"
 
     raw_path.write_text(json.dumps(raw_payload, indent=2))
     processed_path.write_text(json.dumps(processed_payload, indent=2))
@@ -164,17 +185,17 @@ def run_sweep(
             weights_sorted = [example_run["weights"][i] for i in sorted_idx]
             plots.plot_spectrum(
                 energies_sorted,
-                processed_dir / "study05_example_band_spectrum.png",
+                processed_case_dir / "study05_example_band_spectrum.png",
                 title="Hadronic-band spectrum",
             )
             plots.plot_layer_heatmap(
                 energies_sorted.tolist(),
                 weights_sorted,
                 layers_order=["Q", "S1", "S2", "S3"],
-                output_path=processed_dir / "study05_example_band_heatmap.png",
+                output_path=processed_case_dir / "study05_example_band_heatmap.png",
             )
         if all_spacings.size > 0:
-            plots.plot_spacing_histogram(all_spacings, processed_dir / "study05_spacing_histogram.png")
+            plots.plot_spacing_histogram(all_spacings, processed_case_dir / "study05_spacing_histogram.png")
 
     return summary, raw_path, processed_path
 
