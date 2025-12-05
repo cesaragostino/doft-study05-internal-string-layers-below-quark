@@ -1,0 +1,141 @@
+{
+  "seed": 123,
+  "max_complexity": 8,
+  "inputs": [
+    {
+      "case_name": "CaseA_2layers",
+      "f_Q_Hz": 4.8122907997724196e+23,
+      "R_S1_Q": 128.12740714067317,
+      "R_S2_S1": 275.87970031325244,
+      "R_S3_S2": null,
+      "N": {
+        "Q": 1,
+        "S1": 3,
+        "S2": 3,
+        "S3": 3
+      },
+      "memory_terms_per_link": [
+        0,
+        0
+      ],
+      "delays": [
+        3.729641767642733e-27,
+        1.7570297611562707e-29
+      ],
+      "intra_couplings": 4,
+      "inter_coupling_links": [
+        1,
+        3
+      ],
+      "complexity": 7
+    },
+    {
+      "case_name": "CaseA_2layers",
+      "f_Q_Hz": 4.2221533768204225e+23,
+      "R_S1_Q": 6827.239608438444,
+      "R_S2_S1": 5362.662953854223,
+      "R_S3_S2": null,
+      "N": {
+        "Q": 1,
+        "S1": 3,
+        "S2": 3,
+        "S3": 3
+      },
+      "memory_terms_per_link": [
+        0,
+        1
+      ],
+      "delays": [
+        4.1986550065443315e-29,
+        1.767309768441093e-32
+      ],
+      "intra_couplings": 4,
+      "inter_coupling_links": [
+        1,
+        3
+      ],
+      "complexity": 8
+    },
+    {
+      "case_name": "CaseA_2layers",
+      "f_Q_Hz": 1.8708749202801954e+23,
+      "R_S1_Q": 229.21439785332362,
+      "R_S2_S1": 1018.2212921573813,
+      "R_S3_S2": null,
+      "N": {
+        "Q": 1,
+        "S1": 3,
+        "S2": 3,
+        "S3": 3
+      },
+      "memory_terms_per_link": [
+        0,
+        1
+      ],
+      "delays": [
+        2.6611073206315058e-27,
+        6.867341738574605e-30
+      ],
+      "intra_couplings": 4,
+      "inter_coupling_links": [
+        1,
+        3
+      ],
+      "complexity": 8
+    },
+    {
+      "case_name": "CaseA_2layers",
+      "f_Q_Hz": 6.166892504546666e+23,
+      "R_S1_Q": 5235.572468868177,
+      "R_S2_S1": 864.3973521446356,
+      "R_S3_S2": null,
+      "N": {
+        "Q": 1,
+        "S1": 3,
+        "S2": 3,
+        "S3": 3
+      },
+      "memory_terms_per_link": [
+        0,
+        0
+      ],
+      "delays": [
+        8.767003038467523e-29,
+        6.352750436190029e-32
+      ],
+      "intra_couplings": 4,
+      "inter_coupling_links": [
+        1,
+        3
+      ],
+      "complexity": 7
+    },
+    {
+      "case_name": "CaseA_2layers",
+      "f_Q_Hz": 1.0658964284171675e+23,
+      "R_S1_Q": 2833.200303507515,
+      "R_S2_S1": 9366.207620776673,
+      "R_S3_S2": null,
+      "N": {
+        "Q": 1,
+        "S1": 3,
+        "S2": 3,
+        "S3": 3
+      },
+      "memory_terms_per_link": [
+        1,
+        0
+      ],
+      "delays": [
+        9.025202011320554e-28,
+        9.192042123648571e-32
+      ],
+      "intra_couplings": 4,
+      "inter_coupling_links": [
+        1,
+        3
+      ],
+      "complexity": 8
+    }
+  ]
+}
