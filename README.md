@@ -8,7 +8,7 @@ Lightweight simulator of coupled oscillators with internal layers (S1, S2, optio
 - Processed results and plots: `data/processed/`
 
 ## Requirements
-- Python 3.8+ with `numpy` available; `matplotlib` is optional (only needed for plots).
+- Python 3.8+ with `numpy`; `matplotlib` is optional (only needed for plots).
 
 ## Full workflow (generate data)
 From the repo root:
@@ -27,4 +27,4 @@ This:
 
 Useful variations:
 - `--case CaseB_3layers` to include S3.
-- Tune `--n-*` for modes per layer and `--max-complexity` to enforce `C <= 8–10`.
+- Tune `--n-*` for modes per layer (Q defaults to 4 string modes) and `--max-complexity` (defaults to 12; set lower for stricter filtering).

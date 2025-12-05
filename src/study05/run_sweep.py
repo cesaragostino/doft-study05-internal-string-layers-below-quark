@@ -1,8 +1,4 @@
-"""CLI helpers to run Study05 sweeps and persist results.
-
-Usage example (from repository root):
-    PYTHONPATH=src python -m study05.run_sweep --case CaseA_2layers --runs 20
-"""
+"""CLI helpers to run Study05 sweeps (v0.1 with memory/state-space)."""
 
 from __future__ import annotations
 
@@ -13,22 +9,22 @@ from typing import Dict, List, Optional
 
 import numpy as np
 
-from study05.core import (
-    build_dynamical_matrix,
-    compute_eigenfrequencies,
-    compute_mode_spacings,
-    count_modes_in_band,
-    energy_gev_to_mass_kg,
-    generate_configuration,
-    omega_to_energy_gev,
-    summarise_spacings,
+from study05 import analysis, plots
+from study05.config import (
+    DEFAULT_BAND_MAX,
+    DEFAULT_BAND_MIN,
+    DEFAULT_MAX_COMPLEXITY,
+    DEFAULT_N_INTERNAL,
+    DEFAULT_N_Q,
 )
+from study05.state_space import eigen_spectrum
+from study05.sweep import SimulationConfig, generate_configuration, state_matrix_from_config
 
 DEFAULT_RAW_DIR = Path("data/raw")
 DEFAULT_PROCESSED_DIR = Path("data/processed")
 
 
-def _serialize_run_config(config) -> Dict:
+def _serialize_run_config(config: SimulationConfig) -> Dict:
     return {
         "case_name": config.case_name,
         "f_Q_Hz": config.f_Q,
@@ -36,47 +32,9 @@ def _serialize_run_config(config) -> Dict:
         "R_S2_S1": config.R_S2_S1,
         "R_S3_S2": config.R_S3_S2,
         "N": {"Q": config.N_Q, "S1": config.N_S1, "S2": config.N_S2, "S3": config.N_S3},
-        "memory_terms_per_link": [len(ic.memory_kernel.taus) for ic in config.inter_layer_couplings or []],
-        "delays": [ic.delay for ic in config.inter_layer_couplings or []],
-        "intra_couplings": len(config.intra_layer_couplings or []),
-        "inter_coupling_links": [
-            len(ic.coupling_matrix) for ic in config.inter_layer_couplings or []
-        ],
+        "memory_terms": config.memory_terms,
         "complexity": config.complexity,
     }
-
-
-def _plot_spacing_histogram(spacings: np.ndarray, output_path: Path) -> None:
-    try:
-        import matplotlib.pyplot as plt
-    except ImportError:
-        return
-
-    plt.figure()
-    plt.hist(spacings, bins=50, density=True)
-    plt.xlabel("ΔE (GeV)")
-    plt.ylabel("Probability density")
-    plt.title("Mode spacings")
-    plt.tight_layout()
-    plt.savefig(output_path, dpi=200)
-    plt.close()
-
-
-def _plot_spectrum(energies: np.ndarray, output_path: Path) -> None:
-    try:
-        import matplotlib.pyplot as plt
-    except ImportError:
-        return
-
-    plt.figure()
-    x = np.arange(len(energies))
-    plt.stem(x, energies, use_line_collection=True)
-    plt.xlabel("Mode index")
-    plt.ylabel("Energy (GeV)")
-    plt.title("Mode spectrum (all layers)")
-    plt.tight_layout()
-    plt.savefig(output_path, dpi=200)
-    plt.close()
 
 
 def _ensure_dirs(raw_dir: Path, processed_dir: Path) -> None:
@@ -108,7 +66,8 @@ def run_sweep(
     spacings_all: List[np.ndarray] = []
     band_counts: List[int] = []
     rejected = 0
-    example_spectrum: Optional[np.ndarray] = None
+    accepted_runs_for_spacing = 0
+    example_run = None
 
     for run_idx in range(runs):
         config = generate_configuration(
@@ -127,36 +86,53 @@ def run_sweep(
 
         run_inputs.append(_serialize_run_config(config))
 
-        D = build_dynamical_matrix(
-            modes=config.modes or [],
-            intra_couplings=config.intra_layer_couplings or [],
-            inter_couplings=config.inter_layer_couplings or [],
-        )
-        omegas = compute_eigenfrequencies(D)
-        energies_gev = omega_to_energy_gev(omegas)
-        if example_spectrum is None:
-            example_spectrum = energies_gev.copy()
+        A, index_map, n_z = state_matrix_from_config(config)
+        eigvals, eigvecs = eigen_spectrum(A)
+        energies_all = analysis.eigvals_to_energies_gev(eigvals)
+        weights_full = analysis.layer_weights(eigvecs, config.modes, index_map)
+
+        # drop near-zero energies (spurious neutral eigenvalues)
+        energy_eps = 1e-9
+        nonzero_mask = energies_all > energy_eps
+        energies_gev = energies_all[nonzero_mask]
+        weights_filtered = [w for keep, w in zip(nonzero_mask, weights_full) if keep]
 
         band_mask = (energies_gev >= band_min) & (energies_gev <= band_max)
-        band_energies = energies_gev[band_mask]
+        band_indices = np.where(band_mask)[0]
+        band_energies = energies_gev[band_indices]
         band_counts.append(int(band_energies.size))
-        spacings = compute_mode_spacings(band_energies)
-        spacings_all.append(spacings)
+
+        band_weights = []
+        for idx in band_indices:
+            band_weights.append({"energy_gev": float(energies_gev[idx]), "weights": weights_filtered[idx]})
+
+        accepted_band = 3 <= band_energies.size <= 12
+        spacings = analysis.compute_spacings(band_energies) if accepted_band else np.array([])
+        if accepted_band:
+            spacings_all.append(spacings)
+            accepted_runs_for_spacing += 1
+            if example_run is None:
+                example_run = {"energies": band_energies.copy(), "weights": [weights_filtered[i] for i in band_indices]}
 
         run_outputs.append(
             {
                 "run_id": run_idx,
+                "state_dim": int(A.shape[0]),
+                "n_modes": len(config.modes),
+                "n_memory_terms": config.memory_terms,
                 "complexity": config.complexity,
                 "energies_gev": energies_gev.tolist(),
                 "band_energies_gev": band_energies.tolist(),
-                "band_masses_kg": energy_gev_to_mass_kg(band_energies).tolist(),
+                "band_masses_kg": analysis.energies_to_masses_kg(band_energies).tolist(),
                 "band_spacing_gev": spacings.tolist(),
                 "band_count": int(band_energies.size),
+                "accepted_for_spacing": accepted_band,
+                "band_weights": band_weights,
             }
         )
 
     all_spacings = np.concatenate(spacings_all) if spacings_all else np.array([])
-    spacing_stats = summarise_spacings(all_spacings)
+    spacing_stats = analysis.summarise_spacings(all_spacings)
     summary = {
         "case": case,
         "runs_requested": runs,
@@ -166,6 +142,7 @@ def run_sweep(
         "band_count_std": float(np.std(band_counts)) if band_counts else 0.0,
         "spacing_stats": spacing_stats,
         "band_window_gev": [band_min, band_max],
+        "runs_accepted_for_spacing": accepted_runs_for_spacing,
     }
 
     raw_payload = {"seed": seed, "max_complexity": max_complexity, "inputs": run_inputs}
@@ -180,13 +157,24 @@ def run_sweep(
     raw_path.write_text(json.dumps(raw_payload, indent=2))
     processed_path.write_text(json.dumps(processed_payload, indent=2))
 
-    if save_plots and example_spectrum is not None:
-        spectrum_path = processed_dir / "study05_example_spectrum.png"
-        _plot_spectrum(example_spectrum, spectrum_path)
-
-    if save_plots and all_spacings.size > 0:
-        spacing_path = processed_dir / "study05_spacing_histogram.png"
-        _plot_spacing_histogram(all_spacings, spacing_path)
+    if save_plots:
+        if example_run:
+            sorted_idx = np.argsort(example_run["energies"])
+            energies_sorted = np.array(example_run["energies"])[sorted_idx]
+            weights_sorted = [example_run["weights"][i] for i in sorted_idx]
+            plots.plot_spectrum(
+                energies_sorted,
+                processed_dir / "study05_example_band_spectrum.png",
+                title="Hadronic-band spectrum",
+            )
+            plots.plot_layer_heatmap(
+                energies_sorted.tolist(),
+                weights_sorted,
+                layers_order=["Q", "S1", "S2", "S3"],
+                output_path=processed_dir / "study05_example_band_heatmap.png",
+            )
+        if all_spacings.size > 0:
+            plots.plot_spacing_histogram(all_spacings, processed_dir / "study05_spacing_histogram.png")
 
     return summary, raw_path, processed_path
 
@@ -202,18 +190,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--seed", type=int, default=None, help="Random seed.")
     parser.add_argument(
-        "--max-complexity", type=int, default=8, help="Maximum complexity (C) allowed for a run."
+        "--max-complexity", type=int, default=DEFAULT_MAX_COMPLEXITY, help="Maximum complexity (C) allowed per run."
     )
-    parser.add_argument("--n-q", type=int, default=1, help="Modes in layer Q.")
-    parser.add_argument("--n-s1", type=int, default=3, help="Modes in layer S1.")
-    parser.add_argument("--n-s2", type=int, default=3, help="Modes in layer S2.")
-    parser.add_argument("--n-s3", type=int, default=3, help="Modes in layer S3 (Case B only).")
-    parser.add_argument("--band-min", type=float, default=0.0, help="Min band energy (GeV).")
-    parser.add_argument("--band-max", type=float, default=3.0, help="Max band energy (GeV).")
+    parser.add_argument("--n-q", type=int, default=DEFAULT_N_Q, help="Modes in layer Q.")
+    parser.add_argument("--n-s1", type=int, default=DEFAULT_N_INTERNAL, help="Modes in layer S1.")
+    parser.add_argument("--n-s2", type=int, default=DEFAULT_N_INTERNAL, help="Modes in layer S2.")
+    parser.add_argument("--n-s3", type=int, default=DEFAULT_N_INTERNAL, help="Modes in layer S3 (Case B only).")
+    parser.add_argument("--band-min", type=float, default=DEFAULT_BAND_MIN, help="Min band energy (GeV).")
+    parser.add_argument("--band-max", type=float, default=DEFAULT_BAND_MAX, help="Max band energy (GeV).")
     parser.add_argument(
         "--attempts",
         type=int,
-        default=20,
+        default=30,
         help="Max attempts per run to satisfy complexity constraint.",
     )
     parser.add_argument(
@@ -255,7 +243,11 @@ def main():
         raw_dir=args.raw_dir,
         processed_dir=args.processed_dir,
     )
-    print(json.dumps({"summary": summary, "raw_path": str(raw_path), "processed_path": str(processed_path)}, indent=2))
+    print(
+        json.dumps(
+            {"summary": summary, "raw_path": str(raw_path), "processed_path": str(processed_path)}, indent=2
+        )
+    )
 
 
 if __name__ == "__main__":
