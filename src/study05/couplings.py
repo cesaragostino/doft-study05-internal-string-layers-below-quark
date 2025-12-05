@@ -13,24 +13,23 @@ from .config import rng_or_default
 
 @dataclass
 class MemoryKernel:
-    taus: List[float]
-    amps: List[float]
+    taus0: List[float]
+    amps0: List[float]
 
 
 @dataclass
 class Coupling:
     i: Tuple[Layer, int]
     j: Tuple[Layer, int]
-    k_ij: float
+    k_ij0: float
 
 
 @dataclass
 class InterLayerCoupling:
     deep_layer: Layer
     shallow_layer: Layer
-    coupling_matrix: Dict[Tuple[int, int], float]
-    memory_kernel: MemoryKernel
-    delay: float
+    links: Dict[Tuple[int, int], MemoryKernel]  # (i_deep, j_shallow) -> kernel
+    g0: float  # base strength scale
 
 
 def build_string_couplings(
@@ -41,7 +40,7 @@ def build_string_couplings(
     for i in range(max(0, N - 1)):
         k_ij = k_scale * rng.uniform(0.5, 1.5)
         k_ij *= rng.uniform(0.95, 1.05)  # mild disorder to break degeneracies
-        couplings.append(Coupling(i=(layer, i), j=(layer, i + 1), k_ij=float(k_ij)))
+        couplings.append(Coupling(i=(layer, i), j=(layer, i + 1), k_ij0=float(k_ij)))
     return couplings
 
 
@@ -50,38 +49,36 @@ def build_inter_layer_coupling(
     shallow_layer: Layer,
     N_deep: int,
     N_shallow: int,
-    f_deep: float,
+    omega_deep_base: float,
     rng: np.random.Generator | None = None,
 ) -> InterLayerCoupling:
     rng = rng_or_default(rng)
-    M = rng.choice([0, 1, 2], p=[0.3, 0.5, 0.2])
-    taus, amps = [], []
-    for _ in range(int(M)):
-        tau = rng.uniform(0.5, 5.0) / (2 * np.pi * f_deep)
-        A = rng.uniform(0.1, 1.0)
-        taus.append(float(tau))
-        amps.append(float(A))
-
-    kernel = MemoryKernel(taus=taus, amps=amps)
+    links: Dict[Tuple[int, int], MemoryKernel] = {}
+    g0 = rng.uniform(0.2, 2.0) * (omega_deep_base**2)
 
     max_links = min(N_deep, N_shallow)
-    coupling_matrix: Dict[Tuple[int, int], float] = {}
     for idx in range(max_links):
-        strength = rng.uniform(0.2, 3.0)
-        coupling_matrix[(idx, idx)] = float(strength)
-
-    delay = rng.uniform(0.5, 2.0) / (2 * np.pi * f_deep)
+        M = rng.choice([0, 1, 2], p=[0.3, 0.5, 0.2])  # number of exponentials
+        taus0, amps0 = [], []
+        for _ in range(int(M)):
+            tau0 = rng.uniform(0.1, 5.0) / omega_deep_base
+            A0 = rng.uniform(0.1, 1.0)
+            taus0.append(float(tau0))
+            amps0.append(float(A0))
+        links[(idx, idx)] = MemoryKernel(taus0=taus0, amps0=amps0)
 
     return InterLayerCoupling(
         deep_layer=deep_layer,
         shallow_layer=shallow_layer,
-        coupling_matrix=coupling_matrix,
-        memory_kernel=kernel,
-        delay=float(delay),
+        links=links,
+        g0=float(g0),
     )
 
 
 def compute_complexity(modes: List[Mode], inter_couplings: List[InterLayerCoupling]) -> int:
     n_modes = len(modes)
-    n_memory_terms = sum(len(ic.memory_kernel.taus) for ic in inter_couplings)
+    n_memory_terms = 0
+    for ic in inter_couplings:
+        for kernel in ic.links.values():
+            n_memory_terms += len(kernel.taus0)
     return n_modes + n_memory_terms

@@ -14,8 +14,8 @@ def count_memory_terms(inter_couplings: List[InterLayerCoupling]) -> int:
     """Count auxiliary z variables (per link per exponential)."""
     total = 0
     for ic in inter_couplings:
-        n_links = len(ic.coupling_matrix)
-        total += n_links * len(ic.memory_kernel.taus)
+        for kernel in ic.links.values():
+            total += len(kernel.taus0)
     return total
 
 
@@ -45,7 +45,7 @@ def build_state_matrix(
     for c in intra_couplings:
         i = index_map[c.i]
         j = index_map[c.j]
-        k = c.k_ij
+        k = c.k_ij0
 
         mi = modes[i].mass
         mj = modes[j].mass
@@ -61,25 +61,27 @@ def build_state_matrix(
     for ic in inter_couplings:
         deep = ic.deep_layer
         shallow = ic.shallow_layer
-        taus = ic.memory_kernel.taus
-        amps = ic.memory_kernel.amps
-
-        for (i_deep, j_sh), strength in ic.coupling_matrix.items():
+        for (i_deep, j_sh), kernel in ic.links.items():
             idx_deep = index_map[(deep, i_deep)]
             idx_sh_x = index_map[(shallow, j_sh)]
             idx_sh_v = N + idx_sh_x
             m_sh = modes[idx_sh_x].mass
 
-            for tau_a, A_a in zip(taus, amps):
+            # direct coupling (spring-like) using g0
+            g = ic.g0
+            A[idx_sh_v, idx_sh_x] -= g / m_sh
+            A[idx_sh_v, idx_deep] += g / m_sh
+
+            for tau_a, A_a in zip(kernel.taus0, kernel.amps0):
                 idx_z = z_idx
                 z_idx += 1
 
-                # z_dot = -z / tau + strength * x_deep
+                # z_dot = -z / tau + x_deep
                 A[idx_z, idx_z] = -1.0 / tau_a
-                A[idx_z, idx_deep] = strength
+                A[idx_z, idx_deep] = 1.0
 
-                # dv_sh/dt += strength * A_a * z / m_sh
-                A[idx_sh_v, idx_z] += strength * A_a / m_sh
+                # dv_sh/dt += g * A_a * z / m_sh
+                A[idx_sh_v, idx_z] += g * A_a / m_sh
 
     return A, index_map, n_z
 

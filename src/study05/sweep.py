@@ -37,12 +37,12 @@ def generate_configuration(
     rng: np.random.Generator | None = None,
     n_q: int = DEFAULT_N_Q,
     n_s1: int = DEFAULT_N_INTERNAL,
-    n_s2: int = DEFAULT_N_INTERNAL,
-    n_s3: int = DEFAULT_N_INTERNAL,
+    n_s2: int = 2,
+    n_s3: int = 0,
     max_complexity: int = DEFAULT_MAX_COMPLEXITY,
     attempts: int = 30,
-    k_scale_q: float = 0.1,
-    k_scale_internal: float = 0.5,
+    k_scale_q: float | None = None,
+    k_scale_internal: float | None = None,
 ) -> Optional[SimulationConfig]:
     """Generate a configuration satisfying the complexity constraint."""
     rng = rng_or_default(rng)
@@ -57,44 +57,48 @@ def generate_configuration(
         inter: List[InterLayerCoupling] = []
 
         modes.extend(build_string_layer_modes(Layer.Q, f_layers[Layer.Q], n_q, rng))
-        intra.extend(build_string_couplings(Layer.Q, n_q, k_scale=k_scale_q, rng=rng))
+        kq = k_scale_q if k_scale_q is not None else 0.2 * (f_layers[Layer.Q] ** 2)
+        intra.extend(build_string_couplings(Layer.Q, n_q, k_scale=kq, rng=rng))
 
         modes.extend(build_string_layer_modes(Layer.S1, f_layers[Layer.S1], n_s1, rng))
-        intra.extend(build_string_couplings(Layer.S1, n_s1, k_scale=k_scale_internal, rng=rng))
+        k1 = k_scale_internal if k_scale_internal is not None else 0.5 * (f_layers[Layer.S1] ** 2)
+        intra.extend(build_string_couplings(Layer.S1, n_s1, k_scale=k1, rng=rng))
         inter.append(
             build_inter_layer_coupling(
                 deep_layer=Layer.S1,
                 shallow_layer=Layer.Q,
                 N_deep=n_s1,
                 N_shallow=n_q,
-                f_deep=f_layers[Layer.S1],
+                omega_deep_base=f_layers[Layer.S1],
                 rng=rng,
             )
         )
 
         modes.extend(build_string_layer_modes(Layer.S2, f_layers[Layer.S2], n_s2, rng))
-        intra.extend(build_string_couplings(Layer.S2, n_s2, k_scale=k_scale_internal, rng=rng))
+        k2 = k_scale_internal if k_scale_internal is not None else 0.5 * (f_layers[Layer.S2] ** 2)
+        intra.extend(build_string_couplings(Layer.S2, n_s2, k_scale=k2, rng=rng))
         inter.append(
             build_inter_layer_coupling(
                 deep_layer=Layer.S2,
                 shallow_layer=Layer.S1,
                 N_deep=n_s2,
                 N_shallow=n_s1,
-                f_deep=f_layers[Layer.S2],
+                omega_deep_base=f_layers[Layer.S2],
                 rng=rng,
             )
         )
 
         if include_s3:
             modes.extend(build_string_layer_modes(Layer.S3, f_layers[Layer.S3], n_s3, rng))
-            intra.extend(build_string_couplings(Layer.S3, n_s3, k_scale=k_scale_internal, rng=rng))
+            k3 = k_scale_internal if k_scale_internal is not None else 0.5 * (f_layers[Layer.S3] ** 2)
+            intra.extend(build_string_couplings(Layer.S3, n_s3, k_scale=k3, rng=rng))
             inter.append(
                 build_inter_layer_coupling(
                     deep_layer=Layer.S3,
                     shallow_layer=Layer.S2,
                     N_deep=n_s3,
                     N_shallow=n_s2,
-                    f_deep=f_layers[Layer.S3],
+                    omega_deep_base=f_layers[Layer.S3],
                     rng=rng,
                 )
             )

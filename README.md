@@ -27,5 +27,5 @@ This:
 
 Useful variations:
 - `--case CaseB_3layers` to include S3.
-- Tune `--n-*` for modes per layer (Q defaults to 4 string modes) and `--max-complexity` (defaults to 12; set lower for stricter filtering).
-- Narrow the band back to `--band-max 3.0` after exploring mode density.
+- Tune `--n-*` for modes per layer (defaults: Q=3, S1=3, S2=2, S3=0) and `--max-complexity` (defaults to 10 per spec).
+- Narrow the band back to `--band-max 3.0` after exploring mode density or widen for exploratory runs.

@@ -17,8 +17,8 @@ from study05.config import (
     DEFAULT_N_INTERNAL,
     DEFAULT_N_Q,
 )
-from study05.state_space import eigen_spectrum
-from study05.sweep import SimulationConfig, generate_configuration, state_matrix_from_config
+from study05.simulation import SimulationParams, pick_peaks, simulate
+from study05.sweep import SimulationConfig, generate_configuration
 
 DEFAULT_RAW_DIR = Path("data/raw")
 DEFAULT_PROCESSED_DIR = Path("data/processed")
@@ -28,7 +28,7 @@ TARGET_ENERGY_GEV = 2.0
 def _serialize_run_config(config: SimulationConfig) -> Dict:
     return {
         "case_name": config.case_name,
-        "f_Q_Hz": config.f_Q,
+        "f_Q_base": config.f_Q,
         "R_S1_Q": config.R_S1_Q,
         "R_S2_S1": config.R_S2_S1,
         "R_S3_S2": config.R_S3_S2,
@@ -41,6 +41,22 @@ def _serialize_run_config(config: SimulationConfig) -> Dict:
 def _ensure_dirs(raw_dir: Path, processed_dir: Path) -> None:
     raw_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
+
+
+def _case_dirs(raw_dir: Path, processed_dir: Path, case: str) -> tuple[Path, Path]:
+    raw_case = raw_dir / case
+    processed_case = processed_dir / case
+    _ensure_dirs(raw_case, processed_case)
+    return raw_case, processed_case
+
+
+def _rescale_energies(omegas: np.ndarray, target: float = TARGET_ENERGY_GEV) -> tuple[np.ndarray, float]:
+    omegas = np.array(omegas)
+    if omegas.size == 0:
+        return omegas, 1.0
+    anchor = omegas[min(2, omegas.size - 1)] if omegas.size >= 3 else omegas[0]
+    scale = target / anchor if anchor > 0 else 1.0
+    return omegas * scale, scale
 
 
 def _case_dirs(raw_dir: Path, processed_dir: Path, case: str) -> tuple[Path, Path]:
@@ -78,6 +94,7 @@ def run_sweep(
 ):
     rng = np.random.default_rng(seed)
     raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, case)
+    sim_params = SimulationParams()
 
     run_inputs: List[Dict] = []
     run_outputs: List[Dict] = []
@@ -104,51 +121,51 @@ def run_sweep(
 
         run_inputs.append(_serialize_run_config(config))
 
-        A, index_map, n_z = state_matrix_from_config(config)
-        eigvals, eigvecs = eigen_spectrum(A)
-        energies_all = analysis.eigvals_to_energies_gev(eigvals)
-        weights_full = analysis.layer_weights(eigvecs, config.modes, index_map)
-
-        # drop near-zero energies (spurious neutral eigenvalues)
-        energy_eps = 1e-9
-        nonzero_mask = energies_all > energy_eps
-        energies_gev = energies_all[nonzero_mask]
-        weights_filtered = [w for keep, w in zip(nonzero_mask, weights_full) if keep]
-
-        energies_gev, scale = _rescale_energies(energies_gev, target=TARGET_ENERGY_GEV)
+        sim_result = simulate(
+            modes=config.modes,
+            intra_couplings=config.intra_layer_couplings,
+            inter_couplings=config.inter_layer_couplings,
+            sim_params=sim_params,
+            rng=rng,
+        )
+        spectrum = sim_result["spectrum"]
+        omega_peaks, weights_peaks = pick_peaks(
+            spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
+        )
+        energies_gev, scale = _rescale_energies(omega_peaks, target=TARGET_ENERGY_GEV)
 
         band_mask = (energies_gev >= band_min) & (energies_gev <= band_max)
-        band_indices = np.where(band_mask)[0]
-        band_energies = energies_gev[band_indices]
+        band_energies = energies_gev[band_mask]
         band_counts.append(int(band_energies.size))
 
-        band_weights = []
-        for idx in band_indices:
-            band_weights.append({"energy_gev": float(energies_gev[idx]), "weights": weights_filtered[idx]})
+        band_weights = [w for keep, w in zip(band_mask, weights_peaks) if keep]
 
-        accepted_band = 3 <= band_energies.size <= 12
-        spacings = analysis.compute_spacings(band_energies) if accepted_band else np.array([])
+        accepted_band = band_energies.size >= 3
+        spacings = analysis.compute_spacings(band_energies[band_energies > 1e-4]) if accepted_band else np.array([])
         if accepted_band:
             spacings_all.append(spacings)
             accepted_runs_for_spacing += 1
             if example_run is None:
-                example_run = {"energies": band_energies.copy(), "weights": [weights_filtered[i] for i in band_indices]}
+                example_run = {"energies": band_energies.copy(), "weights": band_weights}
+
+        layer_order = [layer for layer, idx in sorted(sim_result["layer_to_idx"].items(), key=lambda kv: kv[1])]
 
         run_outputs.append(
             {
                 "run_id": run_idx,
-                "state_dim": int(A.shape[0]),
                 "n_modes": len(config.modes),
                 "n_memory_terms": config.memory_terms,
                 "complexity": config.complexity,
                 "energy_scale": scale,
                 "energies_gev": energies_gev.tolist(),
                 "band_energies_gev": band_energies.tolist(),
-                "band_masses_kg": analysis.energies_to_masses_kg(band_energies).tolist(),
                 "band_spacing_gev": spacings.tolist(),
                 "band_count": int(band_energies.size),
                 "accepted_for_spacing": accepted_band,
                 "band_weights": band_weights,
+                "layers_order": [l.name for l in layer_order],
+                "b_trace": sim_result["b_series"].tolist(),
+                "t_trace": sim_result["times"].tolist(),
             }
         )
 
@@ -215,8 +232,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--n-q", type=int, default=DEFAULT_N_Q, help="Modes in layer Q.")
     parser.add_argument("--n-s1", type=int, default=DEFAULT_N_INTERNAL, help="Modes in layer S1.")
-    parser.add_argument("--n-s2", type=int, default=DEFAULT_N_INTERNAL, help="Modes in layer S2.")
-    parser.add_argument("--n-s3", type=int, default=DEFAULT_N_INTERNAL, help="Modes in layer S3 (Case B only).")
+    parser.add_argument("--n-s2", type=int, default=2, help="Modes in layer S2.")
+    parser.add_argument("--n-s3", type=int, default=0, help="Modes in layer S3 (Case B only).")
     parser.add_argument("--band-min", type=float, default=DEFAULT_BAND_MIN, help="Min band energy (GeV).")
     parser.add_argument("--band-max", type=float, default=DEFAULT_BAND_MAX, help="Max band energy (GeV).")
     parser.add_argument(

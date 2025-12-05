@@ -8,7 +8,7 @@ from typing import Dict, List, Tuple
 
 import numpy as np
 
-from .config import LOG_FQ_MAX, LOG_FQ_MIN, LOG_R_MAX, LOG_R_MIN, rng_or_default, sample_log_uniform
+from .config import LOG_R_MAX, LOG_R_MIN, OMEGA_Q_BASE, rng_or_default
 
 
 class Layer(Enum):
@@ -28,14 +28,13 @@ class Mode:
 
 
 def sample_base_frequencies(case: str, rng: np.random.Generator | None = None):
-    """Sample base frequencies and ratios according to the spec."""
+    """Sample base frequencies and ratios (dimensionless)."""
     rng = rng_or_default(rng)
-
-    f_Q = sample_log_uniform(LOG_FQ_MIN, LOG_FQ_MAX, rng)
 
     def sample_R():
         return 10 ** rng.uniform(LOG_R_MIN, LOG_R_MAX)
 
+    f_Q = OMEGA_Q_BASE
     R_S1_Q = sample_R()
     R_S2_S1 = sample_R()
 
