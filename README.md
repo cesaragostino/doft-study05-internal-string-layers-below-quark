@@ -1,17 +1,17 @@
 # Study05 – DOFT Internal Layers Simulator
 
-Pequeño simulador de osciladores acoplados con capas internas (S1, S2, opcional S3) y una capa efectiva Q, siguiendo `docs/STUDY05_code_header_and_structures.md`.
+Lightweight simulator of coupled oscillators with internal layers (S1, S2, optional S3) and an effective layer Q, following `docs/STUDY05_code_header_and_structures.md`.
 
-## Estructura
-- Código: `src/study05/`
-- Datos de entrada/sorteos: `data/raw/`
-- Resultados procesados y gráficas: `data/processed/`
+## Layout
+- Code: `src/study05/`
+- Input draws/parameters: `data/raw/`
+- Processed results and plots: `data/processed/`
 
-## Requisitos
-- Python 3.8+ con `numpy` y `matplotlib` disponibles (matplotlib solo si quieres gráficas).
+## Requirements
+- Python 3.8+ with `numpy` available; `matplotlib` is optional (only needed for plots).
 
-## Workflow completo (generar datos)
-Desde la raíz del repo:
+## Full workflow (generate data)
+From the repo root:
 ```bash
 PYTHONPATH=src python3 -m study05.run_sweep \
   --case CaseA_2layers \
@@ -20,11 +20,11 @@ PYTHONPATH=src python3 -m study05.run_sweep \
   --band-min 0.0 \
   --band-max 3.0
 ```
-Esto:
-- Guarda parámetros en `data/raw/study05_sweep_params.json`.
-- Guarda resultados en `data/processed/study05_sweep_results.json`.
-- Si no usas `--no-plots`, también crea gráficos en `data/processed/`.
+This:
+- Stores parameters in `data/raw/study05_sweep_params.json`.
+- Stores results in `data/processed/study05_sweep_results.json`.
+- If you omit `--no-plots`, also writes plots to `data/processed/`.
 
-Cambios útiles:
-- Usa `--case CaseB_3layers` para incluir S3.
-- Ajusta `--n-*` para modos por capa y `--max-complexity` para forzar `C <= 8–10`.
+Useful variations:
+- `--case CaseB_3layers` to include S3.
+- Tune `--n-*` for modes per layer and `--max-complexity` to enforce `C <= 8–10`.
