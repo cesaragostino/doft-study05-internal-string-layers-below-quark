@@ -1,0 +1,1 @@
+# doft-study05-internal-string-layers-below-quark
