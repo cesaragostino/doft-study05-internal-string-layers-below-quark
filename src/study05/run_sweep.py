@@ -20,6 +20,16 @@ from study05.config import (
     LOG_FQ_MIN,
     sample_log_uniform,
 )
+from study05.families import (
+    FamilyDistance,
+    FamilyFingerprint,
+    FamilyPriors,
+    FamilySpec,
+    build_fingerprint,
+    compute_family_distance,
+    load_family_spec,
+    make_priors_for_family,
+)
 from study05.simulation import SimulationParams, pick_peaks, simulate
 from study05.sweep import SimulationConfig, generate_configuration
 
@@ -100,11 +110,18 @@ def run_sweep(
     band_max: float,
     attempts: int,
     save_plots: bool,
+    family_spec: Optional[FamilySpec] = None,
+    family_fp: Optional[FamilyFingerprint] = None,
+    family_priors: Optional[FamilyPriors] = None,
     raw_dir: Path = DEFAULT_RAW_DIR,
     processed_dir: Path = DEFAULT_PROCESSED_DIR,
 ):
     rng = np.random.default_rng(seed)
     raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, case)
+    if family_spec:
+        raw_case_dir = raw_case_dir / family_spec.name
+        processed_case_dir = processed_case_dir / family_spec.name
+        _ensure_dirs(raw_case_dir, processed_case_dir)
     sim_params = SimulationParams()
 
     run_inputs: List[Dict] = []
@@ -114,6 +131,10 @@ def run_sweep(
     rejected = 0
     unstable = 0
     accepted_runs_for_spacing = 0
+    family_match_total = 0
+    family_match_with_s2 = 0
+    family_match_without_s2 = 0
+    family_off_with_s2 = 0
     example_run = None
 
     for run_idx in range(runs):
@@ -126,6 +147,7 @@ def run_sweep(
             n_s3=n_s3,
             max_complexity=max_complexity,
             attempts=attempts,
+            priors=family_priors,
         )
         if config is None:
             rejected += 1
@@ -194,6 +216,25 @@ def run_sweep(
 
         layer_order = [layer for layer, idx in sorted(sim_result["layer_to_idx"].items(), key=lambda kv: kv[1])]
 
+        family_match = False
+        family_distance: Optional[FamilyDistance] = None
+        if family_fp and accepted_band:
+            family_distance = compute_family_distance(
+                sim_levels=band_energies.tolist(),
+                sim_widths=None,
+                fingerprint=family_fp,
+                use_widths=False,
+            )
+            family_match = family_distance.is_match
+            if family_match:
+                family_match_total += 1
+                if has_s2_dominant:
+                    family_match_with_s2 += 1
+                else:
+                    family_match_without_s2 += 1
+            elif has_s2_dominant:
+                family_off_with_s2 += 1
+
         run_outputs.append(
             {
                 "run_id": run_idx,
@@ -207,6 +248,8 @@ def run_sweep(
                 "band_spacing_gev": spacings.tolist(),
                 "band_count": int(band_energies.size),
                 "accepted_for_spacing": accepted_band,
+                "family_match": family_match,
+                "family_distance": family_distance.__dict__ if family_distance else None,
                 "band_weights": band_weights,
                 "band_dominant_layers": band_dominant_layers,
                 "has_s2_dominant": has_s2_dominant,
@@ -219,6 +262,13 @@ def run_sweep(
 
     all_spacings = np.concatenate(spacings_all) if spacings_all else np.array([])
     spacing_stats = analysis.summarise_spacings(all_spacings)
+    d_totals = [r["family_distance"]["d_total"] for r in run_outputs if r.get("family_distance")]
+    family_distance_stats = {
+        "d_total_mean": float(np.mean(d_totals)) if d_totals else float("nan"),
+        "d_total_std": float(np.std(d_totals)) if d_totals else float("nan"),
+        "d_total_min": float(np.min(d_totals)) if d_totals else float("nan"),
+        "d_total_max": float(np.max(d_totals)) if d_totals else float("nan"),
+    }
     runs_with_s2_dominant = sum(
         1
         for r in run_outputs
@@ -237,6 +287,15 @@ def run_sweep(
         "band_window_gev": [band_min, band_max],
         "runs_accepted_for_spacing": accepted_runs_for_spacing,
         "runs_with_s2_dominant": runs_with_s2_dominant,
+        "family": family_spec.__dict__ if family_spec else None,
+        "family_fingerprint": family_fp.__dict__ if family_fp else None,
+        "family_match_stats": {
+            "runs_family_match_total": family_match_total,
+            "runs_family_match_with_s2": family_match_with_s2,
+            "runs_family_match_without_s2": family_match_without_s2,
+            "runs_off_family_with_s2": family_off_with_s2,
+        },
+        "family_distance_stats": family_distance_stats if family_spec else None,
     }
 
     raw_payload = {"seed": seed, "max_complexity": max_complexity, "inputs": run_inputs}
@@ -317,12 +376,35 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default=DEFAULT_PROCESSED_DIR,
         help="Directory to store processed outputs.",
     )
+    parser.add_argument("--family-name", type=str, default=None, help="Predefined family name.")
+    parser.add_argument("--family-config", type=Path, default=None, help="Path to family JSON config.")
     return parser
 
 
 def main():
     parser = build_arg_parser()
     args = parser.parse_args()
+    family_spec = None
+    family_fp = None
+    family_priors = None
+
+    if args.family_config:
+        family_spec = load_family_spec(args.family_config)
+    elif args.family_name:
+        predefined = {
+            "Nucleon_like": Path("data/raw/config/nucleon_like.json"),
+            "Rho_like": Path("data/raw/config/rho_like.json"),
+            "Pion_like": Path("data/raw/config/pion_like.json"),
+        }
+        if args.family_name in predefined and predefined[args.family_name].exists():
+            family_spec = load_family_spec(predefined[args.family_name])
+
+    if family_spec:
+        family_fp = build_fingerprint(family_spec)
+        family_priors = make_priors_for_family(family_spec, family_fp)
+        # Override band window if provided by family
+        args.band_min, args.band_max = family_spec.energy_window
+
     summary, raw_path, processed_path = run_sweep(
         case=args.case,
         runs=args.runs,
@@ -336,6 +418,9 @@ def main():
         band_max=args.band_max,
         attempts=args.attempts,
         save_plots=not args.no_plots,
+        family_spec=family_spec,
+        family_fp=family_fp,
+        family_priors=family_priors,
         raw_dir=args.raw_dir,
         processed_dir=args.processed_dir,
     )

@@ -43,6 +43,7 @@ def generate_configuration(
     attempts: int = 30,
     k_scale_q: float | None = None,
     k_scale_internal: float | None = None,
+    priors=None,
 ) -> Optional[SimulationConfig]:
     """Generate a configuration satisfying the complexity constraint."""
     rng = rng_or_default(rng)
@@ -66,6 +67,16 @@ def generate_configuration(
             n_s1 = 3
             n_s2 = 2
             n_s3 = 0
+        if priors:
+            ratio_overrides = {
+                "R_S1_Q_range": priors.R_S1_Q_range,
+                "R_S2_S1_range": priors.R_S2_S1_range,
+            }
+            if priors.suggested_N:
+                n_q = priors.suggested_N.get("Q", n_q)
+                n_s1 = priors.suggested_N.get("S1", n_s1)
+                n_s2 = priors.suggested_N.get("S2", n_s2)
+                n_s3 = priors.suggested_N.get("S3", n_s3)
         f_Q, f_layers, R_S1_Q, R_S2_S1, R_S3_S2 = sample_base_frequencies(case_name, rng, ratio_overrides=ratio_overrides)
 
         modes: List[Mode] = []
@@ -101,6 +112,10 @@ def generate_configuration(
                 damping_range=damping_overrides.get(Layer.S1) if damping_overrides else None,
             )
         )
+        g0_range_qs1 = (0.5, 1.0) if special_case_debug else None
+        if priors:
+            g0_range_qs1 = priors.g_QS1_scale_range
+
         k1 = k_scale_internal if k_scale_internal is not None else 0.5 * (f_layers[Layer.S1] ** 2)
         intra.extend(build_string_couplings(Layer.S1, n_s1, k_scale=k1, rng=rng))
         g0_range_qs1 = (0.5, 1.0) if special_case_debug else None
@@ -110,6 +125,12 @@ def generate_configuration(
                 "max_links": 1,
                 "terms": [
                     {"tau_range": (0.2, 0.8), "amp_range": (0.5, 1.0)},
+                ]
+            }
+        if priors:
+            mem_override_qs1 = mem_override_qs1 or {
+                "terms": [
+                    {"tau_range": (0.2, 0.8), "amp_range": priors.memory_strength_range},
                 ]
             }
         inter.append(
@@ -134,6 +155,10 @@ def generate_configuration(
                 damping_range=damping_overrides.get(Layer.S2) if damping_overrides else None,
             )
         )
+        g0_range_s2s1 = (2.0, 4.0) if special_case_debug else None
+        if priors:
+            g0_range_s2s1 = priors.g_S1S2_scale_range
+
         k2 = k_scale_internal if k_scale_internal is not None else 0.5 * (f_layers[Layer.S2] ** 2)
         intra.extend(build_string_couplings(Layer.S2, n_s2, k_scale=k2, rng=rng))
         g0_range_s2s1 = (2.0, 4.0) if special_case_debug else None
@@ -144,6 +169,13 @@ def generate_configuration(
                 "terms": [
                     {"tau_range": (0.1, 0.5), "amp_range": (0.5, 1.0)},
                     {"tau_range": (1.0, 3.0), "amp_range": (0.5, 1.0)},
+                ]
+            }
+        if priors:
+            mem_override_s2s1 = mem_override_s2s1 or {
+                "terms": [
+                    {"tau_range": (0.1, 0.5), "amp_range": priors.memory_strength_range},
+                    {"tau_range": (1.0, 3.0), "amp_range": priors.memory_strength_range},
                 ]
             }
         inter.append(

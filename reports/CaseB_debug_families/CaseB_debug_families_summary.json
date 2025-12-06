@@ -1,0 +1,53 @@
+[
+  {
+    "family": "Nucleon_like",
+    "runs_valid": 100,
+    "runs_with_s2": 25,
+    "band_count_mean": 4.43,
+    "band_count_std": 1.3874797295816612,
+    "spacing_mean": 0.3306693730321778,
+    "spacing_std": 0.3364218766810363,
+    "runs_family_match_total": 0,
+    "runs_family_match_with_s2": 0,
+    "runs_family_match_without_s2": 0,
+    "runs_off_family_with_s2": 24,
+    "d_total_mean": 313131316.406429,
+    "d_total_std": 463767281.9603491,
+    "d_total_min": 1.8650371944739608,
+    "d_total_max": 1000000000.0
+  },
+  {
+    "family": "Rho_like",
+    "runs_valid": 100,
+    "runs_with_s2": 25,
+    "band_count_mean": 4.43,
+    "band_count_std": 1.3874797295816612,
+    "spacing_mean": 0.3306693730321778,
+    "spacing_std": 0.3364218766810363,
+    "runs_family_match_total": 2,
+    "runs_family_match_with_s2": 0,
+    "runs_family_match_without_s2": 2,
+    "runs_off_family_with_s2": 24,
+    "d_total_mean": 4.693948806346305,
+    "d_total_std": 2.0065591830135485,
+    "d_total_min": 0.7671957671957679,
+    "d_total_max": 9.652671104284007
+  },
+  {
+    "family": "Pion_like",
+    "runs_valid": 100,
+    "runs_with_s2": 7,
+    "band_count_mean": 3.97,
+    "band_count_std": 1.0995908329919817,
+    "spacing_mean": 0.49338025870283936,
+    "spacing_std": 0.3452667976072342,
+    "runs_family_match_total": 12,
+    "runs_family_match_with_s2": 0,
+    "runs_family_match_without_s2": 12,
+    "runs_off_family_with_s2": 7,
+    "d_total_mean": 2.991394458870171,
+    "d_total_std": 1.2546190580406449,
+    "d_total_min": 0.16795865633074902,
+    "d_total_max": 4.7389919870540025
+  }
+]

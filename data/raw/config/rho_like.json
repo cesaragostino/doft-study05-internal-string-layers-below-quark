@@ -1,0 +1,8 @@
+{
+  "name": "Rho_like",
+  "hadron_type": "meson",
+  "masses_gev": [0.775, 1.45, 1.72],
+  "widths_gev": [0.145, 0.40, 0.25],
+  "jpc": "1--",
+  "energy_window": [0.2, 3.0]
+}
