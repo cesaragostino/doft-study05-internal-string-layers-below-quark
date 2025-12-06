@@ -29,3 +29,4 @@ Useful variations:
 - `--case CaseB_3layers` to include S3.
 - Tune `--n-*` for modes per layer (defaults: Q=3, S1=3, S2=2, S3=0) and `--max-complexity` (defaults to 10 per spec).
 - Narrow the band back to `--band-max 3.0` after exploring mode density or widen for exploratory runs.
+- Runs that blow up numerically/physically are flagged as unstable (not counted in spacing stats) to reflect non-confining configurations.

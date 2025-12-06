@@ -16,6 +16,9 @@ from study05.config import (
     DEFAULT_MAX_COMPLEXITY,
     DEFAULT_N_INTERNAL,
     DEFAULT_N_Q,
+    LOG_FQ_MAX,
+    LOG_FQ_MIN,
+    sample_log_uniform,
 )
 from study05.simulation import SimulationParams, pick_peaks, simulate
 from study05.sweep import SimulationConfig, generate_configuration
@@ -26,9 +29,17 @@ TARGET_ENERGY_GEV = 2.0
 
 
 def _serialize_run_config(config: SimulationConfig) -> Dict:
+    f_Q_hz = sample_log_uniform(LOG_FQ_MIN, LOG_FQ_MAX)
+    f_S1_hz = f_Q_hz * config.R_S1_Q
+    f_S2_hz = f_S1_hz * config.R_S2_S1
+    f_S3_hz = f_S2_hz * config.R_S3_S2 if config.R_S3_S2 else None
     return {
         "case_name": config.case_name,
         "f_Q_base": config.f_Q,
+        "f_Q_Hz": f_Q_hz,
+        "f_S1_Hz": f_S1_hz,
+        "f_S2_Hz": f_S2_hz,
+        "f_S3_Hz": f_S3_hz,
         "R_S1_Q": config.R_S1_Q,
         "R_S2_S1": config.R_S2_S1,
         "R_S3_S2": config.R_S3_S2,
@@ -101,6 +112,7 @@ def run_sweep(
     spacings_all: List[np.ndarray] = []
     band_counts: List[int] = []
     rejected = 0
+    unstable = 0
     accepted_runs_for_spacing = 0
     example_run = None
 
@@ -121,13 +133,37 @@ def run_sweep(
 
         run_inputs.append(_serialize_run_config(config))
 
-        sim_result = simulate(
-            modes=config.modes,
-            intra_couplings=config.intra_layer_couplings,
-            inter_couplings=config.inter_layer_couplings,
-            sim_params=sim_params,
-            rng=rng,
-        )
+        try:
+            sim_result = simulate(
+                modes=config.modes,
+                intra_couplings=config.intra_layer_couplings,
+                inter_couplings=config.inter_layer_couplings,
+                sim_params=sim_params,
+                rng=rng,
+            )
+        except FloatingPointError:
+            unstable += 1
+            run_outputs.append(
+                {
+                    "run_id": run_idx,
+                    "status": "unstable",
+                    "n_modes": len(config.modes),
+                    "n_memory_terms": config.memory_terms,
+                    "complexity": config.complexity,
+                    "energy_scale": None,
+                    "energies_gev": [],
+                    "band_energies_gev": [],
+                    "band_spacing_gev": [],
+                    "band_count": 0,
+                    "accepted_for_spacing": False,
+                    "band_weights": [],
+                    "layers_order": [],
+                    "b_trace": [],
+                    "t_trace": [],
+                    "dt_used": None,
+                }
+            )
+            continue
         spectrum = sim_result["spectrum"]
         omega_peaks, weights_peaks = pick_peaks(
             spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
@@ -153,6 +189,7 @@ def run_sweep(
         run_outputs.append(
             {
                 "run_id": run_idx,
+                "status": "ok",
                 "n_modes": len(config.modes),
                 "n_memory_terms": config.memory_terms,
                 "complexity": config.complexity,
@@ -166,6 +203,7 @@ def run_sweep(
                 "layers_order": [l.name for l in layer_order],
                 "b_trace": sim_result["b_series"].tolist(),
                 "t_trace": sim_result["times"].tolist(),
+                "dt_used": sim_result.get("dt_used"),
             }
         )
 
@@ -174,7 +212,8 @@ def run_sweep(
     summary = {
         "case": case,
         "runs_requested": runs,
-        "runs_valid": len(run_outputs),
+        "runs_valid": len(run_outputs) - unstable,
+        "runs_unstable": unstable,
         "runs_rejected": rejected,
         "band_count_mean": float(np.mean(band_counts)) if band_counts else 0.0,
         "band_count_std": float(np.std(band_counts)) if band_counts else 0.0,

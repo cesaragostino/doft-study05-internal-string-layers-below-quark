@@ -60,6 +60,9 @@ class SimulationParams:
     eps_amp: float = 0.1
     peak_threshold: float = 0.05
     max_peaks: int = 30
+    max_x: float = 1e3
+    max_v: float = 1e3
+    max_energy: float = 1e6
 
 
 def _layer_order(layers: Sequence[Layer]) -> List[Layer]:
@@ -277,7 +280,8 @@ def simulate(
     state, layer_to_idx, mem_links, direct_links = init_state(modes, inter_couplings, struct_params, rng)
     intra_pairs = _numeric_intra(intra_couplings, index_map)
 
-    dt = sim_params.dt
+    omega_max = max(m.omega0 for m in modes) if modes else 1.0
+    dt = min(sim_params.dt, 0.05 / omega_max)
     total_steps = sim_params.total_steps
     transient_steps = int(sim_params.transient_frac * total_steps)
 
@@ -302,6 +306,16 @@ def simulate(
 
     for step in range(total_steps):
         state = rk4_step(state, deriv, dt)
+
+        # stability checks
+        if not (np.isfinite(state.x).all() and np.isfinite(state.v).all() and np.isfinite(state.z).all()):
+            raise FloatingPointError("non-finite state")
+        if np.any(np.abs(state.x) > sim_params.max_x) or np.any(np.abs(state.v) > sim_params.max_v):
+            raise FloatingPointError("state blow-up")
+        inst_energy = compute_layer_energies(modes, state, layer_to_idx, sim_params.eps_omega)
+        if any(val > sim_params.max_energy for val in inst_energy.values()):
+            raise FloatingPointError("energy blow-up")
+
         if step >= transient_steps and (step - transient_steps) % sim_params.sample_stride == 0:
             samples_time.append((step + 1) * dt)
             samples_x.append(state.x.copy())
@@ -324,6 +338,7 @@ def simulate(
         "b_series": samples_b,
         "spectrum": spectrum,
         "layer_to_idx": layer_to_idx,
+        "dt_used": dt,
     }
 
 

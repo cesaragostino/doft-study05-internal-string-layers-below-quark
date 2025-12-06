@@ -10,6 +10,10 @@ HBAR_GEV_S = HBAR_EV_S * 1e-9
 C_LIGHT = 299_792_458.0
 GEV_TO_J = 1.602_176_634e-10
 
+# Physical frequency sampling (for metadata only)
+LOG_FQ_MIN = 23.0
+LOG_FQ_MAX = 24.0
+
 # Dimensionless base frequency for Q
 OMEGA_Q_BASE = 1.0
 
@@ -32,6 +36,11 @@ DEFAULT_MAX_COMPLEXITY = 10
 
 def rng_or_default(rng: np.random.Generator | None = None) -> np.random.Generator:
     return rng if rng is not None else np.random.default_rng()
+
+
+def sample_log_uniform(low: float, high: float, rng: np.random.Generator | None = None) -> float:
+    rng = rng_or_default(rng)
+    return 10 ** rng.uniform(low, high)
 
 
 def sample_log_uniform(low: float, high: float, rng: np.random.Generator | None = None) -> float:
