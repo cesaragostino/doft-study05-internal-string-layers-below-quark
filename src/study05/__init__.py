@@ -1,6 +1,6 @@
 """Utilities for Study05 – DOFT internal layers simulator (v0.1)."""
 
-from . import analysis, config, couplings, families, layers, plots, simulation, state_space, sweep
+from . import analysis, config, couplings, families, layers, plots, simulation, state_space, sweep, analyze_proxies, report_families
 
 __all__ = [
     "analysis",
@@ -12,4 +12,6 @@ __all__ = [
     "simulation",
     "state_space",
     "sweep",
+    "analyze_proxies",
+    "report_families",
 ]

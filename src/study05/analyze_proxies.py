@@ -1,0 +1,130 @@
+"""Offline analysis of proxies and family distances for Study05."""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+from typing import Dict, List
+
+import numpy as np
+
+from study05.families import FamilySpec, build_fingerprint, compute_family_distance, load_family_spec
+
+
+def load_runs(case: str) -> List[Dict]:
+    path = Path("data/processed") / case / "global" / "study05_sweep_results.json"
+    if not path.exists():
+        raise FileNotFoundError(f"No global sweep results at {path}")
+    data = json.loads(path.read_text())
+    return data.get("runs", [])
+
+
+def compute_basic_proxies(run: Dict) -> Dict:
+    spacings = np.array(run.get("band_spacing_gev", []))
+    proxies = {
+        "band_count": run.get("band_count", 0),
+        "spacing_mean": float(np.mean(spacings)) if spacings.size else float("nan"),
+        "spacing_std": float(np.std(spacings)) if spacings.size else float("nan"),
+        "first_energy": run.get("band_energies_gev", [float("nan")])[0] if run.get("band_energies_gev") else float("nan"),
+        "second_energy": run.get("band_energies_gev", [float("nan"), float("nan")])[1] if len(run.get("band_energies_gev", [])) > 1 else float("nan"),
+        "third_energy": run.get("band_energies_gev", [float("nan")] * 3)[2] if len(run.get("band_energies_gev", [])) > 2 else float("nan"),
+        "has_s2_dominant": 1 if run.get("has_s2_dominant") else 0,
+        "s2_band_fraction": run.get("s2_band_fraction", 0.0),
+        "s3_band_fraction": run.get("s3_band_fraction", 0.0),
+        "R_S1_Q": run.get("R_S1_Q"),
+        "R_S2_S1": run.get("R_S2_S1"),
+        "R_S3_S2": run.get("R_S3_S2"),
+    }
+    return proxies
+
+
+def load_family_specs(paths: List[Path]) -> Dict[str, FamilySpec]:
+    specs = {}
+    for p in paths:
+        if not p.exists():
+            # try lowercase filename
+            alt = p.with_name(p.name.lower())
+            if alt.exists():
+                p = alt
+        if p.exists():
+            spec = load_family_spec(p)
+            specs[spec.name] = spec
+    return specs
+
+
+def analyze(case: str, families: List[str], output: Path):
+    runs = load_runs(case)
+    if not runs:
+        print("No runs found.")
+        return
+
+    family_paths = []
+    for f in families:
+        path = Path(f)
+        if not path.suffix:
+            path = Path(f"data/raw/config/{f}.json")
+        family_paths.append(path)
+    specs = load_family_specs(family_paths)
+    fps = {name: build_fingerprint(spec) for name, spec in specs.items()}
+
+    rows: List[Dict] = []
+    for run in runs:
+        base = compute_basic_proxies(run)
+        band_energies = run.get("band_energies_gev", [])
+        for name, spec in specs.items():
+            fp = fps[name]
+            levels = [e for e in band_energies if spec.energy_window[0] <= e <= spec.energy_window[1]]
+            dist = compute_family_distance(levels, None, fp, use_widths=False) if len(levels) >= fp.n_levels_target else None
+            base[f"{name}_has_enough_levels"] = len(levels) >= fp.n_levels_target
+            if dist:
+                base[f"{name}_d_total"] = dist.d_total
+                base[f"{name}_d_spacing"] = dist.d_spacing
+                base[f"{name}_is_match"] = dist.is_match
+                base[f"{name}_n_levels_sim"] = dist.n_levels_sim
+            else:
+                base[f"{name}_d_total"] = float("nan")
+                base[f"{name}_d_spacing"] = float("nan")
+                base[f"{name}_is_match"] = False
+                base[f"{name}_n_levels_sim"] = len(levels)
+        rows.append(base)
+
+    output.mkdir(parents=True, exist_ok=True)
+    # Save CSV
+    keys = sorted({k for row in rows for k in row.keys()})
+    csv_lines = [",".join(keys)]
+    for row in rows:
+        csv_lines.append(",".join(str(row.get(k, "")) for k in keys))
+    (output / f"{case}_all_runs_proxies.csv").write_text("\n".join(csv_lines))
+
+    # Correlation with S2 dominance (Pearson)
+    s2 = np.array([r.get("has_s2_dominant", 0) for r in rows], dtype=float)
+    corr_rows = []
+    for key in keys:
+        if key == "has_s2_dominant":
+            continue
+        vals = np.array([r.get(key, np.nan) for r in rows], dtype=float)
+        mask = np.isfinite(vals)
+        if mask.sum() < 3:
+            continue
+        v = vals[mask]
+        s = s2[mask]
+        denom = np.std(v) * np.std(s)
+        corr = float(np.corrcoef(v, s)[0, 1]) if denom > 0 else float("nan")
+        corr_rows.append({"proxy": key, "corr_with_s2": corr})
+    corr_lines = ["proxy,corr_with_s2"]
+    corr_lines += [f"{r['proxy']},{r['corr_with_s2']}" for r in corr_rows]
+    (output / f"{case}_s2_correlations.csv").write_text("\n".join(corr_lines))
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Analyze proxies and family distances.")
+    parser.add_argument("--case", required=True, help="Case name (e.g., CaseB_debug).")
+    parser.add_argument("--families", nargs="+", default=[], help="Family names or paths to JSON configs.")
+    parser.add_argument("--output", type=Path, default=Path("reports"), help="Output directory.")
+    args = parser.parse_args()
+    analyze(args.case, args.families, args.output)
+
+
+if __name__ == "__main__":
+    main()

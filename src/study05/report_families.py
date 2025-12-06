@@ -85,8 +85,22 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for fam in args.families:
-        res_path = base_processed / fam / "study05_sweep_results.json"
-        if not res_path.exists():
+        # try to resolve directory in a case-insensitive way
+        candidates = [
+            base_processed / fam,
+            base_processed / fam.lower(),
+            base_processed / fam.capitalize(),
+        ]
+        if base_processed.exists():
+            candidates += [p for p in base_processed.iterdir() if p.is_dir() and p.name.lower() == fam.lower()]
+        res_path = None
+        for cand in candidates:
+            path = cand / "study05_sweep_results.json"
+            if path.exists():
+                res_path = path
+                fam = cand.name  # canonical dir name
+                break
+        if not res_path:
             continue
         summary, runs = load_summary(res_path)
         rows.append(build_family_row(fam, summary))

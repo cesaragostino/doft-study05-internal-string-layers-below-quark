@@ -121,7 +121,10 @@ def run_sweep(
     if family_spec:
         raw_case_dir = raw_case_dir / family_spec.name
         processed_case_dir = processed_case_dir / family_spec.name
-        _ensure_dirs(raw_case_dir, processed_case_dir)
+    else:
+        raw_case_dir = raw_case_dir / "global"
+        processed_case_dir = processed_case_dir / "global"
+    _ensure_dirs(raw_case_dir, processed_case_dir)
     sim_params = SimulationParams()
 
     run_inputs: List[Dict] = []
@@ -205,6 +208,16 @@ def run_sweep(
             layer_max = max(w.items(), key=lambda kv: kv[1])
             band_dominant_layers.append({"layer": layer_max[0], "weight": layer_max[1]})
         has_s2_dominant = any(item and item["layer"] == "S2" and item["weight"] >= 0.7 for item in band_dominant_layers)
+        s2_band_fraction = (
+            sum(1 for item in band_dominant_layers if item and item["layer"] == "S2") / band_energies.size
+            if band_energies.size > 0
+            else 0.0
+        )
+        s3_band_fraction = (
+            sum(1 for item in band_dominant_layers if item and item["layer"] == "S3") / band_energies.size
+            if band_energies.size > 0
+            else 0.0
+        )
 
         accepted_band = band_energies.size >= 3
         spacings = analysis.compute_spacings(band_energies[band_energies > 1e-4]) if accepted_band else np.array([])
@@ -246,6 +259,10 @@ def run_sweep(
                 "energies_gev": energies_gev.tolist(),
                 "band_energies_gev": band_energies.tolist(),
                 "band_spacing_gev": spacings.tolist(),
+                "spacing_mean": float(np.mean(spacings)) if spacings.size else float("nan"),
+                "spacing_std": float(np.std(spacings)) if spacings.size else float("nan"),
+                "spacing_min": float(np.min(spacings)) if spacings.size else float("nan"),
+                "spacing_max": float(np.max(spacings)) if spacings.size else float("nan"),
                 "band_count": int(band_energies.size),
                 "accepted_for_spacing": accepted_band,
                 "family_match": family_match,
@@ -253,10 +270,18 @@ def run_sweep(
                 "band_weights": band_weights,
                 "band_dominant_layers": band_dominant_layers,
                 "has_s2_dominant": has_s2_dominant,
+                "s2_band_fraction": s2_band_fraction,
+                "s3_band_fraction": s3_band_fraction,
                 "layers_order": [l.name for l in layer_order],
                 "b_trace": sim_result["b_series"].tolist(),
                 "t_trace": sim_result["times"].tolist(),
                 "dt_used": sim_result.get("dt_used"),
+                "R_S1_Q": config.R_S1_Q,
+                "R_S2_S1": config.R_S2_S1,
+                "R_S3_S2": config.R_S3_S2,
+                "g_couplings": [ic.g0 for ic in config.inter_layer_couplings],
+                "memory_taus": [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0],
+                "memory_amps": [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0],
             }
         )
 
