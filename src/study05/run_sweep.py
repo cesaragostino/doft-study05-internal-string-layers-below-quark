@@ -175,6 +175,14 @@ def run_sweep(
         band_counts.append(int(band_energies.size))
 
         band_weights = [w for keep, w in zip(band_mask, weights_peaks) if keep]
+        band_dominant_layers = []
+        for w in band_weights:
+            if not w:
+                band_dominant_layers.append(None)
+                continue
+            layer_max = max(w.items(), key=lambda kv: kv[1])
+            band_dominant_layers.append({"layer": layer_max[0], "weight": layer_max[1]})
+        has_s2_dominant = any(item and item["layer"] == "S2" and item["weight"] >= 0.7 for item in band_dominant_layers)
 
         accepted_band = band_energies.size >= 3
         spacings = analysis.compute_spacings(band_energies[band_energies > 1e-4]) if accepted_band else np.array([])
@@ -200,6 +208,8 @@ def run_sweep(
                 "band_count": int(band_energies.size),
                 "accepted_for_spacing": accepted_band,
                 "band_weights": band_weights,
+                "band_dominant_layers": band_dominant_layers,
+                "has_s2_dominant": has_s2_dominant,
                 "layers_order": [l.name for l in layer_order],
                 "b_trace": sim_result["b_series"].tolist(),
                 "t_trace": sim_result["times"].tolist(),
@@ -209,6 +219,12 @@ def run_sweep(
 
     all_spacings = np.concatenate(spacings_all) if spacings_all else np.array([])
     spacing_stats = analysis.summarise_spacings(all_spacings)
+    runs_with_s2_dominant = sum(
+        1
+        for r in run_outputs
+        if r.get("status") == "ok" and r.get("has_s2_dominant")
+    )
+
     summary = {
         "case": case,
         "runs_requested": runs,
@@ -220,6 +236,7 @@ def run_sweep(
         "spacing_stats": spacing_stats,
         "band_window_gev": [band_min, band_max],
         "runs_accepted_for_spacing": accepted_runs_for_spacing,
+        "runs_with_s2_dominant": runs_with_s2_dominant,
     }
 
     raw_payload = {"seed": seed, "max_complexity": max_complexity, "inputs": run_inputs}
@@ -258,7 +275,9 @@ def run_sweep(
 
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run Study05 oscillator sweeps.")
-    parser.add_argument("--case", choices=["CaseA_2layers", "CaseB_3layers"], default="CaseA_2layers")
+    parser.add_argument(
+        "--case", choices=["CaseA_2layers", "CaseB_3layers", "CaseB_debug"], default="CaseA_2layers"
+    )
     parser.add_argument(
         "--runs",
         type=int,

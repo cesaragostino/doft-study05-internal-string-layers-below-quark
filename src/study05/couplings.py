@@ -51,20 +51,35 @@ def build_inter_layer_coupling(
     N_shallow: int,
     omega_deep_base: float,
     rng: np.random.Generator | None = None,
+    g0_range: Tuple[float, float] | None = None,
+    memory_override: Dict[str, object] | None = None,
 ) -> InterLayerCoupling:
     rng = rng_or_default(rng)
     links: Dict[Tuple[int, int], MemoryKernel] = {}
-    g0 = rng.uniform(0.2, 2.0) * (omega_deep_base**2)
+    lo, hi = g0_range if g0_range else (0.2, 2.0)
+    g0 = rng.uniform(lo, hi) * (omega_deep_base**2)
 
     max_links = min(N_deep, N_shallow)
+    if memory_override and "max_links" in memory_override:
+        max_links = min(max_links, int(memory_override["max_links"]))
     for idx in range(max_links):
-        M = rng.choice([0, 1, 2], p=[0.3, 0.5, 0.2])  # number of exponentials
         taus0, amps0 = [], []
-        for _ in range(int(M)):
-            tau0 = rng.uniform(0.1, 5.0) / omega_deep_base
-            A0 = rng.uniform(0.1, 1.0)
-            taus0.append(float(tau0))
-            amps0.append(float(A0))
+        if memory_override and "terms" in memory_override:
+            terms = memory_override["terms"]
+            for term in terms:
+                tau_range = term.get("tau_range", (0.1, 5.0))
+                amp_range = term.get("amp_range", (0.1, 1.0))
+                tau0 = rng.uniform(*tau_range) / omega_deep_base
+                A0 = rng.uniform(*amp_range)
+                taus0.append(float(tau0))
+                amps0.append(float(A0))
+        else:
+            M = rng.choice([0, 1, 2], p=[0.3, 0.5, 0.2])  # number of exponentials
+            for _ in range(int(M)):
+                tau0 = rng.uniform(0.1, 5.0) / omega_deep_base
+                A0 = rng.uniform(0.1, 1.0)
+                taus0.append(float(tau0))
+                amps0.append(float(A0))
         links[(idx, idx)] = MemoryKernel(taus0=taus0, amps0=amps0)
 
     return InterLayerCoupling(

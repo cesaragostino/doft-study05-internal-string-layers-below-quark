@@ -27,24 +27,45 @@ class Mode:
     gamma: float
 
 
-def sample_base_frequencies(case: str, rng: np.random.Generator | None = None):
+def sample_base_frequencies(
+    case: str,
+    rng: np.random.Generator | None = None,
+    ratio_overrides: Dict[str, Tuple[float, float]] | None = None,
+):
     """Sample base frequencies and ratios (dimensionless)."""
     rng = rng_or_default(rng)
 
     def sample_R():
+        if ratio_overrides and "R_range" in ratio_overrides:
+            lo, hi = ratio_overrides["R_range"]
+            return rng.uniform(lo, hi)
         return 10 ** rng.uniform(LOG_R_MIN, LOG_R_MAX)
 
+    def sample_R_named(name: str, default_range: Tuple[float, float]):
+        if ratio_overrides and name in ratio_overrides:
+            val = ratio_overrides[name]
+            if val is not None:
+                lo, hi = val
+                return rng.uniform(lo, hi)
+        if ratio_overrides and "R_range" in ratio_overrides:
+            val = ratio_overrides["R_range"]
+            if val is not None:
+                lo, hi = val
+                return rng.uniform(lo, hi)
+        lo, hi = default_range
+        return rng.uniform(lo, hi)
+
     f_Q = OMEGA_Q_BASE
-    R_S1_Q = sample_R()
-    R_S2_S1 = sample_R()
+    R_S1_Q = sample_R_named("R_S1_Q_range", (10 ** LOG_R_MIN, 10 ** LOG_R_MAX))
+    R_S2_S1 = sample_R_named("R_S2_S1_range", (10 ** LOG_R_MIN, 10 ** LOG_R_MAX))
 
     f_layers: Dict[Layer, float] = {Layer.Q: f_Q}
     f_layers[Layer.S1] = R_S1_Q * f_Q
     f_layers[Layer.S2] = R_S2_S1 * f_layers[Layer.S1]
 
     R_S3_S2 = None
-    if case == "CaseB_3layers":
-        R_S3_S2 = sample_R()
+    if case in ("CaseB_3layers", "CaseB_debug"):
+        R_S3_S2 = sample_R_named("R_S3_S2_range", (10 ** LOG_R_MIN, 10 ** LOG_R_MAX))
         f_layers[Layer.S3] = R_S3_S2 * f_layers[Layer.S2]
 
     return f_Q, f_layers, R_S1_Q, R_S2_S1, R_S3_S2
@@ -55,6 +76,7 @@ def build_string_layer_modes(
     base_freq_hz: float,
     N: int,
     rng: np.random.Generator | None = None,
+    damping_range: Tuple[float, float] | None = None,
 ) -> List[Mode]:
     """Generate modes for a 1D string-like layer."""
     rng = rng_or_default(rng)
@@ -62,8 +84,11 @@ def build_string_layer_modes(
     modes: List[Mode] = []
 
     delta_span = 0.05 if layer == Layer.Q else 0.1
-    gamma_min = 1e-4 if layer == Layer.Q else 1e-3
-    gamma_max = 1e-2 if layer == Layer.Q else 1e-1
+    if damping_range is not None:
+        gamma_min, gamma_max = damping_range
+    else:
+        gamma_min = 1e-4 if layer == Layer.Q else 1e-3
+        gamma_max = 1e-2 if layer == Layer.Q else 1e-1
 
     for i in range(N):
         delta = rng.uniform(-delta_span, delta_span)
