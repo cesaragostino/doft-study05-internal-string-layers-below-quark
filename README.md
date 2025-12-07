@@ -41,3 +41,33 @@ PYTHONPATH=src python3 -m study05.report_families \
   --output reports/CaseB_debug_families
 ```
 Reads per-family processed JSONs (under `data/processed/<case>/<family>/`) and writes comparative CSV/JSON + basic plots in `reports/CaseB_debug_families/`.
+
+S2-friendly region analysis (post-processing only):
+```bash
+PYTHONPATH=src python3 -m study05.analyze_s2_region \
+  --case CaseB_debug \
+  --proxies-csv reports/CaseB_debug_pipeline/CaseB_debug_all_runs_proxies.csv \
+  --first-energy-max 0.8 \
+  --spacing-mean-min 0.45 \
+  --nucleon-d-spacing-min 6.0 \
+  --output reports/CaseB_debug_pipeline/s2_region
+```
+Generates a summary JSON, splits in/out CSVs, and basic plots showing where S2 is more likely in proxy space.
+
+S2 threshold scan (post-processing only):
+```bash
+PYTHONPATH=src python3 -m study05.analyze_s2_scan \
+  --proxies-csv reports/CaseB_debug_combined/CaseB_debug_all_runs_proxies.csv \
+  --output reports/CaseB_debug_combined/s2_scan \
+  --first-grid 0.6 0.7 0.8 0.9 \
+  --spacing-grid 0.40 0.45 0.50 \
+  --dspacing-grid 5.5 6.0 6.5
+```
+Produces `s2_scan_results.csv` with p(S2) and z-scores for each box.
+
+Optional: logistic boundary fit
+```bash
+PYTHONPATH=src python3 -m study05.fit_s2_logit \
+  --proxies-csv reports/CaseB_debug_combined/CaseB_debug_all_runs_proxies.csv \
+  --output reports/CaseB_debug_combined/s2_logit
+```
