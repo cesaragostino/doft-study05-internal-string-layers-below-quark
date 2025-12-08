@@ -12,26 +12,52 @@ import numpy as np
 from study05.families import FamilySpec, build_fingerprint, compute_family_distance, load_family_spec
 
 
-def load_runs(case: str) -> List[Dict]:
-    path = Path("data/processed") / case / "global" / "study05_sweep_results.json"
-    if not path.exists():
-        raise FileNotFoundError(f"No global sweep results at {path}")
-    data = json.loads(path.read_text())
-    return data.get("runs", [])
+def _resolve_output_dir(output: Path, case: str) -> Path:
+    """Place outputs under data/processed/<case>/combined by default."""
+    if output == Path("reports"):
+        return Path("data/processed") / case / "combined"
+    if output == Path("data/processed"):
+        return output / case / "combined"
+    return output
+
+
+def load_runs(case: str, results_path: Path | None = None) -> List[Dict]:
+    candidates = []
+    if results_path:
+        candidates.append(Path(results_path))
+    candidates.append(Path("data/processed") / case / "global" / "study05_sweep_results.json")
+    candidates.append(Path("data/ola1/processed") / case / "global" / "study05_sweep_results.json")
+    for path in candidates:
+        if path.exists():
+            data = json.loads(path.read_text())
+            return data.get("runs", [])
+    raise FileNotFoundError(f"No sweep results found. Checked: {', '.join(str(c) for c in candidates)}")
 
 
 def compute_basic_proxies(run: Dict) -> Dict:
     spacings = np.array(run.get("band_spacing_gev", []))
+    energies = run.get("band_energies_gev", [])
     proxies = {
+        "run_id": run.get("run_id"),
         "band_count": run.get("band_count", 0),
         "spacing_mean": float(np.mean(spacings)) if spacings.size else float("nan"),
         "spacing_std": float(np.std(spacings)) if spacings.size else float("nan"),
-        "first_energy": run.get("band_energies_gev", [float("nan")])[0] if run.get("band_energies_gev") else float("nan"),
-        "second_energy": run.get("band_energies_gev", [float("nan"), float("nan")])[1] if len(run.get("band_energies_gev", [])) > 1 else float("nan"),
-        "third_energy": run.get("band_energies_gev", [float("nan")] * 3)[2] if len(run.get("band_energies_gev", [])) > 2 else float("nan"),
+        "first_energy": energies[0] if len(energies) > 0 else float("nan"),
+        "second_energy": energies[1] if len(energies) > 1 else float("nan"),
+        "third_energy": energies[2] if len(energies) > 2 else float("nan"),
+        "band_energies_gev": json.dumps(energies),
         "has_s2_dominant": 1 if run.get("has_s2_dominant") else 0,
+        "has_s3_dominant": 1 if run.get("has_s3_dominant") else 0,
         "s2_band_fraction": run.get("s2_band_fraction", 0.0),
         "s3_band_fraction": run.get("s3_band_fraction", 0.0),
+        "s2_total_fraction": run.get("s2_total_fraction", 0.0),
+        "s3_total_fraction": run.get("s3_total_fraction", 0.0),
+        "s2_state": run.get("s2_state"),
+        "s3_state": run.get("s3_state"),
+        "lock_quality_Q": run.get("lock_quality_Q"),
+        "lock_quality_S1": run.get("lock_quality_S1"),
+        "lock_quality_S2": run.get("lock_quality_S2"),
+        "structure_tier": run.get("structure_tier"),
         "R_S1_Q": run.get("R_S1_Q"),
         "R_S2_S1": run.get("R_S2_S1"),
         "R_S3_S2": run.get("R_S3_S2"),
@@ -53,11 +79,12 @@ def load_family_specs(paths: List[Path]) -> Dict[str, FamilySpec]:
     return specs
 
 
-def analyze(case: str, families: List[str], output: Path):
-    runs = load_runs(case)
+def analyze(case: str, families: List[str], output: Path, results_path: Path | None = None):
+    runs = load_runs(case, results_path)
     if not runs:
         print("No runs found.")
         return
+    output_dir = _resolve_output_dir(output, case)
 
     family_paths = []
     for f in families:
@@ -89,13 +116,13 @@ def analyze(case: str, families: List[str], output: Path):
                 base[f"{name}_n_levels_sim"] = len(levels)
         rows.append(base)
 
-    output.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     # Save CSV
     keys = sorted({k for row in rows for k in row.keys()})
     csv_lines = [",".join(keys)]
     for row in rows:
         csv_lines.append(",".join(str(row.get(k, "")) for k in keys))
-    (output / f"{case}_all_runs_proxies.csv").write_text("\n".join(csv_lines))
+    (output_dir / f"{case}_all_runs_proxies.csv").write_text("\n".join(csv_lines))
 
     # Correlation with S2 dominance (Pearson)
     s2 = np.array([r.get("has_s2_dominant", 0) for r in rows], dtype=float)
@@ -103,7 +130,12 @@ def analyze(case: str, families: List[str], output: Path):
     for key in keys:
         if key == "has_s2_dominant":
             continue
-        vals = np.array([r.get(key, np.nan) for r in rows], dtype=float)
+        vals_raw = [r.get(key, np.nan) for r in rows]
+        # skip non-numeric columns (e.g., JSON strings)
+        try:
+            vals = np.array(vals_raw, dtype=float)
+        except Exception:
+            continue
         mask = np.isfinite(vals)
         if mask.sum() < 3:
             continue
@@ -114,16 +146,17 @@ def analyze(case: str, families: List[str], output: Path):
         corr_rows.append({"proxy": key, "corr_with_s2": corr})
     corr_lines = ["proxy,corr_with_s2"]
     corr_lines += [f"{r['proxy']},{r['corr_with_s2']}" for r in corr_rows]
-    (output / f"{case}_s2_correlations.csv").write_text("\n".join(corr_lines))
+    (output_dir / f"{case}_s2_correlations.csv").write_text("\n".join(corr_lines))
 
 
 def main():
     parser = argparse.ArgumentParser(description="Analyze proxies and family distances.")
     parser.add_argument("--case", required=True, help="Case name (e.g., CaseB_debug).")
     parser.add_argument("--families", nargs="+", default=[], help="Family names or paths to JSON configs.")
-    parser.add_argument("--output", type=Path, default=Path("reports"), help="Output directory.")
+    parser.add_argument("--output", type=Path, default=Path("data/processed"), help="Output directory root.")
+    parser.add_argument("--results-json", type=Path, default=None, help="Optional explicit path to sweep results JSON.")
     args = parser.parse_args()
-    analyze(args.case, args.families, args.output)
+    analyze(args.case, args.families, args.output, results_path=args.results_json)
 
 
 if __name__ == "__main__":

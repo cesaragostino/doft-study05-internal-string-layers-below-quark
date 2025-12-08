@@ -1,0 +1,44 @@
+[
+  {
+    "name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "JPC": "0-",
+    "masses_gev": [0.139, 1.30],
+    "widths_gev": [0.0, 0.40],
+    "energy_window": [0.1, 3.0],
+    "tolerances": {
+      "spacing_rel": 0.10,
+      "mass_abs": 0.03,
+      "width_abs": 0.05
+    }
+  },
+  {
+    "name": "rho",
+    "family": "rho_like",
+    "type": "meson",
+    "JPC": "1-",
+    "masses_gev": [0.775, 1.45, 1.72],
+    "widths_gev": [0.15, 0.35, 0.30],
+    "energy_window": [0.1, 3.0],
+    "tolerances": {
+      "spacing_rel": 0.12,
+      "mass_abs": 0.05,
+      "width_abs": 0.08
+    }
+  },
+  {
+    "name": "proton",
+    "family": "nucleon_like",
+    "type": "baryon",
+    "JPC": "1/2+",
+    "masses_gev": [0.939, 1.44, 1.71, 1.88],
+    "widths_gev": [0.0, 0.35, 0.15, 0.25],
+    "energy_window": [0.2, 3.0],
+    "tolerances": {
+      "spacing_rel": 0.10,
+      "mass_abs": 0.05,
+      "width_abs": 0.10
+    }
+  }
+]

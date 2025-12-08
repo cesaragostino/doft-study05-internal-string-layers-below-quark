@@ -43,10 +43,22 @@ def main():
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("reports/CaseB_debug_pipeline"),
-        help="Output directory for analysis",
+        default=Path("data/processed"),
+        help="Output root for analysis outputs",
+    )
+    parser.add_argument(
+        "--tag-and-catalog",
+        action="store_true",
+        help="If set, run tag_s2_zones and catalog_families_s2 after proxies CSV is generated.",
     )
     args = parser.parse_args()
+
+    def resolve_output_dir(base: Path, case: str) -> Path:
+        if base == Path("reports"):
+            return Path("data/processed") / case / "combined"
+        if base == Path("data/processed"):
+            return base / case / "combined"
+        return base
 
     # Step 1: agnostic sweep to global outputs
     sweep_cmd = [
@@ -80,6 +92,37 @@ def main():
         "--families",
     ] + args.families
     run_cmd(analyze_cmd)
+
+    if args.tag_and_catalog:
+        resolved_out = resolve_output_dir(args.output, args.case)
+        proxies_csv = resolved_out / f"{args.case}_all_runs_proxies.csv"
+        tagged_csv = resolved_out / f"{args.case}_all_runs_tagged.csv"
+        print("[pipeline] tagging S2 zones", flush=True)
+        run_cmd(
+            [
+                "python3",
+                "-m",
+                "study05.tag_s2_zones",
+                "--proxies-csv",
+                str(proxies_csv),
+                "--output",
+                str(tagged_csv),
+            ]
+        )
+        print("[pipeline] cataloging families vs S2", flush=True)
+        catalog_out = resolved_out / "catalog_s2"
+        run_cmd(
+            [
+                "python3",
+                "-m",
+                "study05.catalog_families_s2",
+                "--proxies-csv",
+                str(tagged_csv),
+                "--families",
+            ]
+            + args.families
+            + ["--output", str(catalog_out)]
+        )
 
 
 if __name__ == "__main__":

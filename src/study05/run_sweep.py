@@ -20,6 +20,10 @@ from study05.config import (
     LOG_FQ_MIN,
     sample_log_uniform,
 )
+try:
+    import yaml
+except ImportError:
+    yaml = None
 from study05.families import (
     FamilyDistance,
     FamilyFingerprint,
@@ -36,6 +40,24 @@ from study05.sweep import SimulationConfig, generate_configuration
 DEFAULT_RAW_DIR = Path("data/raw")
 DEFAULT_PROCESSED_DIR = Path("data/processed")
 TARGET_ENERGY_GEV = 2.0
+DEFAULT_LAYER_THRESHOLDS = {
+    "S2": {
+        "band_fraction_dominant": 0.5,
+        "band_fraction_sub": 0.1,
+        "compactness_dom": 1.0,
+        "compactness_sub": 0.5,
+        "total_fraction_eps": 1e-3,
+        "noise_highfreq_min": 0.2,
+    },
+    "S3": {
+        "band_fraction_dominant": 0.4,
+        "band_fraction_sub": 0.05,
+        "compactness_dom": 0.8,
+        "compactness_sub": 0.4,
+        "total_fraction_eps": 1e-3,
+        "noise_highfreq_min": 0.2,
+    },
+}
 
 
 def _serialize_run_config(config: SimulationConfig) -> Dict:
@@ -71,6 +93,17 @@ def _case_dirs(raw_dir: Path, processed_dir: Path, case: str) -> tuple[Path, Pat
     return raw_case, processed_case
 
 
+def _load_layer_state_config(path: Path) -> Dict[str, Dict]:
+    if yaml is None or not path.exists():
+        return {}
+    try:
+        with path.open() as f:
+            data = yaml.safe_load(f)
+            return data or {}
+    except Exception:
+        return {}
+
+
 def _rescale_energies(omegas: np.ndarray, target: float = TARGET_ENERGY_GEV) -> tuple[np.ndarray, float]:
     omegas = np.array(omegas)
     if omegas.size == 0:
@@ -97,6 +130,75 @@ def _rescale_energies(energies: np.ndarray, target: float = TARGET_ENERGY_GEV) -
     return energies * scale, scale
 
 
+def _weighted_std(values: np.ndarray, weights: np.ndarray) -> float:
+    if values.size == 0 or weights.size == 0:
+        return 0.0
+    w_sum = np.sum(weights)
+    if w_sum <= 0:
+        return 0.0
+    mean = np.sum(weights * values) / w_sum
+    var = np.sum(weights * (values - mean) ** 2) / w_sum
+    return float(np.sqrt(var))
+
+
+def _layer_summary(
+    layer_name: str,
+    energies: np.ndarray,
+    weights: List[Dict[str, float]],
+    band_mask: np.ndarray,
+    band_max: float,
+    thresholds: Dict[str, float],
+) -> Dict[str, object]:
+    """Compute per-layer fractions and classify state."""
+    all_weights = np.array([w.get(layer_name, 0.0) for w in weights]) if weights else np.array([])
+    total_fraction = float(np.mean(all_weights)) if all_weights.size else 0.0
+
+    band_weights = all_weights[band_mask] if all_weights.size else np.array([])
+    band_fraction = float(np.mean(band_weights)) if band_weights.size else 0.0
+
+    out_weights = all_weights[~band_mask] if all_weights.size else np.array([])
+    outband_fraction = float(np.mean(out_weights)) if out_weights.size else 0.0
+
+    highfreq_mask = energies > band_max
+    highfreq_weights = all_weights[highfreq_mask] if all_weights.size else np.array([])
+    highfreq_fraction = float(np.mean(highfreq_weights)) if highfreq_weights.size else 0.0
+
+    # compactness: inverse of weighted std of energies where weight>0 in band
+    band_energy = energies[band_mask]
+    w_positive = band_weights[band_weights > 0]
+    e_positive = band_energy[band_weights > 0] if band_weights.size else np.array([])
+    std_band = _weighted_std(e_positive, w_positive) if w_positive.size else 0.0
+    band_compactness = float(1.0 / (std_band + 1e-6)) if std_band > 0 else 0.0
+
+    state = "mixed"
+    if total_fraction < thresholds.get("total_fraction_eps", 1e-3):
+        state = "absent"
+    else:
+        bf_dom = thresholds.get("band_fraction_dominant", 0.5)
+        bf_sub = thresholds.get("band_fraction_sub", 0.1)
+        comp_dom = thresholds.get("compactness_dom", 1.0)
+        comp_sub = thresholds.get("compactness_sub", 0.5)
+        noise_min = thresholds.get("noise_highfreq_min", 0.2)
+
+        if band_fraction >= bf_dom and band_compactness >= comp_dom:
+            state = "structural_dominant"
+        elif band_fraction >= bf_sub and band_compactness >= comp_sub:
+            state = "structural_sub"
+        elif (band_fraction < bf_sub) and (highfreq_fraction >= noise_min or outband_fraction >= noise_min):
+            state = "noise_tail"
+        else:
+            state = "mixed"
+
+    return {
+        "band_fraction": band_fraction,
+        "total_fraction": total_fraction,
+        "band_compactness": band_compactness,
+        "outband_fraction": outband_fraction,
+        "highfreq_fraction": highfreq_fraction,
+        "state": state,
+    }
+
+
 def run_sweep(
     case: str,
     runs: int,
@@ -115,8 +217,13 @@ def run_sweep(
     family_priors: Optional[FamilyPriors] = None,
     raw_dir: Path = DEFAULT_RAW_DIR,
     processed_dir: Path = DEFAULT_PROCESSED_DIR,
+    output_root: Optional[Path] = None,
+    layer_state_config: Optional[Dict] = None,
 ):
     rng = np.random.default_rng(seed)
+    if output_root:
+        raw_dir = Path(output_root) / "raw"
+        processed_dir = Path(output_root) / "processed"
     raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, case)
     if family_spec:
         raw_case_dir = raw_case_dir / family_spec.name
@@ -126,6 +233,10 @@ def run_sweep(
         processed_case_dir = processed_case_dir / "global"
     _ensure_dirs(raw_case_dir, processed_case_dir)
     sim_params = SimulationParams()
+
+    layer_state_config = layer_state_config or {}
+    lock_thresholds = layer_state_config.get("lock_thresholds", {})
+    s2_state_cfg = layer_state_config.get("s2_state", {})
 
     run_inputs: List[Dict] = []
     run_outputs: List[Dict] = []
@@ -248,6 +359,52 @@ def run_sweep(
             elif has_s2_dominant:
                 family_off_with_s2 += 1
 
+        # Layer summaries (S2/S3 focus)
+        layer_summaries: Dict[str, Dict] = {}
+        for layer in layer_order:
+            lname = layer.name
+            thresholds = DEFAULT_LAYER_THRESHOLDS.get(lname, DEFAULT_LAYER_THRESHOLDS.get("S2", {}))
+            layer_summaries[lname] = _layer_summary(
+                layer_name=lname,
+                energies=energies_gev,
+                weights=weights_peaks,
+                band_mask=band_mask,
+                band_max=band_max,
+                thresholds=thresholds,
+            )
+
+        s2_state = layer_summaries.get("S2", {}).get("state", "absent")
+        s3_state = layer_summaries.get("S3", {}).get("state", "absent")
+        has_s3_dominant = s3_state == "structural_dominant"
+
+        # lock_quality based on band fraction
+        lock_quality_Q = layer_summaries.get("Q", {}).get("band_fraction", float("nan"))
+        lock_quality_S1 = layer_summaries.get("S1", {}).get("band_fraction", float("nan"))
+        lock_quality_S2 = layer_summaries.get("S2", {}).get("band_fraction", float("nan"))
+
+        T_Q = lock_thresholds.get("T_Q", 0.6)
+        T_S1 = lock_thresholds.get("T_S1", 0.6)
+        T_S2 = lock_thresholds.get("T_S2", 0.6)
+
+        if lock_quality_Q < T_Q:
+            structure_tier = "none"
+        elif lock_quality_Q >= T_Q and lock_quality_S1 < T_S1:
+            structure_tier = "level1"
+        elif lock_quality_Q >= T_Q and lock_quality_S1 >= T_S1 and lock_quality_S2 < T_S2:
+            structure_tier = "level2"
+        else:
+            structure_tier = "level3"
+
+        s2_band_fraction_weight = layer_summaries.get("S2", {}).get("band_fraction", 0.0)
+        none_max = s2_state_cfg.get("none_max_fraction", 1e-3)
+        latent_max = s2_state_cfg.get("latent_max_fraction", 0.15)
+        if s2_band_fraction_weight < none_max:
+            s2_state_label = "none"
+        elif s2_band_fraction_weight <= latent_max:
+            s2_state_label = "latent"
+        else:
+            s2_state_label = "structural"
+
         run_outputs.append(
             {
                 "run_id": run_idx,
@@ -272,6 +429,21 @@ def run_sweep(
                 "has_s2_dominant": has_s2_dominant,
                 "s2_band_fraction": s2_band_fraction,
                 "s3_band_fraction": s3_band_fraction,
+                "has_s3_dominant": has_s3_dominant,
+                "s2_state": s2_state_label,
+                "s3_state": s3_state,
+                "s2_total_fraction": layer_summaries.get("S2", {}).get("total_fraction"),
+                "s3_total_fraction": layer_summaries.get("S3", {}).get("total_fraction"),
+                "s2_band_compactness": layer_summaries.get("S2", {}).get("band_compactness"),
+                "s3_band_compactness": layer_summaries.get("S3", {}).get("band_compactness"),
+                "s2_outband_fraction": layer_summaries.get("S2", {}).get("outband_fraction"),
+                "s3_outband_fraction": layer_summaries.get("S3", {}).get("outband_fraction"),
+                "s2_highfreq_fraction": layer_summaries.get("S2", {}).get("highfreq_fraction"),
+                "s3_highfreq_fraction": layer_summaries.get("S3", {}).get("highfreq_fraction"),
+                "lock_quality_Q": lock_quality_Q,
+                "lock_quality_S1": lock_quality_S1,
+                "lock_quality_S2": lock_quality_S2,
+                "structure_tier": structure_tier,
                 "layers_order": [l.name for l in layer_order],
                 "b_trace": sim_result["b_series"].tolist(),
                 "t_trace": sim_result["times"].tolist(),
@@ -401,6 +573,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default=DEFAULT_PROCESSED_DIR,
         help="Directory to store processed outputs.",
     )
+    parser.add_argument(
+        "--output-root",
+        type=Path,
+        default=None,
+        help="Override base outputs: raw=<root>/raw, processed=<root>/processed.",
+    )
+    parser.add_argument(
+        "--layer-states",
+        type=Path,
+        default=Path("config/layer_states.yaml"),
+        help="Layer thresholds config (YAML).",
+    )
     parser.add_argument("--family-name", type=str, default=None, help="Predefined family name.")
     parser.add_argument("--family-config", type=Path, default=None, help="Path to family JSON config.")
     return parser
@@ -409,6 +593,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main():
     parser = build_arg_parser()
     args = parser.parse_args()
+    layer_cfg = _load_layer_state_config(args.layer_states)
     family_spec = None
     family_fp = None
     family_priors = None
@@ -448,6 +633,8 @@ def main():
         family_priors=family_priors,
         raw_dir=args.raw_dir,
         processed_dir=args.processed_dir,
+        output_root=args.output_root,
+        layer_state_config=layer_cfg,
     )
     print(
         json.dumps(

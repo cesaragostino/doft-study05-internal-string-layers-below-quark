@@ -4,8 +4,9 @@ Lightweight simulator of coupled oscillators with internal layers (S1, S2, optio
 
 ## Layout
 - Code: `src/study05/`
-- Input draws/parameters: `data/raw/<case>/`
-- Processed results and plots: `data/processed/<case>/`
+- Input draws/parameters and catalogs: `data/raw/` (e.g., family configs, `data/raw/sm_catalog/particles.json`)
+- Processed results and plots: `data/processed/`
+- Important digests/summaries: `digest/`
 
 ## Requirements
 - Python 3.8+ with `numpy`; `matplotlib` is optional (only needed for plots).
@@ -21,9 +22,9 @@ PYTHONPATH=src python3 -m study05.run_sweep \
   --band-max 5.0
 ```
 This:
-- Stores parameters in `data/raw/<case>/study05_sweep_params.json`.
-- Stores results in `data/processed/<case>/study05_sweep_results.json`.
-- If you omit `--no-plots`, also writes plots to `data/processed/<case>/`.
+- Stores parameters in `data/raw/<case>/global/study05_sweep_params.json`.
+- Stores results in `data/processed/<case>/global/study05_sweep_results.json`.
+- If you omit `--no-plots`, also writes plots to `data/processed/<case>/global/`.
 
 Useful variations:
 - `--case CaseB_3layers` to include S3.
@@ -33,14 +34,14 @@ Useful variations:
 - Narrow the band back to `--band-max 3.0` after exploring mode density or widen for exploratory runs.
 - Runs that blow up numerically/physically are flagged as unstable (not counted in spacing stats) to reflect non-confining configurations.
 
-Family reports:
+Family reports (write to processed by default):
 ```bash
 PYTHONPATH=src python3 -m study05.report_families \
   --case CaseB_debug \
   --families Nucleon_like Rho_like Pion_like \
-  --output reports/CaseB_debug_families
+  --output data/processed/CaseB_debug/families
 ```
-Reads per-family processed JSONs (under `data/processed/<case>/<family>/`) and writes comparative CSV/JSON + basic plots in `reports/CaseB_debug_families/`.
+Reads per-family processed JSONs (under `data/processed/<case>/<family>/`) and writes comparative CSV/JSON + basic plots.
 
 S2-friendly region analysis (post-processing only):
 ```bash
@@ -70,4 +71,57 @@ Optional: logistic boundary fit
 PYTHONPATH=src python3 -m study05.fit_s2_logit \
   --proxies-csv reports/CaseB_debug_combined/CaseB_debug_all_runs_proxies.csv \
   --output reports/CaseB_debug_combined/s2_logit
+```
+
+Ola1 (SM matching and block promotion):
+1) Sweep with extended metrics (optional output root):
+```bash
+PYTHONPATH=src python3 -m study05.run_sweep \
+  --case CaseB_debug \
+  --runs 2000 \
+  --seed 123 \
+  --band-min 0.1 \
+  --band-max 3.0 \
+  # keep defaults to write under data/raw and data/processed
+  --layer-states config/layer_states.yaml \
+  --no-plots
+```
+
+2) Build proxies CSV (includes lock_quality, structure_tier, s2_state, s3_state):
+```bash
+PYTHONPATH=src python3 -m study05.analyze_proxies \
+  --case CaseB_debug \
+  --output data/processed \
+  --families nucleon_like rho_like pion_like
+```
+Outputs land in `data/processed/CaseB_debug/combined/`.
+
+3) Match against SM catalog (pion/rho/proton):
+```bash
+PYTHONPATH=src python3 -m study06.match_sm_ola1 \
+  --proxies-csv data/processed/CaseB_debug/combined/CaseB_debug_all_runs_proxies.csv \
+  --sm-catalog data/raw/sm_catalog/particles.json \
+  --output data/processed/CaseB_debug/ola1_matches \
+  --digest digest/ola1
+```
+Writes full match table to processed and a digest copy of `best_match_per_run.csv` under `digest/ola1/`.
+
+4) Promote simple blocks:
+```bash
+PYTHONPATH=src python3 -m study06.promote_simple_blocks \
+  --proxies-csv data/processed/CaseB_debug/combined/CaseB_debug_all_runs_proxies.csv \
+  --zoo-matches-csv data/processed/CaseB_debug/ola1_matches/zoo_matches.csv \
+  --sm-catalog data/raw/sm_catalog/particles.json \
+  --output data/processed/blocks/simple_blocks.json \
+  --digest digest/blocks
+```
+Promoted blocks are stored in processed and copied to `digest/blocks/simple_blocks.json` for quick inspection.
+
+Si corres el sweep con `--output-root data/ola1`, pasa la ruta explícita de resultados a `analyze_proxies`:
+```bash
+PYTHONPATH=src python3 -m study05.analyze_proxies \
+  --case CaseB_debug \
+  --results-json data/ola1/processed/CaseB_debug/global/study05_sweep_results.json \
+  --output data/processed \
+  --families nucleon_like rho_like pion_like
 ```
