@@ -48,12 +48,15 @@ def compute_match(levels: List[float], particle: Dict) -> Dict:
     target_spacings = np.diff(masses)
     sim_spacings_full = np.diff(levels_win)
     enough = len(levels_win) >= len(masses)
-    sim_spacings = sim_spacings_full[: target_spacings.size] if target_spacings.size else np.array([])
+    # Compare spacings on the overlapping portion to avoid shape mismatches
+    min_len = min(sim_spacings_full.size, target_spacings.size)
+    sim_spacings = sim_spacings_full[:min_len] if min_len else np.array([])
+    tgt_spacings = target_spacings[:min_len] if min_len else np.array([])
     spacing_rel = particle.get("tolerances", {}).get("spacing_rel", 0.2)
     mass_abs = particle.get("tolerances", {}).get("mass_abs", 0.1)
 
-    if sim_spacings.size and target_spacings.size:
-        d_spacing = float(np.mean(np.abs(sim_spacings - target_spacings) / (spacing_rel * target_spacings + 1e-9)))
+    if sim_spacings.size and tgt_spacings.size:
+        d_spacing = float(np.mean(np.abs(sim_spacings - tgt_spacings) / (spacing_rel * tgt_spacings + 1e-9)))
     else:
         d_spacing = float("nan")
 
@@ -78,7 +81,7 @@ def main():
     parser.add_argument("--proxies-csv", type=Path, required=True)
     parser.add_argument("--sm-catalog", type=Path, default=Path("data/raw/sm_catalog/particles.json"))
     parser.add_argument("--output", type=Path, default=Path("data/processed/ola1_matches"))
-    parser.add_argument("--digest", type=Path, default=Path("digest/ola1"), help="Directory to store summary outputs.")
+    parser.add_argument("--digest", type=Path, default=Path("data/processed/digest/ola1"), help="Directory to store summary outputs.")
     args = parser.parse_args()
 
     catalog = load_catalog(args.sm_catalog)

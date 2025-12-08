@@ -1,8 +1,0 @@
-lock_thresholds:
-  T_Q: 0.6
-  T_S1: 0.6
-  T_S2: 0.6
-
-s2_state:
-  none_max_fraction: 1.0e-3
-  latent_max_fraction: 0.15

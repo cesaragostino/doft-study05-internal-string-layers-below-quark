@@ -1,0 +1,20 @@
+[
+  {
+    "name": "baryon_triangle",
+    "type": "baryon",
+    "nodes": 3,
+    "edges": [[0, 1], [1, 2], [2, 0]]
+  },
+  {
+    "name": "baryon_chain",
+    "type": "baryon",
+    "nodes": 3,
+    "edges": [[0, 1], [1, 2]]
+  },
+  {
+    "name": "meson_dimer",
+    "type": "meson_complex",
+    "nodes": 2,
+    "edges": [[0, 1]]
+  }
+]

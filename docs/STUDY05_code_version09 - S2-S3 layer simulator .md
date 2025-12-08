@@ -55,7 +55,7 @@ For each run, S3 should end up in one of these states:
 - `S3_STATE_MIXED` (optional)  
   → some band and some noise, without either component being clearly dominant.
 
-This should **not** be hard-coded: ideally thresholds come from a config (e.g. `layer_states.yaml`),
+This should **not** be hard-coded: ideally thresholds come from a config (e.g. `data/raw/config/layer_states.yaml`),
 but we do need to fix the logic now.
 
 ## 2.2. Minimum metrics to classify S3
@@ -226,7 +226,7 @@ So that the developer thinks “S3 can be noise” from the design:
 
 - Explicitly include the `state` field in the `LayerSummary` interface with the values listed above.
 
-- Define in a config (e.g. `config/layer_states.yaml`) something like:
+- Define in a config (e.g. `data/raw/config/layer_states.yaml`) something like:
 
 ```yaml
 S2:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 from pathlib import Path
 from typing import Dict, List
@@ -27,6 +28,8 @@ def load_runs(case: str, results_path: Path | None = None) -> List[Dict]:
         candidates.append(Path(results_path))
     candidates.append(Path("data/processed") / case / "global" / "study05_sweep_results.json")
     candidates.append(Path("data/ola1/processed") / case / "global" / "study05_sweep_results.json")
+    candidates.append(Path("data/processed/ola1") / case / "global" / "study05_sweep_results.json")
+    candidates.append(Path("data/processed/ola1/processed") / case / "global" / "study05_sweep_results.json")
     for path in candidates:
         if path.exists():
             data = json.loads(path.read_text())
@@ -117,12 +120,14 @@ def analyze(case: str, families: List[str], output: Path, results_path: Path | N
         rows.append(base)
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    # Save CSV
+    # Save CSV using proper quoting to avoid column shifts
     keys = sorted({k for row in rows for k in row.keys()})
-    csv_lines = [",".join(keys)]
-    for row in rows:
-        csv_lines.append(",".join(str(row.get(k, "")) for k in keys))
-    (output_dir / f"{case}_all_runs_proxies.csv").write_text("\n".join(csv_lines))
+    csv_path = output_dir / f"{case}_all_runs_proxies.csv"
+    with csv_path.open("w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow({k: row.get(k, "") for k in keys})
 
     # Correlation with S2 dominance (Pearson)
     s2 = np.array([r.get("has_s2_dominant", 0) for r in rows], dtype=float)

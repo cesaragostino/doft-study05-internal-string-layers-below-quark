@@ -5,8 +5,9 @@ Lightweight simulator of coupled oscillators with internal layers (S1, S2, optio
 ## Layout
 - Code: `src/study05/`
 - Input draws/parameters and catalogs: `data/raw/` (e.g., family configs, `data/raw/sm_catalog/particles.json`)
+- Engine/configs: `data/raw/config/core/engine_core3.json`, rules under `data/raw/config/rules/`
 - Processed results and plots: `data/processed/`
-- Important digests/summaries: `digest/`
+- Important digests/summaries: `data/processed/digest/`
 
 ## Requirements
 - Python 3.8+ with `numpy`; `matplotlib` is optional (only needed for plots).
@@ -77,15 +78,17 @@ Ola1 (SM matching and block promotion):
 1) Sweep with extended metrics (optional output root):
 ```bash
 PYTHONPATH=src python3 -m study05.run_sweep \
-  --case CaseB_debug \
+  --case Core3L_Hadron \
   --runs 2000 \
   --seed 123 \
   --band-min 0.1 \
   --band-max 3.0 \
   # keep defaults to write under data/raw and data/processed
-  --layer-states config/layer_states.yaml \
+  --layer-states data/raw/config/layer_states.yaml \
+  --engine-config data/raw/config/core/engine_core3.json \
   --no-plots
 ```
+Notes: `layer_states.yaml` now uses relative thresholds (`T_Q_rel_min`, `T_S1_rel_min`, `T_S2_rel_min`) applied to the structural mass share of each layer; adjust there if you need to relax or tighten tiering.
 
 2) Build proxies CSV (includes lock_quality, structure_tier, s2_state, s3_state):
 ```bash
@@ -99,23 +102,28 @@ Outputs land in `data/processed/CaseB_debug/combined/`.
 3) Match against SM catalog (pion/rho/proton):
 ```bash
 PYTHONPATH=src python3 -m study06.match_sm_ola1 \
-  --proxies-csv data/processed/CaseB_debug/combined/CaseB_debug_all_runs_proxies.csv \
+  --proxies-csv data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv \
   --sm-catalog data/raw/sm_catalog/particles.json \
-  --output data/processed/CaseB_debug/ola1_matches \
-  --digest digest/ola1
+  --output data/processed/Core3L_Hadron/ola1_matches \
+  --digest data/processed/digest/ola1
 ```
-Writes full match table to processed and a digest copy of `best_match_per_run.csv` under `digest/ola1/`.
+Writes full match table to processed and a digest copy of `best_match_per_run.csv` under `data/processed/digest/ola1/`.
 
 4) Promote simple blocks:
 ```bash
 PYTHONPATH=src python3 -m study06.promote_simple_blocks \
-  --proxies-csv data/processed/CaseB_debug/combined/CaseB_debug_all_runs_proxies.csv \
-  --zoo-matches-csv data/processed/CaseB_debug/ola1_matches/zoo_matches.csv \
+  --proxies-csv data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv \
+  --zoo-matches-csv data/processed/Core3L_Hadron/ola1_matches/zoo_matches.csv \
   --sm-catalog data/raw/sm_catalog/particles.json \
   --output data/processed/blocks/simple_blocks.json \
-  --digest digest/blocks
+  --digest data/processed/digest/blocks
 ```
-Promoted blocks are stored in processed and copied to `digest/blocks/simple_blocks.json` for quick inspection.
+Promoted blocks are stored in processed and copied to `data/processed/digest/blocks/simple_blocks.json` for quick inspection.
+
+Pipeline runner (reads `data/raw/config/pipeline/sequence.json`):
+```bash
+PYTHONPATH=src python3 -m study06.run_pipeline --sequence data/raw/config/pipeline/sequence.json
+```
 
 Si corres el sweep con `--output-root data/ola1`, pasa la ruta explícita de resultados a `analyze_proxies`:
 ```bash

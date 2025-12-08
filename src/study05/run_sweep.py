@@ -104,6 +104,15 @@ def _load_layer_state_config(path: Path) -> Dict[str, Dict]:
         return {}
 
 
+def _load_engine_config(path: Optional[Path]) -> Dict:
+    if path is None or not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text())
+    except Exception:
+        return {}
+
+
 def _rescale_energies(omegas: np.ndarray, target: float = TARGET_ENERGY_GEV) -> tuple[np.ndarray, float]:
     omegas = np.array(omegas)
     if omegas.size == 0:
@@ -219,6 +228,7 @@ def run_sweep(
     processed_dir: Path = DEFAULT_PROCESSED_DIR,
     output_root: Optional[Path] = None,
     layer_state_config: Optional[Dict] = None,
+    sim_params_cfg: Optional[Dict] = None,
 ):
     rng = np.random.default_rng(seed)
     if output_root:
@@ -232,7 +242,7 @@ def run_sweep(
         raw_case_dir = raw_case_dir / "global"
         processed_case_dir = processed_case_dir / "global"
     _ensure_dirs(raw_case_dir, processed_case_dir)
-    sim_params = SimulationParams()
+    sim_params = SimulationParams(**sim_params_cfg) if sim_params_cfg else SimulationParams()
 
     layer_state_config = layer_state_config or {}
     lock_thresholds = layer_state_config.get("lock_thresholds", {})
@@ -381,19 +391,37 @@ def run_sweep(
         lock_quality_Q = layer_summaries.get("Q", {}).get("band_fraction", float("nan"))
         lock_quality_S1 = layer_summaries.get("S1", {}).get("band_fraction", float("nan"))
         lock_quality_S2 = layer_summaries.get("S2", {}).get("band_fraction", float("nan"))
+        lock_quality_S3 = layer_summaries.get("S3", {}).get("band_fraction", float("nan"))
 
-        T_Q = lock_thresholds.get("T_Q", 0.6)
-        T_S1 = lock_thresholds.get("T_S1", 0.6)
-        T_S2 = lock_thresholds.get("T_S2", 0.6)
+        # Relative thresholds (defaults can be overridden via YAML)
+        T_Q_rel_min = lock_thresholds.get("T_Q_rel_min", lock_thresholds.get("T_Q", 0.5))
+        T_S1_rel_min = lock_thresholds.get("T_S1_rel_min", lock_thresholds.get("T_S1", 0.1))
+        T_S2_rel_min = lock_thresholds.get("T_S2_rel_min", lock_thresholds.get("T_S2", 0.1))
 
-        if lock_quality_Q < T_Q:
+        def _finite(x: float) -> float:
+            return float(x) if np.isfinite(x) else 0.0
+
+        lock_Q_f = _finite(lock_quality_Q)
+        lock_S1_f = _finite(lock_quality_S1)
+        lock_S2_f = _finite(lock_quality_S2)
+        lock_S3_f = _finite(lock_quality_S3)
+        structural_mass = lock_Q_f + lock_S1_f + lock_S2_f + lock_S3_f
+
+        if structural_mass <= 0:
             structure_tier = "none"
-        elif lock_quality_Q >= T_Q and lock_quality_S1 < T_S1:
-            structure_tier = "level1"
-        elif lock_quality_Q >= T_Q and lock_quality_S1 >= T_S1 and lock_quality_S2 < T_S2:
-            structure_tier = "level2"
+            q_rel = s1_rel = s2_rel = 0.0
         else:
-            structure_tier = "level3"
+            q_rel = lock_Q_f / structural_mass
+            s1_rel = lock_S1_f / structural_mass
+            s2_rel = lock_S2_f / structural_mass
+            if q_rel < T_Q_rel_min:
+                structure_tier = "none"
+            elif s1_rel < T_S1_rel_min and s2_rel < T_S2_rel_min:
+                structure_tier = "level1"
+            elif s1_rel >= T_S1_rel_min and s2_rel < T_S2_rel_min:
+                structure_tier = "level2"
+            else:
+                structure_tier = "level3"
 
         s2_band_fraction_weight = layer_summaries.get("S2", {}).get("band_fraction", 0.0)
         none_max = s2_state_cfg.get("none_max_fraction", 1e-3)
@@ -531,8 +559,12 @@ def run_sweep(
 
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run Study05 oscillator sweeps.")
+    parser.add_argument("--case", type=str, default="Core3L_Hadron", help="Case name (default Core3L_Hadron).")
     parser.add_argument(
-        "--case", choices=["CaseA_2layers", "CaseB_3layers", "CaseB_debug"], default="CaseA_2layers"
+        "--engine-config",
+        type=Path,
+        default=Path("data/raw/config/core/engine_core3.json"),
+        help="Engine configuration JSON (defines layers, integration, band window).",
     )
     parser.add_argument(
         "--runs",
@@ -544,12 +576,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--max-complexity", type=int, default=DEFAULT_MAX_COMPLEXITY, help="Maximum complexity (C) allowed per run."
     )
-    parser.add_argument("--n-q", type=int, default=DEFAULT_N_Q, help="Modes in layer Q.")
-    parser.add_argument("--n-s1", type=int, default=DEFAULT_N_INTERNAL, help="Modes in layer S1.")
-    parser.add_argument("--n-s2", type=int, default=2, help="Modes in layer S2.")
-    parser.add_argument("--n-s3", type=int, default=0, help="Modes in layer S3 (Case B only).")
-    parser.add_argument("--band-min", type=float, default=DEFAULT_BAND_MIN, help="Min band energy (GeV).")
-    parser.add_argument("--band-max", type=float, default=DEFAULT_BAND_MAX, help="Max band energy (GeV).")
+    parser.add_argument("--n-q", type=int, default=None, help="Modes in layer Q.")
+    parser.add_argument("--n-s1", type=int, default=None, help="Modes in layer S1.")
+    parser.add_argument("--n-s2", type=int, default=None, help="Modes in layer S2.")
+    parser.add_argument("--n-s3", type=int, default=None, help="Modes in layer S3 (optional).")
+    parser.add_argument("--band-min", type=float, default=None, help="Min band energy (GeV).")
+    parser.add_argument("--band-max", type=float, default=None, help="Max band energy (GeV).")
     parser.add_argument(
         "--attempts",
         type=int,
@@ -582,7 +614,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--layer-states",
         type=Path,
-        default=Path("config/layer_states.yaml"),
+        default=Path("data/raw/config/layer_states.yaml"),
         help="Layer thresholds config (YAML).",
     )
     parser.add_argument("--family-name", type=str, default=None, help="Predefined family name.")
@@ -593,6 +625,44 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main():
     parser = build_arg_parser()
     args = parser.parse_args()
+    engine_cfg = _load_engine_config(args.engine_config)
+
+    # Override case/band/modes from engine config when provided
+    if engine_cfg:
+        if args.case in ("Core3L_Hadron", "CaseA_2layers", "CaseB_3layers", "CaseB_debug") or not args.case:
+            args.case = engine_cfg.get("name", args.case)
+        spec_layers = {l["name"]: l for l in engine_cfg.get("layers", []) if "name" in l}
+        args.n_q = args.n_q if args.n_q is not None else int(spec_layers.get("Q", {}).get("n_modes", DEFAULT_N_Q))
+        args.n_s1 = args.n_s1 if args.n_s1 is not None else int(
+            spec_layers.get("S1", {}).get("n_modes", DEFAULT_N_INTERNAL)
+        )
+        args.n_s2 = args.n_s2 if args.n_s2 is not None else int(spec_layers.get("S2", {}).get("n_modes", 2))
+        args.n_s3 = args.n_s3 if args.n_s3 is not None else int(spec_layers.get("S3", {}).get("n_modes", 0))
+        spec_band = engine_cfg.get("spectrum", {})
+        if args.band_min is None:
+            args.band_min = float(spec_band.get("band_min", DEFAULT_BAND_MIN))
+        if args.band_max is None:
+            args.band_max = float(spec_band.get("band_max", DEFAULT_BAND_MAX))
+        # integration defaults
+        spec_int = engine_cfg.get("integration", {})
+        dt_cfg = spec_int.get("dt")
+        t_max_cfg = spec_int.get("t_max")
+        sim_params_cfg = None
+        if dt_cfg and t_max_cfg:
+            total_steps = int(float(t_max_cfg) / float(dt_cfg))
+            sim_params_cfg = {"dt": float(dt_cfg), "total_steps": total_steps}
+        else:
+            sim_params_cfg = None
+    else:
+        args.n_q = args.n_q if args.n_q is not None else DEFAULT_N_Q
+        args.n_s1 = args.n_s1 if args.n_s1 is not None else DEFAULT_N_INTERNAL
+        args.n_s2 = args.n_s2 if args.n_s2 is not None else 2
+        args.n_s3 = args.n_s3 if args.n_s3 is not None else 0
+        if args.band_min is None:
+            args.band_min = DEFAULT_BAND_MIN
+        if args.band_max is None:
+            args.band_max = DEFAULT_BAND_MAX
+        sim_params_cfg = None
     layer_cfg = _load_layer_state_config(args.layer_states)
     family_spec = None
     family_fp = None
@@ -615,6 +685,33 @@ def main():
         # Override band window if provided by family
         args.band_min, args.band_max = family_spec.energy_window
 
+    # Resolve dirs to detect existing outputs (after family is known)
+    raw_dir = args.raw_dir
+    processed_dir = args.processed_dir
+    if args.output_root:
+        raw_dir = Path(args.output_root) / "raw"
+        processed_dir = Path(args.output_root) / "processed"
+
+    raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, args.case)
+    if family_spec:
+        raw_case_dir = raw_case_dir / family_spec.name
+        processed_case_dir = processed_case_dir / family_spec.name
+    else:
+        raw_case_dir = raw_case_dir / "global"
+        processed_case_dir = processed_case_dir / "global"
+    raw_path = raw_case_dir / "study05_sweep_params.json"
+    processed_path = processed_case_dir / "study05_sweep_results.json"
+
+    if raw_path.exists() and processed_path.exists():
+        msg = {
+            "status": "skip",
+            "reason": "existing sweep outputs detected; reuse without rerun",
+            "raw_path": str(raw_path),
+            "processed_path": str(processed_path),
+        }
+        print(json.dumps(msg, indent=2))
+        return
+
     summary, raw_path, processed_path = run_sweep(
         case=args.case,
         runs=args.runs,
@@ -631,10 +728,11 @@ def main():
         family_spec=family_spec,
         family_fp=family_fp,
         family_priors=family_priors,
-        raw_dir=args.raw_dir,
-        processed_dir=args.processed_dir,
-        output_root=args.output_root,
+        raw_dir=raw_dir,
+        processed_dir=processed_dir,
+        output_root=None,
         layer_state_config=layer_cfg,
+        sim_params_cfg=sim_params_cfg,
     )
     print(
         json.dumps(

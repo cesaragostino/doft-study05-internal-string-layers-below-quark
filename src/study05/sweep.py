@@ -47,26 +47,11 @@ def generate_configuration(
 ) -> Optional[SimulationConfig]:
     """Generate a configuration satisfying the complexity constraint."""
     rng = rng_or_default(rng)
-    special_case_debug = case == "CaseB_debug"
-    case_name = "CaseB_3layers" if case in ("CaseB_3layers", "CaseB_debug") else "CaseA_2layers"
-    include_s3 = case_name == "CaseB_3layers" and not special_case_debug
-
-    max_c = max_complexity
-    if special_case_debug and max_c < 12:
-        max_c = 12
+    include_s3 = n_s3 > 0
+    case_name = case
 
     for _ in range(attempts):
         ratio_overrides = None
-        if special_case_debug:
-            ratio_overrides = {
-                "R_S1_Q_range": (2.0, 3.0),
-                "R_S2_S1_range": (1.5, 2.5),
-                "R_range": None,
-            }
-            n_q = 3
-            n_s1 = 3
-            n_s2 = 2
-            n_s3 = 0
         if priors:
             ratio_overrides = {
                 "R_S1_Q_range": priors.R_S1_Q_range,
@@ -83,21 +68,13 @@ def generate_configuration(
         intra: List[Coupling] = []
         inter: List[InterLayerCoupling] = []
 
-        damping_overrides = None
-        if special_case_debug:
-            damping_overrides = {
-                Layer.Q: (0.008, 0.012),
-                Layer.S1: (0.008, 0.012),
-                Layer.S2: (0.0015, 0.0025),
-            }
-
         modes.extend(
             build_string_layer_modes(
                 Layer.Q,
                 f_layers[Layer.Q],
                 n_q,
                 rng,
-                damping_range=damping_overrides.get(Layer.Q) if damping_overrides else None,
+                damping_range=None,
             )
         )
         kq = k_scale_q if k_scale_q is not None else 0.2 * (f_layers[Layer.Q] ** 2)
@@ -109,24 +86,16 @@ def generate_configuration(
                 f_layers[Layer.S1],
                 n_s1,
                 rng,
-                damping_range=damping_overrides.get(Layer.S1) if damping_overrides else None,
+                damping_range=None,
             )
         )
-        g0_range_qs1 = (0.5, 1.0) if special_case_debug else None
+        g0_range_qs1 = None
         if priors:
             g0_range_qs1 = priors.g_QS1_scale_range
 
         k1 = k_scale_internal if k_scale_internal is not None else 0.5 * (f_layers[Layer.S1] ** 2)
         intra.extend(build_string_couplings(Layer.S1, n_s1, k_scale=k1, rng=rng))
-        g0_range_qs1 = (0.5, 1.0) if special_case_debug else None
         mem_override_qs1 = None
-        if special_case_debug:
-            mem_override_qs1 = {
-                "max_links": 1,
-                "terms": [
-                    {"tau_range": (0.2, 0.8), "amp_range": (0.5, 1.0)},
-                ]
-            }
         if priors:
             mem_override_qs1 = mem_override_qs1 or {
                 "terms": [
@@ -152,25 +121,16 @@ def generate_configuration(
                 f_layers[Layer.S2],
                 n_s2,
                 rng,
-                damping_range=damping_overrides.get(Layer.S2) if damping_overrides else None,
+                damping_range=None,
             )
         )
-        g0_range_s2s1 = (2.0, 4.0) if special_case_debug else None
+        g0_range_s2s1 = None
         if priors:
             g0_range_s2s1 = priors.g_S1S2_scale_range
 
         k2 = k_scale_internal if k_scale_internal is not None else 0.5 * (f_layers[Layer.S2] ** 2)
         intra.extend(build_string_couplings(Layer.S2, n_s2, k_scale=k2, rng=rng))
-        g0_range_s2s1 = (2.0, 4.0) if special_case_debug else None
         mem_override_s2s1 = None
-        if special_case_debug:
-            mem_override_s2s1 = {
-                "max_links": 1,
-                "terms": [
-                    {"tau_range": (0.1, 0.5), "amp_range": (0.5, 1.0)},
-                    {"tau_range": (1.0, 3.0), "amp_range": (0.5, 1.0)},
-                ]
-            }
         if priors:
             mem_override_s2s1 = mem_override_s2s1 or {
                 "terms": [
@@ -207,12 +167,12 @@ def generate_configuration(
             )
 
         complexity = compute_complexity(modes, inter)
-        if complexity > max_c:
+        if complexity > max_complexity:
             continue
 
         memory_terms = count_memory_terms(inter)
         return SimulationConfig(
-            case_name=case_name,
+            case_name=case,
             f_Q=f_Q,
             R_S1_Q=R_S1_Q,
             R_S2_S1=R_S2_S1,

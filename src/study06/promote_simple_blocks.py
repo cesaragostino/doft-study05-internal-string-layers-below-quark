@@ -6,7 +6,7 @@ import argparse
 import csv
 import json
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional, Set, Tuple
 
 import numpy as np
 
@@ -41,14 +41,59 @@ def read_matches(path: Path) -> List[Dict]:
     return rows
 
 
+def _tier_rank(tier: str) -> int:
+    order = {"none": 0, "level1": 1, "level2": 2, "level3": 3}
+    return order.get(str(tier), 0)
+
+
+def _normalize_s_state(state: Optional[str]) -> str:
+    s = (str(state or "")).lower()
+    if s.startswith("structural"):
+        return "structural"
+    return s
+
+
+def _family_level_count(proxy_row: Dict, family: Optional[str]) -> int:
+    if not family:
+        return 0
+    target_key = f"{family}_n_levels_sim".lower()
+    for k, v in proxy_row.items():
+        if str(k).lower() == target_key:
+            try:
+                return int(float(v))
+            except Exception:
+                return 0
+    return 0
+
+
+def _allowed_s2(state: Optional[str], allowed: Set[str]) -> bool:
+    return _normalize_s_state(state) in allowed
+
+
+def _threshold_for(particle: Dict) -> Tuple[int, float, int, Set[str]]:
+    """Return (min_tier_rank, max_d_total, min_levels, allowed_s2_states)."""
+    ptype = particle.get("type")
+    name = particle.get("name")
+    if ptype == "meson":
+        if name == "pion":
+            return 1, 2.0, 1, {"none", "latent", "structural"}
+        if name == "rho":
+            return 1, 3.0, 2, {"latent", "structural"}
+        return 1, 3.0, 2, {"latent", "structural"}
+    if ptype == "baryon":
+        return 2, 4.0, 3, {"latent", "structural"}
+    # default conservative
+    return 2, 3.0, 2, {"latent", "structural"}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Promote simple blocks from Ola1 sweeps.")
     parser.add_argument("--proxies-csv", type=Path, required=True)
     parser.add_argument("--zoo-matches-csv", type=Path, required=True)
     parser.add_argument("--sm-catalog", type=Path, default=Path("data/raw/sm_catalog/particles.json"))
     parser.add_argument("--output", type=Path, default=Path("data/processed/blocks/simple_blocks.json"))
-    parser.add_argument("--digest", type=Path, default=Path("digest/blocks"), help="Directory to store promoted block summary.")
-    parser.add_argument("--d-total-max", type=float, default=0.3)
+    parser.add_argument("--digest", type=Path, default=Path("data/processed/digest/blocks"), help="Directory to store promoted block summary.")
+    parser.add_argument("--d-total-max", type=float, default=None, help="Deprecated: per-particle thresholds are used instead.")
     parser.add_argument("--max-blocks-per-particle", type=int, default=10)
     args = parser.parse_args()
 
@@ -56,36 +101,77 @@ def main():
     matches = read_matches(args.zoo_matches_csv)
     catalog = json.loads(args.sm_catalog.read_text())
     cat_by_name = {p["name"]: p for p in catalog}
+    proxy_by_run = {str(r.get("run_id")): r for r in proxies}
 
-    # group matches by target
+    # choose best match per run (lowest finite d_total)
+    best_by_run: Dict[str, Dict] = {}
+    for m in matches:
+        rid = str(m.get("run_id"))
+        d_total = m.get("d_total", np.inf)
+        if not np.isfinite(d_total):
+            continue
+        prev = best_by_run.get(rid)
+        if prev is None or d_total < prev.get("d_total", np.inf):
+            best_by_run[rid] = m
+
     blocks: List[Dict] = []
     blocks_per_particle: Dict[str, int] = {}
+    rejected_rows: List[Dict] = []
 
-    for match in matches:
+    for run_id, match in best_by_run.items():
         target = match.get("target_name")
-        if target not in cat_by_name:
+        particle = cat_by_name.get(target or "")
+        proxy_row = proxy_by_run.get(str(run_id))
+
+        def reject(reason: str):
+            rejected_rows.append(
+                {
+                    "run_id": run_id,
+                    "best_target": target,
+                    "type": particle.get("type") if particle else "",
+                    "best_d_total": match.get("d_total"),
+                    "structure_tier": proxy_row.get("structure_tier") if proxy_row else "",
+                    "s2_state": proxy_row.get("s2_state") if proxy_row else "",
+                    "enough_levels": match.get("enough_levels"),
+                    "reason": reason,
+                }
+            )
+
+        if particle is None:
+            reject("unknown_particle")
             continue
-        particle = cat_by_name[target]
-        if particle.get("type") != "meson":
-            continue
-        if not match.get("enough_levels"):
-            continue
-        if not np.isfinite(match.get("d_total", np.inf)) or match.get("d_total", np.inf) > args.d_total_max:
-            continue
-        run_id = match.get("run_id")
-        # find proxy row
-        proxy_row = next((r for r in proxies if str(r.get("run_id")) == str(run_id)), None)
         if proxy_row is None:
-            continue
-        structure_tier = proxy_row.get("structure_tier")
-        s2_state = proxy_row.get("s2_state")
-        if structure_tier not in ("level2", "level3"):
-            continue
-        if s2_state not in ("none", "latent"):
+            reject("missing_proxy")
             continue
 
+        min_tier_rank, max_d_total, min_levels, allowed_s2 = _threshold_for(particle)
+        structure_tier = proxy_row.get("structure_tier", "none")
+        if _tier_rank(structure_tier) < min_tier_rank:
+            reject("tier_too_low")
+            continue
+
+        d_total = match.get("d_total", np.inf)
+        if not np.isfinite(d_total) or d_total > max_d_total:
+            reject("distance_high")
+            continue
+
+        s2_state_norm = _normalize_s_state(proxy_row.get("s2_state"))
+        if not _allowed_s2(s2_state_norm, allowed_s2):
+            reject("s2_state_blocked")
+            continue
+
+        # enough_levels: use zoo flag as primary, but allow per-particle relaxation via n_levels_sim
+        enough_flag = bool(match.get("enough_levels"))
+        if not enough_flag:
+            levels = _family_level_count(proxy_row, match.get("family"))
+            enough_flag = levels >= min_levels
+        if not enough_flag:
+            reject("not_enough_levels")
+            continue
+        # max blocks per particle
         cnt = blocks_per_particle.get(target, 0)
         if cnt >= args.max_blocks_per_particle:
+            reject("max_blocks_reached")
             continue
         blocks_per_particle[target] = cnt + 1
 
@@ -95,15 +181,20 @@ def main():
             "origin_run_id": proxy_row.get("run_id"),
             "particle_name": target,
             "family": particle.get("family"),
+            "type": particle.get("type"),
             "structure_tier": structure_tier,
             "lock_quality": {
                 "Q": proxy_row.get("lock_quality_Q"),
                 "S1": proxy_row.get("lock_quality_S1"),
                 "S2": proxy_row.get("lock_quality_S2"),
             },
-            "s2_state": s2_state,
+            "s2_state": s2_state_norm,
             "s2_band_fraction": proxy_row.get("s2_band_fraction"),
-            "match_score": {"d_total": match.get("d_total"), "d_spacing": match.get("d_spacing"), "d_mass": match.get("d_mass")},
+            "match_score": {
+                "d_total": match.get("d_total"),
+                "d_spacing": match.get("d_spacing"),
+                "d_mass": match.get("d_mass"),
+            },
             "theta_internal": {
                 "R_S1_Q": proxy_row.get("R_S1_Q"),
                 "R_S2_S1": proxy_row.get("R_S2_S1"),
@@ -118,6 +209,16 @@ def main():
     out_path = args.output
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(blocks, indent=2))
+
+    # Save rejected candidates for visibility
+    if rejected_rows:
+        rej_path = out_path.parent / "simple_blocks_rejected.csv"
+        with rej_path.open("w", newline="") as f:
+            fieldnames = ["run_id", "best_target", "type", "best_d_total", "structure_tier", "s2_state", "enough_levels", "reason"]
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            for row in rejected_rows:
+                writer.writerow(row)
 
     # Optional digest copy for a concise promoted-blocks snapshot
     if args.digest:

@@ -1,0 +1,74 @@
+[
+  {
+    "step": "ola1_sweep",
+    "kind": "sweep",
+    "module": "study05.run_sweep",
+    "args": {
+      "case": "Core3L_Hadron",
+      "runs": 2000,
+      "seed": 123,
+      "band_min": 0.1,
+      "band_max": 3.0,
+      "layer_states": "data/raw/config/layer_states.yaml",
+      "output_root": "data/processed/ola1",
+      "engine_config": "data/raw/config/core/engine_core3.json",
+      "no_plots": true
+    }
+  },
+  {
+    "step": "ola1_proxies",
+    "kind": "postprocess",
+    "module": "study05.analyze_proxies",
+    "args": {
+      "case": "Core3L_Hadron",
+      "output": "data/processed",
+      "families": [
+        "nucleon_like",
+        "rho_like",
+        "pion_like"
+      ]
+    }
+  },
+  {
+    "step": "ola1_match_sm",
+    "kind": "postprocess",
+    "module": "study06.match_sm_ola1",
+    "args": {
+      "proxies_csv": "data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv",
+      "sm_catalog": "data/raw/sm_catalog/particles.json",
+      "output": "data/processed/Core3L_Hadron/ola1_matches"
+    }
+  },
+  {
+    "step": "ola1_promote_blocks",
+    "kind": "rules",
+    "module": "study06.apply_wave_rules",
+    "args": {
+      "rules_json": "data/raw/config/rules/wave1_blocks.json"
+    }
+  },
+  {
+    "step": "ola2_compounds",
+    "kind": "rules",
+    "module": "study06.run_ola2_compounds",
+    "args": {
+      "rules_json": "data/raw/config/rules/wave2_compounds.json"
+    }
+  },
+  {
+    "step": "ola2_viability",
+    "kind": "postprocess",
+    "module": "study06.label_ola2_viability",
+    "args": {
+      "compounds_csv": "data/processed/ola2/raw/compounds_proton.csv",
+      "output": "data/processed/ola2/viability/viability_proton.csv",
+      "d_yes": 3.0,
+      "d_possible": 5.0,
+      "min_structure_tier": "level2",
+      "allowed_s2_states": [
+        "latent",
+        "structural"
+      ]
+    }
+  }
+]
