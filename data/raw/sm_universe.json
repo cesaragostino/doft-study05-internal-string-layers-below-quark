@@ -1,0 +1,204 @@
+{
+  "particles": [
+    {
+      "name": "pion",
+      "family": "pion_like",
+      "type": "meson",
+      "JPC": "0-",
+      "masses_gev": [0.139, 1.30],
+      "widths_gev": [0.00, 0.40],
+      "energy_window": [0.10, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.10,
+        "mass_abs": 0.02
+      }
+    },
+    {
+      "name": "rho",
+      "family": "rho_like",
+      "type": "meson",
+      "JPC": "1-",
+      "masses_gev": [0.775, 1.45, 1.72],
+      "widths_gev": [0.15, 0.35, 0.30],
+      "energy_window": [0.10, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.10,
+        "mass_abs": 0.03
+      }
+    },
+    {
+      "name": "kaon",
+      "family": "kaon_like",
+      "type": "meson",
+      "JPC": "0-",
+      "masses_gev": [0.494, 1.27],
+      "widths_gev": [0.00, 0.50],
+      "energy_window": [0.10, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.12,
+        "mass_abs": 0.03
+      }
+    },
+    {
+      "name": "phi",
+      "family": "phi_like",
+      "type": "meson",
+      "JPC": "1-",
+      "masses_gev": [1.02],
+      "widths_gev": [0.004],
+      "energy_window": [0.10, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.10,
+        "mass_abs": 0.02
+      }
+    },
+
+    {
+      "name": "proton",
+      "family": "nucleon_like",
+      "type": "baryon",
+      "JPC": "1/2+",
+      "masses_gev": [0.939, 1.44, 1.71, 1.88],
+      "widths_gev": [0.00, 0.35, 0.15, 0.25],
+      "energy_window": [0.20, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.10,
+        "mass_abs": 0.03
+      }
+    },
+    {
+      "name": "neutron",
+      "family": "nucleon_like",
+      "type": "baryon",
+      "JPC": "1/2+",
+      "masses_gev": [0.939, 1.44, 1.71, 1.88],
+      "widths_gev": [0.00, 0.35, 0.15, 0.25],
+      "energy_window": [0.20, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.10,
+        "mass_abs": 0.03
+      }
+    },
+    {
+      "name": "delta_1232",
+      "family": "delta_like",
+      "type": "baryon",
+      "JPC": "3/2+",
+      "masses_gev": [1.232, 1.60, 1.90],
+      "widths_gev": [0.12, 0.30, 0.30],
+      "energy_window": [0.50, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.12,
+        "mass_abs": 0.04
+      }
+    },
+
+    {
+      "name": "quark_ud_const",
+      "family": "quark_like",
+      "type": "effective_quark",
+      "JPC": "1/2+",
+      "masses_gev": [0.33, 0.80],
+      "widths_gev": [0.10, 0.30],
+      "energy_window": [0.10, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.20,
+        "mass_abs": 0.05
+      }
+    },
+    {
+      "name": "quark_s_const",
+      "family": "quark_like",
+      "type": "effective_quark",
+      "JPC": "1/2+",
+      "masses_gev": [0.50, 1.00],
+      "widths_gev": [0.10, 0.40],
+      "energy_window": [0.10, 3.00],
+      "tolerances": {
+        "spacing_rel": 0.20,
+        "mass_abs": 0.05
+      }
+    }
+  ],
+
+  "families": [
+    {
+      "name": "pion_like",
+      "type": "meson",
+      "members": ["pion"],
+      "prototype": {
+        "masses_gev": [0.14, 1.30],
+        "widths_gev": [0.00, 0.40]
+      },
+      "tolerances": {
+        "spacing_rel": 0.15,
+        "mass_abs": 0.05
+      }
+    },
+    {
+      "name": "rho_like",
+      "type": "meson",
+      "members": ["rho"],
+      "prototype": {
+        "masses_gev": [0.77, 1.45, 1.72],
+        "widths_gev": [0.15, 0.35, 0.30]
+      },
+      "tolerances": {
+        "spacing_rel": 0.15,
+        "mass_abs": 0.05
+      }
+    },
+    {
+      "name": "kaon_like",
+      "type": "meson",
+      "members": ["kaon"],
+      "prototype": {
+        "masses_gev": [0.49, 1.27],
+        "widths_gev": [0.00, 0.50]
+      },
+      "tolerances": {
+        "spacing_rel": 0.18,
+        "mass_abs": 0.05
+      }
+    },
+    {
+      "name": "nucleon_like",
+      "type": "baryon",
+      "members": ["proton", "neutron"],
+      "prototype": {
+        "masses_gev": [0.94, 1.44, 1.71, 1.88],
+        "widths_gev": [0.00, 0.35, 0.15, 0.25]
+      },
+      "tolerances": {
+        "spacing_rel": 0.15,
+        "mass_abs": 0.05
+      }
+    },
+    {
+      "name": "delta_like",
+      "type": "baryon",
+      "members": ["delta_1232"],
+      "prototype": {
+        "masses_gev": [1.23, 1.60, 1.90],
+        "widths_gev": [0.12, 0.30, 0.30]
+      },
+      "tolerances": {
+        "spacing_rel": 0.18,
+        "mass_abs": 0.06
+      }
+    },
+    {
+      "name": "quark_like",
+      "type": "effective_quark",
+      "members": ["quark_ud_const", "quark_s_const"],
+      "prototype": {
+        "masses_gev": [0.33, 0.80],
+        "widths_gev": [0.10, 0.30]
+      },
+      "tolerances": {
+        "spacing_rel": 0.25,
+        "mass_abs": 0.08
+      }
+    }
+  ]
+}

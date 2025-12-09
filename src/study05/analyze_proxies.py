@@ -10,7 +10,7 @@ from typing import Dict, List
 
 import numpy as np
 
-from study05.families import FamilySpec, build_fingerprint, compute_family_distance, load_family_spec
+from study05.families import FamilySpec, build_fingerprint, compute_family_distance
 
 
 def _resolve_output_dir(output: Path, case: str) -> Path:
@@ -31,6 +31,7 @@ def load_runs(case: str, results_path: Path | None = None) -> List[Dict]:
     candidates.append(Path("data/processed/ola1") / case / "global" / "study05_sweep_results.json")
     candidates.append(Path("data/processed/ola1/processed") / case / "global" / "study05_sweep_results.json")
     candidates.append(Path("data/processed/ola1") / "processed" / case / "global" / "study05_sweep_results.json")
+    candidates.append(Path("data/raw") / "study05_sweep_results.json")
     for path in candidates:
         if path.exists():
             data = json.loads(path.read_text())
@@ -69,36 +70,33 @@ def compute_basic_proxies(run: Dict) -> Dict:
     return proxies
 
 
-def load_family_specs(paths: List[Path]) -> Dict[str, FamilySpec]:
-    specs = {}
-    for p in paths:
-        if not p.exists():
-            # try lowercase filename
-            alt = p.with_name(p.name.lower())
-            if alt.exists():
-                p = alt
-        if p.exists():
-            spec = load_family_spec(p)
-            specs[spec.name] = spec
-    return specs
+def load_families_from_universe(path: Path) -> Dict[str, FamilySpec]:
+    uni = json.loads(path.read_text())
+    fams: Dict[str, FamilySpec] = {}
+    for f in uni.get("families", []):
+        proto = f.get("prototype", {})
+        masses = proto.get("masses_gev", [])
+        widths = proto.get("widths_gev")
+        energy_window = f.get("energy_window", [0.1, 3.0])
+        fams[f["name"]] = FamilySpec(
+            name=f["name"],
+            hadron_type=f.get("type", "meson"),
+            masses_gev=masses,
+            widths_gev=widths,
+            jpc=None,
+            energy_window=tuple(energy_window),
+        )
+    return fams
 
 
-def analyze(case: str, families: List[str], output: Path, results_path: Path | None = None):
+def analyze(case: str, sm_universe: Path, output: Path, results_path: Path | None = None):
     runs = load_runs(case, results_path)
     if not runs:
         print("No runs found.")
         return
     output_dir = _resolve_output_dir(output, case)
 
-    family_paths = []
-    for f in families:
-        path = Path(f)
-        if not path.suffix:
-            path = Path(f"data/raw/config/{f}.json")
-            if not path.exists():
-                path = Path(f"data/raw/legacy/sm_families/{f}.json")
-        family_paths.append(path)
-    specs = load_family_specs(family_paths)
+    specs = load_families_from_universe(sm_universe)
     fps = {name: build_fingerprint(spec) for name, spec in specs.items()}
 
     rows: List[Dict] = []
@@ -159,12 +157,12 @@ def analyze(case: str, families: List[str], output: Path, results_path: Path | N
 
 def main():
     parser = argparse.ArgumentParser(description="Analyze proxies and family distances.")
-    parser.add_argument("--case", required=True, help="Case name (e.g., CaseB_debug).")
-    parser.add_argument("--families", nargs="+", default=[], help="Family names or paths to JSON configs.")
+    parser.add_argument("--case", required=True, help="Case name (e.g., Core3L_Hadron).")
+    parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"), help="SM universe JSON.")
     parser.add_argument("--output", type=Path, default=Path("data/processed"), help="Output directory root.")
     parser.add_argument("--results-json", type=Path, default=None, help="Optional explicit path to sweep results JSON.")
     args = parser.parse_args()
-    analyze(args.case, args.families, args.output, results_path=args.results_json)
+    analyze(args.case, args.sm_universe, args.output, results_path=args.results_json)
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ from typing import Dict, List
 import numpy as np
 
 
-def load_catalog(path: Path) -> List[Dict]:
+def load_universe(path: Path) -> Dict:
     return json.loads(path.read_text())
 
 
@@ -79,12 +79,13 @@ def compute_match(levels: List[float], particle: Dict) -> Dict:
 def main():
     parser = argparse.ArgumentParser(description="Match spectra against SM catalog (Ola1).")
     parser.add_argument("--proxies-csv", type=Path, required=True)
-    parser.add_argument("--sm-catalog", type=Path, default=Path("data/raw/sm_catalog/particles.json"))
+    parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"))
     parser.add_argument("--output", type=Path, default=Path("data/processed/ola1_matches"))
     parser.add_argument("--digest", type=Path, default=Path("data/processed/digest/ola1"), help="Directory to store summary outputs.")
     args = parser.parse_args()
 
-    catalog = load_catalog(args.sm_catalog)
+    universe = load_universe(args.sm_universe)
+    catalog = universe.get("particles", [])
     rows = parse_proxies_csv(args.proxies_csv)
     match_rows: List[Dict] = []
     best_rows: List[Dict] = []

@@ -99,6 +99,25 @@ def main():
 
     proxies = read_proxies(args.proxies_csv)
     matches = read_matches(args.zoo_matches_csv)
+    # optional runs JSON to retrieve theta_internal
+    runs_json = None
+    if args.proxies_csv.name.endswith("_all_runs_proxies.csv"):
+        case = args.proxies_csv.stem.replace("_all_runs_proxies", "")
+        candidate = Path("data/processed/ola1") / case / "global" / "study05_sweep_results.json"
+        if candidate.exists():
+            runs_json = candidate
+    if runs_json is None:
+        candidate = Path(args.proxies_csv).parent.parent / "global" / "study05_sweep_results.json"
+        if candidate.exists():
+            runs_json = candidate
+    run_theta: Dict[str, Dict] = {}
+    if runs_json and runs_json.exists():
+        try:
+            data = json.loads(runs_json.read_text())
+            for r in data.get("runs", []):
+                run_theta[str(r.get("run_id"))] = r.get("theta_internal")
+        except Exception:
+            pass
     catalog = json.loads(args.sm_catalog.read_text())
     cat_by_name = {p["name"]: p for p in catalog}
     proxy_by_run = {str(r.get("run_id")): r for r in proxies}
@@ -204,6 +223,9 @@ def main():
                 "memory_amps": proxy_row.get("memory_amps"),
             },
         }
+        theta_full = run_theta.get(str(proxy_row.get("run_id")))
+        if theta_full:
+            block["theta_internal"] = theta_full
         blocks.append(block)
 
     out_path = args.output

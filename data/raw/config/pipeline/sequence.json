@@ -30,7 +30,7 @@
     "module": "study06.match_sm_ola1",
     "args": {
       "proxies_csv": "data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv",
-      "sm_catalog": "data/raw/sm_catalog/particles.json",
+      "sm_universe": "data/raw/sm_universe.json",
       "output": "data/processed/Core3L_Hadron/ola1_matches"
     }
   },

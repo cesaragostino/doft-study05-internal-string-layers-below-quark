@@ -4,7 +4,7 @@ Lightweight simulator of coupled oscillators with internal layers (S1, S2, optio
 
 ## Layout
 - Code: `src/study05/`
-- Input draws/parameters and catalogs: `data/raw/` (e.g., family configs, `data/raw/sm_catalog/particles.json`)
+- Input draws/parameters and catalogs: `data/raw/` (e.g., universe config `data/raw/sm_universe.json`)
 - Engine/configs: `data/raw/config/core/engine_core3.json`, rules under `data/raw/config/rules/`
 - Processed results and plots: `data/processed/`
 - Important digests/summaries: `data/processed/digest/`
@@ -94,8 +94,8 @@ Notes: `layer_states.yaml` now uses relative thresholds (`T_Q_rel_min`, `T_S1_re
 ```bash
 PYTHONPATH=src python3 -m study05.analyze_proxies \
   --case Core3L_Hadron \
-  --output data/processed \
-  --families nucleon_like rho_like pion_like
+  --sm-universe data/raw/sm_universe.json \
+  --output data/processed
 ```
 Outputs land in `data/processed/Core3L_Hadron/combined/`.
 
@@ -103,7 +103,7 @@ Outputs land in `data/processed/Core3L_Hadron/combined/`.
 ```bash
 PYTHONPATH=src python3 -m study06.match_sm_ola1 \
   --proxies-csv data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv \
-  --sm-catalog data/raw/sm_catalog/particles.json \
+  --sm-universe data/raw/sm_universe.json \
   --output data/processed/Core3L_Hadron/ola1_matches \
   --digest data/processed/digest/ola1
 ```
@@ -130,6 +130,6 @@ Si corres el sweep con `--output-root data/ola1`, pasa la ruta explícita de res
 PYTHONPATH=src python3 -m study05.analyze_proxies \
   --case Core3L_Hadron \
   --results-json data/processed/ola1/Core3L_Hadron/global/study05_sweep_results.json \
-  --output data/processed \
-  --families nucleon_like rho_like pion_like
+  --sm-universe data/raw/sm_universe.json \
+  --output data/processed
 ```

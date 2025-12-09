@@ -48,11 +48,11 @@ def _best_match_per_run(zoo_rows: List[Dict[str, Any]]) -> Dict[str, Dict[str, A
     return best
 
 
-def _passes_filter(row: Dict[str, Any], flt: Dict[str, Any]) -> bool:
-    field = flt.get("field")
+def _passes_filter(row: Dict[str, Any], lower_map: Dict[str, Any], flt: Dict[str, Any]) -> bool:
+    field = str(flt.get("field"))
     op = flt.get("op")
     val = flt.get("value")
-    rv = row.get(field)
+    rv = row.get(field, lower_map.get(field.lower()))
     if op == "==":
         return rv == val
     if op == "in":
@@ -99,7 +99,8 @@ def apply_rules(rules_path: Path):
 
         filtered: List[Dict[str, Any]] = []
         for r in merged:
-            if all(_passes_filter(r, f) for f in filters):
+            lower_map = {str(k).lower(): v for k, v in r.items()}
+            if all(_passes_filter(r, lower_map, f) for f in filters):
                 filtered.append(r)
             else:
                 rejected_rows.append(

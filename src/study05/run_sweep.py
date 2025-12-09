@@ -81,6 +81,52 @@ def _serialize_run_config(config: SimulationConfig) -> Dict:
     }
 
 
+def _serialize_theta(config: SimulationConfig) -> Dict:
+    modes = [
+        {
+            "layer": m.layer.name,
+            "index": m.index,
+            "omega0": m.omega0,
+            "mass": m.mass,
+            "gamma": m.gamma,
+        }
+        for m in config.modes
+    ]
+    intra = [
+        {
+            "i": {"layer": c.i[0].name, "index": c.i[1]},
+            "j": {"layer": c.j[0].name, "index": c.j[1]},
+            "k_ij0": c.k_ij0,
+        }
+        for c in config.intra_layer_couplings
+    ]
+    inter = []
+    for ic in config.inter_layer_couplings:
+        links = []
+        for (i_deep, j_sh), ker in ic.links.items():
+            links.append(
+                {
+                    "i_deep": i_deep,
+                    "j_shallow": j_sh,
+                    "taus0": ker.taus0,
+                    "amps0": ker.amps0,
+                }
+            )
+        inter.append(
+            {
+                "deep_layer": ic.deep_layer.name,
+                "shallow_layer": ic.shallow_layer.name,
+                "g0": ic.g0,
+                "links": links,
+            }
+        )
+    return {
+        "modes": modes,
+        "intra_couplings": intra,
+        "inter_couplings": inter,
+    }
+
+
 def _ensure_dirs(raw_dir: Path, processed_dir: Path) -> None:
     raw_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
@@ -482,6 +528,7 @@ def run_sweep(
                 "g_couplings": [ic.g0 for ic in config.inter_layer_couplings],
                 "memory_taus": [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0],
                 "memory_amps": [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0],
+                "theta_internal": _serialize_theta(config),
             }
         )
 
