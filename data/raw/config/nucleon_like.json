@@ -1,8 +1,0 @@
-{
-  "name": "Nucleon_like",
-  "hadron_type": "baryon",
-  "masses_gev": [0.939, 1.44, 1.71, 1.88],
-  "widths_gev": [0.0, 0.35, 0.15, 0.25],
-  "jpc": "1/2+",
-  "energy_window": [0.2, 3.0]
-}

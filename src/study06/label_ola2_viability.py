@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 from pathlib import Path
 from typing import Any, Dict
 
@@ -45,6 +46,10 @@ def main():
     min_tier_rank = order.get(args.min_structure_tier, 2)
     allowed_s2 = {s.lower() for s in args.allowed_s2_states}
 
+    if not args.compounds_csv.exists():
+        print(json.dumps({"status": "skip", "reason": "compounds_not_found", "path": str(args.compounds_csv)}))
+        return
+
     rows = []
     with args.compounds_csv.open() as f:
         reader = csv.DictReader(f)
@@ -52,6 +57,10 @@ def main():
             row = dict(row)
             row["label"] = label_row(row, args.d_yes, args.d_possible, min_tier_rank, allowed_s2)
             rows.append(row)
+
+    if not rows:
+        print(json.dumps({"status": "skip", "reason": "no_compounds"}, indent=2))
+        return
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", newline="") as f:

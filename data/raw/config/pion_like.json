@@ -1,8 +1,0 @@
-{
-  "name": "Pion_like",
-  "hadron_type": "meson",
-  "masses_gev": [0.139, 1.30],
-  "widths_gev": [0.0, 0.40],
-  "jpc": "0-+",
-  "energy_window": [0.1, 3.0]
-}

@@ -233,7 +233,7 @@ def run_sweep(
     rng = np.random.default_rng(seed)
     if output_root:
         raw_dir = Path(output_root) / "raw"
-        processed_dir = Path(output_root) / "processed"
+        processed_dir = Path(output_root)
     raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, case)
     if family_spec:
         raw_case_dir = raw_case_dir / family_spec.name
@@ -672,9 +672,9 @@ def main():
         family_spec = load_family_spec(args.family_config)
     elif args.family_name:
         predefined = {
-            "Nucleon_like": Path("data/raw/config/nucleon_like.json"),
-            "Rho_like": Path("data/raw/config/rho_like.json"),
-            "Pion_like": Path("data/raw/config/pion_like.json"),
+            "Nucleon_like": Path("data/raw/legacy/sm_families/nucleon_like.json"),
+            "Rho_like": Path("data/raw/legacy/sm_families/rho_like.json"),
+            "Pion_like": Path("data/raw/legacy/sm_families/pion_like.json"),
         }
         if args.family_name in predefined and predefined[args.family_name].exists():
             family_spec = load_family_spec(predefined[args.family_name])
@@ -690,7 +690,7 @@ def main():
     processed_dir = args.processed_dir
     if args.output_root:
         raw_dir = Path(args.output_root) / "raw"
-        processed_dir = Path(args.output_root) / "processed"
+        processed_dir = Path(args.output_root)
 
     raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, args.case)
     if family_spec:

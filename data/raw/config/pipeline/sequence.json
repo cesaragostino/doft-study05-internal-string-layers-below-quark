@@ -21,12 +21,7 @@
     "module": "study05.analyze_proxies",
     "args": {
       "case": "Core3L_Hadron",
-      "output": "data/processed",
-      "families": [
-        "nucleon_like",
-        "rho_like",
-        "pion_like"
-      ]
+      "output": "data/processed"
     }
   },
   {

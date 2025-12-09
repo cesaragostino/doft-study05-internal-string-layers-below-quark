@@ -126,9 +126,11 @@ def label_viability(row: Dict[str, Any], eval_cfg: Dict[str, Any]) -> str:
 
 def run_from_rules(rules_path: Path):
     rules = _load_json(rules_path)
-    blocks = _load_blocks(Path(rules["blocks_input"]))
+    blocks_path = Path(rules["blocks_input"])
+    blocks = _load_blocks(blocks_path)
     if not blocks:
-        raise FileNotFoundError("No blocks found to build compounds.")
+        print(json.dumps({"status": "skip", "reason": "no_blocks", "blocks_input": str(blocks_path)}))
+        return
     templates = {t["name"]: t for t in _load_json(Path(rules["templates_json"]))}
     catalog = _load_sm_catalog(Path(rules["sm_catalog"]))
     runs_per_target = int(rules.get("runs_per_target", 100))

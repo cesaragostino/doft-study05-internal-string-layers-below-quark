@@ -30,6 +30,7 @@ def load_runs(case: str, results_path: Path | None = None) -> List[Dict]:
     candidates.append(Path("data/ola1/processed") / case / "global" / "study05_sweep_results.json")
     candidates.append(Path("data/processed/ola1") / case / "global" / "study05_sweep_results.json")
     candidates.append(Path("data/processed/ola1/processed") / case / "global" / "study05_sweep_results.json")
+    candidates.append(Path("data/processed/ola1") / "processed" / case / "global" / "study05_sweep_results.json")
     for path in candidates:
         if path.exists():
             data = json.loads(path.read_text())
@@ -94,6 +95,8 @@ def analyze(case: str, families: List[str], output: Path, results_path: Path | N
         path = Path(f)
         if not path.suffix:
             path = Path(f"data/raw/config/{f}.json")
+            if not path.exists():
+                path = Path(f"data/raw/legacy/sm_families/{f}.json")
         family_paths.append(path)
     specs = load_family_specs(family_paths)
     fps = {name: build_fingerprint(spec) for name, spec in specs.items()}

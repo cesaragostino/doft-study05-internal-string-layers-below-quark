@@ -93,11 +93,11 @@ Notes: `layer_states.yaml` now uses relative thresholds (`T_Q_rel_min`, `T_S1_re
 2) Build proxies CSV (includes lock_quality, structure_tier, s2_state, s3_state):
 ```bash
 PYTHONPATH=src python3 -m study05.analyze_proxies \
-  --case CaseB_debug \
+  --case Core3L_Hadron \
   --output data/processed \
   --families nucleon_like rho_like pion_like
 ```
-Outputs land in `data/processed/CaseB_debug/combined/`.
+Outputs land in `data/processed/Core3L_Hadron/combined/`.
 
 3) Match against SM catalog (pion/rho/proton):
 ```bash
@@ -128,8 +128,8 @@ PYTHONPATH=src python3 -m study06.run_pipeline --sequence data/raw/config/pipeli
 Si corres el sweep con `--output-root data/ola1`, pasa la ruta explícita de resultados a `analyze_proxies`:
 ```bash
 PYTHONPATH=src python3 -m study05.analyze_proxies \
-  --case CaseB_debug \
-  --results-json data/ola1/processed/CaseB_debug/global/study05_sweep_results.json \
+  --case Core3L_Hadron \
+  --results-json data/processed/ola1/Core3L_Hadron/global/study05_sweep_results.json \
   --output data/processed \
   --families nucleon_like rho_like pion_like
 ```
