@@ -49,7 +49,7 @@ def main():
     parser = argparse.ArgumentParser(description="Catalog complex cores (strong S2, level3) from Ola1 proxies.")
     parser.add_argument("--proxies-csv", type=Path, required=True)
     parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"))
-    parser.add_argument("--output", type=Path, default=Path("data/processed/blocks/complex_cores.json"))
+    parser.add_argument("--output", type=Path, default=Path("data/processed/ola1/blocks/complex_cores.json"))
     parser.add_argument("--d-yes-baryon-core", type=float, default=0.6)
     args = parser.parse_args()
 

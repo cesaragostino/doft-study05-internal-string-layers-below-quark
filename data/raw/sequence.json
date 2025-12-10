@@ -21,7 +21,7 @@
     "module": "study05.analyze_proxies",
     "args": {
       "case": "Core3L_Hadron",
-      "output": "data/processed"
+      "output": "data/processed/ola1"
     }
   },
   {
@@ -29,9 +29,9 @@
     "kind": "postprocess",
     "module": "study06.match_sm_ola1",
     "args": {
-      "proxies_csv": "data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv",
+      "proxies_csv": "data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv",
       "sm_universe": "data/raw/sm_universe.json",
-      "output": "data/processed/Core3L_Hadron/ola1_matches"
+      "output": "data/processed/ola1/ola1_matches"
     }
   },
   {
@@ -48,7 +48,7 @@
     "module": "study06.run_ola2_compounds",
     "args": {
       "wave2_config": "data/raw/wave2_compounds.json",
-      "blocks_json": "data/processed/blocks/simple_blocks.json",
+      "blocks_json": "data/processed/ola1/blocks/simple_blocks.json",
       "sm_universe": "data/raw/sm_universe.json",
       "templates_json": "data/raw/compound_templates.json",
       "output_root": "data/processed/ola2"

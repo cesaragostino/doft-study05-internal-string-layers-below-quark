@@ -39,7 +39,7 @@ Family reports (write to processed by default):
 PYTHONPATH=src python3 -m study05.report_families \
   --case CaseB_debug \
   --families Nucleon_like Rho_like Pion_like \
-  --output data/processed/CaseB_debug/families
+  --output data/processed/ola1/CaseB_debug/families
 ```
 Reads per-family processed JSONs (under `data/processed/<case>/<family>/`) and writes comparative CSV/JSON + basic plots.
 
@@ -93,16 +93,16 @@ Notes: `layer_states.yaml` now uses relative thresholds (`T_Q_rel_min`, `T_S1_re
 PYTHONPATH=src python3 -m study05.analyze_proxies \
   --case Core3L_Hadron \
   --sm-universe data/raw/sm_universe.json \
-  --output data/processed
+  --output data/processed/ola1
 ```
 Outputs land in `data/processed/Core3L_Hadron/combined/`.
 
 3) Match against SM catalog (pion/rho/proton):
 ```bash
 PYTHONPATH=src python3 -m study06.match_sm_ola1 \
-  --proxies-csv data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv \
+  --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
   --sm-universe data/raw/sm_universe.json \
-  --output data/processed/Core3L_Hadron/ola1_matches \
+  --output data/processed/ola1/Core3L_Hadron/ola1_matches \
   --digest data/processed/digest/ola1
 ```
 Writes full match table to processed and a digest copy of `best_match_per_run.csv` under `data/processed/digest/ola1/`.
@@ -110,10 +110,10 @@ Writes full match table to processed and a digest copy of `best_match_per_run.cs
 4) Promote simple blocks:
 ```bash
 PYTHONPATH=src python3 -m study06.promote_simple_blocks \
-  --proxies-csv data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv \
-  --zoo-matches-csv data/processed/Core3L_Hadron/ola1_matches/zoo_matches.csv \
+  --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
+  --zoo-matches-csv data/processed/ola1/ola1_matches/zoo_matches.csv \
   --sm-universe data/raw/sm_universe.json \
-  --output data/processed/blocks/simple_blocks.json \
+  --output data/processed/ola1/blocks/simple_blocks.json \
   --digest data/processed/digest/blocks
 ```
 Promoted blocks are stored in processed and copied to `data/processed/digest/blocks/simple_blocks.json` for quick inspection.
@@ -121,16 +121,16 @@ Promoted blocks are stored in processed and copied to `data/processed/digest/blo
 5) Catalog complex cores (strong S2, level3):
 ```bash
 PYTHONPATH=src python3 -m study06.catalog_complex_cores \
-  --proxies-csv data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv \
+  --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
   --sm-universe data/raw/sm_universe.json \
-  --output data/processed/blocks/complex_cores.json
+  --output data/processed/ola1/blocks/complex_cores.json
 ```
 
 Ola2 (compounds + viability):
 ```bash
 # build compounds with physical stitching of blocks
 PYTHONPATH=src python3 -m study06.run_ola2_compounds \
-  --blocks-json data/processed/blocks/simple_blocks.json \
+  --blocks-json data/processed/ola1/blocks/simple_blocks.json \
   --wave2-config data/raw/wave2_compounds.json \
   --sm-universe data/raw/sm_universe.json \
   --templates-json data/raw/compound_templates.json \
@@ -139,7 +139,7 @@ PYTHONPATH=src python3 -m study06.run_ola2_compounds \
 # label viability (example for proton)
 PYTHONPATH=src python3 -m study06.label_ola2_viability \
   --compounds-csv data/processed/ola2/compounds_proton.csv \
-  --output data/processed/ola2/viability_proton.csv \
+  --output data/processed/ola1/ola2/viability_proton.csv \
   --d-yes 0.25 \
   --d-possible 0.45 \
   --min-structure-tier level2 \

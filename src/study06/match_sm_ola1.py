@@ -31,7 +31,7 @@ def main():
     parser = argparse.ArgumentParser(description="Match spectra against SM catalog (Ola1).")
     parser.add_argument("--proxies-csv", type=Path, required=True)
     parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"))
-    parser.add_argument("--output", type=Path, default=Path("data/processed/ola1_matches"))
+    parser.add_argument("--output", type=Path, default=Path("data/processed/ola1/ola1_matches"))
     parser.add_argument("--digest", type=Path, default=Path("data/processed/digest/ola1"), help="Directory to store summary outputs.")
     args = parser.parse_args()
 

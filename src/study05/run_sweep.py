@@ -277,17 +277,21 @@ def run_sweep(
     sim_params_cfg: Optional[Dict] = None,
 ):
     rng = np.random.default_rng(seed)
+    flatten = output_root is not None
     if output_root:
         raw_dir = Path(output_root) / "raw"
         processed_dir = Path(output_root)
-    raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, case)
-    if family_spec:
-        raw_case_dir = raw_case_dir / family_spec.name
-        processed_case_dir = processed_case_dir / family_spec.name
+    raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, case) if not flatten else (raw_dir, processed_dir)
+    if not flatten:
+        if family_spec:
+            raw_case_dir = raw_case_dir / family_spec.name
+            processed_case_dir = processed_case_dir / family_spec.name
+        else:
+            raw_case_dir = raw_case_dir / "global"
+            processed_case_dir = processed_case_dir / "global"
+        _ensure_dirs(raw_case_dir, processed_case_dir)
     else:
-        raw_case_dir = raw_case_dir / "global"
-        processed_case_dir = processed_case_dir / "global"
-    _ensure_dirs(raw_case_dir, processed_case_dir)
+        _ensure_dirs(raw_case_dir, processed_case_dir)
     sim_params = SimulationParams(**sim_params_cfg) if sim_params_cfg else SimulationParams()
 
     layer_state_config = layer_state_config or {}
@@ -576,8 +580,9 @@ def run_sweep(
         "runs": run_outputs,
     }
 
-    raw_path = raw_case_dir / "study05_sweep_params.json"
-    processed_path = processed_case_dir / "study05_sweep_results.json"
+    suffix = f"{case}_" if flatten else ""
+    raw_path = raw_case_dir / f"{suffix}study05_sweep_params.json"
+    processed_path = processed_case_dir / f"{suffix}study05_sweep_results.json"
 
     raw_path.write_text(json.dumps(raw_payload, indent=2))
     processed_path.write_text(json.dumps(processed_payload, indent=2))
@@ -727,19 +732,24 @@ def main():
     # Resolve dirs to detect existing outputs (after family is known)
     raw_dir = args.raw_dir
     processed_dir = args.processed_dir
+    flatten = args.output_root is not None
     if args.output_root:
         raw_dir = Path(args.output_root) / "raw"
         processed_dir = Path(args.output_root)
 
-    raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, args.case)
-    if family_spec:
-        raw_case_dir = raw_case_dir / family_spec.name
-        processed_case_dir = processed_case_dir / family_spec.name
+    if flatten:
+        raw_path = raw_dir / f"{args.case}_study05_sweep_params.json"
+        processed_path = processed_dir / f"{args.case}_study05_sweep_results.json"
     else:
-        raw_case_dir = raw_case_dir / "global"
-        processed_case_dir = processed_case_dir / "global"
-    raw_path = raw_case_dir / "study05_sweep_params.json"
-    processed_path = processed_case_dir / "study05_sweep_results.json"
+        raw_case_dir, processed_case_dir = _case_dirs(raw_dir, processed_dir, args.case)
+        if family_spec:
+            raw_case_dir = raw_case_dir / family_spec.name
+            processed_case_dir = processed_case_dir / family_spec.name
+        else:
+            raw_case_dir = raw_case_dir / "global"
+            processed_case_dir = processed_case_dir / "global"
+        raw_path = raw_case_dir / "study05_sweep_params.json"
+        processed_path = processed_case_dir / "study05_sweep_results.json"
 
     if raw_path.exists() and processed_path.exists():
         msg = {
@@ -769,7 +779,7 @@ def main():
         family_priors=family_priors,
         raw_dir=raw_dir,
         processed_dir=processed_dir,
-        output_root=None,
+        output_root=args.output_root,
         layer_state_config=layer_cfg,
         sim_params_cfg=sim_params_cfg,
     )

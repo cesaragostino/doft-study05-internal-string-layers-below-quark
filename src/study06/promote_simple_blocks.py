@@ -94,8 +94,13 @@ def main():
     parser.add_argument("--proxies-csv", type=Path, required=True)
     parser.add_argument("--zoo-matches-csv", type=Path, required=True)
     parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"))
-    parser.add_argument("--output", type=Path, default=Path("data/processed/blocks/simple_blocks.json"))
-    parser.add_argument("--digest", type=Path, default=Path("data/processed/digest/blocks"), help="Directory to store promoted block summary.")
+    parser.add_argument("--output", type=Path, default=Path("data/processed/ola1/blocks/simple_blocks.json"))
+    parser.add_argument(
+        "--digest",
+        type=Path,
+        default=Path("data/processed/digest/ola1"),
+        help="Directory to store promoted block summary.",
+    )
     parser.add_argument("--d-total-max", type=float, default=None, help="Deprecated: per-particle thresholds are used instead.")
     parser.add_argument("--max-blocks-per-particle", type=int, default=10)
     args = parser.parse_args()

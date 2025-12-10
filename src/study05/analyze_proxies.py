@@ -15,10 +15,10 @@ from study05.families import FamilySpec, build_fingerprint, compute_family_dista
 
 def _resolve_output_dir(output: Path, case: str) -> Path:
     """Place outputs under data/processed/<case>/combined by default."""
-    if output == Path("reports"):
+    if output in (Path("reports"), Path("data/processed")):
         return Path("data/processed") / case / "combined"
-    if output == Path("data/processed"):
-        return output / case / "combined"
+    if str(output).endswith("/ola1"):
+        return output
     return output
 
 
@@ -27,10 +27,9 @@ def load_runs(case: str, results_path: Path | None = None) -> List[Dict]:
     if results_path:
         candidates.append(Path(results_path))
     candidates.append(Path("data/processed") / case / "global" / "study05_sweep_results.json")
-    candidates.append(Path("data/ola1/processed") / case / "global" / "study05_sweep_results.json")
+    candidates.append(Path("data/processed/ola1") / f"{case}_study05_sweep_results.json")
     candidates.append(Path("data/processed/ola1") / case / "global" / "study05_sweep_results.json")
-    candidates.append(Path("data/processed/ola1/processed") / case / "global" / "study05_sweep_results.json")
-    candidates.append(Path("data/processed/ola1") / "processed" / case / "global" / "study05_sweep_results.json")
+    candidates.append(Path("data/processed/ola1") / "raw" / f"{case}_study05_sweep_params.json")
     candidates.append(Path("data/raw") / "study05_sweep_results.json")
     for path in candidates:
         if path.exists():
