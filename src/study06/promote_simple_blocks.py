@@ -306,6 +306,35 @@ def main():
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(blocks, indent=2))
 
+    # Console summary per particle
+    if blocks:
+        try:
+            print("Block summary (particle_name):")
+            by_particle: Dict[str, List[Dict]] = defaultdict(list)
+            for b in blocks:
+                by_particle[b.get("particle_name")].append(b)
+            for name, arr in by_particle.items():
+                d_vals = []
+                for b in arr:
+                    ms = b.get("match_score") or {}
+                    dv = ms.get("d_total")
+                    try:
+                        d_vals.append(float(dv))
+                    except Exception:
+                        pass
+                tiers = Counter(str(b.get("structure_tier")) for b in arr)
+                s2_states = Counter(str(b.get("s2_state")) for b in arr)
+                if d_vals:
+                    stats = (np.min(d_vals), np.median(d_vals), np.max(d_vals))
+                    stats_str = f"{stats[0]:.3f}/{stats[1]:.3f}/{stats[2]:.3f}"
+                else:
+                    stats_str = "nan/nan/nan"
+                print(
+                    f"- {name}: count={len(arr)} d_total[min/med/max]={stats_str} tiers={dict(tiers)} s2={dict(s2_states)}"
+                )
+        except Exception:
+            pass
+
     if sel_cfg.get("log_rejections", False) and selection_log_rows and args.selection_log:
         args.selection_log.parent.mkdir(parents=True, exist_ok=True)
         with args.selection_log.open("w", newline="") as f:
