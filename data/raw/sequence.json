@@ -37,9 +37,15 @@
   {
     "step": "ola1_promote_blocks",
     "kind": "rules",
-    "module": "study06.apply_wave_rules",
+    "module": "study06.promote_simple_blocks",
     "args": {
-      "rules_json": "data/raw/wave1_blocks.json"
+      "proxies_csv": "data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv",
+      "zoo_matches_csv": "data/processed/ola1/ola1_matches/zoo_matches.csv",
+      "sm_universe": "data/raw/sm_universe.json",
+      "selection_config": "data/raw/wave1_selection.json",
+      "selection_log": "data/processed/ola1/ola1_blocks_selection.csv",
+      "output": "data/processed/ola1/blocks/simple_blocks.json",
+      "digest": "data/processed/digest/ola1"
     }
   },
   {

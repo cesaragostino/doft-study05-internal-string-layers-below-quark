@@ -1,0 +1,11 @@
+{
+  "band_count_max": 7,
+  "lock_quality_Q_min": 0.35,
+  "structure_tier_min": "level1",
+  "log_rejections": true,
+  "grades": {
+    "use_d_total_for_grades_only": true,
+    "grade_A_d_total_max": 0.5,
+    "grade_B_d_total_max": 1.5
+  }
+}

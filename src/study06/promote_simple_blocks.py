@@ -5,12 +5,26 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
 import numpy as np
 
 from study06.sm_matching import load_universe
+
+
+DEFAULT_SELECTION = {
+    "band_count_max": 7,
+    "lock_quality_Q_min": 0.35,
+    "structure_tier_min": "level1",
+    "log_rejections": True,
+    "grades": {
+        "use_d_total_for_grades_only": True,
+        "grade_A_d_total_max": 0.5,
+        "grade_B_d_total_max": 1.5,
+    },
+}
 
 
 def read_proxies(path: Path) -> List[Dict]:
@@ -79,7 +93,7 @@ def _threshold_for(particle: Dict) -> Tuple[int, float, int, Set[str]]:
     if ptype == "meson":
         d_yes = 0.3
         min_levels = 1 if name == "pion" else 2
-        return 2, d_yes, min_levels, {"none", "latent"}
+        return 1, d_yes, min_levels, {"none", "latent", "structural"}
     if ptype == "effective_quark":
         return 1, 0.5, 1, {"none", "latent", "structural"}
     if ptype == "baryon":
@@ -101,12 +115,36 @@ def main():
         default=Path("data/processed/digest/ola1"),
         help="Directory to store promoted block summary.",
     )
-    parser.add_argument("--d-total-max", type=float, default=None, help="Deprecated: per-particle thresholds are used instead.")
+    parser.add_argument(
+        "--selection-config",
+        type=Path,
+        default=Path("data/raw/wave1_selection.json"),
+        help="Selection thresholds for Ola1->Ola2 physical filters.",
+    )
+    parser.add_argument(
+        "--selection-log",
+        type=Path,
+        default=Path("data/processed/ola1/ola1_blocks_selection.csv"),
+        help="Optional CSV log of accepted/rejected runs.",
+    )
+    parser.add_argument("--d-total-max", type=float, default=None, help="Deprecated: ignored.")
     parser.add_argument("--max-blocks-per-particle", type=int, default=10)
     args = parser.parse_args()
 
     proxies = read_proxies(args.proxies_csv)
     matches = read_matches(args.zoo_matches_csv)
+    # selection config
+    sel_cfg = DEFAULT_SELECTION
+    if args.selection_config and args.selection_config.exists():
+        try:
+            import json as _json
+
+            loaded = _json.loads(args.selection_config.read_text()) or {}
+            sel_cfg = {**sel_cfg, **loaded}
+            if "grades" in loaded:
+                sel_cfg["grades"] = {**DEFAULT_SELECTION["grades"], **loaded.get("grades", {})}
+        except Exception:
+            sel_cfg = DEFAULT_SELECTION
     # optional runs JSON to retrieve theta_internal
     runs_json = None
     if args.proxies_csv.name.endswith("_all_runs_proxies.csv"):
@@ -145,11 +183,16 @@ def main():
     blocks: List[Dict] = []
     blocks_per_particle: Dict[str, int] = {}
     rejected_rows: List[Dict] = []
+    selection_log_rows: List[Dict[str, object]] = []
 
     for run_id, match in best_by_run.items():
         target = match.get("target_name")
         particle = cat_by_name.get(target or "")
         proxy_row = proxy_by_run.get(str(run_id))
+        band_count = proxy_row.get("band_count") if proxy_row else None
+        lock_q = proxy_row.get("lock_quality_Q") if proxy_row else None
+        structure_tier = proxy_row.get("structure_tier", "none") if proxy_row else "none"
+        reasons: List[str] = []
 
         def reject(reason: str):
             rejected_rows.append(
@@ -166,41 +209,42 @@ def main():
                 }
             )
 
-        if particle is None:
-            reject("unknown_particle")
-            continue
-        if proxy_row is None:
-            reject("missing_proxy")
-            continue
+        # Physical filters (no d_total here)
+        if band_count is not None and band_count > sel_cfg.get("band_count_max", 1e9):
+            reasons.append(f"too_many_bands>{sel_cfg.get('band_count_max')}")
+        if lock_q is not None and lock_q < sel_cfg.get("lock_quality_Q_min", 0.0):
+            reasons.append(f"low_Q_lock<{sel_cfg.get('lock_quality_Q_min')}")
+        order = {"none": 0, "level1": 1, "level2": 2, "level3": 3}
+        min_tier = sel_cfg.get("structure_tier_min", "level1")
+        if order.get(str(structure_tier), 0) < order.get(str(min_tier), 0):
+            reasons.append(f"tier_below_{min_tier}")
 
-        min_tier_rank, max_d_total, min_levels, allowed_s2 = _threshold_for(particle)
+        if particle is None:
+            reasons.append("unknown_particle")
+        if proxy_row is None:
+            reasons.append("missing_proxy")
 
         if particle.get("type") == "baryon":
-            reject("baryon_to_complex_core")
-            continue
-        structure_tier = proxy_row.get("structure_tier", "none")
-        if _tier_rank(structure_tier) < min_tier_rank:
-            reject("tier_too_low")
+            reasons.append("baryon_to_complex_core")
+
+        # log selection decision
+        if sel_cfg.get("log_rejections", False):
+            selection_log_rows.append(
+                {
+                    "run_id": run_id,
+                    "accepted": 0 if reasons else 1,
+                    "reasons": ";".join(reasons) if reasons else "",
+                    "band_count": band_count,
+                    "lock_quality_Q": lock_q,
+                    "structure_tier": structure_tier,
+                    "d_total_best": match.get("d_total"),
+                }
+            )
+
+        if reasons:
+            reject(";".join(reasons))
             continue
 
-        d_total = match.get("d_total", np.inf)
-        if not np.isfinite(d_total) or d_total > max_d_total:
-            reject("distance_high")
-            continue
-
-        s2_state_norm = _normalize_s_state(proxy_row.get("s2_state"))
-        if not _allowed_s2(s2_state_norm, allowed_s2):
-            reject("s2_state_blocked")
-            continue
-
-        # enough_levels: use zoo flag as primary, but allow per-particle relaxation via n_levels_sim
-        enough_flag = bool(match.get("enough_levels_full")) or bool(match.get("enough_levels_partial"))
-        if not enough_flag:
-            levels = _family_level_count(proxy_row, match.get("family"))
-            enough_flag = levels >= min_levels
-        if not enough_flag:
-            reject("not_enough_levels")
-            continue
         # max blocks per particle
         cnt = blocks_per_particle.get(target, 0)
         if cnt >= args.max_blocks_per_particle:
@@ -209,12 +253,24 @@ def main():
         blocks_per_particle[target] = cnt + 1
 
         block_id = f"{target}_block_{cnt+1:04d}"
+        d_total = match.get("d_total", np.inf)
+        grade_cfg = sel_cfg.get("grades", {})
+        grade_A = grade_cfg.get("grade_A_d_total_max", 0.5)
+        grade_B = grade_cfg.get("grade_B_d_total_max", 1.5)
+        if np.isfinite(d_total) and d_total <= grade_A:
+            grade = "A"
+        elif np.isfinite(d_total) and d_total <= grade_B:
+            grade = "B"
+        else:
+            grade = "C"
+        s2_state_norm = _normalize_s_state(proxy_row.get("s2_state"))
         block = {
             "block_id": block_id,
             "origin_run_id": proxy_row.get("run_id"),
             "particle_name": target,
             "family": particle.get("family"),
             "type": particle.get("type"),
+            "grade": grade,
             "structure_tier": structure_tier,
             "lock_quality": {
                 "Q": proxy_row.get("lock_quality_Q"),
@@ -222,6 +278,7 @@ def main():
                 "S2": proxy_row.get("lock_quality_S2"),
             },
             "s2_state": s2_state_norm,
+            "band_count": band_count,
             "s2_band_fraction": proxy_row.get("s2_band_fraction"),
             "match_score": {
                 "d_total": match.get("d_total"),
@@ -248,6 +305,14 @@ def main():
     out_path = args.output
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(blocks, indent=2))
+
+    if sel_cfg.get("log_rejections", False) and selection_log_rows and args.selection_log:
+        args.selection_log.parent.mkdir(parents=True, exist_ok=True)
+        with args.selection_log.open("w", newline="") as f:
+            fieldnames = ["run_id", "accepted", "reasons", "band_count", "lock_quality_Q", "structure_tier", "d_total_best"]
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(selection_log_rows)
 
     # Save rejected candidates for visibility
     if rejected_rows:
