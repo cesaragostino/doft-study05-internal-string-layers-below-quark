@@ -102,7 +102,7 @@ Outputs land in `data/processed/Core3L_Hadron/combined/`.
 PYTHONPATH=src python3 -m study06.match_sm_ola1 \
   --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
   --sm-universe data/raw/sm_universe.json \
-  --output data/processed/ola1/Core3L_Hadron/ola1_matches \
+  --output data/processed/ola1 \
   --digest data/processed/digest/ola1
 ```
 Writes full match table to processed and a digest copy of `best_match_per_run.csv` under `data/processed/digest/ola1/`.
@@ -111,9 +111,9 @@ Writes full match table to processed and a digest copy of `best_match_per_run.cs
 ```bash
 PYTHONPATH=src python3 -m study06.promote_simple_blocks \
   --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
-  --zoo-matches-csv data/processed/ola1/ola1_matches/zoo_matches.csv \
+  --zoo-matches-csv data/processed/ola1/zoo_matches.csv \
   --sm-universe data/raw/sm_universe.json \
-  --output data/processed/ola1/blocks/simple_blocks.json \
+  --output data/processed/ola1/simple_blocks.json \
   --digest data/processed/digest/blocks
 ```
 Promoted blocks are stored in processed and copied to `data/processed/digest/blocks/simple_blocks.json` for quick inspection.
@@ -123,14 +123,14 @@ Promoted blocks are stored in processed and copied to `data/processed/digest/blo
 PYTHONPATH=src python3 -m study06.catalog_complex_cores \
   --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
   --sm-universe data/raw/sm_universe.json \
-  --output data/processed/ola1/blocks/complex_cores.json
+  --output data/processed/ola1/complex_cores.json
 ```
 
 Ola2 (compounds + viability):
 ```bash
 # build compounds with physical stitching of blocks
 PYTHONPATH=src python3 -m study06.run_ola2_compounds \
-  --blocks-json data/processed/ola1/blocks/simple_blocks.json \
+  --blocks-json data/processed/ola1/simple_blocks.json \
   --wave2-config data/raw/wave2_compounds.json \
   --sm-universe data/raw/sm_universe.json \
   --templates-json data/raw/compound_templates.json \
