@@ -4,8 +4,8 @@ Lightweight simulator of coupled oscillators with internal layers (S1, S2, optio
 
 ## Layout
 - Code: `src/study05/`
-- Input draws/parameters and catalogs: `data/raw/` (e.g., universe config `data/raw/sm_universe.json`)
-- Engine/configs: `data/raw/config/core/engine_core3.json`, rules under `data/raw/config/rules/`
+- Input draws/parameters and catalogs: `data/raw/` (e.g., `data/raw/sm_universe.json`, `data/raw/layer_states.yaml`)
+- Engine/configs: `data/raw/engine_core3.json`, `data/raw/compound_templates.json`, `data/raw/wave1_blocks.json`, `data/raw/wave2_compounds.json`
 - Processed results and plots: `data/processed/`
 - Important digests/summaries: `data/processed/digest/`
 
@@ -30,7 +30,6 @@ This:
 Useful variations:
 - `--case CaseB_3layers` to include S3.
 - `--case CaseB_debug` to force a small setup biased toward S2 dominance for debugging locks/mixing.
-- Family-conditioned sweeps: add `--family-config data/raw/config/<file>.json` (or `--family-name Nucleon_like/Rho_like/Pion_like` if placed in that folder) to focus parameter ranges and match spacings for that family; summary will report family match counts and S2 involvement.
 - Tune `--n-*` for modes per layer (defaults: Q=3, S1=3, S2=2, S3=0) and `--max-complexity` (defaults to 10 per spec).
 - Narrow the band back to `--band-max 3.0` after exploring mode density or widen for exploratory runs.
 - Runs that blow up numerically/physically are flagged as unstable (not counted in spacing stats) to reflect non-confining configurations.
@@ -83,9 +82,8 @@ PYTHONPATH=src python3 -m study05.run_sweep \
   --seed 123 \
   --band-min 0.1 \
   --band-max 3.0 \
-  # keep defaults to write under data/raw and data/processed
-  --layer-states data/raw/config/layer_states.yaml \
-  --engine-config data/raw/config/core/engine_core3.json \
+  --layer-states data/raw/layer_states.yaml \
+  --engine-config data/raw/engine_core3.json \
   --no-plots
 ```
 Notes: `layer_states.yaml` now uses relative thresholds (`T_Q_rel_min`, `T_S1_rel_min`, `T_S2_rel_min`) applied to the structural mass share of each layer; adjust there if you need to relax or tighten tiering.
@@ -114,22 +112,41 @@ Writes full match table to processed and a digest copy of `best_match_per_run.cs
 PYTHONPATH=src python3 -m study06.promote_simple_blocks \
   --proxies-csv data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv \
   --zoo-matches-csv data/processed/Core3L_Hadron/ola1_matches/zoo_matches.csv \
-  --sm-catalog data/raw/sm_catalog/particles.json \
+  --sm-universe data/raw/sm_universe.json \
   --output data/processed/blocks/simple_blocks.json \
   --digest data/processed/digest/blocks
 ```
 Promoted blocks are stored in processed and copied to `data/processed/digest/blocks/simple_blocks.json` for quick inspection.
 
-Pipeline runner (reads `data/raw/config/pipeline/sequence.json`):
+5) Catalog complex cores (strong S2, level3):
 ```bash
-PYTHONPATH=src python3 -m study06.run_pipeline --sequence data/raw/config/pipeline/sequence.json
+PYTHONPATH=src python3 -m study06.catalog_complex_cores \
+  --proxies-csv data/processed/Core3L_Hadron/combined/Core3L_Hadron_all_runs_proxies.csv \
+  --sm-universe data/raw/sm_universe.json \
+  --output data/processed/blocks/complex_cores.json
 ```
 
-Si corres el sweep con `--output-root data/ola1`, pasa la ruta explícita de resultados a `analyze_proxies`:
+Ola2 (compounds + viability):
 ```bash
-PYTHONPATH=src python3 -m study05.analyze_proxies \
-  --case Core3L_Hadron \
-  --results-json data/processed/ola1/Core3L_Hadron/global/study05_sweep_results.json \
+# build compounds with physical stitching of blocks
+PYTHONPATH=src python3 -m study06.run_ola2_compounds \
+  --blocks-json data/processed/blocks/simple_blocks.json \
+  --wave2-config data/raw/wave2_compounds.json \
   --sm-universe data/raw/sm_universe.json \
-  --output data/processed
+  --templates-json data/raw/compound_templates.json \
+  --output-root data/processed/ola2
+
+# label viability (example for proton)
+PYTHONPATH=src python3 -m study06.label_ola2_viability \
+  --compounds-csv data/processed/ola2/compounds_proton.csv \
+  --output data/processed/ola2/viability_proton.csv \
+  --d-yes 0.25 \
+  --d-possible 0.45 \
+  --min-structure-tier level2 \
+  --allowed-s2-states latent structural
+```
+
+Pipeline runner (uses `data/raw/sequence.json`):
+```bash
+PYTHONPATH=src python3 -m study06.run_pipeline --sequence data/raw/sequence.json
 ```

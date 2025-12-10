@@ -610,7 +610,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--engine-config",
         type=Path,
-        default=Path("data/raw/config/core/engine_core3.json"),
+        default=Path("data/raw/engine_core3.json"),
         help="Engine configuration JSON (defines layers, integration, band window).",
     )
     parser.add_argument(
@@ -661,7 +661,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--layer-states",
         type=Path,
-        default=Path("data/raw/config/layer_states.yaml"),
+        default=Path("data/raw/layer_states.yaml"),
         help="Layer thresholds config (YAML).",
     )
     parser.add_argument("--family-name", type=str, default=None, help="Predefined family name.")
@@ -717,14 +717,6 @@ def main():
 
     if args.family_config:
         family_spec = load_family_spec(args.family_config)
-    elif args.family_name:
-        predefined = {
-            "Nucleon_like": Path("data/raw/legacy/sm_families/nucleon_like.json"),
-            "Rho_like": Path("data/raw/legacy/sm_families/rho_like.json"),
-            "Pion_like": Path("data/raw/legacy/sm_families/pion_like.json"),
-        }
-        if args.family_name in predefined and predefined[args.family_name].exists():
-            family_spec = load_family_spec(predefined[args.family_name])
 
     if family_spec:
         family_fp = build_fingerprint(family_spec)

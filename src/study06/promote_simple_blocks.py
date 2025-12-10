@@ -10,6 +10,8 @@ from typing import Dict, List, Optional, Set, Tuple
 
 import numpy as np
 
+from study06.sm_matching import load_universe
+
 
 def read_proxies(path: Path) -> List[Dict]:
     rows = []
@@ -75,22 +77,23 @@ def _threshold_for(particle: Dict) -> Tuple[int, float, int, Set[str]]:
     ptype = particle.get("type")
     name = particle.get("name")
     if ptype == "meson":
-        if name == "pion":
-            return 1, 2.0, 1, {"none", "latent", "structural"}
-        if name == "rho":
-            return 1, 3.0, 2, {"latent", "structural"}
-        return 1, 3.0, 2, {"latent", "structural"}
+        d_yes = 0.3
+        min_levels = 1 if name == "pion" else 2
+        return 2, d_yes, min_levels, {"none", "latent"}
+    if ptype == "effective_quark":
+        return 1, 0.5, 1, {"none", "latent", "structural"}
     if ptype == "baryon":
-        return 2, 4.0, 3, {"latent", "structural"}
+        # handled via complex cores
+        return 3, float("inf"), 3, {"latent", "structural"}
     # default conservative
-    return 2, 3.0, 2, {"latent", "structural"}
+    return 2, 0.5, 2, {"none", "latent", "structural"}
 
 
 def main():
     parser = argparse.ArgumentParser(description="Promote simple blocks from Ola1 sweeps.")
     parser.add_argument("--proxies-csv", type=Path, required=True)
     parser.add_argument("--zoo-matches-csv", type=Path, required=True)
-    parser.add_argument("--sm-catalog", type=Path, default=Path("data/raw/sm_catalog/particles.json"))
+    parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"))
     parser.add_argument("--output", type=Path, default=Path("data/processed/blocks/simple_blocks.json"))
     parser.add_argument("--digest", type=Path, default=Path("data/processed/digest/blocks"), help="Directory to store promoted block summary.")
     parser.add_argument("--d-total-max", type=float, default=None, help="Deprecated: per-particle thresholds are used instead.")
@@ -118,7 +121,8 @@ def main():
                 run_theta[str(r.get("run_id"))] = r.get("theta_internal")
         except Exception:
             pass
-    catalog = json.loads(args.sm_catalog.read_text())
+    universe = load_universe(args.sm_universe)
+    catalog = universe.get("particles", universe)
     cat_by_name = {p["name"]: p for p in catalog}
     proxy_by_run = {str(r.get("run_id")): r for r in proxies}
 
@@ -151,7 +155,8 @@ def main():
                     "best_d_total": match.get("d_total"),
                     "structure_tier": proxy_row.get("structure_tier") if proxy_row else "",
                     "s2_state": proxy_row.get("s2_state") if proxy_row else "",
-                    "enough_levels": match.get("enough_levels"),
+                    "enough_levels_full": match.get("enough_levels_full"),
+                    "enough_levels_partial": match.get("enough_levels_partial"),
                     "reason": reason,
                 }
             )
@@ -164,6 +169,10 @@ def main():
             continue
 
         min_tier_rank, max_d_total, min_levels, allowed_s2 = _threshold_for(particle)
+
+        if particle.get("type") == "baryon":
+            reject("baryon_to_complex_core")
+            continue
         structure_tier = proxy_row.get("structure_tier", "none")
         if _tier_rank(structure_tier) < min_tier_rank:
             reject("tier_too_low")
@@ -180,7 +189,7 @@ def main():
             continue
 
         # enough_levels: use zoo flag as primary, but allow per-particle relaxation via n_levels_sim
-        enough_flag = bool(match.get("enough_levels"))
+        enough_flag = bool(match.get("enough_levels_full")) or bool(match.get("enough_levels_partial"))
         if not enough_flag:
             levels = _family_level_count(proxy_row, match.get("family"))
             enough_flag = levels >= min_levels
@@ -213,6 +222,9 @@ def main():
                 "d_total": match.get("d_total"),
                 "d_spacing": match.get("d_spacing"),
                 "d_mass": match.get("d_mass"),
+                "n_levels_sim": match.get("n_levels_sim"),
+                "has_enough_levels_full": bool(match.get("enough_levels_full")),
+                "has_enough_levels_partial": bool(match.get("enough_levels_partial")),
             },
             "theta_internal": {
                 "R_S1_Q": proxy_row.get("R_S1_Q"),
@@ -236,7 +248,17 @@ def main():
     if rejected_rows:
         rej_path = out_path.parent / "simple_blocks_rejected.csv"
         with rej_path.open("w", newline="") as f:
-            fieldnames = ["run_id", "best_target", "type", "best_d_total", "structure_tier", "s2_state", "enough_levels", "reason"]
+            fieldnames = [
+                "run_id",
+                "best_target",
+                "type",
+                "best_d_total",
+                "structure_tier",
+                "s2_state",
+                "enough_levels_full",
+                "enough_levels_partial",
+                "reason",
+            ]
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             for row in rejected_rows:

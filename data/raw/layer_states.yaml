@@ -1,0 +1,8 @@
+lock_thresholds:
+  T_Q_rel_min: 0.5
+  T_S1_rel_min: 0.1
+  T_S2_rel_min: 0.1
+
+s2_state:
+  none_max_fraction: 1.0e-3
+  latent_max_fraction: 0.15

@@ -12,15 +12,19 @@ import numpy as np
 
 
 def label_row(row: Dict[str, Any], d_yes: float, d_possible: float, min_tier: int, allowed_s2) -> str:
-    tier = int(float(row.get("structure_tier_compound", 0)))
-    if tier < min_tier:
+    tier_str = str(row.get("structure_tier_compound", "none")).lower()
+    tier_rank = {"none": 0, "level1": 1, "level2": 2, "level3": 3}.get(tier_str, 0)
+    if tier_rank < min_tier:
         return "NO"
-    s2_state = str(row.get("s2_state_compound", "")).lower()
+    s2_state = str(row.get("s2_state", row.get("s2_state_compound", ""))).lower()
     if s2_state.startswith("structural"):
         s2_state = "structural"
     if s2_state not in allowed_s2:
         return "NO"
-    d_total = row.get("d_total_target")
+    enough_partial = bool(row.get("enough_levels_partial")) or str(row.get("enough_levels_partial")).lower() == "true"
+    if not enough_partial:
+        return "NO"
+    d_total = row.get("match_d_total")
     try:
         d_val = float(d_total)
     except Exception:
@@ -36,8 +40,8 @@ def main():
     parser = argparse.ArgumentParser(description="Label Ola2 compounds viability.")
     parser.add_argument("--compounds-csv", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--d-yes", type=float, default=3.0)
-    parser.add_argument("--d-possible", type=float, default=5.0)
+    parser.add_argument("--d-yes", type=float, default=0.25)
+    parser.add_argument("--d-possible", type=float, default=0.45)
     parser.add_argument("--min-structure-tier", type=str, default="level2")
     parser.add_argument("--allowed-s2-states", nargs="+", default=["latent", "structural"])
     args = parser.parse_args()

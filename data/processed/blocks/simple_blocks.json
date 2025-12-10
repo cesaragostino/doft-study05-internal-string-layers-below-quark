@@ -1,0 +1,562 @@
+[
+  {
+    "block_id": "pion_simple_blocks_0001",
+    "origin_run_id": 3.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999857392039999,
+      "S1": 1.3069951778067592e-05,
+      "S2": 1.1908442219623833e-06
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 3.0,
+    "lock_quality_Q": 0.9999857392039999,
+    "lock_quality_S1": 1.3069951778067592e-05,
+    "lock_quality_S2": 1.1908442219623833e-06,
+    "best_d_total": 0.0,
+    "R_S1_Q": 4.547769672162419,
+    "R_S2_S1": 9.1816619697628,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0002",
+    "origin_run_id": 5.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.999896787155585,
+      "S1": 0.00010319760486486584,
+      "S2": 1.5239550219289377e-08
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 5.0,
+    "lock_quality_Q": 0.999896787155585,
+    "lock_quality_S1": 0.00010319760486486584,
+    "lock_quality_S2": 1.5239550219289377e-08,
+    "best_d_total": 0.0,
+    "R_S1_Q": 8.276367637131441,
+    "R_S2_S1": 9.162897005015152,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0003",
+    "origin_run_id": 6.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999793408324062,
+      "S1": 2.0651946297449504e-05,
+      "S2": 7.221296362879443e-09
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 6.0,
+    "lock_quality_Q": 0.9999793408324062,
+    "lock_quality_S1": 2.0651946297449504e-05,
+    "lock_quality_S2": 7.221296362879443e-09,
+    "best_d_total": 0.0,
+    "R_S1_Q": 6.917225494634461,
+    "R_S2_S1": 9.690944240383548,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0004",
+    "origin_run_id": 11.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999983647942137,
+      "S1": 1.6339126513538776e-06,
+      "S2": 1.2931349578061529e-09
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 11.0,
+    "lock_quality_Q": 0.9999983647942137,
+    "lock_quality_S1": 1.6339126513538776e-06,
+    "lock_quality_S2": 1.2931349578061529e-09,
+    "best_d_total": 0.0,
+    "R_S1_Q": 9.523458938719694,
+    "R_S2_S1": 8.308536327248106,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0005",
+    "origin_run_id": 13.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9997144083705742,
+      "S1": 0.00028500659439289463,
+      "S2": 5.850350327950074e-07
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 13.0,
+    "lock_quality_Q": 0.9997144083705742,
+    "lock_quality_S1": 0.00028500659439289463,
+    "lock_quality_S2": 5.850350327950074e-07,
+    "best_d_total": 0.0,
+    "R_S1_Q": 9.63516733592684,
+    "R_S2_S1": 4.630580079447528,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0006",
+    "origin_run_id": 17.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999614750117931,
+      "S1": 3.846719034689463e-05,
+      "S2": 5.779786001840178e-08
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 17.0,
+    "lock_quality_Q": 0.9999614750117931,
+    "lock_quality_S1": 3.846719034689463e-05,
+    "lock_quality_S2": 5.779786001840178e-08,
+    "best_d_total": 0.0,
+    "R_S1_Q": 9.875233407159257,
+    "R_S2_S1": 9.026748403596791,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0007",
+    "origin_run_id": 21.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9997470537283585,
+      "S1": 0.00025274182306025516,
+      "S2": 2.0444858139973184e-07
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 21.0,
+    "lock_quality_Q": 0.9997470537283585,
+    "lock_quality_S1": 0.00025274182306025516,
+    "lock_quality_S2": 2.0444858139973184e-07,
+    "best_d_total": 0.0,
+    "R_S1_Q": 6.559468921992937,
+    "R_S2_S1": 3.132274938410056,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0008",
+    "origin_run_id": 22.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9998043572315004,
+      "S1": 0.00019562283145995436,
+      "S2": 1.9937039453189776e-08
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 22.0,
+    "lock_quality_Q": 0.9998043572315004,
+    "lock_quality_S1": 0.00019562283145995436,
+    "lock_quality_S2": 1.9937039453189776e-08,
+    "best_d_total": 0.0,
+    "R_S1_Q": 7.722687632505383,
+    "R_S2_S1": 4.877809953795174,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0009",
+    "origin_run_id": 23.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9998976111526999,
+      "S1": 0.00010237373764746358,
+      "S2": 1.510965254280493e-08
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 23.0,
+    "lock_quality_Q": 0.9998976111526999,
+    "lock_quality_S1": 0.00010237373764746358,
+    "lock_quality_S2": 1.510965254280493e-08,
+    "best_d_total": 0.0,
+    "R_S1_Q": 8.341881643106706,
+    "R_S2_S1": 6.204604992523218,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0010",
+    "origin_run_id": 24.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9993486217764099,
+      "S1": 0.0006508952977199765,
+      "S2": 4.829258699889527e-07
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 24.0,
+    "lock_quality_Q": 0.9993486217764099,
+    "lock_quality_S1": 0.0006508952977199765,
+    "lock_quality_S2": 4.829258699889527e-07,
+    "best_d_total": 0.0,
+    "R_S1_Q": 6.411334288034158,
+    "R_S2_S1": 4.3186666417222,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0011",
+    "origin_run_id": 31.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999855525600901,
+      "S1": 1.4434154553543768e-05,
+      "S2": 1.3285356275525376e-08
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 31.0,
+    "lock_quality_Q": 0.9999855525600901,
+    "lock_quality_S1": 1.4434154553543768e-05,
+    "lock_quality_S2": 1.3285356275525376e-08,
+    "best_d_total": 0.0,
+    "R_S1_Q": 4.525713745021586,
+    "R_S2_S1": 4.233312012081524,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0012",
+    "origin_run_id": 33.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999810324740277,
+      "S1": 1.895802728857663e-05,
+      "S2": 9.498683898682119e-09
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 33.0,
+    "lock_quality_Q": 0.9999810324740277,
+    "lock_quality_S1": 1.895802728857663e-05,
+    "lock_quality_S2": 9.498683898682119e-09,
+    "best_d_total": 0.0,
+    "R_S1_Q": 6.991979494247373,
+    "R_S2_S1": 6.521989641819114,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0013",
+    "origin_run_id": 41.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999328280275966,
+      "S1": 6.681654491552947e-05,
+      "S2": 3.55427487763649e-07
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 41.0,
+    "lock_quality_Q": 0.9999328280275966,
+    "lock_quality_S1": 6.681654491552947e-05,
+    "lock_quality_S2": 3.55427487763649e-07,
+    "best_d_total": 0.0,
+    "R_S1_Q": 6.517554015871422,
+    "R_S2_S1": 9.598783036576846,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0014",
+    "origin_run_id": 45.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9996466485035492,
+      "S1": 0.00035304104163534443,
+      "S2": 3.104548154691821e-07
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 45.0,
+    "lock_quality_Q": 0.9996466485035492,
+    "lock_quality_S1": 0.00035304104163534443,
+    "lock_quality_S2": 3.104548154691821e-07,
+    "best_d_total": 0.0,
+    "R_S1_Q": 2.8705758195837197,
+    "R_S2_S1": 7.477983997137122,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0015",
+    "origin_run_id": 50.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9998702796744529,
+      "S1": 0.00012945574684440045,
+      "S2": 2.645787027633493e-07
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 50.0,
+    "lock_quality_Q": 0.9998702796744529,
+    "lock_quality_S1": 0.00012945574684440045,
+    "lock_quality_S2": 2.645787027633493e-07,
+    "best_d_total": 0.0,
+    "R_S1_Q": 2.1076174035417874,
+    "R_S2_S1": 2.970914857492797,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0016",
+    "origin_run_id": 51.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9990550515567044,
+      "S1": 0.0009426729606256533,
+      "S2": 2.275482670036023e-06
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 51.0,
+    "lock_quality_Q": 0.9990550515567044,
+    "lock_quality_S1": 0.0009426729606256533,
+    "lock_quality_S2": 2.275482670036023e-06,
+    "best_d_total": 0.0,
+    "R_S1_Q": 4.6320332576845225,
+    "R_S2_S1": 3.6264088669692898,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0017",
+    "origin_run_id": 55.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9995014747634763,
+      "S1": 0.0004984760416131664,
+      "S2": 4.9194910484054794e-08
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 55.0,
+    "lock_quality_Q": 0.9995014747634763,
+    "lock_quality_S1": 0.0004984760416131664,
+    "lock_quality_S2": 4.9194910484054794e-08,
+    "best_d_total": 0.0,
+    "R_S1_Q": 8.762400245272062,
+    "R_S2_S1": 4.026765980222784,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0018",
+    "origin_run_id": 69.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9998895588467344,
+      "S1": 0.0001104336861908753,
+      "S2": 7.467074786962064e-09
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 69.0,
+    "lock_quality_Q": 0.9998895588467344,
+    "lock_quality_S1": 0.0001104336861908753,
+    "lock_quality_S2": 7.467074786962064e-09,
+    "best_d_total": 0.0,
+    "R_S1_Q": 7.1427757980510185,
+    "R_S2_S1": 6.466800874636223,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0019",
+    "origin_run_id": 70.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9992370404773367,
+      "S1": 0.0007621370048112956,
+      "S2": 8.225178518890642e-07
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 70.0,
+    "lock_quality_Q": 0.9992370404773367,
+    "lock_quality_S1": 0.0007621370048112956,
+    "lock_quality_S2": 8.225178518890642e-07,
+    "best_d_total": 0.0,
+    "R_S1_Q": 4.216452370145562,
+    "R_S2_S1": 2.6884158178455824,
+    "R_S3_S2": ""
+  },
+  {
+    "block_id": "pion_simple_blocks_0020",
+    "origin_run_id": 71.0,
+    "particle_name": "pion",
+    "family": "pion_like",
+    "type": "meson",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999498729947526,
+      "S1": 5.001443406688084e-05,
+      "S2": 1.1257118056100607e-07
+    },
+    "s2_state": "none",
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.0,
+      "d_spacing": NaN,
+      "d_mass": NaN
+    },
+    "run_id": 71.0,
+    "lock_quality_Q": 0.9999498729947526,
+    "lock_quality_S1": 5.001443406688084e-05,
+    "lock_quality_S2": 1.1257118056100607e-07,
+    "best_d_total": 0.0,
+    "R_S1_Q": 7.223800221713304,
+    "R_S2_S1": 3.9631327731982795,
+    "R_S3_S2": ""
+  }
+]
