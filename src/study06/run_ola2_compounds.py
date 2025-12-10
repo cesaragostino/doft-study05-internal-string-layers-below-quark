@@ -442,7 +442,7 @@ def run_from_rules(
 def main():
     parser = argparse.ArgumentParser(description="Run Ola2 compound generation from rules (physical integration).")
     parser.add_argument("--wave2-config", type=Path, default=Path("data/raw/wave2_compounds.json"), help="wave2 rules file.")
-    parser.add_argument("--blocks-json", type=Path, default=None, help="Override simple blocks input.")
+    parser.add_argument("--blocks-json", type=Path, default=Path("data/processed/ola1/simple_blocks.json"), help="Override simple blocks input.")
     parser.add_argument("--sm-universe", type=Path, default=None, help="Override SM universe catalog.")
     parser.add_argument("--templates-json", type=Path, default=None, help="Override compound templates.")
     parser.add_argument("--output-root", type=Path, default=Path("data/processed/ola2"), help="Base output directory.")

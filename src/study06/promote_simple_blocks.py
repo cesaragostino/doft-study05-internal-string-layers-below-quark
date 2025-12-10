@@ -108,7 +108,7 @@ def main():
     parser.add_argument("--proxies-csv", type=Path, required=True)
     parser.add_argument("--zoo-matches-csv", type=Path, required=True)
     parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"))
-    parser.add_argument("--output", type=Path, default=Path("data/processed/ola1/blocks/simple_blocks.json"))
+    parser.add_argument("--output", type=Path, default=Path("data/processed/ola1/simple_blocks.json"))
     parser.add_argument(
         "--digest",
         type=Path,

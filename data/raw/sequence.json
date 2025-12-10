@@ -31,7 +31,7 @@
     "args": {
       "proxies_csv": "data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv",
       "sm_universe": "data/raw/sm_universe.json",
-      "output": "data/processed/ola1/ola1_matches"
+      "output": "data/processed/ola1"
     }
   },
   {
@@ -40,11 +40,11 @@
     "module": "study06.promote_simple_blocks",
     "args": {
       "proxies_csv": "data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv",
-      "zoo_matches_csv": "data/processed/ola1/ola1_matches/zoo_matches.csv",
+      "zoo_matches_csv": "data/processed/ola1/zoo_matches.csv",
       "sm_universe": "data/raw/sm_universe.json",
       "selection_config": "data/raw/wave1_selection.json",
       "selection_log": "data/processed/ola1/ola1_blocks_selection.csv",
-      "output": "data/processed/ola1/blocks/simple_blocks.json",
+      "output": "data/processed/ola1/simple_blocks.json",
       "digest": "data/processed/digest/ola1"
     }
   },
@@ -54,7 +54,7 @@
     "module": "study06.run_ola2_compounds",
     "args": {
       "wave2_config": "data/raw/wave2_compounds.json",
-      "blocks_json": "data/processed/ola1/blocks/simple_blocks.json",
+      "blocks_json": "data/processed/ola1/simple_blocks.json",
       "sm_universe": "data/raw/sm_universe.json",
       "templates_json": "data/raw/compound_templates.json",
       "output_root": "data/processed/ola2"

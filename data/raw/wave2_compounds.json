@@ -1,5 +1,5 @@
 {
-  "blocks_input": "data/processed/ola1/blocks/simple_blocks.json",
+  "blocks_input": "data/processed/ola1/simple_blocks.json",
   "targets": [
     {
       "name": "proton",
