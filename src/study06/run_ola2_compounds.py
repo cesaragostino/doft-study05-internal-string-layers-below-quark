@@ -375,7 +375,10 @@ def run_from_rules(
                 proxies = compute_proxies_from_sim(sim_result, modes, band_min, band_max, layer_cfg)
                 levels = extract_levels(proxies.get("band_energies_gev", []), target.get("energy_window"))
                 match = compute_match_stats(levels, target.get("masses_gev", []), target.get("tolerances", {}))
-                status = "ok"
+                if len(levels) == 0:
+                    status = "error"
+                else:
+                    status = "ok"
             except FloatingPointError:
                 status = "unstable"
                 proxies = {}
@@ -404,6 +407,9 @@ def run_from_rules(
             ratios_R_S3_S2 = _clean_ratios(
                 [b.get("theta_internal", {}).get("R_S3_S2") for b in picked if b.get("theta_internal")]
             )
+            num_quark_blocks = sum(
+                1 for b in picked if str(b.get("family", "")).lower() == "quark_like" or str(b.get("particle_name", "")).startswith("quark_")
+            )
 
             row = {
                 "run_id": run_idx,
@@ -422,12 +428,31 @@ def run_from_rules(
                 "match_d_mass": match.get("d_mass"),
                 "enough_levels_full": match.get("has_enough_levels_full"),
                 "enough_levels_partial": match.get("has_enough_levels_partial"),
+                "enough_levels": bool(match.get("has_enough_levels_partial")) or bool(match.get("has_enough_levels_full")),
                 "n_levels_sim": match.get("n_levels_sim"),
+                "num_quark_blocks": num_quark_blocks,
             }
             row.update(proxies)
+            row["band_count_compound"] = proxies.get("band_count")
             row["s2_band_fraction_compound"] = proxies.get("s2_band_fraction")
             row["structure_tier_compound"] = proxies.get("structure_tier_compound")
             row["s2_state_compound"] = proxies.get("s2_state")
+            band_es = proxies.get("band_energies_gev") or []
+            if isinstance(band_es, str):
+                try:
+                    import json as _json
+
+                    band_es = _json.loads(band_es)
+                except Exception:
+                    band_es = []
+            if band_es:
+                try:
+                    row["first_energy_compound"] = float(sorted(band_es)[0])
+                    spacings = np.diff(np.sort(np.array(band_es, dtype=float)))
+                    row["spacing_mean_compound"] = float(np.mean(spacings)) if spacings.size else float("nan")
+                except Exception:
+                    row["first_energy_compound"] = float("nan")
+                    row["spacing_mean_compound"] = float("nan")
             rows.append(row)
 
         out_compounds.parent.mkdir(parents=True, exist_ok=True)

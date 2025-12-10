@@ -42,10 +42,10 @@ def main():
     default_cfg = {
         "global": {
             "log_rejections": True,
-            "structure_tier_min_baryon": "level3",
-            "allow_s2_states_baryon": ["structural", "latent"],
-            "min_quark_blocks_baryon": 2,
-            "max_bands_compound": 10,
+            "structure_tier_min_baryon": "level2",
+            "allow_s2_states_baryon": ["latent", "structural"],
+            "min_quark_blocks_baryon": 1,
+            "max_bands_compound": 12,
             "min_band_count_compound": 2,
             "use_d_total_for_labels_only": True,
             "grade_yes_d_total_max": 2.0,
@@ -97,7 +97,7 @@ def main():
             if allowed_s2 and s2_state not in allowed_s2:
                 reasons.append("s2_state_not_allowed")
             try:
-                band_count = int(float(row.get("band_count", row.get("band_count_compound", 0))))
+                band_count = int(float(row.get("band_count_compound", row.get("band_count", 0))))
             except Exception:
                 band_count = 0
             if band_count < min_bands:
@@ -114,9 +114,11 @@ def main():
                 quark_blocks = 0
             if quark_blocks < min_quark:
                 reasons.append("too_few_quark_blocks")
-            enough_partial = str(row.get("enough_levels_partial", "")).lower() in ("1", "true", "yes")
+            enough_partial = str(row.get("enough_levels_partial", row.get("enough_levels", ""))).lower() in ("1", "true", "yes")
             if not enough_partial:
                 reasons.append("not_enough_levels_for_match")
+            if str(row.get("status", "")).lower() != "ok":
+                reasons.append("simulation_error")
 
             if reasons:
                 label = "NO"
