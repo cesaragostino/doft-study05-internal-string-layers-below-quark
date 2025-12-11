@@ -1,25 +1,56 @@
 {
   "name": "Core3L_Hadron",
   "layers": [
-    { "name": "Q",  "index": 0, "n_modes": 1, "freq_range": [0.1, 1.0] },
-    { "name": "S1", "index": 1, "n_modes": 1, "freq_range": [0.5, 2.0] },
-    { "name": "S2", "index": 2, "n_modes": 1, "freq_range": [1.0, 5.0] }
+    { "name": "Q",  "index": 0, "n_modes": 1 },
+    { "name": "S1", "index": 1, "n_modes": 1 },
+    { "name": "S2", "index": 2, "n_modes": 1 }
   ],
   "integration": {
-    "t_max": 200.0,
-    "dt": 0.01
+    "t_max": 50.0,
+    "dt": 0.0025
   },
   "spectrum": {
     "band_min": 0.1,
-    "band_max": 3.0,
-    "window_type": "lorentz"
+    "band_max": 3.0
   },
-  "noise": {
-    "type": "white",
-    "amplitude_range": [0.0, 0.1]
-  },
-  "delays": {
+  "memory": {
     "enabled": true,
-    "tau_range": [0.1, 10.0]
+    "modes_per_layer": { "Q": 4, "S1": 3, "S2": 4 },
+    "tau0": {
+      "Q": [0.03, 0.07, 0.2, 1.0],
+      "S1": [0.05, 0.2, 1.0],
+      "S2": [0.1, 0.5, 2.0, 8.0]
+    },
+    "beta_tau": {
+      "Q": [0.05, 0.1],
+      "S1": [0.05, 0.1],
+      "S2": [0.2, 0.3]
+    },
+    "beta": {
+      "Q": [2.0, 3.0],
+      "S1": [2.0, 3.0],
+      "S2": [1.0, 2.0]
+    },
+    "a": {
+      "Q": [0.9, 0.7, 0.5, 0.35],
+      "S1": [0.9, 0.7, 0.5],
+      "S2": [0.9, 0.7, 0.5, 0.35]
+    },
+    "g_xi": {
+      "Q": [0.1, 0.3],
+      "S1": [0.1, 0.3],
+      "S2": [0.1, 0.5]
+    },
+    "mixing_ranges": {
+      "S2<-Q": [0.2, 0.4],
+      "S2<-S1": [0.2, 0.4],
+      "S1<-Q": [0.1, 0.3],
+      "Q<-S1": [0.05, 0.15],
+      "Q<-S2": [0.05, 0.1],
+      "S1<-S2": [0.1, 0.2]
+    },
+    "clamp_tanh_arg": 5.0,
+    "max_abs_z": 1000000.0,
+    "energy_blowup_factor": 1e8
   }
 }

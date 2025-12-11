@@ -276,6 +276,7 @@ def run_sweep(
     layer_state_config: Optional[Dict] = None,
     sim_params_cfg: Optional[Dict] = None,
     debug_traces: int = 0,
+    memory_cfg: Optional[Dict] = None,
 ):
     rng = np.random.default_rng(seed)
     flatten = output_root is not None
@@ -347,6 +348,7 @@ def run_sweep(
                 sim_params=sim_params,
                 rng=rng,
                 debug=debug_enabled,
+                memory_cfg=memory_cfg,
             )
         except FloatingPointError:
             unstable += 1
@@ -733,6 +735,7 @@ def main():
             sim_params_cfg = {"dt": float(dt_cfg), "total_steps": total_steps}
         else:
             sim_params_cfg = None
+        memory_cfg = engine_cfg.get("memory")
     else:
         args.n_q = args.n_q if args.n_q is not None else DEFAULT_N_Q
         args.n_s1 = args.n_s1 if args.n_s1 is not None else DEFAULT_N_INTERNAL
@@ -743,6 +746,7 @@ def main():
         if args.band_max is None:
             args.band_max = DEFAULT_BAND_MAX
         sim_params_cfg = None
+        memory_cfg = None
     layer_cfg = _load_layer_state_config(args.layer_states)
     family_spec = None
     family_fp = None
@@ -811,6 +815,7 @@ def main():
         layer_state_config=layer_cfg,
         sim_params_cfg=sim_params_cfg,
         debug_traces=args.debug_traces,
+        memory_cfg=memory_cfg,
     )
     print(
         json.dumps(

@@ -108,37 +108,98 @@ def _layer_ref_omega(modes: List[Mode], layer: Layer) -> float:
     return float(np.median(omegas))
 
 
-def _build_memory_architecture(modes: List[Mode], rng: np.random.Generator) -> MemoryArchitecture:
-    """Construct per-layer memory parameters following v2 spec (4/3/4 modes and mixing W)."""
+def _build_memory_architecture(
+    modes: List[Mode],
+    rng: np.random.Generator,
+    memory_cfg: Dict[str, object] | None = None,
+) -> MemoryArchitecture:
+    """Construct per-layer memory parameters following v2 spec (4/3/4 modes and mixing W).
+
+    memory_cfg overrides defaults when provided. Supported keys:
+      - modes_per_layer: {"Q": int, "S1": int, "S2": int}
+      - tau0: {"Q": [...], "S1": [...], "S2": [...]}  # in units of 1/omega_Q
+      - beta_tau: {"Q": [min, max], ...}
+      - beta: {"Q": [min, max], ...}
+      - a: {"Q": [...], ...}
+      - g_xi: {"Q": [min, max], ...}  # scaling of m*omega^2
+      - mixing_ranges: {"S2<-Q": [lo, hi], ...}
+    """
+    memory_cfg = memory_cfg or {}
     layers_present = _layer_order([m.layer for m in modes if m.layer in (Layer.Q, Layer.S1, Layer.S2)])
     layer_mem: Dict[Layer, LayerMemoryParams] = {}
     mem_index: Dict[Tuple[Layer, int], int] = {}
 
-    # Base tau definitions (in units of 1 / omega_Q)
-    base_tau = {
+    base_tau_default = {
         Layer.Q: [0.02, 0.05, 0.2, 1.0],
         Layer.S1: [0.05, 0.2, 1.0],
         Layer.S2: [0.1, 0.5, 2.0, 8.0],
     }
-    base_a = [0.9, 0.7, 0.5, 0.35]
-    beta_tau_ranges = {Layer.Q: (0.05, 0.1), Layer.S1: (0.05, 0.1), Layer.S2: (0.2, 0.3)}
-    beta_ranges = {Layer.Q: (2.0, 3.0), Layer.S1: (2.0, 3.0), Layer.S2: (1.0, 2.0)}
-    xi_ranges = {Layer.Q: (0.1, 0.3), Layer.S1: (0.1, 0.3), Layer.S2: (0.1, 0.5)}
+    base_a_default = [0.9, 0.7, 0.5, 0.35]
+    beta_tau_ranges_default = {Layer.Q: (0.05, 0.1), Layer.S1: (0.05, 0.1), Layer.S2: (0.2, 0.3)}
+    beta_ranges_default = {Layer.Q: (2.0, 3.0), Layer.S1: (2.0, 3.0), Layer.S2: (1.0, 2.0)}
+    xi_ranges_default = {Layer.Q: (0.1, 0.3), Layer.S1: (0.1, 0.3), Layer.S2: (0.1, 0.5)}
+
+    modes_per_layer_cfg = memory_cfg.get("modes_per_layer", {})
+    tau0_cfg = memory_cfg.get("tau0", {})
+    beta_tau_cfg = memory_cfg.get("beta_tau", {})
+    beta_cfg = memory_cfg.get("beta", {})
+    a_cfg = memory_cfg.get("a", {})
+    g_xi_cfg = memory_cfg.get("g_xi", {})
 
     omega_q_ref = _layer_ref_omega(modes, Layer.Q)
     z_counter = 0
     for layer in layers_present:
-        taus_base = base_tau.get(layer, [])
+        if layer.name in tau0_cfg:
+            taus_base = tau0_cfg[layer.name]
+        elif layer in tau0_cfg:
+            taus_base = tau0_cfg[layer]
+        else:
+            taus_base = base_tau_default.get(layer, [])
+            n_override = None
+            if layer.name in modes_per_layer_cfg:
+                n_override = modes_per_layer_cfg[layer.name]
+            elif layer in modes_per_layer_cfg:
+                n_override = modes_per_layer_cfg[layer]
+            if n_override is not None:
+                n_override = int(n_override)
+                if n_override < len(taus_base):
+                    taus_base = taus_base[:n_override]
+                elif n_override > len(taus_base):
+                    if taus_base:
+                        taus_base = taus_base + [taus_base[-1]] * (n_override - len(taus_base))
+                    else:
+                        taus_base = [0.1] * n_override
         n_mem = len(taus_base)
         if n_mem == 0:
             continue
         tau0 = np.array([t / max(omega_q_ref, 1e-6) for t in taus_base])
-        beta_tau_lo, beta_tau_hi = beta_tau_ranges.get(layer, (0.05, 0.1))
+        if layer.name in beta_tau_cfg:
+            beta_tau_lo, beta_tau_hi = beta_tau_cfg[layer.name]
+        elif layer in beta_tau_cfg:
+            beta_tau_lo, beta_tau_hi = beta_tau_cfg[layer]
+        else:
+            beta_tau_lo, beta_tau_hi = beta_tau_ranges_default.get(layer, (0.05, 0.1))
         beta_tau = rng.uniform(beta_tau_lo, beta_tau_hi, size=n_mem)
-        beta_lo, beta_hi = beta_ranges.get(layer, (2.0, 3.0))
+        if layer.name in beta_cfg:
+            beta_lo, beta_hi = beta_cfg[layer.name]
+        elif layer in beta_cfg:
+            beta_lo, beta_hi = beta_cfg[layer]
+        else:
+            beta_lo, beta_hi = beta_ranges_default.get(layer, (2.0, 3.0))
         beta = rng.uniform(beta_lo, beta_hi, size=n_mem)
-        a = np.array(base_a[:n_mem])
-        xi_lo, xi_hi = xi_ranges.get(layer, (0.1, 0.3))
+        if layer.name in a_cfg:
+            a_list = a_cfg[layer.name]
+        elif layer in a_cfg:
+            a_list = a_cfg[layer]
+        else:
+            a_list = base_a_default
+        a = np.array(a_list[:n_mem] + [a_list[-1]] * max(0, n_mem - len(a_list)))
+        if layer.name in g_xi_cfg:
+            xi_lo, xi_hi = g_xi_cfg[layer.name]
+        elif layer in g_xi_cfg:
+            xi_lo, xi_hi = g_xi_cfg[layer]
+        else:
+            xi_lo, xi_hi = xi_ranges_default.get(layer, (0.1, 0.3))
         omega_ref = _layer_ref_omega(modes, layer)
         mass_ref = np.mean([m.mass for m in modes if m.layer == layer]) if any(m.layer == layer for m in modes) else 1.0
         g = rng.uniform(xi_lo, xi_hi, size=n_mem) * mass_ref * (omega_ref**2)
@@ -151,8 +212,7 @@ def _build_memory_architecture(modes: List[Mode], rng: np.random.Generator) -> M
             tau0=tau0, beta_tau=beta_tau, a=a, beta=beta, g=g, kappa=kappa
         )
 
-    # Mixing matrix W (only layers present, order = layers_present)
-    ranges = {
+    ranges_default = {
         (Layer.S2, Layer.Q): (0.2, 0.4),
         (Layer.S2, Layer.S1): (0.2, 0.4),
         (Layer.S1, Layer.Q): (0.1, 0.3),
@@ -160,17 +220,24 @@ def _build_memory_architecture(modes: List[Mode], rng: np.random.Generator) -> M
         (Layer.Q, Layer.S2): (0.05, 0.1),
         (Layer.S1, Layer.S2): (0.1, 0.2),
     }
+    mixing_cfg = memory_cfg.get("mixing_ranges", {})
     L = len(layers_present)
     W = np.eye(L)
     for i, layer_i in enumerate(layers_present):
         for j, layer_j in enumerate(layers_present):
             if i == j:
                 continue
-            if (layer_i, layer_j) in ranges:
-                lo, hi = ranges[(layer_i, layer_j)]
-                W[i, j] = rng.uniform(lo, hi)
+            key = f"{layer_i.name}<-{layer_j.name}"
+            if key in mixing_cfg:
+                lo, hi = mixing_cfg[key]
+            elif (layer_i, layer_j) in ranges_default:
+                lo, hi = ranges_default[(layer_i, layer_j)]
             else:
+                lo = hi = None
+            if lo is None or hi is None:
                 W[i, j] = 0.0
+            else:
+                W[i, j] = rng.uniform(lo, hi)
 
     return MemoryArchitecture(layer_order=layers_present, layer_mem=layer_mem, W=W, mem_index=mem_index)
 
@@ -227,11 +294,12 @@ def init_state(
     inter_couplings: List[InterLayerCoupling],
     struct_params: StructuralParams,
     rng: np.random.Generator,
+    memory_cfg: Dict[str, object] | None = None,
 ) -> Tuple[SimulationState, Dict[Layer, int], MemoryArchitecture, List[DirectLink], Dict[Layer, List[int]]]:
     index_map = make_index_map(modes)
     layers_present = _layer_order([m.layer for m in modes])
     layer_to_idx = {layer: i for i, layer in enumerate(layers_present)}
-    mem_arch = _build_memory_architecture(modes, rng)
+    mem_arch = _build_memory_architecture(modes, rng, memory_cfg=memory_cfg)
     _, direct_links = build_links(inter_couplings, index_map)
 
     x0 = rng.normal(scale=1e-3, size=len(modes))
@@ -409,11 +477,23 @@ def simulate(
     sim_params: SimulationParams,
     rng: np.random.Generator,
     debug: bool = False,
+    memory_cfg: Dict[str, object] | None = None,
 ):
+    if memory_cfg:
+        clamp_val = memory_cfg.get("clamp_tanh_arg")
+        if clamp_val is not None:
+            sim_params.clamp_tanh_arg = float(clamp_val)
+        max_abs_z = memory_cfg.get("max_abs_z")
+        if max_abs_z is not None:
+            sim_params.max_abs_z = float(max_abs_z)
+        energy_blowup = memory_cfg.get("energy_blowup_factor")
+        if energy_blowup is not None:
+            sim_params.energy_blowup_factor = float(energy_blowup)
+
     index_map = make_index_map(modes)
     struct_params = init_structural_params(_layer_order([m.layer for m in modes]), rng)
     state, layer_to_idx, mem_arch, direct_links, layer_indices = init_state(
-        modes, inter_couplings, struct_params, rng
+        modes, inter_couplings, struct_params, rng, memory_cfg=memory_cfg
     )
     intra_pairs = _numeric_intra(intra_couplings, index_map)
 
