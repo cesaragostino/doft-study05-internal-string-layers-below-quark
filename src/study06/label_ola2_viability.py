@@ -16,7 +16,7 @@ def main():
     parser.add_argument("--compounds-csv", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--d-yes", type=float, default=0.25, help="Deprecated: use selection-config instead.")
-    parser.add_argument("--d-possible", type=float, default=0.45, help="Deprecated: use selection-config instead.")
+    parser.add_argument("--d-possible", type=float, default=0.50, help="Deprecated: use selection-config instead.")
     parser.add_argument("--min-structure-tier", type=str, default="level2", help="Deprecated: use selection-config.")
     parser.add_argument("--allowed-s2-states", nargs="+", default=["latent", "structural"], help="Deprecated: use selection-config.")
     parser.add_argument(
@@ -48,8 +48,8 @@ def main():
             "max_bands_compound": 12,
             "min_band_count_compound": 2,
             "use_d_total_for_labels_only": True,
-            "grade_yes_d_total_max": 2.0,
-            "grade_possible_d_total_max": 5.0,
+            "grade_yes_d_total_max": 0.25,
+            "grade_possible_d_total_max": 0.5,
         },
         "targets": [],
     }

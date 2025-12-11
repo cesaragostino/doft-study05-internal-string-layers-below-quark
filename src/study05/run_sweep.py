@@ -275,6 +275,7 @@ def run_sweep(
     output_root: Optional[Path] = None,
     layer_state_config: Optional[Dict] = None,
     sim_params_cfg: Optional[Dict] = None,
+    debug_traces: int = 0,
 ):
     rng = np.random.default_rng(seed)
     flatten = output_root is not None
@@ -292,6 +293,14 @@ def run_sweep(
         _ensure_dirs(raw_case_dir, processed_case_dir)
     else:
         _ensure_dirs(raw_case_dir, processed_case_dir)
+    debug_dir = processed_case_dir / "debug"
+    if debug_traces > 0:
+        debug_dir.mkdir(parents=True, exist_ok=True)
+    n_debug = min(debug_traces, runs)
+    debug_indices: set[int] = set()
+    if n_debug > 0:
+        dbg_rng = np.random.default_rng(seed)
+        debug_indices = set(dbg_rng.choice(runs, size=n_debug, replace=False).tolist())
     sim_params = SimulationParams(**sim_params_cfg) if sim_params_cfg else SimulationParams()
 
     layer_state_config = layer_state_config or {}
@@ -329,6 +338,7 @@ def run_sweep(
 
         run_inputs.append(_serialize_run_config(config))
 
+        debug_enabled = run_idx in debug_indices
         try:
             sim_result = simulate(
                 modes=config.modes,
@@ -336,6 +346,7 @@ def run_sweep(
                 inter_couplings=config.inter_layer_couplings,
                 sim_params=sim_params,
                 rng=rng,
+                debug=debug_enabled,
             )
         except FloatingPointError:
             unstable += 1
@@ -483,6 +494,15 @@ def run_sweep(
         else:
             s2_state_label = "structural"
 
+        debug_trace_path = None
+        if debug_enabled and "debug_traces" in sim_result:
+            debug_trace_path = debug_dir / f"run_{run_idx:04d}_traces.npz"
+            dbg = sim_result["debug_traces"]
+            inputs_arr = dbg.get("inputs")
+            tau_eff_obj = np.array(dbg.get("tau_eff", []), dtype=object)
+            z_arr = dbg.get("z")
+            np.savez_compressed(debug_trace_path, inputs=inputs_arr, tau_eff=tau_eff_obj, z=z_arr)
+
         run_outputs.append(
             {
                 "run_id": run_idx,
@@ -533,6 +553,7 @@ def run_sweep(
                 "memory_taus": [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0],
                 "memory_amps": [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0],
                 "theta_internal": _serialize_theta(config),
+                "debug_trace_path": str(debug_trace_path) if debug_trace_path else None,
             }
         )
 
@@ -557,6 +578,7 @@ def run_sweep(
         "runs_valid": len(run_outputs) - unstable,
         "runs_unstable": unstable,
         "runs_rejected": rejected,
+        "debug_trace_run_ids": sorted(debug_indices),
         "band_count_mean": float(np.mean(band_counts)) if band_counts else 0.0,
         "band_count_std": float(np.std(band_counts)) if band_counts else 0.0,
         "spacing_stats": spacing_stats,
@@ -662,6 +684,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
         type=Path,
         default=None,
         help="Override base outputs: raw=<root>/raw, processed=<root>/processed.",
+    )
+    parser.add_argument(
+        "--debug-traces",
+        type=int,
+        default=0,
+        help="Guardar trazas detalladas para N corridas (inputs, tau_eff, z).",
     )
     parser.add_argument(
         "--layer-states",
@@ -782,6 +810,7 @@ def main():
         output_root=args.output_root,
         layer_state_config=layer_cfg,
         sim_params_cfg=sim_params_cfg,
+        debug_traces=args.debug_traces,
     )
     print(
         json.dumps(

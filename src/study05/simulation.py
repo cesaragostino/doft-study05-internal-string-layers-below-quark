@@ -29,6 +29,24 @@ class SimulationState:
 
 
 @dataclass
+class LayerMemoryParams:
+    tau0: np.ndarray
+    beta_tau: np.ndarray
+    a: np.ndarray
+    beta: np.ndarray
+    g: np.ndarray
+    kappa: np.ndarray
+
+
+@dataclass
+class MemoryArchitecture:
+    layer_order: List[Layer]
+    layer_mem: Dict[Layer, LayerMemoryParams]
+    W: np.ndarray  # shape (L, L) aligned with layer_order
+    mem_index: Dict[Tuple[Layer, int], int]  # (layer, k) -> global z index
+
+
+@dataclass
 class MemoryLink:
     deep_idx: int
     shallow_idx: int
@@ -50,8 +68,8 @@ class DirectLink:
 
 @dataclass
 class SimulationParams:
-    dt: float = 0.01
-    total_steps: int = 6000
+    dt: float = 0.0025
+    total_steps: int = 12000
     transient_frac: float = 0.3
     sample_stride: int = 5
     eps_omega: float = 0.1
@@ -63,6 +81,9 @@ class SimulationParams:
     max_x: float = 1e3
     max_v: float = 1e3
     max_energy: float = 1e6
+    max_abs_z: float = 1e6
+    energy_blowup_factor: float = 1e8
+    clamp_tanh_arg: float = 5.0
 
 
 def _layer_order(layers: Sequence[Layer]) -> List[Layer]:
@@ -71,6 +92,87 @@ def _layer_order(layers: Sequence[Layer]) -> List[Layer]:
         if l in layers and l not in ordered:
             ordered.append(l)
     return ordered
+
+
+def _layer_indices(modes: List[Mode]) -> Dict[Layer, List[int]]:
+    idx: Dict[Layer, List[int]] = {}
+    for i, m in enumerate(modes):
+        idx.setdefault(m.layer, []).append(i)
+    return idx
+
+
+def _layer_ref_omega(modes: List[Mode], layer: Layer) -> float:
+    omegas = [m.omega0 for m in modes if m.layer == layer]
+    if not omegas:
+        return 1.0
+    return float(np.median(omegas))
+
+
+def _build_memory_architecture(modes: List[Mode], rng: np.random.Generator) -> MemoryArchitecture:
+    """Construct per-layer memory parameters following v2 spec (4/3/4 modes and mixing W)."""
+    layers_present = _layer_order([m.layer for m in modes if m.layer in (Layer.Q, Layer.S1, Layer.S2)])
+    layer_mem: Dict[Layer, LayerMemoryParams] = {}
+    mem_index: Dict[Tuple[Layer, int], int] = {}
+
+    # Base tau definitions (in units of 1 / omega_Q)
+    base_tau = {
+        Layer.Q: [0.02, 0.05, 0.2, 1.0],
+        Layer.S1: [0.05, 0.2, 1.0],
+        Layer.S2: [0.1, 0.5, 2.0, 8.0],
+    }
+    base_a = [0.9, 0.7, 0.5, 0.35]
+    beta_tau_ranges = {Layer.Q: (0.05, 0.1), Layer.S1: (0.05, 0.1), Layer.S2: (0.2, 0.3)}
+    beta_ranges = {Layer.Q: (2.0, 3.0), Layer.S1: (2.0, 3.0), Layer.S2: (1.0, 2.0)}
+    xi_ranges = {Layer.Q: (0.1, 0.3), Layer.S1: (0.1, 0.3), Layer.S2: (0.1, 0.5)}
+
+    omega_q_ref = _layer_ref_omega(modes, Layer.Q)
+    z_counter = 0
+    for layer in layers_present:
+        taus_base = base_tau.get(layer, [])
+        n_mem = len(taus_base)
+        if n_mem == 0:
+            continue
+        tau0 = np.array([t / max(omega_q_ref, 1e-6) for t in taus_base])
+        beta_tau_lo, beta_tau_hi = beta_tau_ranges.get(layer, (0.05, 0.1))
+        beta_tau = rng.uniform(beta_tau_lo, beta_tau_hi, size=n_mem)
+        beta_lo, beta_hi = beta_ranges.get(layer, (2.0, 3.0))
+        beta = rng.uniform(beta_lo, beta_hi, size=n_mem)
+        a = np.array(base_a[:n_mem])
+        xi_lo, xi_hi = xi_ranges.get(layer, (0.1, 0.3))
+        omega_ref = _layer_ref_omega(modes, layer)
+        mass_ref = np.mean([m.mass for m in modes if m.layer == layer]) if any(m.layer == layer for m in modes) else 1.0
+        g = rng.uniform(xi_lo, xi_hi, size=n_mem) * mass_ref * (omega_ref**2)
+        kappa = g / np.maximum(a, 1e-12)
+
+        for k in range(n_mem):
+            mem_index[(layer, k)] = z_counter
+            z_counter += 1
+        layer_mem[layer] = LayerMemoryParams(
+            tau0=tau0, beta_tau=beta_tau, a=a, beta=beta, g=g, kappa=kappa
+        )
+
+    # Mixing matrix W (only layers present, order = layers_present)
+    ranges = {
+        (Layer.S2, Layer.Q): (0.2, 0.4),
+        (Layer.S2, Layer.S1): (0.2, 0.4),
+        (Layer.S1, Layer.Q): (0.1, 0.3),
+        (Layer.Q, Layer.S1): (0.05, 0.15),
+        (Layer.Q, Layer.S2): (0.05, 0.1),
+        (Layer.S1, Layer.S2): (0.1, 0.2),
+    }
+    L = len(layers_present)
+    W = np.eye(L)
+    for i, layer_i in enumerate(layers_present):
+        for j, layer_j in enumerate(layers_present):
+            if i == j:
+                continue
+            if (layer_i, layer_j) in ranges:
+                lo, hi = ranges[(layer_i, layer_j)]
+                W[i, j] = rng.uniform(lo, hi)
+            else:
+                W[i, j] = 0.0
+
+    return MemoryArchitecture(layer_order=layers_present, layer_mem=layer_mem, W=W, mem_index=mem_index)
 
 
 def build_links(
@@ -125,15 +227,16 @@ def init_state(
     inter_couplings: List[InterLayerCoupling],
     struct_params: StructuralParams,
     rng: np.random.Generator,
-) -> Tuple[SimulationState, Dict[Layer, int], List[MemoryLink], List[DirectLink]]:
+) -> Tuple[SimulationState, Dict[Layer, int], MemoryArchitecture, List[DirectLink], Dict[Layer, List[int]]]:
     index_map = make_index_map(modes)
     layers_present = _layer_order([m.layer for m in modes])
     layer_to_idx = {layer: i for i, layer in enumerate(layers_present)}
-    mem_links, direct_links = build_links(inter_couplings, index_map)
+    mem_arch = _build_memory_architecture(modes, rng)
+    _, direct_links = build_links(inter_couplings, index_map)
 
     x0 = rng.normal(scale=1e-3, size=len(modes))
     v0 = rng.normal(scale=1e-3, size=len(modes))
-    z0 = np.zeros(len(mem_links))
+    z0 = np.zeros(len(mem_arch.mem_index))
     b0 = np.zeros(len(layers_present))
     e0 = np.zeros(len(layers_present))
 
@@ -143,7 +246,8 @@ def init_state(
         idx = layer_to_idx[layer]
         state.e[idx] = val
         struct_params.e_ref[layer] = val
-    return state, layer_to_idx, mem_links, direct_links
+    layer_indices = _layer_indices(modes)
+    return state, layer_to_idx, mem_arch, direct_links, layer_indices
 
 
 def compute_layer_energies(
@@ -151,6 +255,7 @@ def compute_layer_energies(
     state: SimulationState,
     layer_to_idx: Dict[Layer, int],
     eps_omega: float,
+    mem_energy_by_layer: Dict[Layer, float] | None = None,
 ) -> Dict[Layer, float]:
     energies: Dict[Layer, float] = {layer: 0.0 for layer in layer_to_idx}
     for p, m in enumerate(modes):
@@ -159,6 +264,10 @@ def compute_layer_energies(
         bL = state.b[b_idx]
         omega_eff2 = m.omega0**2 * (1.0 + eps_omega * bL)
         energies[layer] += 0.5 * m.mass * state.v[p] ** 2 + 0.5 * m.mass * omega_eff2 * state.x[p] ** 2
+    if mem_energy_by_layer:
+        for layer, e_mem in mem_energy_by_layer.items():
+            if layer in energies:
+                energies[layer] += e_mem
     return energies
 
 
@@ -172,15 +281,13 @@ def _numeric_intra(intra_couplings: List[Coupling], index_map: Dict[Tuple[Layer,
 def derivatives(
     modes: List[Mode],
     intra_pairs: List[Tuple[int, int, float, Layer]],
-    mem_links: List[MemoryLink],
+    mem_arch: MemoryArchitecture,
     direct_links: List[DirectLink],
     struct_params: StructuralParams,
     layer_to_idx: Dict[Layer, int],
+    layer_indices: Dict[Layer, List[int]],
     state: SimulationState,
-    eps_omega: float,
-    eps_k: float,
-    eps_tau: float,
-    eps_amp: float,
+    sim_params: SimulationParams,
 ) -> SimulationState:
     dx = np.zeros_like(state.x)
     dv = np.zeros_like(state.v)
@@ -194,14 +301,14 @@ def derivatives(
     for p, m in enumerate(modes):
         b_idx = layer_to_idx[m.layer]
         bL = state.b[b_idx]
-        omega_eff2 = m.omega0**2 * (1.0 + eps_omega * bL)
+        omega_eff2 = m.omega0**2 * (1.0 + sim_params.eps_omega * bL)
         dv[p] += -omega_eff2 * state.x[p] - m.gamma * state.v[p]
 
     # intra-layer springs
     for i_idx, j_idx, k0, layer in intra_pairs:
         b_idx = layer_to_idx[layer]
         bL = state.b[b_idx]
-        k_eff = k0 * (1.0 + eps_k * bL)
+        k_eff = k0 * (1.0 + sim_params.eps_k * bL)
         dv[i_idx] += -k_eff * (state.x[i_idx] - state.x[j_idx]) / modes[i_idx].mass
         dv[j_idx] += -k_eff * (state.x[j_idx] - state.x[i_idx]) / modes[j_idx].mass
 
@@ -209,7 +316,7 @@ def derivatives(
     for link in direct_links:
         b_idx = layer_to_idx[link.shallow_layer]
         bL = state.b[b_idx]
-        g_eff = link.g0 * (1.0 + eps_k * bL)
+        g_eff = link.g0 * (1.0 + sim_params.eps_k * bL)
         dv[link.shallow_idx] += -g_eff * (state.x[link.shallow_idx] - state.x[link.deep_idx]) / modes[
             link.shallow_idx
         ].mass
@@ -217,17 +324,44 @@ def derivatives(
             link.deep_idx
         ].mass
 
-    # memory contributions
-    for idx, link in enumerate(mem_links):
-        b_tau_idx = layer_to_idx[link.deep_layer]
-        b_amp_idx = layer_to_idx[link.shallow_layer]
-        tau_eff = link.tau0 * (1.0 + eps_tau * state.b[b_tau_idx])
-        amp_eff = link.amp0 * (1.0 + eps_amp * state.b[b_amp_idx])
-        dz[idx] = -state.z[idx] / tau_eff + state.x[link.deep_idx]
-        dv[link.shallow_idx] += -link.g0 * amp_eff * state.z[idx] / modes[link.shallow_idx].mass
+    # memory contributions per layer
+    mem_energy_by_layer: Dict[Layer, float] = {}
+    for (layer, k), idx_z in mem_arch.mem_index.items():
+        params = mem_arch.layer_mem.get(layer)
+        if params is None:
+            continue
+        mem_energy_by_layer[layer] = mem_energy_by_layer.get(layer, 0.0) + 0.5 * params.kappa[k] * state.z[idx_z] ** 2
+
+    inst_energy = compute_layer_energies(
+        modes, state, layer_to_idx, sim_params.eps_omega, mem_energy_by_layer=mem_energy_by_layer
+    )
+
+    # layer signals and inputs
+    signals = {layer: float(np.mean([state.x[i] for i in layer_indices.get(layer, [])])) for layer in layer_indices}
+    signals_vec = np.array([signals.get(layer, 0.0) for layer in mem_arch.layer_order])
+    input_vec = mem_arch.W @ signals_vec if signals_vec.size else np.array([])
+    input_by_layer = {layer: input_vec[i] for i, layer in enumerate(mem_arch.layer_order)} if input_vec.size else {}
+
+    mem_force: Dict[Layer, float] = {}
+    for layer, params in mem_arch.layer_mem.items():
+        if layer not in layer_indices:
+            continue
+        energy_layer = inst_energy.get(layer, 0.0)
+        input_layer = input_by_layer.get(layer, 0.0)
+        for k in range(len(params.tau0)):
+            idx_z = mem_arch.mem_index[(layer, k)]
+            tau_eff = params.tau0[k] * (1.0 + params.beta_tau[k] * energy_layer)
+            tau_eff = max(tau_eff, 1e-9)
+            u = params.beta[k] * input_layer
+            u_clamped = float(np.clip(u, -sim_params.clamp_tanh_arg, sim_params.clamp_tanh_arg))
+            dz[idx_z] = -state.z[idx_z] / tau_eff + params.a[k] * np.tanh(u_clamped)
+            mem_force[layer] = mem_force.get(layer, 0.0) + params.g[k] * state.z[idx_z]
+
+    for layer, force in mem_force.items():
+        for idx in layer_indices.get(layer, []):
+            dv[idx] += -force / modes[idx].mass
 
     # structural updates
-    inst_energy = compute_layer_energies(modes, state, layer_to_idx, eps_omega)
     for layer, idx in layer_to_idx.items():
         tau_e = struct_params.tau_e[layer]
         tau_b = struct_params.tau_b[layer]
@@ -274,10 +408,13 @@ def simulate(
     inter_couplings: List[InterLayerCoupling],
     sim_params: SimulationParams,
     rng: np.random.Generator,
+    debug: bool = False,
 ):
     index_map = make_index_map(modes)
     struct_params = init_structural_params(_layer_order([m.layer for m in modes]), rng)
-    state, layer_to_idx, mem_links, direct_links = init_state(modes, inter_couplings, struct_params, rng)
+    state, layer_to_idx, mem_arch, direct_links, layer_indices = init_state(
+        modes, inter_couplings, struct_params, rng
+    )
     intra_pairs = _numeric_intra(intra_couplings, index_map)
 
     omega_max = max(m.omega0 for m in modes) if modes else 1.0
@@ -288,20 +425,35 @@ def simulate(
     samples_x = []
     samples_time = []
     samples_b = []
+    debug_inputs = []
+    debug_tau = []
+    debug_z = []
+
+    # reference energy for blow-up detection
+    def _mem_energy():
+        mem_energy_by_layer: Dict[Layer, float] = {}
+        for (layer, k), idx_z in mem_arch.mem_index.items():
+            params = mem_arch.layer_mem.get(layer)
+            if params is None:
+                continue
+            mem_energy_by_layer[layer] = mem_energy_by_layer.get(layer, 0.0) + 0.5 * params.kappa[k] * state.z[idx_z] ** 2
+        return mem_energy_by_layer
+
+    init_mem_energy = _mem_energy()
+    init_energy = compute_layer_energies(modes, state, layer_to_idx, sim_params.eps_omega, mem_energy_by_layer=init_mem_energy)
+    energy_ref_total = sum(init_energy.values()) if init_energy else 1.0
 
     def deriv(current_state: SimulationState) -> SimulationState:
         return derivatives(
             modes,
             intra_pairs,
-            mem_links,
+            mem_arch,
             direct_links,
             struct_params,
             layer_to_idx,
+            layer_indices,
             current_state,
-            sim_params.eps_omega,
-            sim_params.eps_k,
-            sim_params.eps_tau,
-            sim_params.eps_amp,
+            sim_params,
         )
 
     for step in range(total_steps):
@@ -312,14 +464,38 @@ def simulate(
             raise FloatingPointError("non-finite state")
         if np.any(np.abs(state.x) > sim_params.max_x) or np.any(np.abs(state.v) > sim_params.max_v):
             raise FloatingPointError("state blow-up")
-        inst_energy = compute_layer_energies(modes, state, layer_to_idx, sim_params.eps_omega)
+        if np.any(np.abs(state.z) > sim_params.max_abs_z):
+            raise FloatingPointError("memory blow-up")
+
+        mem_energy = _mem_energy()
+        inst_energy = compute_layer_energies(
+            modes, state, layer_to_idx, sim_params.eps_omega, mem_energy_by_layer=mem_energy
+        )
         if any(val > sim_params.max_energy for val in inst_energy.values()):
             raise FloatingPointError("energy blow-up")
+        total_e = sum(inst_energy.values())
+        if total_e > sim_params.energy_blowup_factor * max(energy_ref_total, 1e-12):
+            raise FloatingPointError("energy runaway")
 
         if step >= transient_steps and (step - transient_steps) % sim_params.sample_stride == 0:
             samples_time.append((step + 1) * dt)
             samples_x.append(state.x.copy())
             samples_b.append(state.b.copy())
+            if debug:
+                signals = {layer: float(np.mean([state.x[i] for i in layer_indices.get(layer, [])])) for layer in layer_indices}
+                sig_vec = np.array([signals.get(layer, 0.0) for layer in mem_arch.layer_order])
+                inp_vec = mem_arch.W @ sig_vec if sig_vec.size else np.array([])
+                debug_inputs.append(inp_vec.copy())
+                tau_snapshot = []
+                for layer in mem_arch.layer_order:
+                    params = mem_arch.layer_mem.get(layer)
+                    if params is None:
+                        continue
+                    energy_layer = inst_energy.get(layer, 0.0)
+                    tau_layer = params.tau0 * (1.0 + params.beta_tau * energy_layer)
+                    tau_snapshot.append(tau_layer)
+                debug_tau.append(tau_snapshot)
+                debug_z.append(state.z.copy())
 
     samples_x = np.array(samples_x)  # shape (T, N)
     samples_b = np.array(samples_b) if samples_b else np.empty((0, len(state.b)))
@@ -333,13 +509,20 @@ def simulate(
         samples_b = samples_b[::stride]
         times = times[::stride]
 
-    return {
+    result = {
         "times": times,
         "b_series": samples_b,
         "spectrum": spectrum,
         "layer_to_idx": layer_to_idx,
         "dt_used": dt,
     }
+    if debug:
+        result["debug_traces"] = {
+            "inputs": np.array(debug_inputs),
+            "tau_eff": debug_tau,
+            "z": np.array(debug_z),
+        }
+    return result
 
 
 def compute_fft_spectrum(samples_x: np.ndarray, dt_sample: float):
