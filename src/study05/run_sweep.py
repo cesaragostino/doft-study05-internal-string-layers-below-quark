@@ -277,6 +277,7 @@ def run_sweep(
     sim_params_cfg: Optional[Dict] = None,
     debug_traces: int = 0,
     memory_cfg: Optional[Dict] = None,
+    adaptive_cfg: Optional[Dict] = None,
 ):
     rng = np.random.default_rng(seed)
     flatten = output_root is not None
@@ -322,6 +323,7 @@ def run_sweep(
     example_run = None
 
     for run_idx in range(runs):
+        print(f"[run_sweep] run {run_idx + 1}/{runs}", flush=True)
         config = generate_configuration(
             case=case,
             rng=rng,
@@ -335,6 +337,14 @@ def run_sweep(
         )
         if config is None:
             rejected += 1
+            run_outputs.append(
+                {
+                    "run_id": run_idx,
+                    "status": "rejected",
+                    "reason": "complexity_exceeded",
+                    "max_complexity": max_complexity,
+                }
+            )
             continue
 
         run_inputs.append(_serialize_run_config(config))
@@ -349,6 +359,7 @@ def run_sweep(
                 rng=rng,
                 debug=debug_enabled,
                 memory_cfg=memory_cfg,
+                adaptive_cfg=adaptive_cfg,
             )
         except FloatingPointError:
             unstable += 1
@@ -374,7 +385,7 @@ def run_sweep(
             )
             continue
         spectrum = sim_result["spectrum"]
-        omega_peaks, weights_peaks = pick_peaks(
+        omega_peaks, weights_peaks, peak_powers = pick_peaks(
             spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
         )
         energies_gev, scale = _rescale_energies(omega_peaks, target=TARGET_ENERGY_GEV)
@@ -384,6 +395,10 @@ def run_sweep(
         band_counts.append(int(band_energies.size))
 
         band_weights = [w for keep, w in zip(band_mask, weights_peaks) if keep]
+        band_powers = [p for keep, p in zip(band_mask, peak_powers) if keep]
+        bands_all = []
+        for e, pwr, w in zip(band_energies.tolist(), band_powers, band_weights):
+            bands_all.append({"energy": e, "power": pwr, "weights": w})
         band_dominant_layers = []
         for w in band_weights:
             if not w:
@@ -402,6 +417,37 @@ def run_sweep(
             if band_energies.size > 0
             else 0.0
         )
+
+        # structural subset: filter by relative power, cluster by proximity, take top-N
+        structural_energies = []
+        structural_flags: List[str] = []
+        power_capture = 0.0
+        if band_energies.size > 0 and band_powers:
+            max_power = max(band_powers)
+            rel_floor = 0.03 * max_power
+            candidates = [(e, pwr) for e, pwr in zip(band_energies.tolist(), band_powers) if pwr >= rel_floor]
+            delta_min = 0.03
+            candidates.sort(key=lambda x: x[0])
+            clusters = []
+            for e, pwr in candidates:
+                if not clusters or abs(e - clusters[-1][-1][0]) >= delta_min:
+                    clusters.append([(e, pwr)])
+                else:
+                    clusters[-1].append((e, pwr))
+            structural_candidates = []
+            for cl in clusters:
+                cl.sort(key=lambda x: x[1], reverse=True)
+                structural_candidates.append(cl[0])
+            structural_candidates.sort(key=lambda x: x[1], reverse=True)
+            structural_energies = [e for e, _ in structural_candidates[: min(len(structural_candidates), 12)]]
+            power_capture = sum(p for _, p in structural_candidates[: min(len(structural_candidates), 12)]) / max(
+                sum(band_powers), 1e-12
+            )
+            if power_capture < 0.5:
+                structural_flags.append("structural_subset_low_capture")
+        # flag overflow but don't reject
+        if band_energies.size > sim_params.max_peaks:
+            structural_flags.append("band_overflow")
 
         accepted_band = band_energies.size >= 3
         spacings = analysis.compute_spacings(band_energies[band_energies > 1e-4]) if accepted_band else np.array([])
@@ -521,6 +567,12 @@ def run_sweep(
                 "spacing_min": float(np.min(spacings)) if spacings.size else float("nan"),
                 "spacing_max": float(np.max(spacings)) if spacings.size else float("nan"),
                 "band_count": int(band_energies.size),
+                "band_structural_energies_gev": structural_energies,
+                "band_count_structural": len(structural_energies),
+                "bands_all_json": json.dumps(bands_all),
+                "bands_structural_json": json.dumps([{"energy": e} for e in structural_energies]),
+                "band_power_capture": power_capture,
+                "band_flags": structural_flags,
                 "accepted_for_spacing": accepted_band,
                 "family_match": family_match,
                 "family_distance": family_distance.__dict__ if family_distance else None,
@@ -556,6 +608,7 @@ def run_sweep(
                 "memory_amps": [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0],
                 "theta_internal": _serialize_theta(config),
                 "debug_trace_path": str(debug_trace_path) if debug_trace_path else None,
+                "adaptive_lock": sim_result.get("adaptive_lock"),
             }
         )
 
@@ -736,6 +789,7 @@ def main():
         else:
             sim_params_cfg = None
         memory_cfg = engine_cfg.get("memory")
+        adaptive_cfg = engine_cfg.get("adaptive_lock")
     else:
         args.n_q = args.n_q if args.n_q is not None else DEFAULT_N_Q
         args.n_s1 = args.n_s1 if args.n_s1 is not None else DEFAULT_N_INTERNAL
@@ -747,6 +801,7 @@ def main():
             args.band_max = DEFAULT_BAND_MAX
         sim_params_cfg = None
         memory_cfg = None
+        adaptive_cfg = None
     layer_cfg = _load_layer_state_config(args.layer_states)
     family_spec = None
     family_fp = None
@@ -816,6 +871,7 @@ def main():
         sim_params_cfg=sim_params_cfg,
         debug_traces=args.debug_traces,
         memory_cfg=memory_cfg,
+        adaptive_cfg=adaptive_cfg,
     )
     print(
         json.dumps(

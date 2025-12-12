@@ -65,7 +65,20 @@ def compute_basic_proxies(run: Dict) -> Dict:
         "R_S1_Q": run.get("R_S1_Q"),
         "R_S2_S1": run.get("R_S2_S1"),
         "R_S3_S2": run.get("R_S3_S2"),
+        "band_structural_energies_gev": json.dumps(run.get("band_structural_energies_gev", [])),
+        "band_count_structural": run.get("band_count_structural"),
+        "bands_all_json": run.get("bands_all_json"),
+        "bands_structural_json": run.get("bands_structural_json"),
+        "band_power_capture": run.get("band_power_capture"),
+        "band_flags": ";".join(run.get("band_flags", [])) if run.get("band_flags") else "",
     }
+    adapt = run.get("adaptive_lock") or {}
+    for pair in adapt.get("pairs", []):
+        name = pair.get("name", "pair")
+        prefix = f"lock_{name}"
+        proxies[f"{prefix}_L"] = pair.get("L_mean")
+        proxies[f"{prefix}_ratio"] = pair.get("ratio_eff")
+        proxies[f"{prefix}_locked"] = int(pair.get("locked", False))
     return proxies
 
 

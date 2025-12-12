@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Dict, List, Sequence, Tuple
+import math
 
 import numpy as np
 
@@ -44,6 +45,42 @@ class MemoryArchitecture:
     layer_mem: Dict[Layer, LayerMemoryParams]
     W: np.ndarray  # shape (L, L) aligned with layer_order
     mem_index: Dict[Tuple[Layer, int], int]  # (layer, k) -> global z index
+
+
+@dataclass
+class AdaptiveLockPair:
+    name: str
+    i_idx: int
+    j_idx: int
+    p: int
+    q: int
+    weight: float
+    k_adapt: float = 0.0
+    sum_cos: float = 0.0
+    sum_sin: float = 0.0
+    n_samples: int = 0
+    L_last: float = 0.0
+    L_sin_last: float = 0.0
+    phi_last: float = 0.0
+
+
+@dataclass
+class AdaptiveLockConfig:
+    enabled: bool
+    window_cycles: float
+    ref_layer: Layer
+    ref_mode: int
+    epsilon_K: float
+    lambda_K: float
+    L0: float
+    K_min: float
+    K_max: float
+    epsilon_omega: float
+    omega_min: float
+    omega_max: float
+    lock_threshold_L: float
+    lock_ratio_tol: float
+    pairs: List[AdaptiveLockPair]
 
 
 @dataclass
@@ -242,6 +279,64 @@ def _build_memory_architecture(
     return MemoryArchitecture(layer_order=layers_present, layer_mem=layer_mem, W=W, mem_index=mem_index)
 
 
+def _build_adaptive_lock_config(
+    modes: List[Mode],
+    index_map: Dict[Tuple[Layer, int], int],
+    cfg: Dict[str, object] | None,
+) -> AdaptiveLockConfig | None:
+    if not cfg or not cfg.get("enabled", False):
+        return None
+    try:
+        ref_layer = Layer[cfg.get("ref_frequency_layer", "Q")]
+    except Exception:
+        ref_layer = Layer.Q
+    ref_mode = int(cfg.get("ref_mode_index", 0))
+    pairs_cfg = cfg.get("lock_pairs", [])
+    pairs: List[AdaptiveLockPair] = []
+    for pc in pairs_cfg:
+        try:
+            li = Layer[pc.get("layer_i")]
+            lj = Layer[pc.get("layer_j")]
+        except Exception:
+            continue
+        mi = int(pc.get("mode_i", 0))
+        mj = int(pc.get("mode_j", 0))
+        name = pc.get("name", f"{li.name}_{lj.name}_{mi}_{mj}")
+        p = int(pc.get("p", 1))
+        q = int(pc.get("q", 1))
+        weight = float(pc.get("weight", 1.0))
+        if (li, mi) not in index_map or (lj, mj) not in index_map:
+            continue
+        pairs.append(
+            AdaptiveLockPair(
+                name=name,
+                i_idx=index_map[(li, mi)],
+                j_idx=index_map[(lj, mj)],
+                p=p,
+                q=q,
+                weight=weight,
+                k_adapt=0.0,
+            )
+        )
+    return AdaptiveLockConfig(
+        enabled=True,
+        window_cycles=float(cfg.get("window_cycles", 20.0)),
+        ref_layer=ref_layer,
+        ref_mode=ref_mode,
+        epsilon_K=float(cfg.get("epsilon_K", 1e-3)),
+        lambda_K=float(cfg.get("lambda_K", 1e-3)),
+        L0=float(cfg.get("L0", 0.2)),
+        K_min=float(cfg.get("K_min", 0.0)),
+        K_max=float(cfg.get("K_max", 5.0)),
+        epsilon_omega=float(cfg.get("epsilon_omega", 1e-4)),
+        omega_min=float(cfg.get("omega_min", 0.1)),
+        omega_max=float(cfg.get("omega_max", 5.0)),
+        lock_threshold_L=float(cfg.get("lock_threshold_L", 0.8)),
+        lock_ratio_tol=float(cfg.get("lock_ratio_tol", 0.1)),
+        pairs=pairs,
+    )
+
+
 def build_links(
     inter_couplings: List[InterLayerCoupling],
     index_map: Dict[Tuple[Layer, int], int],
@@ -356,6 +451,7 @@ def derivatives(
     layer_indices: Dict[Layer, List[int]],
     state: SimulationState,
     sim_params: SimulationParams,
+    adapt_pairs: List[AdaptiveLockPair] | None = None,
 ) -> SimulationState:
     dx = np.zeros_like(state.x)
     dv = np.zeros_like(state.v)
@@ -391,6 +487,17 @@ def derivatives(
         dv[link.deep_idx] += -g_eff * (state.x[link.deep_idx] - state.x[link.shallow_idx]) / modes[
             link.deep_idx
         ].mass
+
+    # adaptive springs
+    if adapt_pairs:
+        for pair in adapt_pairs:
+            k_adapt = pair.k_adapt
+            if k_adapt == 0.0:
+                continue
+            i = pair.i_idx
+            j = pair.j_idx
+            dv[i] += -k_adapt * (state.x[i] - state.x[j]) / modes[i].mass
+            dv[j] += -k_adapt * (state.x[j] - state.x[i]) / modes[j].mass
 
     # memory contributions per layer
     mem_energy_by_layer: Dict[Layer, float] = {}
@@ -478,6 +585,7 @@ def simulate(
     rng: np.random.Generator,
     debug: bool = False,
     memory_cfg: Dict[str, object] | None = None,
+    adaptive_cfg: Dict[str, object] | None = None,
 ):
     if memory_cfg:
         clamp_val = memory_cfg.get("clamp_tanh_arg")
@@ -495,6 +603,7 @@ def simulate(
     state, layer_to_idx, mem_arch, direct_links, layer_indices = init_state(
         modes, inter_couplings, struct_params, rng, memory_cfg=memory_cfg
     )
+    adaptive_conf = _build_adaptive_lock_config(modes, index_map, adaptive_cfg)
     intra_pairs = _numeric_intra(intra_couplings, index_map)
 
     omega_max = max(m.omega0 for m in modes) if modes else 1.0
@@ -523,6 +632,8 @@ def simulate(
     init_energy = compute_layer_energies(modes, state, layer_to_idx, sim_params.eps_omega, mem_energy_by_layer=init_mem_energy)
     energy_ref_total = sum(init_energy.values()) if init_energy else 1.0
 
+    adapt_pairs = adaptive_conf.pairs if adaptive_conf and adaptive_conf.enabled else None
+
     def deriv(current_state: SimulationState) -> SimulationState:
         return derivatives(
             modes,
@@ -534,10 +645,38 @@ def simulate(
             layer_indices,
             current_state,
             sim_params,
+            adapt_pairs=adapt_pairs,
         )
+
+    # adaptive lock runtime
+    if adaptive_conf and adaptive_conf.enabled:
+        ref_idx = index_map.get((adaptive_conf.ref_layer, adaptive_conf.ref_mode), 0)
+        omega_ref = modes[ref_idx].omega0 if ref_idx < len(modes) else 1.0
+        window_duration = adaptive_conf.window_cycles * (2 * np.pi) / max(omega_ref, 1e-8)
+        window_start = 0.0
+    else:
+        ref_idx = 0
+        window_duration = float("inf")
+        window_start = 0.0
 
     for step in range(total_steps):
         state = rk4_step(state, deriv, dt)
+
+        # adaptive lock accumulation
+        if adapt_pairs:
+            for pair in adapt_pairs:
+                x_i = state.x[pair.i_idx]
+                v_i = state.v[pair.i_idx]
+                omega_i = modes[pair.i_idx].omega0
+                x_j = state.x[pair.j_idx]
+                v_j = state.v[pair.j_idx]
+                omega_j = modes[pair.j_idx].omega0
+                phi_i = math.atan2(v_i / max(omega_i, 1e-9), x_i)
+                phi_j = math.atan2(v_j / max(omega_j, 1e-9), x_j)
+                theta = pair.p * phi_j - pair.q * phi_i
+                pair.sum_cos += math.cos(theta)
+                pair.sum_sin += math.sin(theta)
+                pair.n_samples += 1
 
         # stability checks
         if not (np.isfinite(state.x).all() and np.isfinite(state.v).all() and np.isfinite(state.z).all()):
@@ -577,6 +716,42 @@ def simulate(
                 debug_tau.append(tau_snapshot)
                 debug_z.append(state.z.copy())
 
+        # window update for adaptive lock
+        current_time = (step + 1) * dt
+        if adapt_pairs and (current_time - window_start) >= window_duration:
+            # compute averages and update K and omega
+            avg_sin_by_mode: Dict[int, float] = {}
+            for pair in adapt_pairs:
+                if pair.n_samples > 0:
+                    L_cos = pair.sum_cos / pair.n_samples
+                    L_sin = pair.sum_sin / pair.n_samples
+                else:
+                    L_cos = 0.0
+                    L_sin = 0.0
+                L_mag = math.sqrt(L_cos * L_cos + L_sin * L_sin)
+                pair.L_last = L_mag
+                pair.L_sin_last = L_sin
+                pair.phi_last = math.atan2(L_sin, L_cos)
+                dK = adaptive_conf.epsilon_K * (L_mag - adaptive_conf.L0) - adaptive_conf.lambda_K * pair.k_adapt
+                pair.k_adapt = float(np.clip(pair.k_adapt + dK, adaptive_conf.K_min, adaptive_conf.K_max))
+                # accumulate omega adjustments only if there is meaningful lock
+                if L_mag > adaptive_conf.L0:
+                    avg_sin_by_mode[pair.i_idx] = avg_sin_by_mode.get(pair.i_idx, 0.0) - adaptive_conf.epsilon_omega * pair.weight * L_sin * pair.q
+                    avg_sin_by_mode[pair.j_idx] = avg_sin_by_mode.get(pair.j_idx, 0.0) + adaptive_conf.epsilon_omega * pair.weight * L_sin * pair.p
+                # reset accumulators
+                pair.sum_cos = 0.0
+                pair.sum_sin = 0.0
+                pair.n_samples = 0
+
+            for idx, delta in avg_sin_by_mode.items():
+                new_omega = float(np.clip(modes[idx].omega0 + delta, adaptive_conf.omega_min, adaptive_conf.omega_max))
+                modes[idx].omega0 = new_omega
+
+            # recompute window based on current ref omega
+            omega_ref = modes[ref_idx].omega0 if ref_idx < len(modes) else 1.0
+            window_duration = adaptive_conf.window_cycles * (2 * np.pi) / max(omega_ref, 1e-8)
+            window_start = current_time
+
     samples_x = np.array(samples_x)  # shape (T, N)
     samples_b = np.array(samples_b) if samples_b else np.empty((0, len(state.b)))
     times = np.array(samples_time)
@@ -596,6 +771,38 @@ def simulate(
         "layer_to_idx": layer_to_idx,
         "dt_used": dt,
     }
+    if adapt_pairs:
+        pairs_out = []
+        for pair in adapt_pairs:
+            omega_i = modes[pair.i_idx].omega0
+            omega_j = modes[pair.j_idx].omega0
+            ratio = omega_i / omega_j if omega_j != 0 else float("inf")
+            target_ratio = pair.p / pair.q if pair.q != 0 else float("inf")
+            hit_min = omega_i <= adaptive_conf.omega_min or omega_j <= adaptive_conf.omega_min
+            hit_max = omega_i >= adaptive_conf.omega_max or omega_j >= adaptive_conf.omega_max
+            locked = bool(
+                (pair.L_last > adaptive_conf.lock_threshold_L)
+                and (abs(ratio - target_ratio) < adaptive_conf.lock_ratio_tol)
+            )
+            pairs_out.append(
+                {
+                    "name": pair.name,
+                    "L_mean": pair.L_last,
+                    "L_sin": pair.L_sin_last,
+                    "phi_mean": pair.phi_last,
+                    "K_final": pair.k_adapt,
+                    "omega_i_final": omega_i,
+                    "omega_j_final": omega_j,
+                    "ratio_eff": ratio,
+                    "target_ratio": target_ratio,
+                    "p": pair.p,
+                    "q": pair.q,
+                    "locked": locked,
+                    "hit_omega_min": hit_min,
+                    "hit_omega_max": hit_max,
+                }
+            )
+        result["adaptive_lock"] = {"pairs": pairs_out}
     if debug:
         result["debug_traces"] = {
             "inputs": np.array(debug_inputs),
@@ -626,7 +833,7 @@ def pick_peaks(
     omega = spectrum["omega"]
     power_total = spectrum["power_total"]
     if omega.size == 0:
-        return [], []
+        return [], [], []
     mask = power_total > sim_params.peak_threshold * np.max(power_total)
     idxs = np.where(mask)[0]
     idxs = idxs[idxs > 0]  # drop DC
@@ -636,8 +843,10 @@ def pick_peaks(
 
     weights_per_peak: List[Dict[str, float]] = []
     power_per_mode = spectrum["per_mode"]
+    peak_powers: List[float] = []
     for idx in idxs:
         weights = {}
+        peak_powers.append(float(power_total[idx]))
         total = float(np.sum(power_per_mode[idx]))
         if total <= 0:
             weights_per_peak.append({})
@@ -647,4 +856,4 @@ def pick_peaks(
             layer_power = float(np.sum(power_per_mode[idx, layer_indices]))
             weights[layer.name] = layer_power / total
         weights_per_peak.append(weights)
-    return omega[idxs], weights_per_peak
+    return omega[idxs], weights_per_peak, peak_powers

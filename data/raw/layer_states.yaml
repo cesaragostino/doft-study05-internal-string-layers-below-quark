@@ -1,8 +1,10 @@
-lock_thresholds:
-  T_Q_rel_min: 0.5
-  T_S1_rel_min: 0.1
-  T_S2_rel_min: 0.1
+tiers:
+  # thresholds sobre shares relativas (Q_rel, S1_rel, S2_rel)
+  T_Q_rel_min: 0.35
+  T_S1_rel_min: 0.08
+  T_S2_rel_min: 0.06
 
 s2_state:
-  none_max_fraction: 1.0e-3
-  latent_max_fraction: 0.15
+  none_max: 0.01
+  latent_max: 0.20
+  # >latent_max => structural (si además el lock lo acompaña en tu lógica)

@@ -169,6 +169,12 @@ def main():
     cat_by_name = {p["name"]: p for p in catalog}
     proxy_by_run = {str(r.get("run_id")): r for r in proxies}
 
+    def _to_float(val):
+        try:
+            return float(val)
+        except Exception:
+            return None
+
     # choose best match per run (lowest finite d_total)
     best_by_run: Dict[str, Dict] = {}
     for m in matches:
@@ -179,39 +185,53 @@ def main():
         prev = best_by_run.get(rid)
         if prev is None or d_total < prev.get("d_total", np.inf):
             best_by_run[rid] = m
+    # ensure all runs from proxies are considered (even without match)
+    all_run_ids = {str(r.get("run_id")) for r in proxies}
 
     blocks: List[Dict] = []
     blocks_per_particle: Dict[str, int] = {}
     rejected_rows: List[Dict] = []
     selection_log_rows: List[Dict[str, object]] = []
 
-    for run_id, match in best_by_run.items():
-        target = match.get("target_name")
-        particle = cat_by_name.get(target or "")
+    for run_id in all_run_ids:
+        match = best_by_run.get(run_id)
+        target = match.get("target_name") if match else None
+        particle = cat_by_name.get(target or "") if match else None
         proxy_row = proxy_by_run.get(str(run_id))
-        band_count = proxy_row.get("band_count") if proxy_row else None
-        lock_q = proxy_row.get("lock_quality_Q") if proxy_row else None
+        band_count_struct = proxy_row.get("band_count_structural") if proxy_row else None
+        band_count = band_count_struct if band_count_struct is not None else proxy_row.get("band_count") if proxy_row else None
+        band_count = _to_float(band_count)
+        raw_lock_q = proxy_row.get("lock_quality_Q") if proxy_row else None
+        try:
+            lock_q = float(raw_lock_q)
+        except Exception:
+            lock_q = None
         structure_tier = proxy_row.get("structure_tier", "none") if proxy_row else "none"
         reasons: List[str] = []
 
         def reject(reason: str):
+            m = match or {}
             rejected_rows.append(
                 {
                     "run_id": run_id,
                     "best_target": target,
                     "type": particle.get("type") if particle else "",
-                    "best_d_total": match.get("d_total"),
+                    "best_d_total": m.get("d_total"),
                     "structure_tier": proxy_row.get("structure_tier") if proxy_row else "",
                     "s2_state": proxy_row.get("s2_state") if proxy_row else "",
-                    "enough_levels_full": match.get("enough_levels_full"),
-                    "enough_levels_partial": match.get("enough_levels_partial"),
+                    "enough_levels_full": m.get("enough_levels_full"),
+                    "enough_levels_partial": m.get("enough_levels_partial"),
                     "reason": reason,
                 }
             )
 
         # Physical filters (no d_total here)
-        if band_count is not None and band_count > sel_cfg.get("band_count_max", 1e9):
-            reasons.append(f"too_many_bands>{sel_cfg.get('band_count_max')}")
+        try:
+            band_count_max = float(sel_cfg.get("band_count_max", 1e9))
+        except Exception:
+            band_count_max = 1e9
+        if band_count is not None and band_count > band_count_max:
+            reasons.append(f"too_many_bands>{band_count_max}")
         if lock_q is not None and lock_q < sel_cfg.get("lock_quality_Q_min", 0.0):
             reasons.append(f"low_Q_lock<{sel_cfg.get('lock_quality_Q_min')}")
         order = {"none": 0, "level1": 1, "level2": 2, "level3": 3}
@@ -219,12 +239,21 @@ def main():
         if order.get(str(structure_tier), 0) < order.get(str(min_tier), 0):
             reasons.append(f"tier_below_{min_tier}")
 
+        if match is None or target is None:
+            reasons.append("missing_match")
+        else:
+            try:
+                n_levels_sim = float(match.get("n_levels_sim", 0))
+            except Exception:
+                n_levels_sim = 0.0
+            if n_levels_sim <= 0:
+                reasons.append("missing_levels")
         if particle is None:
             reasons.append("unknown_particle")
         if proxy_row is None:
             reasons.append("missing_proxy")
 
-        if particle.get("type") == "baryon":
+        if particle and particle.get("type") == "baryon":
             reasons.append("baryon_to_complex_core")
 
         # log selection decision
@@ -237,7 +266,7 @@ def main():
                     "band_count": band_count,
                     "lock_quality_Q": lock_q,
                     "structure_tier": structure_tier,
-                    "d_total_best": match.get("d_total"),
+                    "d_total_best": (match or {}).get("d_total"),
                 }
             )
 

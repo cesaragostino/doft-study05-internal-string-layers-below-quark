@@ -1,193 +1,141 @@
 {
   "wave": "ola1",
   "inputs": {
-    "proxies_csv": "data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv",
+    "proxies_csv": "data/processed/ola1/Ola1_Discovery_3-2-5_all_runs_proxies.csv",
     "zoo_matches_csv": "data/processed/ola1/ola1_matches/zoo_matches.csv"
   },
   "selections": [
     {
-      "name": "pion_simple_blocks",
+      "name": "pion_wide_net",
       "target_name": "pion",
       "type": "meson",
       "family": "pion_like",
       "filters": [
         { "field": "best_target", "op": "==", "value": "pion" },
-        { "field": "structure_tier", "op": "in", "value": ["level1", "level2", "level3"] },
-        { "field": "s2_state", "op": "in", "value": ["none", "latent", "structural"] }
+        { "field": "best_d_total", "op": "<=", "value": 999.0 }
       ],
-      "pick": {
-        "mode": "top_n",
-        "n": 50,
-        "order_by": "best_d_total",
-        "ascending": true
-      },
+      "pick": { "mode": "top_n", "n": 200, "order_by": "best_d_total", "ascending": true },
       "output": {
         "blocks_path": "data/processed/ola1/blocks/simple_blocks.json",
         "append": false,
         "block_type": "simple",
         "particle_name": "pion",
         "family": "pion_like",
-        "include_fields": [
-          "run_id",
-          "structure_tier",
-          "lock_quality_Q",
-          "lock_quality_S1",
-          "lock_quality_S2",
-          "s2_state",
-          "s2_band_fraction",
-          "best_target",
-          "best_d_total",
-          "band_energies_gev",
-          "theta_internal"
-        ]
+        "include_fields": ["run_id", "theta_internal", "structure_tier", "lock_quality_Q", "lock_quality_S1", "lock_quality_S2", "s2_state", "best_target", "best_d_total", "adaptive_lock", "debug_trace_path"]
       }
     },
-
     {
-      "name": "kaon_simple_blocks",
+      "name": "rho_wide_net",
+      "target_name": "rho",
+      "type": "meson",
+      "family": "rho_like",
+      "filters": [
+        { "field": "best_target", "op": "==", "value": "rho" },
+        { "field": "best_d_total", "op": "<=", "value": 999.0 }
+      ],
+      "pick": { "mode": "top_n", "n": 200, "order_by": "best_d_total", "ascending": true },
+      "output": {
+        "blocks_path": "data/processed/ola1/blocks/simple_blocks.json",
+        "append": true,
+        "block_type": "simple",
+        "particle_name": "rho",
+        "family": "rho_like",
+        "include_fields": ["run_id", "theta_internal", "structure_tier", "lock_quality_Q", "lock_quality_S1", "lock_quality_S2", "s2_state", "best_target", "best_d_total", "adaptive_lock", "debug_trace_path"]
+      }
+    },
+    {
+      "name": "kaon_wide_net",
       "target_name": "kaon",
       "type": "meson",
       "family": "kaon_like",
       "filters": [
         { "field": "best_target", "op": "==", "value": "kaon" },
-        { "field": "structure_tier", "op": "in", "value": ["level1", "level2", "level3"] }
+        { "field": "best_d_total", "op": "<=", "value": 999.0 }
       ],
-      "pick": {
-        "mode": "top_n",
-        "n": 50,
-        "order_by": "best_d_total",
-        "ascending": true
-      },
+      "pick": { "mode": "top_n", "n": 200, "order_by": "best_d_total", "ascending": true },
       "output": {
         "blocks_path": "data/processed/ola1/blocks/simple_blocks.json",
         "append": true,
         "block_type": "simple",
         "particle_name": "kaon",
         "family": "kaon_like",
-        "include_fields": [
-          "run_id",
-          "structure_tier",
-          "lock_quality_Q",
-          "lock_quality_S1",
-          "lock_quality_S2",
-          "s2_state",
-          "s2_band_fraction",
-          "best_target",
-          "best_d_total",
-          "band_energies_gev",
-          "theta_internal"
-        ]
+        "include_fields": ["run_id", "theta_internal", "structure_tier", "lock_quality_Q", "lock_quality_S1", "lock_quality_S2", "s2_state", "best_target", "best_d_total", "adaptive_lock", "debug_trace_path"]
       }
     },
-
     {
-      "name": "phi_simple_blocks",
+      "name": "phi_wide_net",
       "target_name": "phi",
       "type": "meson",
       "family": "phi_like",
       "filters": [
         { "field": "best_target", "op": "==", "value": "phi" },
-        { "field": "structure_tier", "op": "in", "value": ["level1", "level2", "level3"] }
+        { "field": "best_d_total", "op": "<=", "value": 999.0 }
       ],
-      "pick": {
-        "mode": "top_n",
-        "n": 50,
-        "order_by": "best_d_total",
-        "ascending": true
-      },
+      "pick": { "mode": "top_n", "n": 200, "order_by": "best_d_total", "ascending": true },
       "output": {
         "blocks_path": "data/processed/ola1/blocks/simple_blocks.json",
         "append": true,
         "block_type": "simple",
-          "particle_name": "phi",
-          "family": "phi_like",
-          "include_fields": [
-            "run_id",
-            "structure_tier",
-            "lock_quality_Q",
-            "lock_quality_S1",
-            "lock_quality_S2",
-            "s2_state",
-            "s2_band_fraction",
-            "best_target",
-            "best_d_total",
-            "band_energies_gev",
-            "theta_internal"
-          ]
+        "particle_name": "phi",
+        "family": "phi_like",
+        "include_fields": ["run_id", "theta_internal", "structure_tier", "lock_quality_Q", "lock_quality_S1", "lock_quality_S2", "s2_state", "best_target", "best_d_total", "adaptive_lock", "debug_trace_path"]
       }
     },
-
     {
-      "name": "quark_ud_simple_blocks",
+      "name": "quark_ud_const_wide_net",
       "target_name": "quark_ud_const",
-      "type": "effective_quark",
+      "type": "constituent",
       "family": "quark_like",
       "filters": [
         { "field": "best_target", "op": "==", "value": "quark_ud_const" },
-        { "field": "structure_tier", "op": "in", "value": ["level1", "level2", "level3"] }
+        { "field": "best_d_total", "op": "<=", "value": 999.0 }
       ],
-      "pick": {
-        "mode": "top_n",
-        "n": 50,
-        "order_by": "best_d_total",
-        "ascending": true
-      },
+      "pick": { "mode": "top_n", "n": 200, "order_by": "best_d_total", "ascending": true },
       "output": {
         "blocks_path": "data/processed/ola1/blocks/simple_blocks.json",
         "append": true,
         "block_type": "simple",
         "particle_name": "quark_ud_const",
         "family": "quark_like",
-        "include_fields": [
-          "run_id",
-          "structure_tier",
-          "lock_quality_Q",
-          "lock_quality_S1",
-          "lock_quality_S2",
-          "s2_state",
-          "s2_band_fraction",
-          "best_target",
-          "best_d_total",
-          "band_energies_gev",
-          "theta_internal"
-        ]
+        "include_fields": ["run_id", "theta_internal", "structure_tier", "lock_quality_Q", "lock_quality_S1", "lock_quality_S2", "s2_state", "best_target", "best_d_total", "adaptive_lock", "debug_trace_path"]
       }
     },
-
     {
-      "name": "quark_s_simple_blocks",
+      "name": "quark_s_const_wide_net",
       "target_name": "quark_s_const",
-      "type": "effective_quark",
+      "type": "constituent",
       "family": "quark_like",
       "filters": [
         { "field": "best_target", "op": "==", "value": "quark_s_const" },
-        { "field": "structure_tier", "op": "in", "value": ["level1", "level2", "level3"] }
+        { "field": "best_d_total", "op": "<=", "value": 999.0 }
       ],
-      "pick": {
-        "mode": "top_n",
-        "n": 50,
-        "order_by": "best_d_total",
-        "ascending": true
-      },
+      "pick": { "mode": "top_n", "n": 200, "order_by": "best_d_total", "ascending": true },
       "output": {
         "blocks_path": "data/processed/ola1/blocks/simple_blocks.json",
         "append": true,
         "block_type": "simple",
         "particle_name": "quark_s_const",
         "family": "quark_like",
-        "include_fields": [
-          "run_id",
-          "structure_tier",
-          "lock_quality_Q",
-          "lock_quality_S1",
-          "lock_quality_S2",
-          "s2_state",
-          "s2_band_fraction",
-          "best_target",
-          "best_d_total",
-          "band_energies_gev",
-          "theta_internal"
-        ]
+        "include_fields": ["run_id", "theta_internal", "structure_tier", "lock_quality_Q", "lock_quality_S1", "lock_quality_S2", "s2_state", "best_target", "best_d_total", "adaptive_lock", "debug_trace_path"]
+      }
+    },
+    {
+      "name": "structural_anomaly",
+      "target_name": "unknown",
+      "type": "exotic",
+      "family": "anomaly_like",
+      "filters": [
+        { "field": "s2_state", "op": "==", "value": "structural" },
+        { "field": "lock_quality_S2", "op": ">=", "value": 0.05 }
+      ],
+      "pick": { "mode": "top_n", "n": 200, "order_by": "lock_quality_S2", "ascending": false },
+      "output": {
+        "blocks_path": "data/processed/ola1/blocks/simple_blocks.json",
+        "append": true,
+        "block_type": "simple",
+        "particle_name": "structural_anomaly",
+        "family": "anomaly_like",
+        "include_fields": ["run_id", "theta_internal", "structure_tier", "lock_quality_Q", "lock_quality_S1", "lock_quality_S2", "s2_state", "best_target", "best_d_total", "adaptive_lock", "debug_trace_path"]
       }
     }
   ]

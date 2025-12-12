@@ -61,6 +61,16 @@ def compute_match_stats(
     lev = np.array(levels, dtype=float)
     n_levels_sim = int(lev.size)
 
+    if n_levels_sim == 0:
+        return {
+            "d_total": float("inf"),
+            "d_spacing": float("nan"),
+            "d_mass": float("nan"),
+            "n_levels_sim": n_levels_sim,
+            "has_enough_levels_full": False,
+            "has_enough_levels_partial": False,
+        }
+
     # Spacing distance on overlapping portion
     tgt_sp = np.diff(tgt_masses)
     sim_sp_full = np.diff(lev)
