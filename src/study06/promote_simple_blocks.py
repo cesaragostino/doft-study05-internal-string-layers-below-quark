@@ -42,6 +42,15 @@ def read_proxies(path: Path) -> List[Dict]:
     return rows
 
 
+def _hash_text(text: str) -> str:
+    try:
+        import hashlib
+
+        return hashlib.sha256(text.encode("utf-8")).hexdigest()
+    except Exception:
+        return ""
+
+
 def read_matches(path: Path) -> List[Dict]:
     rows = []
     with path.open() as f:
@@ -135,16 +144,25 @@ def main():
     matches = read_matches(args.zoo_matches_csv)
     # selection config
     sel_cfg = DEFAULT_SELECTION
+    sel_cfg_path_str = ""
+    sel_cfg_hash = ""
     if args.selection_config and args.selection_config.exists():
         try:
             import json as _json
 
-            loaded = _json.loads(args.selection_config.read_text()) or {}
+            sel_cfg_path_str = str(args.selection_config)
+            sel_text = args.selection_config.read_text()
+            sel_cfg_hash = _hash_text(sel_text)
+            loaded = _json.loads(sel_text) or {}
             sel_cfg = {**sel_cfg, **loaded}
             if "grades" in loaded:
                 sel_cfg["grades"] = {**DEFAULT_SELECTION["grades"], **loaded.get("grades", {})}
+            print(f"[promote_simple_blocks] Loaded selection config from {sel_cfg_path_str}")
         except Exception:
+            print("[promote_simple_blocks] Failed to load selection config; using defaults.")
             sel_cfg = DEFAULT_SELECTION
+    else:
+        print("[promote_simple_blocks] Using default selection config.")
     # optional runs JSON to retrieve theta_internal
     runs_json = None
     if args.proxies_csv.name.endswith("_all_runs_proxies.csv"):
@@ -201,6 +219,7 @@ def main():
         band_count_struct = proxy_row.get("band_count_structural") if proxy_row else None
         band_count = band_count_struct if band_count_struct is not None else proxy_row.get("band_count") if proxy_row else None
         band_count = _to_float(band_count)
+        structural_cap_hit = bool(proxy_row.get("band_structural_cap_hit")) if proxy_row else False
         raw_lock_q = proxy_row.get("lock_quality_Q") if proxy_row else None
         try:
             lock_q = float(raw_lock_q)
@@ -231,7 +250,9 @@ def main():
         except Exception:
             band_count_max = 1e9
         if band_count is not None and band_count > band_count_max:
-            reasons.append(f"too_many_bands>{band_count_max}")
+            reasons.append(f"too_many_struct_bands>{band_count_max}")
+        if structural_cap_hit:
+            reasons.append("structural_band_cap_hit")
         if lock_q is not None and lock_q < sel_cfg.get("lock_quality_Q_min", 0.0):
             reasons.append(f"low_Q_lock<{sel_cfg.get('lock_quality_Q_min')}")
         order = {"none": 0, "level1": 1, "level2": 2, "level3": 3}
@@ -367,10 +388,23 @@ def main():
     if sel_cfg.get("log_rejections", False) and selection_log_rows and args.selection_log:
         args.selection_log.parent.mkdir(parents=True, exist_ok=True)
         with args.selection_log.open("w", newline="") as f:
-            fieldnames = ["run_id", "accepted", "reasons", "band_count", "lock_quality_Q", "structure_tier", "d_total_best"]
+            fieldnames = [
+                "run_id",
+                "accepted",
+                "reasons",
+                "band_count",
+                "lock_quality_Q",
+                "structure_tier",
+                "d_total_best",
+                "selection_config_path",
+                "selection_config_hash",
+            ]
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
-            writer.writerows(selection_log_rows)
+            for row in selection_log_rows:
+                row["selection_config_path"] = sel_cfg_path_str
+                row["selection_config_hash"] = sel_cfg_hash
+                writer.writerow(row)
 
     # Save rejected candidates for visibility
     if rejected_rows:
@@ -386,10 +420,14 @@ def main():
                 "enough_levels_full",
                 "enough_levels_partial",
                 "reason",
+                "selection_config_path",
+                "selection_config_hash",
             ]
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             for row in rejected_rows:
+                row["selection_config_path"] = sel_cfg_path_str
+                row["selection_config_hash"] = sel_cfg_hash
                 writer.writerow(row)
 
     # Optional digest copy for a concise promoted-blocks snapshot

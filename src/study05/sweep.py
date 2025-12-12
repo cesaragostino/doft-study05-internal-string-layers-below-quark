@@ -44,11 +44,15 @@ def generate_configuration(
     k_scale_q: float | None = None,
     k_scale_internal: float | None = None,
     priors=None,
-) -> Optional[SimulationConfig]:
-    """Generate a configuration satisfying the complexity constraint."""
+) -> tuple[Optional[SimulationConfig], Dict[str, int]]:
+    """Generate a configuration satisfying the complexity constraint.
+
+    Returns (config, meta) where meta contains the last sampled complexity breakdown.
+    """
     rng = rng_or_default(rng)
     include_s3 = n_s3 > 0
     case_name = case
+    meta = {"last_complexity": None, "last_memory_terms": None, "last_n_modes": None}
 
     for _ in range(attempts):
         ratio_overrides = None
@@ -167,10 +171,11 @@ def generate_configuration(
             )
 
         complexity = compute_complexity(modes, inter)
-        if complexity > max_complexity:
+        memory_terms = count_memory_terms(inter)
+        meta.update({"last_complexity": complexity, "last_memory_terms": memory_terms, "last_n_modes": len(modes)})
+        if max_complexity > 0 and complexity > max_complexity:
             continue
 
-        memory_terms = count_memory_terms(inter)
         return SimulationConfig(
             case_name=case,
             f_Q=f_Q,
@@ -186,9 +191,8 @@ def generate_configuration(
             inter_layer_couplings=inter,
             complexity=complexity,
             memory_terms=memory_terms,
-        )
-    return None
-
+        ), meta
+    return None, meta
 
 def state_matrix_from_config(config: SimulationConfig):
     return build_state_matrix(

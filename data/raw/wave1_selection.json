@@ -1,20 +1,26 @@
 {
-  "wave": "ola1",
+  "band_count_field": "band_count_structural",
+  "band_count_max": 200,
+
+  "lock_quality_Q_min": 0.0,
+  "lock_quality_S1_min": 0.0,
+  "lock_quality_S2_min": 0.0,
+
+  "structure_tier_min": "none",
+
+  "allow_s2_states": ["none", "latent", "structural"],
+
+  "require_match": false,
+  "emit_unknown_when_no_match": true,
+
+  "reject_baryon_to_complex_core": false,
+
   "log_rejections": true,
-  "max_blocks_total": 5000,
-  "max_blocks_per_target": 300,
-  "filters": {
-    "structure_tier_min": "none",
-    "allow_s2_states": ["none", "latent", "structural"],
-    "band_count_max": 80,
-    "best_d_total_max": 999.0,
-    "lock_quality_Q_min": 0.0,
-    "lock_quality_S1_min": 0.0,
-    "lock_quality_S2_min": 0.0
-  },
+
   "grades": {
-    "grade_A": { "best_d_total_max": 0.3 },
-    "grade_B": { "best_d_total_max": 1.0 },
-    "grade_C": { "best_d_total_max": 3.0 }
+    "use_d_total_for_grades_only": true,
+    "grade_A_d_total_max": 0.30,
+    "grade_B_d_total_max": 1.00,
+    "grade_C_d_total_max": 3.00
   }
 }

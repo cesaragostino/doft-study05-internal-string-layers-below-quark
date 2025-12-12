@@ -309,6 +309,13 @@ def run_sweep(
     lock_thresholds = layer_state_config.get("lock_thresholds", {})
     s2_state_cfg = layer_state_config.get("s2_state", {})
 
+    n_modes_min = n_q + n_s1 + n_s2 + n_s3
+    if max_complexity > 0 and max_complexity <= n_modes_min:
+        print(
+            f"[run_sweep] WARNING: max_complexity={max_complexity} <= n_modes_total={n_modes_min}; memory terms will be forced to zero.",
+            flush=True,
+        )
+
     run_inputs: List[Dict] = []
     run_outputs: List[Dict] = []
     spacings_all: List[np.ndarray] = []
@@ -324,7 +331,7 @@ def run_sweep(
 
     for run_idx in range(runs):
         print(f"[run_sweep] run {run_idx + 1}/{runs}", flush=True)
-        config = generate_configuration(
+        config, gen_meta = generate_configuration(
             case=case,
             rng=rng,
             n_q=n_q,
@@ -343,6 +350,9 @@ def run_sweep(
                     "status": "rejected",
                     "reason": "complexity_exceeded",
                     "max_complexity": max_complexity,
+                    "complexity_last": gen_meta.get("last_complexity"),
+                    "n_modes_last": gen_meta.get("last_n_modes"),
+                    "n_memory_terms_last": gen_meta.get("last_memory_terms"),
                 }
             )
             continue
@@ -551,12 +561,21 @@ def run_sweep(
             z_arr = dbg.get("z")
             np.savez_compressed(debug_trace_path, inputs=inputs_arr, tau_eff=tau_eff_obj, z=z_arr)
 
+        mem_taus_flat = [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0]
+        mem_amps_flat = [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0]
+        memory_enabled_effective = bool(mem_taus_flat)
+        if memory_cfg and memory_cfg.get("enabled", False) and not mem_taus_flat:
+            print(
+                f"[run_sweep] WARNING: memory.enabled=True but no memory terms were instantiated (run {run_idx}); possible complexity cap or override.",
+                flush=True,
+            )
         run_outputs.append(
             {
                 "run_id": run_idx,
                 "status": "ok",
                 "n_modes": len(config.modes),
                 "n_memory_terms": config.memory_terms,
+                "max_complexity": max_complexity,
                 "complexity": config.complexity,
                 "energy_scale": scale,
                 "energies_gev": energies_gev.tolist(),
@@ -569,6 +588,7 @@ def run_sweep(
                 "band_count": int(band_energies.size),
                 "band_structural_energies_gev": structural_energies,
                 "band_count_structural": len(structural_energies),
+                "band_structural_cap_hit": "structural_band_cap_hit" in structural_flags,
                 "bands_all_json": json.dumps(bands_all),
                 "bands_structural_json": json.dumps([{"energy": e} for e in structural_energies]),
                 "band_power_capture": power_capture,
@@ -604,8 +624,9 @@ def run_sweep(
                 "R_S2_S1": config.R_S2_S1,
                 "R_S3_S2": config.R_S3_S2,
                 "g_couplings": [ic.g0 for ic in config.inter_layer_couplings],
-                "memory_taus": [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0],
-                "memory_amps": [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0],
+                "memory_taus": mem_taus_flat,
+                "memory_amps": mem_amps_flat,
+                "memory_enabled_effective": memory_enabled_effective,
                 "theta_internal": _serialize_theta(config),
                 "debug_trace_path": str(debug_trace_path) if debug_trace_path else None,
                 "adaptive_lock": sim_result.get("adaptive_lock"),
@@ -703,7 +724,10 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--seed", type=int, default=None, help="Random seed.")
     parser.add_argument(
-        "--max-complexity", type=int, default=DEFAULT_MAX_COMPLEXITY, help="Maximum complexity (C) allowed per run."
+        "--max-complexity",
+        type=int,
+        default=DEFAULT_MAX_COMPLEXITY,
+        help="Maximum complexity (C) allowed per run. If <=0, no limit is enforced.",
     )
     parser.add_argument("--n-q", type=int, default=None, help="Modes in layer Q.")
     parser.add_argument("--n-s1", type=int, default=None, help="Modes in layer S1.")
@@ -778,6 +802,11 @@ def main():
             args.band_min = float(spec_band.get("band_min", DEFAULT_BAND_MIN))
         if args.band_max is None:
             args.band_max = float(spec_band.get("band_max", DEFAULT_BAND_MAX))
+        if engine_cfg.get("max_complexity") is not None and args.max_complexity == DEFAULT_MAX_COMPLEXITY:
+            try:
+                args.max_complexity = int(engine_cfg.get("max_complexity"))
+            except Exception:
+                pass
         # integration defaults
         spec_int = engine_cfg.get("integration", {})
         dt_cfg = spec_int.get("dt")
