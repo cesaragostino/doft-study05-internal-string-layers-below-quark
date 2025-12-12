@@ -210,6 +210,7 @@ def main():
     blocks_per_particle: Dict[str, int] = {}
     rejected_rows: List[Dict] = []
     selection_log_rows: List[Dict[str, object]] = []
+    baryon_candidates: List[Dict[str, object]] = []
 
     for run_id in all_run_ids:
         match = best_by_run.get(run_id)
@@ -276,6 +277,23 @@ def main():
 
         if particle and particle.get("type") == "baryon":
             reasons.append("baryon_to_complex_core")
+            baryon_candidates.append(
+                {
+                    "run_id": run_id,
+                    "best_target": target,
+                    "best_d_total": (match or {}).get("d_total"),
+                    "structure_tier": structure_tier,
+                    "s2_state": proxy_row.get("s2_state") if proxy_row else "",
+                    "band_count_structural": band_count,
+                    "band_count": band_count,
+                    "lock_quality_Q": lock_q,
+                    "lock_quality_S1": proxy_row.get("lock_quality_S1") if proxy_row else None,
+                    "lock_quality_S2": proxy_row.get("lock_quality_S2") if proxy_row else None,
+                    "reasons": ";".join(reasons),
+                    "selection_config_path": sel_cfg_path_str,
+                    "selection_config_hash": sel_cfg_hash,
+                }
+            )
 
         # log selection decision
         if sel_cfg.get("log_rejections", False):
@@ -428,6 +446,32 @@ def main():
             for row in rejected_rows:
                 row["selection_config_path"] = sel_cfg_path_str
                 row["selection_config_hash"] = sel_cfg_hash
+                writer.writerow(row)
+
+    # Save baryon candidates (excluded from simple blocks but kept as evidence)
+    if baryon_candidates:
+        baryon_dir = out_path.parent / "blocks"
+        baryon_dir.mkdir(parents=True, exist_ok=True)
+        baryon_path = baryon_dir / "baryon_candidates.csv"
+        with baryon_path.open("w", newline="") as f:
+            fieldnames = [
+                "run_id",
+                "best_target",
+                "best_d_total",
+                "structure_tier",
+                "s2_state",
+                "band_count_structural",
+                "band_count",
+                "lock_quality_Q",
+                "lock_quality_S1",
+                "lock_quality_S2",
+                "reasons",
+                "selection_config_path",
+                "selection_config_hash",
+            ]
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            for row in baryon_candidates:
                 writer.writerow(row)
 
     # Optional digest copy for a concise promoted-blocks snapshot

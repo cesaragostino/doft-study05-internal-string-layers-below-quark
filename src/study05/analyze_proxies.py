@@ -22,6 +22,36 @@ def _resolve_output_dir(output: Path, case: str) -> Path:
     return output
 
 
+def _load_runs_from_path(path: Path) -> List[Dict]:
+    """Load runs from a JSON or JSONL file."""
+    if not path.exists():
+        return []
+    try:
+        # Try JSON first
+        data = json.loads(path.read_text())
+        if isinstance(data, dict) and "runs" in data:
+            return data.get("runs", [])
+        if isinstance(data, list):
+            return data
+    except Exception:
+        pass
+    # Fallback to JSONL (one run per line)
+    runs: List[Dict] = []
+    try:
+        with path.open() as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    runs.append(json.loads(line))
+                except Exception:
+                    continue
+    except Exception:
+        return []
+    return runs
+
+
 def load_runs(case: str, results_path: Path | None = None) -> List[Dict]:
     candidates = []
     if results_path:
@@ -33,8 +63,9 @@ def load_runs(case: str, results_path: Path | None = None) -> List[Dict]:
     candidates.append(Path("data/raw") / "study05_sweep_results.json")
     for path in candidates:
         if path.exists():
-            data = json.loads(path.read_text())
-            return data.get("runs", [])
+            runs = _load_runs_from_path(path)
+            if runs:
+                return runs
     raise FileNotFoundError(f"No sweep results found. Checked: {', '.join(str(c) for c in candidates)}")
 
 
@@ -44,6 +75,8 @@ def compute_basic_proxies(run: Dict) -> Dict:
     proxies = {
         "run_id": run.get("run_id"),
         "band_count": run.get("band_count", 0),
+        "band_count_structural": run.get("band_count_structural"),
+        "band_structural_cap_hit": run.get("band_structural_cap_hit"),
         "spacing_mean": float(np.mean(spacings)) if spacings.size else float("nan"),
         "spacing_std": float(np.std(spacings)) if spacings.size else float("nan"),
         "first_energy": energies[0] if len(energies) > 0 else float("nan"),

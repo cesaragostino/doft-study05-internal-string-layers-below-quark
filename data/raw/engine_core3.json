@@ -1,9 +1,9 @@
 {
-  "name": "Ola1_Discovery_3-2-5",
+  "name": "Ola1_Discovery_Smoke50_core3",
   "layers": [
-    { "name": "Q",  "index": 0, "n_modes": 3, "freq_range": [0.05, 1.5] },
-    { "name": "S1", "index": 1, "n_modes": 2, "freq_range": [0.20, 3.0] },
-    { "name": "S2", "index": 2, "n_modes": 5, "freq_range": [0.50, 8.0] }
+    { "name": "Q",  "index": 0, "n_modes": 3, "freq_range": [1.0, 10.0] },
+    { "name": "S1", "index": 1, "n_modes": 2, "freq_range": [0.5, 5.0] },
+    { "name": "S2", "index": 2, "n_modes": 5, "freq_range": [0.1, 2.0] }
   ],
   "integration": {
     "t_max": 400.0,
@@ -11,8 +11,10 @@
   },
   "spectrum": {
     "band_min": 0.05,
-    "band_max": 5.0,
-    "window_type": "lorentz"
+    "band_max": 12.0,
+    "window_type": "lorentz",
+    "structural_peak_cap": 60,
+    "log_peak_counts": true
   },
   "noise": {
     "type": "white",
@@ -24,11 +26,12 @@
   },
   "memory": {
     "enabled": true,
-    "modes_per_layer": { "Q": 4, "S1": 3, "S2": 4 },
+    "modes_per_layer": { "Q": 2, "S1": 2, "S2": 3 },
+
     "tau0": {
-      "Q":  [0.02, 0.05, 0.20, 1.00],
-      "S1": [0.05, 0.20, 1.00],
-      "S2": [0.10, 0.50, 2.00, 8.00]
+      "Q":  [0.02, 0.20],
+      "S1": [0.05, 0.50],
+      "S2": [0.10, 2.00, 8.00]
     },
     "beta_tau": {
       "Q":  [0.05, 0.15],
@@ -41,9 +44,9 @@
       "S2": [1.0, 3.0]
     },
     "a": {
-      "Q":  [0.90, 0.70, 0.50, 0.35],
-      "S1": [0.90, 0.70, 0.50],
-      "S2": [0.90, 0.70, 0.50, 0.35]
+      "Q":  [0.90, 0.50],
+      "S1": [0.90, 0.50],
+      "S2": [0.90, 0.50, 0.35]
     },
     "g_xi": {
       "Q":  [0.10, 0.35],
@@ -60,41 +63,47 @@
     },
     "clamp_tanh_arg": 5.0,
     "max_abs_z": 1000000.0,
-    "energy_blowup_factor": 1e8
+    "energy_blowup_factor": 100000000.0
   },
   "adaptive_lock": {
     "enabled": true,
     "window_cycles": 30,
     "ref_frequency_layer": "Q",
 
-    "epsilon_K": 1e-3,
-    "lambda_K": 1e-3,
+    "epsilon_K": 0.001,
+    "lambda_K": 0.001,
     "L0": 0.15,
 
     "K_min": 0.0,
     "K_max": 20.0,
 
-    "epsilon_omega": 1e-4,
+    "epsilon_omega": 0.0001,
     "omega_min": 0.05,
     "omega_max": 10.0,
 
     "lock_pairs": [
-      { "name": "Q0_S1_0_1-1", "layer_i": "Q",  "mode_i": 0, "layer_j": "S1", "mode_j": 0, "p": 1, "q": 1, "weight": 1.0 },
-      { "name": "Q1_S1_1_1-1", "layer_i": "Q",  "mode_i": 1, "layer_j": "S1", "mode_j": 1, "p": 1, "q": 1, "weight": 1.0 },
-      { "name": "Q2_S1_0_1-1", "layer_i": "Q",  "mode_i": 2, "layer_j": "S1", "mode_j": 0, "p": 1, "q": 1, "weight": 0.6 },
-      { "name": "Q2_S1_1_1-1", "layer_i": "Q",  "mode_i": 2, "layer_j": "S1", "mode_j": 1, "p": 1, "q": 1, "weight": 0.6 },
+      { "name": "Q0_S1_0_1-1", "layer_i": "Q",  "mode_i": 0, "layer_j": "S1", "mode_j": 0, "p": 1, "q": 1, "weight": 0.70 },
+      { "name": "Q1_S1_1_1-1", "layer_i": "Q",  "mode_i": 1, "layer_j": "S1", "mode_j": 1, "p": 1, "q": 1, "weight": 0.70 },
+      { "name": "Q2_S1_0_1-1", "layer_i": "Q",  "mode_i": 2, "layer_j": "S1", "mode_j": 0, "p": 1, "q": 1, "weight": 0.45 },
+      { "name": "Q2_S1_1_1-1", "layer_i": "Q",  "mode_i": 2, "layer_j": "S1", "mode_j": 1, "p": 1, "q": 1, "weight": 0.45 },
 
-      { "name": "S1_0_S2_0_1-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 1, "q": 1, "weight": 1.0 },
-      { "name": "S1_1_S2_1_1-1", "layer_i": "S1", "mode_i": 1, "layer_j": "S2", "mode_j": 1, "p": 1, "q": 1, "weight": 1.0 },
-      { "name": "S1_0_S2_2_1-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 2, "p": 1, "q": 1, "weight": 0.5 },
-      { "name": "S1_1_S2_3_1-1", "layer_i": "S1", "mode_i": 1, "layer_j": "S2", "mode_j": 3, "p": 1, "q": 1, "weight": 0.5 },
+      { "name": "S1_0_S2_0_1-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 1, "q": 1, "weight": 0.65 },
+      { "name": "S1_1_S2_1_1-1", "layer_i": "S1", "mode_i": 1, "layer_j": "S2", "mode_j": 1, "p": 1, "q": 1, "weight": 0.65 },
+      { "name": "S1_0_S2_2_1-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 2, "p": 1, "q": 1, "weight": 0.40 },
+      { "name": "S1_1_S2_3_1-1", "layer_i": "S1", "mode_i": 1, "layer_j": "S2", "mode_j": 3, "p": 1, "q": 1, "weight": 0.40 },
 
-      { "name": "Q0_S2_0_1-1", "layer_i": "Q",  "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 1, "q": 1, "weight": 0.4 },
-      { "name": "Q1_S2_1_1-1", "layer_i": "Q",  "mode_i": 1, "layer_j": "S2", "mode_j": 1, "p": 1, "q": 1, "weight": 0.4 },
-      { "name": "Q2_S2_2_1-1", "layer_i": "Q",  "mode_i": 2, "layer_j": "S2", "mode_j": 2, "p": 1, "q": 1, "weight": 0.6 },
+      { "name": "Q0_S2_0_1-1", "layer_i": "Q",  "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 1, "q": 1, "weight": 0.35 },
+      { "name": "Q1_S2_1_1-1", "layer_i": "Q",  "mode_i": 1, "layer_j": "S2", "mode_j": 1, "p": 1, "q": 1, "weight": 0.35 },
+      { "name": "Q2_S2_2_1-1", "layer_i": "Q",  "mode_i": 2, "layer_j": "S2", "mode_j": 2, "p": 1, "q": 1, "weight": 0.45 },
 
       { "name": "Q0_S1_0_3-2", "layer_i": "Q",  "mode_i": 0, "layer_j": "S1", "mode_j": 0, "p": 3, "q": 2, "weight": 0.35 },
-      { "name": "S1_0_S2_0_2-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 2, "q": 1, "weight": 0.35 }
+      { "name": "Q1_S1_1_3-2", "layer_i": "Q",  "mode_i": 1, "layer_j": "S1", "mode_j": 1, "p": 3, "q": 2, "weight": 0.35 },
+
+      { "name": "S1_0_S2_0_2-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 2, "q": 1, "weight": 0.35 },
+      { "name": "S1_1_S2_1_2-1", "layer_i": "S1", "mode_i": 1, "layer_j": "S2", "mode_j": 1, "p": 2, "q": 1, "weight": 0.35 },
+
+      { "name": "Q0_S2_0_5-3", "layer_i": "Q",  "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 5, "q": 3, "weight": 0.25 },
+      { "name": "Q1_S2_1_5-3", "layer_i": "Q",  "mode_i": 1, "layer_j": "S2", "mode_j": 1, "p": 5, "q": 3, "weight": 0.25 }
     ]
   }
 }

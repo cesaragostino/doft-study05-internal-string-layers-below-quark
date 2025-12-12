@@ -45,6 +45,7 @@ def main():
         levels_full = extract_levels(row.get("band_energies_gev", "[]"))
         run_id = row.get("run_id", row.get("id", len(match_rows)))
         best = {"run_id": run_id, "best_target": None, "best_family": None, "best_d_total": float("inf")}
+        second: Dict[str, object] = {"target": None, "family": None, "d_total": float("inf")}
         for particle in catalog:
             levels = [e for e in levels_full if _in_window(e, particle.get("energy_window", [0.0, 10.0]))]
             res = compute_match_stats(levels, particle.get("masses_gev", []), particle.get("tolerances", {}))
@@ -62,14 +63,31 @@ def main():
                     "n_levels_sim": res["n_levels_sim"],
                 }
             )
-            if np.isfinite(res["d_total"]) and res["d_total"] < best["best_d_total"]:
-                best.update(
-                    {
-                        "best_target": particle["name"],
-                        "best_family": particle.get("family"),
-                        "best_d_total": res["d_total"],
+            if np.isfinite(res["d_total"]):
+                if res["d_total"] < best["best_d_total"]:
+                    # shift best to second
+                    second = {
+                        "target": best.get("best_target"),
+                        "family": best.get("best_family"),
+                        "d_total": best.get("best_d_total"),
                     }
-                )
+                    best.update(
+                        {
+                            "best_target": particle["name"],
+                            "best_family": particle.get("family"),
+                            "best_d_total": res["d_total"],
+                        }
+                    )
+                elif res["d_total"] < second.get("d_total", float("inf")):
+                    second = {"target": particle["name"], "family": particle.get("family"), "d_total": res["d_total"]}
+        # margin
+        delta_margin = None
+        if np.isfinite(best.get("best_d_total", np.inf)) and np.isfinite(second.get("d_total", np.inf)):
+            delta_margin = second.get("d_total") - best.get("best_d_total")
+        best["second_best_target"] = second.get("target")
+        best["second_best_family"] = second.get("family")
+        best["second_best_d_total"] = second.get("d_total")
+        best["delta_margin"] = delta_margin
         best_rows.append(best)
 
     out_dir = args.output

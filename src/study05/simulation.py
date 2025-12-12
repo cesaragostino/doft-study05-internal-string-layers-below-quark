@@ -115,6 +115,7 @@ class SimulationParams:
     eps_amp: float = 0.1
     peak_threshold: float = 0.05
     max_peaks: int = 30
+    structural_peak_cap: int = 12
     max_x: float = 1e3
     max_v: float = 1e3
     max_energy: float = 1e6
@@ -774,12 +775,14 @@ def simulate(
     if adapt_pairs:
         pairs_out = []
         for pair in adapt_pairs:
-            omega_i = modes[pair.i_idx].omega0
-            omega_j = modes[pair.j_idx].omega0
+            omega_i_raw = modes[pair.i_idx].omega0
+            omega_j_raw = modes[pair.j_idx].omega0
+            omega_i = float(np.clip(omega_i_raw, adaptive_conf.omega_min, adaptive_conf.omega_max))
+            omega_j = float(np.clip(omega_j_raw, adaptive_conf.omega_min, adaptive_conf.omega_max))
             ratio = omega_i / omega_j if omega_j != 0 else float("inf")
             target_ratio = pair.p / pair.q if pair.q != 0 else float("inf")
-            hit_min = omega_i <= adaptive_conf.omega_min or omega_j <= adaptive_conf.omega_min
-            hit_max = omega_i >= adaptive_conf.omega_max or omega_j >= adaptive_conf.omega_max
+            hit_min = (omega_i <= adaptive_conf.omega_min + 1e-12) or (omega_j <= adaptive_conf.omega_min + 1e-12)
+            hit_max = (omega_i >= adaptive_conf.omega_max - 1e-12) or (omega_j >= adaptive_conf.omega_max - 1e-12)
             locked = bool(
                 (pair.L_last > adaptive_conf.lock_threshold_L)
                 and (abs(ratio - target_ratio) < adaptive_conf.lock_ratio_tol)
@@ -791,6 +794,8 @@ def simulate(
                     "L_sin": pair.L_sin_last,
                     "phi_mean": pair.phi_last,
                     "K_final": pair.k_adapt,
+                    "omega_i_raw_final": omega_i_raw,
+                    "omega_j_raw_final": omega_j_raw,
                     "omega_i_final": omega_i,
                     "omega_j_final": omega_j,
                     "ratio_eff": ratio,

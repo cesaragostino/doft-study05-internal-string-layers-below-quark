@@ -278,6 +278,7 @@ def run_sweep(
     debug_traces: int = 0,
     memory_cfg: Optional[Dict] = None,
     adaptive_cfg: Optional[Dict] = None,
+    partial_flush_every: int = 0,
 ):
     rng = np.random.default_rng(seed)
     flatten = output_root is not None
@@ -305,6 +306,14 @@ def run_sweep(
         debug_indices = set(dbg_rng.choice(runs, size=n_debug, replace=False).tolist())
     sim_params = SimulationParams(**sim_params_cfg) if sim_params_cfg else SimulationParams()
 
+    partial_dir = processed_case_dir / "partial"
+    partial_runs_path = None
+    if partial_flush_every and partial_flush_every > 0:
+        partial_dir.mkdir(parents=True, exist_ok=True)
+        partial_runs_path = partial_dir / "runs_partial.jsonl"
+        if partial_runs_path.exists():
+            partial_runs_path.unlink()  # start fresh for this sweep
+
     layer_state_config = layer_state_config or {}
     lock_thresholds = layer_state_config.get("lock_thresholds", {})
     s2_state_cfg = layer_state_config.get("s2_state", {})
@@ -329,8 +338,21 @@ def run_sweep(
     family_off_with_s2 = 0
     example_run = None
 
+    saved_since_print = 0
+
+    def _append_partial(record: Dict):
+        nonlocal saved_since_print
+        if partial_runs_path and partial_flush_every > 0:
+            with partial_runs_path.open("a") as pf:
+                pf.write(json.dumps(record) + "\n")
+            saved_since_print += 1
+
     for run_idx in range(runs):
-        print(f"[run_sweep] run {run_idx + 1}/{runs}", flush=True)
+        if saved_since_print:
+            print(f"[run_sweep] run {run_idx + 1}/{runs} (partial_saved={saved_since_print})", flush=True)
+            saved_since_print = 0
+        else:
+            print(f"[run_sweep] run {run_idx + 1}/{runs}", flush=True)
         config, gen_meta = generate_configuration(
             case=case,
             rng=rng,
@@ -353,8 +375,10 @@ def run_sweep(
                     "complexity_last": gen_meta.get("last_complexity"),
                     "n_modes_last": gen_meta.get("last_n_modes"),
                     "n_memory_terms_last": gen_meta.get("last_memory_terms"),
+                    "complexity_estimated": gen_meta.get("last_complexity"),
                 }
             )
+            _append_partial(run_outputs[-1])
             continue
 
         run_inputs.append(_serialize_run_config(config))
@@ -393,15 +417,18 @@ def run_sweep(
                     "dt_used": None,
                 }
             )
+            _append_partial(run_outputs[-1])
             continue
         spectrum = sim_result["spectrum"]
         omega_peaks, weights_peaks, peak_powers = pick_peaks(
             spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
         )
+        peaks_raw_count = len(omega_peaks)
         energies_gev, scale = _rescale_energies(omega_peaks, target=TARGET_ENERGY_GEV)
 
         band_mask = (energies_gev >= band_min) & (energies_gev <= band_max)
         band_energies = energies_gev[band_mask]
+        peaks_kept_count = int(band_energies.size)
         band_counts.append(int(band_energies.size))
 
         band_weights = [w for keep, w in zip(band_mask, weights_peaks) if keep]
@@ -416,12 +443,12 @@ def run_sweep(
                 continue
             layer_max = max(w.items(), key=lambda kv: kv[1])
             band_dominant_layers.append({"layer": layer_max[0], "weight": layer_max[1]})
-        has_s2_dominant = any(item and item["layer"] == "S2" and item["weight"] >= 0.7 for item in band_dominant_layers)
         s2_band_fraction = (
             sum(1 for item in band_dominant_layers if item and item["layer"] == "S2") / band_energies.size
             if band_energies.size > 0
             else 0.0
         )
+        has_s2_dominant = s2_band_fraction > 0.0
         s3_band_fraction = (
             sum(1 for item in band_dominant_layers if item and item["layer"] == "S3") / band_energies.size
             if band_energies.size > 0
@@ -449,8 +476,11 @@ def run_sweep(
                 cl.sort(key=lambda x: x[1], reverse=True)
                 structural_candidates.append(cl[0])
             structural_candidates.sort(key=lambda x: x[1], reverse=True)
-            structural_energies = [e for e, _ in structural_candidates[: min(len(structural_candidates), 12)]]
-            power_capture = sum(p for _, p in structural_candidates[: min(len(structural_candidates), 12)]) / max(
+            cap = sim_params.structural_peak_cap
+            if len(structural_candidates) > cap:
+                structural_flags.append("structural_band_cap_hit")
+            structural_energies = [e for e, _ in structural_candidates[: min(len(structural_candidates), cap)]]
+            power_capture = sum(p for _, p in structural_candidates[: min(len(structural_candidates), cap)]) / max(
                 sum(band_powers), 1e-12
             )
             if power_capture < 0.5:
@@ -564,74 +594,107 @@ def run_sweep(
         mem_taus_flat = [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0]
         mem_amps_flat = [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0]
         memory_enabled_effective = bool(mem_taus_flat)
-        if memory_cfg and memory_cfg.get("enabled", False) and not mem_taus_flat:
-            print(
-                f"[run_sweep] WARNING: memory.enabled=True but no memory terms were instantiated (run {run_idx}); possible complexity cap or override.",
-                flush=True,
-            )
-        run_outputs.append(
-            {
-                "run_id": run_idx,
-                "status": "ok",
-                "n_modes": len(config.modes),
-                "n_memory_terms": config.memory_terms,
-                "max_complexity": max_complexity,
-                "complexity": config.complexity,
-                "energy_scale": scale,
-                "energies_gev": energies_gev.tolist(),
-                "band_energies_gev": band_energies.tolist(),
-                "band_spacing_gev": spacings.tolist(),
-                "spacing_mean": float(np.mean(spacings)) if spacings.size else float("nan"),
-                "spacing_std": float(np.std(spacings)) if spacings.size else float("nan"),
-                "spacing_min": float(np.min(spacings)) if spacings.size else float("nan"),
-                "spacing_max": float(np.max(spacings)) if spacings.size else float("nan"),
-                "band_count": int(band_energies.size),
-                "band_structural_energies_gev": structural_energies,
-                "band_count_structural": len(structural_energies),
-                "band_structural_cap_hit": "structural_band_cap_hit" in structural_flags,
-                "bands_all_json": json.dumps(bands_all),
-                "bands_structural_json": json.dumps([{"energy": e} for e in structural_energies]),
-                "band_power_capture": power_capture,
-                "band_flags": structural_flags,
-                "accepted_for_spacing": accepted_band,
-                "family_match": family_match,
-                "family_distance": family_distance.__dict__ if family_distance else None,
-                "band_weights": band_weights,
-                "band_dominant_layers": band_dominant_layers,
-                "has_s2_dominant": has_s2_dominant,
-                "s2_band_fraction": s2_band_fraction,
-                "s3_band_fraction": s3_band_fraction,
-                "has_s3_dominant": has_s3_dominant,
-                "s2_state": s2_state_label,
-                "s3_state": s3_state,
-                "s2_total_fraction": layer_summaries.get("S2", {}).get("total_fraction"),
-                "s3_total_fraction": layer_summaries.get("S3", {}).get("total_fraction"),
-                "s2_band_compactness": layer_summaries.get("S2", {}).get("band_compactness"),
-                "s3_band_compactness": layer_summaries.get("S3", {}).get("band_compactness"),
-                "s2_outband_fraction": layer_summaries.get("S2", {}).get("outband_fraction"),
-                "s3_outband_fraction": layer_summaries.get("S3", {}).get("outband_fraction"),
-                "s2_highfreq_fraction": layer_summaries.get("S2", {}).get("highfreq_fraction"),
-                "s3_highfreq_fraction": layer_summaries.get("S3", {}).get("highfreq_fraction"),
-                "lock_quality_Q": lock_quality_Q,
-                "lock_quality_S1": lock_quality_S1,
-                "lock_quality_S2": lock_quality_S2,
-                "structure_tier": structure_tier,
-                "layers_order": [l.name for l in layer_order],
-                "b_trace": sim_result["b_series"].tolist(),
-                "t_trace": sim_result["times"].tolist(),
-                "dt_used": sim_result.get("dt_used"),
-                "R_S1_Q": config.R_S1_Q,
-                "R_S2_S1": config.R_S2_S1,
-                "R_S3_S2": config.R_S3_S2,
-                "g_couplings": [ic.g0 for ic in config.inter_layer_couplings],
-                "memory_taus": mem_taus_flat,
-                "memory_amps": mem_amps_flat,
-                "memory_enabled_effective": memory_enabled_effective,
-                "theta_internal": _serialize_theta(config),
-                "debug_trace_path": str(debug_trace_path) if debug_trace_path else None,
-                "adaptive_lock": sim_result.get("adaptive_lock"),
-            }
+        expected_mem_terms = 0
+        if memory_cfg and memory_cfg.get("modes_per_layer"):
+            try:
+                expected_mem_terms = sum(int(v) for v in memory_cfg.get("modes_per_layer", {}).values())
+            except Exception:
+                expected_mem_terms = 0
+        mem_issue = (
+            memory_cfg
+            and memory_cfg.get("enabled", False)
+            and expected_mem_terms > 0
+            and not mem_taus_flat
         )
+        if mem_issue:
+            msg = (
+                f"[run_sweep] ERROR: memory.enabled=True and modes_per_layer>0 but no memory terms were instantiated (run {run_idx}); "
+                "possible complexity cap or generation bug. Marking run as rejected."
+            )
+            print(msg, flush=True)
+            rejected += 1
+            run_outputs.append(
+                {
+                    "run_id": run_idx,
+                    "status": "rejected",
+                    "reason": "memory_not_applied",
+                    "max_complexity": max_complexity,
+                    "complexity": config.complexity,
+                    "n_modes": len(config.modes),
+                    "expected_memory_terms": expected_mem_terms,
+                    "n_memory_terms": config.memory_terms,
+                    "memory_taus": mem_taus_flat,
+                    "memory_amps": mem_amps_flat,
+                    "memory_enabled_effective": False,
+                }
+            )
+            _append_partial(run_outputs[-1])
+            continue
+        run_record = {
+            "run_id": run_idx,
+            "status": "ok",
+            "n_modes": len(config.modes),
+            "n_memory_terms": config.memory_terms,
+            "memory_enabled_effective": memory_enabled_effective,
+            "max_complexity": max_complexity,
+            "complexity": config.complexity,
+            "energy_scale": scale,
+            "peaks_raw_count": peaks_raw_count,
+            "peaks_kept_count": peaks_kept_count,
+            "energies_gev": energies_gev.tolist(),
+            "band_energies_gev": band_energies.tolist(),
+            "band_spacing_gev": spacings.tolist(),
+            "spacing_mean": float(np.mean(spacings)) if spacings.size else float("nan"),
+            "spacing_std": float(np.std(spacings)) if spacings.size else float("nan"),
+            "spacing_min": float(np.min(spacings)) if spacings.size else float("nan"),
+            "spacing_max": float(np.max(spacings)) if spacings.size else float("nan"),
+            "band_count": int(band_energies.size),
+            "band_structural_energies_gev": structural_energies,
+            "band_count_structural": len(structural_energies),
+            "band_structural_cap_hit": "structural_band_cap_hit" in structural_flags,
+            "bands_all_json": json.dumps(bands_all),
+            "bands_structural_json": json.dumps([{"energy": e} for e in structural_energies]),
+            "band_power_capture": power_capture,
+            "band_flags": structural_flags,
+            "accepted_for_spacing": accepted_band,
+            "family_match": family_match,
+            "family_distance": family_distance.__dict__ if family_distance else None,
+            "band_weights": band_weights,
+            "band_dominant_layers": band_dominant_layers,
+            "has_s2_dominant": has_s2_dominant,
+            "s2_band_fraction": s2_band_fraction,
+            "s3_band_fraction": s3_band_fraction,
+            "has_s3_dominant": has_s3_dominant,
+            "s2_state": s2_state_label,
+            "s3_state": s3_state,
+            "s2_total_fraction": layer_summaries.get("S2", {}).get("total_fraction"),
+            "s3_total_fraction": layer_summaries.get("S3", {}).get("total_fraction"),
+            "s2_band_compactness": layer_summaries.get("S2", {}).get("band_compactness"),
+            "s3_band_compactness": layer_summaries.get("S3", {}).get("band_compactness"),
+            "s2_outband_fraction": layer_summaries.get("S2", {}).get("outband_fraction"),
+            "s3_outband_fraction": layer_summaries.get("S3", {}).get("outband_fraction"),
+            "s2_highfreq_fraction": layer_summaries.get("S2", {}).get("highfreq_fraction"),
+            "s3_highfreq_fraction": layer_summaries.get("S3", {}).get("highfreq_fraction"),
+            "lock_quality_Q": lock_quality_Q,
+            "lock_quality_S1": lock_quality_S1,
+            "lock_quality_S2": lock_quality_S2,
+            "structure_tier": structure_tier,
+            "layers_order": [l.name for l in layer_order],
+            "b_trace": sim_result["b_series"].tolist(),
+            "t_trace": sim_result["times"].tolist(),
+            "dt_used": sim_result.get("dt_used"),
+            "R_S1_Q": config.R_S1_Q,
+            "R_S2_S1": config.R_S2_S1,
+            "R_S3_S2": config.R_S3_S2,
+            "g_couplings": [ic.g0 for ic in config.inter_layer_couplings],
+            "memory_taus": mem_taus_flat,
+            "memory_amps": mem_amps_flat,
+            "theta_internal": _serialize_theta(config),
+            "debug_trace_path": str(debug_trace_path) if debug_trace_path else None,
+            "adaptive_lock": sim_result.get("adaptive_lock"),
+        }
+        run_outputs.append(run_record)
+        _append_partial(run_record)
 
     all_spacings = np.concatenate(spacings_all) if spacings_all else np.array([])
     spacing_stats = analysis.summarise_spacings(all_spacings)
@@ -778,6 +841,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--family-name", type=str, default=None, help="Predefined family name.")
     parser.add_argument("--family-config", type=Path, default=None, help="Path to family JSON config.")
+    parser.add_argument(
+        "--partial-flush-every",
+        type=int,
+        default=0,
+        help="If >0, append each run record to partial/runs_partial.jsonl (every run if set).",
+    )
     return parser
 
 
@@ -817,6 +886,14 @@ def main():
             sim_params_cfg = {"dt": float(dt_cfg), "total_steps": total_steps}
         else:
             sim_params_cfg = None
+        # optional spectrum overrides (e.g., structural peak cap)
+        if spec_band.get("structural_peak_cap") is not None:
+            if sim_params_cfg is None:
+                sim_params_cfg = {}
+            try:
+                sim_params_cfg["structural_peak_cap"] = int(spec_band.get("structural_peak_cap"))
+            except Exception:
+                pass
         memory_cfg = engine_cfg.get("memory")
         adaptive_cfg = engine_cfg.get("adaptive_lock")
     else:
@@ -901,6 +978,7 @@ def main():
         debug_traces=args.debug_traces,
         memory_cfg=memory_cfg,
         adaptive_cfg=adaptive_cfg,
+        partial_flush_every=args.partial_flush_every,
     )
     print(
         json.dumps(
