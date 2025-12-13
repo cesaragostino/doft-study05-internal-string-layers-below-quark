@@ -67,7 +67,7 @@
   },
   "adaptive_lock": {
     "enabled": true,
-    "window_cycles": 30,
+    "window_cycles": 120,
     "ref_frequency_layer": "Q",
 
     "epsilon_K": 0.001,
@@ -76,19 +76,20 @@
 
     "K_min": 0.0,
     "K_max": 20.0,
+    "K_gate": 0.01,
 
-    "epsilon_omega": 0.0001,
+    "epsilon_omega": 0.000001,
     "omega_min": 0.05,
     "omega_max": 10.0,
 
     "lock_pairs": [
-      { "name": "Q0_S1_0_1-1", "layer_i": "Q",  "mode_i": 0, "layer_j": "S1", "mode_j": 0, "p": 1, "q": 1, "weight": 0.70 },
-      { "name": "Q1_S1_1_1-1", "layer_i": "Q",  "mode_i": 1, "layer_j": "S1", "mode_j": 1, "p": 1, "q": 1, "weight": 0.70 },
+      { "name": "Q0_S1_0_1-1", "layer_i": "Q",  "mode_i": 0, "layer_j": "S1", "mode_j": 0, "p": 1, "q": 1, "weight": 0.50 },
+      { "name": "Q1_S1_1_1-1", "layer_i": "Q",  "mode_i": 1, "layer_j": "S1", "mode_j": 1, "p": 1, "q": 1, "weight": 0.50 },
       { "name": "Q2_S1_0_1-1", "layer_i": "Q",  "mode_i": 2, "layer_j": "S1", "mode_j": 0, "p": 1, "q": 1, "weight": 0.45 },
       { "name": "Q2_S1_1_1-1", "layer_i": "Q",  "mode_i": 2, "layer_j": "S1", "mode_j": 1, "p": 1, "q": 1, "weight": 0.45 },
 
-      { "name": "S1_0_S2_0_1-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 1, "q": 1, "weight": 0.65 },
-      { "name": "S1_1_S2_1_1-1", "layer_i": "S1", "mode_i": 1, "layer_j": "S2", "mode_j": 1, "p": 1, "q": 1, "weight": 0.65 },
+      { "name": "S1_0_S2_0_1-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 0, "p": 1, "q": 1, "weight": 0.55 },
+      { "name": "S1_1_S2_1_1-1", "layer_i": "S1", "mode_i": 1, "layer_j": "S2", "mode_j": 1, "p": 1, "q": 1, "weight": 0.55 },
       { "name": "S1_0_S2_2_1-1", "layer_i": "S1", "mode_i": 0, "layer_j": "S2", "mode_j": 2, "p": 1, "q": 1, "weight": 0.40 },
       { "name": "S1_1_S2_3_1-1", "layer_i": "S1", "mode_i": 1, "layer_j": "S2", "mode_j": 3, "p": 1, "q": 1, "weight": 0.40 },
 

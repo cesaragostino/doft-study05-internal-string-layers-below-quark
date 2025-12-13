@@ -1,0 +1,761 @@
+[
+  {
+    "block_id": "delta_1232_block_0001",
+    "origin_run_id": 6.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9998372249018193,
+      "S1": 4.462169444301261e-05,
+      "S2": 0.00011815340373765707
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 8.169519366622385,
+      "d_spacing": 2.855835209232914,
+      "d_mass": 5.3136841573894715,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": false,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 8.92301495994699,
+      "R_S2_S1": 7.914217256180699,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0002",
+    "origin_run_id": 11.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9999097821423424,
+      "S1": 2.5283517080461875e-05,
+      "S2": 6.493434057713939e-05
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 8.397312166372295,
+      "d_spacing": 3.0118576747722967,
+      "d_mass": 5.385454491599999,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": false,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 8.584158899712945,
+      "R_S2_S1": 6.30934978142105,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0003",
+    "origin_run_id": 67.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9996091001280143,
+      "S1": 0.00018385238032020683,
+      "S2": 0.0002070474916654686
+    },
+    "s2_state": "none",
+    "band_count": 4.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 6.476170791648144,
+      "d_spacing": 3.0179252121955127,
+      "d_mass": 3.4582455794526314,
+      "n_levels_sim": 4.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 2.353630338618771,
+      "R_S2_S1": 7.129644387081274,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0004",
+    "origin_run_id": 27.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9996595606396191,
+      "S1": 6.126147064288271e-05,
+      "S2": 0.0002791778897380072
+    },
+    "s2_state": "none",
+    "band_count": 3.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 3.2169357840363073,
+      "d_spacing": 1.437888182779165,
+      "d_mass": 1.7790476012571423,
+      "n_levels_sim": 3.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 8.063143341842691,
+      "R_S2_S1": 9.516072308733452,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0005",
+    "origin_run_id": 3.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9988760207448288,
+      "S1": 0.0006128436853306951,
+      "S2": 0.0005111355698402498
+    },
+    "s2_state": "none",
+    "band_count": 1.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 7.6799999232000005,
+      "d_spacing": NaN,
+      "d_mass": 7.6799999232000005,
+      "n_levels_sim": 1.0,
+      "has_enough_levels_full": false,
+      "has_enough_levels_partial": false
+    },
+    "theta_internal": {
+      "R_S1_Q": 5.844824143506975,
+      "R_S2_S1": 4.623707626972141,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0001",
+    "origin_run_id": 51.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9989860909390633,
+      "S1": 0.0007226402857959074,
+      "S2": 0.00029126877514077716
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 4.286666623800001,
+      "d_spacing": NaN,
+      "d_mass": 4.286666623800001,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 4.834187169833682,
+      "R_S2_S1": 3.3033691515642323,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0006",
+    "origin_run_id": 61.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9994738810656352,
+      "S1": 8.680356206346074e-05,
+      "S2": 0.0004393153723015927
+    },
+    "s2_state": "none",
+    "band_count": 1.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 7.6799999232000005,
+      "d_spacing": NaN,
+      "d_mass": 7.6799999232000005,
+      "n_levels_sim": 1.0,
+      "has_enough_levels_full": false,
+      "has_enough_levels_partial": false
+    },
+    "theta_internal": {
+      "R_S1_Q": 9.934122083509871,
+      "R_S2_S1": 6.5454546833896305,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0007",
+    "origin_run_id": 58.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9991202131439207,
+      "S1": 0.00020202091354471564,
+      "S2": 0.0006777659425346112
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 4.925867011916312,
+      "d_spacing": 2.6049474948956215,
+      "d_mass": 2.3209195170206907,
+      "n_levels_sim": 5.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 5.607644352373562,
+      "R_S2_S1": 2.340594568120636,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0008",
+    "origin_run_id": 44.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9981917465621559,
+      "S1": 0.000356111291964796,
+      "S2": 0.0014521421458792215
+    },
+    "s2_state": "latent",
+    "band_count": 4.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 7.047959790045643,
+      "d_spacing": 3.4007803393379517,
+      "d_mass": 3.647179450707691,
+      "n_levels_sim": 4.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 2.616043124466897,
+      "R_S2_S1": 8.996489356810772,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0002",
+    "origin_run_id": 17.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9997169901867324,
+      "S1": 0.00012039691178443385,
+      "S2": 0.00016261290148326634
+    },
+    "s2_state": "none",
+    "band_count": 3.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 3.496923041953849,
+      "d_spacing": NaN,
+      "d_mass": 3.496923041953849,
+      "n_levels_sim": 3.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 6.973104746637657,
+      "R_S2_S1": 6.8808370021257526,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0009",
+    "origin_run_id": 15.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9991297460463961,
+      "S1": 8.080362589664112e-05,
+      "S2": 0.0007894503277072045
+    },
+    "s2_state": "none",
+    "band_count": 4.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 6.25669377284094,
+      "d_spacing": 2.9300271394409405,
+      "d_mass": 3.3266666334,
+      "n_levels_sim": 4.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 4.7540222070309595,
+      "R_S2_S1": 6.453915469024809,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "delta_1232_block_0010",
+    "origin_run_id": 41.0,
+    "particle_name": "delta_1232",
+    "family": "delta_like",
+    "type": "baryon",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9996038722406008,
+      "S1": 0.00027884906949577357,
+      "S2": 0.00011727868990339968
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 9.118656032247024,
+      "d_spacing": 3.505928815647022,
+      "d_mass": 5.6127272166000015,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": false,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 3.938644409020732,
+      "R_S2_S1": 6.332619984906388,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "quark_ud_const_block_0001",
+    "origin_run_id": 59.0,
+    "particle_name": "quark_ud_const",
+    "family": "quark_like",
+    "type": "constituent",
+    "grade": "B",
+    "structure_tier": "level2",
+    "lock_quality": {
+      "Q": 0.6656387664077265,
+      "S1": 0.33328004722034904,
+      "S2": 0.0010811863719245127
+    },
+    "s2_state": "latent",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.503278683491803,
+      "d_spacing": NaN,
+      "d_mass": 0.503278683491803,
+      "n_levels_sim": 3.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 9.078780072136007,
+      "R_S2_S1": 3.1031404159676588,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0003",
+    "origin_run_id": 14.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9977013370004348,
+      "S1": 0.00012815969069235924,
+      "S2": 0.002170503308872687
+    },
+    "s2_state": "latent",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 3.3777464450957777,
+      "d_spacing": NaN,
+      "d_mass": 3.3777464450957777,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 7.099154947322618,
+      "R_S2_S1": 2.40217084348845,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0004",
+    "origin_run_id": 5.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9994497584521357,
+      "S1": 0.00013074138822668767,
+      "S2": 0.00041950015963764306
+    },
+    "s2_state": "none",
+    "band_count": 4.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 2.7729411487411753,
+      "d_spacing": NaN,
+      "d_mass": 2.7729411487411753,
+      "n_levels_sim": 4.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 7.641855232019592,
+      "R_S2_S1": 5.099833348071699,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0005",
+    "origin_run_id": 32.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9997607322959411,
+      "S1": 0.00013556923043683142,
+      "S2": 0.00010369847362204121
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 1.4199999858000014,
+      "d_spacing": NaN,
+      "d_mass": 1.4199999858000014,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 8.929572644061194,
+      "R_S2_S1": 9.378748898211503,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0006",
+    "origin_run_id": 33.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9994219623662489,
+      "S1": 0.00048171670006002593,
+      "S2": 9.632093369106816e-05
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 2.8143661690394364,
+      "d_spacing": NaN,
+      "d_mass": 2.8143661690394364,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 6.878348486510452,
+      "R_S2_S1": 3.028964775820166,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0007",
+    "origin_run_id": 24.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "B",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9995734998884779,
+      "S1": 0.00011589074487802031,
+      "S2": 0.0003106093666440486
+    },
+    "s2_state": "none",
+    "band_count": 3.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.4199999957999993,
+      "d_spacing": NaN,
+      "d_mass": 0.4199999957999993,
+      "n_levels_sim": 3.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 9.664542089124794,
+      "R_S2_S1": 6.682866812868381,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0008",
+    "origin_run_id": 55.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9987329111311146,
+      "S1": 0.0006697173628528967,
+      "S2": 0.0005973715060325381
+    },
+    "s2_state": "none",
+    "band_count": 5.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 4.308888845799998,
+      "d_spacing": NaN,
+      "d_mass": 4.308888845799998,
+      "n_levels_sim": 5.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 4.659773337721359,
+      "R_S2_S1": 7.225272041993642,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0009",
+    "origin_run_id": 65.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "C",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.999536190770336,
+      "S1": 0.00016171970365351385,
+      "S2": 0.0003020895260104828
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 1.7533333158000024,
+      "d_spacing": NaN,
+      "d_mass": 1.7533333158000024,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 7.023781902616597,
+      "R_S2_S1": 6.976970277863893,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "eta_prime_block_0010",
+    "origin_run_id": 0.0,
+    "particle_name": "eta_prime",
+    "family": "eta_prime_like",
+    "type": "meson",
+    "grade": "B",
+    "structure_tier": "level1",
+    "lock_quality": {
+      "Q": 0.9996656621109001,
+      "S1": 0.000245083316848214,
+      "S2": 8.925457225176771e-05
+    },
+    "s2_state": "none",
+    "band_count": 4.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.9755555458000007,
+      "d_spacing": NaN,
+      "d_mass": 0.9755555458000007,
+      "n_levels_sim": 4.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 8.190577463402574,
+      "R_S2_S1": 5.508369100799793,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "quark_s_const_block_0001",
+    "origin_run_id": 42.0,
+    "particle_name": "quark_s_const",
+    "family": "quark_like",
+    "type": "constituent",
+    "grade": "B",
+    "structure_tier": "none",
+    "lock_quality": {
+      "Q": 0.4998889748077055,
+      "S1": 0.49974659280667577,
+      "S2": 0.00036443238561875897
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.4340277741608795,
+      "d_spacing": NaN,
+      "d_mass": 0.4340277741608795,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 5.364550057791808,
+      "R_S2_S1": 5.315261083144084,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  },
+  {
+    "block_id": "quark_ud_const_block_0002",
+    "origin_run_id": 2.0,
+    "particle_name": "quark_ud_const",
+    "family": "quark_like",
+    "type": "constituent",
+    "grade": "B",
+    "structure_tier": "none",
+    "lock_quality": {
+      "Q": 0.49993999324114485,
+      "S1": 0.49998688585246825,
+      "S2": 7.312090638689144e-05
+    },
+    "s2_state": "none",
+    "band_count": 2.0,
+    "s2_band_fraction": 0.0,
+    "match_score": {
+      "d_total": 0.32127659253191465,
+      "d_spacing": NaN,
+      "d_mass": 0.32127659253191465,
+      "n_levels_sim": 2.0,
+      "has_enough_levels_full": true,
+      "has_enough_levels_partial": true
+    },
+    "theta_internal": {
+      "R_S1_Q": 8.432068213157832,
+      "R_S2_S1": 7.721908725544431,
+      "R_S3_S2": "",
+      "g_couplings": null,
+      "memory_taus": null,
+      "memory_amps": null
+    }
+  }
+]

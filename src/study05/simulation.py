@@ -55,6 +55,8 @@ class AdaptiveLockPair:
     p: int
     q: int
     weight: float
+    omega_i_init: float = 0.0
+    omega_j_init: float = 0.0
     k_adapt: float = 0.0
     sum_cos: float = 0.0
     sum_sin: float = 0.0
@@ -62,6 +64,16 @@ class AdaptiveLockPair:
     L_last: float = 0.0
     L_sin_last: float = 0.0
     phi_last: float = 0.0
+    omega_updates: int = 0
+    omega_update_applied: bool = False
+    delta_omega_i_last: float = 0.0
+    delta_omega_j_last: float = 0.0
+    omega_i_before: float = 0.0
+    omega_j_before: float = 0.0
+    omega_i_after: float = 0.0
+    omega_j_after: float = 0.0
+    clamp_i: str = "none"
+    clamp_j: str = "none"
 
 
 @dataclass
@@ -75,6 +87,7 @@ class AdaptiveLockConfig:
     L0: float
     K_min: float
     K_max: float
+    K_gate: float
     epsilon_omega: float
     omega_min: float
     omega_max: float
@@ -317,6 +330,8 @@ def _build_adaptive_lock_config(
                 q=q,
                 weight=weight,
                 k_adapt=0.0,
+                omega_i_init=modes[index_map[(li, mi)]].omega0,
+                omega_j_init=modes[index_map[(lj, mj)]].omega0,
             )
         )
     return AdaptiveLockConfig(
@@ -329,6 +344,7 @@ def _build_adaptive_lock_config(
         L0=float(cfg.get("L0", 0.2)),
         K_min=float(cfg.get("K_min", 0.0)),
         K_max=float(cfg.get("K_max", 5.0)),
+        K_gate=float(cfg.get("K_gate", 1e-2)),
         epsilon_omega=float(cfg.get("epsilon_omega", 1e-4)),
         omega_min=float(cfg.get("omega_min", 0.1)),
         omega_max=float(cfg.get("omega_max", 5.0)),
@@ -723,6 +739,9 @@ def simulate(
             # compute averages and update K and omega
             avg_sin_by_mode: Dict[int, float] = {}
             for pair in adapt_pairs:
+                pair.omega_update_applied = False
+                pair.delta_omega_i_last = 0.0
+                pair.delta_omega_j_last = 0.0
                 if pair.n_samples > 0:
                     L_cos = pair.sum_cos / pair.n_samples
                     L_sin = pair.sum_sin / pair.n_samples
@@ -735,18 +754,49 @@ def simulate(
                 pair.phi_last = math.atan2(L_sin, L_cos)
                 dK = adaptive_conf.epsilon_K * (L_mag - adaptive_conf.L0) - adaptive_conf.lambda_K * pair.k_adapt
                 pair.k_adapt = float(np.clip(pair.k_adapt + dK, adaptive_conf.K_min, adaptive_conf.K_max))
-                # accumulate omega adjustments only if there is meaningful lock
-                if L_mag > adaptive_conf.L0:
-                    avg_sin_by_mode[pair.i_idx] = avg_sin_by_mode.get(pair.i_idx, 0.0) - adaptive_conf.epsilon_omega * pair.weight * L_sin * pair.q
-                    avg_sin_by_mode[pair.j_idx] = avg_sin_by_mode.get(pair.j_idx, 0.0) + adaptive_conf.epsilon_omega * pair.weight * L_sin * pair.p
+                # accumulate omega adjustments only if there is meaningful lock and coupling developed
+                if L_mag > adaptive_conf.L0 and pair.k_adapt > adaptive_conf.K_gate:
+                    delta_i = -adaptive_conf.epsilon_omega * pair.weight * L_sin * pair.q
+                    delta_j = adaptive_conf.epsilon_omega * pair.weight * L_sin * pair.p
+                    avg_sin_by_mode[pair.i_idx] = avg_sin_by_mode.get(pair.i_idx, 0.0) + delta_i
+                    avg_sin_by_mode[pair.j_idx] = avg_sin_by_mode.get(pair.j_idx, 0.0) + delta_j
+                    pair.delta_omega_i_last = delta_i
+                    pair.delta_omega_j_last = delta_j
+                else:
+                    pair.omega_update_applied = False
+                    continue
                 # reset accumulators
                 pair.sum_cos = 0.0
                 pair.sum_sin = 0.0
                 pair.n_samples = 0
 
             for idx, delta in avg_sin_by_mode.items():
-                new_omega = float(np.clip(modes[idx].omega0 + delta, adaptive_conf.omega_min, adaptive_conf.omega_max))
+                base_omega = modes[idx].omega0
+                delta_cap = 0.05 * max(abs(base_omega), 1e-6)
+                delta = float(np.clip(delta, -delta_cap, delta_cap))
+                raw_omega = base_omega + delta
+                new_omega = float(np.clip(raw_omega, adaptive_conf.omega_min, adaptive_conf.omega_max))
                 modes[idx].omega0 = new_omega
+                clamp_flag = "none"
+                if new_omega <= adaptive_conf.omega_min + 1e-12:
+                    clamp_flag = "min"
+                elif new_omega >= adaptive_conf.omega_max - 1e-12:
+                    clamp_flag = "max"
+                # mark updates for pairs involving this mode
+                for pair in adapt_pairs:
+                    if pair.i_idx == idx or pair.j_idx == idx:
+                        pair.omega_updates += 1
+                        pair.omega_update_applied = True
+                        if pair.i_idx == idx:
+                            pair.omega_i_before = base_omega
+                            pair.omega_i_after = new_omega
+                            pair.delta_omega_i_last = delta
+                            pair.clamp_i = clamp_flag
+                        if pair.j_idx == idx:
+                            pair.omega_j_before = base_omega
+                            pair.omega_j_after = new_omega
+                            pair.delta_omega_j_last = delta
+                            pair.clamp_j = clamp_flag
 
             # recompute window based on current ref omega
             omega_ref = modes[ref_idx].omega0 if ref_idx < len(modes) else 1.0
@@ -787,17 +837,33 @@ def simulate(
                 (pair.L_last > adaptive_conf.lock_threshold_L)
                 and (abs(ratio - target_ratio) < adaptive_conf.lock_ratio_tol)
             )
+            drift_without_update = False
+            if pair.omega_updates == 0:
+                tol_i = 0.05 * max(abs(pair.omega_i_init), 1e-6)
+                tol_j = 0.05 * max(abs(pair.omega_j_init), 1e-6)
+                if abs(omega_i - pair.omega_i_init) > tol_i or abs(omega_j - pair.omega_j_init) > tol_j:
+                    drift_without_update = True
             pairs_out.append(
                 {
                     "name": pair.name,
                     "L_mean": pair.L_last,
+                    "L_mag_used": pair.L_last,
                     "L_sin": pair.L_sin_last,
                     "phi_mean": pair.phi_last,
                     "K_final": pair.k_adapt,
+                    "K_used": pair.k_adapt,
                     "omega_i_raw_final": omega_i_raw,
                     "omega_j_raw_final": omega_j_raw,
                     "omega_i_final": omega_i,
                     "omega_j_final": omega_j,
+                    "delta_omega_i_last": pair.delta_omega_i_last,
+                    "delta_omega_j_last": pair.delta_omega_j_last,
+                    "omega_i_before": pair.omega_i_before,
+                    "omega_i_after": pair.omega_i_after,
+                    "omega_j_before": pair.omega_j_before,
+                    "omega_j_after": pair.omega_j_after,
+                    "clamp_i": pair.clamp_i,
+                    "clamp_j": pair.clamp_j,
                     "ratio_eff": ratio,
                     "target_ratio": target_ratio,
                     "p": pair.p,
@@ -805,6 +871,9 @@ def simulate(
                     "locked": locked,
                     "hit_omega_min": hit_min,
                     "hit_omega_max": hit_max,
+                    "omega_update_applied": pair.omega_update_applied,
+                    "omega_update_count": pair.omega_updates,
+                    "omega_drift_without_update": drift_without_update,
                 }
             )
         result["adaptive_lock"] = {"pairs": pairs_out}

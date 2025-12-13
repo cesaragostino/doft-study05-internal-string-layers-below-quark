@@ -1,7 +1,7 @@
 {
   "global": {
     "log_rejections": true,
-    "structure_tier_min_baryon": "level2",
+    "structure_tier_min_baryon": "level1",  // CAMBIADO de level2 a level1
     "allow_s2_states_baryon": ["latent", "structural"],
     "min_quark_blocks_baryon": 1,
     "max_bands_compound": 12,
@@ -13,7 +13,7 @@
   "targets": [
     {
       "name": "proton",
-      "structure_tier_min": "level2",
+      "structure_tier_min": "level1",       // CAMBIADO de level2 a level1
       "allow_s2_states": ["latent", "structural"],
       "min_quark_blocks": 1,
       "max_bands": 12,

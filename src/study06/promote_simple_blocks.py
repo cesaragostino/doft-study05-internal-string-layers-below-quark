@@ -193,6 +193,19 @@ def main():
         except Exception:
             return None
 
+    def _as_bool(val) -> bool:
+        if isinstance(val, bool):
+            return val
+        if isinstance(val, (int, float)):
+            return val != 0
+        if isinstance(val, str):
+            v = val.strip().lower()
+            if v in {"true", "yes", "y", "1"}:
+                return True
+            if v in {"false", "no", "n", "0", ""}:
+                return False
+        return bool(val)
+
     # choose best match per run (lowest finite d_total)
     best_by_run: Dict[str, Dict] = {}
     for m in matches:
@@ -220,7 +233,11 @@ def main():
         band_count_struct = proxy_row.get("band_count_structural") if proxy_row else None
         band_count = band_count_struct if band_count_struct is not None else proxy_row.get("band_count") if proxy_row else None
         band_count = _to_float(band_count)
-        structural_cap_hit = bool(proxy_row.get("band_structural_cap_hit")) if proxy_row else False
+        structural_cap_hit = False
+        peak_cap_hit = False
+        if proxy_row:
+            structural_cap_hit = _as_bool(proxy_row.get("band_structural_cap_hit"))
+            peak_cap_hit = _as_bool(proxy_row.get("peak_cap_hit"))
         raw_lock_q = proxy_row.get("lock_quality_Q") if proxy_row else None
         try:
             lock_q = float(raw_lock_q)
@@ -252,7 +269,7 @@ def main():
             band_count_max = 1e9
         if band_count is not None and band_count > band_count_max:
             reasons.append(f"too_many_struct_bands>{band_count_max}")
-        if structural_cap_hit:
+        if structural_cap_hit or peak_cap_hit:
             reasons.append("structural_band_cap_hit")
         if lock_q is not None and lock_q < sel_cfg.get("lock_quality_Q_min", 0.0):
             reasons.append(f"low_Q_lock<{sel_cfg.get('lock_quality_Q_min')}")
@@ -276,7 +293,6 @@ def main():
             reasons.append("missing_proxy")
 
         if particle and particle.get("type") == "baryon":
-            reasons.append("baryon_to_complex_core")
             baryon_candidates.append(
                 {
                     "run_id": run_id,
@@ -332,6 +348,27 @@ def main():
         else:
             grade = "C"
         s2_state_norm = _normalize_s_state(proxy_row.get("s2_state"))
+        # derive a band-based s2 state for clarity
+        try:
+            s2_frac = float(proxy_row.get("s2_band_fraction", 0.0))
+        except Exception:
+            s2_frac = 0.0
+        if s2_frac < 0.02:
+            s2_state_band = "none"
+        elif s2_frac < 0.12:
+            s2_state_band = "latent"
+        else:
+            s2_state_band = "structural"
+        # sanitise match distances (avoid NaN in JSON)
+        def _nan_to_none(val):
+            try:
+                v = float(val)
+                return v if np.isfinite(v) else None
+            except Exception:
+                return None
+        d_spacing_clean = _nan_to_none(match.get("d_spacing"))
+        d_mass_clean = _nan_to_none(match.get("d_mass"))
+        d_total_clean = _nan_to_none(match.get("d_total"))
         block = {
             "block_id": block_id,
             "origin_run_id": proxy_row.get("run_id"),
@@ -346,12 +383,13 @@ def main():
                 "S2": proxy_row.get("lock_quality_S2"),
             },
             "s2_state": s2_state_norm,
+            "s2_state_band": s2_state_band,
             "band_count": band_count,
             "s2_band_fraction": proxy_row.get("s2_band_fraction"),
             "match_score": {
-                "d_total": match.get("d_total"),
-                "d_spacing": match.get("d_spacing"),
-                "d_mass": match.get("d_mass"),
+                "d_total": d_total_clean,
+                "d_spacing": d_spacing_clean,
+                "d_mass": d_mass_clean,
                 "n_levels_sim": match.get("n_levels_sim"),
                 "has_enough_levels_full": bool(match.get("enough_levels_full")),
                 "has_enough_levels_partial": bool(match.get("enough_levels_partial")),

@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime, timezone
 from pathlib import Path
+import uuid
 from typing import Dict, List, Optional
 
 import numpy as np
@@ -279,8 +281,12 @@ def run_sweep(
     memory_cfg: Optional[Dict] = None,
     adaptive_cfg: Optional[Dict] = None,
     partial_flush_every: int = 0,
+    engine_config_path: Optional[str] = None,
+    engine_config_hash: Optional[str] = None,
 ):
     rng = np.random.default_rng(seed)
+    run_session_id = uuid.uuid4().hex
+    session_tag = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     flatten = output_root is not None
     if output_root:
         raw_dir = Path(output_root) / "raw"
@@ -339,13 +345,18 @@ def run_sweep(
     example_run = None
 
     saved_since_print = 0
+    partial_buffer: List[Dict] = []
 
-    def _append_partial(record: Dict):
-        nonlocal saved_since_print
+    def _append_partial(record: Dict, flush_now: bool = False):
+        nonlocal saved_since_print, partial_buffer
         if partial_runs_path and partial_flush_every > 0:
-            with partial_runs_path.open("a") as pf:
-                pf.write(json.dumps(record) + "\n")
-            saved_since_print += 1
+            partial_buffer.append(record)
+            if flush_now or len(partial_buffer) >= partial_flush_every:
+                with partial_runs_path.open("a") as pf:
+                    for rec in partial_buffer:
+                        pf.write(json.dumps(rec) + "\n")
+                saved_since_print += len(partial_buffer)
+                partial_buffer = []
 
     for run_idx in range(runs):
         if saved_since_print:
@@ -368,6 +379,9 @@ def run_sweep(
             rejected += 1
             run_outputs.append(
                 {
+                    "run_session_id": run_session_id,
+                    "engine_config_path": engine_config_path,
+                    "engine_config_hash": engine_config_hash,
                     "run_id": run_idx,
                     "status": "rejected",
                     "reason": "complexity_exceeded",
@@ -399,10 +413,17 @@ def run_sweep(
             unstable += 1
             run_outputs.append(
                 {
+                    "run_session_id": run_session_id,
+                    "engine_config_path": engine_config_path,
+                    "engine_config_hash": engine_config_hash,
                     "run_id": run_idx,
                     "status": "unstable",
                     "n_modes": len(config.modes),
-                    "n_memory_terms": config.memory_terms,
+                    "n_memory_terms": None,
+                    "memory_taus": [],
+                    "memory_amps": [],
+                    "memory_enabled_effective": False,
+                    "memory_abort_stage": "simulate_fpe",
                     "complexity": config.complexity,
                     "energy_scale": None,
                     "energies_gev": [],
@@ -443,11 +464,24 @@ def run_sweep(
                 continue
             layer_max = max(w.items(), key=lambda kv: kv[1])
             band_dominant_layers.append({"layer": layer_max[0], "weight": layer_max[1]})
+        band_dom_counts_total: Dict[str, int] = {}
+        for item in band_dominant_layers:
+            if item and item.get("layer"):
+                band_dom_counts_total[item["layer"]] = band_dom_counts_total.get(item["layer"], 0) + 1
         s2_band_fraction = (
             sum(1 for item in band_dominant_layers if item and item["layer"] == "S2") / band_energies.size
             if band_energies.size > 0
             else 0.0
         )
+        s2_band_fraction_struct = (
+            sum(1 for item in structural_dom_layers if item == "S2") / len(structural_dom_layers)
+            if structural_dom_layers
+            else 0.0
+        )
+        band_dom_counts_struct: Dict[str, int] = {}
+        for layer in structural_dom_layers:
+            if layer:
+                band_dom_counts_struct[layer] = band_dom_counts_struct.get(layer, 0) + 1
         has_s2_dominant = s2_band_fraction > 0.0
         s3_band_fraction = (
             sum(1 for item in band_dominant_layers if item and item["layer"] == "S3") / band_energies.size
@@ -457,6 +491,7 @@ def run_sweep(
 
         # structural subset: filter by relative power, cluster by proximity, take top-N
         structural_energies = []
+        structural_dom_layers: List[str] = []
         structural_flags: List[str] = []
         power_capture = 0.0
         if band_energies.size > 0 and band_powers:
@@ -479,12 +514,22 @@ def run_sweep(
             cap = sim_params.structural_peak_cap
             if len(structural_candidates) > cap:
                 structural_flags.append("structural_band_cap_hit")
-            structural_energies = [e for e, _ in structural_candidates[: min(len(structural_candidates), cap)]]
+            selected = structural_candidates[: min(len(structural_candidates), cap)]
+            structural_energies = [e for e, _ in selected]
             power_capture = sum(p for _, p in structural_candidates[: min(len(structural_candidates), cap)]) / max(
                 sum(band_powers), 1e-12
             )
             if power_capture < 0.5:
                 structural_flags.append("structural_subset_low_capture")
+            # dominant layer for structural peaks
+            for e, _ in selected:
+                try:
+                    idx = band_energies.tolist().index(e)
+                except ValueError:
+                    structural_dom_layers.append(None)
+                    continue
+                dom = band_dominant_layers[idx] if idx < len(band_dominant_layers) else None
+                structural_dom_layers.append(dom["layer"] if dom else None)
         # flag overflow but don't reject
         if band_energies.size > sim_params.max_peaks:
             structural_flags.append("band_overflow")
@@ -593,6 +638,10 @@ def run_sweep(
 
         mem_taus_flat = [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0]
         mem_amps_flat = [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0]
+        mem_terms_by_layer: Dict[str, int] = {}
+        for ic in config.inter_layer_couplings:
+            total_terms = sum(len(k.taus0) for k in ic.links.values())
+            mem_terms_by_layer[ic.deep_layer.name] = mem_terms_by_layer.get(ic.deep_layer.name, 0) + total_terms
         memory_enabled_effective = bool(mem_taus_flat)
         expected_mem_terms = 0
         if memory_cfg and memory_cfg.get("modes_per_layer"):
@@ -600,6 +649,12 @@ def run_sweep(
                 expected_mem_terms = sum(int(v) for v in memory_cfg.get("modes_per_layer", {}).values())
             except Exception:
                 expected_mem_terms = 0
+        mem_terms_mismatch = (mem_terms_by_layer and sum(mem_terms_by_layer.values()) != config.memory_terms)
+        if mem_terms_mismatch:
+            print(
+                f"[run_sweep] WARNING: n_memory_terms({config.memory_terms}) != sum(mem_terms_by_layer)({sum(mem_terms_by_layer.values())}) for run {run_idx}",
+                flush=True,
+            )
         mem_issue = (
             memory_cfg
             and memory_cfg.get("enabled", False)
@@ -615,6 +670,9 @@ def run_sweep(
             rejected += 1
             run_outputs.append(
                 {
+                    "run_session_id": run_session_id,
+                    "engine_config_path": engine_config_path,
+                    "engine_config_hash": engine_config_hash,
                     "run_id": run_idx,
                     "status": "rejected",
                     "reason": "memory_not_applied",
@@ -630,11 +688,48 @@ def run_sweep(
             )
             _append_partial(run_outputs[-1])
             continue
+        # derive auxiliary metrics for interpretability
+        layer_energy_fraction = {
+            "Q": lock_quality_Q,
+            "S1": lock_quality_S1,
+            "S2": lock_quality_S2,
+        }
+        try:
+            import math as _math
+
+            vals = [v for v in layer_energy_fraction.values() if v is not None and v > 0]
+            if vals:
+                p = np.array(vals, dtype=float)
+                p = p / max(np.sum(p), 1e-12)
+                participation_entropy = float(-np.sum(p * np.log(np.clip(p, 1e-12, 1))))
+                min_layer_fraction = float(np.min(p))
+            else:
+                participation_entropy = None
+                min_layer_fraction = None
+        except Exception:
+            participation_entropy = None
+            min_layer_fraction = None
+
+        s2_state_lock = s2_state_label
+        # band-based state
+        if s2_band_fraction_struct < none_max:
+            s2_state_bands = "none"
+        elif s2_band_fraction_struct <= latent_max:
+            s2_state_bands = "latent"
+        else:
+            s2_state_bands = "structural"
+
         run_record = {
+            "run_session_id": run_session_id,
+            "engine_config_path": engine_config_path,
+            "engine_config_hash": engine_config_hash,
             "run_id": run_idx,
             "status": "ok",
             "n_modes": len(config.modes),
             "n_memory_terms": config.memory_terms,
+            "expected_memory_terms": expected_mem_terms,
+            "memory_terms_by_layer": mem_terms_by_layer,
+            "memory_terms_mismatch": mem_terms_mismatch,
             "memory_enabled_effective": memory_enabled_effective,
             "max_complexity": max_complexity,
             "complexity": config.complexity,
@@ -652,20 +747,29 @@ def run_sweep(
             "band_structural_energies_gev": structural_energies,
             "band_count_structural": len(structural_energies),
             "band_structural_cap_hit": "structural_band_cap_hit" in structural_flags,
+            "peak_cap": sim_params.structural_peak_cap,
+            "peak_cap_hit": "structural_band_cap_hit" in structural_flags,
+            "peaks_raw_count": peaks_raw_count,
+            "peaks_kept_count": peaks_kept_count,
             "bands_all_json": json.dumps(bands_all),
             "bands_structural_json": json.dumps([{"energy": e} for e in structural_energies]),
             "band_power_capture": power_capture,
             "band_flags": structural_flags,
+            "band_dom_counts_total": band_dom_counts_total,
+            "band_dom_counts_structural": band_dom_counts_struct,
             "accepted_for_spacing": accepted_band,
             "family_match": family_match,
             "family_distance": family_distance.__dict__ if family_distance else None,
             "band_weights": band_weights,
             "band_dominant_layers": band_dominant_layers,
+            "s2_band_fraction_total": s2_band_fraction,
             "has_s2_dominant": has_s2_dominant,
             "s2_band_fraction": s2_band_fraction,
             "s3_band_fraction": s3_band_fraction,
             "has_s3_dominant": has_s3_dominant,
             "s2_state": s2_state_label,
+            "s2_state_lock": s2_state_lock,
+            "s2_state_bands": s2_state_bands,
             "s3_state": s3_state,
             "s2_total_fraction": layer_summaries.get("S2", {}).get("total_fraction"),
             "s3_total_fraction": layer_summaries.get("S3", {}).get("total_fraction"),
@@ -678,6 +782,9 @@ def run_sweep(
             "lock_quality_Q": lock_quality_Q,
             "lock_quality_S1": lock_quality_S1,
             "lock_quality_S2": lock_quality_S2,
+            "layer_energy_fraction": layer_energy_fraction,
+            "participation_entropy": participation_entropy,
+            "min_layer_fraction": min_layer_fraction,
             "structure_tier": structure_tier,
             "layers_order": [l.name for l in layer_order],
             "b_trace": sim_result["b_series"].tolist(),
@@ -694,7 +801,8 @@ def run_sweep(
             "adaptive_lock": sim_result.get("adaptive_lock"),
         }
         run_outputs.append(run_record)
-        _append_partial(run_record)
+        flush_now = ((run_idx + 1) % partial_flush_every == 0) or (run_idx + 1 == runs)
+        _append_partial(run_record, flush_now=flush_now)
 
     all_spacings = np.concatenate(spacings_all) if spacings_all else np.array([])
     spacing_stats = analysis.summarise_spacings(all_spacings)
@@ -717,6 +825,10 @@ def run_sweep(
         "runs_valid": len(run_outputs) - unstable,
         "runs_unstable": unstable,
         "runs_rejected": rejected,
+        "run_session_id": run_session_id,
+        "session_tag": session_tag,
+        "engine_config_path": engine_config_path,
+        "engine_config_hash": engine_config_hash,
         "debug_trace_run_ids": sorted(debug_indices),
         "band_count_mean": float(np.mean(band_counts)) if band_counts else 0.0,
         "band_count_std": float(np.std(band_counts)) if band_counts else 0.0,
@@ -735,7 +847,15 @@ def run_sweep(
         "family_distance_stats": family_distance_stats if family_spec else None,
     }
 
-    raw_payload = {"seed": seed, "max_complexity": max_complexity, "inputs": run_inputs}
+    raw_payload = {
+        "seed": seed,
+        "max_complexity": max_complexity,
+        "engine_config_path": engine_config_path,
+        "engine_config_hash": engine_config_hash,
+        "run_session_id": run_session_id,
+        "session_tag": session_tag,
+        "inputs": run_inputs,
+    }
     processed_payload = {
         "summary": summary,
         "runs": run_outputs,
@@ -747,6 +867,11 @@ def run_sweep(
 
     raw_path.write_text(json.dumps(raw_payload, indent=2))
     processed_path.write_text(json.dumps(processed_payload, indent=2))
+    # Also write timestamped copies to avoid collisions between sweeps
+    raw_ts_path = raw_path.with_name(f"{raw_path.stem}_{session_tag}{raw_path.suffix}")
+    processed_ts_path = processed_path.with_name(f"{processed_path.stem}_{session_tag}{processed_path.suffix}")
+    raw_ts_path.write_text(json.dumps(raw_payload, indent=2))
+    processed_ts_path.write_text(json.dumps(processed_payload, indent=2))
 
     if save_plots:
         if example_run:
@@ -854,6 +979,12 @@ def main():
     parser = build_arg_parser()
     args = parser.parse_args()
     engine_cfg = _load_engine_config(args.engine_config)
+    engine_cfg_path = str(args.engine_config) if args.engine_config else None
+    engine_cfg_hash = None
+    if args.engine_config and args.engine_config.exists():
+        import hashlib
+
+        engine_cfg_hash = hashlib.sha256(args.engine_config.read_bytes()).hexdigest()
 
     # Override case/band/modes from engine config when provided
     if engine_cfg:
@@ -979,6 +1110,8 @@ def main():
         memory_cfg=memory_cfg,
         adaptive_cfg=adaptive_cfg,
         partial_flush_every=args.partial_flush_every,
+        engine_config_path=engine_cfg_path,
+        engine_config_hash=engine_cfg_hash,
     )
     print(
         json.dumps(

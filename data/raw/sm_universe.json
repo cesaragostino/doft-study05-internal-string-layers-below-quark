@@ -1,5 +1,5 @@
 {
-  "name": "sm_universe_min_plus",
+  "name": "sm_universe_min_plus_enriched",
   "energy_window_gev": [0.05, 5.0],
   "particles": [
     {
@@ -7,8 +7,8 @@
       "family": "pion_like",
       "type": "meson",
       "jpc": "0-",
-      "masses_gev": [0.139],
-      "widths_gev": [0.0],
+      "masses_gev": [0.139, 1.300, 1.800],
+      "widths_gev": [0.0, 0.40, 0.25],
       "tolerances": { "mass_abs": 0.05, "width_abs": 0.20, "spacing_rel": 0.30 }
     },
     {
@@ -16,8 +16,8 @@
       "family": "rho_like",
       "type": "meson",
       "jpc": "1-",
-      "masses_gev": [0.775],
-      "widths_gev": [0.15],
+      "masses_gev": [0.775, 1.450, 1.720],
+      "widths_gev": [0.15, 0.40, 0.25],
       "tolerances": { "mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35 }
     },
     {
@@ -25,8 +25,8 @@
       "family": "kaon_like",
       "type": "meson",
       "jpc": "0-",
-      "masses_gev": [0.494],
-      "widths_gev": [0.0],
+      "masses_gev": [0.494, 1.460],
+      "widths_gev": [0.0, 0.25],
       "tolerances": { "mass_abs": 0.06, "width_abs": 0.20, "spacing_rel": 0.35 }
     },
     {
@@ -34,18 +34,17 @@
       "family": "phi_like",
       "type": "meson",
       "jpc": "1-",
-      "masses_gev": [1.019],
-      "widths_gev": [0.004],
-      "tolerances": { "mass_abs": 0.06, "width_abs": 0.10, "spacing_rel": 0.35 }
+      "masses_gev": [1.019, 1.680],
+      "widths_gev": [0.004, 0.15],
+      "tolerances": { "mass_abs": 0.06, "width_abs": 0.15, "spacing_rel": 0.35 }
     },
-
     {
       "name": "eta",
       "family": "eta_like",
       "type": "meson",
       "jpc": "0-",
-      "masses_gev": [0.548],
-      "widths_gev": [0.0],
+      "masses_gev": [0.548, 1.295],
+      "widths_gev": [0.0, 0.05],
       "tolerances": { "mass_abs": 0.08, "width_abs": 0.20, "spacing_rel": 0.40 }
     },
     {
@@ -53,8 +52,8 @@
       "family": "omega_like",
       "type": "meson",
       "jpc": "1-",
-      "masses_gev": [0.783],
-      "widths_gev": [0.009],
+      "masses_gev": [0.783, 1.420],
+      "widths_gev": [0.009, 0.20],
       "tolerances": { "mass_abs": 0.08, "width_abs": 0.20, "spacing_rel": 0.40 }
     },
     {
@@ -62,8 +61,8 @@
       "family": "kstar_like",
       "type": "meson",
       "jpc": "1-",
-      "masses_gev": [0.892],
-      "widths_gev": [0.05],
+      "masses_gev": [0.892, 1.410],
+      "widths_gev": [0.05, 0.23],
       "tolerances": { "mass_abs": 0.10, "width_abs": 0.25, "spacing_rel": 0.45 }
     },
     {
@@ -75,7 +74,6 @@
       "widths_gev": [0.0],
       "tolerances": { "mass_abs": 0.10, "width_abs": 0.30, "spacing_rel": 0.45 }
     },
-
     {
       "name": "quark_ud_const",
       "family": "quark_like",
@@ -94,13 +92,12 @@
       "widths_gev": [0.0],
       "tolerances": { "mass_abs": 0.12, "width_abs": 0.30, "spacing_rel": 0.60 }
     },
-
     {
       "name": "proton",
       "family": "nucleon_like",
       "type": "baryon",
       "jpc": "1/2+",
-      "masses_gev": [0.939, 1.44, 1.71, 1.88],
+      "masses_gev": [0.938, 1.440, 1.710, 1.880],
       "widths_gev": [0.0, 0.35, 0.15, 0.25],
       "tolerances": { "mass_abs": 0.08, "width_abs": 0.30, "spacing_rel": 0.35 }
     },
@@ -109,7 +106,7 @@
       "family": "nucleon_like",
       "type": "baryon",
       "jpc": "1/2+",
-      "masses_gev": [0.940, 1.44, 1.71, 1.88],
+      "masses_gev": [0.940, 1.440, 1.710, 1.880],
       "widths_gev": [0.0, 0.35, 0.15, 0.25],
       "tolerances": { "mass_abs": 0.08, "width_abs": 0.30, "spacing_rel": 0.35 }
     },
@@ -118,9 +115,9 @@
       "family": "delta_like",
       "type": "baryon",
       "jpc": "3/2+",
-      "masses_gev": [1.232],
-      "widths_gev": [0.12],
-      "tolerances": { "mass_abs": 0.10, "width_abs": 0.30, "spacing_rel": 0.45 }
+      "masses_gev": [1.232, 1.600, 1.920],
+      "widths_gev": [0.12, 0.25, 0.30],
+      "tolerances": { "mass_abs": 0.10, "width_abs": 0.30, "spacing_rel": 0.25 }
     }
   ]
 }
