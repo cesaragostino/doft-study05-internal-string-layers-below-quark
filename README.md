@@ -84,6 +84,9 @@ PYTHONPATH=src python3 -m study05.run_sweep \
   --band-max 3.0 \
   --layer-states data/raw/layer_states.yaml \
   --engine-config data/raw/engine_core3.json \
+  --partial-flush-every 2 \   # guarda runs en partial/runs_partial.jsonl cada 2 corridas
+  --resume \                  # continua desde el parcial si existe
+  --stop-file /tmp/stop_sweep \# crea este archivo para frenar limpio; el script lo borra al salir
   --no-plots
 ```
 Notes: `layer_states.yaml` now uses relative thresholds (`T_Q_rel_min`, `T_S1_rel_min`, `T_S2_rel_min`) applied to the structural mass share of each layer; adjust there if you need to relax or tighten tiering.
@@ -117,6 +120,16 @@ PYTHONPATH=src python3 -m study06.promote_simple_blocks \
   --digest data/processed/digest/blocks
 ```
 Promoted blocks are stored in processed and copied to `data/processed/digest/blocks/simple_blocks.json` for quick inspection.
+Nota: el límite por defecto de bloques por partícula en `promote_simple_blocks` es 5000 (ajustable por flag).
+
+6) Reporte rápido de Ola1:
+```bash
+PYTHONPATH=src python3 scripts/ola1_status_report.py \
+  --case Core3L_Hadron \
+  --processed-dir data/processed/ola1 \
+  --output data/processed/ola1/Core3L_Hadron_ola1_report.md
+```
+Genera un markdown con semáforo de salud, inventario, radar de candidatos y pareto de rechazos.
 
 5) Catalog complex cores (strong S2, level3):
 ```bash

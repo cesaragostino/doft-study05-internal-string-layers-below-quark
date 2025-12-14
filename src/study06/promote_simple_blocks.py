@@ -137,7 +137,7 @@ def main():
         help="Optional CSV log of accepted/rejected runs.",
     )
     parser.add_argument("--d-total-max", type=float, default=None, help="Deprecated: ignored.")
-    parser.add_argument("--max-blocks-per-particle", type=int, default=10)
+    parser.add_argument("--max-blocks-per-particle", type=int, default=5000)
     args = parser.parse_args()
 
     proxies = read_proxies(args.proxies_csv)
@@ -384,8 +384,11 @@ def main():
             },
             "s2_state": s2_state_norm,
             "s2_state_band": s2_state_band,
+            "s2_state_lock": proxy_row.get("s2_state_lock"),
             "band_count": band_count,
             "s2_band_fraction": proxy_row.get("s2_band_fraction"),
+            "band_dom_counts_total": proxy_row.get("band_dom_counts_total"),
+            "band_dom_counts_structural": proxy_row.get("band_dom_counts_structural"),
             "match_score": {
                 "d_total": d_total_clean,
                 "d_spacing": d_spacing_clean,
@@ -401,7 +404,12 @@ def main():
                 "g_couplings": proxy_row.get("g_couplings"),
                 "memory_taus": proxy_row.get("memory_taus"),
                 "memory_amps": proxy_row.get("memory_amps"),
+                "n_memory_terms": proxy_row.get("n_memory_terms"),
+                "memory_terms_by_layer": proxy_row.get("memory_terms_by_layer"),
             },
+            "layer_energy_fraction": proxy_row.get("layer_energy_fraction"),
+            "participation_entropy": proxy_row.get("participation_entropy"),
+            "min_layer_fraction": proxy_row.get("min_layer_fraction"),
         }
         theta_full = run_theta.get(str(proxy_row.get("run_id")))
         if theta_full:

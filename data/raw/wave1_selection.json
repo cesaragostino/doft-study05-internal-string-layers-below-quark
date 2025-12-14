@@ -10,6 +10,8 @@
 
   "allow_s2_states": ["none", "latent", "structural"],
 
+  "max_blocks_per_target": 5000,
+
   "require_match": false,
   "emit_unknown_when_no_match": true,
 

@@ -283,6 +283,8 @@ def run_sweep(
     partial_flush_every: int = 0,
     engine_config_path: Optional[str] = None,
     engine_config_hash: Optional[str] = None,
+    resume: bool = False,
+    stop_file: Optional[str] = None,
 ):
     rng = np.random.default_rng(seed)
     run_session_id = uuid.uuid4().hex
@@ -317,7 +319,7 @@ def run_sweep(
     if partial_flush_every and partial_flush_every > 0:
         partial_dir.mkdir(parents=True, exist_ok=True)
         partial_runs_path = partial_dir / "runs_partial.jsonl"
-        if partial_runs_path.exists():
+        if partial_runs_path.exists() and not resume:
             partial_runs_path.unlink()  # start fresh for this sweep
 
     layer_state_config = layer_state_config or {}
@@ -347,6 +349,38 @@ def run_sweep(
     saved_since_print = 0
     partial_buffer: List[Dict] = []
 
+    start_run_idx = 0
+    if resume and partial_runs_path and partial_runs_path.exists():
+        try:
+            for line in partial_runs_path.read_text().splitlines():
+                if not line.strip():
+                    continue
+                try:
+                    rec = json.loads(line)
+                except Exception:
+                    continue
+                run_outputs.append(rec)
+                rid = rec.get("run_id")
+                if isinstance(rid, (int, float)):
+                    start_run_idx = max(start_run_idx, int(rid) + 1)
+                if rec.get("status") == "ok":
+                    band_counts.append(int(rec.get("band_count", 0)))
+                    if rec.get("accepted_for_spacing"):
+                        spacing_vals = np.array(rec.get("band_spacing_gev", []))
+                        if spacing_vals.size:
+                            spacings_all.append(spacing_vals)
+                            accepted_runs_for_spacing += 1
+                elif rec.get("status") == "rejected":
+                    rejected += 1
+                elif rec.get("status") == "unstable":
+                    unstable += 1
+            if run_outputs:
+                # reuse session id to keep lineage; session_tag can stay new
+                run_session_id = run_outputs[0].get("run_session_id", run_session_id)
+        except Exception:
+            run_outputs = []
+            start_run_idx = 0
+
     def _append_partial(record: Dict, flush_now: bool = False):
         nonlocal saved_since_print, partial_buffer
         if partial_runs_path and partial_flush_every > 0:
@@ -358,7 +392,14 @@ def run_sweep(
                 saved_since_print += len(partial_buffer)
                 partial_buffer = []
 
-    for run_idx in range(runs):
+    for run_idx in range(start_run_idx, runs):
+        if stop_file and Path(stop_file).exists():
+            print(f"[run_sweep] stop-file detected at run {run_idx}/{runs}. Stopping gracefully.", flush=True)
+            try:
+                Path(stop_file).unlink()
+            except Exception:
+                pass
+            break
         if saved_since_print:
             print(f"[run_sweep] run {run_idx + 1}/{runs} (partial_saved={saved_since_print})", flush=True)
             saved_since_print = 0
@@ -464,30 +505,6 @@ def run_sweep(
                 continue
             layer_max = max(w.items(), key=lambda kv: kv[1])
             band_dominant_layers.append({"layer": layer_max[0], "weight": layer_max[1]})
-        band_dom_counts_total: Dict[str, int] = {}
-        for item in band_dominant_layers:
-            if item and item.get("layer"):
-                band_dom_counts_total[item["layer"]] = band_dom_counts_total.get(item["layer"], 0) + 1
-        s2_band_fraction = (
-            sum(1 for item in band_dominant_layers if item and item["layer"] == "S2") / band_energies.size
-            if band_energies.size > 0
-            else 0.0
-        )
-        s2_band_fraction_struct = (
-            sum(1 for item in structural_dom_layers if item == "S2") / len(structural_dom_layers)
-            if structural_dom_layers
-            else 0.0
-        )
-        band_dom_counts_struct: Dict[str, int] = {}
-        for layer in structural_dom_layers:
-            if layer:
-                band_dom_counts_struct[layer] = band_dom_counts_struct.get(layer, 0) + 1
-        has_s2_dominant = s2_band_fraction > 0.0
-        s3_band_fraction = (
-            sum(1 for item in band_dominant_layers if item and item["layer"] == "S3") / band_energies.size
-            if band_energies.size > 0
-            else 0.0
-        )
 
         # structural subset: filter by relative power, cluster by proximity, take top-N
         structural_energies = []
@@ -530,6 +547,30 @@ def run_sweep(
                     continue
                 dom = band_dominant_layers[idx] if idx < len(band_dominant_layers) else None
                 structural_dom_layers.append(dom["layer"] if dom else None)
+        band_dom_counts_total: Dict[str, int] = {}
+        for item in band_dominant_layers:
+            if item and item.get("layer"):
+                band_dom_counts_total[item["layer"]] = band_dom_counts_total.get(item["layer"], 0) + 1
+        band_dom_counts_struct: Dict[str, int] = {}
+        for layer in structural_dom_layers:
+            if layer:
+                band_dom_counts_struct[layer] = band_dom_counts_struct.get(layer, 0) + 1
+        s2_band_fraction = (
+            sum(1 for item in band_dominant_layers if item and item["layer"] == "S2") / band_energies.size
+            if band_energies.size > 0
+            else 0.0
+        )
+        s2_band_fraction_struct = (
+            sum(1 for item in structural_dom_layers if item == "S2") / len(structural_dom_layers)
+            if structural_dom_layers
+            else 0.0
+        )
+        has_s2_dominant = s2_band_fraction > 0.0
+        s3_band_fraction = (
+            sum(1 for item in band_dominant_layers if item and item["layer"] == "S3") / band_energies.size
+            if band_energies.size > 0
+            else 0.0
+        )
         # flag overflow but don't reject
         if band_energies.size > sim_params.max_peaks:
             structural_flags.append("band_overflow")
@@ -972,6 +1013,13 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default=0,
         help="If >0, append each run record to partial/runs_partial.jsonl (every run if set).",
     )
+    parser.add_argument("--resume", action="store_true", help="Resume from existing partial/runs_partial.jsonl if present.")
+    parser.add_argument(
+        "--stop-file",
+        type=str,
+        default=None,
+        help="If set, sweep stops gracefully when this file appears (checked every run).",
+    )
     return parser
 
 
@@ -1112,6 +1160,8 @@ def main():
         partial_flush_every=args.partial_flush_every,
         engine_config_path=engine_cfg_path,
         engine_config_hash=engine_cfg_hash,
+        resume=args.resume,
+        stop_file=args.stop_file,
     )
     print(
         json.dumps(
