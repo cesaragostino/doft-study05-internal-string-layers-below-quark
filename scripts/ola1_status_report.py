@@ -276,13 +276,14 @@ def main():
 
     lines.append("## Detalle por partícula (d_total y conteos)")
     if detailed:
+        lines.append("| Partícula | Count | d_min | d_med | d_max | Tiers | S2 states |")
+        lines.append("|-----------|-------|-------|-------|-------|-------|-----------|")
         for item in detailed:
             tiers = ", ".join(f"{k}:{v}" for k, v in sorted(item["tier_counts"].items()))
             s2s = ", ".join(f"{k}:{v}" for k, v in sorted(item["s2_counts"].items()))
             lines.append(
-                f"- {item['particle']}: count={item['count']} "
-                f"d_total[min/med/max]={item['d_min']:.3f}/{item['d_med']:.3f}/{item['d_max']:.3f} "
-                f"tiers={{ {tiers} }} s2={{ {s2s} }}"
+                f"| {item['particle']} | {item['count']} | {item['d_min']:.3f} | "
+                f"{item['d_med']:.3f} | {item['d_max']:.3f} | {tiers} | {s2s} |"
             )
     else:
         lines.append("Sin bloques aceptados.")
