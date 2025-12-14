@@ -89,6 +89,53 @@ def summarize_inventory(blocks: List[Dict]) -> List[Tuple[str, int, float, float
     return summary
 
 
+def summarize_blocks_extended(blocks: List[Dict]) -> List[Dict]:
+    stats: Dict[str, Dict] = {}
+    for b in blocks:
+        pname = b.get("particle_name", "unknown")
+        st = stats.setdefault(
+            pname,
+            {
+                "d": [],
+                "tier": Counter(),
+                "s2": Counter(),
+            },
+        )
+        try:
+            d = float(b.get("match_score", {}).get("d_total"))
+            st["d"].append(d)
+        except Exception:
+            pass
+        st["tier"][str(b.get("structure_tier", "unknown"))] += 1
+        st["s2"][str(b.get("s2_state", "unknown"))] += 1
+
+    out: List[Dict] = []
+    for pname in sorted(stats.keys()):
+        dvals = sorted(stats[pname]["d"])
+        if dvals:
+            d_min = dvals[0]
+            d_max = dvals[-1]
+            mid = len(dvals) // 2
+            if len(dvals) % 2 == 0 and len(dvals) > 1:
+                d_med = (dvals[mid - 1] + dvals[mid]) / 2
+            else:
+                d_med = dvals[mid]
+        else:
+            d_min = d_med = d_max = float("nan")
+        out.append(
+            {
+                "particle": pname,
+                "count": len(dvals),
+                "d_min": d_min,
+                "d_med": d_med,
+                "d_max": d_max,
+                "tier_counts": dict(stats[pname]["tier"]),
+                "s2_counts": dict(stats[pname]["s2"]),
+            }
+        )
+    return out
+
+
 def _to_int(val) -> Optional[int]:
     try:
         return int(float(val))
@@ -200,6 +247,7 @@ def main():
         alerts.append(f"ALERTA AMARILLA: rechazos por memoria/overflow={memory_hits}")
 
     inventory = summarize_inventory(blocks)
+    detailed = summarize_blocks_extended(blocks)
     radar = radar_candidates(zoo, selection_rows, args.d_threshold_radar)
     pareto = reasons_counter.most_common()
 
@@ -222,6 +270,20 @@ def main():
         lines.append("|-----------|----------|---------------|------------------|")
         for particle, count, best, avg in inventory:
             lines.append(f"| {particle} | {count} | {best:.3f} | {avg:.3f} |")
+    else:
+        lines.append("Sin bloques aceptados.")
+    lines.append("")
+
+    lines.append("## Detalle por partícula (d_total y conteos)")
+    if detailed:
+        for item in detailed:
+            tiers = ", ".join(f"{k}:{v}" for k, v in sorted(item["tier_counts"].items()))
+            s2s = ", ".join(f"{k}:{v}" for k, v in sorted(item["s2_counts"].items()))
+            lines.append(
+                f"- {item['particle']}: count={item['count']} "
+                f"d_total[min/med/max]={item['d_min']:.3f}/{item['d_med']:.3f}/{item['d_max']:.3f} "
+                f"tiers={{ {tiers} }} s2={{ {s2s} }}"
+            )
     else:
         lines.append("Sin bloques aceptados.")
     lines.append("")
