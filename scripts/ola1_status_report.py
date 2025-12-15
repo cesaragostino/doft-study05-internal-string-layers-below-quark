@@ -63,6 +63,13 @@ def load_sm_masses(path: Path) -> Dict[str, float]:
     return masses
 
 
+def _mini_bar(val: float, max_val: float, width: int = 20) -> str:
+    if max_val <= 0 or val is None or not math.isfinite(val):
+        return ""
+    filled = int(min(max(val / max_val, 0.0), 1.0) * width)
+    return "[" + "#" * filled + "-" * (width - filled) + "]"
+
+
 def load_sweep_results(path_candidates: List[Path]) -> Tuple[int, int]:
     """Return runs_requested, runs_valid from first existing candidate."""
     for p in path_candidates:
@@ -643,6 +650,16 @@ def main():
             lines.append(f"- cosmic_chaos_temp (PE avg): {statistics.mean(cosmic_pe_vals):.4f}")
         if cosmic_hlock_vals:
             lines.append(f"- cosmic_disorder (H_mean avg): {statistics.mean(cosmic_hlock_vals):.4f}")
+        lines.append("")
+
+    if chaos_rows:
+        lines.append("## Mini-grafico caos/desorden por run (ASCII)")
+        max_pe = max((v for _, _, v, _, _ in chaos_rows if v is not None), default=1.0)
+        max_h = max((v for _, _, _, v, _ in chaos_rows if v is not None), default=1.0)
+        for rid, pname, pe_val, mh_val, _ in chaos_rows:
+            pe_bar = _mini_bar(pe_val or 0.0, max_pe, width=15)
+            h_bar = _mini_bar(mh_val or 0.0, max_h, width=15)
+            lines.append(f"- run {rid:>4} {pname:<12} PE {pe_val if pe_val is not None else float('nan'):.3f} {pe_bar} | H {mh_val if mh_val is not None else float('nan'):.4f} {h_bar}")
         lines.append("")
 
     lines.append("## Inventario (cosecha)")
