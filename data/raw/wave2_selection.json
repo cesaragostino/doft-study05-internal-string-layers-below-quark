@@ -1,45 +1,71 @@
 {
-  "global": {
-    "log_rejections": true,
-    "structure_tier_min_baryon": "level1",  // CAMBIADO de level2 a level1
-    "allow_s2_states_baryon": ["latent", "structural"],
-    "min_quark_blocks_baryon": 1,
-    "max_bands_compound": 12,
-    "min_band_count_compound": 2,
-    "use_d_total_for_labels_only": true,
-    "grade_yes_d_total_max": 2.0,
-    "grade_possible_d_total_max": 5.0
-  },
-  "targets": [
+  "selections": [
     {
-      "name": "proton",
-      "structure_tier_min": "level1",       // CAMBIADO de level2 a level1
-      "allow_s2_states": ["latent", "structural"],
-      "min_quark_blocks": 1,
-      "max_bands": 12,
-      "min_band_count": 2,
-      "grade_yes_d_total_max": 2.0,
-      "grade_possible_d_total_max": 5.0
+      "name": "nuclear_candidates_loose",
+      "target_name": "any",
+      "type": "nucleus",
+      "family": "any",
+      "filters": [
+        {
+          "field": "lock_quality_S1",
+          "op": ">=",
+          "value": 0.0
+        },
+        {
+          "field": "structure_tier",
+          "op": "in",
+          "value": ["none", "latent", "structural", "optimal"]
+        }
+      ],
+      "pick": {
+        "mode": "all",
+        "n": 10000
+      },
+      "output": {
+        "blocks_path": "data/processed/ola2/compounds.json",
+        "append": false,
+        "include_fields": [
+          "run_id",
+          "target_name",
+          "particle_name",
+          "mass_gev",
+          "d_total",
+          "structure_tier",
+          "composition",
+          "lock_quality_S1",
+          "band_count_structural"
+        ]
+      }
     },
     {
-      "name": "neutron",
-      "structure_tier_min": "level2",
-      "allow_s2_states": ["latent", "structural"],
-      "min_quark_blocks": 1,
-      "max_bands": 12,
-      "min_band_count": 2,
-      "grade_yes_d_total_max": 2.0,
-      "grade_possible_d_total_max": 5.0
-    },
-    {
-      "name": "delta_1232",
-      "structure_tier_min": "level2",
-      "allow_s2_states": ["latent", "structural"],
-      "min_quark_blocks": 1,
-      "max_bands": 12,
-      "min_band_count": 2,
-      "grade_yes_d_total_max": 2.0,
-      "grade_possible_d_total_max": 5.0
+      "name": "exotic_discovery",
+      "target_name": "unknown",
+      "type": "exotic",
+      "family": "any",
+      "filters": [
+        {
+          "field": "d_total",
+          "op": "<",
+          "value": 999.0
+        }
+      ],
+      "pick": {
+        "mode": "top_n",
+        "n": 500,
+        "order_by": "lock_quality_S1",
+        "ascending": false
+      },
+      "output": {
+        "blocks_path": "data/processed/ola2/exotics.json",
+        "append": false
+      }
     }
-  ]
+  ],
+  "global_settings": {
+    "band_count_field": "band_count_structural",
+    "band_count_max": 500,
+    "require_match": false,
+    "emit_unknown_when_no_match": true,
+    "log_rejections": true
+  }
 }

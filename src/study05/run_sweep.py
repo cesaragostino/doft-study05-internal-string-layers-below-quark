@@ -285,6 +285,7 @@ def run_sweep(
     engine_config_hash: Optional[str] = None,
     resume: bool = False,
     stop_file: Optional[str] = None,
+    compute_entropy: bool = False,
 ):
     rng = np.random.default_rng(seed)
     run_session_id = uuid.uuid4().hex
@@ -725,6 +726,13 @@ def run_sweep(
                     "memory_taus": mem_taus_flat,
                     "memory_amps": mem_amps_flat,
                     "memory_enabled_effective": False,
+                    "entropy_status": "skipped",
+                    "entropy_reason": "compute_entropy_disabled" if not compute_entropy else "not_implemented",
+                    "lyapunov_local": None,
+                    "lyapunov_mean": None,
+                    "phase_compactness": None,
+                    "phase_occupancy": None,
+                    "entropy_flags": None,
                 }
             )
             _append_partial(run_outputs[-1])
@@ -759,6 +767,13 @@ def run_sweep(
             s2_state_bands = "latent"
         else:
             s2_state_bands = "structural"
+
+        if compute_entropy:
+            entropy_status = "skipped"
+            entropy_reason = "not_implemented"
+        else:
+            entropy_status = "skipped"
+            entropy_reason = "compute_entropy_disabled"
 
         run_record = {
             "run_session_id": run_session_id,
@@ -831,6 +846,13 @@ def run_sweep(
             "b_trace": sim_result["b_series"].tolist(),
             "t_trace": sim_result["times"].tolist(),
             "dt_used": sim_result.get("dt_used"),
+            "entropy_status": entropy_status,
+            "entropy_reason": entropy_reason,
+            "lyapunov_local": None,
+            "lyapunov_mean": None,
+            "phase_compactness": None,
+            "phase_occupancy": None,
+            "entropy_flags": None,
             "R_S1_Q": config.R_S1_Q,
             "R_S2_S1": config.R_S2_S1,
             "R_S3_S2": config.R_S3_S2,
@@ -1020,6 +1042,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default=None,
         help="If set, sweep stops gracefully when this file appears (checked every run).",
     )
+    parser.add_argument(
+        "--compute-entropy",
+        action="store_true",
+        help="Calcular métricas de entropía/caos en cada corrida (desactivado por defecto).",
+    )
     return parser
 
 
@@ -1162,6 +1189,7 @@ def main():
         engine_config_hash=engine_cfg_hash,
         resume=args.resume,
         stop_file=args.stop_file,
+        compute_entropy=args.compute_entropy,
     )
     print(
         json.dumps(

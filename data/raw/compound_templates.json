@@ -3,21 +3,54 @@
     "name": "baryon_triangle",
     "type": "baryon",
     "nodes": 3,
-    "edges": [[0,1],[1,2],[2,0]],
-    "allowed_block_families": ["quark_like", "pion_like", "rho_like"]
+    "edges": [
+      [0, 1],
+      [1, 2],
+      [2, 0]
+    ],
+    "allowed_block_families": [
+      "quark_like",
+      "pion_like",
+      "rho_like"
+    ]
   },
   {
     "name": "baryon_chain",
     "type": "baryon",
     "nodes": 3,
-    "edges": [[0,1],[1,2]],
-    "allowed_block_families": ["quark_like", "pion_like", "rho_like"]
+    "edges": [
+      [0, 1],
+      [1, 2]
+    ],
+    "allowed_block_families": [
+      "quark_like",
+      "pion_like",
+      "rho_like"
+    ]
   },
   {
     "name": "meson_dimer",
     "type": "meson_complex",
     "nodes": 2,
-    "edges": [[0,1]],
-    "allowed_block_families": ["pion_like", "rho_like", "kaon_like"]
+    "edges": [
+      [0, 1]
+    ],
+    "allowed_block_families": [
+      "pion_like",
+      "rho_like",
+      "kaon_like"
+    ]
+  },
+  {
+    "name": "singlet",
+    "type": "elementary",
+    "nodes": 1,
+    "edges": [],
+    "allowed_block_families": [
+      "lepton",
+      "gauge_boson",
+      "nucleus",
+      "match_any"
+    ]
   }
 ]

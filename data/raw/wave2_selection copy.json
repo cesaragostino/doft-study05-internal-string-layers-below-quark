@@ -1,0 +1,45 @@
+{
+  "global": {
+    "log_rejections": true,
+    "structure_tier_min_baryon": "level1",  // CAMBIADO de level2 a level1
+    "allow_s2_states_baryon": ["latent", "structural"],
+    "min_quark_blocks_baryon": 1,
+    "max_bands_compound": 12,
+    "min_band_count_compound": 2,
+    "use_d_total_for_labels_only": true,
+    "grade_yes_d_total_max": 2.0,
+    "grade_possible_d_total_max": 5.0
+  },
+  "targets": [
+    {
+      "name": "proton",
+      "structure_tier_min": "level1",       // CAMBIADO de level2 a level1
+      "allow_s2_states": ["latent", "structural"],
+      "min_quark_blocks": 1,
+      "max_bands": 12,
+      "min_band_count": 2,
+      "grade_yes_d_total_max": 2.0,
+      "grade_possible_d_total_max": 5.0
+    },
+    {
+      "name": "neutron",
+      "structure_tier_min": "level2",
+      "allow_s2_states": ["latent", "structural"],
+      "min_quark_blocks": 1,
+      "max_bands": 12,
+      "min_band_count": 2,
+      "grade_yes_d_total_max": 2.0,
+      "grade_possible_d_total_max": 5.0
+    },
+    {
+      "name": "delta_1232",
+      "structure_tier_min": "level2",
+      "allow_s2_states": ["latent", "structural"],
+      "min_quark_blocks": 1,
+      "max_bands": 12,
+      "min_band_count": 2,
+      "grade_yes_d_total_max": 2.0,
+      "grade_possible_d_total_max": 5.0
+    }
+  ]
+}

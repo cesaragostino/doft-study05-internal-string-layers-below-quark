@@ -74,11 +74,12 @@ def _max_rel_delta(vals: List[float]) -> float:
 
 def _sample_blocks(pool: List[Dict[str, Any]], families: Sequence[str], k: int) -> List[Dict[str, Any]]:
     fam_lower = {f.lower() for f in families} if families else set()
-    filtered = [
-        b
-        for b in pool
-        if (not fam_lower or str(b.get("family", "")).lower() in fam_lower)
-    ]
+    if "match_any" in fam_lower:
+        filtered = list(pool)
+    else:
+        filtered = [
+            b for b in pool if (not fam_lower or str(b.get("family", "")).lower() in fam_lower)
+        ]
     if len(filtered) < k:
         return []
     # weighted by inverse d_total to prefer better matches but keep diversity
@@ -305,6 +306,10 @@ def run_from_rules(
 
     templates_path = Path(templates_path or rules.get("templates_json", "data/raw/compound_templates.json"))
     templates = {t["name"]: t for t in _load_json(templates_path)}
+    for t in rules.get("templates_definitions", []):
+        name = t.get("name")
+        if name:
+            templates[name] = t
     sm_path = Path(sm_universe or rules.get("sm_universe", "data/raw/sm_universe.json"))
     catalog = {p["name"]: p for p in load_universe(sm_path).get("particles", [])}
     runs_per_target_default = int(rules.get("runs_per_target", 100))
