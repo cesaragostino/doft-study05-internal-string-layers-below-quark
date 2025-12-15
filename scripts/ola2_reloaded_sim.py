@@ -150,14 +150,20 @@ def simulate_ola2(
         R_mean_lastW = float(np.mean(R_series[-window_W:])) if R_series.size >= window_W else float("nan")
 
     phase_var_lastW = float("nan")
+    skipped_edges = 0
     if R_series.size >= window_W and edges:
         thetas_window = np.stack(theta_history[-window_W:], axis=0)
         delta_vars = []
         for i, j in edges:
+            if i < 0 or j < 0 or i >= N or j >= N:
+                skipped_edges += 1
+                continue
             dtheta = _wrap_angle(thetas_window[:, int(i)] - thetas_window[:, int(j)])
             delta_vars.append(np.var(dtheta))
         if delta_vars:
             phase_var_lastW = float(np.mean(delta_vars))
+    if skipped_edges:
+        print(f"[ola2_sim] skipped {skipped_edges} invalid edges (N={N})")
 
     insufficient_ticks = R_series.size < window_W
     success = False

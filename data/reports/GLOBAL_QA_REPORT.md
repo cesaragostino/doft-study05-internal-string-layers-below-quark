@@ -1,0 +1,11 @@
+# QA Global – Estabilidad Nuclear (olas 1–4)
+## Tabla de la verdad
+| Ola | Partícula | Éxitos (filtrados) | Masa Sim (GeV) | Masa Real (GeV) | Precisión (%) | Eb/A Sim (MeV) | Eb/A Real (MeV) |
+|-----|-----------|--------------------|----------------|-----------------|---------------|----------------|-----------------|
+| Ola 2 | Helium-4 | 9895 | 3.744 | 3.727 | 0.44% | 6.57 | 7.07 |
+| Ola 3 | Carbon-12 | 9034 | 11.153 | 11.175 | 0.20% | 6.44 | 7.68 |
+| Ola 3 | Oxygen-16 (Tetra) | 0 | nan | 14.899 | nan% | nan | 7.98 |
+| Ola 4 | Magnesium-24 | 9009 | 22.152 | 22.341 | 0.85% | 6.39 | 8.26 |
+
+## Curva de estabilidad
+![stability](stability_curve.png)

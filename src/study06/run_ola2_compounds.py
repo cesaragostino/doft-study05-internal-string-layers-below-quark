@@ -214,24 +214,41 @@ def run_from_rules(
             lockq: List[Dict[str, float]] = []
             fm_missing = False
             for b in picked:
-                rid = b.get("origin_run_id")
+                rid = b.get("origin_run_id") or b.get("source_run")
                 try:
                     rid_int = int(float(rid))
                 except Exception:
                     rid_int = None
                 bands = proxies_map.get(rid_int, {}).get("band_energies_gev", []) if rid_int is not None else []
-                fm = min(bands) if bands else 1.0
-                if not bands:
+                mass_field = b.get("mass")
+                fm_candidate = b.get("F_m") or b.get("f_m")
+                fm = None
+                if bands:
+                    fm = min(bands)
+                elif fm_candidate is not None:
+                    fm = fm_candidate
+                elif mass_field is not None:
+                    fm = mass_field
+                else:
                     fm_missing = True
-                fms.append(fm)
-                masses.append(fm)
-                omegas.append(fm)  # omega = F_m (natural units)
-                lockq.append(b.get("lock_quality", {}))
+                    fm = 1.0
+                fms.append(float(fm))
+                mass_val = mass_field if mass_field is not None else fm
+                masses.append(float(mass_val))
+                omegas.append(float(fm))  # omega = F_m
+                lq = b.get("lock_quality")
+                if not lq and b.get("quality") is not None:
+                    try:
+                        qv = float(b.get("quality"))
+                        lq = {"Q": qv, "S1": 0.0, "S2": 0.0}
+                    except Exception:
+                        lq = {}
+                lockq.append(lq or {})
 
             sim_res = simulate_ola2(
                 masses=np.array(masses, dtype=float),
                 omegas=np.array(omegas, dtype=float),
-                theta0=None,  # random + ruido interno
+                theta0=None,
                 template=tmpl,
                 lock_quality=lockq,
                 dt=dt,
@@ -277,12 +294,12 @@ def run_from_rules(
                 "degree_normalized": topo_block.get("degree_normalized"),
                 "effective_degree": topo_block.get("effective_degree"),
                 "block_ids": json.dumps([b.get("block_id") for b in picked]),
-                "block_particles": json.dumps([b.get("particle_name") for b in picked]),
+                "block_particles": json.dumps([b.get("particle_name") or b.get("name") for b in picked]),
                 "block_families": json.dumps([b.get("family") for b in picked]),
                 "F_m_list": json.dumps(fms),
                 "mass_list": json.dumps(masses),
                 "fm_missing": fm_missing,
-                "origin_run_ids": json.dumps([b.get("origin_run_id") for b in picked]),
+                "origin_run_ids": json.dumps([b.get("origin_run_id") or b.get("source_run") for b in picked]),
                 "H_block_mean": float(np.mean([_lock_entropy(q) for q in lockq])) if lockq else None,
             }
             rows.append(row)

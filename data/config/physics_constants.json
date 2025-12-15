@@ -1,0 +1,40 @@
+{
+  "qa_targets": [
+    {
+      "wave": "Ola 2",
+      "particle": "Helium-4",
+      "csv_path": "data/processed/ola2_reloaded/ola2_helium_from_deuterons.csv",
+      "filter_composition": ["deuteron", "deuteron"],
+      "A": 4,
+      "real_mass_gev": 3.7273,
+      "real_binding_energy_per_nucleon_mev": 7.07
+    },
+    {
+      "wave": "Ola 3",
+      "particle": "Carbon-12",
+      "csv_path": "data/processed/ola3/ola2_carbon_triple_alpha.csv",
+      "filter_composition": ["alpha", "alpha", "alpha"],
+      "A": 12,
+      "real_mass_gev": 11.1748,
+      "real_binding_energy_per_nucleon_mev": 7.68
+    },
+    {
+      "wave": "Ola 3",
+      "particle": "Oxygen-16 (Tetra)",
+      "csv_path": "data/processed/ola3_oxygen/ola2_oxygen_tetra_alpha.csv",
+      "filter_composition": ["alpha", "alpha", "alpha", "alpha"],
+      "A": 16,
+      "real_mass_gev": 14.8991,
+      "real_binding_energy_per_nucleon_mev": 7.98
+    },
+    {
+      "wave": "Ola 4",
+      "particle": "Magnesium-24",
+      "csv_path": "data/processed/ola4/ola2_magnesium_synthesis.csv",
+      "filter_composition": ["carbon12", "carbon12"],
+      "A": 24,
+      "real_mass_gev": 22.3413,
+      "real_binding_energy_per_nucleon_mev": 8.26
+    }
+  ]
+}
