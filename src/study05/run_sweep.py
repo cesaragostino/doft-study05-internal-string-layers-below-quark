@@ -60,6 +60,54 @@ DEFAULT_LAYER_THRESHOLDS = {
         "noise_highfreq_min": 0.2,
     },
 }
+CHAOS_EPS = 1e-12
+
+
+def _lock_entropy_norm(values: List[float]) -> float:
+    vals = np.array(values, dtype=float)
+    k = vals.size if vals.size > 0 else 1
+    s = float(np.sum(vals))
+    if s <= CHAOS_EPS:
+        p = np.ones(k) / k
+    else:
+        p = vals / s
+    return float(-np.sum(p * np.log(np.clip(p, CHAOS_EPS, 1.0))) / np.log(k)) if k > 1 else 0.0
+
+
+def _mixture_entropy_norm(values: List[float], bins: int = 30) -> float:
+    if not values:
+        return float("nan")
+    hist, _ = np.histogram(values, bins=bins, range=(0.0, 1.0))
+    total = hist.sum()
+    if total <= 0:
+        return float("nan")
+    p = hist / total
+    return float(-np.sum(p * np.log(np.clip(p, CHAOS_EPS, 1.0))) / np.log(bins))
+
+
+def _structure_mix_entropy_norm(tiers: List[str]) -> float:
+    if not tiers:
+        return float("nan")
+    unique, counts = np.unique(tiers, return_counts=True)
+    p = counts / counts.sum()
+    return float(-np.sum(p * np.log(np.clip(p, CHAOS_EPS, 1.0))) / np.log(len(p)))
+
+
+def _permutation_entropy(series: List[float], m: int = 5, tau: int = 1) -> float | None:
+    x = np.asarray(series, dtype=float)
+    T = x.size
+    if T < m * tau + 1:
+        return None
+    patterns = {}
+    for t in range(T - (m - 1) * tau):
+        window = x[t : t + m * tau : tau]
+        order = tuple(np.argsort(window, kind="stable"))
+        patterns[order] = patterns.get(order, 0) + 1
+    total = sum(patterns.values())
+    if total == 0:
+        return None
+    probs = np.array(list(patterns.values()), dtype=float) / total
+    return float(-np.sum(probs * np.log(np.clip(probs, CHAOS_EPS, 1.0))) / np.log(np.math.factorial(m)))
 
 
 def _serialize_run_config(config: SimulationConfig) -> Dict:
@@ -728,6 +776,7 @@ def run_sweep(
                     "memory_enabled_effective": False,
                     "entropy_status": "skipped",
                     "entropy_reason": "compute_entropy_disabled" if not compute_entropy else "not_implemented",
+                    "entropy_chaos": None,
                     "lyapunov_local": None,
                     "lyapunov_mean": None,
                     "phase_compactness": None,
@@ -768,12 +817,41 @@ def run_sweep(
         else:
             s2_state_bands = "structural"
 
+        # Entropy/caos
+        entropy_chaos = None
         if compute_entropy:
-            entropy_status = "skipped"
-            entropy_reason = "not_implemented"
+            tick_H: List[float] = []
+            energies_series = sim_result.get("energies_series")
+            if energies_series is not None and np.size(energies_series) > 0:
+                for vec in energies_series:
+                    tick_H.append(_lock_entropy_norm(vec))
+            chaos_mode = "dynamic" if len(tick_H) >= 6 else "ensemble"  # m=5,tau=1 ⇒ need ≥6
+            PE_tick_norm = _permutation_entropy(tick_H, m=5, tau=1) if chaos_mode == "dynamic" else None
+            fraction_structured = 0.0
+            if structure_tier and structure_tier != "none":
+                fraction_structured = 1.0
+            entropy_chaos = {
+                "eps": CHAOS_EPS,
+                "mean_H_lock_norm": float(np.mean(tick_H)) if tick_H else float("nan"),
+                "std_H_lock_norm": float(np.std(tick_H)) if tick_H else float("nan"),
+                "p90_H_lock_norm": float(np.percentile(tick_H, 90)) if tick_H else float("nan"),
+                "fraction_structured": fraction_structured,
+                "mean_Q": lock_Q_f,
+                "std_Q": 0.0,
+                "mixture_entropy_blocks_norm": _mixture_entropy_norm(tick_H) if tick_H else float("nan"),
+                "structure_mix_norm": _structure_mix_entropy_norm([structure_tier] if structure_tier else []),
+                "chaos_mode": chaos_mode,
+                "PE_tick_norm": PE_tick_norm,
+                "T_ticks": len(tick_H) if tick_H else 0,
+                "mean_H_lock_norm_tick": tick_H if tick_H else None,
+                "notes": "PE computed on causal ticks if available; ensemble metrics otherwise.",
+            }
+            entropy_status = "ok"
+            entropy_reason = None
         else:
             entropy_status = "skipped"
             entropy_reason = "compute_entropy_disabled"
+            entropy_chaos = None
 
         run_record = {
             "run_session_id": run_session_id,
@@ -853,6 +931,7 @@ def run_sweep(
             "phase_compactness": None,
             "phase_occupancy": None,
             "entropy_flags": None,
+            "entropy_chaos": entropy_chaos,
             "R_S1_Q": config.R_S1_Q,
             "R_S2_S1": config.R_S2_S1,
             "R_S3_S2": config.R_S3_S2,
@@ -1045,7 +1124,14 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--compute-entropy",
         action="store_true",
-        help="Calcular métricas de entropía/caos en cada corrida (desactivado por defecto).",
+        default=True,
+        help="Calcular métricas de entropía/caos en cada corrida (activado por defecto, pasar --no-compute-entropy si se quiere desactivar).",
+    )
+    parser.add_argument(
+        "--no-compute-entropy",
+        action="store_false",
+        dest="compute_entropy",
+        help="Desactivar métricas de entropía/caos.",
     )
     return parser
 

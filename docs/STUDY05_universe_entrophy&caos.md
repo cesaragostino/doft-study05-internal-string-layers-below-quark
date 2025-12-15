@@ -31,178 +31,262 @@ to compare runs.
 
 ---
 
-## Chaos as Temporal Complexity (Dynamic Proxy)
+## Instantaneous Disorder/Randomness (Ensemble)
 
-To capture “chaos” as irregularity in the evolution (not just instantaneous uncertainty), we use **Permutation Entropy** on a scalar time series \(x_n\) (for example \(x_n = \langle H_{\text{lock}}^{(\text{norm})} \rangle\) per run). This metric detects loss of temporal structure and increasing complexity of the generator without requiring an explicit physical model.
-
-Normalized, it also lies in \([0, 1]\): high values imply a more “chaotic/irregular” evolution.
+This is what you see in a “snapshot” of the system: how spread out or mixed the states are at that instant. This can be measured without any temporal trajectory. In physics it is related to mixing entropy, heterogeneity, fluctuations between subsystems, etc.
 
 ---
 
-## Single Spec for the Programmer (Full Scope)
+## Dynamical Chaos (Temporal)
 
-### Objective
-
-For each run of the sweep, compute and append to the output file an “Entropy+Chaos” block of metrics at block and run level, using only what already exists in the current JSON (lock_quality, tiers, etc.) and a short window of internal history.
+This is **not** “being disordered” in a snapshot; it is the complexity/instability of the evolution: sensitivity to initial conditions, growth of uncertainty, emergence of unpredictable patterns in time. To measure it you need a causal trajectory \(x_t\). Without that trajectory, any temporal metric (Permutation Entropy, Lyapunov proxy, etc.) ends up measuring artifacts of the log or of the RNG.
 
 ---
 
-## Inputs (Per Block, Per Run)
+## Lock Entropy (Instantaneous Measure)
 
-For each block in the run:
-
-- `lock_quality.Q`, `lock_quality.S1`, `lock_quality.S2` (floats, may be very close to 0),
-- `structure_tier` (string: `"none"`, `"level1"`, `"level2"`, …),
-- optionally: `s2_state` (for stats), `match_score.d_total` (for correlations if you want).
-
----
-
-## Outputs (Appended Per Run to Log/Report)
-
-Add to the run summary the following keys (suggested names):
-
-### A) Per-Block Metrics (if you keep detailed data; otherwise at least aggregates)
-
-- `H_lock` (float): Shannon entropy in nats,
-- `H_lock_norm` (float): `H_lock / ln(3)` in \([0, 1]\),
-- `A_lock` (float): simple ambiguity = \(1 - \max(p)\) in \([0, 2/3]\) (can be normalized),
-- `p_lock_max` (float): \(\max(p)\) (how dominant the lock is).
-
-### B) Aggregated Metrics Per Run
-
-- `n_blocks`,
-- `mean_H_lock_norm`, `std_H_lock_norm`, `p90_H_lock_norm`,
-- `mean_A_lock`, `std_A_lock`,
-- `mean_Q`, `std_Q` (and similarly for `S1`, `S2` if desired),
-- `fraction_structured` = (# blocks with `structure_tier != "none"`) / `n_blocks`,
-- `fraction_s2_latent` = (# blocks with `s2_state == "latent"`) / `n_blocks` (if applicable).
-
-**Production (change run to run)**
-
-- `delta_mean_H_lock_norm` = `mean_H_lock_norm(run) - mean_H_lock_norm(prev_run)`,
-- `delta_fraction_structured` = `fraction_structured(run) - fraction_structured(prev_run)`.
-
----
-
-## C) Dynamic Chaos (Permutation Entropy Over the Per-Run Series)
-
-Define a scalar series per run:
-
-- `x_run = mean_H_lock_norm` (one number per run).
-
-Maintain a circular buffer with the last \(W\) values of `x_run` (e.g. \(W = 256\) or 512). When the buffer is full, compute:
-
-- `PE_run_norm` = normalized Permutation Entropy in \([0, 1]\) with parameters:
-
-  - embedding dimension `m = 5`,
-  - delay `tau = 1`,
-  - normalization by `ln(m!)`.
-
-Store per run:
-
-- `PE_run_norm` (if there are not yet \(W\) data points, store `null`).
-
----
-
-## Exact Definitions (to Avoid Ambiguity)
-
-### 1) Preparation of Vector `p` per Block
-
-```python
-eps = 1e-12
-p_raw = [Q, S1, S2]   # if any is missing, use 0.0
-s = Q + S1 + S2
-if s <= eps:
-    p = [1.0, 0.0, 0.0]   # fallback
-else:
-    p = [Q/s, S1/s, S2/s]
-```
-
-### 2) Lock Entropy per Block
-
-Natural log (nats):
+Each block has a vector of “qualities” \((Q, S1, S2)\). To avoid depending on scale, it is normalized:
 
 \[
-H_{\text{lock}} = -\sum_i p[i] \ln(p[i] + \text{eps})
+p_i = \frac{v_i}{\sum_j v_j}, \quad v = (Q, S1, S2)
 \]
+
+and the normalized entropy is defined as:
 
 \[
-H_{\text{lock}}^{(\text{norm})} = \frac{H_{\text{lock}}}{\ln 3}
+H_{\text{lock}} = -\frac{1}{\ln 3} \sum_{i=1}^{3} p_i \ln(p_i) \in [0, 1]
 \]
-
-### 3) Simple Ambiguity (Additional Instantaneous Proxy)
-
-```python
-pmax = max(p)
-A_lock = 1 - pmax
-A_lock_norm = A_lock / (2.0/3.0)  # optional, yields [0,1]
-```
 
 Interpretation:
 
-- `H_lock_norm` and `A_lock_norm` capture “uncertainty/mixture” of the lock in the run.
-- If you want “two different numbers”, here they are: entropy (H) and ambiguity (A) (instantaneous),
-  plus dynamic chaos (PE) (temporal).
+- \(H_{\text{lock}} \approx 0\): a dominant “lock” (more decided state / less mixing).
+- \(H_{\text{lock}} \approx 1\): high mixing between components (less decided / more spread-out state).
 
-### 4) Permutation Entropy (Per Run, Over `x_run`)
-
-With buffer
-
-\[
-X = [x_{t-W+1}, \dots, x_t]:
-\]
-
-For each position \(j\), take the vector
-
-\[
-v = (x_j, x_{j+\tau}, \dots, x_{j + (m-1)\tau}).
-\]
-
-Obtain the **ordinal pattern** (ranking) of the vector (if there are ties, break them with a minimal jitter or a stable rule).
-
-Count frequencies of each pattern (there are \(m!\) patterns).
-
-Compute:
-
-\[
-PE = -\sum_{\text{patterns}} p(\text{pattern}) \log(p(\text{pattern}) + \text{eps})
-\]
-
-\[
-PE_{\text{norm}} = \frac{PE}{\ln(m!)}
-\]
-
-Recommended fixed parameters: `W = 256`, `m = 5`, `tau = 1`.
+This is a measure of instantaneous disorder (ensemble-type): valid whether the runs are independent or there is inheritance.
 
 ---
 
-## Recommended Output Format (to Append to the Sweep File)
+## Dynamical Chaos (Correct Temporal Measure)
 
-If your sweep already generates a JSON per run, add inside:
+To measure dynamical chaos in a way that is “agnostic to the narrative”, we use a measure based on local orderings of the time series, for example **Permutation Entropy** (Bandt–Pompe) on a macroscopic observable \(x_t\) defined per tick within a run:
+
+\[
+x_t = \operatorname{mean}_{\text{blocks}}(H_{\text{lock}}(t))
+\]
+
+Permutation Entropy is high when the sequence exhibits locally complex patterns (low predictability of orderings), and low when there is regularity/periodicity. It is a robust proxy of temporal complexity.  
+
+**Critical:** it only has physical meaning if \(x_t\) is causal (ticks within a run, or runs with explicit inheritance).
+
+---
+
+## What We Do If the Experiment Is Stateless
+
+If Wave 2 (Ola2) produces i.i.d. runs (without causal continuity), then:
+
+- We report ensemble entropy/heterogeneity (valid).
+- We do **not** report “dynamical chaos” (PE) over runs, because that would be measuring the RNG/ordering. In that case `PE` remains `null` and the reason is reported explicitly.
+
+---
+
+## Complete Spec for Implementation (Single Scope)
+
+### Objective
+
+For each run, append to the sweep report an `entropy_chaos` block that includes:
+
+- instantaneous metrics (always valid),
+- dynamical metrics (only if there are ticks/causal series),
+- ensemble fallback if there are no ticks,
+
+and which makes it traceable whether the run is `dynamic` or `ensemble`.
+
+---
+
+## A) Data to Log (Minimum Necessary)
+
+### A1) Per Block (if you already have it, perfect)
+
+Fields already present:
+
+- `lock_quality.Q`, `lock_quality.S1`, `lock_quality.S2`
+- `structure_tier`
+
+Optional: `match_score.*` if you want correlations, not necessary for this spec.
+
+### A2) Per Tick Within the Run (NEW – Needed for Correct “Chaos”)
+
+For each tick in `0..T-1` (e.g. `T = 120`):
+
+Store aggregates per tick (no need to dump full per-block data):
+
+- `mean_H_lock_norm_tick`
+- `std_H_lock_norm_tick` (optional but useful)
+- `fraction_structured_tick` (optional)
+- `mean_Q_tick` (optional)
+
+**Important:** if, by architecture, an internal tick does not exist today, it must be instrumented. Without this, dynamical “chaos” cannot be measured properly.
+
+---
+
+## B) Computations
+
+### B1) Lock Entropy per Block
+
+Input: `Q, S1, S2`  
+Constant: `eps = 1e-12`  
+
+Computation:
+
+```python
+s = Q + S1 + S2
+if s < eps:
+    p = [1/3, 1/3, 1/3]
+else:
+    p = [Q/s, S1/s, S2/s]
+
+H_lock = -(
+    p[0] * ln(p[0] + eps)
+  + p[1] * ln(p[1] + eps)
+  + p[2] * ln(p[2] + eps)
+) / ln(3)
+```
+
+### B2) Instantaneous Aggregates per Run (Always)
+
+Over all blocks of the run:
+
+- `mean_H_lock_norm`
+- `std_H_lock_norm`
+- `p90_H_lock_norm`
+- `fraction_structured = count(structure_tier != "none") / N`
+- `mean_Q`, `std_Q` (optional, cheap)
+
+**Ensemble extras** (recommended, cheap and useful if stateless):
+
+- `mixture_entropy_blocks_norm`:
+
+  - histogram of `H_lock` in `B = 30` bins in `[0, 1]`
+  - `p_bin = count / bin_total`
+  - \(H_{\text{bins}} = -\sum p_{\text{bin}} \ln(p_{\text{bin}} + \text{eps}) / \ln(B)\)
+
+- `structure_mix_norm`:
+
+  - count tiers (`none`, `level1`, `level2`, …)
+  - \(H_{\text{tier}} = -\sum p_{\text{tier}} \ln(p_{\text{tier}} + \text{eps}) / \ln(K)\), where \(K\) is the number of categories present.
+
+### B3) Dynamical Chaos per Run (Only If There Are Ticks)
+
+Define the causal series:
+
+\[
+x_t = \text{mean\_H\_lock\_norm\_tick}[t], \quad t = 0..T-1
+\]
+
+Compute normalized Permutation Entropy (Bandt–Pompe):
+
+**Parameters:**
+
+- embedding dimension `m = 5`
+- delay `tau = 1`
+- number of patterns: \(m!\)
+
+For each window index \(t\) such that there are \(m\) points, construct the vector
+
+\[
+v = [x_t, x_{t+\tau}, \dots, x_{t+(m-1)\tau}]
+\]
+
+Obtain the ordinal pattern (ranking). Tie handling:
+
+- simple/robust option: if there are exact ties, break them with the index (stable order).
+
+Count pattern frequencies \(p(\text{pattern})\).
+
+Entropy:
+
+\[
+PE = -\sum p \ln(p + \epsilon) / \ln(m!)
+\]
+
+Output: `PE_tick_norm = PE`.
+
+Validity rules:
+
+- if \(T < m \cdot \tau + 1\), set `PE_tick_norm = null` and `chaos_mode = "ensemble"`.
+
+---
+
+## C) Mode Detection (So We Don’t Fool Ourselves)
+
+Set in each run:
+
+- `has_ticks =` (whether there exists a series `mean_H_lock_norm_tick` with `T >= m * tau + 1`)
+
+If `has_ticks`:
+
+- `chaos_mode = "dynamic"`
+- compute `PE_tick_norm`
+
+If not:
+
+- `chaos_mode = "ensemble"`
+- `PE_tick_norm = null`
+- keep `mixture_entropy_blocks_norm` and `structure_mix_norm` as honest substitutes.
+
+---
+
+## D) Output Format (Append to the Sweep Report JSON)
+
+Add to the run object:
 
 ```json
-"entropy_chaos": {
-  "n_blocks": ...,
-  "mean_H_lock_norm": ...,
-  "std_H_lock_norm": ...,
-  "p90_H_lock_norm": ...,
-  "mean_A_lock": ...,
-  "std_A_lock": ...,
-  "mean_Q": ...,
-  "std_Q": ...,
-  "fraction_structured": ...,
-  "fraction_s2_latent": ...,
-  "delta_mean_H_lock_norm": ...,
-  "delta_fraction_structured": ...,
-  "PE_run_norm": ...
+{
+  "entropy_chaos": {
+    "eps": 1e-12,
+    "mean_H_lock_norm": 0.0,
+    "std_H_lock_norm": 0.0,
+    "p90_H_lock_norm": 0.0,
+    "fraction_structured": 0.0,
+    "mean_Q": 0.0,
+    "std_Q": 0.0,
+
+    "mixture_entropy_blocks_norm": 0.0,
+    "structure_mix_norm": 0.0,
+
+    "chaos_mode": "dynamic|ensemble",
+    "PE_tick_norm": null,
+    "T_ticks": null,
+
+    "notes": "PE computed only on causal tick series; stateless runs use ensemble metrics."
+  }
 }
 ```
 
+If `chaos_mode = "dynamic"`:
+
+- `PE_tick_norm`: float  
+- `T_ticks`: int
+
+If `chaos_mode = "ensemble"`:
+
+- `PE_tick_norm = null`, `T_ticks = null`.
+
 ---
 
-## Practical Note (Important So You Don’t Lose 4 Days)
+## E) Complexity and Cost
 
-This adds very little cost:
+- Per-block computation: \(O(N)\) per run.
+- Histogram: \(O(N)\).
+- PE per tick: \(O(T \cdot m \log m)\) (with \(m = 5\) it is effectively constant). Very cheap.
 
-- `H_lock_norm` and aggregates: \(O(n_{\text{blocks}})\) per run (cheap).
-- `PE_run_norm`: only when the buffer is full, \(O(W)\) (also cheap with \(W = 256\)).
+---
+
+## Result
+
+With this:
+
+- **Entropy** (`H_lock`) becomes your “thermometer” of mixture/decision of locks (instantaneous).
+- **Chaos** (`PE`) becomes a correct dynamical measure, but only when there is causal continuity (ticks).
+- If Wave 2 (Ola2) is stateless, the report is still useful (ensemble), without self-deception.
+

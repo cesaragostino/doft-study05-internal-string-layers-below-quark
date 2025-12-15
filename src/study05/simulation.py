@@ -631,6 +631,7 @@ def simulate(
     samples_x = []
     samples_time = []
     samples_b = []
+    samples_e = []
     debug_inputs = []
     debug_tau = []
     debug_z = []
@@ -717,6 +718,9 @@ def simulate(
             samples_time.append((step + 1) * dt)
             samples_x.append(state.x.copy())
             samples_b.append(state.b.copy())
+            # keep per-layer energies for entropy/chaos metrics
+            energy_vec = [inst_energy.get(layer, 0.0) for layer in layer_to_idx.keys()]
+            samples_e.append(energy_vec)
             if debug:
                 signals = {layer: float(np.mean([state.x[i] for i in layer_indices.get(layer, [])])) for layer in layer_indices}
                 sig_vec = np.array([signals.get(layer, 0.0) for layer in mem_arch.layer_order])
@@ -805,6 +809,7 @@ def simulate(
 
     samples_x = np.array(samples_x)  # shape (T, N)
     samples_b = np.array(samples_b) if samples_b else np.empty((0, len(state.b)))
+    samples_e = np.array(samples_e) if samples_e else np.empty((0, len(state.b)))
     times = np.array(samples_time)
 
     spectrum = compute_fft_spectrum(samples_x, dt * sim_params.sample_stride)
@@ -813,11 +818,13 @@ def simulate(
     if samples_b.shape[0] > 300:
         stride = max(1, samples_b.shape[0] // 200)
         samples_b = samples_b[::stride]
+        samples_e = samples_e[::stride] if samples_e.size else samples_e
         times = times[::stride]
 
     result = {
         "times": times,
         "b_series": samples_b,
+        "energies_series": samples_e,
         "spectrum": spectrum,
         "layer_to_idx": layer_to_idx,
         "dt_used": dt,
