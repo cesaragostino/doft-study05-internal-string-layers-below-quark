@@ -640,14 +640,14 @@ def main():
         lines.append("")
 
     if chaos_rows:
-        lines.append("## Mini-grafico caos/desorden por run (ASCII)")
+        lines.append("## Caos/desorden por run")
         chaos_rows_sorted = sorted(chaos_rows, key=lambda x: x[0] if x[0] is not None else -1)
-        max_pe = max((v for _, _, v, _, _ in chaos_rows_sorted if v is not None), default=1.0)
-        max_h = max((v for _, _, _, v, _ in chaos_rows_sorted if v is not None), default=1.0)
-        for rid, pname, pe_val, mh_val, _ in chaos_rows_sorted:
-            pe_bar = _mini_bar(pe_val or 0.0, max_pe, width=15)
-            h_bar = _mini_bar(mh_val or 0.0, max_h, width=15)
-            lines.append(f"- run {rid:>4} {pname:<12} PE {pe_val if pe_val is not None else float('nan'):.3f} {pe_bar} | H {mh_val if mh_val is not None else float('nan'):.4f} {h_bar}")
+        lines.append("| Run ID | PE_tick_norm | mean_H_lock_norm |")
+        lines.append("|--------|--------------|------------------|")
+        for rid, _, pe_val, mh_val, _ in chaos_rows_sorted:
+            pe_str = f"{pe_val:.4f}" if pe_val is not None else "n/d"
+            mh_str = f"{mh_val:.4f}" if mh_val is not None else "n/d"
+            lines.append(f"| {rid} | {pe_str} | {mh_str} |")
         lines.append("")
 
     lines.append("## Inventario (cosecha)")
