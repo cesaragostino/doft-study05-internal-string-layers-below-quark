@@ -1,5 +1,6 @@
 {
-  "blocks_input": "data/processed/ola1/simple_blocks.json",
+  "blocks_input": "data/processed/ola1-chaos/simple_blocks.json",
+  "ola1_proxies_csv": "data/processed/ola1-chaos/Ola1_3-2-5_all_runs_proxies.csv",
   "targets": [
     {
       "name": "deuteron_synthesis",
