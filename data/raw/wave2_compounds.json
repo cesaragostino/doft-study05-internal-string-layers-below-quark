@@ -3,22 +3,22 @@
   "ola1_proxies_csv": "data/processed/ola1-chaos/Ola1_3-2-5_all_runs_proxies.csv",
   "targets": [
     {
-      "name": "deuteron_synthesis",
+      "name": "deuteron_synthesis_strict",
       "particle_name": "deuteron",
       "type": "nucleus",
       "templates": ["nuclear_pair"],
-      "allowed_block_families": ["nucleon_like", "match_any"],
-      "runs_per_target": 500,
+      "allowed_block_families": ["nucleon_like"],
+      "runs_per_target": 10000,
       "d_yes_match": 0.5,
       "d_possible_match": 1.5
     },
     {
-      "name": "alpha_synthesis",
+      "name": "alpha_synthesis_pure",
       "particle_name": "alpha",
       "type": "nucleus",
       "templates": ["nuclear_tetra"],
-      "allowed_block_families": ["nucleon_like", "nucleus", "match_any"],
-      "runs_per_target": 1500,
+      "allowed_block_families": ["nucleon_like"],
+      "runs_per_target": 10000,
       "d_yes_match": 1.0,
       "d_possible_match": 3.0
     },
@@ -27,8 +27,8 @@
       "particle_name": "unknown",
       "type": "exotic",
       "templates": ["nuclear_chain", "nuclear_tetra"],
-      "allowed_block_families": ["nucleon_like", "nucleus", "lepton", "meson", "match_any"],
-      "runs_per_target": 1000,
+      "allowed_block_families": ["nucleon_like", "nucleus", "match_any"],
+      "runs_per_target": 2000,
       "d_yes_match": 5.0,
       "d_possible_match": 10.0
     }
