@@ -419,6 +419,9 @@ def main():
     blocks = load_simple_blocks(blocks_path)
     zoo = load_zoo_matches(zoo_path)
     sm_masses = load_sm_masses(Path("data/raw/sm_universe.json"))
+    # Collect per-run chaos/disorder for cosmic averages
+    cosmic_pe_vals: List[float] = []
+    cosmic_hlock_vals: List[float] = []
 
     # fallback: if no sweep_results, infer totals from proxies/selection
     if runs_total == 0:
@@ -472,8 +475,16 @@ def main():
         if rid is None:
             continue
         runs_by_id[rid] = r
+        ec = r.get("entropy_chaos") or {}
+        pe_val = ec.get("PE_tick_norm")
+        mh_val = ec.get("mean_H_lock_norm")
+        if pe_val is not None and math.isfinite(pe_val):
+            cosmic_pe_vals.append(float(pe_val))
+        if mh_val is not None and math.isfinite(mh_val):
+            cosmic_hlock_vals.append(float(mh_val))
 
     block_lines: List[str] = []
+    chaos_rows: List[Tuple[int, str, Optional[float], Optional[float], Optional[float]]] = []
     mass_errors_by_particle: Dict[str, List[float]] = defaultdict(list)
     if blocks and runs_by_id:
         for b in blocks:
@@ -531,6 +542,8 @@ def main():
                         dev = ((fm - sm_mass) / sm_mass) * 100.0
                         block_lines.append(f"- Δ_mass vs SM: {dev:+.4f}%")
                         mass_errors_by_particle[pname].append(dev)
+                else:
+                    dev = None
                 if h_block is not None:
                     block_lines.append(f"- H_block (lock_quality): {h_block:.3f}")
                 if capture is not None:
@@ -551,6 +564,9 @@ def main():
                     block_lines.append(f"- lock_S1_series (mean/min/max): {s_mean:.4f} / {s_min:.4f} / {s_max:.4f}")
             else:
                 block_lines.append("- entropy_chaos: no encontrado para este run.")
+            pe_val = ec.get("PE_tick_norm") if ec else None
+            mh_val = ec.get("mean_H_lock_norm") if ec else None
+            chaos_rows.append((rid if rid is not None else -1, pname or "", pe_val if pe_val is not None else None, mh_val if mh_val is not None else None, dev))
             block_lines.append("")
     else:
         block_lines.append("Sin bloques aceptados o no se encontraron runs para mapear entropy_chaos.")
@@ -607,6 +623,27 @@ def main():
     else:
         lines.append("Sin desviaciones de masa calculadas (no hay sm_mass o F_m).")
     lines.append("")
+
+    lines.append("## Tabla caos/desorden por run")
+    if chaos_rows:
+        lines.append("| Run ID | Partícula | Chaos Temp (PE) | Disorder (H_mean) | Δ_mass vs SM |")
+        lines.append("|--------|-----------|-----------------|-------------------|--------------|")
+        for rid, pname, pe_val, mh_val, dev in chaos_rows:
+            pe_str = f"{pe_val:.4f}" if pe_val is not None else "n/d"
+            mh_str = f"{mh_val:.4f}" if mh_val is not None else "n/d"
+            dev_str = f"{dev:+.4f}%" if dev is not None else "n/d"
+            lines.append(f"| {rid} | {pname} | {pe_str} | {mh_str} | {dev_str} |")
+    else:
+        lines.append("Sin filas de caos/desorden (no se hallaron runs/bloques).")
+    lines.append("")
+
+    if cosmic_pe_vals or cosmic_hlock_vals:
+        lines.append("## Promedio cósmico (Ola1)")
+        if cosmic_pe_vals:
+            lines.append(f"- cosmic_chaos_temp (PE avg): {statistics.mean(cosmic_pe_vals):.4f}")
+        if cosmic_hlock_vals:
+            lines.append(f"- cosmic_disorder (H_mean avg): {statistics.mean(cosmic_hlock_vals):.4f}")
+        lines.append("")
 
     lines.append("## Inventario (cosecha)")
     if inventory:
