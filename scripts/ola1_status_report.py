@@ -473,90 +473,88 @@ def main():
             continue
         runs_by_id[rid] = r
 
-    lines.append("## Bloques aceptados con métricas de entropía/caos")
+    block_lines: List[str] = []
+    mass_errors_by_particle: Dict[str, List[float]] = defaultdict(list)
     if blocks and runs_by_id:
         for b in blocks:
             rid_raw = b.get("origin_run_id")
             rid = _to_int(rid_raw)
             run = runs_by_id.get(rid)
             ec = run.get("entropy_chaos") if run else None
-            lines.append(f"### {b.get('block_id', 'block')} (run_id={rid})")
-            lines.append(f"- Partícula: {b.get('particle_name')}, tier: {b.get('structure_tier')}, s2_state: {b.get('s2_state')}")
+            block_lines.append(f"### {b.get('block_id', 'block')} (run_id={rid})")
+            block_lines.append(f"- Partícula: {b.get('particle_name')}, tier: {b.get('structure_tier')}, s2_state: {b.get('s2_state')}")
             ms = b.get("match_score", {}) or {}
             d_total = ms.get("d_total")
             if d_total is not None:
                 try:
-                    lines.append(f"- match_score.d_total: {float(d_total):.3f}")
+                    block_lines.append(f"- match_score.d_total: {float(d_total):.3f}")
                 except Exception:
-                    lines.append(f"- match_score.d_total: {d_total}")
-            lines.append(f"- Bandas: count={b.get('band_count')}, s2_band_fraction={b.get('s2_band_fraction')}")
+                    block_lines.append(f"- match_score.d_total: {d_total}")
+            block_lines.append(f"- Bandas: count={b.get('band_count')}, s2_band_fraction={b.get('s2_band_fraction')}")
+            fm = None
+            h_block = None
+            sm_mass = None
+            pname = str(b.get("particle_name", "")).strip()
+            if pname and sm_masses:
+                sm_mass = sm_masses.get(pname)
             if run:
                 energies = run.get("band_energies_gev") or []
                 capture = run.get("band_power_capture")
-                lines.append(f"- band_energies_gev: {energies}")
+                block_lines.append(f"- band_energies_gev: {energies}")
                 if energies:
                     try:
                         fm = float(min(energies))
-                        lines.append(f"- F_m (base): {fm:.3f} GeV")
+                        block_lines.append(f"- F_m (base): {fm:.3f} GeV")
                     except Exception:
                         fm = energies[0]
-                        lines.append(f"- F_m (base): {fm} GeV")
-                else:
-                    fm = None
-                # mass proxies
-                h_block = None
+                        block_lines.append(f"- F_m (base): {fm} GeV")
                 lq = b.get("lock_quality") or {}
                 if lq:
                     h_block = _lock_entropy_norm_from_weights(lq)
-                sm_mass = None
-                pname = str(b.get("particle_name", "")).strip()
-                if pname and sm_masses:
-                    sm_mass = sm_masses.get(pname)
                 m_eff = run.get("mass_effective") or run.get("effective_mass") or run.get("mass")
                 if m_eff is not None:
                     try:
                         m_eff_val = float(m_eff)
-                        lines.append(f"- M_eff (run): {m_eff_val:.3f}")
+                        block_lines.append(f"- M_eff (run): {m_eff_val:.3f}")
                     except Exception:
-                        lines.append(f"- M_eff (run): {m_eff}")
+                        block_lines.append(f"- M_eff (run): {m_eff}")
                 elif fm is not None:
-                    lines.append(f"- M_eff (base≈F_m): {fm:.3f}")
+                    block_lines.append(f"- M_eff (base≈F_m): {fm:.3f}")
                     if h_block is not None:
-                            m_corr = fm * (1.0 - h_block)
-                            if m_corr < 0:
-                                m_corr = 0.0
-                            lines.append(f"- M_corrected (F_m*(1-H_block)): {m_corr:.3f} (H_block={h_block:.3f})")
+                        m_corr = fm * (1.0 - h_block)
+                        if m_corr < 0:
+                            m_corr = 0.0
+                        block_lines.append(f"- M_corrected (F_m*(1-H_block)): {m_corr:.3f} (H_block={h_block:.3f})")
                 if sm_mass is not None:
-                    lines.append(f"- sm_mass_gev: {sm_mass:.3f}")
+                    block_lines.append(f"- sm_mass_gev: {sm_mass:.3f}")
                     if fm is not None:
                         dev = ((fm - sm_mass) / sm_mass) * 100.0
-                        lines.append(f"- Δ_mass vs SM: {dev:+.4f}%")
+                        block_lines.append(f"- Δ_mass vs SM: {dev:+.4f}%")
+                        mass_errors_by_particle[pname].append(dev)
                 if h_block is not None:
-                    lines.append(f"- H_block (lock_quality): {h_block:.3f}")
-                else:
-                    lines.append("- M_eff: n/d")
+                    block_lines.append(f"- H_block (lock_quality): {h_block:.3f}")
                 if capture is not None:
-                    lines.append(f"- band_power_capture: {capture}")
+                    block_lines.append(f"- band_power_capture: {capture}")
             if ec:
-                lines.append(
+                block_lines.append(
                     f"- chaos_mode={ec.get('chaos_mode')}, PE_tick_norm={ec.get('PE_tick_norm')}, T_ticks={ec.get('T_ticks')}"
                 )
-                lines.append(
+                block_lines.append(
                     f"- mean_H_lock_norm={ec.get('mean_H_lock_norm')}, mixture_entropy_blocks_norm={ec.get('mixture_entropy_blocks_norm')}, structure_mix_norm={ec.get('structure_mix_norm')}"
                 )
-                lines.append(f"- fraction_structured={ec.get('fraction_structured')}")
+                block_lines.append(f"- fraction_structured={ec.get('fraction_structured')}")
                 series = ec.get("lock_S1_series") or []
                 if isinstance(series, list) and series:
                     s_mean = statistics.mean(series)
                     s_min = min(series)
                     s_max = max(series)
-                    lines.append(f"- lock_S1_series (mean/min/max): {s_mean:.4f} / {s_min:.4f} / {s_max:.4f}")
+                    block_lines.append(f"- lock_S1_series (mean/min/max): {s_mean:.4f} / {s_min:.4f} / {s_max:.4f}")
             else:
-                lines.append("- entropy_chaos: no encontrado para este run.")
-            lines.append("")
+                block_lines.append("- entropy_chaos: no encontrado para este run.")
+            block_lines.append("")
     else:
-        lines.append("Sin bloques aceptados o no se encontraron runs para mapear entropy_chaos.")
-    lines.append("")
+        block_lines.append("Sin bloques aceptados o no se encontraron runs para mapear entropy_chaos.")
+        block_lines.append("")
 
     lines.append("## Semáforo de salud")
     lines.append(f"- Runs totales: {runs_total}")
@@ -594,6 +592,20 @@ def main():
             lines.append(f"- fraction_structured (mean/med): {fstr[0]:.3f} / {fstr[1]:.3f}")
     else:
         lines.append("- No se encontraron métricas de entropía/caos en sweep_results.")
+    lines.append("")
+
+    lines.append("## Error de masa vs SM")
+    if mass_errors_by_particle:
+        lines.append("| Partícula | Δ_mean% | Δ_min% | Δ_max% | n |")
+        lines.append("|-----------|---------|--------|--------|---|")
+        for pname, vals in sorted(mass_errors_by_particle.items()):
+            if vals:
+                mean = statistics.mean(vals)
+                vmin = min(vals)
+                vmax = max(vals)
+                lines.append(f"| {pname} | {mean:+.4f}% | {vmin:+.4f}% | {vmax:+.4f}% | {len(vals)} |")
+    else:
+        lines.append("Sin desviaciones de masa calculadas (no hay sm_mass o F_m).")
     lines.append("")
 
     lines.append("## Inventario (cosecha)")
@@ -640,6 +652,10 @@ def main():
     else:
         lines.append("No hay registros de rechazo (o no se encontró el log).")
     lines.append("")
+
+    # Append block-level details at the end
+    lines.append("## Bloques aceptados con métricas de entropía/caos")
+    lines.extend(block_lines)
 
     output_path = args.output or proc / f"{case}_ola1_report.md"
     output_path.write_text("\n".join(lines))
