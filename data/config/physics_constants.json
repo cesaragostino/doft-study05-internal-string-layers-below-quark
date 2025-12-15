@@ -21,7 +21,7 @@
     {
       "wave": "Ola 3",
       "particle": "Oxygen-16 (Tetra)",
-      "csv_path": "data/processed/ola3_oxygen/ola2_oxygen_tetra_alpha.csv",
+      "csv_path": "data/processed/ola3/ola2_oxygen_tetra_alpha.csv",
       "filter_composition": ["alpha", "alpha", "alpha", "alpha"],
       "A": 16,
       "real_mass_gev": 14.8991,
