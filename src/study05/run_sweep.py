@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from datetime import datetime, timezone
 from pathlib import Path
 import uuid
@@ -74,6 +75,33 @@ def _lock_entropy_norm(values: List[float]) -> float:
     return float(-np.sum(p * np.log(np.clip(p, CHAOS_EPS, 1.0))) / np.log(k)) if k > 1 else 0.0
 
 
+def _lock_entropy_norm_from_weights(weights: Dict[str, float]) -> float:
+    """Compute normalized lock entropy from a weight dict (Q, S1, S2)."""
+    return _lock_entropy_norm([float(weights.get("Q", 0.0)), float(weights.get("S1", 0.0)), float(weights.get("S2", 0.0))])
+
+
+def _lock_entropy_norm_qs1s2(vec: List[float]) -> float:
+    """Compute lock entropy using only Q, S1, S2 components from a vector that may include more layers."""
+    if not vec:
+        return 0.0
+    trimmed = vec[:3]  # assume order Q, S1, S2 (ignore deeper layers for entropy)
+    return _lock_entropy_norm(trimmed)
+
+
+def _block_tier_from_weights(weights: Dict[str, float], min_fraction: float = 0.05) -> str:
+    q = max(float(weights.get("Q", 0.0)), 0.0)
+    s1 = max(float(weights.get("S1", 0.0)), 0.0)
+    s2 = max(float(weights.get("S2", 0.0)), 0.0)
+    total = q + s1 + s2
+    if total <= CHAOS_EPS:
+        return "none"
+    if (s2 / total) > min_fraction:
+        return "level2"
+    if (s1 / total) > min_fraction:
+        return "level1"
+    return "none"
+
+
 def _mixture_entropy_norm(values: List[float], bins: int = 30) -> float:
     if not values:
         return float("nan")
@@ -89,8 +117,10 @@ def _structure_mix_entropy_norm(tiers: List[str]) -> float:
     if not tiers:
         return float("nan")
     unique, counts = np.unique(tiers, return_counts=True)
-    p = counts / counts.sum()
-    return float(-np.sum(p * np.log(np.clip(p, CHAOS_EPS, 1.0))) / np.log(len(p)))
+    k = len(p := counts / counts.sum())
+    if k <= 1:
+        return 0.0
+    return float(-np.sum(p * np.log(np.clip(p, CHAOS_EPS, 1.0))) / np.log(k))
 
 
 def _permutation_entropy(series: List[float], m: int = 5, tau: int = 1) -> float | None:
@@ -107,7 +137,7 @@ def _permutation_entropy(series: List[float], m: int = 5, tau: int = 1) -> float
     if total == 0:
         return None
     probs = np.array(list(patterns.values()), dtype=float) / total
-    return float(-np.sum(probs * np.log(np.clip(probs, CHAOS_EPS, 1.0))) / np.log(np.math.factorial(m)))
+    return float(-np.sum(probs * np.log(np.clip(probs, CHAOS_EPS, 1.0))) / np.log(math.factorial(m)))
 
 
 def _serialize_run_config(config: SimulationConfig) -> Dict:
@@ -820,31 +850,51 @@ def run_sweep(
         # Entropy/caos
         entropy_chaos = None
         if compute_entropy:
-            tick_H: List[float] = []
+            block_entropies: List[float] = []
+            q_values: List[float] = []
+            block_tiers: List[str] = []
+            min_layer_fraction_thr = float(s2_state_cfg.get("min_layer_fraction", 0.05))
+            for w in band_weights:
+                if not isinstance(w, dict):
+                    continue
+                block_entropies.append(_lock_entropy_norm_from_weights(w))
+                q_values.append(float(w.get("Q", 0.0)))
+                block_tiers.append(_block_tier_from_weights(w, min_fraction=min_layer_fraction_thr))
+
+            # Global structural chaos: PE on lock_quality_S1 per tick (fraction of S1 energy)
+            lock_s1_series: List[float] = []
             energies_series = sim_result.get("energies_series")
             if energies_series is not None and np.size(energies_series) > 0:
                 for vec in energies_series:
-                    tick_H.append(_lock_entropy_norm(vec))
-            chaos_mode = "dynamic" if len(tick_H) >= 6 else "ensemble"  # m=5,tau=1 ⇒ need ≥6
-            PE_tick_norm = _permutation_entropy(tick_H, m=5, tau=1) if chaos_mode == "dynamic" else None
-            fraction_structured = 0.0
-            if structure_tier and structure_tier != "none":
-                fraction_structured = 1.0
+                    e_q = float(vec[0]) if len(vec) > 0 else 0.0
+                    e_s1 = float(vec[1]) if len(vec) > 1 else 0.0
+                    e_s2 = float(vec[2]) if len(vec) > 2 else 0.0
+                    total = e_q + e_s1 + e_s2
+                    if total > CHAOS_EPS:
+                        lock_s1_series.append(e_s1 / total)
+                    else:
+                        lock_s1_series.append(1.0 / 3.0)
+            chaos_mode = "dynamic" if len(lock_s1_series) >= 6 else "ensemble"  # m=5,tau=1 ⇒ need ≥6
+            PE_tick_norm = _permutation_entropy(lock_s1_series, m=5, tau=1) if chaos_mode == "dynamic" else None
+            fraction_structured = (
+                float(sum(1 for t in block_tiers if t != "none")) / len(block_tiers) if block_tiers else None
+            )
             entropy_chaos = {
                 "eps": CHAOS_EPS,
-                "mean_H_lock_norm": float(np.mean(tick_H)) if tick_H else float("nan"),
-                "std_H_lock_norm": float(np.std(tick_H)) if tick_H else float("nan"),
-                "p90_H_lock_norm": float(np.percentile(tick_H, 90)) if tick_H else float("nan"),
+                "mean_H_lock_norm": float(np.mean(block_entropies)) if block_entropies else None,
+                "std_H_lock_norm": float(np.std(block_entropies)) if block_entropies else None,
+                "p90_H_lock_norm": float(np.percentile(block_entropies, 90)) if block_entropies else None,
                 "fraction_structured": fraction_structured,
-                "mean_Q": lock_Q_f,
-                "std_Q": 0.0,
-                "mixture_entropy_blocks_norm": _mixture_entropy_norm(tick_H) if tick_H else float("nan"),
-                "structure_mix_norm": _structure_mix_entropy_norm([structure_tier] if structure_tier else []),
+                "mean_Q": float(np.mean(q_values)) if q_values else None,
+                "std_Q": float(np.std(q_values)) if q_values else None,
+                "mixture_entropy_blocks_norm": _mixture_entropy_norm(block_entropies) if block_entropies else None,
+                "structure_mix_norm": _structure_mix_entropy_norm(block_tiers) if block_tiers else None,
                 "chaos_mode": chaos_mode,
                 "PE_tick_norm": PE_tick_norm,
-                "T_ticks": len(tick_H) if tick_H else 0,
-                "mean_H_lock_norm_tick": tick_H if tick_H else None,
-                "notes": "PE computed on causal ticks if available; ensemble metrics otherwise.",
+                "has_ticks": bool(lock_s1_series),
+                "T_ticks": len(lock_s1_series) if chaos_mode == "dynamic" else None,
+                "lock_S1_series": lock_s1_series if lock_s1_series else None,
+                "notes": "PE sobre lock_quality_S1 por tick (fracción S1 global); sin serie → sólo métricas instantáneas/ensemble.",
             }
             entropy_status = "ok"
             entropy_reason = None

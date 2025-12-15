@@ -11,6 +11,20 @@ import numpy as np
 from .couplings import Coupling, InterLayerCoupling
 from .layers import Layer, Mode, make_index_map
 
+CHAOS_EPS = 1e-12
+
+
+def _lock_entropy_norm_qs1s2(vec: Sequence[float]) -> float:
+    """Normalized entropy using only Q, S1, S2 components of an energy vector."""
+    trimmed = np.array(list(vec[:3]), dtype=float)
+    k = trimmed.size if trimmed.size > 0 else 1
+    s = float(np.sum(trimmed))
+    if s <= CHAOS_EPS:
+        p = np.ones(k) / k
+    else:
+        p = trimmed / s
+    return float(-np.sum(p * np.log(np.clip(p, CHAOS_EPS, 1.0))) / np.log(k)) if k > 1 else 0.0
+
 
 @dataclass
 class StructuralParams:
@@ -632,6 +646,7 @@ def simulate(
     samples_time = []
     samples_b = []
     samples_e = []
+    samples_hlock: List[float] = []
     debug_inputs = []
     debug_tau = []
     debug_z = []
@@ -721,6 +736,7 @@ def simulate(
             # keep per-layer energies for entropy/chaos metrics
             energy_vec = [inst_energy.get(layer, 0.0) for layer in layer_to_idx.keys()]
             samples_e.append(energy_vec)
+            samples_hlock.append(_lock_entropy_norm_qs1s2(energy_vec))
             if debug:
                 signals = {layer: float(np.mean([state.x[i] for i in layer_indices.get(layer, [])])) for layer in layer_indices}
                 sig_vec = np.array([signals.get(layer, 0.0) for layer in mem_arch.layer_order])
@@ -810,6 +826,7 @@ def simulate(
     samples_x = np.array(samples_x)  # shape (T, N)
     samples_b = np.array(samples_b) if samples_b else np.empty((0, len(state.b)))
     samples_e = np.array(samples_e) if samples_e else np.empty((0, len(state.b)))
+    samples_hlock = np.array(samples_hlock) if samples_hlock else np.empty(0)
     times = np.array(samples_time)
 
     spectrum = compute_fft_spectrum(samples_x, dt * sim_params.sample_stride)
@@ -819,12 +836,14 @@ def simulate(
         stride = max(1, samples_b.shape[0] // 200)
         samples_b = samples_b[::stride]
         samples_e = samples_e[::stride] if samples_e.size else samples_e
+        samples_hlock = samples_hlock[::stride] if samples_hlock.size else samples_hlock
         times = times[::stride]
 
     result = {
         "times": times,
         "b_series": samples_b,
         "energies_series": samples_e,
+        "hlock_series": samples_hlock,
         "spectrum": spectrum,
         "layer_to_idx": layer_to_idx,
         "dt_used": dt,

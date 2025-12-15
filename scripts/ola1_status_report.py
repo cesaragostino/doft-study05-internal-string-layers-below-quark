@@ -19,7 +19,48 @@ import csv
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
+import math
+import statistics
+from functools import lru_cache
+
+CHAOS_EPS = 1e-12
+
+
+def _lock_entropy_norm_from_weights(weights: Dict[str, float]) -> float:
+    """Shannon entropy normalized for 3 components (Q, S1, S2)."""
+    q = max(float(weights.get("Q", 0.0)), 0.0)
+    s1 = max(float(weights.get("S1", 0.0)), 0.0)
+    s2 = max(float(weights.get("S2", 0.0)), 0.0)
+    s = q + s1 + s2
+    if s <= CHAOS_EPS:
+        p = [1 / 3, 1 / 3, 1 / 3]
+    else:
+        p = [q / s, s1 / s, s2 / s]
+    return float(-sum(pi * math.log(pi + CHAOS_EPS) for pi in p) / math.log(3))
+
+
+@lru_cache()
+def load_sm_masses(path: Path) -> Dict[str, float]:
+    """Load SM masses from sm_universe JSON keyed by particle name."""
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text())
+    except Exception:
+        return {}
+    masses = {}
+    for item in data.get("particles", []):
+        name = str(item.get("name", "")).strip()
+        if not name:
+            continue
+        sm_val = item.get("sm_mass_gev")
+        try:
+            sm_val = float(sm_val)
+        except Exception:
+            continue
+        masses[name] = sm_val
+    return masses
 
 
 def load_sweep_results(path_candidates: List[Path]) -> Tuple[int, int]:
@@ -33,6 +74,161 @@ def load_sweep_results(path_candidates: List[Path]) -> Tuple[int, int]:
             except Exception:
                 continue
     return 0, 0
+
+
+def _aggregate_entropy(runs: List[Dict]) -> Optional[Dict]:
+    pe_vals = []
+    ticks_vals = []
+    chaos_mode_counts: Counter = Counter()
+    hlock_mean_vals = []
+    mix_vals = []
+    struct_mix_vals = []
+    frac_struct_vals = []
+    for r in runs:
+        ec = r.get("entropy_chaos") or {}
+        if not isinstance(ec, dict):
+            continue
+        chaos_mode = ec.get("chaos_mode")
+        if chaos_mode:
+            chaos_mode_counts[chaos_mode] += 1
+        pe = ec.get("PE_tick_norm")
+        if pe is not None and math.isfinite(pe):
+            pe_vals.append(float(pe))
+        t_ticks = ec.get("T_ticks")
+        if t_ticks is not None and math.isfinite(t_ticks):
+            ticks_vals.append(float(t_ticks))
+        mh = ec.get("mean_H_lock_norm")
+        if mh is not None and math.isfinite(mh):
+            hlock_mean_vals.append(float(mh))
+        mix = ec.get("mixture_entropy_blocks_norm")
+        if mix is not None and math.isfinite(mix):
+            mix_vals.append(float(mix))
+        smix = ec.get("structure_mix_norm")
+        if smix is not None and math.isfinite(smix):
+            struct_mix_vals.append(float(smix))
+        fstr = ec.get("fraction_structured")
+        if fstr is not None and math.isfinite(fstr):
+            frac_struct_vals.append(float(fstr))
+    total = sum(chaos_mode_counts.values())
+    if total == 0:
+        return {"total_runs": 0, "chaos_mode": {}}
+
+    def _safe_stats(vals: List[float]):
+        if not vals:
+            return None, None, None, None
+        vals_sorted = sorted(vals)
+        mid = len(vals_sorted) // 2
+        median = (
+            (vals_sorted[mid - 1] + vals_sorted[mid]) / 2
+            if len(vals_sorted) % 2 == 0 and len(vals_sorted) > 1
+            else vals_sorted[mid]
+        )
+        return float(sum(vals_sorted) / len(vals_sorted)), median, float(min(vals_sorted)), float(max(vals_sorted))
+
+    pe_stats = _safe_stats(pe_vals)
+    ticks_stats = _safe_stats(ticks_vals)
+    hlock_stats = _safe_stats(hlock_mean_vals)
+    mix_stats = _safe_stats(mix_vals)
+    struct_mix_stats = _safe_stats(struct_mix_vals)
+    frac_struct_stats = _safe_stats(frac_struct_vals)
+
+    return {
+        "total_runs": total,
+        "chaos_mode": dict(chaos_mode_counts),
+        "pe_stats": pe_stats,  # mean, median, min, max
+        "ticks_stats": ticks_stats,
+        "hlock_mean_stats": hlock_stats,
+        "mix_stats": mix_stats,
+        "struct_mix_stats": struct_mix_stats,
+        "frac_struct_stats": frac_struct_stats,
+    }
+
+
+def load_entropy_summary(path_candidates: List[Path]) -> Optional[Dict]:
+    """Aggregate entropy/caos metrics from the first sweep_results found."""
+    for p in path_candidates:
+        if not p.exists():
+            continue
+        try:
+            data = json.loads(p.read_text())
+            runs = data.get("runs", [])
+        except Exception:
+            continue
+        summary = _aggregate_entropy(runs)
+        if summary:
+            return summary
+    return None
+
+
+def load_entropy_summary_partial(path_candidates: List[Path]) -> Optional[Dict]:
+    """Aggregate entropy/caos metrics from partial JSONL runs."""
+    for p in path_candidates:
+        if not p.exists():
+            continue
+        runs = []
+        try:
+            with p.open() as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        runs.append(json.loads(line))
+                    except Exception:
+                        continue
+        except Exception:
+            continue
+        if not runs:
+            continue
+        pe_vals = []
+        ticks_vals = []
+        chaos_mode_counts: Counter = Counter()
+        hlock_mean_vals = []
+        mix_vals = []
+        struct_mix_vals = []
+        frac_struct_vals = []
+        summary = _aggregate_entropy(runs)
+        if summary:
+            return summary
+    return None
+
+
+def load_runs_any(proc: Path, case: str, sweep_candidates: List[Path]) -> List[Dict]:
+    """Return runs from sweep_results if present; otherwise from partial JSONL."""
+    for p in sweep_candidates:
+        if not p.exists():
+            continue
+        try:
+            data = json.loads(p.read_text())
+            runs = data.get("runs", [])
+            if runs:
+                return runs
+        except Exception:
+            continue
+    partial_candidates = [
+        proc / "partial" / "runs_partial.jsonl",
+        proc / "global" / "partial" / "runs_partial.jsonl",
+        proc / case / "partial" / "runs_partial.jsonl",
+    ]
+    for p in partial_candidates:
+        if not p.exists():
+            continue
+        runs = []
+        try:
+            with p.open() as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        runs.append(json.loads(line))
+                    except Exception:
+                        continue
+        except Exception:
+            continue
+        if runs:
+            return runs
+    return []
 
 
 def load_selection_log(path: Path) -> List[Dict]:
@@ -216,10 +412,13 @@ def main():
 
     runs_total, runs_valid = load_sweep_results(sweep_candidates)
     success_rate = (runs_valid / runs_total * 100.0) if runs_total else 0.0
+    entropy_source = "sweep_results"
+    entropy_summary = load_entropy_summary(sweep_candidates)
 
     selection_rows = load_selection_log(selection_path)
     blocks = load_simple_blocks(blocks_path)
     zoo = load_zoo_matches(zoo_path)
+    sm_masses = load_sm_masses(Path("data/raw/sm_universe.json"))
 
     # fallback: if no sweep_results, infer totals from proxies/selection
     if runs_total == 0:
@@ -254,6 +453,111 @@ def main():
     lines = []
     lines.append(f"# Informe Ola1 – {case}")
     lines.append("")
+    # Fallback: try partial runs if no entropy from sweep_results
+    partial_candidates = [
+        proc / "partial" / "runs_partial.jsonl",
+        proc / "global" / "partial" / "runs_partial.jsonl",
+        proc / case / "partial" / "runs_partial.jsonl",
+    ]
+    if (not entropy_summary) or entropy_summary.get("total_runs", 0) == 0:
+        entropy_summary_partial = load_entropy_summary_partial(partial_candidates)
+        if entropy_summary_partial and entropy_summary_partial.get("total_runs", 0) > 0:
+            entropy_summary = entropy_summary_partial
+            entropy_source = "partial_runs"
+
+    run_records = load_runs_any(proc, case, sweep_candidates)
+    runs_by_id = {}
+    for r in run_records:
+        rid = _to_int(r.get("run_id"))
+        if rid is None:
+            continue
+        runs_by_id[rid] = r
+
+    lines.append("## Bloques aceptados con métricas de entropía/caos")
+    if blocks and runs_by_id:
+        for b in blocks:
+            rid_raw = b.get("origin_run_id")
+            rid = _to_int(rid_raw)
+            run = runs_by_id.get(rid)
+            ec = run.get("entropy_chaos") if run else None
+            lines.append(f"### {b.get('block_id', 'block')} (run_id={rid})")
+            lines.append(f"- Partícula: {b.get('particle_name')}, tier: {b.get('structure_tier')}, s2_state: {b.get('s2_state')}")
+            ms = b.get("match_score", {}) or {}
+            d_total = ms.get("d_total")
+            if d_total is not None:
+                try:
+                    lines.append(f"- match_score.d_total: {float(d_total):.3f}")
+                except Exception:
+                    lines.append(f"- match_score.d_total: {d_total}")
+            lines.append(f"- Bandas: count={b.get('band_count')}, s2_band_fraction={b.get('s2_band_fraction')}")
+            if run:
+                energies = run.get("band_energies_gev") or []
+                capture = run.get("band_power_capture")
+                lines.append(f"- band_energies_gev: {energies}")
+                if energies:
+                    try:
+                        fm = float(min(energies))
+                        lines.append(f"- F_m (base): {fm:.3f} GeV")
+                    except Exception:
+                        fm = energies[0]
+                        lines.append(f"- F_m (base): {fm} GeV")
+                else:
+                    fm = None
+                # mass proxies
+                h_block = None
+                lq = b.get("lock_quality") or {}
+                if lq:
+                    h_block = _lock_entropy_norm_from_weights(lq)
+                sm_mass = None
+                pname = str(b.get("particle_name", "")).strip()
+                if pname and sm_masses:
+                    sm_mass = sm_masses.get(pname)
+                m_eff = run.get("mass_effective") or run.get("effective_mass") or run.get("mass")
+                if m_eff is not None:
+                    try:
+                        m_eff_val = float(m_eff)
+                        lines.append(f"- M_eff (run): {m_eff_val:.3f}")
+                    except Exception:
+                        lines.append(f"- M_eff (run): {m_eff}")
+                elif fm is not None:
+                    lines.append(f"- M_eff (base≈F_m): {fm:.3f}")
+                    if h_block is not None:
+                            m_corr = fm * (1.0 - h_block)
+                            if m_corr < 0:
+                                m_corr = 0.0
+                            lines.append(f"- M_corrected (F_m*(1-H_block)): {m_corr:.3f} (H_block={h_block:.3f})")
+                if sm_mass is not None:
+                    lines.append(f"- sm_mass_gev: {sm_mass:.3f}")
+                    if fm is not None:
+                        dev = ((fm - sm_mass) / sm_mass) * 100.0
+                        lines.append(f"- Δ_mass vs SM: {dev:+.4f}%")
+                if h_block is not None:
+                    lines.append(f"- H_block (lock_quality): {h_block:.3f}")
+                else:
+                    lines.append("- M_eff: n/d")
+                if capture is not None:
+                    lines.append(f"- band_power_capture: {capture}")
+            if ec:
+                lines.append(
+                    f"- chaos_mode={ec.get('chaos_mode')}, PE_tick_norm={ec.get('PE_tick_norm')}, T_ticks={ec.get('T_ticks')}"
+                )
+                lines.append(
+                    f"- mean_H_lock_norm={ec.get('mean_H_lock_norm')}, mixture_entropy_blocks_norm={ec.get('mixture_entropy_blocks_norm')}, structure_mix_norm={ec.get('structure_mix_norm')}"
+                )
+                lines.append(f"- fraction_structured={ec.get('fraction_structured')}")
+                series = ec.get("lock_S1_series") or []
+                if isinstance(series, list) and series:
+                    s_mean = statistics.mean(series)
+                    s_min = min(series)
+                    s_max = max(series)
+                    lines.append(f"- lock_S1_series (mean/min/max): {s_mean:.4f} / {s_min:.4f} / {s_max:.4f}")
+            else:
+                lines.append("- entropy_chaos: no encontrado para este run.")
+            lines.append("")
+    else:
+        lines.append("Sin bloques aceptados o no se encontraron runs para mapear entropy_chaos.")
+    lines.append("")
+
     lines.append("## Semáforo de salud")
     lines.append(f"- Runs totales: {runs_total}")
     lines.append(f"- Runs aceptados: {runs_valid} ({success_rate:.1f}%)")
@@ -262,6 +566,34 @@ def main():
             lines.append(f"- {a}")
     else:
         lines.append("- Alertas: ninguna")
+    lines.append("")
+
+    lines.append("## Entropía / Caos (nuevo)")
+    if entropy_summary and entropy_summary.get("total_runs", 0) > 0:
+        lines.append(f"- Fuente de datos: {entropy_source}")
+        cm = entropy_summary.get("chaos_mode", {})
+        lines.append(f"- Runs con entropy_chaos: {entropy_summary['total_runs']}")
+        lines.append(f"- chaos_mode: dynamic={cm.get('dynamic', 0)}, ensemble={cm.get('ensemble', 0)}")
+        pe = entropy_summary.get("pe_stats")
+        if pe and pe[0] is not None:
+            lines.append(f"- PE_tick_norm (mean/med/min/max): {pe[0]:.3f} / {pe[1]:.3f} / {pe[2]:.3f} / {pe[3]:.3f}")
+        ticks = entropy_summary.get("ticks_stats")
+        if ticks and ticks[0] is not None:
+            lines.append(f"- T_ticks (mean/med/min/max): {ticks[0]:.1f} / {ticks[1]:.1f} / {ticks[2]:.0f} / {ticks[3]:.0f}")
+        hlock = entropy_summary.get("hlock_mean_stats")
+        if hlock and hlock[0] is not None:
+            lines.append(f"- mean_H_lock_norm (mean/med): {hlock[0]:.3f} / {hlock[1]:.3f}")
+        mix = entropy_summary.get("mix_stats")
+        if mix and mix[0] is not None:
+            lines.append(f"- mixture_entropy_blocks_norm (mean/med): {mix[0]:.3f} / {mix[1]:.3f}")
+        smix = entropy_summary.get("struct_mix_stats")
+        if smix and smix[0] is not None:
+            lines.append(f"- structure_mix_norm (mean/med): {smix[0]:.3f} / {smix[1]:.3f}")
+        fstr = entropy_summary.get("frac_struct_stats")
+        if fstr and fstr[0] is not None:
+            lines.append(f"- fraction_structured (mean/med): {fstr[0]:.3f} / {fstr[1]:.3f}")
+    else:
+        lines.append("- No se encontraron métricas de entropía/caos en sweep_results.")
     lines.append("")
 
     lines.append("## Inventario (cosecha)")

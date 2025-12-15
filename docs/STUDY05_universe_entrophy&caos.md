@@ -68,10 +68,11 @@ This is a measure of instantaneous disorder (ensemble-type): valid whether the r
 
 ## Dynamical Chaos (Correct Temporal Measure)
 
-To measure dynamical chaos in a way that is “agnostic to the narrative”, we use a measure based on local orderings of the time series, for example **Permutation Entropy** (Bandt–Pompe) on a macroscopic observable \(x_t\) defined per tick within a run:
+To measure dynamical chaos in a way that is “agnostic to the narrative”, we use **Permutation Entropy** (Bandt–Pompe) on a causal macroscopic observable \(x_t\).  
+**Decision (implementation-approved):** \(x_t\) is the global fraction of S1 energy per tick:
 
 \[
-x_t = \operatorname{mean}_{\text{blocks}}(H_{\text{lock}}(t))
+x_t = \text{lock\_S1\_series}[t] = \frac{E_{S1}(t)}{E_Q(t) + E_{S1}(t) + E_{S2}(t)}
 \]
 
 Permutation Entropy is high when the sequence exhibits locally complex patterns (low predictability of orderings), and low when there is regularity/periodicity. It is a robust proxy of temporal complexity.  
@@ -116,14 +117,11 @@ Optional: `match_score.*` if you want correlations, not necessary for this spec.
 
 ### A2) Per Tick Within the Run (NEW – Needed for Correct “Chaos”)
 
-For each tick in `0..T-1` (e.g. `T = 120`):
+For each tick in `0..T-1` (e.g. `T = 120`), store:
 
-Store aggregates per tick (no need to dump full per-block data):
+- `lock_S1_series[t] = E_S1(t) / (E_Q(t) + E_S1(t) + E_S2(t))`
 
-- `mean_H_lock_norm_tick`
-- `std_H_lock_norm_tick` (optional but useful)
-- `fraction_structured_tick` (optional)
-- `mean_Q_tick` (optional)
+Optional (not required for PE): `std_lock_S1_tick`, `fraction_structured_tick`, `mean_Q_tick`.
 
 **Important:** if, by architecture, an internal tick does not exist today, it must be instrumented. Without this, dynamical “chaos” cannot be measured properly.
 
@@ -180,7 +178,7 @@ Over all blocks of the run:
 Define the causal series:
 
 \[
-x_t = \text{mean\_H\_lock\_norm\_tick}[t], \quad t = 0..T-1
+x_t = \text{lock\_S1\_series}[t], \quad t = 0..T-1
 \]
 
 Compute normalized Permutation Entropy (Bandt–Pompe):
@@ -221,7 +219,7 @@ Validity rules:
 
 Set in each run:
 
-- `has_ticks =` (whether there exists a series `mean_H_lock_norm_tick` with `T >= m * tau + 1`)
+- `has_ticks =` (whether there exists a series `lock_S1_series` with `T >= m * tau + 1`)
 
 If `has_ticks`:
 
@@ -256,9 +254,11 @@ Add to the run object:
 
     "chaos_mode": "dynamic|ensemble",
     "PE_tick_norm": null,
+    "has_ticks": false,
     "T_ticks": null,
+    "lock_S1_series": null,
 
-    "notes": "PE computed only on causal tick series; stateless runs use ensemble metrics."
+    "notes": "PE computed only on causal lock_S1_series; stateless runs use ensemble metrics."
   }
 }
 ```
@@ -267,10 +267,11 @@ If `chaos_mode = "dynamic"`:
 
 - `PE_tick_norm`: float  
 - `T_ticks`: int
+- `lock_S1_series`: list[float]
 
 If `chaos_mode = "ensemble"`:
 
-- `PE_tick_norm = null`, `T_ticks = null`.
+- `PE_tick_norm = null`, `T_ticks = null`, `lock_S1_series = null`.
 
 ---
 
@@ -289,4 +290,3 @@ With this:
 - **Entropy** (`H_lock`) becomes your “thermometer” of mixture/decision of locks (instantaneous).
 - **Chaos** (`PE`) becomes a correct dynamical measure, but only when there is causal continuity (ticks).
 - If Wave 2 (Ola2) is stateless, the report is still useful (ensemble), without self-deception.
-
