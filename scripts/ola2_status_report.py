@@ -175,9 +175,17 @@ def render_report(
     ola1_h: float,
     stats: Dict[str, Dict[str, Any]],
     output: Path,
+    list_max_per_target: int = 20,
 ):
     lines: List[str] = []
     lines.append("# Ola2 – Reporte de Entropía / Caos / Masa")
+    lines.append("## Cómo se calcula la masa")
+    lines.append("")
+    lines.append("Energía de enlace aplicada en el engine Ola2:")
+    lines.append("- $E_{bind} = \\gamma \\cdot (\\sum M_{iniciales}) \\cdot R_{final} \\cdot Q_{lock}$")
+    lines.append("- $M_{final} = \\sum M_{iniciales} - E_{bind}$")
+    lines.append("Nota: $\\gamma$ es el acople configurado en Ola2 (p.ej. 0.007); $Q_{lock}$ es la calidad de lock media.")
+    lines.append("")
     # Termómetro cósmico
     all_success = [r for v in stats.values() for r in v["success_rows"]]
     ola2_pe = mean_of("PE_tick_norm", all_success)
@@ -242,6 +250,33 @@ def render_report(
         lines.append(f"| {tgt} | {mem:.4f} | {strain:.4f} | {deg:.3f} |")
     lines.append("")
 
+    # Lista de compuestos aceptados por target (limitada)
+    lines.append("## Compuestos aceptados (detalle)")
+    for tgt, d in stats.items():
+        succ = d["success_rows"]
+        if not succ:
+            continue
+        lines.append(f"### {tgt}")
+        lines.append("| run_id | Σm | M_final | E_b | R_final | Q_lock | PE | H_block | Partículas |")
+        lines.append("|--------|----|---------|-----|---------|--------|----|---------|------------|")
+        rows = succ if list_max_per_target < 0 else succ[:list_max_per_target]
+        for r in rows:
+            particles = ", ".join(_parse_list(r.get("block_particles")))
+            lines.append(
+                f"| {int(float(r.get('run_id',0)))} | "
+                f"{_parse_float(r.get('sumM')) or 0:.3f} | "
+                f"{_parse_float(r.get('M_final')) or 0:.3f} | "
+                f"{_parse_float(r.get('mass_defect')) or 0:.4f} | "
+                f"{_parse_float(r.get('R_final')) or 0:.3f} | "
+                f"{_parse_float(r.get('QualityLock')) or 0:.3f} | "
+                f"{_parse_float(r.get('PE_tick_norm')) or 0:.3f} | "
+                f"{_parse_float(r.get('H_block_mean')) or 0:.4f} | "
+                f"{particles} |"
+            )
+        if list_max_per_target >= 0 and len(succ) > list_max_per_target:
+            lines.append(f"_({len(succ) - list_max_per_target} más…)_")
+        lines.append("")
+
     output.write_text("\n".join(lines))
     print(f"[ola2] reporte escrito en {output}")
 
@@ -252,12 +287,13 @@ def main():
     parser.add_argument("--ola1-partial", type=Path, default=Path("data/processed/ola1-chaos/partial/runs_partial.jsonl"))
     parser.add_argument("--ola2-root", type=Path, default=Path("data/processed/ola2_reloaded"))
     parser.add_argument("--output", type=Path, default=Path("data/processed/ola2_reloaded/ola2_report.md"))
+    parser.add_argument("--list-max-per-target", type=int, default=20, help="Máximo de compuestos listados por target (-1 para todos).")
     args = parser.parse_args()
 
     ola1_pe, ola1_h = load_ola1_baseline(args.ola1_proxies, args.ola1_partial)
     runs = load_ola2_runs(args.ola2_root)
     stats = compute_stats(runs)
-    render_report(ola1_pe, ola1_h, stats, args.output)
+    render_report(ola1_pe, ola1_h, stats, args.output, list_max_per_target=args.list_max_per_target)
 
 
 if __name__ == "__main__":
