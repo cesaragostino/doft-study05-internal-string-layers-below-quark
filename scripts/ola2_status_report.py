@@ -51,18 +51,33 @@ def _parse_float(val: Any) -> float | None:
         return None
 
 
-def load_ola1_baseline(csv_path: Path) -> Tuple[float, float]:
+def load_ola1_baseline(csv_path: Path, partial_path: Path | None = None) -> Tuple[float, float]:
     pe_vals: List[float] = []
     h_vals: List[float] = []
-    with csv_path.open() as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            pe = _parse_float(row.get("PE_tick_norm"))
-            h = _parse_float(row.get("mean_H_lock_norm"))
+    if csv_path.exists():
+        with csv_path.open() as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                pe = _parse_float(row.get("PE_tick_norm"))
+                h = _parse_float(row.get("mean_H_lock_norm"))
+                if pe is not None and math.isfinite(pe):
+                    pe_vals.append(pe)
+                if h is not None and math.isfinite(h):
+                    h_vals.append(h)
+    # Fallback a runs_partial.jsonl si no hay columnas en proxies
+    if (not pe_vals or not h_vals) and partial_path and partial_path.exists():
+        for line in partial_path.read_text().splitlines():
+            try:
+                obj = json.loads(line)
+            except Exception:
+                continue
+            ec = obj.get("entropy_chaos") or {}
+            pe = ec.get("PE_tick_norm")
+            h = ec.get("mean_H_lock_norm")
             if pe is not None and math.isfinite(pe):
-                pe_vals.append(pe)
+                pe_vals.append(float(pe))
             if h is not None and math.isfinite(h):
-                h_vals.append(h)
+                h_vals.append(float(h))
     pe_mean = float(np.mean(pe_vals)) if pe_vals else float("nan")
     h_mean = float(np.mean(h_vals)) if h_vals else float("nan")
     return pe_mean, h_mean
@@ -234,11 +249,12 @@ def render_report(
 def main():
     parser = argparse.ArgumentParser(description="Reporte Markdown para Ola2 reloaded.")
     parser.add_argument("--ola1-proxies", type=Path, default=Path("data/processed/ola1-chaos/Ola1_3-2-5_all_runs_proxies.csv"))
+    parser.add_argument("--ola1-partial", type=Path, default=Path("data/processed/ola1-chaos/partial/runs_partial.jsonl"))
     parser.add_argument("--ola2-root", type=Path, default=Path("data/processed/ola2_reloaded"))
     parser.add_argument("--output", type=Path, default=Path("data/processed/ola2_reloaded/ola2_report.md"))
     args = parser.parse_args()
 
-    ola1_pe, ola1_h = load_ola1_baseline(args.ola1_proxies)
+    ola1_pe, ola1_h = load_ola1_baseline(args.ola1_proxies, args.ola1_partial)
     runs = load_ola2_runs(args.ola2_root)
     stats = compute_stats(runs)
     render_report(ola1_pe, ola1_h, stats, args.output)

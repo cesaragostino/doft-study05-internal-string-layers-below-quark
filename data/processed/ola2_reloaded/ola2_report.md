@@ -2,8 +2,8 @@
 ## Termómetro cósmico (Ola1 → Ola2)
 | Métrica | Promedio Ola1 (inputs) | Promedio Ola2 (éxitos) | Δ (Ola2 - Ola1) |
 |---------|------------------------|------------------------|-----------------|
-| Caos dinámico (PE) | nan | 0.843 | +nan |
-| Entropía (H_lock) | nan | 0.0113 | +nan |
+| Caos dinámico (PE) | 0.699 | 0.843 | +0.144 |
+| Entropía (H_lock) | 0.0053 | 0.0113 | +0.0060 |
 | Dynamic Strain (1-R_final) | n/a | 0.0249 | n/a |
 
 ## Rendimiento del reactor
