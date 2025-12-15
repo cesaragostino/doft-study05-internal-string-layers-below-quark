@@ -3,17 +3,6 @@
   "ola1_proxies_csv": "data/processed/ola1-chaos/Ola1_3-2-5_all_runs_proxies.csv",
   "targets": [
     {
-      "name": "oxygen_hybrid_synthesis",
-      "particle_name": "oxygen16",
-      "type": "nucleus",
-      "templates": ["nuclear_pair"],
-      "allowed_block_families": ["carbon12", "alpha"],
-      "description": "Fusión asimétrica: Carbono + Helio",
-      "runs_per_target": 5000,
-      "d_yes_match": 1.0,
-      "d_possible_match": 3.0
-    },
-    {
       "name": "magnesium_synthesis",
       "particle_name": "magnesium24",
       "type": "nucleus",

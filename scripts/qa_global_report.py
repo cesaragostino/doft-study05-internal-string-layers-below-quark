@@ -39,6 +39,7 @@ def validate_composition(row_particles_str: Any, expected: List[str]) -> bool:
 
 
 def analyze_target(entry: Dict[str, Any]) -> Tuple[Dict[str, float], int]:
+    M_NUCLEON = 0.938272  # GeV
     csv_path = Path(entry["csv_path"])
     if not csv_path.exists():
         return {"mass_sim": np.nan, "eb_per_a_sim": np.nan, "precision": np.nan}, 0
@@ -55,8 +56,9 @@ def analyze_target(entry: Dict[str, Any]) -> Tuple[Dict[str, float], int]:
         return {"mass_sim": np.nan, "eb_per_a_sim": np.nan, "precision": np.nan}, 0
     A = float(entry["A"])
     mass_sim = df["M_final"].mean()
-    eb_mev = df["E_bind_mass"].mean() * 1000.0
-    eb_per_a = eb_mev / A if A else np.nan
+    # Defecto de masa absoluto respecto a nucleones libres
+    total_defect = (A * M_NUCLEON) - mass_sim
+    eb_per_a = (total_defect * 1000.0 / A) if A else np.nan
     mass_real = float(entry["real_mass_gev"])
     precision = abs(mass_sim - mass_real) / mass_real * 100.0 if mass_real else np.nan
     return {"mass_sim": mass_sim, "eb_per_a_sim": eb_per_a, "precision": precision}, count
