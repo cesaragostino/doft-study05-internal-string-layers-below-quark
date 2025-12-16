@@ -194,6 +194,37 @@
       "masses_gev": [3.7274],
       "widths_gev": [0.0],
       "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "beryllium8",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 7.45485,
+      "masses_gev": [7.45485],
+      "widths_gev": [0.0],
+      "tolerances": {
+      "mass_abs": 0.05, "width_abs": 0.0,"spacing_rel": 0.4}
+    },
+    {
+      "name": "carbon12",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 11.17486,
+      "masses_gev": [11.17486],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.08,"width_abs": 0.0,"spacing_rel": 0.4}
+    },
+    {
+      "name": "oxygen16",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 14.89508,
+      "masses_gev": [14.89508],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.0, "spacing_rel": 0.4}
     }
   ]
 }

@@ -1,0 +1,71 @@
+{
+  "selections": [
+    {
+      "name": "nuclear_candidates_loose",
+      "target_name": "any",
+      "type": "nucleus",
+      "family": "any",
+      "filters": [
+        {
+          "field": "lock_quality_S1",
+          "op": ">=",
+          "value": 0.0
+        },
+        {
+          "field": "structure_tier",
+          "op": "in",
+          "value": ["none", "latent", "structural", "optimal"]
+        }
+      ],
+      "pick": {
+        "mode": "all",
+        "n": 10000
+      },
+      "output": {
+        "blocks_path": "data/processed/ola2/compounds.json",
+        "append": false,
+        "include_fields": [
+          "run_id",
+          "target_name",
+          "particle_name",
+          "mass_gev",
+          "d_total",
+          "structure_tier",
+          "composition",
+          "lock_quality_S1",
+          "band_count_structural"
+        ]
+      }
+    },
+    {
+      "name": "exotic_discovery",
+      "target_name": "unknown",
+      "type": "exotic",
+      "family": "any",
+      "filters": [
+        {
+          "field": "d_total",
+          "op": "<",
+          "value": 999.0
+        }
+      ],
+      "pick": {
+        "mode": "top_n",
+        "n": 500,
+        "order_by": "lock_quality_S1",
+        "ascending": false
+      },
+      "output": {
+        "blocks_path": "data/processed/ola2/exotics.json",
+        "append": false
+      }
+    }
+  ],
+  "global_settings": {
+    "band_count_field": "band_count_structural",
+    "band_count_max": 500,
+    "require_match": false,
+    "emit_unknown_when_no_match": true,
+    "log_rejections": true
+  }
+}

@@ -1,16 +1,11 @@
 {
-  "selections": [
+  "selection_rules": [
     {
-      "name": "nuclear_candidates_loose",
+      "name": "ola2_compounds",
       "target_name": "any",
-      "type": "nucleus",
+      "type": "compound",
       "family": "any",
       "filters": [
-        {
-          "field": "lock_quality_S1",
-          "op": ">=",
-          "value": 0.0
-        },
         {
           "field": "structure_tier",
           "op": "in",
@@ -25,15 +20,30 @@
         "blocks_path": "data/processed/ola2/compounds.json",
         "append": false,
         "include_fields": [
+          "compound_id",
           "run_id",
           "target_name",
           "particle_name",
+          "template_name",
+          "seed",
+          "config_hash",
+          "parent_ids",
+          "parent_names",
+          "parent_families",
           "mass_gev",
+          "binding_energy",
           "d_total",
+          "R_final",
+          "Q_lock",
           "structure_tier",
           "composition",
+          "lock_quality_Q",
           "lock_quality_S1",
-          "band_count_structural"
+          "lock_quality_S2",
+          "band_count_structural",
+          "memory_score_k10",
+          "H_lock",
+          "PE"
         ]
       }
     },

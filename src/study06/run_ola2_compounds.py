@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Sequence
 
 import numpy as np
+import hashlib
 
 # Import simulator from scripts/ (repo root)
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -38,7 +39,17 @@ def _load_json(path: Path):
 
 
 def _load_blocks(path: Path) -> List[Dict[str, Any]]:
-    return json.loads(path.read_text()) if path.exists() else []
+    if not path.exists():
+        return []
+    if path.suffix == ".jsonl":
+        blocks: List[Dict[str, Any]] = []
+        for line in path.read_text().splitlines():
+            try:
+                blocks.append(json.loads(line))
+            except Exception:
+                continue
+        return blocks
+    return json.loads(path.read_text())
 
 
 def _parse_band_energies(raw: Any) -> List[float]:
@@ -138,6 +149,8 @@ def run_from_rules(
     seed: int | None = None,
     runs_override: int | None = None,
     log_every: int = 0,
+    harvest_jsonl: Path | None = None,
+    harvest_rej_jsonl: Path | None = None,
 ):
     rng = random.Random(seed)
     rules = _load_json(rules_path)
@@ -176,10 +189,12 @@ def run_from_rules(
 
     targets_cfg = rules.get("targets", [])
     print(f"[ola2] targets a procesar: {len(targets_cfg)}")
+    config_hash = hashlib.sha256(rules_path.read_bytes()).hexdigest()[:16]
 
     for tgt_cfg in targets_cfg:
         target_name = tgt_cfg.get("name") or tgt_cfg.get("particle_name") or "unknown"
         families = [f.lower() for f in tgt_cfg.get("allowed_block_families", [])]
+        allowed_particle_names = {n.lower() for n in tgt_cfg.get("allowed_particle_names", [])} if tgt_cfg.get("allowed_particle_names") else None
         template_names = tgt_cfg.get("templates", [])
         runs_per_target = int(runs_override or tgt_cfg.get("runs_per_target", rules.get("runs_per_target", 100)))
         out_csv = out_base / f"ola2_{target_name}.csv"
@@ -192,9 +207,31 @@ def run_from_rules(
             tmpl = templates.get(tmpl_name) if tmpl_name else None
             if tmpl is None:
                 rows.append({"run_id": run_idx, "status": "skip", "reason": "no_template"})
+                if harvest_rej_jsonl:
+                    harvest_rej_jsonl.parent.mkdir(parents=True, exist_ok=True)
+                    with harvest_rej_jsonl.open("a") as hf:
+                        hf.write(
+                            json.dumps(
+                                {
+                                    "compound_id": None,
+                                    "run_id": run_idx,
+                                    "wave": "ola2",
+                                    "target_name": target_name,
+                                    "particle_name": target_name or "unknown",
+                                    "template_name": None,
+                                    "seed": seed,
+                                    "config_hash": config_hash,
+                                    "status": "skip",
+                                    "reason": "no_template",
+                                }
+                            )
+                            + "\n"
+                        )
                 continue
             nodes = int(tmpl.get("nodes", 0))
             picked = _sample_blocks(blocks, families, nodes, rng)
+            if allowed_particle_names:
+                picked = [b for b in picked if str(b.get("particle_name") or b.get("name", "")).lower() in allowed_particle_names]
             if len(picked) != nodes:
                 rows.append(
                     {
@@ -206,6 +243,26 @@ def run_from_rules(
                         "picked": len(picked),
                     }
                 )
+                if harvest_rej_jsonl:
+                    harvest_rej_jsonl.parent.mkdir(parents=True, exist_ok=True)
+                    with harvest_rej_jsonl.open("a") as hf:
+                        hf.write(
+                            json.dumps(
+                                {
+                                    "compound_id": None,
+                                    "run_id": run_idx,
+                                    "wave": "ola2",
+                                    "target_name": target_name,
+                                    "particle_name": target_name or "unknown",
+                                    "template_name": tmpl_name,
+                                    "seed": seed,
+                                    "config_hash": config_hash,
+                                    "status": "skip",
+                                    "reason": "not_enough_blocks",
+                                }
+                            )
+                            + "\n"
+                        )
                 continue
 
             fms: List[float] = []
@@ -304,6 +361,58 @@ def run_from_rules(
             }
             rows.append(row)
 
+            # Harvest jsonl append
+            if harvest_jsonl:
+                harvest_jsonl.parent.mkdir(parents=True, exist_ok=True)
+                compound_id = hashlib.sha256(
+                    f"{target_name}|{tmpl_name}|{run_idx}|{seed}|{config_hash}".encode()
+                ).hexdigest()
+                edges = tmpl.get("edges", [])
+                # agregamos k_edge/g_edge por arista como listas; si vacío, valores globales
+                k_edge_used = [K_local for _ in edges] if edges else [K_local]
+                g_edge_used = [kappa_global for _ in edges] if edges else [kappa_global]
+                lockq_mean = {}
+                if lockq:
+                    lockq_mean = {
+                        "Q": float(np.mean([q.get("Q", 0.0) for q in lockq])),
+                        "S1": float(np.mean([q.get("S1", 0.0) for q in lockq])),
+                        "S2": float(np.mean([q.get("S2", 0.0) for q in lockq])),
+                    }
+                harvest_entry = {
+                    "compound_id": compound_id,
+                    "run_id": run_idx,
+                    "wave": "ola2",
+                    "target_name": target_name,
+                    "particle_name": target_name if target_name else "unknown",
+                    "template_name": tmpl_name,
+                    "seed": seed,
+                    "config_hash": config_hash,
+                    "parent_ids": [b.get("block_id") or b.get("id") for b in picked],
+                    "parent_names": [b.get("particle_name") or b.get("name") for b in picked],
+                    "parent_families": [b.get("family") for b in picked],
+                    "edges": edges,
+                    "k_edge_used": k_edge_used,
+                    "g_edge_used": g_edge_used,
+                    "coupling_mode": tmpl.get("coupling_mode"),
+                    "mass_gev": mass_block.get("M_final"),
+                    "binding_energy": mass_block.get("mass_defect"),
+                    "R_final": metrics.get("R_final"),
+                    "Q_lock": metrics.get("QualityLock"),
+                    "d_total": row.get("match_d_total"),
+                    "lock_quality_Q": lockq_mean.get("Q") if lockq_mean else None,
+                    "lock_quality_S1": lockq_mean.get("S1") if lockq_mean else None,
+                    "lock_quality_S2": lockq_mean.get("S2") if lockq_mean else None,
+                    "structure_tier": row.get("structure_tier_compound", row.get("structure_tier")),
+                    "band_count_structural": row.get("band_count_compound", row.get("band_count")),
+                    "memory_score_k10": metrics.get("memory_score_k10"),
+                    "H_lock": row.get("H_block_mean"),
+                    "PE": metrics.get("PE_tick_norm"),
+                    "status": row["status"],
+                    "reason": row.get("reason"),
+                }
+                with harvest_jsonl.open("a") as hf:
+                    hf.write(json.dumps(harvest_entry) + "\n")
+
         if rows:
             fieldnames = sorted({k for r in rows for k in r.keys()})
             out_csv.parent.mkdir(parents=True, exist_ok=True)
@@ -323,6 +432,8 @@ def main():
     parser.add_argument("--seed", type=int, default=None)
     parser.add_argument("--runs-per-target", type=int, default=None, help="Override global de runs por target.")
     parser.add_argument("--log-every", type=int, default=0, help="Loguea progreso cada N runs (0 desactiva).")
+    parser.add_argument("--harvest-jsonl", type=Path, default=None, help="Escribe harvest completo JSONL (append).")
+    parser.add_argument("--harvest-rejections-jsonl", type=Path, default=None, help="Opcional: log de rechazos JSONL.")
     args = parser.parse_args()
 
     run_from_rules(
@@ -333,6 +444,8 @@ def main():
         seed=args.seed,
         runs_override=args.runs_per_target,
         log_every=args.log_every,
+        harvest_jsonl=args.harvest_jsonl,
+        harvest_rej_jsonl=args.harvest_rejections_jsonl,
     )
 
 
