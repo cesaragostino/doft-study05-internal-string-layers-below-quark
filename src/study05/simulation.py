@@ -650,6 +650,9 @@ def simulate(
     debug_inputs = []
     debug_tau = []
     debug_z = []
+    window_start_step = int(math.floor(0.75 * total_steps))
+    energy_sum_window = 0.0
+    energy_count_window = 0
 
     # reference energy for blow-up detection
     def _mem_energy():
@@ -728,6 +731,9 @@ def simulate(
         total_e = sum(inst_energy.values())
         if total_e > sim_params.energy_blowup_factor * max(energy_ref_total, 1e-12):
             raise FloatingPointError("energy runaway")
+        if step >= window_start_step:
+            energy_sum_window += total_e
+            energy_count_window += 1
 
         if step >= transient_steps and (step - transient_steps) % sim_params.sample_stride == 0:
             samples_time.append((step + 1) * dt)
@@ -909,6 +915,9 @@ def simulate(
             "tau_eff": debug_tau,
             "z": np.array(debug_z),
         }
+    result["E_internal"] = (
+        energy_sum_window / max(energy_count_window, 1) if energy_count_window > 0 else None
+    )
     return result
 
 

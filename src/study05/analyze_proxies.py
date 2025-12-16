@@ -108,6 +108,7 @@ def compute_basic_proxies(run: Dict) -> Dict:
         "lock_quality_S1": run.get("lock_quality_S1"),
         "lock_quality_S2": run.get("lock_quality_S2"),
         "participation_entropy": run.get("participation_entropy"),
+        "E_internal": run.get("E_internal"),
         "min_layer_fraction": run.get("min_layer_fraction"),
         "layer_energy_fraction": json.dumps(run.get("layer_energy_fraction", {})),
         "structure_tier": run.get("structure_tier"),

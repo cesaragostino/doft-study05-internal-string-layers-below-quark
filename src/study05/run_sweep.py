@@ -471,6 +471,16 @@ def run_sweep(
                 saved_since_print += len(partial_buffer)
                 partial_buffer = []
 
+    def _log_run_status(run_idx: int, status: str, e_internal: float | None = None):
+        try:
+            if e_internal is None or not math.isfinite(float(e_internal)):
+                e_val = "nan"
+            else:
+                e_val = f"{float(e_internal):.6g}"
+        except Exception:
+            e_val = "nan"
+        print(f"[run_sweep] run {run_idx + 1}/{runs} status={status} E_internal={e_val}", flush=True)
+
     for run_idx in range(start_run_idx, runs):
         if stop_file and Path(stop_file).exists():
             print(f"[run_sweep] stop-file detected at run {run_idx}/{runs}. Stopping gracefully.", flush=True)
@@ -513,6 +523,7 @@ def run_sweep(
                 }
             )
             _append_partial(run_outputs[-1])
+            _log_run_status(run_idx, "rejected", None)
             continue
 
         run_inputs.append(_serialize_run_config(config))
@@ -559,6 +570,7 @@ def run_sweep(
                 }
             )
             _append_partial(run_outputs[-1])
+            _log_run_status(run_idx, "unstable", None)
             continue
         spectrum = sim_result["spectrum"]
         omega_peaks, weights_peaks, peak_powers = pick_peaks(
@@ -903,6 +915,8 @@ def run_sweep(
             entropy_reason = "compute_entropy_disabled"
             entropy_chaos = None
 
+        e_internal = sim_result.get("E_internal")
+
         run_record = {
             "run_session_id": run_session_id,
             "engine_config_path": engine_config_path,
@@ -974,6 +988,7 @@ def run_sweep(
             "b_trace": sim_result["b_series"].tolist(),
             "t_trace": sim_result["times"].tolist(),
             "dt_used": sim_result.get("dt_used"),
+            "E_internal": e_internal,
             "entropy_status": entropy_status,
             "entropy_reason": entropy_reason,
             "lyapunov_local": None,
@@ -995,6 +1010,7 @@ def run_sweep(
         run_outputs.append(run_record)
         flush_now = ((run_idx + 1) % partial_flush_every == 0) or (run_idx + 1 == runs)
         _append_partial(run_record, flush_now=flush_now)
+        _log_run_status(run_idx, "ok", e_internal)
 
     all_spacings = np.concatenate(spacings_all) if spacings_all else np.array([])
     spacing_stats = analysis.summarise_spacings(all_spacings)

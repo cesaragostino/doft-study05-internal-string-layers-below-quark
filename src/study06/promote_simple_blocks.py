@@ -410,6 +410,7 @@ def main():
             "layer_energy_fraction": proxy_row.get("layer_energy_fraction"),
             "participation_entropy": proxy_row.get("participation_entropy"),
             "min_layer_fraction": proxy_row.get("min_layer_fraction"),
+            "internal_energy": _to_float(proxy_row.get("E_internal")),
         }
         theta_full = run_theta.get(str(proxy_row.get("run_id")))
         if theta_full:

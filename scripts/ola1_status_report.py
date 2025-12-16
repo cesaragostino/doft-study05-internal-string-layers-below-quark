@@ -482,6 +482,14 @@ def main():
         if rid is None:
             continue
         runs_by_id[rid] = r
+        e_int = r.get("E_internal")
+        if e_int is not None:
+            try:
+                e_val = float(e_int)
+                if math.isfinite(e_val):
+                    cosmic_pe_vals  # keep lint happy
+            except Exception:
+                pass
         ec = r.get("entropy_chaos") or {}
         pe_val = ec.get("PE_tick_norm")
         mh_val = ec.get("mean_H_lock_norm")
@@ -615,6 +623,68 @@ def main():
             lines.append(f"- fraction_structured (mean/med): {fstr[0]:.3f} / {fstr[1]:.3f}")
     else:
         lines.append("- No se encontraron métricas de entropía/caos en sweep_results.")
+    lines.append("")
+
+    # Energía interna (E_internal) en runs y bloques
+    def _energy_stats(vals: List[float]):
+        if not vals:
+            return None
+        vals_sorted = sorted(vals)
+        mid = len(vals_sorted) // 2
+        med = (
+            (vals_sorted[mid - 1] + vals_sorted[mid]) / 2
+            if len(vals_sorted) % 2 == 0 and len(vals_sorted) > 1
+            else vals_sorted[mid]
+        )
+        return statistics.mean(vals_sorted), med, vals_sorted[0], vals_sorted[-1]
+
+    run_energy_vals: List[float] = []
+    for r in run_records:
+        try:
+            val = float(r.get("E_internal"))
+            if math.isfinite(val):
+                run_energy_vals.append(val)
+        except Exception:
+            continue
+    block_energy_vals: List[float] = []
+    block_mass_vals: List[float] = []
+    for b in blocks:
+        try:
+            val = float(b.get("internal_energy"))
+            if math.isfinite(val):
+                block_energy_vals.append(val)
+        except Exception:
+            pass
+        try:
+            mval = float(b.get("mass_gev"))
+            if math.isfinite(mval):
+                block_mass_vals.append(mval)
+        except Exception:
+            pass
+
+    lines.append("## Energía interna (E_internal)")
+    lines.append(f"- Runs con E_internal: {len(run_energy_vals)} / {len(run_records)}")
+    stats_runs = _energy_stats(run_energy_vals)
+    if stats_runs:
+        lines.append(
+            f"- E_internal runs (mean/med/min/max): {stats_runs[0]:.6g} / {stats_runs[1]:.6g} / {stats_runs[2]:.6g} / {stats_runs[3]:.6g}"
+        )
+    else:
+        lines.append("- E_internal runs: n/d")
+    lines.append(f"- Bloques con internal_energy: {len(block_energy_vals)} / {len(blocks)}")
+    stats_blocks = _energy_stats(block_energy_vals)
+    if stats_blocks:
+        lines.append(
+            f"- internal_energy bloques (mean/med/min/max): {stats_blocks[0]:.6g} / {stats_blocks[1]:.6g} / {stats_blocks[2]:.6g} / {stats_blocks[3]:.6g}"
+        )
+    else:
+        lines.append("- internal_energy bloques: n/d")
+    if block_mass_vals:
+        stats_mass = _energy_stats(block_mass_vals)
+        if stats_mass:
+            lines.append(
+                f"- mass_gev bloques (mean/med/min/max): {stats_mass[0]:.6g} / {stats_mass[1]:.6g} / {stats_mass[2]:.6g} / {stats_mass[3]:.6g}"
+            )
     lines.append("")
 
     lines.append("## Error de masa vs SM")
