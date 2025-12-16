@@ -23,6 +23,30 @@
 - internal_energy bloques (mean/med/min/max): 0.000232373 / 6.76308e-05 / 3.71695e-06 / 0.00268174
 - mass_gev bloques (mean/med/min/max): 1.69485 / 0.493276 / 0.0271101 / 19.5597
 
+## Energía calibrada por bloque
+| run | best_target | family | E_internal | m_DOFT (GeV) | m_SM (GeV) | rel_error |
+|-----|-------------|--------|------------|--------------|-----------:|----------:|
+| 3 | delta_1232 | delta_like | 2.497e-05 | 0.1821 | 1.2320 | -0.852 |
+| 9 | delta_1232 | delta_like | 5.884e-05 | 0.4292 | 1.2320 | -0.652 |
+| 12 | delta_1232 | delta_like | 3.717e-06 | 0.0271 | 1.2320 | -0.978 |
+| 19 | delta_1232 | delta_like | 2.679e-05 | 0.1954 | 1.2320 | -0.841 |
+| 1 | deuteron | nucleus | 8.588e-05 | 0.6264 | 1.8756 | -0.666 |
+| 6 | deuteron | nucleus | 7.642e-05 | 0.5574 | 1.8756 | -0.703 |
+| 8 | deuteron | nucleus | 4.124e-05 | 0.3008 | 1.8756 | -0.840 |
+| 11 | deuteron | nucleus | 8.665e-05 | 0.6320 | 1.8756 | -0.663 |
+| 18 | deuteron | nucleus | 3.126e-05 | 0.2280 | 1.8756 | -0.878 |
+| 0 | eta_prime | eta_prime_like | 5.672e-05 | 0.4137 | 0.9578 | -0.568 |
+| 4 | eta_prime | eta_prime_like | 1.520e-04 | 1.1088 | 0.9578 | +0.158 |
+| 5 | eta_prime | eta_prime_like | 1.779e-04 | 1.2973 | 0.9578 | +0.354 |
+| 10 | eta_prime | eta_prime_like | 1.313e-04 | 0.9578 | 0.9578 | +0.000 |
+| 14 | eta_prime | eta_prime_like | 4.153e-05 | 0.3029 | 0.9578 | -0.684 |
+| 16 | eta_prime | eta_prime_like | 1.551e-04 | 1.1310 | 0.9578 | +0.181 |
+| 17 | eta_prime | eta_prime_like | 1.069e-04 | 0.7800 | 0.9578 | -0.186 |
+| 2 | quark_ud_const | quark_like | 2.682e-03 | 19.5597 | 0.3360 | +57.213 |
+| 7 | tau | lepton | 6.300e-04 | 4.5949 | 1.7769 | +1.586 |
+| 13 | tau | lepton | 5.788e-05 | 0.4221 | 1.7769 | -0.762 |
+| 15 | tau | lepton | 2.064e-05 | 0.1505 | 1.7769 | -0.915 |
+
 ## Error de masa vs SM
 | Partícula | Δ_mean% | Δ_min% | Δ_max% | n |
 |-----------|---------|--------|--------|---|

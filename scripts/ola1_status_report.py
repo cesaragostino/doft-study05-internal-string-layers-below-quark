@@ -687,6 +687,72 @@ def main():
             )
     lines.append("")
 
+    # Tabla de energía calibrada por bloque (si hay mass_gev o internal_energy)
+    def _load_calibration(proc_dir: Path) -> float | None:
+        candidates = [
+            proc_dir / "energy_calibration.json",
+            proc_dir.parent / "ola1-chaos" / "energy_calibration.json",
+        ]
+        for c in candidates:
+            if c.exists():
+                try:
+                    data = json.loads(c.read_text())
+                    K = float(data.get("scale_K"))
+                    if math.isfinite(K):
+                        return K
+                except Exception:
+                    continue
+        return None
+
+    K_cal = _load_calibration(proc)
+    energy_rows = []
+    for b in blocks:
+        rid = _to_int(b.get("origin_run_id"))
+        pname = b.get("particle_name")
+        fam = b.get("family")
+        e_int = b.get("internal_energy")
+        mass_sm = sm_masses.get(str(pname)) if sm_masses else None
+        try:
+            e_val = float(e_int)
+        except Exception:
+            e_val = None
+        mass_doft = None
+        if b.get("mass_gev") is not None:
+            try:
+                mass_doft = float(b.get("mass_gev"))
+            except Exception:
+                mass_doft = None
+        if mass_doft is None and e_val is not None and K_cal is not None:
+            mass_doft = K_cal * e_val
+        if e_val is None or mass_doft is None or mass_sm is None or mass_sm == 0:
+            continue
+        rel_err = (mass_doft - mass_sm) / mass_sm
+        energy_rows.append(
+            (
+                rid if rid is not None else -1,
+                str(pname),
+                str(fam),
+                e_val,
+                mass_doft,
+                mass_sm,
+                rel_err,
+            )
+        )
+
+    lines.append("## Energía calibrada por bloque")
+    if energy_rows:
+        energy_rows_sorted = sorted(energy_rows, key=lambda x: (x[1], x[0]))
+        lines.append("| run | best_target | family | E_internal | m_DOFT (GeV) | m_SM (GeV) | rel_error |")
+        lines.append("|-----|-------------|--------|------------|--------------|-----------:|----------:|")
+        for row in energy_rows_sorted[:100]:
+            rid, pname, fam, e_val, m_doft, m_sm, rel_err = row
+            lines.append(
+                f"| {rid} | {pname} | {fam} | {e_val:.3e} | {m_doft:.4f} | {m_sm:.4f} | {rel_err:+.3f} |"
+            )
+    else:
+        lines.append("- No se pudo construir la tabla (falta internal_energy, mass_gev o sm_mass_gev).")
+    lines.append("")
+
     lines.append("## Error de masa vs SM")
     if mass_errors_by_particle:
         lines.append("| Partícula | Δ_mean% | Δ_min% | Δ_max% | n |")
