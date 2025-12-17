@@ -39,6 +39,11 @@ def main():
         default=None,
         help="Optional path to hbar_sim_calibration.json to compute mass_sim_gev when proxies lack it.",
     )
+    parser.add_argument(
+        "--use-mass-sim",
+        action="store_true",
+        help="Usar mass_sim_gev/omega_ref en lugar de band_energies_gev para el matching. Útil en fase 2/3.",
+    )
     args = parser.parse_args()
 
     universe = load_universe(args.sm_universe)
@@ -66,17 +71,19 @@ def main():
                     hbar_sim = None
 
     for row in rows:
-        mass_sim = row.get("mass_sim_gev")
-        if mass_sim is None and hbar_sim is not None:
-            omega_ref = row.get("omega_ref") or row.get("omega_ref_interp")
-            try:
-                omega_ref_f = float(omega_ref)
-                if np.isfinite(omega_ref_f):
-                    mass_sim = hbar_sim * omega_ref_f
-            except Exception:
-                pass
+        mass_sim = None
+        if args.use_mass_sim:
+            mass_sim = row.get("mass_sim_gev")
+            if mass_sim is None and hbar_sim is not None:
+                omega_ref = row.get("omega_ref") or row.get("omega_ref_interp")
+                try:
+                    omega_ref_f = float(omega_ref)
+                    if np.isfinite(omega_ref_f):
+                        mass_sim = hbar_sim * omega_ref_f
+                except Exception:
+                    pass
         levels_full = []
-        if mass_sim is not None:
+        if args.use_mass_sim and mass_sim is not None:
             try:
                 m_val = float(mass_sim)
                 if np.isfinite(m_val):

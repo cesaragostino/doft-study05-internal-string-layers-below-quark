@@ -91,6 +91,11 @@ def main():
     parser.add_argument("--output", type=Path, default=Path("data/processed/ola1/hbar_sim_calibration.json"))
     parser.add_argument("--proxies-csv", type=Path, default=None, help="Opcional: actualizar mass_sim_gev en proxies.")
     parser.add_argument("--blocks-output", type=Path, default=None, help="Opcional: escribir bloques enriquecidos en otro path.")
+    parser.add_argument(
+        "--seed-mode",
+        action="store_true",
+        help="Usar solo semillas (Q>=0.9, band_count==2, omega_ref bajo) y masa de deuteron para hbar_seed.",
+    )
     args = parser.parse_args()
 
     blocks = _load_blocks(args.blocks)
@@ -100,14 +105,28 @@ def main():
     for b in blocks:
         grade = str(b.get("grade", "")).upper()
         ms = b.get("match_score") or {}
-        if grade not in {"A", "B"}:
-            continue
-        if not bool(ms.get("has_enough_levels_full")):
-            continue
+        if not args.seed_mode:
+            if grade not in {"A", "B"}:
+                continue
+            if not bool(ms.get("has_enough_levels_full")):
+                continue
         omega = _to_float(b.get("omega_ref")) or _to_float(b.get("omega_ref_interp"))
         if omega is None or omega <= 0:
             continue
         pname = b.get("particle_name")
+        if args.seed_mode:
+            # semillas: Q>=0.9, band_count==2, omega_ref bajo
+            try:
+                q_lock = float((b.get("lock_quality") or {}).get("Q"))
+            except Exception:
+                q_lock = 0.0
+            try:
+                band_count = int(float(b.get("band_count")))
+            except Exception:
+                band_count = 0
+            if q_lock < 0.9 or band_count != 2 or omega <= 0 or omega > 12.0:
+                continue
+            pname = "deuteron"  # fijamos masa deuteron como referencia seed
         m_sm = sm_masses.get(str(pname))
         if m_sm is None:
             continue
@@ -121,12 +140,14 @@ def main():
         candidates.append({"block": b, "omega_ref": omega, "sm_mass": m_sm, "q_lock": q_lock, "d_total": d_total})
 
     if not candidates:
-        raise ValueError("hbar_sim: no hay bloques elegibles con omega_ref y sm_mass_gev.")
+        print("!! hbar_sim: no hay bloques elegibles con omega_ref y sm_mass_gev. ¿Faltan runs o grades A/B con matches full?", flush=True)
+        return
 
     # cluster fundamental: omega0 = p10; keep within ±10%
     omega_all = np.array([c["omega_ref"] for c in candidates if c["omega_ref"] is not None], dtype=float)
     if omega_all.size == 0:
-        raise ValueError("hbar_sim: sin omegas válidos.")
+        print("!! hbar_sim: sin omegas válidos para calibrar.", flush=True)
+        return
     omega0 = float(np.percentile(omega_all, 10))
     cluster_tol = 0.10
     clustered = [c for c in candidates if abs(c["omega_ref"] - omega0) / max(omega0, 1e-9) <= cluster_tol]
@@ -176,8 +197,18 @@ def main():
             "p50": float(np.percentile(h_vals, 50)),
             "p90": float(hi),
         },
+        "mode": "seed" if args.seed_mode else "global",
+        "seed_particle": "deuteron" if args.seed_mode else None,
+        "selection": {
+            "q_lock_min": 0.9 if args.seed_mode else None,
+            "band_count_exact": 2 if args.seed_mode else None,
+            "omega_max": 12.0 if args.seed_mode else None,
+            "grade_filter": None if args.seed_mode else "A/B with enough_levels_full",
+        },
     }
     _write_calibration(args.output, payload)
+    if len(kept_trim) < 10:
+        print(f"!! hbar_sim: solo {len(kept_trim)} bloques usados para calibrar (recomendado >=10).", flush=True)
 
     # enrich blocks with mass_sim_gev
     out_blocks_path = args.blocks_output or args.blocks
