@@ -23,6 +23,30 @@
 - internal_energy bloques (mean/med/min/max): 0.000232373 / 6.76308e-05 / 3.71695e-06 / 0.00268174
 - mass_gev bloques (mean/med/min/max): 1.69485 / 0.493276 / 0.0271101 / 19.5597
 
+## Proxies de masa/lock (unidades internas)
+| run | particle | family | omega_ref | M_spec | M1 | M2 | M3 |
+|-----|----------|--------|-----------|--------|----|----|----|
+| 3 | delta_1232 | delta_like | 1.017e+01 | 1.017e+01 | 1.001e+00 | 1.018e+01 | 3.102e+00 |
+| 9 | delta_1232 | delta_like | 5.961e+00 | 5.961e+00 | 5.002e+00 | 2.982e+01 | 4.022e+00 |
+| 12 | delta_1232 | delta_like | 6.216e+00 | 6.216e+00 | 4.003e+00 | 2.488e+01 | 1.217e+01 |
+| 19 | delta_1232 | delta_like | 5.945e+00 | 5.945e+00 | 4.002e+00 | 2.379e+01 | 8.931e+00 |
+| 1 | deuteron | nucleus | 6.786e+00 | 6.786e+00 | 2.003e+00 | 1.359e+01 | 4.225e+00 |
+| 6 | deuteron | nucleus | 9.853e+00 | 9.853e+00 | 2.000e+00 | 1.971e+01 | 7.379e+00 |
+| 8 | deuteron | nucleus | 6.436e+00 | 6.436e+00 | 2.000e+00 | 1.287e+01 | 3.965e+00 |
+| 11 | deuteron | nucleus | 8.781e+00 | 8.781e+00 | 2.000e+00 | 1.756e+01 | 5.177e+00 |
+| 18 | deuteron | nucleus | 6.118e+00 | 6.118e+00 | 6.001e+00 | 3.672e+01 | 1.026e+01 |
+| 0 | eta_prime | eta_prime_like | 6.608e+00 | 6.608e+00 | 4.001e+00 | 2.644e+01 | 1.093e+01 |
+| 4 | eta_prime | eta_prime_like | 6.120e+00 | 6.120e+00 | 2.001e+00 | 1.225e+01 | 3.050e+00 |
+| 5 | eta_prime | eta_prime_like | 6.166e+00 | 6.166e+00 | 4.002e+00 | 2.468e+01 | 4.281e+00 |
+| 10 | eta_prime | eta_prime_like | 5.894e+00 | 5.894e+00 | 4.001e+00 | 2.358e+01 | 7.405e+00 |
+| 14 | eta_prime | eta_prime_like | 6.035e+00 | 6.035e+00 | 2.003e+00 | 1.209e+01 | 2.615e+00 |
+| 16 | eta_prime | eta_prime_like | 6.456e+00 | 6.456e+00 | 4.001e+00 | 2.583e+01 | 5.953e+00 |
+| 17 | eta_prime | eta_prime_like | 6.235e+00 | 6.235e+00 | 3.001e+00 | 1.871e+01 | 6.857e+00 |
+| 2 | quark_ud_const | quark_like | 1.027e+01 | 1.027e+01 | 1.475e+00 | 1.515e+01 | 2.336e+00 |
+| 7 | tau | lepton | 6.483e+00 | 6.483e+00 | 4.000e+00 | 2.593e+01 | 6.542e+00 |
+| 13 | tau | lepton | 6.265e+00 | 6.265e+00 | 6.001e+00 | 3.760e+01 | 8.734e+00 |
+| 15 | tau | lepton | 6.619e+00 | 6.619e+00 | 4.003e+00 | 2.649e+01 | 8.208e+00 |
+
 ## Energía calibrada por bloque
 | run | best_target | family | E_internal | m_DOFT (GeV) | m_SM (GeV) | rel_error |
 |-----|-------------|--------|------------|--------------|-----------:|----------:|
@@ -109,39 +133,22 @@ Sin candidatos cercanos fuera de la selección.
 No hay registros de rechazo (o no se encontró el log).
 
 ## Bloques aceptados con métricas de entropía/caos
-### delta_1232_block_0001 (run_id=12)
-- Partícula: delta_1232, tier: level1, s2_state: none
-- match_score.d_total: 4.676
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.7234042553191489, 1.74468085106383, 2.0, 2.0212765957446805]
-- F_m (base): 1.723 GeV
-- M_eff (base≈F_m): 1.723
-- M_corrected (F_m*(1-H_block)): 1.712 (H_block=0.007)
-- sm_mass_gev: 1.232
-- Δ_mass vs SM: +39.8867%
-- H_block (lock_quality): 0.007
-- band_power_capture: 0.8922299068312326
-- chaos_mode=dynamic, PE_tick_norm=0.5075835339297446, T_ticks=200
-- mean_H_lock_norm=0.006881691991043257, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0013 / 0.0002 / 0.0027
-
-### eta_prime_block_0001 (run_id=5)
+### eta_prime_block_0001 (run_id=4)
 - Partícula: eta_prime, tier: level1, s2_state: none
-- match_score.d_total: 2.773
-- Bandas: count=4.0, s2_band_fraction=0.0
-- band_energies_gev: [1.2352941176470587, 1.941176470588235, 2.0, 2.0588235294117645]
-- F_m (base): 1.235 GeV
-- M_eff (base≈F_m): 1.235
-- M_corrected (F_m*(1-H_block)): 1.230 (H_block=0.005)
+- match_score.d_total: 0.946
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.0526315789473684, 2.0]
+- F_m (base): 1.053 GeV
+- M_eff (base≈F_m): 1.053
+- M_corrected (F_m*(1-H_block)): 1.048 (H_block=0.004)
 - sm_mass_gev: 0.958
-- Δ_mass vs SM: +28.9747%
-- H_block (lock_quality): 0.005
+- Δ_mass vs SM: +9.9033%
+- H_block (lock_quality): 0.004
 - band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.8257164719111137, T_ticks=200
-- mean_H_lock_norm=0.004447177737256901, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- chaos_mode=dynamic, PE_tick_norm=0.7498699821239433, T_ticks=200
+- mean_H_lock_norm=0.0040844136112220125, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0104 / 0.0005 / 0.1226
+- lock_S1_series (mean/min/max): 0.0029 / 0.0005 / 0.0260
 
 ### quark_ud_const_block_0001 (run_id=2)
 - Partícula: quark_ud_const, tier: none, s2_state: none
@@ -160,7 +167,24 @@ No hay registros de rechazo (o no se encontró el log).
 - fraction_structured=0.5
 - lock_S1_series (mean/min/max): 0.9960 / 0.9916 / 0.9987
 
-### delta_1232_block_0002 (run_id=9)
+### deuteron_block_0001 (run_id=1)
+- Partícula: deuteron, tier: level1, s2_state: latent
+- match_score.d_total: 7.312
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9487179487179487, 1.9999999999999998]
+- F_m (base): 1.949 GeV
+- M_eff (base≈F_m): 1.949
+- M_corrected (F_m*(1-H_block)): 1.920 (H_block=0.015)
+- sm_mass_gev: 1.876
+- Δ_mass vs SM: +3.8978%
+- H_block (lock_quality): 0.015
+- band_power_capture: 1.0
+- chaos_mode=dynamic, PE_tick_norm=0.6845438224083286, T_ticks=200
+- mean_H_lock_norm=0.014525308311905797, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0008 / 0.0001 / 0.0013
+
+### delta_1232_block_0001 (run_id=9)
 - Partícula: delta_1232, tier: level1, s2_state: none
 - match_score.d_total: 2.560
 - Bandas: count=5.0, s2_band_fraction=0.0
@@ -177,22 +201,39 @@ No hay registros de rechazo (o no se encontró el log).
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.1249 / 0.0006 / 0.8211
 
-### eta_prime_block_0002 (run_id=16)
-- Partícula: eta_prime, tier: level1, s2_state: none
-- match_score.d_total: 3.463
-- Bandas: count=4.0, s2_band_fraction=0.0
-- band_energies_gev: [1.3043478260869565, 1.9130434782608698, 2.0, 2.0869565217391304]
-- F_m (base): 1.304 GeV
-- M_eff (base≈F_m): 1.304
-- M_corrected (F_m*(1-H_block)): 1.300 (H_block=0.004)
+### eta_prime_block_0002 (run_id=14)
+- Partícula: eta_prime, tier: level1, s2_state: latent
+- match_score.d_total: 3.378
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.2957746478873242, 2.0]
+- F_m (base): 1.296 GeV
+- M_eff (base≈F_m): 1.296
+- M_corrected (F_m*(1-H_block)): 1.276 (H_block=0.015)
 - sm_mass_gev: 0.958
-- Δ_mass vs SM: +36.1845%
-- H_block (lock_quality): 0.004
+- Δ_mass vs SM: +35.2894%
+- H_block (lock_quality): 0.015
 - band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.768719465075447, T_ticks=200
-- mean_H_lock_norm=0.0036268985838813976, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- chaos_mode=dynamic, PE_tick_norm=0.7803259662410384, T_ticks=200
+- mean_H_lock_norm=0.015209458087242542, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0123 / 0.0003 / 0.1065
+- lock_S1_series (mean/min/max): 0.0034 / 0.0001 / 0.0090
+
+### deuteron_block_0002 (run_id=6)
+- Partícula: deuteron, tier: level1, s2_state: none
+- match_score.d_total: 1.914
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.894736842105263, 1.9999999999999998]
+- F_m (base): 1.895 GeV
+- M_eff (base≈F_m): 1.895
+- M_corrected (F_m*(1-H_block)): 1.892 (H_block=0.002)
+- sm_mass_gev: 1.876
+- Δ_mass vs SM: +1.0198%
+- H_block (lock_quality): 0.002
+- band_power_capture: 1.0
+- chaos_mode=dynamic, PE_tick_norm=0.6250467465883088, T_ticks=200
+- mean_H_lock_norm=0.001510667079824818, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0016 / 0.0001 / 0.0035
 
 ### eta_prime_block_0003 (run_id=17)
 - Partícula: eta_prime, tier: level1, s2_state: none
@@ -211,22 +252,56 @@ No hay registros de rechazo (o no se encontró el log).
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0032 / 0.0005 / 0.0078
 
-### deuteron_block_0001 (run_id=8)
-- Partícula: deuteron, tier: level1, s2_state: none
-- match_score.d_total: 6.884
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9444444444444444, 2.0]
-- F_m (base): 1.944 GeV
-- M_eff (base≈F_m): 1.944
-- M_corrected (F_m*(1-H_block)): 1.942 (H_block=0.001)
-- sm_mass_gev: 1.876
-- Δ_mass vs SM: +3.6700%
-- H_block (lock_quality): 0.001
+### eta_prime_block_0004 (run_id=10)
+- Partícula: eta_prime, tier: level1, s2_state: none
+- match_score.d_total: 0.020
+- Bandas: count=4.0, s2_band_fraction=0.0
+- band_energies_gev: [0.9600000000000001, 1.04, 2.0, 2.08]
+- F_m (base): 0.960 GeV
+- M_eff (base≈F_m): 0.960
+- M_corrected (F_m*(1-H_block)): 0.958 (H_block=0.002)
+- sm_mass_gev: 0.958
+- Δ_mass vs SM: +0.2318%
+- H_block (lock_quality): 0.002
 - band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.6915397013314226, T_ticks=200
-- mean_H_lock_norm=0.0014268028550437624, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- chaos_mode=dynamic, PE_tick_norm=0.6853623294396579, T_ticks=200
+- mean_H_lock_norm=0.0019715005256091224, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0015 / 0.0001 / 0.0033
+- lock_S1_series (mean/min/max): 0.0042 / 0.0001 / 0.0108
+
+### eta_prime_block_0005 (run_id=0)
+- Partícula: eta_prime, tier: level1, s2_state: none
+- match_score.d_total: 0.976
+- Bandas: count=4.0, s2_band_fraction=0.0
+- band_energies_gev: [1.0555555555555556, 1.9444444444444446, 2.0, 2.055555555555556]
+- F_m (base): 1.056 GeV
+- M_eff (base≈F_m): 1.056
+- M_corrected (F_m*(1-H_block)): 1.052 (H_block=0.003)
+- sm_mass_gev: 0.958
+- Δ_mass vs SM: +10.2086%
+- H_block (lock_quality): 0.003
+- band_power_capture: 1.0
+- chaos_mode=dynamic, PE_tick_norm=0.585332879330038, T_ticks=200
+- mean_H_lock_norm=0.002860883825820061, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0063 / 0.0005 / 0.0197
+
+### eta_prime_block_0006 (run_id=16)
+- Partícula: eta_prime, tier: level1, s2_state: none
+- match_score.d_total: 3.463
+- Bandas: count=4.0, s2_band_fraction=0.0
+- band_energies_gev: [1.3043478260869565, 1.9130434782608698, 2.0, 2.0869565217391304]
+- F_m (base): 1.304 GeV
+- M_eff (base≈F_m): 1.304
+- M_corrected (F_m*(1-H_block)): 1.300 (H_block=0.004)
+- sm_mass_gev: 0.958
+- Δ_mass vs SM: +36.1845%
+- H_block (lock_quality): 0.004
+- band_power_capture: 1.0
+- chaos_mode=dynamic, PE_tick_norm=0.768719465075447, T_ticks=200
+- mean_H_lock_norm=0.0036268985838813976, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0123 / 0.0003 / 0.1065
 
 ### tau_block_0001 (run_id=13)
 - Partícula: tau, tier: level1, s2_state: none
@@ -245,75 +320,7 @@ No hay registros de rechazo (o no se encontró el log).
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.1620 / 0.0017 / 0.7697
 
-### deuteron_block_0002 (run_id=11)
-- Partícula: deuteron, tier: level1, s2_state: none
-- match_score.d_total: 3.349
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.909090909090909, 2.0]
-- F_m (base): 1.909 GeV
-- M_eff (base≈F_m): 1.909
-- M_corrected (F_m*(1-H_block)): 1.907 (H_block=0.001)
-- sm_mass_gev: 1.876
-- Δ_mass vs SM: +1.7851%
-- H_block (lock_quality): 0.001
-- band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.7049745080656846, T_ticks=200
-- mean_H_lock_norm=0.0008915856555246151, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0129 / 0.0002 / 0.1189
-
-### eta_prime_block_0004 (run_id=0)
-- Partícula: eta_prime, tier: level1, s2_state: none
-- match_score.d_total: 0.976
-- Bandas: count=4.0, s2_band_fraction=0.0
-- band_energies_gev: [1.0555555555555556, 1.9444444444444446, 2.0, 2.055555555555556]
-- F_m (base): 1.056 GeV
-- M_eff (base≈F_m): 1.056
-- M_corrected (F_m*(1-H_block)): 1.052 (H_block=0.003)
-- sm_mass_gev: 0.958
-- Δ_mass vs SM: +10.2086%
-- H_block (lock_quality): 0.003
-- band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.585332879330038, T_ticks=200
-- mean_H_lock_norm=0.002860883825820061, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0063 / 0.0005 / 0.0197
-
-### tau_block_0002 (run_id=15)
-- Partícula: tau, tier: level1, s2_state: none
-- match_score.d_total: 3.570
-- Bandas: count=4.0, s2_band_fraction=0.0
-- band_energies_gev: [1.8124999999999998, 1.9375000000000002, 2.0, 2.0625]
-- F_m (base): 1.812 GeV
-- M_eff (base≈F_m): 1.812
-- M_corrected (F_m*(1-H_block)): 1.801 (H_block=0.007)
-- sm_mass_gev: 1.777
-- Δ_mass vs SM: +2.0058%
-- H_block (lock_quality): 0.007
-- band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.6881040049861288, T_ticks=200
-- mean_H_lock_norm=0.00661465207548643, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0190 / 0.0001 / 0.1486
-
-### deuteron_block_0003 (run_id=1)
-- Partícula: deuteron, tier: level1, s2_state: latent
-- match_score.d_total: 7.312
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9487179487179487, 1.9999999999999998]
-- F_m (base): 1.949 GeV
-- M_eff (base≈F_m): 1.949
-- M_corrected (F_m*(1-H_block)): 1.920 (H_block=0.015)
-- sm_mass_gev: 1.876
-- Δ_mass vs SM: +3.8978%
-- H_block (lock_quality): 0.015
-- band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.6845438224083286, T_ticks=200
-- mean_H_lock_norm=0.014525308311905797, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0008 / 0.0001 / 0.0013
-
-### deuteron_block_0004 (run_id=18)
+### deuteron_block_0003 (run_id=18)
 - Partícula: deuteron, tier: level1, s2_state: none
 - match_score.d_total: 2.440
 - Bandas: count=6.0, s2_band_fraction=0.0
@@ -330,58 +337,7 @@ No hay registros de rechazo (o no se encontró el log).
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0002 / 0.0000 / 0.0008
 
-### eta_prime_block_0005 (run_id=10)
-- Partícula: eta_prime, tier: level1, s2_state: none
-- match_score.d_total: 0.020
-- Bandas: count=4.0, s2_band_fraction=0.0
-- band_energies_gev: [0.9600000000000001, 1.04, 2.0, 2.08]
-- F_m (base): 0.960 GeV
-- M_eff (base≈F_m): 0.960
-- M_corrected (F_m*(1-H_block)): 0.958 (H_block=0.002)
-- sm_mass_gev: 0.958
-- Δ_mass vs SM: +0.2318%
-- H_block (lock_quality): 0.002
-- band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.6853623294396579, T_ticks=200
-- mean_H_lock_norm=0.0019715005256091224, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0042 / 0.0001 / 0.0108
-
-### tau_block_0003 (run_id=7)
-- Partícula: tau, tier: level1, s2_state: none
-- match_score.d_total: 4.138
-- Bandas: count=4.0, s2_band_fraction=0.0
-- band_energies_gev: [1.8181818181818183, 1.9090909090909092, 1.9999999999999998, 2.0909090909090913]
-- F_m (base): 1.818 GeV
-- M_eff (base≈F_m): 1.818
-- M_corrected (F_m*(1-H_block)): 1.816 (H_block=0.001)
-- sm_mass_gev: 1.777
-- Δ_mass vs SM: +2.3256%
-- H_block (lock_quality): 0.001
-- band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.7475149486476064, T_ticks=200
-- mean_H_lock_norm=0.0009276421783549375, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.9083 / 0.7233 / 0.9728
-
-### deuteron_block_0005 (run_id=6)
-- Partícula: deuteron, tier: level1, s2_state: none
-- match_score.d_total: 1.914
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.894736842105263, 1.9999999999999998]
-- F_m (base): 1.895 GeV
-- M_eff (base≈F_m): 1.895
-- M_corrected (F_m*(1-H_block)): 1.892 (H_block=0.002)
-- sm_mass_gev: 1.876
-- Δ_mass vs SM: +1.0198%
-- H_block (lock_quality): 0.002
-- band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.6250467465883088, T_ticks=200
-- mean_H_lock_norm=0.001510667079824818, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0016 / 0.0001 / 0.0035
-
-### delta_1232_block_0003 (run_id=19)
+### delta_1232_block_0002 (run_id=19)
 - Partícula: delta_1232, tier: level1, s2_state: none
 - match_score.d_total: 4.188
 - Bandas: count=2.0, s2_band_fraction=0.0
@@ -397,6 +353,57 @@ No hay registros de rechazo (o no se encontró el log).
 - mean_H_lock_norm=0.004924927102850987, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0044 / 0.0006 / 0.0099
+
+### deuteron_block_0004 (run_id=8)
+- Partícula: deuteron, tier: level1, s2_state: none
+- match_score.d_total: 6.884
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9444444444444444, 2.0]
+- F_m (base): 1.944 GeV
+- M_eff (base≈F_m): 1.944
+- M_corrected (F_m*(1-H_block)): 1.942 (H_block=0.001)
+- sm_mass_gev: 1.876
+- Δ_mass vs SM: +3.6700%
+- H_block (lock_quality): 0.001
+- band_power_capture: 1.0
+- chaos_mode=dynamic, PE_tick_norm=0.6915397013314226, T_ticks=200
+- mean_H_lock_norm=0.0014268028550437624, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0015 / 0.0001 / 0.0033
+
+### delta_1232_block_0003 (run_id=12)
+- Partícula: delta_1232, tier: level1, s2_state: none
+- match_score.d_total: 4.676
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.7234042553191489, 1.74468085106383, 2.0, 2.0212765957446805]
+- F_m (base): 1.723 GeV
+- M_eff (base≈F_m): 1.723
+- M_corrected (F_m*(1-H_block)): 1.712 (H_block=0.007)
+- sm_mass_gev: 1.232
+- Δ_mass vs SM: +39.8867%
+- H_block (lock_quality): 0.007
+- band_power_capture: 0.8922299068312326
+- chaos_mode=dynamic, PE_tick_norm=0.5075835339297446, T_ticks=200
+- mean_H_lock_norm=0.006881691991043257, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0013 / 0.0002 / 0.0027
+
+### deuteron_block_0005 (run_id=11)
+- Partícula: deuteron, tier: level1, s2_state: none
+- match_score.d_total: 3.349
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.909090909090909, 2.0]
+- F_m (base): 1.909 GeV
+- M_eff (base≈F_m): 1.909
+- M_corrected (F_m*(1-H_block)): 1.907 (H_block=0.001)
+- sm_mass_gev: 1.876
+- Δ_mass vs SM: +1.7851%
+- H_block (lock_quality): 0.001
+- band_power_capture: 1.0
+- chaos_mode=dynamic, PE_tick_norm=0.7049745080656846, T_ticks=200
+- mean_H_lock_norm=0.0008915856555246151, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0129 / 0.0002 / 0.1189
 
 ### delta_1232_block_0004 (run_id=3)
 - Partícula: delta_1232, tier: level1, s2_state: none
@@ -415,36 +422,94 @@ No hay registros de rechazo (o no se encontró el log).
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0324 / 0.0002 / 0.2708
 
-### eta_prime_block_0006 (run_id=14)
-- Partícula: eta_prime, tier: level1, s2_state: latent
-- match_score.d_total: 3.378
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.2957746478873242, 2.0]
-- F_m (base): 1.296 GeV
-- M_eff (base≈F_m): 1.296
-- M_corrected (F_m*(1-H_block)): 1.276 (H_block=0.015)
-- sm_mass_gev: 0.958
-- Δ_mass vs SM: +35.2894%
-- H_block (lock_quality): 0.015
+### tau_block_0002 (run_id=15)
+- Partícula: tau, tier: level1, s2_state: none
+- match_score.d_total: 3.570
+- Bandas: count=4.0, s2_band_fraction=0.0
+- band_energies_gev: [1.8124999999999998, 1.9375000000000002, 2.0, 2.0625]
+- F_m (base): 1.812 GeV
+- M_eff (base≈F_m): 1.812
+- M_corrected (F_m*(1-H_block)): 1.801 (H_block=0.007)
+- sm_mass_gev: 1.777
+- Δ_mass vs SM: +2.0058%
+- H_block (lock_quality): 0.007
 - band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.7803259662410384, T_ticks=200
-- mean_H_lock_norm=0.015209458087242542, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- chaos_mode=dynamic, PE_tick_norm=0.6881040049861288, T_ticks=200
+- mean_H_lock_norm=0.00661465207548643, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0034 / 0.0001 / 0.0090
+- lock_S1_series (mean/min/max): 0.0190 / 0.0001 / 0.1486
 
-### eta_prime_block_0007 (run_id=4)
+### eta_prime_block_0007 (run_id=5)
 - Partícula: eta_prime, tier: level1, s2_state: none
-- match_score.d_total: 0.946
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.0526315789473684, 2.0]
-- F_m (base): 1.053 GeV
-- M_eff (base≈F_m): 1.053
-- M_corrected (F_m*(1-H_block)): 1.048 (H_block=0.004)
+- match_score.d_total: 2.773
+- Bandas: count=4.0, s2_band_fraction=0.0
+- band_energies_gev: [1.2352941176470587, 1.941176470588235, 2.0, 2.0588235294117645]
+- F_m (base): 1.235 GeV
+- M_eff (base≈F_m): 1.235
+- M_corrected (F_m*(1-H_block)): 1.230 (H_block=0.005)
 - sm_mass_gev: 0.958
-- Δ_mass vs SM: +9.9033%
-- H_block (lock_quality): 0.004
+- Δ_mass vs SM: +28.9747%
+- H_block (lock_quality): 0.005
 - band_power_capture: 1.0
-- chaos_mode=dynamic, PE_tick_norm=0.7498699821239433, T_ticks=200
-- mean_H_lock_norm=0.0040844136112220125, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- chaos_mode=dynamic, PE_tick_norm=0.8257164719111137, T_ticks=200
+- mean_H_lock_norm=0.004447177737256901, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0029 / 0.0005 / 0.0260
+- lock_S1_series (mean/min/max): 0.0104 / 0.0005 / 0.1226
+
+### tau_block_0003 (run_id=7)
+- Partícula: tau, tier: level1, s2_state: none
+- match_score.d_total: 4.138
+- Bandas: count=4.0, s2_band_fraction=0.0
+- band_energies_gev: [1.8181818181818183, 1.9090909090909092, 1.9999999999999998, 2.0909090909090913]
+- F_m (base): 1.818 GeV
+- M_eff (base≈F_m): 1.818
+- M_corrected (F_m*(1-H_block)): 1.816 (H_block=0.001)
+- sm_mass_gev: 1.777
+- Δ_mass vs SM: +2.3256%
+- H_block (lock_quality): 0.001
+- band_power_capture: 1.0
+- chaos_mode=dynamic, PE_tick_norm=0.7475149486476064, T_ticks=200
+- mean_H_lock_norm=0.0009276421783549375, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.9083 / 0.7233 / 0.9728
+
+- M2 (omega_ref*V_lock*D_stat): 12.245
+- M3 (omega_ref*V_lock*rho_lock): 3.05033
+- M2 (omega_ref*V_lock*D_stat): 15.152
+- M3 (omega_ref*V_lock*rho_lock): 2.33609
+- M2 (omega_ref*V_lock*D_stat): 13.5892
+- M3 (omega_ref*V_lock*rho_lock): 4.22454
+- M2 (omega_ref*V_lock*D_stat): 29.8205
+- M3 (omega_ref*V_lock*rho_lock): 4.02233
+- M2 (omega_ref*V_lock*D_stat): 12.0859
+- M3 (omega_ref*V_lock*rho_lock): 2.61459
+- M2 (omega_ref*V_lock*D_stat): 19.7088
+- M3 (omega_ref*V_lock*rho_lock): 7.37872
+- M2 (omega_ref*V_lock*D_stat): 18.7103
+- M3 (omega_ref*V_lock*rho_lock): 6.85746
+- M2 (omega_ref*V_lock*D_stat): 23.5802
+- M3 (omega_ref*V_lock*rho_lock): 7.40458
+- M2 (omega_ref*V_lock*D_stat): 26.4402
+- M3 (omega_ref*V_lock*rho_lock): 10.9325
+- M2 (omega_ref*V_lock*D_stat): 25.8326
+- M3 (omega_ref*V_lock*rho_lock): 5.9529
+- M2 (omega_ref*V_lock*D_stat): 37.5986
+- M3 (omega_ref*V_lock*rho_lock): 8.73364
+- M2 (omega_ref*V_lock*D_stat): 36.7183
+- M3 (omega_ref*V_lock*rho_lock): 10.2554
+- M2 (omega_ref*V_lock*D_stat): 23.7924
+- M3 (omega_ref*V_lock*rho_lock): 8.93054
+- M2 (omega_ref*V_lock*D_stat): 12.8733
+- M3 (omega_ref*V_lock*rho_lock): 3.96524
+- M2 (omega_ref*V_lock*D_stat): 24.8806
+- M3 (omega_ref*V_lock*rho_lock): 12.1673
+- M2 (omega_ref*V_lock*D_stat): 17.5632
+- M3 (omega_ref*V_lock*rho_lock): 5.17696
+- M2 (omega_ref*V_lock*D_stat): 10.1764
+- M3 (omega_ref*V_lock*rho_lock): 3.10222
+- M2 (omega_ref*V_lock*D_stat): 26.4914
+- M3 (omega_ref*V_lock*rho_lock): 8.20792
+- M2 (omega_ref*V_lock*D_stat): 24.6751
+- M3 (omega_ref*V_lock*rho_lock): 4.28133
+- M2 (omega_ref*V_lock*D_stat): 25.9343
+- M3 (omega_ref*V_lock*rho_lock): 6.54196

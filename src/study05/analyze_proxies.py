@@ -165,6 +165,17 @@ def analyze(case: str, sm_universe: Path, output: Path, results_path: Path | Non
     for run in runs:
         base = compute_basic_proxies(run)
         band_energies = run.get("band_energies_gev", [])
+        # mass/lock proxies (already computed in run_sweep)
+        base["omega_ref"] = run.get("omega_ref")
+        base["V_layers"] = run.get("V_layers")
+        base["V_lock"] = run.get("V_lock")
+        base["D_stat"] = run.get("D_stat")
+        base["D_dyn"] = run.get("D_dyn")
+        base["rho_lock"] = run.get("rho_lock")
+        base["M_spec"] = run.get("M_spec")
+        base["M1"] = run.get("M1")
+        base["M2"] = run.get("M2")
+        base["M3"] = run.get("M3")
         for name, spec in specs.items():
             fp = fps[name]
             levels = [e for e in band_energies if spec.energy_window[0] <= e <= spec.energy_window[1]]

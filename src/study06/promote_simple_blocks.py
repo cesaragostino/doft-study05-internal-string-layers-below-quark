@@ -411,6 +411,17 @@ def main():
             "participation_entropy": proxy_row.get("participation_entropy"),
             "min_layer_fraction": proxy_row.get("min_layer_fraction"),
             "internal_energy": _to_float(proxy_row.get("E_internal")),
+            # lock/mass proxies (Ola1 internal units)
+            "omega_ref": _to_float(proxy_row.get("omega_ref")),
+            "V_layers": _to_float(proxy_row.get("V_layers")),
+            "V_lock": _to_float(proxy_row.get("V_lock")),
+            "D_stat": _to_float(proxy_row.get("D_stat")),
+            "D_dyn": _to_float(proxy_row.get("D_dyn")),
+            "rho_lock": _to_float(proxy_row.get("rho_lock")),
+            "M_spec": _to_float(proxy_row.get("M_spec")),
+            "M1": _to_float(proxy_row.get("M1")),
+            "M2": _to_float(proxy_row.get("M2")),
+            "M3": _to_float(proxy_row.get("M3")),
         }
         theta_full = run_theta.get(str(proxy_row.get("run_id")))
         if theta_full:

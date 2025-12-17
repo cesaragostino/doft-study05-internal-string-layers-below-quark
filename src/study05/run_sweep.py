@@ -460,6 +460,8 @@ def run_sweep(
             run_outputs = []
             start_run_idx = 0
 
+    current_mass_proxies: Dict[str, float | None] = {"M1": None, "M2": None, "M3": None}
+
     def _append_partial(record: Dict, flush_now: bool = False):
         nonlocal saved_since_print, partial_buffer
         if partial_runs_path and partial_flush_every > 0:
@@ -479,9 +481,30 @@ def run_sweep(
                 e_val = f"{float(e_internal):.6g}"
         except Exception:
             e_val = "nan"
-        print(f"[run_sweep] run {run_idx + 1}/{runs} status={status} E_internal={e_val}", flush=True)
+        try:
+            m1 = "nan"
+            m2 = "nan"
+            m3 = "nan"
+            val_m1 = current_mass_proxies.get("M1")
+            val_m2 = current_mass_proxies.get("M2")
+            val_m3 = current_mass_proxies.get("M3")
+            if val_m1 is not None and math.isfinite(float(val_m1)):
+                m1 = f"{float(val_m1):.6g}"
+            if val_m2 is not None and math.isfinite(float(val_m2)):
+                m2 = f"{float(val_m2):.6g}"
+            if val_m3 is not None and math.isfinite(float(val_m3)):
+                m3 = f"{float(val_m3):.6g}"
+        except Exception:
+            m1 = "nan"
+            m2 = "nan"
+            m3 = "nan"
+        print(
+            f"[run_sweep] run {run_idx + 1}/{runs} status={status} E_internal={e_val} M1={m1} M2={m2} M3={m3}",
+            flush=True,
+        )
 
     for run_idx in range(start_run_idx, runs):
+        current_mass_proxies = {"M1": None, "M2": None, "M3": None}
         if stop_file and Path(stop_file).exists():
             print(f"[run_sweep] stop-file detected at run {run_idx}/{runs}. Stopping gracefully.", flush=True)
             try:
@@ -917,6 +940,57 @@ def run_sweep(
 
         e_internal = sim_result.get("E_internal")
 
+        # --- Lock mass/energy proxies (all in internal units) ---
+        # Inputs
+        H_layers = participation_entropy
+        H_layers_max = math.log(3.0)
+        band_count_run = int(band_energies.size)
+        omega_peaks_raw = omega_peaks.tolist() if omega_peaks is not None else []
+        omega_ref = float(min(omega_peaks_raw)) if omega_peaks_raw else None
+
+        # Layer volume proxy
+        V_layers = float(math.exp(H_layers)) if H_layers is not None else None
+        V_lock = (V_layers * band_count_run) if (V_layers is not None) else None
+
+        # Static density
+        D_stat = None
+        if H_layers is not None and H_layers_max > 0:
+            D_stat = 1.0 - (H_layers / H_layers_max)
+            D_stat = max(0.0, min(1.0, D_stat))
+
+        # Dynamic density from entropy_chaos over lock_S1_series
+        D_dyn = None
+        rho_lock = None
+        if entropy_chaos:
+            mh = entropy_chaos.get("mean_H_lock_norm")
+            pe = entropy_chaos.get("PE_tick_norm")
+            if mh is not None and pe is not None:
+                try:
+                    D_dyn_val = (1.0 - float(mh)) * (1.0 - float(pe))
+                    D_dyn = max(0.0, min(1.0, D_dyn_val))
+                except Exception:
+                    D_dyn = None
+        if D_stat is not None and D_dyn is not None:
+            rho_lock = D_stat * D_dyn
+
+        # Mass proxies
+        M_spec = omega_ref
+        M1 = None
+        M2 = None
+        M3 = None
+
+        if V_lock is not None and D_stat is not None:
+            M1 = V_lock * D_stat
+        if omega_ref is not None and V_lock is not None and D_stat is not None:
+            M2 = omega_ref * V_lock * D_stat
+        if omega_ref is not None and V_lock is not None and rho_lock is not None:
+            M3 = omega_ref * V_lock * rho_lock
+
+        # snapshot for console logging
+        current_mass_proxies["M1"] = M1
+        current_mass_proxies["M2"] = M2
+        current_mass_proxies["M3"] = M3
+
         run_record = {
             "run_session_id": run_session_id,
             "engine_config_path": engine_config_path,
@@ -989,6 +1063,17 @@ def run_sweep(
             "t_trace": sim_result["times"].tolist(),
             "dt_used": sim_result.get("dt_used"),
             "E_internal": e_internal,
+            "omega_peaks": omega_peaks_raw,
+            "omega_ref": omega_ref,
+            "V_layers": V_layers,
+            "V_lock": V_lock,
+            "D_stat": D_stat,
+            "D_dyn": D_dyn,
+            "rho_lock": rho_lock,
+            "M_spec": M_spec,
+            "M1": M1,
+            "M2": M2,
+            "M3": M3,
             "entropy_status": entropy_status,
             "entropy_reason": entropy_reason,
             "lyapunov_local": None,

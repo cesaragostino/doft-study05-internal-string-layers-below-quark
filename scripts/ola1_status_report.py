@@ -661,6 +661,21 @@ def main():
                 block_mass_vals.append(mval)
         except Exception:
             pass
+        # lock/mass proxies
+        if b.get("M2") is not None:
+            try:
+                m2_val = float(b.get("M2"))
+                if math.isfinite(m2_val):
+                    block_lines.append(f"- M2 (omega_ref*V_lock*D_stat): {m2_val:.6g}")
+            except Exception:
+                pass
+        if b.get("M3") is not None:
+            try:
+                m3_val = float(b.get("M3"))
+                if math.isfinite(m3_val):
+                    block_lines.append(f"- M3 (omega_ref*V_lock*rho_lock): {m3_val:.6g}")
+            except Exception:
+                pass
 
     lines.append("## Energía interna (E_internal)")
     lines.append(f"- Runs con E_internal: {len(run_energy_vals)} / {len(run_records)}")
@@ -685,6 +700,40 @@ def main():
             lines.append(
                 f"- mass_gev bloques (mean/med/min/max): {stats_mass[0]:.6g} / {stats_mass[1]:.6g} / {stats_mass[2]:.6g} / {stats_mass[3]:.6g}"
             )
+    lines.append("")
+
+    # Proxies de masa/lock (M_spec/M1/M2/M3)
+    lines.append("## Proxies de masa/lock (unidades internas)")
+    proxy_rows = []
+    for b in blocks:
+        rid = _to_int(b.get("origin_run_id"))
+        pname = b.get("particle_name")
+        fam = b.get("family")
+        omega_ref = b.get("omega_ref")
+        m_spec = b.get("M_spec")
+        m1 = b.get("M1")
+        m2 = b.get("M2")
+        m3 = b.get("M3")
+        proxy_rows.append((rid if rid is not None else -1, pname, fam, omega_ref, m_spec, m1, m2, m3))
+    if proxy_rows:
+        proxy_rows_sorted = sorted(proxy_rows, key=lambda x: (str(x[1]), x[0]))
+        lines.append("| run | particle | family | omega_ref | M_spec | M1 | M2 | M3 |")
+        lines.append("|-----|----------|--------|-----------|--------|----|----|----|")
+        def _fmt(val):
+            try:
+                xv = float(val)
+                if math.isfinite(xv):
+                    return f"{xv:.3e}"
+            except Exception:
+                return "n/d"
+            return "n/d"
+        for r in proxy_rows_sorted[:100]:
+            rid, pname, fam, omega_ref, m_spec, m1, m2, m3 = r
+            lines.append(
+                f"| {rid} | {pname} | {fam} | {_fmt(omega_ref)} | {_fmt(m_spec)} | {_fmt(m1)} | {_fmt(m2)} | {_fmt(m3)} |"
+            )
+    else:
+        lines.append("- No hay proxies de masa disponibles.")
     lines.append("")
 
     # Tabla de energía calibrada por bloque (si hay mass_gev o internal_energy)
