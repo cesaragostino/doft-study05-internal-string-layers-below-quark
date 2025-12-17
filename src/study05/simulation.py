@@ -835,7 +835,7 @@ def simulate(
     samples_hlock = np.array(samples_hlock) if samples_hlock else np.empty(0)
     times = np.array(samples_time)
 
-    spectrum = compute_fft_spectrum(samples_x, dt * sim_params.sample_stride)
+    spectrum = compute_fft_spectrum(samples_x, dt * sim_params.sample_stride, zero_pad_factor=4, use_hann=True)
 
     # downsample traces for storage
     if samples_b.shape[0] > 300:
@@ -921,8 +921,8 @@ def simulate(
     return result
 
 
-def compute_fft_spectrum(samples_x: np.ndarray, dt_sample: float):
-    """Compute FFT and per-frequency power."""
+def compute_fft_spectrum(samples_x: np.ndarray, dt_sample: float, zero_pad_factor: int = 4, use_hann: bool = True):
+    """Compute FFT and per-frequency power with optional Hann window and zero-padding."""
     if samples_x.size == 0:
         return {
             "freqs": np.array([]),
@@ -930,12 +930,23 @@ def compute_fft_spectrum(samples_x: np.ndarray, dt_sample: float):
             "power_total": np.array([]),
             "per_mode": np.array([]),
             "delta_omega": None,
+            "delta_f": None,
+            "n_samples": 0,
+            "n_padded": 0,
+            "dt_sample": dt_sample,
+            "T_obs": 0.0,
         }
-    X = np.fft.rfft(samples_x, axis=0)
-    freqs = np.fft.rfftfreq(samples_x.shape[0], d=dt_sample)
+    n_samples = samples_x.shape[0]
+    window = np.hanning(n_samples) if use_hann else np.ones(n_samples)
+    x_win = samples_x * window[:, None]
+    pad = max(1, int(zero_pad_factor))
+    n_fft = n_samples * pad
+    X = np.fft.rfft(x_win, n=n_fft, axis=0)
+    freqs = np.fft.rfftfreq(n_fft, d=dt_sample)
     omega = 2 * np.pi * freqs
     power_per_mode = np.abs(X) ** 2
     power_total = np.sum(power_per_mode, axis=1)
+    delta_f = freqs[1] - freqs[0] if freqs.size >= 2 else None
     delta_omega = omega[1] - omega[0] if omega.size >= 2 else None
     return {
         "freqs": freqs,
@@ -943,6 +954,11 @@ def compute_fft_spectrum(samples_x: np.ndarray, dt_sample: float):
         "power_total": power_total,
         "per_mode": power_per_mode,
         "delta_omega": delta_omega,
+        "delta_f": delta_f,
+        "n_samples": n_samples,
+        "n_padded": n_fft,
+        "dt_sample": dt_sample,
+        "T_obs": n_fft * dt_sample,
     }
 
 

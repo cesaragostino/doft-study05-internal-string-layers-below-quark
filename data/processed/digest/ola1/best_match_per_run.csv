@@ -1,7 +1,0 @@
-run_id,best_target,best_family,best_d_total,second_best_target,second_best_family,second_best_d_total,delta_margin
-0.0,eta,eta_like,1.1834703051698787,quark_s_const,quark_like,1.1889802034006705,0.005509898230791732
-1.0,rho,rho_like,1.1914126379112808,omega_782,omega_like,1.2914126366612808,0.09999999874999999
-2.0,phi,phi_like,0.2499916431594852,eta_prime,eta_prime_like,0.46000500700434177,0.21001336384485658
-3.0,eta_prime,eta_prime_like,0.3557815338577006,phi,phi_like,0.4236974305791819,0.0679158967214813
-4.0,delta_1232,delta_like,0.9596094600806863,eta_prime,eta_prime_like,1.780390512519314,0.8207810524386278
-5.0,eta_prime,eta_prime_like,0.15240206047075908,neutron,nucleon_like,0.4155025722996926,0.26310051182893357

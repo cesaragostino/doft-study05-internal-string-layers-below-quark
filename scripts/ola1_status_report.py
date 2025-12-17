@@ -660,6 +660,7 @@ def main():
     block_energy_vals: List[float] = []
     block_mass_vals: List[float] = []
     block_mass_sim_vals: List[float] = []
+    mass_sim_rows: List[Tuple[int, str, str, float, float, float]] = []
     for b in blocks:
         try:
             val = float(b.get("internal_energy"))
@@ -692,6 +693,21 @@ def main():
                 m3_val = float(b.get("M3"))
                 if math.isfinite(m3_val):
                     block_lines.append(f"- M3 (omega_ref*V_lock*rho_lock): {m3_val:.6g}")
+            except Exception:
+                pass
+        # mass_sim summary rows
+        omega_row = _to_int(b.get("origin_run_id"))
+        pname_row = b.get("particle_name")
+        fam_row = b.get("family")
+        if b.get("mass_sim_gev") is not None and pname_row:
+            try:
+                msim_val = float(b.get("mass_sim_gev"))
+                if math.isfinite(msim_val):
+                    sm_ref = sm_masses.get(str(pname_row))
+                    rel_err = None
+                    if sm_ref:
+                        rel_err = (msim_val - sm_ref) / sm_ref
+                    mass_sim_rows.append((omega_row if omega_row is not None else -1, pname_row, fam_row, b.get("omega_ref") or b.get("omega_ref_interp"), msim_val, rel_err if rel_err is not None else None))
             except Exception:
                 pass
 
@@ -852,6 +868,27 @@ def main():
                 lines.append(f"| {pname} | {mean:+.4f}% | {vmin:+.4f}% | {vmax:+.4f}% | {len(vals)} |")
     else:
         lines.append("Sin desviaciones mass_sim calculadas (no hay mass_sim_gev).")
+    lines.append("")
+
+    lines.append("## Masa por frecuencia (mass_sim_gev)")
+    if mass_sim_rows:
+        rows_sorted = sorted(mass_sim_rows, key=lambda x: (str(x[1]), x[0]))
+        lines.append("| run | particle | family | omega_ref | mass_sim_gev | rel_err_vs_SM |")
+        lines.append("|-----|----------|--------|-----------|--------------|---------------|")
+        def _fmt(val):
+            try:
+                xv = float(val)
+                if math.isfinite(xv):
+                    return f"{xv:.6g}"
+            except Exception:
+                return "n/d"
+            return "n/d"
+        for r in rows_sorted[:100]:
+            rid, pname, fam, omega_val, msim_val, rel_err = r
+            rel = f"{rel_err:+.4f}" if rel_err is not None else "n/d"
+            lines.append(f"| {rid} | {pname} | {fam} | {_fmt(omega_val)} | {_fmt(msim_val)} | {rel} |")
+    else:
+        lines.append("- No hay mass_sim_gev disponibles (ejecute la calibración hbar_sim).")
     lines.append("")
 
     if cosmic_pe_vals or cosmic_hlock_vals:

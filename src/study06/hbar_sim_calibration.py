@@ -45,28 +45,23 @@ def _load_sm_masses(sm_path: Path) -> Dict[str, float]:
     return masses
 
 
-def _fit_hbar(pairs: List[Tuple[float, float]]) -> float | None:
-    if not pairs:
+def _weighted_median(vals: np.ndarray, weights: np.ndarray) -> float | None:
+    if vals.size == 0 or weights.size == 0:
         return None
-    w = np.array([p[0] for p in pairs], dtype=float)
-    m = np.array([p[1] for p in pairs], dtype=float)
-    denom = np.sum(w * w)
-    if denom <= 0:
-        return None
-    return float(np.sum(w * m) / denom)
+    order = np.argsort(vals)
+    vals_sorted = vals[order]
+    w_sorted = weights[order]
+    cumsum = np.cumsum(w_sorted)
+    cutoff = 0.5 * np.sum(w_sorted)
+    idx = np.searchsorted(cumsum, cutoff)
+    idx = min(idx, vals_sorted.size - 1)
+    return float(vals_sorted[idx])
 
 
-def _write_calibration(path: Path, hbar: float, used: List[Dict[str, Any]], dropped: List[Dict[str, Any]]):
-    payload = {
-        "hbar_sim": hbar,
-        "n_used": len(used),
-        "n_dropped_outliers": len(dropped),
-        "used_blocks": used,
-        "dropped_outliers": dropped,
-    }
+def _write_calibration(path: Path, payload: Dict[str, Any]):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2))
-    print(f"[hbar_sim] escrito {path} (hbar_sim={hbar:.6g}, n_used={len(used)}, dropped={len(dropped)})")
+    print(f"[hbar_sim] escrito {path} (hbar_sim={payload.get('hbar_sim'):.6g}, n_used={payload.get('n_used')}, dropped={payload.get('n_rejected')})")
 
 
 def _update_proxies(proxies_path: Path, hbar: float) -> None:
@@ -110,53 +105,79 @@ def main():
         if not bool(ms.get("has_enough_levels_full")):
             continue
         omega = _to_float(b.get("omega_ref")) or _to_float(b.get("omega_ref_interp"))
-        if omega is None:
+        if omega is None or omega <= 0:
             continue
         pname = b.get("particle_name")
         m_sm = sm_masses.get(str(pname))
         if m_sm is None:
             continue
-        candidates.append({"block": b, "omega_ref": omega, "sm_mass": m_sm})
+        q_lock = None
+        lq = b.get("lock_quality") or {}
+        try:
+            q_lock = float(lq.get("Q"))
+        except Exception:
+            q_lock = None
+        d_total = _to_float(ms.get("d_total")) or 0.0
+        candidates.append({"block": b, "omega_ref": omega, "sm_mass": m_sm, "q_lock": q_lock, "d_total": d_total})
 
     if not candidates:
         raise ValueError("hbar_sim: no hay bloques elegibles con omega_ref y sm_mass_gev.")
 
-    pairs = [(c["omega_ref"], c["sm_mass"]) for c in candidates]
-    hbar_initial = _fit_hbar(pairs)
-    if hbar_initial is None:
-        raise ValueError("hbar_sim: no se pudo estimar hbar_sim (denom=0).")
-    used = []
-    dropped = []
-    for c in candidates:
-        est = hbar_initial * c["omega_ref"]
-        rel_err = abs(est - c["sm_mass"]) / c["sm_mass"] if c["sm_mass"] != 0 else np.inf
-        if rel_err > 0.5:
-            dropped.append(
-                {
-                    "block_id": c["block"].get("block_id"),
-                    "particle_name": c["block"].get("particle_name"),
-                    "omega_ref": c["omega_ref"],
-                    "sm_mass_gev": c["sm_mass"],
-                    "rel_err_initial": rel_err,
-                }
-            )
-        else:
-            used.append(
-                {
-                    "block_id": c["block"].get("block_id"),
-                    "particle_name": c["block"].get("particle_name"),
-                    "omega_ref": c["omega_ref"],
-                    "sm_mass_gev": c["sm_mass"],
-                }
-            )
+    # cluster fundamental: omega0 = p10; keep within ±10%
+    omega_all = np.array([c["omega_ref"] for c in candidates if c["omega_ref"] is not None], dtype=float)
+    if omega_all.size == 0:
+        raise ValueError("hbar_sim: sin omegas válidos.")
+    omega0 = float(np.percentile(omega_all, 10))
+    cluster_tol = 0.10
+    clustered = [c for c in candidates if abs(c["omega_ref"] - omega0) / max(omega0, 1e-9) <= cluster_tol]
+    if not clustered:
+        clustered = candidates
 
-    hbar_final = hbar_initial
-    if used:
-        hbar_refined = _fit_hbar([(u["omega_ref"], u["sm_mass_gev"]) for u in used])
-        if hbar_refined is not None:
-            hbar_final = hbar_refined
+    # compute h_i = m_sm / omega
+    h_vals = []
+    weights = []
+    kept = []
+    for c in clustered:
+        h_i = c["sm_mass"] / c["omega_ref"]
+        if h_i <= 0 or not np.isfinite(h_i):
+            continue
+        h_vals.append(h_i)
+        q_lock = c.get("q_lock") if c.get("q_lock") is not None else 0.0
+        d_total = c.get("d_total") if c.get("d_total") is not None else 0.0
+        w = float(q_lock) / (1.0 + float(d_total)) if (q_lock is not None) else 1.0
+        if not np.isfinite(w) or w <= 0:
+            w = 1.0
+        weights.append(w)
+        kept.append(c)
+    h_vals = np.array(h_vals, dtype=float)
+    weights = np.array(weights, dtype=float)
+    if h_vals.size == 0:
+        raise ValueError("hbar_sim: no se pudieron construir h_i válidos.")
+    # trim percentiles
+    lo, hi = np.percentile(h_vals, [10, 90])
+    mask = (h_vals >= lo) & (h_vals <= hi)
+    h_trim = h_vals[mask]
+    w_trim = weights[mask]
+    kept_trim = [k for k, m in zip(kept, mask) if m]
+    hbar_final = _weighted_median(h_trim, w_trim)
+    if hbar_final is None:
+        raise ValueError("hbar_sim: weighted median falló.")
 
-    _write_calibration(args.output, hbar_final, used, dropped)
+    # payload
+    payload = {
+        "hbar_sim": hbar_final,
+        "units": "GeV per rad/time_unit",
+        "n_used": len(kept_trim),
+        "n_rejected": len(candidates) - len(kept_trim),
+        "omega0": omega0,
+        "cluster_tol_rel": cluster_tol,
+        "h_i_percentiles": {
+            "p10": float(lo),
+            "p50": float(np.percentile(h_vals, 50)),
+            "p90": float(hi),
+        },
+    }
+    _write_calibration(args.output, payload)
 
     # enrich blocks with mass_sim_gev
     out_blocks_path = args.blocks_output or args.blocks

@@ -38,6 +38,7 @@ from study05.families import (
     make_priors_for_family,
 )
 from study05.simulation import SimulationParams, pick_peaks, simulate
+from study05.layers import Layer
 from study05.sweep import SimulationConfig, generate_configuration
 
 DEFAULT_RAW_DIR = Path("data/raw")
@@ -213,24 +214,52 @@ def _ensure_dirs(raw_dir: Path, processed_dir: Path) -> None:
     processed_dir.mkdir(parents=True, exist_ok=True)
 
 
-def _interp_omega_ref(power_total: np.ndarray, delta_omega: float | None, omega_max_cutoff: float = OMEGA_MAX_CUTOFF):
-    """Return (omega_ref, k_peak, mag_km1, mag_k, mag_kp1) using quadratic interpolation on low-frequency window."""
-    if power_total is None or delta_omega is None:
-        return None, None, None, None, None
-    power = np.array(power_total, dtype=float)
-    if power.size < 2 or not np.isfinite(delta_omega) or delta_omega <= 0:
-        return None, None, None, None, None
-    omega_axis = np.arange(power.size, dtype=float) * float(delta_omega)
-    mask = (omega_axis > 0.0) & (omega_axis <= omega_max_cutoff)
-    idx_candidates = np.where(mask)[0]
+def _select_peak_and_interp(
+    mag: np.ndarray,
+    delta_f: float | None,
+    omega_max_cutoff: float = OMEGA_MAX_CUTOFF,
+    frac_of_max: float = 0.20,
+    snr_min: float = 5.0,
+):
+    """Select fundamental peak and interpolate: returns (f_ref, omega_ref, peak_k, peak_delta, mag_km1, mag_k, mag_kp1)."""
+    if mag is None or delta_f is None or not np.isfinite(delta_f) or delta_f <= 0:
+        return (None, None, None, None, None, None, None)
+    power = np.array(mag, dtype=float)
+    n = power.size
+    if n < 2:
+        return (None, None, None, None, None, None, None)
+    freqs = np.arange(n, dtype=float) * float(delta_f)
+    mask_low = (freqs > 0.0) & (freqs <= omega_max_cutoff / (2 * np.pi) * (2 * np.pi))  # keep in omega units but with same cutoff
+    idx_candidates = np.where(mask_low)[0]
     if idx_candidates.size == 0:
-        idx_candidates = np.where(omega_axis > 0.0)[0]
+        idx_candidates = np.where(freqs > 0.0)[0]
     if idx_candidates.size == 0:
-        return None, None, None, None, None
-    k_peak_local = idx_candidates[int(np.argmax(power[idx_candidates]))]
-    if k_peak_local <= 0 or k_peak_local >= power.size - 1:
-        omega_ref = float(k_peak_local * delta_omega)
-        return omega_ref, int(k_peak_local), None, float(power[k_peak_local]), None
+        return (None, None, None, None, None, None, None)
+    mags_low = power[idx_candidates]
+    max_low = float(np.max(mags_low)) if mags_low.size else 0.0
+    median_low = float(np.median(mags_low[1:])) if mags_low.size > 1 else max_low
+    # find first peak that passes both thresholds
+    k_peak_local = None
+    for k in idx_candidates:
+        m = power[k]
+        if max_low > 0 and m < frac_of_max * max_low:
+            continue
+        if median_low > 0 and (m / median_low) < snr_min:
+            continue
+        if k == 0:
+            continue
+        k_peak_local = k
+        break
+    if k_peak_local is None:
+        # fallback to max in band (skip dc)
+        k_peak_local = int(idx_candidates[int(np.argmax(mags_low))])
+        if k_peak_local == 0 and idx_candidates.size > 1:
+            k_peak_local = int(idx_candidates[1])
+    # interpolation
+    if k_peak_local <= 0 or k_peak_local >= n - 1:
+        f_ref = float(k_peak_local * delta_f)
+        omega_ref = 2 * np.pi * f_ref
+        return (f_ref, omega_ref, int(k_peak_local), 0.0, None, float(power[k_peak_local]), None)
     m_km1 = float(power[k_peak_local - 1])
     m_k = float(power[k_peak_local])
     m_kp1 = float(power[k_peak_local + 1])
@@ -239,8 +268,9 @@ def _interp_omega_ref(power_total: np.ndarray, delta_omega: float | None, omega_
     if np.isfinite(denom) and abs(denom) > 1e-12:
         delta = 0.5 * (m_km1 - m_kp1) / denom
         delta = float(np.clip(delta, -0.5, 0.5))
-    omega_ref = float((k_peak_local + delta) * delta_omega)
-    return omega_ref, int(k_peak_local), m_km1, m_k, m_kp1
+    f_ref = float((k_peak_local + delta) * delta_f)
+    omega_ref = 2 * np.pi * f_ref
+    return (f_ref, omega_ref, int(k_peak_local), delta, m_km1, m_k, m_kp1)
 
 
 def _case_dirs(raw_dir: Path, processed_dir: Path, case: str) -> tuple[Path, Path]:
@@ -493,6 +523,23 @@ def run_sweep(
 
     current_mass_proxies: Dict[str, float | None] = {"M1": None, "M2": None, "M3": None, "omega_ref": None, "mass_sim_gev": None}
 
+    # optional hbar_sim preload for live mass_sim logging
+    hbar_sim_live = None
+    for cand in [
+        processed_dir / "hbar_sim_calibration.json",
+        processed_dir.parent / "hbar_sim_calibration.json",
+        processed_dir.parent / "ola1" / "hbar_sim_calibration.json",
+        processed_dir.parent / "ola1-chaos" / "hbar_sim_calibration.json",
+        Path("hbar_sim_calibration.json"),
+    ]:
+        if cand and cand.exists():
+            try:
+                data_h = json.loads(cand.read_text())
+                hbar_sim_live = float(data_h.get("hbar_sim"))
+                break
+            except Exception:
+                hbar_sim_live = None
+
     def _append_partial(record: Dict, flush_now: bool = False):
         nonlocal saved_since_print, partial_buffer
         if partial_runs_path and partial_flush_every > 0:
@@ -638,9 +685,20 @@ def run_sweep(
             continue
         spectrum = sim_result["spectrum"]
         delta_omega = spectrum.get("delta_omega")
+        delta_f = spectrum.get("delta_f")
         power_total = spectrum.get("power_total")
-        omega_ref_interp, fft_k_peak, fft_mag_km1, fft_mag_k, fft_mag_kp1 = _interp_omega_ref(
-            power_total, delta_omega, omega_max_cutoff=OMEGA_MAX_CUTOFF
+        per_mode = spectrum.get("per_mode")
+        # identity channel: Q layer if available
+        q_indices = [i for i, m in enumerate(config.modes) if m.layer == Layer.Q]
+        if per_mode is not None and len(q_indices) > 0:
+            try:
+                mag_q = np.sum(per_mode[:, q_indices], axis=1)
+            except Exception:
+                mag_q = power_total
+        else:
+            mag_q = power_total
+        f_ref, omega_ref_interp, fft_k_peak, fft_peak_delta, fft_mag_km1, fft_mag_k, fft_mag_kp1 = _select_peak_and_interp(
+            mag_q, delta_f, omega_max_cutoff=OMEGA_MAX_CUTOFF, frac_of_max=0.20, snr_min=5.0
         )
         omega_peaks, weights_peaks, peak_powers = pick_peaks(
             spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
@@ -1031,13 +1089,19 @@ def run_sweep(
             M2 = omega_ref * V_lock * D_stat
         if omega_ref is not None and V_lock is not None and rho_lock is not None:
             M3 = omega_ref * V_lock * rho_lock
+        mass_sim_gev = None
+        if hbar_sim_live is not None and omega_ref is not None:
+            try:
+                mass_sim_gev = hbar_sim_live * omega_ref
+            except Exception:
+                mass_sim_gev = None
 
         # snapshot for console logging
         current_mass_proxies["M1"] = M1
         current_mass_proxies["M2"] = M2
         current_mass_proxies["M3"] = M3
         current_mass_proxies["omega_ref"] = omega_ref
-        current_mass_proxies["mass_sim_gev"] = None
+        current_mass_proxies["mass_sim_gev"] = mass_sim_gev
 
         run_record = {
             "run_session_id": run_session_id,
@@ -1112,10 +1176,17 @@ def run_sweep(
             "dt_used": sim_result.get("dt_used"),
             "E_internal": e_internal,
             "omega_peaks": omega_peaks_raw,
+            "f_ref": f_ref,
             "omega_ref": omega_ref,
             "omega_ref_interp": omega_ref_interp,
             "delta_omega": delta_omega,
+            "delta_f": delta_f,
+            "dt_sample_fft": sim_result.get("dt_used") * sim_params.sample_stride if sim_result.get("dt_used") else None,
+            "n_samples_fft": spectrum.get("n_samples"),
+            "n_samples_fft_padded": spectrum.get("n_padded"),
+            "T_obs_fft": spectrum.get("T_obs"),
             "fft_peak_index": fft_k_peak,
+            "fft_peak_delta": fft_peak_delta,
             "fft_peak_mag_km1": fft_mag_km1,
             "fft_peak_mag_k": fft_mag_k,
             "fft_peak_mag_kp1": fft_mag_kp1,
@@ -1128,7 +1199,7 @@ def run_sweep(
             "M1": M1,
             "M2": M2,
             "M3": M3,
-            "mass_sim_gev": None,
+            "mass_sim_gev": mass_sim_gev,
             "entropy_status": entropy_status,
             "entropy_reason": entropy_reason,
             "lyapunov_local": None,
