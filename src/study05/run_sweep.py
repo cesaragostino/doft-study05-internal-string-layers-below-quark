@@ -43,6 +43,7 @@ from study05.sweep import SimulationConfig, generate_configuration
 DEFAULT_RAW_DIR = Path("data/raw")
 DEFAULT_PROCESSED_DIR = Path("data/processed")
 TARGET_ENERGY_GEV = 2.0
+OMEGA_MAX_CUTOFF = 12.0  # rad/s cutoff for fundamental peak search
 DEFAULT_LAYER_THRESHOLDS = {
     "S2": {
         "band_fraction_dominant": 0.5,
@@ -210,6 +211,36 @@ def _serialize_theta(config: SimulationConfig) -> Dict:
 def _ensure_dirs(raw_dir: Path, processed_dir: Path) -> None:
     raw_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
+
+
+def _interp_omega_ref(power_total: np.ndarray, delta_omega: float | None, omega_max_cutoff: float = OMEGA_MAX_CUTOFF):
+    """Return (omega_ref, k_peak, mag_km1, mag_k, mag_kp1) using quadratic interpolation on low-frequency window."""
+    if power_total is None or delta_omega is None:
+        return None, None, None, None, None
+    power = np.array(power_total, dtype=float)
+    if power.size < 2 or not np.isfinite(delta_omega) or delta_omega <= 0:
+        return None, None, None, None, None
+    omega_axis = np.arange(power.size, dtype=float) * float(delta_omega)
+    mask = (omega_axis > 0.0) & (omega_axis <= omega_max_cutoff)
+    idx_candidates = np.where(mask)[0]
+    if idx_candidates.size == 0:
+        idx_candidates = np.where(omega_axis > 0.0)[0]
+    if idx_candidates.size == 0:
+        return None, None, None, None, None
+    k_peak_local = idx_candidates[int(np.argmax(power[idx_candidates]))]
+    if k_peak_local <= 0 or k_peak_local >= power.size - 1:
+        omega_ref = float(k_peak_local * delta_omega)
+        return omega_ref, int(k_peak_local), None, float(power[k_peak_local]), None
+    m_km1 = float(power[k_peak_local - 1])
+    m_k = float(power[k_peak_local])
+    m_kp1 = float(power[k_peak_local + 1])
+    denom = m_km1 - 2 * m_k + m_kp1
+    delta = 0.0
+    if np.isfinite(denom) and abs(denom) > 1e-12:
+        delta = 0.5 * (m_km1 - m_kp1) / denom
+        delta = float(np.clip(delta, -0.5, 0.5))
+    omega_ref = float((k_peak_local + delta) * delta_omega)
+    return omega_ref, int(k_peak_local), m_km1, m_k, m_kp1
 
 
 def _case_dirs(raw_dir: Path, processed_dir: Path, case: str) -> tuple[Path, Path]:
@@ -460,7 +491,7 @@ def run_sweep(
             run_outputs = []
             start_run_idx = 0
 
-    current_mass_proxies: Dict[str, float | None] = {"M1": None, "M2": None, "M3": None}
+    current_mass_proxies: Dict[str, float | None] = {"M1": None, "M2": None, "M3": None, "omega_ref": None, "mass_sim_gev": None}
 
     def _append_partial(record: Dict, flush_now: bool = False):
         nonlocal saved_since_print, partial_buffer
@@ -485,26 +516,36 @@ def run_sweep(
             m1 = "nan"
             m2 = "nan"
             m3 = "nan"
+            omg = "nan"
+            m_sim = "nan"
             val_m1 = current_mass_proxies.get("M1")
             val_m2 = current_mass_proxies.get("M2")
             val_m3 = current_mass_proxies.get("M3")
+            val_omega = current_mass_proxies.get("omega_ref")
+            val_msim = current_mass_proxies.get("mass_sim_gev")
             if val_m1 is not None and math.isfinite(float(val_m1)):
                 m1 = f"{float(val_m1):.6g}"
             if val_m2 is not None and math.isfinite(float(val_m2)):
                 m2 = f"{float(val_m2):.6g}"
             if val_m3 is not None and math.isfinite(float(val_m3)):
                 m3 = f"{float(val_m3):.6g}"
+            if val_omega is not None and math.isfinite(float(val_omega)):
+                omg = f"{float(val_omega):.6g}"
+            if val_msim is not None and math.isfinite(float(val_msim)):
+                m_sim = f"{float(val_msim):.6g}"
         except Exception:
             m1 = "nan"
             m2 = "nan"
             m3 = "nan"
+            omg = "nan"
+            m_sim = "nan"
         print(
-            f"[run_sweep] run {run_idx + 1}/{runs} status={status} E_internal={e_val} M1={m1} M2={m2} M3={m3}",
+            f"[run_sweep] run {run_idx + 1}/{runs} status={status} E_internal={e_val} omega_ref={omg} mass_sim={m_sim} M1={m1} M2={m2} M3={m3}",
             flush=True,
         )
 
     for run_idx in range(start_run_idx, runs):
-        current_mass_proxies = {"M1": None, "M2": None, "M3": None}
+        current_mass_proxies = {"M1": None, "M2": None, "M3": None, "omega_ref": None, "mass_sim_gev": None}
         if stop_file and Path(stop_file).exists():
             print(f"[run_sweep] stop-file detected at run {run_idx}/{runs}. Stopping gracefully.", flush=True)
             try:
@@ -596,6 +637,11 @@ def run_sweep(
             _log_run_status(run_idx, "unstable", None)
             continue
         spectrum = sim_result["spectrum"]
+        delta_omega = spectrum.get("delta_omega")
+        power_total = spectrum.get("power_total")
+        omega_ref_interp, fft_k_peak, fft_mag_km1, fft_mag_k, fft_mag_kp1 = _interp_omega_ref(
+            power_total, delta_omega, omega_max_cutoff=OMEGA_MAX_CUTOFF
+        )
         omega_peaks, weights_peaks, peak_powers = pick_peaks(
             spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
         )
@@ -946,7 +992,7 @@ def run_sweep(
         H_layers_max = math.log(3.0)
         band_count_run = int(band_energies.size)
         omega_peaks_raw = omega_peaks.tolist() if omega_peaks is not None else []
-        omega_ref = float(min(omega_peaks_raw)) if omega_peaks_raw else None
+        omega_ref = omega_ref_interp if omega_ref_interp is not None else (float(min(omega_peaks_raw)) if omega_peaks_raw else None)
 
         # Layer volume proxy
         V_layers = float(math.exp(H_layers)) if H_layers is not None else None
@@ -990,6 +1036,8 @@ def run_sweep(
         current_mass_proxies["M1"] = M1
         current_mass_proxies["M2"] = M2
         current_mass_proxies["M3"] = M3
+        current_mass_proxies["omega_ref"] = omega_ref
+        current_mass_proxies["mass_sim_gev"] = None
 
         run_record = {
             "run_session_id": run_session_id,
@@ -1065,6 +1113,12 @@ def run_sweep(
             "E_internal": e_internal,
             "omega_peaks": omega_peaks_raw,
             "omega_ref": omega_ref,
+            "omega_ref_interp": omega_ref_interp,
+            "delta_omega": delta_omega,
+            "fft_peak_index": fft_k_peak,
+            "fft_peak_mag_km1": fft_mag_km1,
+            "fft_peak_mag_k": fft_mag_k,
+            "fft_peak_mag_kp1": fft_mag_kp1,
             "V_layers": V_layers,
             "V_lock": V_lock,
             "D_stat": D_stat,
@@ -1074,6 +1128,7 @@ def run_sweep(
             "M1": M1,
             "M2": M2,
             "M3": M3,
+            "mass_sim_gev": None,
             "entropy_status": entropy_status,
             "entropy_reason": entropy_reason,
             "lyapunov_local": None,

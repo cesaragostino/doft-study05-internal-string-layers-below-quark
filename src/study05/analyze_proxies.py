@@ -176,6 +176,13 @@ def analyze(case: str, sm_universe: Path, output: Path, results_path: Path | Non
         base["M1"] = run.get("M1")
         base["M2"] = run.get("M2")
         base["M3"] = run.get("M3")
+        base["omega_ref_interp"] = run.get("omega_ref_interp")
+        base["delta_omega"] = run.get("delta_omega")
+        base["fft_peak_index"] = run.get("fft_peak_index")
+        base["fft_peak_mag_km1"] = run.get("fft_peak_mag_km1")
+        base["fft_peak_mag_k"] = run.get("fft_peak_mag_k")
+        base["fft_peak_mag_kp1"] = run.get("fft_peak_mag_kp1")
+        base["mass_sim_gev"] = run.get("mass_sim_gev")
         for name, spec in specs.items():
             fp = fps[name]
             levels = [e for e in band_energies if spec.energy_window[0] <= e <= spec.energy_window[1]]

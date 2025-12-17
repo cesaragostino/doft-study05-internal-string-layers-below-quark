@@ -924,13 +924,26 @@ def simulate(
 def compute_fft_spectrum(samples_x: np.ndarray, dt_sample: float):
     """Compute FFT and per-frequency power."""
     if samples_x.size == 0:
-        return {"freqs": np.array([]), "omega": np.array([]), "power_total": np.array([]), "per_mode": np.array([])}
+        return {
+            "freqs": np.array([]),
+            "omega": np.array([]),
+            "power_total": np.array([]),
+            "per_mode": np.array([]),
+            "delta_omega": None,
+        }
     X = np.fft.rfft(samples_x, axis=0)
     freqs = np.fft.rfftfreq(samples_x.shape[0], d=dt_sample)
     omega = 2 * np.pi * freqs
     power_per_mode = np.abs(X) ** 2
     power_total = np.sum(power_per_mode, axis=1)
-    return {"freqs": freqs, "omega": omega, "power_total": power_total, "per_mode": power_per_mode}
+    delta_omega = omega[1] - omega[0] if omega.size >= 2 else None
+    return {
+        "freqs": freqs,
+        "omega": omega,
+        "power_total": power_total,
+        "per_mode": power_per_mode,
+        "delta_omega": delta_omega,
+    }
 
 
 def pick_peaks(

@@ -1,0 +1,22 @@
+{
+  "hbar_sim": 0.0655206012832765,
+  "n_used": 0,
+  "n_dropped_outliers": 2,
+  "used_blocks": [],
+  "dropped_outliers": [
+    {
+      "block_id": "quark_ud_const_block_0001",
+      "particle_name": "quark_ud_const",
+      "omega_ref": 10.275147365816633,
+      "sm_mass_gev": 0.336,
+      "rel_err_initial": 1.0036721240552986
+    },
+    {
+      "block_id": "eta_prime_block_0001",
+      "particle_name": "eta_prime",
+      "omega_ref": 6.577294836098563,
+      "sm_mass_gev": 0.95778,
+      "rel_err_initial": 0.5500550100455559
+    }
+  ]
+}

@@ -33,6 +33,12 @@ def main():
     parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"))
     parser.add_argument("--output", type=Path, default=Path("data/processed/ola1"))
     parser.add_argument("--digest", type=Path, default=Path("data/processed/digest/ola1"), help="Directory to store summary outputs.")
+    parser.add_argument(
+        "--hbar-sim",
+        type=Path,
+        default=None,
+        help="Optional path to hbar_sim_calibration.json to compute mass_sim_gev when proxies lack it.",
+    )
     args = parser.parse_args()
 
     universe = load_universe(args.sm_universe)
@@ -41,8 +47,44 @@ def main():
     match_rows: List[Dict] = []
     best_rows: List[Dict] = []
 
+    hbar_sim = None
+    if args.hbar_sim and args.hbar_sim.exists():
+        try:
+            data_h = json.loads(args.hbar_sim.read_text())
+            hbar_sim = float(data_h.get("hbar_sim"))
+        except Exception:
+            hbar_sim = None
+    else:
+        # fallback: default locations
+        for cand in [Path("data/processed/ola1/hbar_sim_calibration.json"), Path("data/processed/ola1-chaos/hbar_sim_calibration.json")]:
+            if cand.exists():
+                try:
+                    data_h = json.loads(cand.read_text())
+                    hbar_sim = float(data_h.get("hbar_sim"))
+                    break
+                except Exception:
+                    hbar_sim = None
+
     for row in rows:
-        levels_full = extract_levels(row.get("band_energies_gev", "[]"))
+        mass_sim = row.get("mass_sim_gev")
+        if mass_sim is None and hbar_sim is not None:
+            omega_ref = row.get("omega_ref") or row.get("omega_ref_interp")
+            try:
+                omega_ref_f = float(omega_ref)
+                if np.isfinite(omega_ref_f):
+                    mass_sim = hbar_sim * omega_ref_f
+            except Exception:
+                pass
+        levels_full = []
+        if mass_sim is not None:
+            try:
+                m_val = float(mass_sim)
+                if np.isfinite(m_val):
+                    levels_full = [m_val]
+            except Exception:
+                levels_full = []
+        if not levels_full:
+            levels_full = extract_levels(row.get("band_energies_gev", "[]"))
         run_id = row.get("run_id", row.get("id", len(match_rows)))
         best = {"run_id": run_id, "best_target": None, "best_family": None, "best_d_total": float("inf")}
         second: Dict[str, object] = {"target": None, "family": None, "d_total": float("inf")}

@@ -422,6 +422,13 @@ def main():
             "M1": _to_float(proxy_row.get("M1")),
             "M2": _to_float(proxy_row.get("M2")),
             "M3": _to_float(proxy_row.get("M3")),
+            "omega_ref_interp": _to_float(proxy_row.get("omega_ref_interp")),
+            "delta_omega": _to_float(proxy_row.get("delta_omega")),
+            "fft_peak_index": _to_float(proxy_row.get("fft_peak_index")),
+            "fft_peak_mag_km1": _to_float(proxy_row.get("fft_peak_mag_km1")),
+            "fft_peak_mag_k": _to_float(proxy_row.get("fft_peak_mag_k")),
+            "fft_peak_mag_kp1": _to_float(proxy_row.get("fft_peak_mag_kp1")),
+            "mass_sim_gev": _to_float(proxy_row.get("mass_sim_gev")),
         }
         theta_full = run_theta.get(str(proxy_row.get("run_id")))
         if theta_full:

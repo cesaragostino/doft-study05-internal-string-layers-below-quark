@@ -501,6 +501,7 @@ def main():
     block_lines: List[str] = []
     chaos_rows: List[Tuple[int, str, Optional[float], Optional[float], Optional[float]]] = []
     mass_errors_by_particle: Dict[str, List[float]] = defaultdict(list)
+    mass_sim_errors_by_particle: Dict[str, List[float]] = defaultdict(list)
     if blocks and runs_by_id:
         for b in blocks:
             rid_raw = b.get("origin_run_id")
@@ -551,17 +552,27 @@ def main():
                         if m_corr < 0:
                             m_corr = 0.0
                         block_lines.append(f"- M_corrected (F_m*(1-H_block)): {m_corr:.3f} (H_block={h_block:.3f})")
-                if sm_mass is not None:
-                    block_lines.append(f"- sm_mass_gev: {sm_mass:.3f}")
-                    if fm is not None:
-                        dev = ((fm - sm_mass) / sm_mass) * 100.0
-                        block_lines.append(f"- Δ_mass vs SM: {dev:+.4f}%")
-                        mass_errors_by_particle[pname].append(dev)
-                else:
-                    dev = None
-                if h_block is not None:
-                    block_lines.append(f"- H_block (lock_quality): {h_block:.3f}")
-                if capture is not None:
+            if sm_mass is not None:
+                block_lines.append(f"- sm_mass_gev: {sm_mass:.3f}")
+                if fm is not None:
+                    dev = ((fm - sm_mass) / sm_mass) * 100.0
+                    block_lines.append(f"- Δ_mass vs SM: {dev:+.4f}%")
+                    mass_errors_by_particle[pname].append(dev)
+                msim = b.get("mass_sim_gev")
+                if msim is not None:
+                    try:
+                        msim_val = float(msim)
+                        dev_sim = ((msim_val - sm_mass) / sm_mass) * 100.0
+                        block_lines.append(f"- mass_sim_gev: {msim_val:.6g}")
+                        block_lines.append(f"- Δ_mass_sim vs SM: {dev_sim:+.4f}%")
+                        mass_sim_errors_by_particle[pname].append(dev_sim)
+                    except Exception:
+                        pass
+            else:
+                dev = None
+            if h_block is not None:
+                block_lines.append(f"- H_block (lock_quality): {h_block:.3f}")
+            if capture is not None:
                     block_lines.append(f"- band_power_capture: {capture}")
             if ec:
                 block_lines.append(
@@ -648,6 +659,7 @@ def main():
             continue
     block_energy_vals: List[float] = []
     block_mass_vals: List[float] = []
+    block_mass_sim_vals: List[float] = []
     for b in blocks:
         try:
             val = float(b.get("internal_energy"))
@@ -659,6 +671,12 @@ def main():
             mval = float(b.get("mass_gev"))
             if math.isfinite(mval):
                 block_mass_vals.append(mval)
+        except Exception:
+            pass
+        try:
+            msim = float(b.get("mass_sim_gev"))
+            if math.isfinite(msim):
+                block_mass_sim_vals.append(msim)
         except Exception:
             pass
         # lock/mass proxies
@@ -699,6 +717,12 @@ def main():
         if stats_mass:
             lines.append(
                 f"- mass_gev bloques (mean/med/min/max): {stats_mass[0]:.6g} / {stats_mass[1]:.6g} / {stats_mass[2]:.6g} / {stats_mass[3]:.6g}"
+            )
+    if block_mass_sim_vals:
+        stats_mass_sim = _energy_stats(block_mass_sim_vals)
+        if stats_mass_sim:
+            lines.append(
+                f"- mass_sim_gev bloques (mean/med/min/max): {stats_mass_sim[0]:.6g} / {stats_mass_sim[1]:.6g} / {stats_mass_sim[2]:.6g} / {stats_mass_sim[3]:.6g}"
             )
     lines.append("")
 
@@ -814,6 +838,20 @@ def main():
                 lines.append(f"| {pname} | {mean:+.4f}% | {vmin:+.4f}% | {vmax:+.4f}% | {len(vals)} |")
     else:
         lines.append("Sin desviaciones de masa calculadas (no hay sm_mass o F_m).")
+    lines.append("")
+
+    lines.append("## Error de mass_sim vs SM")
+    if mass_sim_errors_by_particle:
+        lines.append("| Partícula | Δ_mean% | Δ_min% | Δ_max% | n |")
+        lines.append("|-----------|---------|--------|--------|---|")
+        for pname, vals in sorted(mass_sim_errors_by_particle.items()):
+            if vals:
+                mean = statistics.mean(vals)
+                vmin = min(vals)
+                vmax = max(vals)
+                lines.append(f"| {pname} | {mean:+.4f}% | {vmin:+.4f}% | {vmax:+.4f}% | {len(vals)} |")
+    else:
+        lines.append("Sin desviaciones mass_sim calculadas (no hay mass_sim_gev).")
     lines.append("")
 
     if cosmic_pe_vals or cosmic_hlock_vals:
