@@ -701,6 +701,146 @@
       "masses_gev": [0.892],
       "widths_gev": [0.051],
       "tolerances": {"mass_abs": 0.04, "width_abs": 0.02, "spacing_rel": 0.3}
+    },
+    {
+      "name": "photon",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1-",
+      "sm_mass_gev": 0.0,
+      "masses_gev": [0.0],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "gluon",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1-",
+      "sm_mass_gev": 0.0,
+      "masses_gev": [0.0],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "upsilon_1s",
+      "family": "bottomonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 9.4603,
+      "masses_gev": [9.460],
+      "widths_gev": [0.000054],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "upsilon_2s",
+      "family": "bottomonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 10.02326,
+      "masses_gev": [10.023],
+      "widths_gev": [0.000032],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "upsilon_3s",
+      "family": "bottomonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 10.3552,
+      "masses_gev": [10.355],
+      "widths_gev": [0.00002],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_b_plus",
+      "family": "bottom_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 5.27934,
+      "masses_gev": [5.279],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_b_zero",
+      "family": "bottom_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 5.27965,
+      "masses_gev": [5.280],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_bs",
+      "family": "bottom_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 5.36688,
+      "masses_gev": [5.367],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "lambda_b",
+      "family": "bottom_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 5.61960,
+      "masses_gev": [5.620],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "xi_b",
+      "family": "bottom_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 5.7919,
+      "masses_gev": [5.792],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "omega_b",
+      "family": "bottom_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 6.0461,
+      "masses_gev": [6.046],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "lead208",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 193.687,
+      "masses_gev": [193.687],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 1.0, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "gold197",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "3/2+",
+      "sm_mass_gev": 183.473,
+      "masses_gev": [183.473],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 1.0, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "uranium238",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 221.694,
+      "masses_gev": [221.694],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 1.0, "width_abs": 0.0, "spacing_rel": 0.2}
     }
   ]
 }
