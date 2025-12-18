@@ -321,6 +321,76 @@
       "masses_gev": [1.672],
       "widths_gev": [0.0],
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "xi_minus",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.32171,
+      "masses_gev": [1.322],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "xi_zero",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.31486,
+      "masses_gev": [1.315],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "sigma_star_1385",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.385,
+      "masses_gev": [1.385],
+      "widths_gev": [0.036],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_d_star_zero",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 2.00685,
+      "masses_gev": [2.007],
+      "widths_gev": [0.002],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_d_star_plus",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 2.01026,
+      "masses_gev": [2.010],
+      "widths_gev": [0.00008],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_ds_star",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 2.1122,
+      "masses_gev": [2.112],
+      "widths_gev": [0.0019],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "xi_c_plus",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.46787,
+      "masses_gev": [2.468],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
     }
   ]
 }

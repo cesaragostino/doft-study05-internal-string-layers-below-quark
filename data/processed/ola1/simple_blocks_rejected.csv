@@ -1,4 +1,4 @@
 run_id,best_target,type,best_d_total,structure_tier,s2_state,enough_levels_full,enough_levels_partial,reason,selection_config_path,selection_config_hash
-74.0,,,,,,,,missing_match;unknown_particle,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
 49.0,,,,,,,,missing_match;unknown_particle,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+74.0,,,,,,,,missing_match;unknown_particle,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
 71.0,,,,none,latent,,,missing_match;unknown_particle,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
