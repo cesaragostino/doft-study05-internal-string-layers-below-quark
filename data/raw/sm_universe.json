@@ -273,16 +273,6 @@
       "tolerances": {"mass_abs": 0.12, "width_abs": 0.0, "spacing_rel": 0.2}
     },
     {
-      "name": "sigma_c",
-      "family": "charmed_baryon",
-      "type": "baryon",
-      "jpc": "1/2+",
-      "sm_mass_gev": 2.45397,
-      "masses_gev": [2.454],
-      "widths_gev": [0.002],
-      "tolerances": {"mass_abs": 0.12, "width_abs": 0.0, "spacing_rel": 0.2}
-    },
-    {
       "name": "meson_d0",
       "family": "charmed_meson",
       "type": "meson",
