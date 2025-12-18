@@ -281,6 +281,46 @@
       "masses_gev": [2.454],
       "widths_gev": [0.002],
       "tolerances": {"mass_abs": 0.12, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_d0",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 1.86484,
+      "masses_gev": [1.865],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_d_plus",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 1.86966,
+      "masses_gev": [1.870],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_ds",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 1.96835,
+      "masses_gev": [1.968],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "omega_baryon",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.67245,
+      "masses_gev": [1.672],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
     }
   ]
 }
