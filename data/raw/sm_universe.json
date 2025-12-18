@@ -471,6 +471,56 @@
       "masses_gev": [3.686],
       "widths_gev": [0.00029],
       "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "magnesium24",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 22.3419,
+      "masses_gev": [22.342],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "silicon28",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 26.0603,
+      "masses_gev": [26.060],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "sulfur32",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 29.7818,
+      "masses_gev": [29.782],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "iron56",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 52.103,
+      "masses_gev": [52.103],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.25, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "copper63",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "3/2-",
+      "sm_mass_gev": 58.628,
+      "masses_gev": [58.628],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.30, "width_abs": 0.0, "spacing_rel": 0.2}
     }
   ]
 }

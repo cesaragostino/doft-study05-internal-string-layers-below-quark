@@ -9,53 +9,62 @@ Nota: $\gamma$ es el acople configurado en Ola2 (p.ej. 0.007); $Q_{lock}$ es la 
 ## Termómetro cósmico (Ola1 → Ola2)
 | Métrica | Promedio Ola1 (inputs) | Promedio Ola2 (éxitos) | Δ (Ola2 - Ola1) |
 |---------|------------------------|------------------------|-----------------|
-| Caos dinámico (PE) | 0.698 | 0.842 | +0.144 |
-| Entropía (H_lock) | 0.0054 | 0.0070 | +0.0017 |
+| Caos dinámico (PE) | 0.702 | 0.842 | +0.140 |
+| Entropía (H_lock) | 0.0052 | 0.0070 | +0.0019 |
 | Dynamic Strain (1-R_final) | n/a | 0.0017 | n/a |
 
 ## Rendimiento del reactor
 | Target | Runs | Éxitos | Éxito % | geometry_mismatch | no_lock | otros |
 |--------|------|--------|---------|-------------------|---------|-------|
 | alpha_synthesis_pure | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
+| carbon12_triple_alpha | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
 | deuteron_synthesis_strict | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
+| magnesium24_fusion | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
 | open_cluster_scan | 10000 | 9959 | 99.6% | 0 | 41 | 0 |
-| oxygen16_from_deuterons_fc6 | 10000 | 45 | 0.5% | 0 | 0 | 9955 |
-| oxygen16_from_deuterons_fc8 | 10000 | 12 | 0.1% | 0 | 0 | 9988 |
-| oxygen16_from_deuterons_ring8 | 10000 | 8 | 0.1% | 0 | 1 | 9991 |
+| oxygen16_from_deuterons_fc6 | 10000 | 23 | 0.2% | 0 | 0 | 9977 |
+| oxygen16_from_deuterons_fc8 | 10000 | 7 | 0.1% | 0 | 0 | 9993 |
+| oxygen16_from_deuterons_ring8 | 10000 | 5 | 0.1% | 0 | 0 | 9995 |
+| oxygen16_tetra_alpha | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
 
 ## Tabla de fusión (defecto de masa)
 | Target | ⟨Σm⟩ | ⟨M_final⟩ | ⟨E_b⟩ | ⟨E_b⟩/nodo |
 |--------|------|-----------|-------|------------|
 | alpha_synthesis_pure | nan | nan | nan | nan |
+| carbon12_triple_alpha | nan | nan | nan | nan |
 | deuteron_synthesis_strict | nan | nan | nan | nan |
+| magnesium24_fusion | nan | nan | nan | nan |
 | open_cluster_scan | 3.511 | 3.487 | 0.0240 | 0.0068 |
 | oxygen16_from_deuterons_fc6 | 6.000 | 5.958 | 0.0419 | 0.0070 |
 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 0.0070 |
-| oxygen16_from_deuterons_ring8 | 8.000 | 7.944 | 0.0557 | 0.0070 |
+| oxygen16_from_deuterons_ring8 | 8.000 | 7.944 | 0.0556 | 0.0070 |
+| oxygen16_tetra_alpha | nan | nan | nan | nan |
 
 ### Top binding (mayor E_b)
 | Compound | Target | Σm | M_final | E_b | Nodos | Partículas |
 |----------|--------|----|---------|-----|-------|------------|
-| oxygen16_from_deuterons_fc8_run_8874 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_fc8_run_0872 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_fc8_run_7622 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_ring8_run_6176 | oxygen16_from_deuterons_ring8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_fc8_run_9336 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_fc8_run_5941 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_ring8_run_5166 | oxygen16_from_deuterons_ring8 | 8.000 | 7.944 | 0.0558 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_fc8_run_0767 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_fc8_run_4105 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| oxygen16_from_deuterons_fc8_run_1936 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_fc8_run_6843 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_ring8_run_2737 | oxygen16_from_deuterons_ring8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_fc8_run_1647 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0559 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_fc8_run_2579 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_fc8_run_8872 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_fc8_run_8663 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_fc8_run_1934 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_ring8_run_2359 | oxygen16_from_deuterons_ring8 | 8.000 | 7.944 | 0.0557 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_fc8_run_5561 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0556 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| oxygen16_from_deuterons_ring8_run_8707 | oxygen16_from_deuterons_ring8 | 8.000 | 7.944 | 0.0556 | 8 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
 
 ## Dinámica de memoria y topología
 | Target | ⟨memory_score_k10⟩ | ⟨Dynamic Strain⟩ | ⟨grado efectivo⟩ |
 |--------|--------------------|-------------------|------------------|
 | alpha_synthesis_pure | nan | nan | nan |
+| carbon12_triple_alpha | nan | nan | nan |
 | deuteron_synthesis_strict | nan | nan | nan |
+| magnesium24_fusion | nan | nan | nan |
 | open_cluster_scan | 0.8056 | 0.0017 | 2.184 |
-| oxygen16_from_deuterons_fc6 | 0.9012 | 0.0023 | 5.000 |
-| oxygen16_from_deuterons_fc8 | 0.9364 | 0.0023 | 7.000 |
-| oxygen16_from_deuterons_ring8 | 0.9050 | 0.0051 | 2.000 |
+| oxygen16_from_deuterons_fc6 | 0.8907 | 0.0021 | 5.000 |
+| oxygen16_from_deuterons_fc8 | 0.9478 | 0.0031 | 7.000 |
+| oxygen16_from_deuterons_ring8 | 0.9286 | 0.0062 | 2.000 |
+| oxygen16_tetra_alpha | nan | nan | nan |
 
 ## Compuestos aceptados (detalle)
 ### open_cluster_scan
@@ -86,52 +95,44 @@ _(9939 más…)_
 ### oxygen16_from_deuterons_fc6
 | run_id | Σm | M_final | E_b | R_final | Q_lock | PE | H_block | Partículas |
 |--------|----|---------|-----|---------|--------|----|---------|------------|
-| 82 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.833 | 0.0064 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 286 | 6.000 | 5.958 | 0.0419 | 0.997 | 0.999 | 0.795 | 0.0062 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 401 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.835 | 0.0067 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 670 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.820 | 0.0048 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 1079 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.799 | 0.0071 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 1156 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.841 | 0.0063 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 1397 | 6.000 | 5.958 | 0.0416 | 0.993 | 0.999 | 0.795 | 0.0085 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 1465 | 6.000 | 5.958 | 0.0417 | 0.995 | 0.999 | 0.784 | 0.0062 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 1955 | 6.000 | 5.958 | 0.0418 | 0.996 | 0.999 | 0.833 | 0.0063 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 2027 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.827 | 0.0044 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 2616 | 6.000 | 5.958 | 0.0419 | 0.997 | 0.999 | 0.803 | 0.0054 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 2958 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.830 | 0.0047 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 3096 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.824 | 0.0072 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 3277 | 6.000 | 5.958 | 0.0418 | 0.996 | 0.999 | 0.861 | 0.0060 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 3569 | 6.000 | 5.958 | 0.0418 | 0.997 | 0.999 | 0.825 | 0.0057 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4201 | 6.000 | 5.958 | 0.0419 | 0.997 | 0.999 | 0.846 | 0.0051 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4428 | 6.000 | 5.958 | 0.0418 | 0.996 | 0.999 | 0.793 | 0.0068 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4739 | 6.000 | 5.958 | 0.0419 | 1.000 | 0.999 | 0.807 | 0.0085 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4864 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.791 | 0.0042 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4923 | 6.000 | 5.958 | 0.0419 | 0.999 | 1.000 | 0.835 | 0.0032 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-_(25 más…)_
+| 594 | 6.000 | 5.958 | 0.0419 | 0.997 | 0.999 | 0.781 | 0.0063 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 744 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.838 | 0.0058 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 770 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.857 | 0.0051 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 1902 | 6.000 | 5.958 | 0.0418 | 0.996 | 0.999 | 0.840 | 0.0062 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 2153 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.850 | 0.0048 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 2212 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.843 | 0.0066 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 2748 | 6.000 | 5.958 | 0.0418 | 0.996 | 0.999 | 0.828 | 0.0063 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 3129 | 6.000 | 5.958 | 0.0419 | 0.998 | 1.000 | 0.816 | 0.0028 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 3384 | 6.000 | 5.958 | 0.0419 | 0.997 | 0.999 | 0.866 | 0.0042 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 3728 | 6.000 | 5.958 | 0.0418 | 0.997 | 0.999 | 0.813 | 0.0057 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 4584 | 6.000 | 5.958 | 0.0418 | 0.996 | 0.999 | 0.800 | 0.0046 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 4988 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.825 | 0.0073 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 5168 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.827 | 0.0043 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 5212 | 6.000 | 5.958 | 0.0418 | 0.996 | 0.999 | 0.808 | 0.0065 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 5988 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.817 | 0.0058 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 6065 | 6.000 | 5.958 | 0.0419 | 0.999 | 0.999 | 0.817 | 0.0073 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 6216 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.843 | 0.0057 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 6457 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.836 | 0.0047 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 7146 | 6.000 | 5.958 | 0.0419 | 0.998 | 0.999 | 0.842 | 0.0043 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 7294 | 6.000 | 5.958 | 0.0419 | 0.999 | 1.000 | 0.816 | 0.0041 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+_(3 más…)_
 
 ### oxygen16_from_deuterons_fc8
 | run_id | Σm | M_final | E_b | R_final | Q_lock | PE | H_block | Partículas |
 |--------|----|---------|-----|---------|--------|----|---------|------------|
-| 767 | 8.000 | 7.944 | 0.0558 | 0.998 | 0.999 | 0.817 | 0.0049 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 872 | 8.000 | 7.944 | 0.0559 | 0.999 | 0.999 | 0.770 | 0.0062 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 1936 | 8.000 | 7.944 | 0.0558 | 0.998 | 0.999 | 0.783 | 0.0075 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 3738 | 8.000 | 7.944 | 0.0557 | 0.996 | 0.999 | 0.854 | 0.0063 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 3781 | 8.000 | 7.944 | 0.0558 | 0.997 | 0.999 | 0.833 | 0.0071 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4105 | 8.000 | 7.944 | 0.0558 | 0.997 | 0.999 | 0.833 | 0.0056 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 5941 | 8.000 | 7.944 | 0.0559 | 0.999 | 0.999 | 0.804 | 0.0070 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 7622 | 8.000 | 7.944 | 0.0559 | 0.999 | 0.999 | 0.798 | 0.0049 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 7819 | 8.000 | 7.944 | 0.0557 | 0.996 | 0.999 | 0.852 | 0.0065 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 8874 | 8.000 | 7.944 | 0.0559 | 0.999 | 0.999 | 0.803 | 0.0053 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 9336 | 8.000 | 7.944 | 0.0559 | 0.999 | 0.999 | 0.813 | 0.0067 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 9450 | 8.000 | 7.944 | 0.0557 | 0.996 | 0.999 | 0.781 | 0.0062 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 1647 | 8.000 | 7.944 | 0.0559 | 0.998 | 0.999 | 0.792 | 0.0062 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 1934 | 8.000 | 7.944 | 0.0558 | 0.996 | 0.999 | 0.875 | 0.0054 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 2579 | 8.000 | 7.944 | 0.0558 | 0.997 | 1.000 | 0.854 | 0.0039 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 5561 | 8.000 | 7.944 | 0.0556 | 0.994 | 0.999 | 0.849 | 0.0052 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 6843 | 8.000 | 7.944 | 0.0559 | 0.999 | 1.000 | 0.791 | 0.0035 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 8663 | 8.000 | 7.944 | 0.0558 | 0.996 | 1.000 | 0.786 | 0.0035 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 8872 | 8.000 | 7.944 | 0.0558 | 0.998 | 0.999 | 0.839 | 0.0066 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
 
 ### oxygen16_from_deuterons_ring8
 | run_id | Σm | M_final | E_b | R_final | Q_lock | PE | H_block | Partículas |
 |--------|----|---------|-----|---------|--------|----|---------|------------|
-| 2903 | 8.000 | 7.944 | 0.0558 | 0.997 | 0.999 | 0.730 | 0.0070 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 2925 | 8.000 | 7.944 | 0.0557 | 0.995 | 0.999 | 0.827 | 0.0067 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4058 | 8.000 | 7.944 | 0.0555 | 0.992 | 0.999 | 0.827 | 0.0067 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4170 | 8.000 | 7.944 | 0.0557 | 0.996 | 0.999 | 0.811 | 0.0059 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 4390 | 8.000 | 7.945 | 0.0554 | 0.990 | 0.999 | 0.801 | 0.0057 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 5166 | 8.000 | 7.944 | 0.0558 | 0.998 | 0.999 | 0.803 | 0.0058 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 6176 | 8.000 | 7.944 | 0.0559 | 0.999 | 0.999 | 0.796 | 0.0065 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
-| 8952 | 8.000 | 7.944 | 0.0555 | 0.993 | 0.999 | 0.801 | 0.0065 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 2359 | 8.000 | 7.944 | 0.0557 | 0.995 | 1.000 | 0.844 | 0.0039 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 2737 | 8.000 | 7.944 | 0.0559 | 0.998 | 0.999 | 0.841 | 0.0043 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 7721 | 8.000 | 7.945 | 0.0553 | 0.989 | 0.999 | 0.828 | 0.0075 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 8670 | 8.000 | 7.944 | 0.0555 | 0.992 | 0.999 | 0.801 | 0.0053 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
+| 8707 | 8.000 | 7.944 | 0.0556 | 0.994 | 0.999 | 0.770 | 0.0047 | deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron, deuteron |
