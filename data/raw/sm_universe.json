@@ -551,6 +551,156 @@
       "masses_gev": [22.342],
       "widths_gev": [0.0],
       "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "w_boson",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1+",
+      "sm_mass_gev": 80.377,
+      "masses_gev": [80.377],
+      "widths_gev": [2.085],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3}
+    },
+    {
+      "name": "z_boson",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1+",
+      "sm_mass_gev": 91.1876,
+      "masses_gev": [91.188],
+      "widths_gev": [2.4952],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3}
+    },
+    {
+      "name": "higgs",
+      "family": "higgs",
+      "type": "elementary",
+      "jpc": "0+",
+      "sm_mass_gev": 125.25,
+      "masses_gev": [125.25],
+      "widths_gev": [0.00407],
+      "tolerances": {"mass_abs": 0.2, "width_abs": 0.002, "spacing_rel": 0.3}
+    },
+    {
+      "name": "quark_u",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00216,
+      "masses_gev": [0.00216],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_d",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00467,
+      "masses_gev": [0.00467],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_s",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.093,
+      "masses_gev": [0.093],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.01, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_c",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.27,
+      "masses_gev": [1.27],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_b",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 4.18,
+      "masses_gev": [4.18],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_t",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 172.57,
+      "masses_gev": [172.57],
+      "widths_gev": [1.42],
+      "tolerances": {"mass_abs": 0.5, "width_abs": 0.1, "spacing_rel": 0.5}
+    },
+    {
+      "name": "neutrino_e",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.0000022,
+      "masses_gev": [0.0000022],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.000001, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "neutrino_mu",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00017,
+      "masses_gev": [0.00017],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.00005, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "neutrino_tau",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.0155,
+      "masses_gev": [0.0155],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "kaon_k_plus",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.49368,
+      "masses_gev": [0.494],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "kaon_k_zero",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.49761,
+      "masses_gev": [0.498],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "kaon_k_star",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 0.89166,
+      "masses_gev": [0.892],
+      "widths_gev": [0.051],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.02, "spacing_rel": 0.3}
     }
   ]
 }
