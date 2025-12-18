@@ -1,5 +1,5 @@
 {
-  "name": "sm_universe_complete_v4_modified",
+  "name": "sm_universe_complete_v4",
   "energy_window_gev": [0.05, 10.0],
   "particles": [
     {
@@ -148,29 +148,9 @@
       "type": "baryon",
       "jpc": "3/2+",
       "sm_mass_gev": 1.232,
-      "masses_gev": [1.232],
-      "widths_gev": [0.117],
-      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.4}
-    },
-    {
-      "name": "delta_1600",
-      "family": "delta_like",
-      "type": "baryon",
-      "jpc": "3/2+",
-      "sm_mass_gev": 1.600,
-      "masses_gev": [1.6],
-      "widths_gev": [0.3],
-      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.4}
-    },
-    {
-      "name": "delta_1900",
-      "family": "delta_like",
-      "type": "baryon",
-      "jpc": "3/2+",
-      "sm_mass_gev": 1.900,
-      "masses_gev": [1.9],
-      "widths_gev": [0.2],
-      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.4}
+      "masses_gev": [1.232, 1.6, 1.9],
+      "widths_gev": [0.117, 0.3, 0.2],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.3, "spacing_rel": 0.4}
     },
     {
       "name": "tau",

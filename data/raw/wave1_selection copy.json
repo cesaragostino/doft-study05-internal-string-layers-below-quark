@@ -19,11 +19,8 @@
 
   "log_rejections": true,
 
-  "d_total_max": 3.0,
-  "band_power_capture_min": 0.2,
-
   "grades": {
-    "use_d_total_for_grades_only": false,
+    "use_d_total_for_grades_only": true,
     "grade_A_d_total_max": 0.30,
     "grade_B_d_total_max": 1.00,
     "grade_C_d_total_max": 3.00
