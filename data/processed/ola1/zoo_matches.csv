@@ -25,6 +25,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 0.0,carbon12,nucleus,composite,75.07885199944604,nan,75.07885199944604,1,1,1
 0.0,eta_c,charmonium,meson,13.65949422634101,nan,13.65949422634101,1,1,1
 0.0,j_psi,charmonium,meson,11.399494271541009,nan,11.399494271541009,1,1,1
+0.0,lambda_c,charmed_baryon,baryon,11.508122612236852,nan,11.508122612236852,1,1,1
+0.0,sigma_c,charmed_baryon,baryon,10.108122623903517,nan,10.108122623903517,1,1,1
 1.0,electron,lepton,elementary,20464.818824968686,nan,20464.818824968686,1,1,1
 1.0,muon,lepton,elementary,194.13531531803784,nan,194.13531531803784,1,1,1
 1.0,pion,pion_like,meson,38.16026618310855,nan,38.16026618310855,0,0,1
@@ -51,6 +53,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 1.0,carbon12,nucleus,composite,91.2784656140584,nan,91.2784656140584,1,1,1
 1.0,eta_c,charmonium,meson,18.73973267889147,nan,18.73973267889147,1,1,1
 1.0,j_psi,charmonium,meson,20.999732633691472,nan,20.999732633691472,1,1,1
+1.0,lambda_c,charmed_baryon,baryon,1.9915554224395908,nan,1.9915554224395908,1,1,1
+1.0,sigma_c,charmed_baryon,baryon,3.3915554107729253,nan,3.3915554107729253,1,1,1
 2.0,electron,lepton,elementary,17814.852695141235,nan,17814.852695141235,1,1,1
 2.0,muon,lepton,elementary,167.6353916731427,nan,167.6353916731427,1,1,1
 2.0,pion,pion_like,meson,32.86028103013075,nan,32.86028103013075,0,0,1
@@ -77,6 +81,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 2.0,carbon12,nucleus,composite,93.92845821704722,nan,93.92845821704722,1,1,1
 2.0,eta_c,charmonium,meson,24.039717831869268,nan,24.039717831869268,1,1,1
 2.0,j_psi,charmonium,meson,26.29971778666927,nan,26.29971778666927,1,1,1
+2.0,lambda_c,charmed_baryon,baryon,4.19988259527749,nan,4.19988259527749,1,1,1
+2.0,sigma_c,charmed_baryon,baryon,5.599882583610825,nan,5.599882583610825,1,1,1
 3.0,electron,lepton,elementary,30624.826612032604,nan,30624.826612032604,1,1,1
 3.0,muon,lepton,elementary,295.7363990293474,nan,295.7363990293474,1,1,1
 3.0,pion,pion_like,meson,58.48048455098776,nan,58.48048455098776,0,0,1
@@ -103,6 +109,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 3.0,carbon12,nucleus,composite,81.11835632851772,nan,81.11835632851772,1,1,1
 3.0,eta_c,charmonium,meson,1.5804856889877392,nan,1.5804856889877392,1,1,1
 3.0,j_psi,charmonium,meson,0.6795142658122613,nan,0.6795142658122613,1,1,1
+3.0,lambda_c,charmed_baryon,baryon,6.4752023296222525,nan,6.4752023296222525,1,1,1
+3.0,sigma_c,charmed_baryon,baryon,5.075202341288918,nan,5.075202341288918,1,1,1
 4.0,electron,lepton,elementary,33548.22165750829,nan,33548.22165750829,1,1,1
 4.0,muon,lepton,elementary,324.97063890018484,nan,324.97063890018484,1,1,1
 4.0,pion,pion_like,meson,64.32733299290308,nan,64.32733299290308,0,0,1
@@ -129,6 +137,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 4.0,carbon12,nucleus,composite,78.19493207832582,nan,78.19493207832582,1,1,1
 4.0,eta_c,charmonium,meson,7.427334130903057,nan,7.427334130903057,1,1,1
 4.0,j_psi,charmonium,meson,5.167334176103056,nan,5.167334176103056,1,1,1
+4.0,lambda_c,charmed_baryon,baryon,8.91138920884248,nan,8.91138920884248,1,1,1
+4.0,sigma_c,charmed_baryon,baryon,7.511389220509146,nan,7.511389220509146,1,1,1
 5.0,electron,lepton,elementary,29376.26088465445,nan,29376.26088465445,1,1,1
 5.0,muon,lepton,elementary,283.2506181475712,nan,283.2506181475712,1,1,1
 5.0,pion,pion_like,meson,55.983328174860034,nan,55.983328174860034,0,0,1
@@ -155,6 +165,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 5.0,carbon12,nucleus,composite,82.36693452906736,nan,82.36693452906736,1,1,1
 5.0,eta_c,charmonium,meson,0.916670687139992,nan,0.916670687139992,1,1,1
 5.0,j_psi,charmonium,meson,3.1766706419399924,nan,3.1766706419399924,1,1,1
+5.0,lambda_c,charmed_baryon,baryon,5.4347204940967435,nan,5.4347204940967435,1,1,1
+5.0,sigma_c,charmed_baryon,baryon,4.034720505763409,nan,4.034720505763409,1,1,1
 6.0,electron,lepton,elementary,28746.057011810124,nan,28746.057011810124,1,1,1
 6.0,muon,lepton,elementary,276.94851702895073,nan,276.94851702895073,1,1,1
 6.0,pion,pion_like,meson,54.72290785030232,nan,54.72290785030232,0,0,1
@@ -181,6 +193,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 6.0,carbon12,nucleus,composite,82.99714469764831,nan,82.99714469764831,1,1,1
 6.0,eta_c,charmonium,meson,2.1770910116976947,nan,2.1770910116976947,1,1,1
 6.0,j_psi,charmonium,meson,4.437090966497696,nan,4.437090966497696,1,1,1
+6.0,lambda_c,charmed_baryon,baryon,4.909545352737324,nan,4.909545352737324,1,1,1
+6.0,sigma_c,charmed_baryon,baryon,3.5095453644039893,nan,3.5095453644039893,1,1,1
 7.0,electron,lepton,elementary,19754.774894782924,nan,19754.774894782924,1,1,1
 7.0,muon,lepton,elementary,187.03480572183818,nan,187.03480572183818,1,1,1
 7.0,pion,pion_like,meson,36.74016415026046,nan,36.74016415026046,0,0,1
@@ -207,6 +221,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 7.0,carbon12,nucleus,composite,91.98851663758296,nan,91.98851663758296,1,1,1
 7.0,eta_c,charmonium,meson,20.159834711739556,nan,20.159834711739556,1,1,1
 7.0,j_psi,charmonium,meson,22.419834666539558,nan,22.419834666539558,1,1,1
+7.0,lambda_c,charmed_baryon,baryon,2.5832646096962333,nan,2.5832646096962333,1,1,1
+7.0,sigma_c,charmed_baryon,baryon,3.9832645980295682,nan,3.9832645980295682,1,1,1
 8.0,electron,lepton,elementary,19522.707982668668,nan,19522.707982668668,1,1,1
 8.0,muon,lepton,elementary,184.71411362607358,nan,184.71411362607358,1,1,1
 8.0,pion,pion_like,meson,36.27602569397647,nan,36.27602569397647,0,0,1
@@ -233,6 +249,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 8.0,carbon12,nucleus,composite,92.22058586804565,nan,92.22058586804565,1,1,1
 8.0,eta_c,charmonium,meson,20.623973168023547,nan,20.623973168023547,1,1,1
 8.0,j_psi,charmonium,meson,22.883973122823548,nan,22.883973122823548,1,1,1
+8.0,lambda_c,charmed_baryon,baryon,2.776655635404125,nan,2.776655635404125,1,1,1
+8.0,sigma_c,charmed_baryon,baryon,4.17665562373746,nan,4.17665562373746,1,1,1
 9.0,electron,lepton,elementary,25134.88486195298,nan,25134.88486195298,1,1,1
 9.0,muon,lepton,elementary,240.83643802437223,nan,240.83643802437223,1,1,1
 9.0,pion,pion_like,meson,47.50049147159338,nan,47.50049147159338,0,0,1
@@ -259,6 +277,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 9.0,carbon12,nucleus,composite,86.60835292311486,nan,86.60835292311486,1,1,1
 9.0,eta_c,charmonium,meson,9.399507390406647,nan,9.399507390406647,1,1,1
 9.0,j_psi,charmonium,meson,11.659507345206647,nan,11.659507345206647,1,1,1
+9.0,lambda_c,charmed_baryon,baryon,1.9002051598329588,nan,1.9002051598329588,1,1,1
+9.0,sigma_c,charmed_baryon,baryon,0.500205171499624,nan,0.500205171499624,1,1,1
 10.0,electron,lepton,elementary,17883.921335170027,nan,17883.921335170027,1,1,1
 10.0,muon,lepton,elementary,168.32608491122528,nan,168.32608491122528,1,1,1
 10.0,pion,pion_like,meson,32.998419688798364,nan,32.998419688798364,0,0,1
@@ -285,6 +305,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 10.0,carbon12,nucleus,composite,93.85938888702275,nan,93.85938888702275,1,1,1
 10.0,eta_c,charmonium,meson,23.901579173201657,nan,23.901579173201657,1,1,1
 10.0,j_psi,charmonium,meson,26.16157912800166,nan,26.16157912800166,1,1,1
+10.0,lambda_c,charmed_baryon,baryon,4.142324820161145,nan,4.142324820161145,1,1,1
+10.0,sigma_c,charmed_baryon,baryon,5.542324808494479,nan,5.542324808494479,1,1,1
 11.0,electron,lepton,elementary,25804.613905181035,nan,25804.613905181035,1,1,1
 11.0,muon,lepton,elementary,247.53379475982143,nan,247.53379475982143,1,1,1
 11.0,pion,pion_like,meson,48.83996292584092,nan,48.83996292584092,0,0,1
@@ -311,6 +333,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 11.0,carbon12,nucleus,composite,85.93861718929374,nan,85.93861718929374,1,1,1
 11.0,eta_c,charmonium,meson,8.060035936159103,nan,8.060035936159103,1,1,1
 11.0,j_psi,charmonium,meson,10.320035890959103,nan,10.320035890959103,1,1,1
+11.0,lambda_c,charmed_baryon,baryon,2.458318272280755,nan,2.458318272280755,1,1,1
+11.0,sigma_c,charmed_baryon,baryon,1.0583182839474203,nan,1.0583182839474203,1,1,1
 12.0,electron,lepton,elementary,19148.628955941123,nan,19148.628955941123,1,1,1
 12.0,muon,lepton,elementary,180.97328632497818,nan,180.97328632497818,1,1,1
 12.0,pion,pion_like,meson,35.52786017390416,nan,35.52786017390416,0,0,1
@@ -337,6 +361,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 12.0,carbon12,nucleus,composite,92.59466863182264,nan,92.59466863182264,1,1,1
 12.0,eta_c,charmonium,meson,21.37213868809586,nan,21.37213868809586,1,1,1
 12.0,j_psi,charmonium,meson,23.63213864289586,nan,23.63213864289586,1,1,1
+12.0,lambda_c,charmed_baryon,baryon,3.088391272404505,nan,3.088391272404505,1,1,1
+12.0,sigma_c,charmed_baryon,baryon,4.488391260737839,nan,4.488391260737839,1,1,1
 13.0,electron,lepton,elementary,18656.797242148703,nan,18656.797242148703,1,1,1
 13.0,muon,lepton,elementary,176.0549204957192,nan,176.0549204957192,1,1,1
 13.0,pion,pion_like,meson,34.54418692935851,nan,34.54418692935851,0,0,1
@@ -363,6 +389,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 13.0,carbon12,nucleus,composite,93.08650525901383,nan,93.08650525901383,1,1,1
 13.0,eta_c,charmonium,meson,22.355811932641508,nan,22.355811932641508,1,1,1
 13.0,j_psi,charmonium,meson,24.61581188744151,nan,24.61581188744151,1,1,1
+13.0,lambda_c,charmed_baryon,baryon,3.49825512908027,nan,3.49825512908027,1,1,1
+13.0,sigma_c,charmed_baryon,baryon,4.898255117413605,nan,4.898255117413605,1,1,1
 14.0,electron,lepton,elementary,18151.70150548697,nan,18151.70150548697,1,1,1
 14.0,muon,lepton,elementary,171.00391312462895,nan,171.00391312462895,1,1,1
 14.0,pion,pion_like,meson,33.533985374324345,nan,33.533985374324345,0,0,1
@@ -389,6 +417,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 14.0,carbon12,nucleus,composite,93.59160604158193,nan,93.59160604158193,1,1,1
 14.0,eta_c,charmonium,meson,23.366013487675676,nan,23.366013487675676,1,1,1
 14.0,j_psi,charmonium,meson,25.626013442475678,nan,25.626013442475678,1,1,1
+14.0,lambda_c,charmed_baryon,baryon,3.9191724485885415,nan,3.9191724485885415,1,1,1
+14.0,sigma_c,charmed_baryon,baryon,5.3191724369218765,nan,5.3191724369218765,1,1,1
 15.0,electron,lepton,elementary,19857.745655021557,nan,19857.745655021557,1,1,1
 15.0,muon,lepton,elementary,188.06452351832874,nan,188.06452351832874,1,1,1
 15.0,pion,pion_like,meson,36.946107726034064,nan,36.946107726034064,0,0,1
@@ -415,6 +445,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 15.0,carbon12,nucleus,composite,91.88554484866644,nan,91.88554484866644,1,1,1
 15.0,eta_c,charmonium,meson,19.953891135965957,nan,19.953891135965957,1,1,1
 15.0,j_psi,charmonium,meson,22.213891090765955,nan,22.213891090765955,1,1,1
+15.0,lambda_c,charmed_baryon,baryon,2.4974547854561187,nan,2.4974547854561187,1,1,1
+15.0,sigma_c,charmed_baryon,baryon,3.8974547737894536,nan,3.8974547737894536,1,1,1
 16.0,electron,lepton,elementary,28541.303523561506,nan,28541.303523561506,1,1,1
 16.0,muon,lepton,elementary,274.90096187587125,nan,274.90096187587125,1,1,1
 16.0,pion,pion_like,meson,54.31339678692555,nan,54.31339678692555,0,0,1
@@ -441,6 +473,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 16.0,carbon12,nucleus,composite,83.20190023138426,nan,83.20190023138426,1,1,1
 16.0,eta_c,charmonium,meson,2.5866020750744747,nan,2.5866020750744747,1,1,1
 16.0,j_psi,charmonium,meson,4.846602029874475,nan,4.846602029874475,1,1,1
+16.0,lambda_c,charmed_baryon,baryon,4.73891574100632,nan,4.73891574100632,1,1,1
+16.0,sigma_c,charmed_baryon,baryon,3.3389157526729853,nan,3.3389157526729853,1,1,1
 17.0,electron,lepton,elementary,18416.042406624354,nan,18416.042406624354,1,1,1
 17.0,muon,lepton,elementary,173.64734830574938,nan,173.64734830574938,1,1,1
 17.0,pion,pion_like,meson,34.062672452843394,nan,34.062672452843394,0,0,1
@@ -467,6 +501,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 17.0,carbon12,nucleus,composite,93.32726249967895,nan,93.32726249967895,1,1,1
 17.0,eta_c,charmonium,meson,22.837326409156628,nan,22.837326409156628,1,1,1
 17.0,j_psi,charmonium,meson,25.09732636395663,nan,25.09732636395663,1,1,1
+17.0,lambda_c,charmed_baryon,baryon,3.698886163302265,nan,3.698886163302265,1,1,1
+17.0,sigma_c,charmed_baryon,baryon,5.098886151635599,nan,5.098886151635599,1,1,1
 18.0,electron,lepton,elementary,18946.14375077506,nan,18946.14375077506,1,1,1
 18.0,muon,lepton,elementary,178.94841422728425,nan,178.94841422728425,1,1,1
 18.0,pion,pion_like,meson,35.122885721967414,nan,35.122885721967414,0,0,1
@@ -493,6 +529,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 18.0,carbon12,nucleus,composite,92.79715585981589,nan,92.79715585981589,1,1,1
 18.0,eta_c,charmonium,meson,21.777113140032604,nan,21.777113140032604,1,1,1
 18.0,j_psi,charmonium,meson,24.037113094832602,nan,24.037113094832602,1,1,1
+18.0,lambda_c,charmed_baryon,baryon,3.257130629346773,nan,3.257130629346773,1,1,1
+18.0,sigma_c,charmed_baryon,baryon,4.6571306176801075,nan,4.6571306176801075,1,1,1
 19.0,electron,lepton,elementary,18425.977594619504,nan,18425.977594619504,1,1,1
 19.0,muon,lepton,elementary,173.7467011692844,nan,173.7467011692844,1,1,1
 19.0,pion,pion_like,meson,34.08254302714004,nan,34.08254302714004,0,0,1
@@ -519,6 +557,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 19.0,carbon12,nucleus,composite,93.31732721243128,nan,93.31732721243128,1,1,1
 19.0,eta_c,charmonium,meson,22.81745583485998,nan,22.81745583485998,1,1,1
 19.0,j_psi,charmonium,meson,25.077455789659982,nan,25.077455789659982,1,1,1
+19.0,lambda_c,charmed_baryon,baryon,3.6906067572487355,nan,3.6906067572487355,1,1,1
+19.0,sigma_c,charmed_baryon,baryon,5.09060674558207,nan,5.09060674558207,1,1,1
 20.0,electron,lepton,elementary,18888.940899624213,nan,18888.940899624213,1,1,1
 20.0,muon,lepton,elementary,178.3763800526941,nan,178.3763800526941,1,1,1
 20.0,pion,pion_like,meson,35.00847887789684,nan,35.00847887789684,0,0,1
@@ -545,6 +585,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 20.0,carbon12,nucleus,composite,92.85435928242319,nan,92.85435928242319,1,1,1
 20.0,eta_c,charmonium,meson,21.89151998410318,nan,21.89151998410318,1,1,1
 20.0,j_psi,charmonium,meson,24.15151993890318,nan,24.15151993890318,1,1,1
+20.0,lambda_c,charmed_baryon,baryon,3.304800148265658,nan,3.304800148265658,1,1,1
+20.0,sigma_c,charmed_baryon,baryon,4.704800136598993,nan,4.704800136598993,1,1,1
 21.0,electron,lepton,elementary,31695.455732302555,nan,31695.455732302555,1,1,1
 21.0,muon,lepton,elementary,306.4427962243192,nan,306.4427962243192,1,1,1
 21.0,pion,pion_like,meson,60.62176416128447,nan,60.62176416128447,0,0,1
@@ -571,6 +613,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 21.0,carbon12,nucleus,composite,80.04771651266294,nan,80.04771651266294,1,1,1
 21.0,eta_c,charmonium,meson,3.7217652992844523,nan,3.7217652992844523,1,1,1
 21.0,j_psi,charmonium,meson,1.4617653444844518,nan,1.4617653444844518,1,1,1
+21.0,lambda_c,charmed_baryon,baryon,7.367402177654881,nan,7.367402177654881,1,1,1
+21.0,sigma_c,charmed_baryon,baryon,5.967402189321547,nan,5.967402189321547,1,1,1
 22.0,electron,lepton,elementary,22435.451880734036,nan,22435.451880734036,1,1,1
 22.0,muon,lepton,elementary,213.84184096834434,nan,213.84184096834434,1,1,1
 22.0,pion,pion_like,meson,42.101571628474254,nan,42.101571628474254,0,0,1
@@ -597,6 +641,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 22.0,carbon12,nucleus,composite,89.30781287166903,nan,89.30781287166903,1,1,1
 22.0,eta_c,charmonium,meson,14.798427233525768,nan,14.798427233525768,1,1,1
 22.0,j_psi,charmonium,meson,17.05842718832577,nan,17.05842718832577,1,1,1
+22.0,lambda_c,charmed_baryon,baryon,0.3493448010447577,nan,0.3493448010447577,1,1,1
+22.0,sigma_c,charmed_baryon,baryon,1.7493447893780925,nan,1.7493447893780925,1,1,1
 23.0,electron,lepton,elementary,33845.6028760164,nan,33845.6028760164,1,1,1
 23.0,muon,lepton,elementary,327.94448052600353,nan,327.94448052600353,1,1,1
 23.0,pion,pion_like,meson,64.92210136564829,nan,64.92210136564829,0,0,1
@@ -623,6 +669,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 23.0,carbon12,nucleus,composite,77.89754788897937,nan,77.89754788897937,1,1,1
 23.0,eta_c,charmonium,meson,8.022102503648263,nan,8.022102503648263,1,1,1
 23.0,j_psi,charmonium,meson,5.7621025488482625,nan,5.7621025488482625,1,1,1
+23.0,lambda_c,charmed_baryon,baryon,9.15920936704422,nan,9.15920936704422,1,1,1
+23.0,sigma_c,charmed_baryon,baryon,7.759209378710884,nan,7.759209378710884,1,1,1
 24.0,electron,lepton,elementary,37792.6145899336,nan,37792.6145899336,1,1,1
 24.0,muon,lepton,elementary,367.41498841929615,nan,367.41498841929615,1,1,1
 24.0,pion,pion_like,meson,72.81620357583492,nan,72.81620357583492,0,0,1
@@ -649,6 +697,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 24.0,carbon12,nucleus,composite,73.95049674441553,nan,73.95049674441553,1,1,1
 24.0,eta_c,charmonium,meson,15.916204713834905,nan,15.916204713834905,1,1,1
 24.0,j_psi,charmonium,meson,13.656204759034903,nan,13.656204759034903,1,1,1
+24.0,lambda_c,charmed_baryon,baryon,12.44841865966276,nan,12.44841865966276,1,1,1
+24.0,sigma_c,charmed_baryon,baryon,11.048418671329426,nan,11.048418671329426,1,1,1
 25.0,electron,lepton,elementary,18253.35051115267,nan,18253.35051115267,1,1,1
 25.0,muon,lepton,elementary,172.02041324453648,nan,172.02041324453648,1,1,1
 25.0,pion,pion_like,meson,33.737285414569854,nan,33.737285414569854,0,0,1
@@ -675,6 +725,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 25.0,carbon12,nucleus,composite,93.48995602044266,nan,93.48995602044266,1,1,1
 25.0,eta_c,charmonium,meson,23.162713447430168,nan,23.162713447430168,1,1,1
 25.0,j_psi,charmonium,meson,25.42271340223017,nan,25.42271340223017,1,1,1
+25.0,lambda_c,charmed_baryon,baryon,3.8344640974979822,nan,3.8344640974979822,1,1,1
+25.0,sigma_c,charmed_baryon,baryon,5.234464085831317,nan,5.234464085831317,1,1,1
 26.0,electron,lepton,elementary,20006.186525584744,nan,20006.186525584744,1,1,1
 26.0,muon,lepton,elementary,189.54894691960533,nan,189.54894691960533,1,1,1
 26.0,pion,pion_like,meson,37.242992430040154,nan,37.242992430040154,0,0,1
@@ -701,6 +753,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 26.0,carbon12,nucleus,composite,91.73710249517897,nan,91.73710249517897,1,1,1
 26.0,eta_c,charmonium,meson,19.657006431959868,nan,19.657006431959868,1,1,1
 26.0,j_psi,charmonium,meson,21.917006386759866,nan,21.917006386759866,1,1,1
+26.0,lambda_c,charmed_baryon,baryon,2.373752824010392,nan,2.373752824010392,1,1,1
+26.0,sigma_c,charmed_baryon,baryon,3.773752812343727,nan,3.773752812343727,1,1,1
 27.0,electron,lepton,elementary,17274.607875108388,nan,17274.607875108388,1,1,1
 27.0,muon,lepton,elementary,162.2328899885824,nan,162.2328899885824,1,1,1
 27.0,pion,pion_like,meson,31.779780606778665,nan,31.779780606778665,0,0,1
@@ -727,6 +781,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 27.0,carbon12,nucleus,composite,94.46870843412577,nan,94.46870843412577,1,1,1
 27.0,eta_c,charmonium,meson,25.120218255221353,nan,25.120218255221353,1,1,1
 27.0,j_psi,charmonium,meson,27.380218210021354,nan,27.380218210021354,1,1,1
+27.0,lambda_c,charmed_baryon,baryon,4.650091110259958,nan,4.650091110259958,1,1,1
+27.0,sigma_c,charmed_baryon,baryon,6.050091098593293,nan,6.050091098593293,1,1,1
 28.0,electron,lepton,elementary,18013.095726155607,nan,18013.095726155607,1,1,1
 28.0,muon,lepton,elementary,169.6178416093445,nan,169.6178416093445,1,1,1
 28.0,pion,pion_like,meson,33.25677104909031,nan,33.25677104909031,0,0,1
@@ -753,6 +809,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 28.0,carbon12,nucleus,composite,93.73021320558499,nan,93.73021320558499,1,1,1
 28.0,eta_c,charmonium,meson,23.643227812909704,nan,23.643227812909704,1,1,1
 28.0,j_psi,charmonium,meson,25.903227767709705,nan,25.903227767709705,1,1,1
+28.0,lambda_c,charmed_baryon,baryon,4.034678418783623,nan,4.034678418783623,1,1,1
+28.0,sigma_c,charmed_baryon,baryon,5.434678407116958,nan,5.434678407116958,1,1,1
 29.0,electron,lepton,elementary,19698.289963391788,nan,19698.289963391788,1,1,1
 29.0,muon,lepton,elementary,186.46995081591913,nan,186.46995081591913,1,1,1
 29.0,pion,pion_like,meson,36.62719316003898,nan,36.62719316003898,0,0,1
@@ -779,6 +837,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 29.0,carbon12,nucleus,composite,92.04500213325856,nan,92.04500213325856,1,1,1
 29.0,eta_c,charmonium,meson,20.27280570196104,nan,20.27280570196104,1,1,1
 29.0,j_psi,charmonium,meson,22.53280565676104,nan,22.53280565676104,1,1,1
+29.0,lambda_c,charmed_baryon,baryon,2.630335856171017,nan,2.630335856171017,1,1,1
+29.0,sigma_c,charmed_baryon,baryon,4.030335844504352,nan,4.030335844504352,1,1,1
 30.0,electron,lepton,elementary,22151.424227822554,nan,22151.424227822554,1,1,1
 30.0,muon,lepton,elementary,211.00153632049472,nan,211.00153632049472,1,1,1
 30.0,pion,pion_like,meson,41.533510653459444,nan,41.533510653459444,0,0,1
@@ -805,6 +865,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 30.0,carbon12,nucleus,composite,89.59184336201673,nan,89.59184336201673,1,1,1
 30.0,eta_c,charmonium,meson,15.366488208540568,nan,15.366488208540568,1,1,1
 30.0,j_psi,charmonium,meson,17.626488163340568,nan,17.626488163340568,1,1,1
+30.0,lambda_c,charmed_baryon,baryon,0.5860368767289987,nan,0.5860368767289987,1,1,1
+30.0,sigma_c,charmed_baryon,baryon,1.9860368650623335,nan,1.9860368650623335,1,1,1
 31.0,electron,lepton,elementary,17272.073664783446,nan,17272.073664783446,1,1,1
 31.0,muon,lepton,elementary,162.20754763444617,nan,162.20754763444617,1,1,1
 31.0,pion,pion_like,meson,31.77471213554594,nan,31.77471213554594,0,0,1
@@ -831,6 +893,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 31.0,carbon12,nucleus,composite,94.47124266976749,nan,94.47124266976749,1,1,1
 31.0,eta_c,charmonium,meson,25.12528672645408,nan,25.12528672645408,1,1,1
 31.0,j_psi,charmonium,meson,27.38528668125408,nan,27.38528668125408,1,1,1
+31.0,lambda_c,charmed_baryon,baryon,4.652202973298231,nan,4.652202973298231,1,1,1
+31.0,sigma_c,charmed_baryon,baryon,6.052202961631567,nan,6.052202961631567,1,1,1
 32.0,electron,lepton,elementary,20223.840793286818,nan,20223.840793286818,1,1,1
 32.0,muon,lepton,elementary,191.7255111443964,nan,191.7255111443964,1,1,1
 32.0,pion,pion_like,meson,37.67830530982339,nan,37.67830530982339,0,0,1
@@ -857,6 +921,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 32.0,carbon12,nucleus,composite,91.5194460531108,nan,91.5194460531108,1,1,1
 32.0,eta_c,charmonium,meson,19.221693552176625,nan,19.221693552176625,1,1,1
 32.0,j_psi,charmonium,meson,21.481693506976626,nan,21.481693506976626,1,1,1
+32.0,lambda_c,charmed_baryon,baryon,2.1923724553179373,nan,2.1923724553179373,1,1,1
+32.0,sigma_c,charmed_baryon,baryon,3.5923724436512723,nan,3.5923724436512723,1,1,1
 33.0,electron,lepton,elementary,19590.576573050414,nan,19590.576573050414,1,1,1
 33.0,muon,lepton,elementary,185.39280624888082,nan,185.39280624888082,1,1,1
 33.0,pion,pion_like,meson,36.411764229397,nan,36.411764229397,0,0,1
@@ -883,6 +949,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 33.0,carbon12,nucleus,composite,92.1527165996567,nan,92.1527165996567,1,1,1
 33.0,eta_c,charmonium,meson,20.488234632603017,nan,20.488234632603017,1,1,1
 33.0,j_psi,charmonium,meson,22.74823458740302,nan,22.74823458740302,1,1,1
+33.0,lambda_c,charmed_baryon,baryon,2.720097911652397,nan,2.720097911652397,1,1,1
+33.0,sigma_c,charmed_baryon,baryon,4.1200978999857325,nan,4.1200978999857325,1,1,1
 34.0,electron,lepton,elementary,19982.705979231043,nan,19982.705979231043,1,1,1
 34.0,muon,lepton,elementary,189.31413913149447,nan,189.31413913149447,1,1,1
 34.0,pion,pion_like,meson,37.196030868661055,nan,37.196030868661055,0,0,1
@@ -909,6 +977,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 34.0,carbon12,nucleus,composite,91.76058327610335,nan,91.76058327610335,1,1,1
 34.0,eta_c,charmonium,meson,19.703967993338964,nan,19.703967993338964,1,1,1
 34.0,j_psi,charmonium,meson,21.963967948138965,nan,21.963967948138965,1,1,1
+34.0,lambda_c,charmed_baryon,baryon,2.393320141479968,nan,2.393320141479968,1,1,1
+34.0,sigma_c,charmed_baryon,baryon,3.793320129813303,nan,3.793320129813303,1,1,1
 35.0,electron,lepton,elementary,18131.71810188259,nan,18131.71810188259,1,1,1
 35.0,muon,lepton,elementary,170.80407711022838,nan,170.80407711022838,1,1,1
 35.0,pion,pion_like,meson,33.49401816824685,nan,33.49401816824685,0,0,1
@@ -935,6 +1005,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 35.0,carbon12,nucleus,composite,93.61158964482048,nan,93.61158964482048,1,1,1
 35.0,eta_c,charmonium,meson,23.405980693753165,nan,23.405980693753165,1,1,1
 35.0,j_psi,charmonium,meson,25.665980648553166,nan,25.665980648553166,1,1,1
+35.0,lambda_c,charmed_baryon,baryon,3.935825451315113,nan,3.935825451315113,1,1,1
+35.0,sigma_c,charmed_baryon,baryon,5.335825439648448,nan,5.335825439648448,1,1,1
 36.0,electron,lepton,elementary,21605.00715569769,nan,21605.00715569769,1,1,1
 36.0,muon,lepton,elementary,205.53731150396135,nan,205.53731150396135,1,1,1
 36.0,pion,pion_like,meson,40.440665602725176,nan,40.440665602725176,0,0,1
@@ -961,6 +1033,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 36.0,carbon12,nucleus,composite,90.1382658928481,nan,90.1382658928481,1,1,1
 36.0,eta_c,charmonium,meson,16.45933325927484,nan,16.45933325927484,1,1,1
 36.0,j_psi,charmonium,meson,18.71933321407484,nan,18.71933321407484,1,1,1
+36.0,lambda_c,charmed_baryon,baryon,1.0413889865140524,nan,1.0413889865140524,1,1,1
+36.0,sigma_c,charmed_baryon,baryon,2.441388974847387,nan,2.441388974847387,1,1,1
 37.0,electron,lepton,elementary,29137.405978868544,nan,29137.405978868544,1,1,1
 37.0,muon,lepton,elementary,280.86204544307884,nan,280.86204544307884,1,1,1
 37.0,pion,pion_like,meson,55.50561359574439,nan,55.50561359574439,0,0,1
@@ -987,6 +1061,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 37.0,carbon12,nucleus,composite,82.60579182101375,nan,82.60579182101375,1,1,1
 37.0,eta_c,charmonium,meson,1.3943852662556244,nan,1.3943852662556244,1,1,1
 37.0,j_psi,charmonium,meson,3.654385221055625,nan,3.654385221055625,1,1,1
+37.0,lambda_c,charmed_baryon,baryon,5.23567275047634,nan,5.23567275047634,1,1,1
+37.0,sigma_c,charmed_baryon,baryon,3.835672762143005,nan,3.835672762143005,1,1,1
 38.0,electron,lepton,elementary,25546.928366402917,nan,25546.928366402917,1,1,1
 38.0,muon,lepton,elementary,244.95691386117448,nan,244.95691386117448,1,1,1
 38.0,pion,pion_like,meson,48.324586704881426,nan,48.324586704881426,0,0,1
@@ -1013,6 +1089,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 38.0,carbon12,nucleus,composite,86.19630530235037,nan,86.19630530235037,1,1,1
 38.0,eta_c,charmonium,meson,8.575412157118588,nan,8.575412157118588,1,1,1
 38.0,j_psi,charmonium,meson,10.83541211191859,nan,10.83541211191859,1,1,1
+38.0,lambda_c,charmed_baryon,baryon,2.2435781777090016,nan,2.2435781777090016,1,1,1
+38.0,sigma_c,charmed_baryon,baryon,0.8435781893756666,nan,0.8435781893756666,1,1,1
 39.0,electron,lepton,elementary,23492.535015760714,nan,23492.535015760714,1,1,1
 39.0,muon,lepton,elementary,224.41277696983104,nan,224.41277696983104,1,1,1
 39.0,pion,pion_like,meson,44.21575899790657,nan,44.21575899790657,0,0,1
@@ -1039,6 +1117,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 39.0,carbon12,nucleus,composite,88.25071917638193,nan,88.25071917638193,1,1,1
 39.0,eta_c,charmonium,meson,12.684239864093456,nan,12.684239864093456,1,1,1
 39.0,j_psi,charmonium,meson,14.944239818893456,nan,14.944239818893456,1,1,1
+39.0,lambda_c,charmed_baryon,baryon,0.5315666131626722,nan,0.5315666131626722,1,1,1
+39.0,sigma_c,charmed_baryon,baryon,0.8684333751706627,nan,0.8684333751706627,1,1,1
 40.0,electron,lepton,elementary,20878.822105369018,nan,20878.822105369018,1,1,1
 40.0,muon,lepton,elementary,198.2753891083618,nan,198.2753891083618,1,1,1
 40.0,pion,pion_like,meson,38.98828100741452,nan,38.98828100741452,0,0,1
@@ -1065,6 +1145,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 40.0,carbon12,nucleus,composite,90.86445819776534,nan,90.86445819776534,1,1,1
 40.0,eta_c,charmonium,meson,17.9117178545855,nan,17.9117178545855,1,1,1
 40.0,j_psi,charmonium,meson,20.171717809385502,nan,20.171717809385502,1,1,1
+40.0,lambda_c,charmed_baryon,baryon,1.6465492416203644,nan,1.6465492416203644,1,1,1
+40.0,sigma_c,charmed_baryon,baryon,3.046549229953699,nan,3.046549229953699,1,1,1
 41.0,electron,lepton,elementary,24892.005427038002,nan,24892.005427038002,1,1,1
 41.0,muon,lepton,elementary,238.4076196301608,nan,238.4076196301608,1,1,1
 41.0,pion,pion_like,meson,47.014727753889986,nan,47.014727753889986,0,0,1
@@ -1091,6 +1173,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 41.0,carbon12,nucleus,composite,86.85123478439537,nan,86.85123478439537,1,1,1
 41.0,eta_c,charmonium,meson,9.885271108110029,nan,9.885271108110029,1,1,1
 41.0,j_psi,charmonium,meson,12.145271062910028,nan,12.145271062910028,1,1,1
+41.0,lambda_c,charmed_baryon,baryon,1.6978036084285317,nan,1.6978036084285317,1,1,1
+41.0,sigma_c,charmed_baryon,baryon,0.2978036200951971,nan,0.2978036200951971,1,1,1
 42.0,electron,lepton,elementary,27621.987086823483,nan,27621.987086823483,1,1,1
 42.0,muon,lepton,elementary,265.70770649617293,nan,265.70770649617293,1,1,1
 42.0,pion,pion_like,meson,52.47474556389379,nan,52.47474556389379,0,0,1
@@ -1117,6 +1201,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 42.0,carbon12,nucleus,composite,84.12122585209337,nan,84.12122585209337,1,1,1
 42.0,eta_c,charmonium,meson,4.425253298106226,nan,4.425253298106226,1,1,1
 42.0,j_psi,charmonium,meson,6.685253252906226,nan,6.685253252906226,1,1,1
+42.0,lambda_c,charmed_baryon,baryon,3.9728110558052028,nan,3.9728110558052028,1,1,1
+42.0,sigma_c,charmed_baryon,baryon,2.572811067471868,nan,2.572811067471868,1,1,1
 43.0,electron,lepton,elementary,18999.85589309671,nan,18999.85589309671,1,1,1
 43.0,muon,lepton,elementary,179.48554096800228,nan,179.48554096800228,1,1,1
 43.0,pion,pion_like,meson,35.23031107870505,nan,35.23031107870505,0,0,1
@@ -1143,6 +1229,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 43.0,carbon12,nucleus,composite,92.74344318090994,nan,92.74344318090994,1,1,1
 43.0,eta_c,charmonium,meson,21.669687783294965,nan,21.669687783294965,1,1,1
 43.0,j_psi,charmonium,meson,23.929687738094966,nan,23.929687738094966,1,1,1
+43.0,lambda_c,charmed_baryon,baryon,3.2123700635172177,nan,3.2123700635172177,1,1,1
+43.0,sigma_c,charmed_baryon,baryon,4.612370051850553,nan,4.612370051850553,1,1,1
 44.0,electron,lepton,elementary,20952.91404389606,nan,20952.91404389606,1,1,1
 44.0,muon,lepton,elementary,199.0163158287334,nan,199.0163158287334,1,1,1
 44.0,pion,pion_like,meson,39.13646636334367,nan,39.13646636334367,0,0,1
@@ -1169,6 +1257,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 44.0,carbon12,nucleus,composite,90.79036551905986,nan,90.79036551905986,1,1,1
 44.0,eta_c,charmonium,meson,17.76353249865635,nan,17.76353249865635,1,1,1
 44.0,j_psi,charmonium,meson,20.02353245345635,nan,20.02353245345635,1,1,1
+44.0,lambda_c,charmed_baryon,baryon,1.5848053425962059,nan,1.5848053425962059,1,1,1
+44.0,sigma_c,charmed_baryon,baryon,2.984805330929541,nan,2.984805330929541,1,1,1
 45.0,electron,lepton,elementary,18687.810411953487,nan,18687.810411953487,1,1,1
 45.0,muon,lepton,elementary,176.36505526407055,nan,176.36505526407055,1,1,1
 45.0,pion,pion_like,meson,34.60621388799093,nan,34.60621388799093,0,0,1
@@ -1195,6 +1285,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 45.0,carbon12,nucleus,composite,93.05549177938747,nan,93.05549177938747,1,1,1
 45.0,eta_c,charmonium,meson,22.293784974009085,nan,22.293784974009085,1,1,1
 45.0,j_psi,charmonium,meson,24.553784928809087,nan,24.553784928809087,1,1,1
+45.0,lambda_c,charmed_baryon,baryon,3.472410562681907,nan,3.472410562681907,1,1,1
+45.0,sigma_c,charmed_baryon,baryon,4.872410551015242,nan,4.872410551015242,1,1,1
 46.0,electron,lepton,elementary,19751.68866605179,nan,19751.68866605179,1,1,1
 46.0,muon,lepton,elementary,187.0039431289902,nan,187.0039431289902,1,1,1
 46.0,pion,pion_like,meson,36.73399163119707,nan,36.73399163119707,0,0,1
@@ -1221,6 +1313,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 46.0,carbon12,nucleus,composite,91.99160289714553,nan,91.99160289714553,1,1,1
 46.0,eta_c,charmonium,meson,20.16600723080295,nan,20.16600723080295,1,1,1
 46.0,j_psi,charmonium,meson,22.426007185602952,nan,22.426007185602952,1,1,1
+46.0,lambda_c,charmed_baryon,baryon,2.5858364926693205,nan,2.5858364926693205,1,1,1
+46.0,sigma_c,charmed_baryon,baryon,3.985836481002655,nan,3.985836481002655,1,1,1
 47.0,electron,lepton,elementary,18251.639303214353,nan,18251.639303214353,1,1,1
 47.0,muon,lepton,elementary,172.00330099574376,nan,172.00330099574376,1,1,1
 47.0,pion,pion_like,meson,33.733862964537515,nan,33.733862964537515,0,0,1
@@ -1247,6 +1341,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 47.0,carbon12,nucleus,composite,93.49166724547594,nan,93.49166724547594,1,1,1
 47.0,eta_c,charmonium,meson,23.166135897462507,nan,23.166135897462507,1,1,1
 47.0,j_psi,charmonium,meson,25.426135852262508,nan,25.426135852262508,1,1,1
+47.0,lambda_c,charmed_baryon,baryon,3.835890118361427,nan,3.835890118361427,1,1,1
+47.0,sigma_c,charmed_baryon,baryon,5.235890106694762,nan,5.235890106694762,1,1,1
 48.0,electron,lepton,elementary,22082.603994849655,nan,22082.603994849655,1,1,1
 48.0,muon,lepton,elementary,210.31332717756334,nan,210.31332717756334,1,1,1
 48.0,pion,pion_like,meson,41.39586881386183,nan,41.39586881386183,0,0,1
@@ -1273,6 +1369,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 48.0,carbon12,nucleus,composite,89.66066428250375,nan,89.66066428250375,1,1,1
 48.0,eta_c,charmonium,meson,15.504130048138192,nan,15.504130048138192,1,1,1
 48.0,j_psi,charmonium,meson,17.76413000293819,nan,17.76413000293819,1,1,1
+48.0,lambda_c,charmed_baryon,baryon,0.6433876438971007,nan,0.6433876438971007,1,1,1
+48.0,sigma_c,charmed_baryon,baryon,2.043387632230435,nan,2.043387632230435,1,1,1
 49.0,electron,lepton,elementary,inf,nan,nan,0,0,0
 49.0,muon,lepton,elementary,inf,nan,nan,0,0,0
 49.0,pion,pion_like,meson,inf,nan,nan,0,0,0
@@ -1299,6 +1397,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 49.0,carbon12,nucleus,composite,inf,nan,nan,0,0,0
 49.0,eta_c,charmonium,meson,inf,nan,nan,0,0,0
 49.0,j_psi,charmonium,meson,inf,nan,nan,0,0,0
+49.0,lambda_c,charmed_baryon,baryon,inf,nan,nan,0,0,0
+49.0,sigma_c,charmed_baryon,baryon,inf,nan,nan,0,0,0
 50.0,electron,lepton,elementary,20516.027342024903,nan,20516.027342024903,1,1,1
 50.0,muon,lepton,elementary,194.6474055582427,nan,194.6474055582427,1,1,1
 50.0,pion,pion_like,meson,38.26268423934297,nan,38.26268423934297,0,0,1
@@ -1325,6 +1425,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 50.0,carbon12,nucleus,composite,91.22725658542912,nan,91.22725658542912,1,1,1
 50.0,eta_c,charmonium,meson,18.637314622657055,nan,18.637314622657055,1,1,1
 50.0,j_psi,charmonium,meson,20.897314577457056,nan,20.897314577457056,1,1,1
+50.0,lambda_c,charmed_baryon,baryon,1.9488812318440523,nan,1.9488812318440523,1,1,1
+50.0,sigma_c,charmed_baryon,baryon,3.348881220177387,nan,3.348881220177387,1,1,1
 51.0,electron,lepton,elementary,18657.254929961884,nan,18657.254929961884,1,1,1
 51.0,muon,lepton,elementary,176.05949741916208,nan,176.05949741916208,1,1,1
 51.0,pion,pion_like,meson,34.54510231412032,nan,34.54510231412032,0,0,1
@@ -1351,6 +1453,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 51.0,carbon12,nucleus,composite,93.08604756662834,nan,93.08604756662834,1,1,1
 51.0,eta_c,charmonium,meson,22.3548965478797,nan,22.3548965478797,1,1,1
 51.0,j_psi,charmonium,meson,24.6148965026797,nan,24.6148965026797,1,1,1
+51.0,lambda_c,charmed_baryon,baryon,3.4978737187583993,nan,3.4978737187583993,1,1,1
+51.0,sigma_c,charmed_baryon,baryon,4.897873707091734,nan,4.897873707091734,1,1,1
 52.0,electron,lepton,elementary,23171.956411175768,nan,23171.956411175768,1,1,1
 52.0,muon,lepton,elementary,221.2069591867029,nan,221.2069591867029,1,1,1
 52.0,pion,pion_like,meson,43.574595389987856,nan,43.574595389987856,0,0,1
@@ -1377,6 +1481,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 52.0,carbon12,nucleus,composite,88.5713009835471,nan,88.5713009835471,1,1,1
 52.0,eta_c,charmonium,meson,13.325403472012168,nan,13.325403472012168,1,1,1
 52.0,j_psi,charmonium,meson,15.585403426812169,nan,15.585403426812169,1,1,1
+52.0,lambda_c,charmed_baryon,baryon,0.2644151067464411,nan,0.2644151067464411,1,1,1
+52.0,sigma_c,charmed_baryon,baryon,1.1355848815868936,nan,1.1355848815868936,1,1,1
 53.0,electron,lepton,elementary,27016.209518167132,nan,27016.209518167132,1,1,1
 53.0,muon,lepton,elementary,259.64987083763606,nan,259.64987083763606,1,1,1
 53.0,pion,pion_like,meson,51.26317833526105,nan,51.26317833526105,0,0,1
@@ -1403,6 +1509,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 53.0,carbon12,nucleus,composite,84.7270094724676,nan,84.7270094724676,1,1,1
 53.0,eta_c,charmonium,meson,5.63682052673896,nan,5.63682052673896,1,1,1
 53.0,j_psi,charmonium,meson,7.896820481538961,nan,7.896820481538961,1,1,1
+53.0,lambda_c,charmed_baryon,baryon,3.4679913713186674,nan,3.4679913713186674,1,1,1
+53.0,sigma_c,charmed_baryon,baryon,2.0679913829853325,nan,2.0679913829853325,1,1,1
 54.0,electron,lepton,elementary,27515.673968579526,nan,27515.673968579526,1,1,1
 54.0,muon,lepton,elementary,264.6445647887357,nan,264.6445647887357,1,1,1
 54.0,pion,pion_like,meson,52.26211720539607,nan,52.26211720539607,0,0,1
@@ -1429,6 +1537,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 54.0,carbon12,nucleus,composite,84.22754003240539,nan,84.22754003240539,1,1,1
 54.0,eta_c,charmonium,meson,4.6378816566039385,nan,4.6378816566039385,1,1,1
 54.0,j_psi,charmonium,meson,6.897881611403939,nan,6.897881611403939,1,1,1
+54.0,lambda_c,charmed_baryon,baryon,3.8842159053975456,nan,3.8842159053975456,1,1,1
+54.0,sigma_c,charmed_baryon,baryon,2.4842159170642106,nan,2.4842159170642106,1,1,1
 55.0,electron,lepton,elementary,26954.82902682996,nan,26954.82902682996,1,1,1
 55.0,muon,lepton,elementary,259.03605984759633,nan,259.03605984759633,1,1,1
 55.0,pion,pion_like,meson,51.14041612743213,nan,51.14041612743213,0,0,1
@@ -1455,6 +1565,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 55.0,carbon12,nucleus,composite,84.78839057699587,nan,84.78839057699587,1,1,1
 55.0,eta_c,charmonium,meson,5.759582734567884,nan,5.759582734567884,1,1,1
 55.0,j_psi,charmonium,meson,8.019582689367885,nan,8.019582689367885,1,1,1
+55.0,lambda_c,charmed_baryon,baryon,3.416840450793188,nan,3.416840450793188,1,1,1
+55.0,sigma_c,charmed_baryon,baryon,2.0168404624598533,nan,2.0168404624598533,1,1,1
 56.0,electron,lepton,elementary,17359.215928835125,nan,17359.215928835125,1,1,1
 56.0,muon,lepton,elementary,163.07897890204626,nan,163.07897890204626,1,1,1
 56.0,pion,pion_like,meson,31.948998403008858,nan,31.948998403008858,0,0,1
@@ -1481,6 +1593,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 56.0,carbon12,nucleus,composite,94.3840995351646,nan,94.3840995351646,1,1,1
 56.0,eta_c,charmonium,meson,24.95100045899116,nan,24.95100045899116,1,1,1
 56.0,j_psi,charmonium,meson,27.21100041379116,nan,27.21100041379116,1,1,1
+56.0,lambda_c,charmed_baryon,baryon,4.579583694341458,nan,4.579583694341458,1,1,1
+56.0,sigma_c,charmed_baryon,baryon,5.979583682674793,nan,5.979583682674793,1,1,1
 57.0,electron,lepton,elementary,19861.564820412135,nan,19861.564820412135,1,1,1
 57.0,muon,lepton,elementary,188.10271555033185,nan,188.10271555033185,1,1,1
 57.0,pion,pion_like,meson,36.95374613304576,nan,36.95374613304576,0,0,1
@@ -1507,6 +1621,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 57.0,carbon12,nucleus,composite,91.8817256451224,nan,91.8817256451224,1,1,1
 57.0,eta_c,charmonium,meson,19.94625272895426,nan,19.94625272895426,1,1,1
 57.0,j_psi,charmonium,meson,22.20625268375426,nan,22.20625268375426,1,1,1
+57.0,lambda_c,charmed_baryon,baryon,2.4942721158307815,nan,2.4942721158307815,1,1,1
+57.0,sigma_c,charmed_baryon,baryon,3.894272104164116,nan,3.894272104164116,1,1,1
 58.0,electron,lepton,elementary,25625.96880817918,nan,25625.96880817918,1,1,1
 58.0,muon,lepton,elementary,245.74732610394003,nan,245.74732610394003,1,1,1
 58.0,pion,pion_like,meson,48.48266916608113,nan,48.48266916608113,0,0,1
@@ -1533,6 +1649,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 58.0,carbon12,nucleus,composite,86.1172640709601,nan,86.1172640709601,1,1,1
 58.0,eta_c,charmonium,meson,8.417329695918886,nan,8.417329695918886,1,1,1
 58.0,j_psi,charmonium,meson,10.677329650718885,nan,10.677329650718885,1,1,1
+58.0,lambda_c,charmed_baryon,baryon,2.309445870644001,nan,2.309445870644001,1,1,1
+58.0,sigma_c,charmed_baryon,baryon,0.9094458823106664,nan,0.9094458823106664,1,1,1
 59.0,electron,lepton,elementary,38387.371020399056,nan,38387.371020399056,1,1,1
 59.0,muon,lepton,elementary,373.3626116048315,nan,373.3626116048315,1,1,1
 59.0,pion,pion_like,meson,74.00572830810395,nan,74.00572830810395,0,0,1
@@ -1559,6 +1677,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 59.0,carbon12,nucleus,composite,73.3557343723334,nan,73.3557343723334,1,1,1
 59.0,eta_c,charmonium,meson,17.10572944610394,nan,17.10572944610394,1,1,1
 59.0,j_psi,charmonium,meson,14.845729491303938,nan,14.845729491303938,1,1,1
+59.0,lambda_c,charmed_baryon,baryon,12.94405397055727,nan,12.94405397055727,1,1,1
+59.0,sigma_c,charmed_baryon,baryon,11.544053982223936,nan,11.544053982223936,1,1,1
 60.0,electron,lepton,elementary,19804.969993897448,nan,19804.969993897448,1,1,1
 60.0,muon,lepton,elementary,187.5367616822977,nan,187.5367616822977,1,1,1
 60.0,pion,pion_like,meson,36.84055535038367,nan,36.84055535038367,0,0,1
@@ -1585,6 +1705,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 60.0,carbon12,nucleus,composite,91.9383210370194,nan,91.9383210370194,1,1,1
 60.0,eta_c,charmonium,meson,20.05944351161635,nan,20.05944351161635,1,1,1
 60.0,j_psi,charmonium,meson,22.319443466416352,nan,22.319443466416352,1,1,1
+60.0,lambda_c,charmed_baryon,baryon,2.541434942490218,nan,2.541434942490218,1,1,1
+60.0,sigma_c,charmed_baryon,baryon,3.941434930823553,nan,3.941434930823553,1,1,1
 61.0,electron,lepton,elementary,30047.87332782556,nan,30047.87332782556,1,1,1
 61.0,muon,lepton,elementary,289.96680906890754,nan,289.96680906890754,1,1,1
 61.0,pion,pion_like,meson,57.32656646658635,nan,57.32656646658635,0,0,1
@@ -1611,6 +1733,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 61.0,carbon12,nucleus,composite,81.69531537648801,nan,81.69531537648801,1,1,1
 61.0,eta_c,charmonium,meson,0.4265676045863311,nan,0.4265676045863311,1,1,1
 61.0,j_psi,charmonium,meson,1.8334323502136696,nan,1.8334323502136696,1,1,1
+61.0,lambda_c,charmed_baryon,baryon,5.994403122179008,nan,5.994403122179008,1,1,1
+61.0,sigma_c,charmed_baryon,baryon,4.594403133845674,nan,4.594403133845674,1,1,1
 62.0,electron,lepton,elementary,29090.472854372456,nan,29090.472854372456,1,1,1
 62.0,muon,lepton,elementary,280.3927095517391,nan,280.3927095517391,1,1,1
 62.0,pion,pion_like,meson,55.41174640996707,nan,55.41174640996707,0,0,1
@@ -1637,6 +1761,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 62.0,carbon12,nucleus,composite,82.65272541437176,nan,82.65272541437176,1,1,1
 62.0,eta_c,charmonium,meson,1.488252452032949,nan,1.488252452032949,1,1,1
 62.0,j_psi,charmonium,meson,3.7482524068329495,nan,3.7482524068329495,1,1,1
+62.0,lambda_c,charmed_baryon,baryon,5.196561422612822,nan,5.196561422612822,1,1,1
+62.0,sigma_c,charmed_baryon,baryon,3.7965614342794876,nan,3.7965614342794876,1,1,1
 63.0,electron,lepton,elementary,21937.53880371043,nan,21937.53880371043,1,1,1
 63.0,muon,lepton,elementary,208.8626609047186,nan,208.8626609047186,1,1,1
 63.0,pion,pion_like,meson,41.10573553608223,nan,41.10573553608223,0,0,1
@@ -1663,6 +1789,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 63.0,carbon12,nucleus,composite,89.80573092284423,nan,89.80573092284423,1,1,1
 63.0,eta_c,charmonium,meson,15.794263325917795,nan,15.794263325917795,1,1,1
 63.0,j_psi,charmonium,meson,18.054263280717795,nan,18.054263280717795,1,1,1
+63.0,lambda_c,charmed_baryon,baryon,0.7642765110489717,nan,0.7642765110489717,1,1,1
+63.0,sigma_c,charmed_baryon,baryon,2.1642764993823063,nan,2.1642764993823063,1,1,1
 64.0,electron,lepton,elementary,19600.374296229984,nan,19600.374296229984,1,1,1
 64.0,muon,lepton,elementary,185.490784450651,nan,185.490784450651,1,1,1
 64.0,pion,pion_like,meson,36.43135987131869,nan,36.43135987131869,0,0,1
@@ -1689,6 +1817,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 64.0,carbon12,nucleus,composite,92.14291877859787,nan,92.14291877859787,1,1,1
 64.0,eta_c,charmonium,meson,20.468638990681328,nan,20.468638990681328,1,1,1
 64.0,j_psi,charmonium,meson,22.72863894548133,nan,22.72863894548133,1,1,1
+64.0,lambda_c,charmed_baryon,baryon,2.7119330607564374,nan,2.7119330607564374,1,1,1
+64.0,sigma_c,charmed_baryon,baryon,4.111933049089772,nan,4.111933049089772,1,1,1
 65.0,electron,lepton,elementary,18217.452578476332,nan,18217.452578476332,1,1,1
 65.0,muon,lepton,elementary,171.6614303638781,nan,171.6614303638781,1,1,1
 65.0,pion,pion_like,meson,33.66548883269445,nan,33.66548883269445,0,0,1
@@ -1715,6 +1845,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 65.0,carbon12,nucleus,composite,93.52585431173934,nan,93.52585431173934,1,1,1
 65.0,eta_c,charmonium,meson,23.234510029305568,nan,23.234510029305568,1,1,1
 65.0,j_psi,charmonium,meson,25.494509984105566,nan,25.494509984105566,1,1,1
+65.0,lambda_c,charmed_baryon,baryon,3.864379340295076,nan,3.864379340295076,1,1,1
+65.0,sigma_c,charmed_baryon,baryon,5.264379328628411,nan,5.264379328628411,1,1,1
 66.0,electron,lepton,elementary,36407.00931941269,nan,36407.00931941269,1,1,1
 66.0,muon,lepton,elementary,353.558798539179,nan,353.558798539179,1,1,1
 66.0,pion,pion_like,meson,70.04496537811245,nan,70.04496537811245,0,0,1
@@ -1741,6 +1873,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 66.0,carbon12,nucleus,composite,75.33611585713295,nan,75.33611585713295,1,1,1
 66.0,eta_c,charmonium,meson,13.14496651611244,nan,13.14496651611244,1,1,1
 66.0,j_psi,charmonium,meson,10.884966561312439,nan,10.884966561312439,1,1,1
+66.0,lambda_c,charmed_baryon,baryon,11.293736063807104,nan,11.293736063807104,1,1,1
+66.0,sigma_c,charmed_baryon,baryon,9.89373607547377,nan,9.89373607547377,1,1,1
 67.0,electron,lepton,elementary,21219.936445844945,nan,21219.936445844945,1,1,1
 67.0,muon,lepton,elementary,201.68656628343746,nan,201.68656628343746,1,1,1
 67.0,pion,pion_like,meson,39.67051649700848,nan,39.67051649700848,0,0,1
@@ -1767,6 +1901,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 67.0,carbon12,nucleus,composite,90.5233404495572,nan,90.5233404495572,1,1,1
 67.0,eta_c,charmonium,meson,17.22948236499154,nan,17.22948236499154,1,1,1
 67.0,j_psi,charmonium,meson,19.48948231979154,nan,19.48948231979154,1,1,1
+67.0,lambda_c,charmed_baryon,baryon,1.362284450973125,nan,1.362284450973125,1,1,1
+67.0,sigma_c,charmed_baryon,baryon,2.7622844393064594,nan,2.7622844393064594,1,1,1
 68.0,electron,lepton,elementary,18689.367305705196,nan,18689.367305705196,1,1,1
 68.0,muon,lepton,elementary,176.38062435572007,nan,176.38062435572007,1,1,1
 68.0,pion,pion_like,meson,34.60932770656995,nan,34.60932770656995,0,0,1
@@ -1793,6 +1929,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 68.0,carbon12,nucleus,composite,93.0539348700824,nan,93.0539348700824,1,1,1
 68.0,eta_c,charmonium,meson,22.290671155430072,nan,22.290671155430072,1,1,1
 68.0,j_psi,charmonium,meson,24.55067111023007,nan,24.55067111023007,1,1,1
+68.0,lambda_c,charmed_baryon,baryon,3.4711131382588474,nan,3.4711131382588474,1,1,1
+68.0,sigma_c,charmed_baryon,baryon,4.871113126592182,nan,4.871113126592182,1,1,1
 69.0,electron,lepton,elementary,18502.62438904422,nan,18502.62438904422,1,1,1
 69.0,muon,lepton,elementary,174.51317670156342,nan,174.51317670156342,1,1,1
 69.0,pion,pion_like,meson,34.235838145859454,nan,34.235838145859454,0,0,1
@@ -1819,6 +1957,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 69.0,carbon12,nucleus,composite,93.24067965230509,nan,93.24067965230509,1,1,1
 69.0,eta_c,charmonium,meson,22.664160716140564,nan,22.664160716140564,1,1,1
 69.0,j_psi,charmonium,meson,24.924160670940566,nan,24.924160670940566,1,1,1
+69.0,lambda_c,charmed_baryon,baryon,3.6267337903704604,nan,3.6267337903704604,1,1,1
+69.0,sigma_c,charmed_baryon,baryon,5.026733778703795,nan,5.026733778703795,1,1,1
 70.0,electron,lepton,elementary,19031.32044301146,nan,19031.32044301146,1,1,1
 70.0,muon,lepton,elementary,179.80018958213992,nan,179.80018958213992,1,1,1
 70.0,pion,pion_like,meson,35.29324080656696,nan,35.29324080656696,0,0,1
@@ -1845,6 +1985,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 70.0,carbon12,nucleus,composite,92.71197831666433,nan,92.71197831666433,1,1,1
 70.0,eta_c,charmonium,meson,21.60675805543306,nan,21.60675805543306,1,1,1
 70.0,j_psi,charmonium,meson,23.86675801023306,nan,23.86675801023306,1,1,1
+70.0,lambda_c,charmed_baryon,baryon,3.186149343268848,nan,3.186149343268848,1,1,1
+70.0,sigma_c,charmed_baryon,baryon,4.586149331602183,nan,4.586149331602183,1,1,1
 71.0,electron,lepton,elementary,inf,nan,nan,0,0,0
 71.0,muon,lepton,elementary,inf,nan,nan,0,0,0
 71.0,pion,pion_like,meson,inf,nan,nan,0,0,0
@@ -1871,6 +2013,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 71.0,carbon12,nucleus,composite,inf,nan,nan,0,0,0
 71.0,eta_c,charmonium,meson,inf,nan,nan,0,0,0
 71.0,j_psi,charmonium,meson,inf,nan,nan,0,0,0
+71.0,lambda_c,charmed_baryon,baryon,inf,nan,nan,0,0,0
+71.0,sigma_c,charmed_baryon,baryon,inf,nan,nan,0,0,0
 72.0,electron,lepton,elementary,17998.91772011472,nan,17998.91772011472,1,1,1
 72.0,muon,lepton,elementary,169.47606014531323,nan,169.47606014531323,1,1,1
 72.0,pion,pion_like,meson,33.22841475401555,nan,33.22841475401555,0,0,1
@@ -1897,6 +2041,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 72.0,carbon12,nucleus,composite,93.74439135326418,nan,93.74439135326418,1,1,1
 72.0,eta_c,charmonium,meson,23.67158410798447,nan,23.67158410798447,1,1,1
 72.0,j_psi,charmonium,meson,25.93158406278447,nan,25.93158406278447,1,1,1
+72.0,lambda_c,charmed_baryon,baryon,4.0464935418692844,nan,4.0464935418692844,1,1,1
+72.0,sigma_c,charmed_baryon,baryon,5.446493530202619,nan,5.446493530202619,1,1,1
 73.0,electron,lepton,elementary,17581.410751081996,nan,17581.410751081996,1,1,1
 73.0,muon,lepton,elementary,165.30094912180013,nan,165.30094912180013,1,1,1
 73.0,pion,pion_like,meson,32.39339248251116,nan,32.39339248251116,0,0,1
@@ -1923,6 +2069,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 73.0,carbon12,nucleus,composite,94.16190249319148,nan,94.16190249319148,1,1,1
 73.0,eta_c,charmonium,meson,24.506606379488858,nan,24.506606379488858,1,1,1
 73.0,j_psi,charmonium,meson,26.76660633428886,nan,26.76660633428886,1,1,1
+73.0,lambda_c,charmed_baryon,baryon,4.394419492388583,nan,4.394419492388583,1,1,1
+73.0,sigma_c,charmed_baryon,baryon,5.794419480721918,nan,5.794419480721918,1,1,1
 74.0,electron,lepton,elementary,inf,nan,nan,0,0,0
 74.0,muon,lepton,elementary,inf,nan,nan,0,0,0
 74.0,pion,pion_like,meson,inf,nan,nan,0,0,0
@@ -1949,6 +2097,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 74.0,carbon12,nucleus,composite,inf,nan,nan,0,0,0
 74.0,eta_c,charmonium,meson,inf,nan,nan,0,0,0
 74.0,j_psi,charmonium,meson,inf,nan,nan,0,0,0
+74.0,lambda_c,charmed_baryon,baryon,inf,nan,nan,0,0,0
+74.0,sigma_c,charmed_baryon,baryon,inf,nan,nan,0,0,0
 75.0,electron,lepton,elementary,36648.871025147,nan,36648.871025147,1,1,1
 75.0,muon,lepton,elementary,355.9774395408286,nan,355.9774395408286,1,1,1
 75.0,pion,pion_like,meson,70.52869361714063,nan,70.52869361714063,0,0,1
@@ -1975,6 +2125,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 75.0,carbon12,nucleus,composite,75.09425173520025,nan,75.09425173520025,1,1,1
 75.0,eta_c,charmonium,meson,13.628694755140605,nan,13.628694755140605,1,1,1
 75.0,j_psi,charmonium,meson,11.368694800340606,nan,11.368694800340606,1,1,1
+75.0,lambda_c,charmed_baryon,baryon,11.495289499086963,nan,11.495289499086963,1,1,1
+75.0,sigma_c,charmed_baryon,baryon,10.095289510753629,nan,10.095289510753629,1,1,1
 76.0,electron,lepton,elementary,28127.44778268516,nan,28127.44778268516,1,1,1
 76.0,muon,lepton,elementary,270.7623634953936,nan,270.7623634953936,1,1,1
 76.0,pion,pion_like,meson,53.485677044612444,nan,53.485677044612444,0,0,1
@@ -2001,6 +2153,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 76.0,carbon12,nucleus,composite,83.61576010667942,nan,83.61576010667942,1,1,1
 76.0,eta_c,charmonium,meson,3.4143218173875822,nan,3.4143218173875822,1,1,1
 76.0,j_psi,charmonium,meson,5.674321772187583,nan,5.674321772187583,1,1,1
+76.0,lambda_c,charmed_baryon,baryon,4.394032511018888,nan,4.394032511018888,1,1,1
+76.0,sigma_c,charmed_baryon,baryon,2.994032522685553,nan,2.994032522685553,1,1,1
 77.0,electron,lepton,elementary,23752.706316769658,nan,23752.706316769658,1,1,1
 77.0,muon,lepton,elementary,227.01451573687672,nan,227.01451573687672,1,1,1
 77.0,pion,pion_like,meson,44.736106792943524,nan,44.736106792943524,0,0,1
@@ -2027,6 +2181,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 77.0,carbon12,nucleus,composite,87.99054527626173,nan,87.99054527626173,1,1,1
 77.0,eta_c,charmonium,meson,12.163892069056503,nan,12.163892069056503,1,1,1
 77.0,j_psi,charmonium,meson,14.423892023856505,nan,14.423892023856505,1,1,1
+77.0,lambda_c,charmed_baryon,baryon,0.7483781969575373,nan,0.7483781969575373,1,1,1
+77.0,sigma_c,charmed_baryon,baryon,0.6516217913757975,nan,0.6516217913757975,1,1,1
 78.0,electron,lepton,elementary,17396.785291010452,nan,17396.785291010452,1,1,1
 78.0,muon,lepton,elementary,163.454676243166,nan,163.454676243166,1,1,1
 78.0,pion,pion_like,meson,32.024137877243966,nan,32.024137877243966,0,0,1
@@ -2053,6 +2209,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 78.0,carbon12,nucleus,composite,94.34652979767134,nan,94.34652979767134,1,1,1
 78.0,eta_c,charmonium,meson,24.875860984756052,nan,24.875860984756052,1,1,1
 78.0,j_psi,charmonium,meson,27.13586093955605,nan,27.13586093955605,1,1,1
+78.0,lambda_c,charmed_baryon,baryon,4.548275579711567,nan,4.548275579711567,1,1,1
+78.0,sigma_c,charmed_baryon,baryon,5.9482755680449015,nan,5.9482755680449015,1,1,1
 79.0,electron,lepton,elementary,19379.96364167914,nan,19379.96364167914,1,1,1
 79.0,muon,lepton,elementary,183.28665608448995,nan,183.28665608448995,1,1,1
 79.0,pion,pion_like,meson,35.99053416282043,nan,35.99053416282043,0,0,1
@@ -2079,6 +2237,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 79.0,carbon12,nucleus,composite,92.36333163505113,nan,92.36333163505113,1,1,1
 79.0,eta_c,charmonium,meson,20.90946469917959,nan,20.90946469917959,1,1,1
 79.0,j_psi,charmonium,meson,23.169464653979592,nan,23.169464653979592,1,1,1
+79.0,lambda_c,charmed_baryon,baryon,2.8956104414402826,nan,2.8956104414402826,1,1,1
+79.0,sigma_c,charmed_baryon,baryon,4.2956104297736175,nan,4.2956104297736175,1,1,1
 80.0,electron,lepton,elementary,26303.96508847443,nan,26303.96508847443,1,1,1
 80.0,muon,lepton,elementary,252.5273560285176,nan,252.5273560285176,1,1,1
 80.0,pion,pion_like,meson,49.83867525947712,nan,49.83867525947712,0,0,1
@@ -2105,6 +2265,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 80.0,carbon12,nucleus,composite,85.43926101748208,nan,85.43926101748208,1,1,1
 80.0,eta_c,charmonium,meson,7.061323602522894,nan,7.061323602522894,1,1,1
 80.0,j_psi,charmonium,meson,9.321323557322895,nan,9.321323557322895,1,1,1
+80.0,lambda_c,charmed_baryon,baryon,2.874448416150694,nan,2.874448416150694,1,1,1
+80.0,sigma_c,charmed_baryon,baryon,1.474448427817359,nan,1.474448427817359,1,1,1
 81.0,electron,lepton,elementary,18669.120798350003,nan,18669.120798350003,1,1,1
 81.0,muon,lepton,elementary,176.17815727776414,nan,176.17815727776414,1,1,1
 81.0,pion,pion_like,meson,34.56883428773929,nan,34.56883428773929,0,0,1
@@ -2131,6 +2293,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 81.0,carbon12,nucleus,composite,93.07418157970021,nan,93.07418157970021,1,1,1
 81.0,eta_c,charmonium,meson,22.33116457426073,nan,22.33116457426073,1,1,1
 81.0,j_psi,charmonium,meson,24.59116452906073,nan,24.59116452906073,1,1,1
+81.0,lambda_c,charmed_baryon,baryon,3.4879853963017986,nan,3.4879853963017986,1,1,1
+81.0,sigma_c,charmed_baryon,baryon,4.887985384635133,nan,4.887985384635133,1,1,1
 82.0,electron,lepton,elementary,18029.3546052007,nan,18029.3546052007,1,1,1
 82.0,muon,lepton,elementary,169.78043200942432,nan,169.78043200942432,1,1,1
 82.0,pion,pion_like,meson,33.28928913170772,nan,33.28928913170772,0,0,1
@@ -2157,6 +2321,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 82.0,carbon12,nucleus,composite,93.7139541641137,nan,93.7139541641137,1,1,1
 82.0,eta_c,charmonium,meson,23.6107097302923,nan,23.6107097302923,1,1,1
 82.0,j_psi,charmonium,meson,25.8707096850923,nan,25.8707096850923,1,1,1
+82.0,lambda_c,charmed_baryon,baryon,4.0211292175349636,nan,4.0211292175349636,1,1,1
+82.0,sigma_c,charmed_baryon,baryon,5.421129205868298,nan,5.421129205868298,1,1,1
 83.0,electron,lepton,elementary,17813.447790965376,nan,17813.447790965376,1,1,1
 83.0,muon,lepton,elementary,167.6213424922986,nan,167.6213424922986,1,1,1
 83.0,pion,pion_like,meson,32.85747119373715,nan,32.85747119373715,0,0,1
@@ -2183,6 +2349,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 83.0,carbon12,nucleus,composite,93.92986313525807,nan,93.92986313525807,1,1,1
 83.0,eta_c,charmonium,meson,24.042527668262874,nan,24.042527668262874,1,1,1
 83.0,j_psi,charmonium,meson,26.302527623062876,nan,26.302527623062876,1,1,1
+83.0,lambda_c,charmed_baryon,baryon,4.201053360455151,nan,4.201053360455151,1,1,1
+83.0,sigma_c,charmed_baryon,baryon,5.601053348788486,nan,5.601053348788486,1,1,1
 84.0,electron,lepton,elementary,21354.507858712357,nan,21354.507858712357,1,1,1
 84.0,muon,lepton,elementary,203.0322937346801,nan,203.0322937346801,1,1,1
 84.0,pion,pion_like,meson,39.93966200878865,nan,39.93966200878865,0,0,1
@@ -2209,6 +2377,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 84.0,carbon12,nucleus,composite,90.38876769232138,nan,90.38876769232138,1,1,1
 84.0,eta_c,charmonium,meson,16.96033685321137,nan,16.96033685321137,1,1,1
 84.0,j_psi,charmonium,meson,19.22033680801137,nan,19.22033680801137,1,1,1
+84.0,lambda_c,charmed_baryon,baryon,1.2501404864230419,nan,1.2501404864230419,1,1,1
+84.0,sigma_c,charmed_baryon,baryon,2.6501404747563764,nan,2.6501404747563764,1,1,1
 85.0,electron,lepton,elementary,26914.414179228457,nan,26914.414179228457,1,1,1
 85.0,muon,lepton,elementary,258.6319073705118,nan,258.6319073705118,1,1,1
 85.0,pion,pion_like,meson,51.059585625548785,nan,51.059585625548785,0,0,1
@@ -2235,6 +2405,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 85.0,carbon12,nucleus,composite,84.82880582834169,nan,84.82880582834169,1,1,1
 85.0,eta_c,charmonium,meson,5.840413236451236,nan,5.840413236451236,1,1,1
 85.0,j_psi,charmonium,meson,8.100413191251237,nan,8.100413191251237,1,1,1
+85.0,lambda_c,charmed_baryon,baryon,3.383161074615532,nan,3.383161074615532,1,1,1
+85.0,sigma_c,charmed_baryon,baryon,1.9831610862821971,nan,1.9831610862821971,1,1,1
 86.0,electron,lepton,elementary,19344.88053945157,nan,19344.88053945157,1,1,1
 86.0,muon,lepton,elementary,182.93582158898747,nan,182.93582158898747,1,1,1
 86.0,pion,pion_like,meson,35.92036725810658,nan,35.92036725810658,0,0,1
@@ -2261,6 +2433,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 86.0,carbon12,nucleus,composite,92.39841508775889,nan,92.39841508775889,1,1,1
 86.0,eta_c,charmonium,meson,20.979631603893438,nan,20.979631603893438,1,1,1
 86.0,j_psi,charmonium,meson,23.23963155869344,nan,23.23963155869344,1,1,1
+86.0,lambda_c,charmed_baryon,baryon,2.9248466520788083,nan,2.9248466520788083,1,1,1
+86.0,sigma_c,charmed_baryon,baryon,4.324846640412143,nan,4.324846640412143,1,1,1
 87.0,electron,lepton,elementary,18128.052899042195,nan,18128.052899042195,1,1,1
 87.0,muon,lepton,elementary,170.76742471896938,nan,170.76742471896938,1,1,1
 87.0,pion,pion_like,meson,33.48668768940862,nan,33.48668768940862,0,0,1
@@ -2287,6 +2461,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 87.0,carbon12,nucleus,composite,93.61525488427627,nan,93.61525488427627,1,1,1
 87.0,eta_c,charmonium,meson,23.413311172591403,nan,23.413311172591403,1,1,1
 87.0,j_psi,charmonium,meson,25.6733111273914,nan,25.6733111273914,1,1,1
+87.0,lambda_c,charmed_baryon,baryon,3.9388798175333464,nan,3.9388798175333464,1,1,1
+87.0,sigma_c,charmed_baryon,baryon,5.338879805866681,nan,5.338879805866681,1,1,1
 88.0,electron,lepton,elementary,18113.79900130931,nan,18113.79900130931,1,1,1
 88.0,muon,lepton,elementary,170.6248843305048,nan,170.6248843305048,1,1,1
 88.0,pion,pion_like,meson,33.45817960943506,nan,33.45817960943506,0,0,1
@@ -2313,6 +2489,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 88.0,carbon12,nucleus,composite,93.62950892440558,nan,93.62950892440558,1,1,1
 88.0,eta_c,charmonium,meson,23.44181925256496,nan,23.44181925256496,1,1,1
 88.0,j_psi,charmonium,meson,25.701819207364963,nan,25.701819207364963,1,1,1
+88.0,lambda_c,charmed_baryon,baryon,3.9507581843275776,nan,3.9507581843275776,1,1,1
+88.0,sigma_c,charmed_baryon,baryon,5.350758172660912,nan,5.350758172660912,1,1,1
 89.0,electron,lepton,elementary,28367.771771106825,nan,28367.771771106825,1,1,1
 89.0,muon,lepton,elementary,273.1656271716827,nan,273.1656271716827,1,1,1
 89.0,pion,pion_like,meson,53.96632981832248,nan,53.96632981832248,0,0,1
@@ -2339,6 +2517,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 89.0,carbon12,nucleus,composite,83.37543371742113,nan,83.37543371742113,1,1,1
 89.0,eta_c,charmonium,meson,2.9336690436775434,nan,2.9336690436775434,1,1,1
 89.0,j_psi,charmonium,meson,5.193668998477544,nan,5.193668998477544,1,1,1
+89.0,lambda_c,charmed_baryon,baryon,4.594304502401243,nan,4.594304502401243,1,1,1
+89.0,sigma_c,charmed_baryon,baryon,3.194304514067909,nan,3.194304514067909,1,1,1
 90.0,electron,lepton,elementary,18484.919258027374,nan,18484.919258027374,1,1,1
 90.0,muon,lepton,elementary,174.33612363858717,nan,174.33612363858717,1,1,1
 90.0,pion,pion_like,meson,34.200427530431355,nan,34.200427530431355,0,0,1
@@ -2365,6 +2545,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 90.0,carbon12,nucleus,composite,93.2583849601962,nan,93.2583849601962,1,1,1
 90.0,eta_c,charmonium,meson,22.699571331568666,nan,22.699571331568666,1,1,1
 90.0,j_psi,charmonium,meson,24.959571286368668,nan,24.959571286368668,1,1,1
+90.0,lambda_c,charmed_baryon,baryon,3.6414882136376376,nan,3.6414882136376376,1,1,1
+90.0,sigma_c,charmed_baryon,baryon,5.041488201970973,nan,5.041488201970973,1,1,1
 91.0,electron,lepton,elementary,19168.313340213655,nan,19168.313340213655,1,1,1
 91.0,muon,lepton,elementary,181.17013211645738,nan,181.17013211645738,1,1,1
 91.0,pion,pion_like,meson,35.56722933534953,nan,35.56722933534953,0,0,1
@@ -2391,6 +2573,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 91.0,carbon12,nucleus,composite,92.57498405090311,nan,92.57498405090311,1,1,1
 91.0,eta_c,charmonium,meson,21.33276952665049,nan,21.33276952665049,1,1,1
 91.0,j_psi,charmonium,meson,23.59276948145049,nan,23.59276948145049,1,1,1
+91.0,lambda_c,charmed_baryon,baryon,3.0719874549442223,nan,3.0719874549442223,1,1,1
+91.0,sigma_c,charmed_baryon,baryon,4.471987443277557,nan,4.471987443277557,1,1,1
 92.0,electron,lepton,elementary,18840.514236766303,nan,18840.514236766303,1,1,1
 92.0,muon,lepton,elementary,177.89210862987585,nan,177.89210862987585,1,1,1
 92.0,pion,pion_like,meson,34.911624585584846,nan,34.911624585584846,0,0,1
@@ -2417,6 +2601,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 92.0,carbon12,nucleus,composite,92.90278642906347,nan,92.90278642906347,1,1,1
 92.0,eta_c,charmonium,meson,21.988374276415172,nan,21.988374276415172,1,1,1
 92.0,j_psi,charmonium,meson,24.248374231215173,nan,24.248374231215173,1,1,1
+92.0,lambda_c,charmed_baryon,baryon,3.3451561038664743,nan,3.3451561038664743,1,1,1
+92.0,sigma_c,charmed_baryon,baryon,4.745156092199809,nan,4.745156092199809,1,1,1
 93.0,electron,lepton,elementary,18394.79834515296,nan,18394.79834515296,1,1,1
 93.0,muon,lepton,elementary,173.43490558787357,nan,173.43490558787357,1,1,1
 93.0,pion,pion_like,meson,34.020183905869146,nan,34.020183905869146,0,0,1
@@ -2443,6 +2629,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 93.0,carbon12,nucleus,composite,93.34850677337852,nan,93.34850677337852,1,1,1
 93.0,eta_c,charmonium,meson,22.879814956130872,nan,22.879814956130872,1,1,1
 93.0,j_psi,charmonium,meson,25.139814910930873,nan,25.139814910930873,1,1,1
+93.0,lambda_c,charmed_baryon,baryon,3.7165897247480744,nan,3.7165897247480744,1,1,1
+93.0,sigma_c,charmed_baryon,baryon,5.116589713081409,nan,5.116589713081409,1,1,1
 94.0,electron,lepton,elementary,35845.84521835592,nan,35845.84521835592,1,1,1
 94.0,muon,lepton,elementary,347.9471019733709,nan,347.9471019733709,1,1,1
 94.0,pion,pion_like,meson,68.92262597516368,nan,68.92262597516368,0,0,1
@@ -2469,6 +2657,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 94.0,carbon12,nucleus,composite,75.89728556421905,nan,75.89728556421905,1,1,1
 94.0,eta_c,charmonium,meson,12.022627113163672,nan,12.022627113163672,1,1,1
 94.0,j_psi,charmonium,meson,9.762627158363673,nan,9.762627158363673,1,1,1
+94.0,lambda_c,charmed_baryon,baryon,10.826094640455969,nan,10.826094640455969,1,1,1
+94.0,sigma_c,charmed_baryon,baryon,9.426094652122632,nan,9.426094652122632,1,1,1
 95.0,electron,lepton,elementary,18967.948678290326,nan,18967.948678290326,1,1,1
 95.0,muon,lepton,elementary,179.1664656611245,nan,179.1664656611245,1,1,1
 95.0,pion,pion_like,meson,35.16649601222429,nan,35.16649601222429,0,0,1
@@ -2495,6 +2685,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 95.0,carbon12,nucleus,composite,92.77535071446938,nan,92.77535071446938,1,1,1
 95.0,eta_c,charmonium,meson,21.733502849775725,nan,21.733502849775725,1,1,1
 95.0,j_psi,charmonium,meson,23.993502804575726,nan,23.993502804575726,1,1,1
+95.0,lambda_c,charmed_baryon,baryon,3.2389596748610794,nan,3.2389596748610794,1,1,1
+95.0,sigma_c,charmed_baryon,baryon,4.638959663194414,nan,4.638959663194414,1,1,1
 96.0,electron,lepton,elementary,18694.992904692386,nan,18694.992904692386,1,1,1
 96.0,muon,lepton,elementary,176.43688090252624,nan,176.43688090252624,1,1,1
 96.0,pion,pion_like,meson,34.620579016831286,nan,34.620579016831286,0,0,1
@@ -2521,6 +2713,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 96.0,carbon12,nucleus,composite,93.04830921489547,nan,93.04830921489547,1,1,1
 96.0,eta_c,charmonium,meson,22.279419845168736,nan,22.279419845168736,1,1,1
 96.0,j_psi,charmonium,meson,24.539419799968737,nan,24.539419799968737,1,1,1
+96.0,lambda_c,charmed_baryon,baryon,3.466425092261931,nan,3.466425092261931,1,1,1
+96.0,sigma_c,charmed_baryon,baryon,4.866425080595266,nan,4.866425080595266,1,1,1
 97.0,electron,lepton,elementary,19146.215961204918,nan,19146.215961204918,1,1,1
 97.0,muon,lepton,elementary,180.94915613872968,nan,180.94915613872968,1,1,1
 97.0,pion,pion_like,meson,35.52303413626838,nan,35.52303413626838,0,0,1
@@ -2547,6 +2741,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 97.0,carbon12,nucleus,composite,92.59708165066465,nan,92.59708165066465,1,1,1
 97.0,eta_c,charmonium,meson,21.376964725731643,nan,21.376964725731643,1,1,1
 97.0,j_psi,charmonium,meson,23.636964680531644,nan,23.636964680531644,1,1,1
+97.0,lambda_c,charmed_baryon,baryon,3.090402121442874,nan,3.090402121442874,1,1,1
+97.0,sigma_c,charmed_baryon,baryon,4.490402109776209,nan,4.490402109776209,1,1,1
 98.0,electron,lepton,elementary,24688.928723875615,nan,24688.928723875615,1,1,1
 98.0,muon,lepton,elementary,236.37683249394533,nan,236.37683249394533,1,1,1
 98.0,pion,pion_like,meson,46.6085702941543,nan,46.6085702941543,0,0,1
@@ -2573,6 +2769,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 98.0,carbon12,nucleus,composite,87.054313516294,nan,87.054313516294,1,1,1
 98.0,eta_c,charmonium,meson,10.291428567845715,nan,10.291428567845715,1,1,1
 98.0,j_psi,charmonium,meson,12.551428522645717,nan,12.551428522645717,1,1,1
+98.0,lambda_c,charmed_baryon,baryon,1.5285713315642857,nan,1.5285713315642857,1,1,1
+98.0,sigma_c,charmed_baryon,baryon,0.1285713432309509,nan,0.1285713432309509,1,1,1
 99.0,electron,lepton,elementary,21031.57447394694,nan,21031.57447394694,1,1,1
 99.0,muon,lepton,elementary,199.80292791662401,nan,199.80292791662401,1,1,1
 99.0,pion,pion_like,meson,39.29378879350758,nan,39.29378879350758,0,0,1
@@ -2599,6 +2797,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 99.0,carbon12,nucleus,composite,90.71170430319128,nan,90.71170430319128,1,1,1
 99.0,eta_c,charmonium,meson,17.606210068492437,nan,17.606210068492437,1,1,1
 99.0,j_psi,charmonium,meson,19.86621002329244,nan,19.86621002329244,1,1,1
+99.0,lambda_c,charmed_baryon,baryon,1.5192543292631473,nan,1.5192543292631473,1,1,1
+99.0,sigma_c,charmed_baryon,baryon,2.919254317596482,nan,2.919254317596482,1,1,1
 100.0,electron,lepton,elementary,17818.056864619826,nan,17818.056864619826,1,1,1
 100.0,muon,lepton,elementary,167.66743368514136,nan,167.66743368514136,1,1,1
 100.0,pion,pion_like,meson,32.866689433043156,nan,32.866689433043156,0,0,1
@@ -2625,6 +2825,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 100.0,carbon12,nucleus,composite,93.92525401555899,nan,93.92525401555899,1,1,1
 100.0,eta_c,charmonium,meson,24.033309428956862,nan,24.033309428956862,1,1,1
 100.0,j_psi,charmonium,meson,26.29330938375686,nan,26.29330938375686,1,1,1
+100.0,lambda_c,charmed_baryon,baryon,4.197212427366168,nan,4.197212427366168,1,1,1
+100.0,sigma_c,charmed_baryon,baryon,5.597212415699503,nan,5.597212415699503,1,1,1
 101.0,electron,lepton,elementary,18759.347818642076,nan,18759.347818642076,1,1,1
 101.0,muon,lepton,elementary,177.08043641315896,nan,177.08043641315896,1,1,1
 101.0,pion,pion_like,meson,34.74929012925472,nan,34.74929012925472,0,0,1
@@ -2651,6 +2853,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 101.0,carbon12,nucleus,composite,92.98395365804019,nan,92.98395365804019,1,1,1
 101.0,eta_c,charmonium,meson,22.1507087327453,nan,22.1507087327453,1,1,1
 101.0,j_psi,charmonium,meson,24.410708687545302,nan,24.410708687545302,1,1,1
+101.0,lambda_c,charmed_baryon,baryon,3.4127954614598197,nan,3.4127954614598197,1,1,1
+101.0,sigma_c,charmed_baryon,baryon,4.812795449793154,nan,4.812795449793154,1,1,1
 102.0,electron,lepton,elementary,20929.800658443124,nan,20929.800658443124,1,1,1
 102.0,muon,lepton,elementary,198.7851796859791,nan,198.7851796859791,1,1,1
 102.0,pion,pion_like,meson,39.090239131094634,nan,39.090239131094634,0,0,1
@@ -2677,6 +2881,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 102.0,carbon12,nucleus,composite,90.8134791354155,nan,90.8134791354155,1,1,1
 102.0,eta_c,charmonium,meson,17.809759730905387,nan,17.809759730905387,1,1,1
 102.0,j_psi,charmonium,meson,20.06975968570539,nan,20.06975968570539,1,1,1
+102.0,lambda_c,charmed_baryon,baryon,1.6040666895913545,nan,1.6040666895913545,1,1,1
+102.0,sigma_c,charmed_baryon,baryon,3.004066677924689,nan,3.004066677924689,1,1,1
 103.0,electron,lepton,elementary,19513.283187315552,nan,19513.283187315552,1,1,1
 103.0,muon,lepton,elementary,184.61986473948778,nan,184.61986473948778,1,1,1
 103.0,pion,pion_like,meson,36.25717591515133,nan,36.25717591515133,0,0,1
@@ -2703,6 +2909,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 103.0,carbon12,nucleus,composite,92.23001075755246,nan,92.23001075755246,1,1,1
 103.0,eta_c,charmonium,meson,20.64282294684869,nan,20.64282294684869,1,1,1
 103.0,j_psi,charmonium,meson,22.90282290164869,nan,22.90282290164869,1,1,1
+103.0,lambda_c,charmed_baryon,baryon,2.784509710006232,nan,2.784509710006232,1,1,1
+103.0,sigma_c,charmed_baryon,baryon,4.184509698339567,nan,4.184509698339567,1,1,1
 104.0,electron,lepton,elementary,19484.07329587237,nan,19484.07329587237,1,1,1
 104.0,muon,lepton,elementary,184.327762933277,nan,184.327762933277,1,1,1
 104.0,pion,pion_like,meson,36.19875554923554,nan,36.19875554923554,0,0,1
@@ -2729,6 +2937,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 104.0,carbon12,nucleus,composite,92.25922094080246,nan,92.25922094080246,1,1,1
 104.0,eta_c,charmonium,meson,20.701243312764475,nan,20.701243312764475,1,1,1
 104.0,j_psi,charmonium,meson,22.961243267564477,nan,22.961243267564477,1,1,1
+104.0,lambda_c,charmed_baryon,baryon,2.8088515294217973,nan,2.8088515294217973,1,1,1
+104.0,sigma_c,charmed_baryon,baryon,4.208851517755132,nan,4.208851517755132,1,1,1
 105.0,electron,lepton,elementary,27968.171622948972,nan,27968.171622948972,1,1,1
 105.0,muon,lepton,elementary,269.16958612969347,nan,269.16958612969347,1,1,1
 105.0,pion,pion_like,meson,53.16712154598798,nan,53.16712154598798,0,0,1
@@ -2755,6 +2965,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 105.0,carbon12,nucleus,composite,83.77503785758442,nan,83.77503785758442,1,1,1
 105.0,eta_c,charmonium,meson,3.7328773160120448,nan,3.7328773160120448,1,1,1
 105.0,j_psi,charmonium,meson,5.992877270812045,nan,5.992877270812045,1,1,1
+105.0,lambda_c,charmed_baryon,baryon,4.261301051710161,nan,4.261301051710161,1,1,1
+105.0,sigma_c,charmed_baryon,baryon,2.8613010633768265,nan,2.8613010633768265,1,1,1
 106.0,electron,lepton,elementary,18675.86502952266,nan,18675.86502952266,1,1,1
 106.0,muon,lepton,elementary,176.24560025716954,nan,176.24560025716954,1,1,1
 106.0,pion,pion_like,meson,34.58232288469946,nan,34.58232288469946,0,0,1
@@ -2781,6 +2993,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 106.0,carbon12,nucleus,composite,93.06743728115268,nan,93.06743728115268,1,1,1
 106.0,eta_c,charmonium,meson,22.317675977300564,nan,22.317675977300564,1,1,1
 106.0,j_psi,charmonium,meson,24.577675932100565,nan,24.577675932100565,1,1,1
+106.0,lambda_c,charmed_baryon,baryon,3.482365147502826,nan,3.482365147502826,1,1,1
+106.0,sigma_c,charmed_baryon,baryon,4.882365135836161,nan,4.882365135836161,1,1,1
 107.0,electron,lepton,elementary,19445.236091440886,nan,19445.236091440886,1,1,1
 107.0,muon,lepton,elementary,183.9393870440793,nan,183.9393870440793,1,1,1
 107.0,pion,pion_like,meson,36.12108036518199,nan,36.12108036518199,0,0,1
@@ -2807,6 +3021,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 107.0,carbon12,nucleus,composite,92.29805853321763,nan,92.29805853321763,1,1,1
 107.0,eta_c,charmonium,meson,20.77891849681803,nan,20.77891849681803,1,1,1
 107.0,j_psi,charmonium,meson,23.03891845161803,nan,23.03891845161803,1,1,1
+107.0,lambda_c,charmed_baryon,baryon,2.841216189821699,nan,2.841216189821699,1,1,1
+107.0,sigma_c,charmed_baryon,baryon,4.2412161781550335,nan,4.2412161781550335,1,1,1
 108.0,electron,lepton,elementary,25111.164231154966,nan,25111.164231154966,1,1,1
 108.0,muon,lepton,elementary,240.59922936804986,nan,240.59922936804986,1,1,1
 108.0,pion,pion_like,meson,47.45304973653356,nan,47.45304973653356,0,0,1
@@ -2833,6 +3049,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 108.0,carbon12,nucleus,composite,86.63207379088199,nan,86.63207379088199,1,1,1
 108.0,eta_c,charmonium,meson,9.44694912546646,nan,9.44694912546646,1,1,1
 108.0,j_psi,charmonium,meson,11.706949080266462,nan,11.706949080266462,1,1,1
+108.0,lambda_c,charmed_baryon,baryon,1.8804377699940833,nan,1.8804377699940833,1,1,1
+108.0,sigma_c,charmed_baryon,baryon,0.4804377816607486,nan,0.4804377816607486,1,1,1
 109.0,electron,lepton,elementary,23233.862160595178,nan,23233.862160595178,1,1,1
 109.0,muon,lepton,elementary,221.8260228095656,nan,221.8260228095656,1,1,1
 109.0,pion,pion_like,meson,43.69840812446541,nan,43.69840812446541,0,0,1
@@ -2859,6 +3077,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 109.0,carbon12,nucleus,composite,88.50939461568927,nan,88.50939461568927,1,1,1
 109.0,eta_c,charmonium,meson,13.201590737534618,nan,13.201590737534618,1,1,1
 109.0,j_psi,charmonium,meson,15.461590692334617,nan,15.461590692334617,1,1,1
+109.0,lambda_c,charmed_baryon,baryon,0.3160037467139547,nan,0.3160037467139547,1,1,1
+109.0,sigma_c,charmed_baryon,baryon,1.08399624161938,nan,1.08399624161938,1,1,1
 110.0,electron,lepton,elementary,18703.19663155378,nan,18703.19663155378,1,1,1
 110.0,muon,lepton,elementary,176.51891898330905,nan,176.51891898330905,1,1,1
 110.0,pion,pion_like,meson,34.636986634300456,nan,34.636986634300456,0,0,1
@@ -2885,6 +3105,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 110.0,carbon12,nucleus,composite,93.04010540607885,nan,93.04010540607885,1,1,1
 110.0,eta_c,charmonium,meson,22.263012227699566,nan,22.263012227699566,1,1,1
 110.0,j_psi,charmonium,meson,24.523012182499567,nan,24.523012182499567,1,1,1
+110.0,lambda_c,charmed_baryon,baryon,3.4595885849033507,nan,3.4595885849033507,1,1,1
+110.0,sigma_c,charmed_baryon,baryon,4.859588573236685,nan,4.859588573236685,1,1,1
 111.0,electron,lepton,elementary,27241.038070101433,nan,27241.038070101433,1,1,1
 111.0,muon,lepton,elementary,261.89817861500353,nan,261.89817861500353,1,1,1
 111.0,pion,pion_like,meson,51.71283992670747,nan,51.71283992670747,0,0,1
@@ -2911,6 +3133,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 111.0,carbon12,nucleus,composite,84.50217867449608,nan,84.50217867449608,1,1,1
 111.0,eta_c,charmonium,meson,5.187158935292548,nan,5.187158935292548,1,1,1
 111.0,j_psi,charmonium,meson,7.447158890092549,nan,7.447158890092549,1,1,1
+111.0,lambda_c,charmed_baryon,baryon,3.655350369940527,nan,3.655350369940527,1,1,1
+111.0,sigma_c,charmed_baryon,baryon,2.2553503816071925,nan,2.2553503816071925,1,1,1
 112.0,electron,lepton,elementary,19483.45841901932,nan,19483.45841901932,1,1,1
 112.0,muon,lepton,elementary,184.3216141038737,nan,184.3216141038737,1,1,1
 112.0,pion,pion_like,meson,36.19752578325651,nan,36.19752578325651,0,0,1
@@ -2937,6 +3161,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 112.0,carbon12,nucleus,composite,92.25983582379814,nan,92.25983582379814,1,1,1
 112.0,eta_c,charmonium,meson,20.702473078743513,nan,20.702473078743513,1,1,1
 112.0,j_psi,charmonium,meson,22.962473033543514,nan,22.962473033543514,1,1,1
+112.0,lambda_c,charmed_baryon,baryon,2.8093639319190413,nan,2.8093639319190413,1,1,1
+112.0,sigma_c,charmed_baryon,baryon,4.209363920252376,nan,4.209363920252376,1,1,1
 113.0,electron,lepton,elementary,18750.80249197508,nan,18750.80249197508,1,1,1
 113.0,muon,lepton,elementary,176.99498230050173,nan,176.99498230050173,1,1,1
 113.0,pion,pion_like,meson,34.732199305356005,nan,34.732199305356005,0,0,1
@@ -2963,6 +3189,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 113.0,carbon12,nucleus,composite,92.99249907007501,nan,92.99249907007501,1,1,1
 113.0,eta_c,charmonium,meson,22.167799556644013,nan,22.167799556644013,1,1,1
 113.0,j_psi,charmonium,meson,24.42779951144401,nan,24.42779951144401,1,1,1
+113.0,lambda_c,charmed_baryon,baryon,3.4199166381673636,nan,3.4199166381673636,1,1,1
+113.0,sigma_c,charmed_baryon,baryon,4.8199166265006985,nan,4.8199166265006985,1,1,1
 114.0,electron,lepton,elementary,17022.013821916677,nan,17022.013821916677,1,1,1
 114.0,muon,lepton,elementary,159.7069244498565,nan,159.7069244498565,1,1,1
 114.0,pion,pion_like,meson,31.27458745861804,nan,31.27458745861804,0,0,1
@@ -2989,6 +3217,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 114.0,carbon12,nucleus,composite,94.72130501073205,nan,94.72130501073205,1,1,1
 114.0,eta_c,charmonium,meson,25.62541140338198,nan,25.62541140338198,1,1,1
 114.0,j_psi,charmonium,meson,27.885411358181983,nan,27.885411358181983,1,1,1
+114.0,lambda_c,charmed_baryon,baryon,4.860588257782686,nan,4.860588257782686,1,1,1
+114.0,sigma_c,charmed_baryon,baryon,6.260588246116021,nan,6.260588246116021,1,1,1
 115.0,electron,lepton,elementary,17851.94494233375,nan,17851.94494233375,1,1,1
 115.0,muon,lepton,elementary,168.00631781719994,nan,168.00631781719994,1,1,1
 115.0,pion,pion_like,meson,32.93446626487702,nan,32.93446626487702,0,0,1
@@ -3015,6 +3245,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 115.0,carbon12,nucleus,composite,93.89136559930317,nan,93.89136559930317,1,1,1
 115.0,eta_c,charmonium,meson,23.965532597123,nan,23.965532597123,1,1,1
 115.0,j_psi,charmonium,meson,26.225532551923003,nan,26.225532551923003,1,1,1
+115.0,lambda_c,charmed_baryon,baryon,4.168972080439255,nan,4.168972080439255,1,1,1
+115.0,sigma_c,charmed_baryon,baryon,5.568972068772591,nan,5.568972068772591,1,1,1
 116.0,electron,lepton,elementary,19178.979653572285,nan,19178.979653572285,1,1,1
 116.0,muon,lepton,elementary,181.27679630600858,nan,181.27679630600858,1,1,1
 116.0,pion,pion_like,meson,35.5885621749664,nan,35.5885621749664,0,0,1
@@ -3041,6 +3273,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 116.0,carbon12,nucleus,composite,92.564317630988,nan,92.564317630988,1,1,1
 116.0,eta_c,charmonium,meson,21.311436687033623,nan,21.311436687033623,1,1,1
 116.0,j_psi,charmonium,meson,23.571436641833625,nan,23.571436641833625,1,1,1
+116.0,lambda_c,charmed_baryon,baryon,3.063098771666827,nan,3.063098771666827,1,1,1
+116.0,sigma_c,charmed_baryon,baryon,4.463098760000162,nan,4.463098760000162,1,1,1
 117.0,electron,lepton,elementary,17658.84562178023,nan,17658.84562178023,1,1,1
 117.0,muon,lepton,elementary,166.0753054948339,nan,166.0753054948339,1,1,1
 117.0,pion,pion_like,meson,32.54826376950762,nan,32.54826376950762,0,0,1
@@ -3067,6 +3301,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 117.0,carbon12,nucleus,composite,94.08446684891888,nan,94.08446684891888,1,1,1
 117.0,eta_c,charmonium,meson,24.3517350924924,nan,24.3517350924924,1,1,1
 117.0,j_psi,charmonium,meson,26.611735047292402,nan,26.611735047292402,1,1,1
+117.0,lambda_c,charmed_baryon,baryon,4.329889788720546,nan,4.329889788720546,1,1,1
+117.0,sigma_c,charmed_baryon,baryon,5.729889777053881,nan,5.729889777053881,1,1,1
 118.0,electron,lepton,elementary,19564.65619473236,nan,19564.65619473236,1,1,1
 118.0,muon,lepton,elementary,185.13359989958312,nan,185.13359989958312,1,1,1
 118.0,pion,pion_like,meson,36.35992295539016,nan,36.35992295539016,0,0,1
@@ -3093,6 +3329,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 118.0,carbon12,nucleus,composite,92.17863723691931,nan,92.17863723691931,1,1,1
 118.0,eta_c,charmonium,meson,20.54007590660986,nan,20.54007590660986,1,1,1
 118.0,j_psi,charmonium,meson,22.800075861409862,nan,22.800075861409862,1,1,1
+118.0,lambda_c,charmed_baryon,baryon,2.7416984427405886,nan,2.7416984427405886,1,1,1
+118.0,sigma_c,charmed_baryon,baryon,4.141698431073923,nan,4.141698431073923,1,1,1
 119.0,electron,lepton,elementary,33859.80519680984,nan,33859.80519680984,1,1,1
 119.0,muon,lepton,elementary,328.0865051399676,nan,328.0865051399676,1,1,1
 119.0,pion,pion_like,meson,64.95050629071349,nan,64.95050629071349,0,0,1
@@ -3119,6 +3357,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 119.0,carbon12,nucleus,composite,77.88334542630474,nan,77.88334542630474,1,1,1
 119.0,eta_c,charmonium,meson,8.05050742871346,nan,8.05050742871346,1,1,1
 119.0,j_psi,charmonium,meson,5.79050747391346,nan,5.79050747391346,1,1,1
+119.0,lambda_c,charmed_baryon,baryon,9.17104475262613,nan,9.17104475262613,1,1,1
+119.0,sigma_c,charmed_baryon,baryon,7.771044764292797,nan,7.771044764292797,1,1,1
 120.0,electron,lepton,elementary,18798.138279118262,nan,18798.138279118262,1,1,1
 120.0,muon,lepton,elementary,177.46834485817604,nan,177.46834485817604,1,1,1
 120.0,pion,pion_like,meson,34.82687182446467,nan,34.82687182446467,0,0,1
@@ -3145,6 +3385,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 120.0,carbon12,nucleus,composite,92.94516281004732,nan,92.94516281004732,1,1,1
 120.0,eta_c,charmonium,meson,22.07312703753535,nan,22.07312703753535,1,1,1
 120.0,j_psi,charmonium,meson,24.33312699233535,nan,24.33312699233535,1,1,1
+120.0,lambda_c,charmed_baryon,baryon,3.3804697547452074,nan,3.3804697547452074,1,1,1
+120.0,sigma_c,charmed_baryon,baryon,4.780469743078542,nan,4.780469743078542,1,1,1
 121.0,electron,lepton,elementary,18611.096407944468,nan,18611.096407944468,1,1,1
 121.0,muon,lepton,elementary,175.59790762929472,nan,175.59790762929472,1,1,1
 121.0,pion,pion_like,meson,34.45278434876141,nan,34.45278434876141,0,0,1
@@ -3171,6 +3413,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 121.0,carbon12,nucleus,composite,93.13220654976938,nan,93.13220654976938,1,1,1
 121.0,eta_c,charmonium,meson,22.44721451323861,nan,22.44721451323861,1,1,1
 121.0,j_psi,charmonium,meson,24.70721446803861,nan,24.70721446803861,1,1,1
+121.0,lambda_c,charmed_baryon,baryon,3.5363395381067138,nan,3.5363395381067138,1,1,1
+121.0,sigma_c,charmed_baryon,baryon,4.936339526440048,nan,4.936339526440048,1,1,1
 122.0,electron,lepton,elementary,31439.004480754404,nan,31439.004480754404,1,1,1
 122.0,muon,lepton,elementary,303.8782583201663,nan,303.8782583201663,1,1,1
 122.0,pion,pion_like,meson,60.10885653942129,nan,60.10885653942129,0,0,1
@@ -3197,6 +3441,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 122.0,carbon12,nucleus,composite,80.3041703261591,nan,80.3041703261591,1,1,1
 122.0,eta_c,charmonium,meson,3.2088576774212716,nan,3.2088576774212716,1,1,1
 122.0,j_psi,charmonium,meson,0.9488577226212711,nan,0.9488577226212711,1,1,1
+122.0,lambda_c,charmed_baryon,baryon,7.153690666051921,nan,7.153690666051921,1,1,1
+122.0,sigma_c,charmed_baryon,baryon,5.753690677718587,nan,5.753690677718587,1,1,1
 123.0,electron,lepton,elementary,17424.85311157664,nan,17424.85311157664,1,1,1
 123.0,muon,lepton,elementary,163.73535722754184,nan,163.73535722754184,1,1,1
 123.0,pion,pion_like,meson,32.08027407861003,nan,32.08027407861003,0,0,1
@@ -3223,6 +3469,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 123.0,carbon12,nucleus,composite,94.31846169670763,nan,94.31846169670763,1,1,1
 123.0,eta_c,charmonium,meson,24.81972478338999,nan,24.81972478338999,1,1,1
 123.0,j_psi,charmonium,meson,27.07972473818999,nan,27.07972473818999,1,1,1
+123.0,lambda_c,charmed_baryon,baryon,4.524885495536158,nan,4.524885495536158,1,1,1
+123.0,sigma_c,charmed_baryon,baryon,5.924885483869493,nan,5.924885483869493,1,1,1
 124.0,electron,lepton,elementary,22006.037205978468,nan,22006.037205978468,1,1,1
 124.0,muon,lepton,elementary,209.54765170874015,nan,209.54765170874015,1,1,1
 124.0,pion,pion_like,meson,41.24273370784639,nan,41.24273370784639,0,0,1
@@ -3249,6 +3497,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 124.0,carbon12,nucleus,composite,89.73723183627716,nan,89.73723183627716,1,1,1
 124.0,eta_c,charmonium,meson,15.657265154153636,nan,15.657265154153636,1,1,1
 124.0,j_psi,charmonium,meson,17.917265108953636,nan,17.917265108953636,1,1,1
+124.0,lambda_c,charmed_baryon,baryon,0.7071939388146091,nan,0.7071939388146091,1,1,1
+124.0,sigma_c,charmed_baryon,baryon,2.107193927147944,nan,2.107193927147944,1,1,1
 125.0,electron,lepton,elementary,23775.066182975545,nan,23775.066182975545,1,1,1
 125.0,muon,lepton,elementary,227.23811661256212,nan,227.23811661256212,1,1,1
 125.0,pion,pion_like,meson,44.78082697165821,nan,44.78082697165821,0,0,1
@@ -3275,6 +3525,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 125.0,carbon12,nucleus,composite,87.96818518668077,nan,87.96818518668077,1,1,1
 125.0,eta_c,charmonium,meson,12.119171890341809,nan,12.119171890341809,1,1,1
 125.0,j_psi,charmonium,meson,14.379171845141808,nan,14.379171845141808,1,1,1
+125.0,lambda_c,charmed_baryon,baryon,0.7670116049727168,nan,0.7670116049727168,1,1,1
+125.0,sigma_c,charmed_baryon,baryon,0.6329883833606179,nan,0.6329883833606179,1,1,1
 126.0,electron,lepton,elementary,18484.14955518677,nan,18484.14955518677,1,1,1
 126.0,muon,lepton,elementary,174.32842653398058,nan,174.32842653398058,1,1,1
 126.0,pion,pion_like,meson,34.198888109386886,nan,34.198888109386886,0,0,1
@@ -3301,6 +3553,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 126.0,carbon12,nucleus,composite,93.25915467072613,nan,93.25915467072613,1,1,1
 126.0,eta_c,charmonium,meson,22.701110752613136,nan,22.701110752613136,1,1,1
 126.0,j_psi,charmonium,meson,24.961110707413138,nan,24.961110707413138,1,1,1
+126.0,lambda_c,charmed_baryon,baryon,3.642129639080317,nan,3.642129639080317,1,1,1
+126.0,sigma_c,charmed_baryon,baryon,5.042129627413652,nan,5.042129627413652,1,1,1
 127.0,electron,lepton,elementary,17540.165995631938,nan,17540.165995631938,1,1,1
 127.0,muon,lepton,elementary,164.8884974840692,nan,164.8884974840692,1,1,1
 127.0,pion,pion_like,meson,32.31090214836575,nan,32.31090214836575,0,0,1
@@ -3327,6 +3581,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 127.0,carbon12,nucleus,composite,94.20314766067662,nan,94.20314766067662,1,1,1
 127.0,eta_c,charmonium,meson,24.589096713634273,nan,24.589096713634273,1,1,1
 127.0,j_psi,charmonium,meson,26.849096668434274,nan,26.849096668434274,1,1,1
+127.0,lambda_c,charmed_baryon,baryon,4.428790465350167,nan,4.428790465350167,1,1,1
+127.0,sigma_c,charmed_baryon,baryon,5.828790453683501,nan,5.828790453683501,1,1,1
 128.0,electron,lepton,elementary,17936.757397270187,nan,17936.757397270187,1,1,1
 128.0,muon,lepton,elementary,168.85445076299652,nan,168.85445076299652,1,1,1
 128.0,pion,pion_like,meson,33.10409286760646,nan,33.10409286760646,0,0,1
@@ -3353,6 +3609,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 128.0,carbon12,nucleus,composite,93.80655229709032,nan,93.80655229709032,1,1,1
 128.0,eta_c,charmonium,meson,23.79590599439356,nan,23.79590599439356,1,1,1
 128.0,j_psi,charmonium,meson,26.055905949193562,nan,26.055905949193562,1,1,1
+128.0,lambda_c,charmed_baryon,baryon,4.098294328477415,nan,4.098294328477415,1,1,1
+128.0,sigma_c,charmed_baryon,baryon,5.49829431681075,nan,5.49829431681075,1,1,1
 129.0,electron,lepton,elementary,19649.561138705372,nan,19649.561138705372,1,1,1
 129.0,muon,lepton,elementary,185.98265774490184,nan,185.98265774490184,1,1,1
 129.0,pion,pion_like,meson,36.52973453803883,nan,36.52973453803883,0,0,1
@@ -3379,6 +3637,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 129.0,carbon12,nucleus,composite,92.09373144474593,nan,92.09373144474593,1,1,1
 129.0,eta_c,charmonium,meson,20.370264323961187,nan,20.370264323961187,1,1,1
 129.0,j_psi,charmonium,meson,22.63026427876119,nan,22.63026427876119,1,1,1
+129.0,lambda_c,charmed_baryon,baryon,2.670943615811502,nan,2.670943615811502,1,1,1
+129.0,sigma_c,charmed_baryon,baryon,4.070943604144837,nan,4.070943604144837,1,1,1
 130.0,electron,lepton,elementary,27902.540090475948,nan,27902.540090475948,1,1,1
 130.0,muon,lepton,elementary,268.5132643074421,nan,268.5132643074421,1,1,1
 130.0,pion,pion_like,meson,53.03585717103657,nan,53.03585717103657,0,0,1
@@ -3405,6 +3665,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 130.0,carbon12,nucleus,composite,83.84067004571645,nan,83.84067004571645,1,1,1
 130.0,eta_c,charmonium,meson,3.864141690963456,nan,3.864141690963456,1,1,1
 130.0,j_psi,charmonium,meson,6.124141645763457,nan,6.124141645763457,1,1,1
+130.0,lambda_c,charmed_baryon,baryon,4.206607561508982,nan,4.206607561508982,1,1,1
+130.0,sigma_c,charmed_baryon,baryon,2.806607573175648,nan,2.806607573175648,1,1,1
 131.0,electron,lepton,elementary,25203.05232704321,nan,25203.05232704321,1,1,1
 131.0,muon,lepton,elementary,241.51811942385288,nan,241.51811942385288,1,1,1
 131.0,pion,pion_like,meson,47.63682776239641,nan,47.63682776239641,0,0,1
@@ -3431,6 +3693,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 131.0,carbon12,nucleus,composite,86.54018477703168,nan,86.54018477703168,1,1,1
 131.0,eta_c,charmonium,meson,9.263171099603618,nan,9.263171099603618,1,1,1
 131.0,j_psi,charmonium,meson,11.523171054403619,nan,11.523171054403619,1,1,1
+131.0,lambda_c,charmed_baryon,baryon,1.9570119483303001,nan,1.9570119483303001,1,1,1
+131.0,sigma_c,charmed_baryon,baryon,0.5570119599969654,nan,0.5570119599969654,1,1,1
 132.0,electron,lepton,elementary,18069.5418187148,nan,18069.5418187148,1,1,1
 132.0,muon,lepton,elementary,170.18230812309906,nan,170.18230812309906,1,1,1
 132.0,pion,pion_like,meson,33.36966436087269,nan,33.36966436087269,0,0,1
@@ -3457,6 +3721,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 132.0,carbon12,nucleus,composite,93.67376654912935,nan,93.67376654912935,1,1,1
 132.0,eta_c,charmonium,meson,23.53033450112733,nan,23.53033450112733,1,1,1
 132.0,j_psi,charmonium,meson,25.790334455927333,nan,25.790334455927333,1,1,1
+132.0,lambda_c,charmed_baryon,baryon,3.987639538325514,nan,3.987639538325514,1,1,1
+132.0,sigma_c,charmed_baryon,baryon,5.387639526658849,nan,5.387639526658849,1,1,1
 133.0,electron,lepton,elementary,38566.01097092591,nan,38566.01097092591,1,1,1
 133.0,muon,lepton,elementary,375.1490287954534,nan,375.1490287954534,1,1,1
 133.0,pion,pion_like,meson,74.363011774811,nan,74.363011774811,0,0,1
@@ -3483,6 +3749,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 133.0,carbon12,nucleus,composite,73.17709263719345,nan,73.17709263719345,1,1,1
 133.0,eta_c,charmonium,meson,17.463012912810985,nan,17.463012912810985,1,1,1
 133.0,j_psi,charmonium,meson,15.203012958010984,nan,15.203012958010984,1,1,1
+133.0,lambda_c,charmed_baryon,baryon,13.092922083422001,nan,13.092922083422001,1,1,1
+133.0,sigma_c,charmed_baryon,baryon,11.692922095088665,nan,11.692922095088665,1,1,1
 134.0,electron,lepton,elementary,30714.67138700766,nan,30714.67138700766,1,1,1
 134.0,muon,lepton,elementary,296.63485567372976,nan,296.63485567372976,1,1,1
 134.0,pion,pion_like,meson,58.66017589423955,nan,58.66017589423955,0,0,1
@@ -3509,6 +3777,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 134.0,carbon12,nucleus,composite,81.02851065599336,nan,81.02851065599336,1,1,1
 134.0,eta_c,charmonium,meson,1.7601770322395243,nan,1.7601770322395243,1,1,1
 134.0,j_psi,charmonium,meson,0.4998229225604763,nan,0.4998229225604763,1,1,1
+134.0,lambda_c,charmed_baryon,baryon,6.550073723517329,nan,6.550073723517329,1,1,1
+134.0,sigma_c,charmed_baryon,baryon,5.1500737351839945,nan,5.1500737351839945,1,1,1
 135.0,electron,lepton,elementary,29860.895170077834,nan,29860.895170077834,1,1,1
 135.0,muon,lepton,elementary,288.0970089805945,nan,288.0970089805945,1,1,1
 135.0,pion,pion_like,meson,56.95260641900695,nan,56.95260641900695,0,0,1
@@ -3535,6 +3805,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 135.0,carbon12,nucleus,composite,81.88229540214752,nan,81.88229540214752,1,1,1
 135.0,eta_c,charmonium,meson,0.05260755700692343,nan,0.05260755700692343,1,1,1
 135.0,j_psi,charmonium,meson,2.207392397793077,nan,2.207392397793077,1,1,1
+135.0,lambda_c,charmed_baryon,baryon,5.838586433869727,nan,5.838586433869727,1,1,1
+135.0,sigma_c,charmed_baryon,baryon,4.438586445536393,nan,4.438586445536393,1,1,1
 136.0,electron,lepton,elementary,16573.483411447687,nan,16573.483411447687,1,1,1
 136.0,muon,lepton,elementary,155.22157594066044,nan,155.22157594066044,1,1,1
 136.0,pion,pion_like,meson,30.37751768501325,nan,30.37751768501325,0,0,1
@@ -3561,6 +3833,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 136.0,carbon12,nucleus,composite,95.1698399020198,nan,95.1698399020198,1,1,1
 136.0,eta_c,charmonium,meson,26.52248117698677,nan,26.52248117698677,1,1,1
 136.0,j_psi,charmonium,meson,28.78248113178677,nan,28.78248113178677,1,1,1
+136.0,lambda_c,charmed_baryon,baryon,5.234367334478771,nan,5.234367334478771,1,1,1
+136.0,sigma_c,charmed_baryon,baryon,6.634367322812105,nan,6.634367322812105,1,1,1
 137.0,electron,lepton,elementary,18465.139212056187,nan,18465.139212056187,1,1,1
 137.0,muon,lepton,elementary,174.13832122065097,nan,174.13832122065097,1,1,1
 137.0,pion,pion_like,meson,34.160867043679275,nan,34.160867043679275,0,0,1
@@ -3587,6 +3861,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 137.0,carbon12,nucleus,composite,93.27816520377004,nan,93.27816520377004,1,1,1
 137.0,eta_c,charmonium,meson,22.739131818320747,nan,22.739131818320747,1,1,1
 137.0,j_psi,charmonium,meson,24.999131773120748,nan,24.999131773120748,1,1,1
+137.0,lambda_c,charmed_baryon,baryon,3.657971749976646,nan,3.657971749976646,1,1,1
+137.0,sigma_c,charmed_baryon,baryon,5.0579717383099805,nan,5.0579717383099805,1,1,1
 138.0,electron,lepton,elementary,19902.194867084425,nan,19902.194867084425,1,1,1
 138.0,muon,lepton,elementary,188.50902003942898,nan,188.50902003942898,1,1,1
 138.0,pion,pion_like,meson,37.03500703736605,nan,37.03500703736605,0,0,1
@@ -3613,6 +3889,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 138.0,carbon12,nucleus,composite,91.84109519255595,nan,91.84109519255595,1,1,1
 138.0,eta_c,charmonium,meson,19.864991824633968,nan,19.864991824633968,1,1,1
 138.0,j_psi,charmonium,meson,22.124991779433966,nan,22.124991779433966,1,1,1
+138.0,lambda_c,charmed_baryon,baryon,2.460413405302307,nan,2.460413405302307,1,1,1
+138.0,sigma_c,charmed_baryon,baryon,3.8604133936356417,nan,3.8604133936356417,1,1,1
 139.0,electron,lepton,elementary,24745.938145965407,nan,24745.938145965407,1,1,1
 139.0,muon,lepton,elementary,236.94693235877546,nan,236.94693235877546,1,1,1
 139.0,pion,pion_like,meson,46.72259027624193,nan,46.72259027624193,0,0,1
@@ -3639,6 +3917,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 139.0,carbon12,nucleus,composite,86.9973035246801,nan,86.9973035246801,1,1,1
 139.0,eta_c,charmonium,meson,10.177408585758096,nan,10.177408585758096,1,1,1
 139.0,j_psi,charmonium,meson,12.437408540558097,nan,12.437408540558097,1,1,1
+139.0,lambda_c,charmed_baryon,baryon,1.576079657988391,nan,1.576079657988391,1,1,1
+139.0,sigma_c,charmed_baryon,baryon,0.1760796696550561,nan,0.1760796696550561,1,1,1
 140.0,electron,lepton,elementary,18703.812809752395,nan,18703.812809752395,1,1,1
 140.0,muon,lepton,elementary,176.52508082629686,nan,176.52508082629686,1,1,1
 140.0,pion,pion_like,meson,34.63821900299661,nan,34.63821900299661,0,0,1
@@ -3665,6 +3945,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 140.0,carbon12,nucleus,composite,93.03948922172462,nan,93.03948922172462,1,1,1
 140.0,eta_c,charmonium,meson,22.261779859003415,nan,22.261779859003415,1,1,1
 140.0,j_psi,charmonium,meson,24.521779813803413,nan,24.521779813803413,1,1,1
+140.0,lambda_c,charmed_baryon,baryon,3.4590750979406297,nan,3.4590750979406297,1,1,1
+140.0,sigma_c,charmed_baryon,baryon,4.859075086273965,nan,4.859075086273965,1,1,1
 141.0,electron,lepton,elementary,31671.73897372871,nan,31671.73897372871,1,1,1
 141.0,muon,lepton,elementary,306.20562629062186,nan,306.20562629062186,1,1,1
 141.0,pion,pion_like,meson,60.574330170750294,nan,60.574330170750294,0,0,1
@@ -3691,6 +3973,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 141.0,carbon12,nucleus,composite,80.07143350816723,nan,80.07143350816723,1,1,1
 141.0,eta_c,charmonium,meson,3.6743313087502685,nan,3.6743313087502685,1,1,1
 141.0,j_psi,charmonium,meson,1.4143313539502682,nan,1.4143313539502682,1,1,1
+141.0,lambda_c,charmed_baryon,baryon,7.347638014701722,nan,7.347638014701722,1,1,1
+141.0,sigma_c,charmed_baryon,baryon,5.947638026368388,nan,5.947638026368388,1,1,1
 142.0,electron,lepton,elementary,18423.24689170861,nan,18423.24689170861,1,1,1
 142.0,muon,lepton,elementary,173.71939386983593,nan,173.71939386983593,1,1,1
 142.0,pion,pion_like,meson,34.077081566813426,nan,34.077081566813426,0,0,1
@@ -3717,6 +4001,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 142.0,carbon12,nucleus,composite,93.3200579426219,nan,93.3200579426219,1,1,1
 142.0,eta_c,charmonium,meson,22.822917295186592,nan,22.822917295186592,1,1,1
 142.0,j_psi,charmonium,meson,25.08291724998659,nan,25.08291724998659,1,1,1
+142.0,lambda_c,charmed_baryon,baryon,3.6928823657447047,nan,3.6928823657447047,1,1,1
+142.0,sigma_c,charmed_baryon,baryon,5.092882354078039,nan,5.092882354078039,1,1,1
 143.0,electron,lepton,elementary,25538.327168993437,nan,25538.327168993437,1,1,1
 143.0,muon,lepton,elementary,244.8709010355612,nan,244.8709010355612,1,1,1
 143.0,pion,pion_like,meson,48.307384138382574,nan,48.307384138382574,0,0,1
@@ -3743,6 +4029,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 143.0,carbon12,nucleus,composite,86.2049065856858,nan,86.2049065856858,1,1,1
 143.0,eta_c,charmonium,meson,8.592614723617451,nan,8.592614723617451,1,1,1
 143.0,j_psi,charmonium,meson,10.852614678417451,nan,10.852614678417451,1,1,1
+143.0,lambda_c,charmed_baryon,baryon,2.2364104415841854,nan,2.2364104415841854,1,1,1
+143.0,sigma_c,charmed_baryon,baryon,0.8364104532508506,nan,0.8364104532508506,1,1,1
 144.0,electron,lepton,elementary,18265.574568889875,nan,18265.574568889875,1,1,1
 144.0,muon,lepton,elementary,172.14265503209015,nan,172.14265503209015,1,1,1
 144.0,pion,pion_like,meson,33.76173377403645,nan,33.76173377403645,0,0,1
@@ -3769,6 +4057,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 144.0,carbon12,nucleus,composite,93.47773184058711,nan,93.47773184058711,1,1,1
 144.0,eta_c,charmonium,meson,23.138265087963568,nan,23.138265087963568,1,1,1
 144.0,j_psi,charmonium,meson,25.398265042763565,nan,25.398265042763565,1,1,1
+144.0,lambda_c,charmed_baryon,baryon,3.8242772809347185,nan,3.8242772809347185,1,1,1
+144.0,sigma_c,charmed_baryon,baryon,5.224277269268053,nan,5.224277269268053,1,1,1
 145.0,electron,lepton,elementary,19765.231110980872,nan,19765.231110980872,1,1,1
 145.0,muon,lepton,elementary,187.13936891898294,nan,187.13936891898294,1,1,1
 145.0,pion,pion_like,meson,36.76107679136243,nan,36.76107679136243,0,0,1
@@ -3795,6 +4085,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 145.0,carbon12,nucleus,composite,91.97806031692741,nan,91.97806031692741,1,1,1
 145.0,eta_c,charmonium,meson,20.13892207063759,nan,20.13892207063759,1,1,1
 145.0,j_psi,charmonium,meson,22.398922025437592,nan,22.398922025437592,1,1,1
+145.0,lambda_c,charmed_baryon,baryon,2.574551009135423,nan,2.574551009135423,1,1,1
+145.0,sigma_c,charmed_baryon,baryon,3.9745509974687576,nan,3.9745509974687576,1,1,1
 146.0,electron,lepton,elementary,18832.41976427513,nan,18832.41976427513,1,1,1
 146.0,muon,lepton,elementary,177.81116310361142,nan,177.81116310361142,1,1,1
 146.0,pion,pion_like,meson,34.89543547903684,nan,34.89543547903684,0,0,1
@@ -3821,6 +4113,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 146.0,carbon12,nucleus,composite,92.91088098241843,nan,92.91088098241843,1,1,1
 146.0,eta_c,charmonium,meson,22.00456338296318,nan,22.00456338296318,1,1,1
 146.0,j_psi,charmonium,meson,24.26456333776318,nan,24.26456333776318,1,1,1
+146.0,lambda_c,charmed_baryon,baryon,3.351901565006842,nan,3.351901565006842,1,1,1
+146.0,sigma_c,charmed_baryon,baryon,4.7519015533401765,nan,4.7519015533401765,1,1,1
 147.0,electron,lepton,elementary,33604.684621151595,nan,33604.684621151595,1,1,1
 147.0,muon,lepton,elementary,325.5352741264507,nan,325.5352741264507,1,1,1
 147.0,pion,pion_like,meson,64.44026004719042,nan,64.44026004719042,0,0,1
@@ -3847,6 +4141,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 147.0,carbon12,nucleus,composite,78.1384685506175,nan,78.1384685506175,1,1,1
 147.0,eta_c,charmonium,meson,7.540261185190397,nan,7.540261185190397,1,1,1
 147.0,j_psi,charmonium,meson,5.280261230390397,nan,5.280261230390397,1,1,1
+147.0,lambda_c,charmed_baryon,baryon,8.958442148677824,nan,8.958442148677824,1,1,1
+147.0,sigma_c,charmed_baryon,baryon,7.55844216034449,nan,7.55844216034449,1,1,1
 148.0,electron,lepton,elementary,20659.230078857818,nan,20659.230078857818,1,1,1
 148.0,muon,lepton,elementary,196.07944710364134,nan,196.07944710364134,1,1,1
 148.0,pion,pion_like,meson,38.54909257133536,nan,38.54909257133536,0,0,1
@@ -3873,6 +4169,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 148.0,carbon12,nucleus,composite,91.08405241800087,nan,91.08405241800087,1,1,1
 148.0,eta_c,charmonium,meson,18.35090629066466,nan,18.35090629066466,1,1,1
 148.0,j_psi,charmonium,meson,20.610906245464662,nan,20.610906245464662,1,1,1
+148.0,lambda_c,charmed_baryon,baryon,1.8295444254549587,nan,1.8295444254549587,1,1,1
+148.0,sigma_c,charmed_baryon,baryon,3.2295444137882936,nan,3.2295444137882936,1,1,1
 149.0,electron,lepton,elementary,18518.3821697381,nan,18518.3821697381,1,1,1
 149.0,muon,lepton,elementary,174.67075606852234,nan,174.67075606852234,1,1,1
 149.0,pion,pion_like,meson,34.26735402177251,nan,34.26735402177251,0,0,1
@@ -3899,6 +4197,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 149.0,carbon12,nucleus,composite,93.22492171419098,nan,93.22492171419098,1,1,1
 149.0,eta_c,charmonium,meson,22.63264484022751,nan,22.63264484022751,1,1,1
 149.0,j_psi,charmonium,meson,24.89264479502751,nan,24.89264479502751,1,1,1
+149.0,lambda_c,charmed_baryon,baryon,3.613602175253486,nan,3.613602175253486,1,1,1
+149.0,sigma_c,charmed_baryon,baryon,5.013602163586821,nan,5.013602163586821,1,1,1
 150.0,electron,lepton,elementary,38419.66730434299,nan,38419.66730434299,1,1,1
 150.0,muon,lepton,elementary,373.68557764160266,nan,373.68557764160266,1,1,1
 150.0,pion,pion_like,meson,74.07032152062564,nan,74.07032152062564,0,0,1
@@ -3925,6 +4225,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 150.0,carbon12,nucleus,composite,73.32343776574959,nan,73.32343776574959,1,1,1
 150.0,eta_c,charmonium,meson,17.170322658625622,nan,17.170322658625622,1,1,1
 150.0,j_psi,charmonium,meson,14.910322703825623,nan,14.910322703825623,1,1,1
+150.0,lambda_c,charmed_baryon,baryon,12.970967809421968,nan,12.970967809421968,1,1,1
+150.0,sigma_c,charmed_baryon,baryon,11.570967821088633,nan,11.570967821088633,1,1,1
 151.0,electron,lepton,elementary,20821.582155644577,nan,20821.582155644577,1,1,1
 151.0,muon,lepton,elementary,197.70298394436293,nan,197.70298394436293,1,1,1
 151.0,pion,pion_like,meson,38.873799965456264,nan,38.873799965456264,0,0,1
@@ -3951,6 +4253,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 151.0,carbon12,nucleus,composite,90.92169871931688,nan,90.92169871931688,1,1,1
 151.0,eta_c,charmonium,meson,18.026198896543754,nan,18.026198896543754,1,1,1
 151.0,j_psi,charmonium,meson,20.286198851343755,nan,20.286198851343755,1,1,1
+151.0,lambda_c,charmed_baryon,baryon,1.6942496763261425,nan,1.6942496763261425,1,1,1
+151.0,sigma_c,charmed_baryon,baryon,3.0942496646594773,nan,3.0942496646594773,1,1,1
 152.0,electron,lepton,elementary,21772.13735606276,nan,21772.13735606276,1,1,1
 152.0,muon,lepton,elementary,207.20863005350026,nan,207.20863005350026,1,1,1
 152.0,pion,pion_like,meson,40.77492933937406,nan,40.77492933937406,0,0,1
@@ -3977,6 +4281,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 152.0,carbon12,nucleus,composite,89.97113402285234,nan,89.97113402285234,1,1,1
 152.0,eta_c,charmonium,meson,16.12506952262596,nan,16.12506952262596,1,1,1
 152.0,j_psi,charmonium,meson,18.38506947742596,nan,18.38506947742596,1,1,1
+152.0,lambda_c,charmed_baryon,baryon,0.9021124279521264,nan,0.9021124279521264,1,1,1
+152.0,sigma_c,charmed_baryon,baryon,2.3021124162854614,nan,2.3021124162854614,1,1,1
 153.0,electron,lepton,elementary,18615.909237624826,nan,18615.909237624826,1,1,1
 153.0,muon,lepton,elementary,175.6460364025684,nan,175.6460364025684,1,1,1
 153.0,pion,pion_like,meson,34.462410104186205,nan,34.462410104186205,0,0,1
@@ -4003,6 +4309,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 153.0,carbon12,nucleus,composite,93.12739367200886,nan,93.12739367200886,1,1,1
 153.0,eta_c,charmonium,meson,22.437588757813817,nan,22.437588757813817,1,1,1
 153.0,j_psi,charmonium,meson,24.697588712613815,nan,24.697588712613815,1,1,1
+153.0,lambda_c,charmed_baryon,baryon,3.5323288066329237,nan,3.5323288066329237,1,1,1
+153.0,sigma_c,charmed_baryon,baryon,4.932328794966258,nan,4.932328794966258,1,1,1
 154.0,electron,lepton,elementary,27881.26763085881,nan,27881.26763085881,1,1,1
 154.0,muon,lepton,elementary,268.30053760529745,nan,268.30053760529745,1,1,1
 154.0,pion,pion_like,meson,52.993311827203996,nan,52.993311827203996,0,0,1
@@ -4029,6 +4337,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 154.0,carbon12,nucleus,composite,83.86194271784545,nan,83.86194271784545,1,1,1
 154.0,eta_c,charmonium,meson,3.9066870347960223,nan,3.9066870347960223,1,1,1
 154.0,j_psi,charmonium,meson,6.166686989596023,nan,6.166686989596023,1,1,1
+154.0,lambda_c,charmed_baryon,baryon,4.188880334705263,nan,4.188880334705263,1,1,1
+154.0,sigma_c,charmed_baryon,baryon,2.788880346371928,nan,2.788880346371928,1,1,1
 155.0,electron,lepton,elementary,19850.099026637174,nan,19850.099026637174,1,1,1
 155.0,muon,lepton,elementary,187.98805647746875,nan,187.98805647746875,1,1,1
 155.0,pion,pion_like,meson,36.93081431663859,nan,36.93081431663859,0,0,1
@@ -4055,6 +4365,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 155.0,carbon12,nucleus,composite,91.89319155344066,nan,91.89319155344066,1,1,1
 155.0,eta_c,charmonium,meson,19.96918454536143,nan,19.96918454536143,1,1,1
 155.0,j_psi,charmonium,meson,22.229184500161427,nan,22.229184500161427,1,1,1
+155.0,lambda_c,charmed_baryon,baryon,2.5038270394452415,nan,2.5038270394452415,1,1,1
+155.0,sigma_c,charmed_baryon,baryon,3.9038270277785765,nan,3.9038270277785765,1,1,1
 156.0,electron,lepton,elementary,27163.360828598914,nan,27163.360828598914,1,1,1
 156.0,muon,lepton,elementary,261.1213985099322,nan,261.1213985099322,1,1,1
 156.0,pion,pion_like,meson,51.55748389326472,nan,51.55748389326472,0,0,1
@@ -4081,6 +4393,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 156.0,carbon12,nucleus,composite,84.57985669199422,nan,84.57985669199422,1,1,1
 156.0,eta_c,charmonium,meson,5.3425149687352995,nan,5.3425149687352995,1,1,1
 156.0,j_psi,charmonium,meson,7.6025149235353,nan,7.6025149235353,1,1,1
+156.0,lambda_c,charmed_baryon,baryon,3.5906186885841778,nan,3.5906186885841778,1,1,1
+156.0,sigma_c,charmed_baryon,baryon,2.1906187002508433,nan,2.1906187002508433,1,1,1
 157.0,electron,lepton,elementary,18284.47880310465,nan,18284.47880310465,1,1,1
 157.0,muon,lepton,elementary,172.33169924575685,nan,172.33169924575685,1,1,1
 157.0,pion,pion_like,meson,33.7995426197945,nan,33.7995426197945,0,0,1
@@ -4107,6 +4421,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 157.0,carbon12,nucleus,composite,93.45882741751905,nan,93.45882741751905,1,1,1
 157.0,eta_c,charmonium,meson,23.100456242205517,nan,23.100456242205517,1,1,1
 157.0,j_psi,charmonium,meson,25.36045619700552,nan,25.36045619700552,1,1,1
+157.0,lambda_c,charmed_baryon,baryon,3.808523595018405,nan,3.808523595018405,1,1,1
+157.0,sigma_c,charmed_baryon,baryon,5.20852358335174,nan,5.20852358335174,1,1,1
 158.0,electron,lepton,elementary,18683.36664242547,nan,18683.36664242547,1,1,1
 158.0,muon,lepton,elementary,176.3206171288572,nan,176.3206171288572,1,1,1
 158.0,pion,pion_like,meson,34.59732626023726,nan,34.59732626023726,0,0,1
@@ -4133,6 +4449,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 158.0,carbon12,nucleus,composite,93.05993559330875,nan,93.05993559330875,1,1,1
 158.0,eta_c,charmonium,meson,22.302672601762758,nan,22.302672601762758,1,1,1
 158.0,j_psi,charmonium,meson,24.56267255656276,nan,24.56267255656276,1,1,1
+158.0,lambda_c,charmed_baryon,baryon,3.476113740955808,nan,3.476113740955808,1,1,1
+158.0,sigma_c,charmed_baryon,baryon,4.876113729289143,nan,4.876113729289143,1,1,1
 159.0,electron,lepton,elementary,19680.418152724997,nan,19680.418152724997,1,1,1
 159.0,muon,lepton,elementary,186.29123093994215,nan,186.29123093994215,1,1,1
 159.0,pion,pion_like,meson,36.59144918198407,nan,36.59144918198407,0,0,1
@@ -4159,6 +4477,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 159.0,carbon12,nucleus,composite,92.06287412246473,nan,92.06287412246473,1,1,1
 159.0,eta_c,charmonium,meson,20.308549680015954,nan,20.308549680015954,1,1,1
 159.0,j_psi,charmonium,meson,22.568549634815955,nan,22.568549634815955,1,1,1
+159.0,lambda_c,charmed_baryon,baryon,2.6452291805343195,nan,2.6452291805343195,1,1,1
+159.0,sigma_c,charmed_baryon,baryon,4.045229168867654,nan,4.045229168867654,1,1,1
 160.0,electron,lepton,elementary,17185.44249476788,nan,17185.44249476788,1,1,1
 160.0,muon,lepton,elementary,161.34122735780556,nan,161.34122735780556,1,1,1
 160.0,pion,pion_like,meson,31.601448066356696,nan,31.601448066356696,0,0,1
@@ -4185,6 +4505,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 160.0,carbon12,nucleus,composite,94.55787470522841,nan,94.55787470522841,1,1,1
 160.0,eta_c,charmonium,meson,25.298550795643322,nan,25.298550795643322,1,1,1
 160.0,j_psi,charmonium,meson,27.558550750443324,nan,27.558550750443324,1,1,1
+160.0,lambda_c,charmed_baryon,baryon,4.724396336302673,nan,4.724396336302673,1,1,1
+160.0,sigma_c,charmed_baryon,baryon,6.124396324636008,nan,6.124396324636008,1,1,1
 161.0,electron,lepton,elementary,28778.671795769875,nan,28778.671795769875,1,1,1
 161.0,muon,lepton,elementary,277.27466809741156,nan,277.27466809741156,1,1,1
 161.0,pion,pion_like,meson,54.7881380692129,nan,54.7881380692129,0,0,1
@@ -4211,6 +4533,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 161.0,carbon12,nucleus,composite,82.96452958786688,nan,82.96452958786688,1,1,1
 161.0,eta_c,charmonium,meson,2.1118607927871147,nan,2.1118607927871147,1,1,1
 161.0,j_psi,charmonium,meson,4.371860747587116,nan,4.371860747587116,1,1,1
+161.0,lambda_c,charmed_baryon,baryon,4.936724610933823,nan,4.936724610933823,1,1,1
+161.0,sigma_c,charmed_baryon,baryon,3.536724622600489,nan,3.536724622600489,1,1,1
 162.0,electron,lepton,elementary,37865.94502696271,nan,37865.94502696271,1,1,1
 162.0,muon,lepton,elementary,368.14830004929985,nan,368.14830004929985,1,1,1
 162.0,pion,pion_like,meson,72.96286591356863,nan,72.96286591356863,0,0,1
@@ -4237,6 +4561,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 162.0,carbon12,nucleus,composite,73.87716557481536,nan,73.87716557481536,1,1,1
 162.0,eta_c,charmonium,meson,16.062867051568624,nan,16.062867051568624,1,1,1
 162.0,j_psi,charmonium,meson,13.802867096768624,nan,13.802867096768624,1,1,1
+162.0,lambda_c,charmed_baryon,baryon,12.509527967764752,nan,12.509527967764752,1,1,1
+162.0,sigma_c,charmed_baryon,baryon,11.109527979431418,nan,11.109527979431418,1,1,1
 163.0,electron,lepton,elementary,21385.575765983347,nan,21385.575765983347,1,1,1
 163.0,muon,lepton,elementary,203.3429758831125,nan,203.3429758831125,1,1,1
 163.0,pion,pion_like,meson,40.001798443446035,nan,40.001798443446035,0,0,1
@@ -4263,6 +4589,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 163.0,carbon12,nucleus,composite,90.35769947468201,nan,90.35769947468201,1,1,1
 163.0,eta_c,charmonium,meson,16.898200418553976,nan,16.898200418553976,1,1,1
 163.0,j_psi,charmonium,meson,19.158200373353978,nan,19.158200373353978,1,1,1
+163.0,lambda_c,charmed_baryon,baryon,1.2242503050137425,nan,1.2242503050137425,1,1,1
+163.0,sigma_c,charmed_baryon,baryon,2.6242502933470773,nan,2.6242502933470773,1,1,1
 164.0,electron,lepton,elementary,20626.093944803986,nan,20626.093944803986,1,1,1
 164.0,muon,lepton,elementary,195.7480824826261,nan,195.7480824826261,1,1,1
 164.0,pion,pion_like,meson,38.482819641830474,nan,38.482819641830474,0,0,1
@@ -4289,6 +4617,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 164.0,carbon12,nucleus,composite,91.11718888308468,nan,91.11718888308468,1,1,1
 164.0,eta_c,charmonium,meson,18.417179220169544,nan,18.417179220169544,1,1,1
 164.0,j_psi,charmonium,meson,20.677179174969545,nan,20.677179174969545,1,1,1
+164.0,lambda_c,charmed_baryon,baryon,1.8571581464041538,nan,1.8571581464041538,1,1,1
+164.0,sigma_c,charmed_baryon,baryon,3.2571581347374883,nan,3.2571581347374883,1,1,1
 165.0,electron,lepton,elementary,19571.651857963243,nan,19571.651857963243,1,1,1
 165.0,muon,lepton,elementary,185.20355722446251,nan,185.20355722446251,1,1,1
 165.0,pion,pion_like,meson,36.37391442148536,nan,36.37391442148536,0,0,1
@@ -4315,6 +4645,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 165.0,carbon12,nucleus,composite,92.17164150380177,nan,92.17164150380177,1,1,1
 165.0,eta_c,charmonium,meson,20.526084440514662,nan,20.526084440514662,1,1,1
 165.0,j_psi,charmonium,meson,22.786084395314663,nan,22.786084395314663,1,1,1
+165.0,lambda_c,charmed_baryon,baryon,2.7358686651329087,nan,2.7358686651329087,1,1,1
+165.0,sigma_c,charmed_baryon,baryon,4.135868653466243,nan,4.135868653466243,1,1,1
 166.0,electron,lepton,elementary,18110.27341413977,nan,18110.27341413977,1,1,1
 166.0,muon,lepton,elementary,170.5896281097763,nan,170.5896281097763,1,1,1
 166.0,pion,pion_like,meson,33.45112836472526,nan,33.45112836472526,0,0,1
@@ -4341,6 +4673,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 166.0,carbon12,nucleus,composite,93.63303454679574,nan,93.63303454679574,1,1,1
 166.0,eta_c,charmonium,meson,23.448870497274765,nan,23.448870497274765,1,1,1
 166.0,j_psi,charmonium,meson,25.708870452074766,nan,25.708870452074766,1,1,1
+166.0,lambda_c,charmed_baryon,baryon,3.9536962029909386,nan,3.9536962029909386,1,1,1
+166.0,sigma_c,charmed_baryon,baryon,5.353696191324273,nan,5.353696191324273,1,1,1
 167.0,electron,lepton,elementary,17765.3357988899,nan,17765.3357988899,1,1,1
 167.0,muon,lepton,elementary,167.14021780845712,nan,167.14021780845712,1,1,1
 167.0,pion,pion_like,meson,32.761246249270854,nan,32.761246249270854,0,0,1
@@ -4367,6 +4701,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 167.0,carbon12,nucleus,composite,93.97797560797234,nan,93.97797560797234,1,1,1
 167.0,eta_c,charmonium,meson,24.138752612729164,nan,24.138752612729164,1,1,1
 167.0,j_psi,charmonium,meson,26.398752567529165,nan,26.398752567529165,1,1,1
+167.0,lambda_c,charmed_baryon,baryon,4.241147087783865,nan,4.241147087783865,1,1,1
+167.0,sigma_c,charmed_baryon,baryon,5.6411470761172,nan,5.6411470761172,1,1,1
 168.0,electron,lepton,elementary,18658.145656566343,nan,18658.145656566343,1,1,1
 168.0,muon,lepton,elementary,176.0684047733886,nan,176.0684047733886,1,1,1
 168.0,pion,pion_like,meson,34.54688378510814,nan,34.54688378510814,0,0,1
@@ -4393,6 +4729,8 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 168.0,carbon12,nucleus,composite,93.08515683112553,nan,93.08515683112553,1,1,1
 168.0,eta_c,charmonium,meson,22.35311507689188,nan,22.35311507689188,1,1,1
 168.0,j_psi,charmonium,meson,24.61311503169188,nan,24.61311503169188,1,1,1
+168.0,lambda_c,charmed_baryon,baryon,3.4971314391714805,nan,3.4971314391714805,1,1,1
+168.0,sigma_c,charmed_baryon,baryon,4.8971314275048154,nan,4.8971314275048154,1,1,1
 169.0,electron,lepton,elementary,19302.488086686983,nan,19302.488086686983,1,1,1
 169.0,muon,lepton,elementary,182.5118928644892,nan,182.5118928644892,1,1,1
 169.0,pion,pion_like,meson,35.83558150642406,nan,35.83558150642406,0,0,1
@@ -4419,3 +4757,117 @@ run_id,target_name,family,type,d_total,d_spacing,d_mass,enough_levels_full,enoug
 169.0,carbon12,nucleus,composite,92.44080796402407,nan,92.44080796402407,1,1,1
 169.0,eta_c,charmonium,meson,21.064417355575955,nan,21.064417355575955,1,1,1
 169.0,j_psi,charmonium,meson,23.324417310375953,nan,23.324417310375953,1,1,1
+169.0,lambda_c,charmed_baryon,baryon,2.9601740490253423,nan,2.9601740490253423,1,1,1
+169.0,sigma_c,charmed_baryon,baryon,4.360174037358677,nan,4.360174037358677,1,1,1
+170.0,electron,lepton,elementary,16777.62053023506,nan,16777.62053023506,1,1,1
+170.0,muon,lepton,elementary,157.2629673381069,nan,157.2629673381069,1,1,1
+170.0,pion,pion_like,meson,30.785795997164804,nan,30.785795997164804,0,0,1
+170.0,quark_ud_const,quark_like,constituent,8.98859881103625,nan,8.98859881103625,0,0,1
+170.0,quark_s_const,quark_like,constituent,7.9885988177029175,nan,7.9885988177029175,0,0,1
+170.0,eta,eta_like,meson,18.85483019648677,nan,18.85483019648677,0,0,1
+170.0,rho,rho_like,meson,11.291122741911419,nan,11.291122741911419,0,0,1
+170.0,omega_782,omega_like,meson,17.9257962543648,nan,17.9257962543648,0,0,1
+170.0,proton,baryon,baryon,14.805796316764802,nan,14.805796316764802,0,0,1
+170.0,neutron,baryon,baryon,14.7857963171648,nan,14.7857963171648,0,0,1
+170.0,eta_prime,eta_prime_like,meson,14.4057963247648,nan,14.4057963247648,1,1,1
+170.0,phi,phi_like,meson,16.482245354044778,nan,16.482245354044778,0,0,1
+170.0,lambda,baryon,baryon,11.2657963875648,nan,11.2657963875648,1,1,1
+170.0,sigma,baryon,baryon,9.785796417164798,nan,9.785796417164798,0,0,1
+170.0,delta_1232,delta_like,baryon,4.462898261811381,nan,4.462898261811381,1,1,1
+170.0,delta_1600,delta_like,baryon,0.7828982986113797,nan,0.7828982986113797,1,1,1
+170.0,delta_1900,delta_like,baryon,2.2171016713886185,nan,2.2171016713886185,1,1,1
+170.0,tau,lepton,elementary,4.935508221022767,nan,4.935508221022767,1,1,1
+170.0,deuteron,nucleus,composite,13.154010413463546,nan,13.154010413463546,1,1,1
+170.0,triton,nucleus,composite,14.132626940291708,nan,14.132626940291708,1,1,1
+170.0,helium3,nucleus,composite,14.12637694036983,nan,14.12637694036983,1,1,1
+170.0,alpha,nucleus,composite,68.30367003507646,nan,68.30367003507646,1,1,1
+170.0,beryllium8,nucleus,composite,115.53120107649525,nan,115.53120107649525,1,1,1
+170.0,carbon12,nucleus,composite,94.96570074390263,nan,94.96570074390263,1,1,1
+170.0,eta_c,charmonium,meson,26.114202864835214,nan,26.114202864835214,1,1,1
+170.0,j_psi,charmonium,meson,28.374202819635215,nan,28.374202819635215,1,1,1
+170.0,lambda_c,charmed_baryon,baryon,5.064251369097603,nan,5.064251369097603,1,1,1
+170.0,sigma_c,charmed_baryon,baryon,6.464251357430937,nan,6.464251357430937,1,1,1
+171.0,electron,lepton,elementary,22464.135689965213,nan,22464.135689965213,1,1,1
+171.0,muon,lepton,elementary,214.12868190035294,nan,214.12868190035294,1,1,1
+171.0,pion,pion_like,meson,42.158939819465424,nan,42.158939819465424,0,0,1
+171.0,quark_ud_const,quark_like,constituent,12.77964680235043,nan,12.77964680235043,0,0,1
+171.0,quark_s_const,quark_like,constituent,11.779646809017096,nan,11.779646809017096,0,0,1
+171.0,eta,eta_like,meson,28.33245007999602,nan,28.33245007999602,0,0,1
+171.0,rho,rho_like,meson,18.39933768416092,nan,18.39933768416092,0,0,1
+171.0,omega_782,omega_like,meson,29.29894007666542,nan,29.29894007666542,0,0,1
+171.0,proton,baryon,baryon,26.17894013906542,nan,26.17894013906542,0,0,1
+171.0,neutron,baryon,baryon,26.158940139465418,nan,26.158940139465418,0,0,1
+171.0,eta_prime,eta_prime_like,meson,25.77894014706542,nan,25.77894014706542,1,1,1
+171.0,phi,phi_like,meson,30.698675060838408,nan,30.698675060838408,0,0,1
+171.0,lambda,baryon,baryon,22.63894020986542,nan,22.63894020986542,1,1,1
+171.0,sigma,baryon,baryon,21.15894023946542,nan,21.15894023946542,0,0,1
+171.0,delta_1232,delta_like,baryon,10.14947022982741,nan,10.14947022982741,1,1,1
+171.0,delta_1600,delta_like,baryon,6.469470266627408,nan,6.469470266627408,1,1,1
+171.0,delta_1900,delta_like,baryon,3.46947029662741,nan,3.46947029662741,1,1,1
+171.0,tau,lepton,elementary,23.49735048174304,nan,23.49735048174304,1,1,1
+171.0,deuteron,nucleus,composite,24.756467225049605,nan,24.756467225049605,1,1,1
+171.0,triton,nucleus,composite,7.024411998042209,nan,7.024411998042209,1,1,1
+171.0,helium3,nucleus,composite,7.018161998120332,nan,7.018161998120332,1,1,1
+171.0,alpha,nucleus,composite,49.348430583978605,nan,49.348430583978605,1,1,1
+171.0,beryllium8,nucleus,composite,104.15805725419463,nan,104.15805725419463,1,1,1
+171.0,carbon12,nucleus,composite,89.2791287758866,nan,89.2791287758866,1,1,1
+171.0,eta_c,charmonium,meson,14.741059042534594,nan,14.741059042534594,1,1,1
+171.0,j_psi,charmonium,meson,17.001058997334596,nan,17.001058997334596,1,1,1
+171.0,lambda_c,charmed_baryon,baryon,0.32544138785289517,nan,0.32544138785289517,1,1,1
+171.0,sigma_c,charmed_baryon,baryon,1.72544137618623,nan,1.72544137618623,1,1,1
+172.0,electron,lepton,elementary,19191.799757411343,nan,19191.799757411343,1,1,1
+172.0,muon,lepton,elementary,181.40499861358933,nan,181.40499861358933,1,1,1
+172.0,pion,pion_like,meson,35.61420263853378,nan,35.61420263853378,0,0,1
+172.0,quark_ud_const,quark_like,constituent,10.598067712952162,nan,10.598067712952162,0,0,1
+172.0,quark_s_const,quark_like,constituent,9.598067719618829,nan,9.598067719618829,0,0,1
+172.0,eta,eta_like,meson,22.878502411039825,nan,22.878502411039825,0,0,1
+172.0,rho,rho_like,meson,14.308876915400186,nan,14.308876915400186,0,0,1
+172.0,omega_782,omega_like,meson,22.754202895733776,nan,22.754202895733776,0,0,1
+172.0,proton,baryon,baryon,19.634202958133777,nan,19.634202958133777,0,0,1
+172.0,neutron,baryon,baryon,19.614202958533777,nan,19.614202958533777,0,0,1
+172.0,eta_prime,eta_prime_like,meson,19.23420296613378,nan,19.23420296613378,1,1,1
+172.0,phi,phi_like,meson,22.517753625578457,nan,22.517753625578457,0,0,1
+172.0,lambda,baryon,baryon,16.094203028933777,nan,16.094203028933777,1,1,1
+172.0,sigma,baryon,baryon,14.614203058533775,nan,14.614203058533775,0,0,1
+172.0,delta_1232,delta_like,baryon,6.877101606637902,nan,6.877101606637902,1,1,1
+172.0,delta_1600,delta_like,baryon,3.197101643437901,nan,3.197101643437901,1,1,1
+172.0,delta_1900,delta_like,baryon,0.1971016734379027,nan,0.1971016734379027,1,1,1
+172.0,tau,lepton,elementary,7.135508020269196,nan,7.135508020269196,1,1,1
+172.0,deuteron,nucleus,composite,2.9406776400142856,nan,2.9406776400142856,1,1,1
+172.0,triton,nucleus,composite,11.114872766802941,nan,11.114872766802941,1,1,1
+172.0,helium3,nucleus,composite,11.108622766881064,nan,11.108622766881064,1,1,1
+172.0,alpha,nucleus,composite,60.25632574009274,nan,60.25632574009274,1,1,1
+172.0,beryllium8,nucleus,composite,110.70279443512628,nan,110.70279443512628,1,1,1
+172.0,carbon12,nucleus,composite,92.55149739907611,nan,92.55149739907611,1,1,1
+172.0,eta_c,charmonium,meson,21.28579622346624,nan,21.28579622346624,1,1,1
+172.0,j_psi,charmonium,meson,23.545796178266237,nan,23.545796178266237,1,1,1
+172.0,lambda_c,charmed_baryon,baryon,3.0524152450557747,nan,3.0524152450557747,1,1,1
+172.0,sigma_c,charmed_baryon,baryon,4.452415233389109,nan,4.452415233389109,1,1,1
+173.0,electron,lepton,elementary,36991.08353851986,nan,36991.08353851986,1,1,1
+173.0,muon,lepton,elementary,359.3995985535926,nan,359.3995985535926,1,1,1
+173.0,pion,pion_like,meson,71.21312547444798,nan,71.21312547444798,0,0,1
+173.0,quark_ud_const,quark_like,constituent,22.464375483140994,nan,22.464375483140994,0,0,1
+173.0,quark_s_const,quark_like,constituent,21.46437548980766,nan,21.46437548980766,0,0,1
+173.0,eta,eta_like,meson,52.544271539854215,nan,52.544271539854215,0,0,1
+173.0,rho,rho_like,meson,36.55820385471651,nan,36.55820385471651,0,0,1
+173.0,omega_782,omega_like,meson,58.35312573164798,nan,58.35312573164798,0,0,1
+173.0,proton,baryon,baryon,55.23312579404798,nan,55.23312579404798,0,0,1
+173.0,neutron,baryon,baryon,55.213125794447976,nan,55.213125794447976,0,0,1
+173.0,eta_prime,eta_prime_like,meson,54.833125802047974,nan,54.833125802047974,1,1,1
+173.0,phi,phi_like,meson,67.01640694797794,nan,67.01640694797794,0,0,1
+173.0,lambda,baryon,baryon,51.69312586484797,nan,51.69312586484797,1,1,1
+173.0,sigma,baryon,baryon,50.21312589444797,nan,50.21312589444797,0,0,1
+173.0,delta_1232,delta_like,baryon,24.676563202589612,nan,24.676563202589612,1,1,1
+173.0,delta_1600,delta_like,baryon,20.996563239389612,nan,20.996563239389612,1,1,1
+173.0,delta_1900,delta_like,baryon,17.996563269389615,nan,17.996563269389615,1,1,1
+173.0,tau,lepton,elementary,96.13281244013561,nan,96.13281244013561,1,1,1
+173.0,deuteron,nucleus,composite,121.60374822211844,nan,121.60374822211844,1,1,1
+173.0,triton,nucleus,composite,11.134454172513381,nan,11.134454172513381,1,1,1
+173.0,helium3,nucleus,composite,11.140704172435258,nan,11.140704172435258,1,1,1
+173.0,alpha,nucleus,composite,0.9247884713228903,nan,0.9247884713228903,1,1,1
+173.0,beryllium8,nucleus,composite,75.10387159921208,nan,75.10387159921208,1,1,1
+173.0,carbon12,nucleus,composite,74.7520358031244,nan,74.7520358031244,1,1,1
+173.0,eta_c,charmonium,meson,14.31312661244796,nan,14.31312661244796,1,1,1
+173.0,j_psi,charmonium,meson,12.05312665764796,nan,12.05312665764796,1,1,1
+173.0,lambda_c,charmed_baryon,baryon,11.780469442958793,nan,11.780469442958793,1,1,1
+173.0,sigma_c,charmed_baryon,baryon,10.380469454625459,nan,10.380469454625459,1,1,1

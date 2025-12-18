@@ -261,6 +261,26 @@
       "masses_gev": [3.097],
       "widths_gev": [0.00009],
       "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "lambda_c",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.28646,
+      "masses_gev": [2.286],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.12, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "sigma_c",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.45397,
+      "masses_gev": [2.454],
+      "widths_gev": [0.002],
+      "tolerances": {"mass_abs": 0.12, "width_abs": 0.0, "spacing_rel": 0.2}
     }
   ]
 }
