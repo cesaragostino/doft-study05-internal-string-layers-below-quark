@@ -33,6 +33,28 @@
       "runs_per_target": 5000,
       "d_yes_match": 3.0,
       "d_possible_match": 8.0
+    },
+    {
+      "name": "boron11_synthesis",
+      "particle_name": "boron11",
+      "type": "nucleus",
+      "templates": ["triangle_boron"],
+      "allowed_block_families": ["nucleus"],
+      "allowed_particle_names": ["alpha", "triton"],
+      "runs_per_target": 10000,
+      "d_yes_match": 2.0,
+      "d_possible_match": 6.0
+    },
+    {
+      "name": "magnesium24_synthesis",
+      "particle_name": "magnesium24",
+      "type": "nucleus",
+      "templates": ["octahedron_alpha"],
+      "allowed_block_families": ["nucleus"],
+      "allowed_particle_names": ["alpha"],
+      "runs_per_target": 10000,
+      "d_yes_match": 3.0,
+      "d_possible_match": 8.0
     }
   ],
   "templates_definitions": [
@@ -53,6 +75,13 @@
       "nodes": 6,
       "edges": "ALL_TO_ALL", 
       "coupling_mode": "strong_residual"
+    },
+    {
+      "name": "triangle_boron",
+      "nodes": 3,
+      "edges": [[0, 1], [1, 2], [2, 0]], 
+      "coupling_mode": "strong_residual",
+      "composition": {"alpha": 2, "triton": 1} 
     }
   ]
 }

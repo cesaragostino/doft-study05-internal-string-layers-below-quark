@@ -9,17 +9,19 @@ Nota: $\gamma$ es el acople configurado en Ola2 (p.ej. 0.007); $Q_{lock}$ es la 
 ## Termómetro cósmico (Ola1 → Ola2)
 | Métrica | Promedio Ola1 (inputs) | Promedio Ola2 (éxitos) | Δ (Ola2 - Ola1) |
 |---------|------------------------|------------------------|-----------------|
-| Caos dinámico (PE) | 0.702 | 0.842 | +0.140 |
-| Entropía (H_lock) | 0.0052 | 0.0070 | +0.0019 |
+| Caos dinámico (PE) | 0.701 | 0.842 | +0.141 |
+| Entropía (H_lock) | 0.0052 | 0.0070 | +0.0018 |
 | Dynamic Strain (1-R_final) | n/a | 0.0017 | n/a |
 
 ## Rendimiento del reactor
 | Target | Runs | Éxitos | Éxito % | geometry_mismatch | no_lock | otros |
 |--------|------|--------|---------|-------------------|---------|-------|
 | alpha_synthesis_pure | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
+| boron11_synthesis | 10000 | 236 | 2.4% | 0 | 1 | 9763 |
 | carbon12_triple_alpha | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
 | deuteron_synthesis_strict | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
 | magnesium24_fusion | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
+| magnesium24_synthesis | 10000 | 0 | 0.0% | 0 | 0 | 10000 |
 | open_cluster_scan | 10000 | 9959 | 99.6% | 0 | 41 | 0 |
 | oxygen16_from_deuterons_fc6 | 10000 | 23 | 0.2% | 0 | 0 | 9977 |
 | oxygen16_from_deuterons_fc8 | 10000 | 7 | 0.1% | 0 | 0 | 9993 |
@@ -30,9 +32,11 @@ Nota: $\gamma$ es el acople configurado en Ola2 (p.ej. 0.007); $Q_{lock}$ es la 
 | Target | ⟨Σm⟩ | ⟨M_final⟩ | ⟨E_b⟩ | ⟨E_b⟩/nodo |
 |--------|------|-----------|-------|------------|
 | alpha_synthesis_pure | nan | nan | nan | nan |
+| boron11_synthesis | 3.000 | 2.981 | 0.0190 | 0.0063 |
 | carbon12_triple_alpha | nan | nan | nan | nan |
 | deuteron_synthesis_strict | nan | nan | nan | nan |
 | magnesium24_fusion | nan | nan | nan | nan |
+| magnesium24_synthesis | nan | nan | nan | nan |
 | open_cluster_scan | 3.511 | 3.487 | 0.0240 | 0.0068 |
 | oxygen16_from_deuterons_fc6 | 6.000 | 5.958 | 0.0419 | 0.0070 |
 | oxygen16_from_deuterons_fc8 | 8.000 | 7.944 | 0.0558 | 0.0070 |
@@ -57,9 +61,11 @@ Nota: $\gamma$ es el acople configurado en Ola2 (p.ej. 0.007); $Q_{lock}$ es la 
 | Target | ⟨memory_score_k10⟩ | ⟨Dynamic Strain⟩ | ⟨grado efectivo⟩ |
 |--------|--------------------|-------------------|------------------|
 | alpha_synthesis_pure | nan | nan | nan |
+| boron11_synthesis | 0.8091 | 0.0013 | 2.000 |
 | carbon12_triple_alpha | nan | nan | nan |
 | deuteron_synthesis_strict | nan | nan | nan |
 | magnesium24_fusion | nan | nan | nan |
+| magnesium24_synthesis | nan | nan | nan |
 | open_cluster_scan | 0.8056 | 0.0017 | 2.184 |
 | oxygen16_from_deuterons_fc6 | 0.8907 | 0.0021 | 5.000 |
 | oxygen16_from_deuterons_fc8 | 0.9478 | 0.0031 | 7.000 |
@@ -67,6 +73,31 @@ Nota: $\gamma$ es el acople configurado en Ola2 (p.ej. 0.007); $Q_{lock}$ es la 
 | oxygen16_tetra_alpha | nan | nan | nan |
 
 ## Compuestos aceptados (detalle)
+### boron11_synthesis
+| run_id | Σm | M_final | E_b | R_final | Q_lock | PE | H_block | Partículas |
+|--------|----|---------|-----|---------|--------|----|---------|------------|
+| 190 | 3.000 | 2.979 | 0.0210 | 1.000 | 0.999 | 0.833 | 0.0066 | triton, triton, triton |
+| 221 | 3.000 | 2.986 | 0.0140 | 0.997 | 0.667 | 0.841 | 0.0056 | triton, triton, triton |
+| 253 | 3.000 | 2.986 | 0.0140 | 0.997 | 0.667 | 0.870 | 0.0048 | triton, triton, triton |
+| 304 | 3.000 | 2.979 | 0.0210 | 0.999 | 0.999 | 0.873 | 0.0061 | triton, triton, triton |
+| 452 | 3.000 | 2.979 | 0.0210 | 0.999 | 1.000 | 0.832 | 0.0035 | triton, triton, triton |
+| 453 | 3.000 | 2.979 | 0.0210 | 0.999 | 1.000 | 0.851 | 0.0014 | triton, triton, triton |
+| 476 | 3.000 | 2.979 | 0.0210 | 1.000 | 1.000 | 0.853 | 0.0025 | triton, triton, triton |
+| 503 | 3.000 | 2.986 | 0.0140 | 0.998 | 0.666 | 0.806 | 0.0065 | triton, triton, triton |
+| 584 | 3.000 | 2.979 | 0.0210 | 1.000 | 1.000 | 0.836 | 0.0023 | triton, triton, triton |
+| 624 | 3.000 | 2.979 | 0.0209 | 0.996 | 0.999 | 0.838 | 0.0046 | triton, triton, triton |
+| 638 | 3.000 | 2.979 | 0.0209 | 0.997 | 0.999 | 0.878 | 0.0042 | triton, triton, triton |
+| 659 | 3.000 | 2.979 | 0.0210 | 0.999 | 1.000 | 0.855 | 0.0029 | triton, triton, triton |
+| 716 | 3.000 | 2.993 | 0.0070 | 0.999 | 0.334 | 0.834 | 0.0072 | triton, triton, triton |
+| 719 | 3.000 | 2.986 | 0.0140 | 0.999 | 0.667 | 0.852 | 0.0050 | triton, triton, triton |
+| 774 | 3.000 | 2.986 | 0.0140 | 0.999 | 0.667 | 0.851 | 0.0051 | triton, triton, triton |
+| 778 | 3.000 | 2.979 | 0.0210 | 0.999 | 1.000 | 0.867 | 0.0011 | triton, triton, triton |
+| 789 | 3.000 | 2.979 | 0.0210 | 1.000 | 0.999 | 0.874 | 0.0050 | triton, triton, triton |
+| 809 | 3.000 | 2.979 | 0.0209 | 0.996 | 0.999 | 0.813 | 0.0061 | triton, triton, triton |
+| 833 | 3.000 | 2.986 | 0.0140 | 1.000 | 0.667 | 0.843 | 0.0036 | triton, triton, triton |
+| 834 | 3.000 | 2.986 | 0.0140 | 0.999 | 0.667 | 0.870 | 0.0045 | triton, triton, triton |
+_(216 más…)_
+
 ### open_cluster_scan
 | run_id | Σm | M_final | E_b | R_final | Q_lock | PE | H_block | Partículas |
 |--------|----|---------|-----|---------|--------|----|---------|------------|
