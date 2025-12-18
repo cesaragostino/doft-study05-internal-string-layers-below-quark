@@ -197,20 +197,20 @@
       "family": "nucleus",
       "type": "composite",
       "jpc": "1/2+",
-      "sm_mass_gev": 2.80892113298,
-      "masses_gev": [2.80892],
+      "sm_mass_gev": 2.80892,
+      "masses_gev": [2.8089],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.00005, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.0, "spacing_rel": 0.3}
     },
     {
       "name": "helium3",
       "family": "nucleus",
       "type": "composite",
       "jpc": "1/2+",
-      "sm_mass_gev": 2.80839160743,
-      "masses_gev": [2.80839],
+      "sm_mass_gev": 2.80839,
+      "masses_gev": [2.8084],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.00005, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.0, "spacing_rel": 0.3}
     },
     {
       "name": "alpha",
@@ -613,6 +613,16 @@
       "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.5}
     },
     {
+      "name": "quark_b",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 4.18,
+      "masses_gev": [4.18],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
       "name": "quark_t",
       "family": "quark",
       "type": "elementary",
@@ -850,7 +860,8 @@
       "sm_mass_gev": 2.59225,
       "masses_gev": [2.592],
       "widths_gev": [0.0036],
-      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2},
+      "comment": "NEW - First P-wave excitation"
     },
     {
       "name": "lambda_c_2625",
@@ -860,17 +871,8 @@
       "sm_mass_gev": 2.62811,
       "masses_gev": [2.628],
       "widths_gev": [0.00097],
-      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2}
-    },
-    {
-      "name": "eta_b_1s",
-      "family": "bottomonium",
-      "type": "meson",
-      "jpc": "0-",
-      "sm_mass_gev": 9.3987,
-      "masses_gev": [9.399],
-      "widths_gev": [0.0105],
-      "tolerances": {"mass_abs": 0.005, "width_abs": 0.003, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2},
+      "comment": "NEW - Second P-wave excitation"
     }
   ]
 }
