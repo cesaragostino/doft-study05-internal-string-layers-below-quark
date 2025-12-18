@@ -2,8 +2,8 @@
   "hbar_sim": 0.306576287961637,
   "units": "GeV per rad/time_unit",
   "n_used": 32,
-  "n_rejected": 31,
-  "omega0": 5.953299112979942,
+  "n_rejected": 32,
+  "omega0": 5.953753455321381,
   "cluster_tol_rel": 0.1,
   "h_i_percentiles": {
     "p10": 0.29203914454239444,
