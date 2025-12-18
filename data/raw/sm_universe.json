@@ -391,6 +391,56 @@
       "masses_gev": [2.468],
       "widths_gev": [0.0],
       "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "rho_1700",
+      "family": "rho_like",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 1.720,
+      "masses_gev": [1.720],
+      "widths_gev": [0.250],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "nucleon_1720",
+      "family": "nucleon_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.720,
+      "masses_gev": [1.720],
+      "widths_gev": [0.200],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "sigma_1775",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "5/2-",
+      "sm_mass_gev": 1.775,
+      "masses_gev": [1.775],
+      "widths_gev": [0.120],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "chi_c0",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0+",
+      "sm_mass_gev": 3.4147,
+      "masses_gev": [3.415],
+      "widths_gev": [0.010],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "delta_1900",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.900,
+      "masses_gev": [1.900],
+      "widths_gev": [0.200],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.1, "spacing_rel": 0.1}
     }
   ]
 }
