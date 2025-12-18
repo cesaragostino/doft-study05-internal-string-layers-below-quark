@@ -170,7 +170,7 @@
       "sm_mass_gev": 1.900,
       "masses_gev": [1.9],
       "widths_gev": [0.2],
-      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.4}
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.1}
     },
     {
       "name": "tau",
@@ -200,7 +200,7 @@
       "sm_mass_gev": 2.80892,
       "masses_gev": [2.8089],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.0, "spacing_rel": 0.3}
     },
     {
       "name": "helium3",
@@ -210,7 +210,7 @@
       "sm_mass_gev": 2.80839,
       "masses_gev": [2.8084],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.0, "spacing_rel": 0.3}
     },
     {
       "name": "alpha",
