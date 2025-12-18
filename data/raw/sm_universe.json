@@ -441,6 +441,36 @@
       "masses_gev": [1.900],
       "widths_gev": [0.200],
       "tolerances": {"mass_abs": 0.04, "width_abs": 0.1, "spacing_rel": 0.1}
+    },
+    {
+      "name": "chi_c1",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1+",
+      "sm_mass_gev": 3.51067,
+      "masses_gev": [3.511],
+      "widths_gev": [0.00084],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15}
+    },
+    {
+      "name": "chi_c2",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "2+",
+      "sm_mass_gev": 3.55617,
+      "masses_gev": [3.556],
+      "widths_gev": [0.0019],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15}
+    },
+    {
+      "name": "psi_2s",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 3.68610,
+      "masses_gev": [3.686],
+      "widths_gev": [0.00029],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
     }
   ]
 }
