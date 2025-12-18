@@ -430,7 +430,7 @@
       "sm_mass_gev": 3.4147,
       "masses_gev": [3.415],
       "widths_gev": [0.010],
-      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
     },
     {
       "name": "delta_1900",
