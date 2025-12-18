@@ -241,6 +241,26 @@
       "masses_gev": [11.17486],
       "widths_gev": [0.0],
       "tolerances": {"mass_abs": 0.1, "width_abs": 0.0, "spacing_rel": 0.4}
+    },
+    {
+      "name": "eta_c",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 2.9839,
+      "masses_gev": [2.984],
+      "widths_gev": [0.032],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.2}
+    },
+    {
+      "name": "j_psi",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 3.0969,
+      "masses_gev": [3.097],
+      "widths_gev": [0.00009],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
     }
   ]
 }
