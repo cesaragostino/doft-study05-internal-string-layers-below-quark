@@ -63,6 +63,26 @@ def load_sm_masses(path: Path) -> Dict[str, float]:
     return masses
 
 
+@lru_cache()
+def load_sm_jpc(path: Path) -> Dict[str, str]:
+    """Load SM J^PC (if present) from sm_universe JSON keyed by particle name."""
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text())
+    except Exception:
+        return {}
+    out = {}
+    for item in data.get("particles", []):
+        name = str(item.get("name", "")).strip()
+        if not name:
+            continue
+        jpc = item.get("jpc")
+        if jpc is not None:
+            out[name] = str(jpc)
+    return out
+
+
 def _mini_bar(val: float, max_val: float, width: int = 20) -> str:
     if max_val <= 0 or val is None or not math.isfinite(val):
         return ""
@@ -443,6 +463,7 @@ def main():
     blocks = load_simple_blocks(blocks_path)
     zoo = load_zoo_matches(zoo_path)
     sm_masses = load_sm_masses(Path("data/raw/sm_universe.json"))
+    sm_jpc = load_sm_jpc(Path("data/raw/sm_universe.json"))
     # Collect per-run chaos/disorder for cosmic averages
     cosmic_pe_vals: List[float] = []
     cosmic_hlock_vals: List[float] = []
@@ -747,6 +768,7 @@ def main():
     block_mass_vals: List[float] = []
     block_mass_sim_vals: List[float] = []
     mass_sim_rows: List[Tuple[int, str, str, float, float, float, float, bool]] = []
+    harmonic_records: List[Dict[str, Any]] = []
     for b in blocks:
         try:
             val = float(b.get("internal_energy"))
@@ -852,6 +874,66 @@ def main():
                     )
             except Exception:
                 pass
+
+        # Harmonic structure proxy (v1, evidence-based)
+        omega_raw_val = None
+        omega_raw = b.get("omega_ref") or b.get("omega_ref_interp")
+        if omega_raw is not None:
+            try:
+                omega_raw_val = float(omega_raw)
+            except Exception:
+                omega_raw_val = None
+        first_energy = None
+        band_energies = None
+        run = runs_by_id.get(omega_row) if omega_row is not None else None
+        if run:
+            band_energies = run.get("band_energies_gev") or []
+        omega_band = None
+        hbar_est = None
+        if omega_raw_val is not None and b.get("mass_sim_gev") is not None:
+            try:
+                hbar_est = float(b.get("mass_sim_gev")) / omega_raw_val if omega_raw_val else None
+            except Exception:
+                hbar_est = None
+        if band_energies and hbar_est:
+            try:
+                energies_f = [float(x) for x in band_energies if math.isfinite(float(x))]
+                if energies_f:
+                    median_energy = statistics.median(energies_f)
+                    if hbar_est and hbar_est > 0:
+                        omega_band = median_energy / hbar_est
+                        first_energy = min(energies_f)
+            except Exception:
+                omega_band = None
+        if omega_band is not None and omega_raw_val is not None and omega_band > 0:
+            ratio = omega_raw_val / omega_band
+            k_scores = {}
+            score_sum = 0.0
+            for k in range(1, 6):
+                score = math.exp(-((ratio - k) ** 2) / (2 * (0.07 ** 2)))
+                k_scores[k] = score
+                score_sum += score
+            dominant_k = max(k_scores, key=lambda k: k_scores[k])
+            dominant_parity = "odd" if dominant_k % 2 == 1 else "even"
+            odd_score = sum(v for k, v in k_scores.items() if k % 2 == 1)
+            even_score = sum(v for k, v in k_scores.items() if k % 2 == 0)
+            odd_frac = odd_score / score_sum if score_sum > 0 else 0.0
+            even_frac = even_score / score_sum if score_sum > 0 else 0.0
+            sector_conf = (k_scores[dominant_k] / score_sum) if score_sum > 0 else 0.0
+            harmonic_records.append(
+                {
+                    "particle": str(pname_row),
+                    "family": str(fam_row),
+                    "jpc": sm_jpc.get(str(pname_row)),
+                    "dominant_k": dominant_k,
+                    "dominant_parity": dominant_parity,
+                    "sector_confidence_v1": sector_conf,
+                    "odd_evidence_frac": odd_frac,
+                    "even_evidence_frac": even_frac,
+                    "ratio": ratio,
+                    "scores": k_scores,
+                }
+            )
 
     lines.append("## Energía interna (E_internal)")
     lines.append(f"- Runs con E_internal: {len(run_energy_vals)} / {len(run_records)}")
@@ -1041,6 +1123,90 @@ def main():
     else:
         lines.append("- No hay mass_sim_gev disponibles (ejecute la calibración hbar_sim).")
     lines.append("")
+
+    # Harmonic structure vs SM quantum numbers (v1 proxy)
+    lines.append("## Harmonic Structure vs SM Quantum Numbers (v1 proxy)")
+    lines.append(
+        "Proceed with v1 using only the stored main FFT peak (plus km1/kp1 if frequency is available) "
+        "and band_energies anchor. Evidence is score-based (not power-based)."
+    )
+    lines.append(
+        "dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching scores "
+        "(k_tol=0.07, k in 1..5). odd/even evidence fractions are sums of scores."
+    )
+    lines.append("")
+    if harmonic_records:
+        # By family
+        lines.append("### By family")
+        lines.append("| family | count | odd_frac_mean | even_frac_mean | odd_dominant_frac |")
+        lines.append("|--------|-------|---------------|----------------|-------------------|")
+        fam_groups: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+        for r in harmonic_records:
+            fam_groups[str(r.get("family"))].append(r)
+        for fam, rows in sorted(fam_groups.items()):
+            count = len(rows)
+            odd_mean = statistics.mean(r["odd_evidence_frac"] for r in rows)
+            even_mean = statistics.mean(r["even_evidence_frac"] for r in rows)
+            odd_dom = sum(1 for r in rows if r["dominant_parity"] == "odd") / count if count else 0.0
+            lines.append(f"| {fam} | {count} | {odd_mean:.3f} | {even_mean:.3f} | {odd_dom:.3f} |")
+        lines.append("")
+
+        # By J^PC
+        lines.append("### By J^PC")
+        lines.append("| jpc | count | odd_frac_mean | even_frac_mean | odd_dominant_frac |")
+        lines.append("|-----|-------|---------------|----------------|-------------------|")
+        jpc_groups: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+        for r in harmonic_records:
+            jpc_groups[str(r.get("jpc") or "unknown")].append(r)
+        for jpc, rows in sorted(jpc_groups.items()):
+            count = len(rows)
+            odd_mean = statistics.mean(r["odd_evidence_frac"] for r in rows)
+            even_mean = statistics.mean(r["even_evidence_frac"] for r in rows)
+            odd_dom = sum(1 for r in rows if r["dominant_parity"] == "odd") / count if count else 0.0
+            lines.append(f"| {jpc} | {count} | {odd_mean:.3f} | {even_mean:.3f} | {odd_dom:.3f} |")
+        lines.append("")
+
+        # Top particles by odd/even evidence
+        particle_scores: Dict[str, Dict[str, float]] = defaultdict(lambda: {"odd": 0.0, "even": 0.0})
+        for r in harmonic_records:
+            pname = r.get("particle") or ""
+            particle_scores[pname]["odd"] += r["odd_evidence_frac"]
+            particle_scores[pname]["even"] += r["even_evidence_frac"]
+        particles = []
+        for pname, vals in particle_scores.items():
+            total = vals["odd"] + vals["even"]
+            if total <= 0:
+                continue
+            particles.append((pname, vals["odd"] / total, vals["even"] / total))
+        top_odd = sorted(particles, key=lambda x: x[1], reverse=True)[:10]
+        top_even = sorted(particles, key=lambda x: x[2], reverse=True)[:10]
+        lines.append("### Top 10 particles by odd evidence")
+        lines.append("| particle | odd_evidence_frac | even_evidence_frac |")
+        lines.append("|----------|-------------------|--------------------|")
+        for pname, odd_f, even_f in top_odd:
+            lines.append(f"| {pname} | {odd_f:.3f} | {even_f:.3f} |")
+        lines.append("")
+        lines.append("### Top 10 particles by even evidence")
+        lines.append("| particle | odd_evidence_frac | even_evidence_frac |")
+        lines.append("|----------|-------------------|--------------------|")
+        for pname, odd_f, even_f in top_even:
+            lines.append(f"| {pname} | {odd_f:.3f} | {even_f:.3f} |")
+        lines.append("")
+
+        # Outliers (k=3 or k=4, high confidence)
+        outliers = [r for r in harmonic_records if r["dominant_k"] in (3, 4) and r["sector_confidence_v1"] >= 0.6]
+        if outliers:
+            lines.append("### Outliers (k=3 or k=4 with high confidence)")
+            lines.append("| particle | family | jpc | k | conf | ratio |")
+            lines.append("|----------|--------|-----|---|------|-------|")
+            for r in outliers[:50]:
+                lines.append(
+                    f"| {r['particle']} | {r['family']} | {r.get('jpc') or 'unknown'} | {r['dominant_k']} | {r['sector_confidence_v1']:.3f} | {r['ratio']:.3f} |"
+                )
+            lines.append("")
+    else:
+        lines.append("- No harmonic evidence computed (missing omega_ref or band_energies_gev).")
+        lines.append("")
 
     # OLD (disabled): mass_sim-based error tables.
     # This method is kept for reference but is not written to reports to avoid
