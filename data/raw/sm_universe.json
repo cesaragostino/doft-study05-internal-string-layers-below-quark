@@ -33,26 +33,6 @@
       "tolerances": {"mass_abs": 0.05, "width_abs": 0.2, "spacing_rel": 0.3}
     },
     {
-      "name": "quark_ud_const",
-      "family": "quark_like",
-      "type": "constituent",
-      "jpc": "1/2+",
-      "sm_mass_gev": 0.336,
-      "masses_gev": [0.33, 0.35],
-      "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.15, "width_abs": 0.1, "spacing_rel": 0.5}
-    },
-    {
-      "name": "quark_s_const",
-      "family": "quark_like",
-      "type": "constituent",
-      "jpc": "1/2+",
-      "sm_mass_gev": 0.486,
-      "masses_gev": [0.48, 0.50],
-      "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.15, "width_abs": 0.1, "spacing_rel": 0.5}
-    },
-    {
       "name": "eta",
       "family": "eta_like",
       "type": "meson",
@@ -210,7 +190,7 @@
       "sm_mass_gev": 1.920,
       "masses_gev": [1.920],
       "widths_gev": [0.260],
-      "tolerances": {"mass_abs": 0.08, "width_abs": 0.20, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.2}
     },
     {
       "name": "delta_1930",
@@ -220,7 +200,7 @@
       "sm_mass_gev": 1.930,
       "masses_gev": [1.930],
       "widths_gev": [0.285],
-      "tolerances": {"mass_abs": 0.08, "width_abs": 0.20, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.15}
     },
     {
       "name": "delta_1950",
