@@ -140,7 +140,7 @@
       "sm_mass_gev": 1.600,
       "masses_gev": [1.6],
       "widths_gev": [0.3],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.3, "spacing_rel": 0.4}
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.25, "spacing_rel": 0.35}
     },
     {
       "name": "delta_1620",
