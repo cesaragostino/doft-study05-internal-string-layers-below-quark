@@ -126,6 +126,7 @@ def simulate_ola2(
     Z = 0.0 + 0.0j
     R_series: List[float] = []
     theta_history: List[np.ndarray] = []
+    E_local_series: List[float] = []
     dt = float(dt)
     for t in range(T_ticks):
         sigma_t = sigma0 * math.exp(-t / sigma_tc)
@@ -137,6 +138,7 @@ def simulate_ola2(
         global_term = kappa_global * dt * np.imag(Z * np.exp(-1j * theta))
         noise = sigma_t * dt * np.random.normal(0.0, 1.0, size=N)
         theta = theta + omegas * dt + coupling + global_term + noise
+        E_local_series.append(float(-K_local * np.sum(W * np.cos(-theta_diff))))
         # coherence
         R_series.append(abs(np.exp(1j * theta).mean()))
         theta_history.append(theta.copy())
@@ -150,18 +152,30 @@ def simulate_ola2(
         R_mean_lastW = float(np.mean(R_series[-window_W:])) if R_series.size >= window_W else float("nan")
 
     phase_var_lastW = float("nan")
+    edge_phase_diff_mean_lastW = float("nan")
+    edge_phase_diff_std_lastW = float("nan")
     skipped_edges = 0
     if R_series.size >= window_W and edges:
         thetas_window = np.stack(theta_history[-window_W:], axis=0)
         delta_vars = []
-        for i, j in edges:
+        delta_samples = []
+        for e in edges:
+            if len(e) < 2:
+                skipped_edges += 1
+                continue
+            i, j = int(e[0]), int(e[1])
             if i < 0 or j < 0 or i >= N or j >= N:
                 skipped_edges += 1
                 continue
-            dtheta = _wrap_angle(thetas_window[:, int(i)] - thetas_window[:, int(j)])
+            dtheta = _wrap_angle(thetas_window[:, i] - thetas_window[:, j])
             delta_vars.append(np.var(dtheta))
+            delta_samples.append(np.abs(dtheta))
         if delta_vars:
             phase_var_lastW = float(np.mean(delta_vars))
+        if delta_samples:
+            stacked = np.concatenate(delta_samples, axis=0)
+            edge_phase_diff_mean_lastW = float(np.mean(stacked))
+            edge_phase_diff_std_lastW = float(np.std(stacked))
     if skipped_edges:
         print(f"[ola2_sim] skipped {skipped_edges} invalid edges (N={N})")
 
@@ -211,6 +225,24 @@ def simulate_ola2(
             mse10 = float(np.mean(diff10**2))
             memory_score_k10 = float(1.0 - mse1 / (mse10 + MEM_EPS))
 
+    E_local_series_arr = np.array(E_local_series, dtype=float)
+    if E_local_series_arr.size == 0:
+        E_local_final = float("nan")
+        E_local_mean_lastW = float("nan")
+        E_local_min_lastW = float("nan")
+        E_local_max_lastW = float("nan")
+    else:
+        E_local_final = float(E_local_series_arr[-1])
+        if E_local_series_arr.size >= window_W:
+            window_vals = E_local_series_arr[-window_W:]
+            E_local_mean_lastW = float(np.mean(window_vals))
+            E_local_min_lastW = float(np.min(window_vals))
+            E_local_max_lastW = float(np.max(window_vals))
+        else:
+            E_local_mean_lastW = float("nan")
+            E_local_min_lastW = float("nan")
+            E_local_max_lastW = float("nan")
+
     reason = "locked" if success else "no_lock"
     if insufficient_ticks:
         reason = "insufficient_ticks"
@@ -220,12 +252,19 @@ def simulate_ola2(
     return {
         "metrics": {
             "R_final": R_final,
+            "Z_final_abs": float(abs(Z)),
             "R_mean_lastW": R_mean_lastW,
             "phase_var_lastW": phase_var_lastW,
+            "edge_phase_diff_mean_lastW": edge_phase_diff_mean_lastW,
+            "edge_phase_diff_std_lastW": edge_phase_diff_std_lastW,
             "PE_tick_norm": PE_tick_norm,
             "QualityLock": QualityLock,
             "entropy_quality": entropy_quality,
             "memory_score_k10": memory_score_k10,
+            "E_local_final": E_local_final,
+            "E_local_mean_lastW": E_local_mean_lastW,
+            "E_local_min_lastW": E_local_min_lastW,
+            "E_local_max_lastW": E_local_max_lastW,
         },
         "topology": {
             "nodes": N,

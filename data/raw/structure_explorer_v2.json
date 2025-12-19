@@ -1,0 +1,109 @@
+{
+  "schema_version": "ola2_structure_explorer_v2",
+  "inputs": {
+    "blocks_json": "data/processed/ola1/simple_blocks.json",
+    "templates_json": "data/raw/compound_templates.json"
+  },
+  "targets": [
+    {
+      "name": "baryon_explore",
+      "templates": [
+        "baryon_triangle",
+        "baryon_chain",
+        "meson_dimer"
+      ],
+      "allowed_block_families": [
+        "quark_like",
+        "pion_like",
+        "rho_like",
+        "match_any"
+      ],
+      "budget_evals": 2000
+    }
+  ],
+  "engine_defaults": {
+    "dt": 1,
+    "T_ticks": 120,
+    "W": 20,
+    "K_local": 0.15,
+    "kappa_global": 0.25,
+    "tau_field": 20,
+    "sigma0": 0.30,
+    "sigma_tc": 60,
+    "sigma_theta_init": 0.5
+  },
+  "engine_variation": {
+    "enabled": true,
+    "mode": "bin_sample",
+    "bins": {
+      "K_local_edges": [0.00, 0.10, 0.20, 0.40],
+      "kappa_edges": [0.00, 0.10, 0.20, 0.40],
+      "tau_field_edges": [5, 10, 20, 40, 80],
+      "sigma0_edges": [0.00, 0.10, 0.20, 0.30, 0.50],
+      "sigma_tc_edges": [10, 30, 60, 120, 240]
+    }
+  },
+  "templates": {
+    "weighted_edges": true,
+    "edge_weight_levels": [0.5, 1.0, 2.0],
+    "edge_weight_policy": "sample_discrete"
+  },
+  "tagging": {
+    "R_mean_lastW_min": 0.85,
+    "phase_var_lastW_max": 0.02,
+    "memory_score_k10_min": 0.0,
+    "viability_mode": "hard_viable_soft_memory"
+  },
+  "search_policy": {
+    "phase1_fraction": 0.70,
+    "phase2_fraction": 0.30,
+    "phase1": {
+      "prefer_novel_structures": true,
+      "template_balance": "round_robin",
+      "max_repeats_per_structure": 1
+    },
+    "phase2": {
+      "promising_rule": {
+        "min_R_mean_lastW": 0.80,
+        "max_phase_var_lastW": 0.03,
+        "min_memory_score_k10": 0.0
+      },
+      "seed_repeats_per_structure": 10,
+      "param_neighbor_bins": 2
+    },
+    "priority_scoring": {
+      "score": "R_mean_lastW - 3.0*phase_var_lastW + 0.2*memory_score_k10"
+    }
+  },
+  "canonicalization": {
+    "enabled": true,
+    "method": "template_automorphisms_lexmin",
+    "block_key": "block_id"
+  },
+  "memory_store": {
+    "enabled": true,
+    "format": "jsonl",
+    "path": "explorer_memory/memory_store.jsonl",
+    "incremental": true,
+    "rebuild_from_outputs": false
+  },
+  "progress": {
+    "term_attempts": 500,
+    "term_seconds": 10
+  },
+  "export": {
+    "min_seed_stability_for_export": 0.5,
+    "min_viable_hits_for_export": 1,
+    "export_promising_nonviable": false,
+    "R_promising_min": 0.80,
+    "phase_var_promising_max": 0.03
+  },
+  "outputs": {
+    "accepted_jsonl": "explorer/accepted.jsonl",
+    "rejected_jsonl": "explorer/rejected.jsonl",
+    "structures_config_json": "explorer/structures_config.json",
+    "structures_cards_json": "explorer/structures_cards.json",
+    "report_md": "explorer/report.md",
+    "progress_terms_jsonl": "explorer/progress_terms.jsonl"
+  }
+}
