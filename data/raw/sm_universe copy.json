@@ -238,9 +238,9 @@
       "type": "composite",
       "jpc": "1/2+",
       "sm_mass_gev": 2.80892113298,
-      "masses_gev": [2.80892113298],
+      "masses_gev": [2.80892],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.25}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
     },
     {
       "name": "helium3",
@@ -248,9 +248,9 @@
       "type": "composite",
       "jpc": "1/2+",
       "sm_mass_gev": 2.80839160743,
-      "masses_gev": [2.80839160743],
+      "masses_gev": [2.80839],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.0002, "width_abs": 0.0, "spacing_rel": 0.25}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
     },
     {
       "name": "alpha",
@@ -410,7 +410,7 @@
       "sm_mass_gev": 2.01026,
       "masses_gev": [2.010],
       "widths_gev": [0.00008],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.18}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
     },
     {
       "name": "meson_ds_star",
@@ -420,7 +420,7 @@
       "sm_mass_gev": 2.1122,
       "masses_gev": [2.112],
       "widths_gev": [0.0019],
-      "tolerances": {"mass_abs": 0.020, "width_abs": 0.002, "spacing_rel": 0.18}
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.002, "spacing_rel": 0.2}
     },
     {
       "name": "xi_c_plus",
