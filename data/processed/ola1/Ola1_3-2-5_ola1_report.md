@@ -7,8 +7,8 @@
 
 ## Entropía / Caos (nuevo)
 - Fuente de datos: partial_runs
-- Runs con entropy_chaos: 1168
-- chaos_mode: dynamic=1168, ensemble=0
+- Runs con entropy_chaos: 1170
+- chaos_mode: dynamic=1170, ensemble=0
 - PE_tick_norm (mean/med/min/max): 0.700 / 0.701 / 0.301 / 0.917
 - T_ticks (mean/med/min/max): 200.0 / 200.0 / 200 / 200
 - mean_H_lock_norm (mean/med): 0.005 / 0.005
@@ -17,8 +17,8 @@
 - fraction_structured (mean/med): 0.027 / 0.000
 
 ## Energía interna (E_internal)
-- Runs con E_internal: 1168 / 1178
-- E_internal runs (mean/med/min/max): 105.783 / 5.77787e-05 / 1.3489e-09 / 79584.3
+- Runs con E_internal: 1170 / 1180
+- E_internal runs (mean/med/min/max): 105.602 / 5.77491e-05 / 1.3489e-09 / 79584.3
 - Bloques con internal_energy: 1148 / 1148
 - internal_energy bloques (mean/med/min/max): 100.478 / 5.76655e-05 / 1.3489e-09 / 79584.3
 - mass_sim_gev bloques (mean/med/min/max): 2.24214 / 1.968 / 1.62 / 6.10887
@@ -133,12 +133,12 @@
 ## Error de mass_sim vs SM
 | Partícula | Δ_mean% | Δ_min% | Δ_max% | n |
 |-----------|---------|--------|--------|---|
-| alpha | -32.1874% | -48.5331% | +0.0171% | 3 |
-| chi_c0 | -5.7271% | -66.5313% | +1.5881% | 27 |
-| chi_c0_3915 | -50.2118% | -50.8098% | -49.4692% | 6 |
-| chi_c0_4500 | -56.4982% | -57.0238% | -55.9727% | 2 |
+| alpha | +0.3249% | +0.0171% | +0.6646% | 3 |
+| chi_c0 | -0.9793% | -3.0181% | +1.5881% | 27 |
+| chi_c0_3915 | +0.3835% | -0.7751% | +1.3403% | 6 |
+| chi_c0_4500 | -0.1940% | -0.3881% | +0.0000% | 2 |
 | chi_c1 | -0.3261% | -0.8902% | +0.3648% | 8 |
-| chi_c1_3872 | -49.2615% | -49.5443% | -48.6806% | 4 |
+| chi_c1_3872 | -0.4921% | -0.8794% | +0.2695% | 4 |
 | chi_c2 | +0.5954% | -0.2522% | +1.1500% | 6 |
 | delta_1600 | +24.7113% | +24.6662% | +24.7563% | 2 |
 | delta_1620 | +1.5513% | +0.0000% | +2.2082% | 4 |
@@ -149,14 +149,14 @@
 | delta_1930 | +0.0672% | -0.2544% | +0.4140% | 29 |
 | delta_1950 | +0.0045% | -0.5615% | +0.5291% | 55 |
 | deuteron | +0.0584% | -0.1269% | +0.2128% | 25 |
-| eta_c | -2.4980% | -53.9558% | +1.2263% | 25 |
-| eta_c_2s | -7.7507% | -47.4883% | +0.6298% | 6 |
+| eta_c | -0.3740% | -2.4571% | +1.2263% | 25 |
+| eta_c_2s | +0.1594% | -0.5997% | +0.6298% | 6 |
 | j_psi | +1.8556% | -2.2352% | +5.7042% | 47 |
 | lambda_c | -1.3736% | -3.2624% | +0.5208% | 47 |
 | lambda_c_2595 | +0.3733% | +0.1346% | +0.5199% | 6 |
 | lambda_c_2625 | -0.0210% | -0.5906% | +0.3455% | 7 |
 | lambda_c_2765 | -1.1923% | -3.2306% | +0.5474% | 31 |
-| lambda_c_2860 | -2.4777% | -53.6092% | +1.7471% | 18 |
+| lambda_c_2860 | +0.4845% | -0.6139% | +1.7471% | 18 |
 | meson_d0 | -0.3532% | -0.8936% | +0.1331% | 81 |
 | meson_d_plus | +0.0542% | -0.1072% | +0.1888% | 13 |
 | meson_d_star_plus | +0.4178% | +0.0874% | +0.7037% | 11 |
@@ -166,13 +166,13 @@
 | meson_ds1_2460 | -0.6998% | -1.3607% | -0.0056% | 12 |
 | meson_ds_star | +1.5561% | -1.8839% | +4.6384% | 69 |
 | omega_baryon | +0.0367% | -0.4733% | +0.4018% | 4 |
-| psi_2s | -35.7213% | -47.8290% | +0.2404% | 4 |
-| psi_3770 | -41.4731% | -49.1216% | -0.2017% | 7 |
-| psi_4040 | -51.7445% | -52.7859% | -51.0653% | 6 |
-| psi_4160 | -53.3687% | -53.8964% | -52.9369% | 3 |
-| psi_4230 | -53.1585% | -53.1585% | -53.1585% | 1 |
+| psi_2s | +0.1337% | -0.1646% | +0.5449% | 4 |
+| psi_3770 | +0.4561% | -0.2017% | +1.6089% | 7 |
+| psi_4040 | +0.5716% | -1.1522% | +1.9086% | 6 |
+| psi_4160 | -1.0189% | -1.4292% | -0.5499% | 3 |
+| psi_4230 | +0.9019% | +0.9019% | +0.9019% | 1 |
 | rho_1700 | +0.8189% | -0.1807% | +1.7727% | 28 |
-| sigma_1775 | +0.4685% | -83.2399% | +2.8103% | 120 |
+| sigma_1775 | +1.1644% | -1.3461% | +2.8103% | 120 |
 | sigma_c_2455 | +0.0281% | +0.0281% | +0.0281% | 1 |
 | sigma_c_2520 | +0.0986% | -0.1971% | +0.3143% | 8 |
 | tau | +0.0624% | +0.0039% | +0.1082% | 5 |
@@ -185,9 +185,9 @@
 | run | particle | family | omega_ref_raw | omega_ref_used | mass_sim_used_gev | rel_err_vs_SM | guard |
 |-----|----------|--------|--------------|----------------|------------------|---------------|-------|
 | 618 | alpha | nucleus | 12.1701 | 12.1701 | 3.72802 | +0.0002 | no |
-| 1030 | alpha* | nucleus | 12.2036 | 6.26249 | 1.91837 | -0.4853 | yes |
-| 1075 | alpha* | nucleus | 12.2489 | 6.32171 | 1.93651 | -0.4805 | yes |
-| 4 | chi_c0* | charmonium | 10.9397 | 3.73084 | 1.14286 | -0.6653 | yes |
+| 1030 | alpha | nucleus | 12.2036 | 12.2036 | 3.7383 | +0.0029 | no |
+| 1075 | alpha | nucleus | 12.2489 | 12.2489 | 3.75215 | +0.0066 | no |
+| 4 | chi_c0 | charmonium | 10.9397 | 10.9397 | 3.35111 | -0.0186 | no |
 | 23 | chi_c0 | charmonium | 11.0366 | 11.0366 | 3.38081 | -0.0099 | no |
 | 119 | chi_c0 | charmonium | 11.0412 | 11.0412 | 3.38223 | -0.0095 | no |
 | 147 | chi_c0 | charmonium | 10.9581 | 10.9581 | 3.35675 | -0.0170 | no |
@@ -201,7 +201,7 @@
 | 621 | chi_c0 | charmonium | 10.969 | 10.969 | 3.36011 | -0.0160 | no |
 | 622 | chi_c0 | charmonium | 10.8219 | 10.8219 | 3.31505 | -0.0292 | no |
 | 638 | chi_c0 | charmonium | 11.1521 | 11.1521 | 3.41619 | +0.0004 | no |
-| 683 | chi_c0* | charmonium | 11.0124 | 3.93143 | 1.2043 | -0.6473 | yes |
+| 683 | chi_c0 | charmonium | 11.0124 | 11.0124 | 3.37338 | -0.0121 | no |
 | 700 | chi_c0 | charmonium | 11.0672 | 11.0672 | 3.39019 | -0.0072 | no |
 | 751 | chi_c0 | charmonium | 10.8108 | 10.8108 | 3.31164 | -0.0302 | no |
 | 807 | chi_c0 | charmonium | 11.1666 | 11.1666 | 3.42063 | +0.0017 | no |
@@ -214,14 +214,14 @@
 | 1069 | chi_c0 | charmonium | 10.8864 | 10.8864 | 3.3348 | -0.0234 | no |
 | 1076 | chi_c0 | charmonium | 11.2331 | 11.2331 | 3.44101 | +0.0077 | no |
 | 1097 | chi_c0 | charmonium | 11.2646 | 11.2646 | 3.45064 | +0.0105 | no |
-| 227 | chi_c0_3915* | charmonium | 12.7906 | 6.46303 | 1.9798 | -0.4947 | yes |
-| 313 | chi_c0_3915* | charmonium | 12.753 | 6.34761 | 1.94444 | -0.5037 | yes |
-| 376 | chi_c0_3915* | charmonium | 12.9168 | 6.35252 | 1.94595 | -0.5033 | yes |
-| 463 | chi_c0_3915* | charmonium | 12.9617 | 6.40342 | 1.96154 | -0.4994 | yes |
-| 873 | chi_c0_3915* | charmonium | 12.9227 | 6.3501 | 1.94521 | -0.5035 | yes |
-| 896 | chi_c0_3915* | charmonium | 12.6911 | 6.29156 | 1.92727 | -0.5081 | yes |
-| 387 | chi_c0_4500* | charmonium | 14.6527 | 6.47632 | 1.98387 | -0.5597 | yes |
-| 482 | chi_c0_4500* | charmonium | 14.7098 | 6.32171 | 1.93651 | -0.5702 | yes |
+| 227 | chi_c0_3915 | charmonium | 12.7906 | 12.7906 | 3.9181 | +0.0000 | no |
+| 313 | chi_c0_3915 | charmonium | 12.753 | 12.753 | 3.9066 | -0.0029 | no |
+| 376 | chi_c0_3915 | charmonium | 12.9168 | 12.9168 | 3.95677 | +0.0099 | no |
+| 463 | chi_c0_3915 | charmonium | 12.9617 | 12.9617 | 3.97051 | +0.0134 | no |
+| 873 | chi_c0_3915 | charmonium | 12.9227 | 12.9227 | 3.95856 | +0.0104 | no |
+| 896 | chi_c0_3915 | charmonium | 12.6911 | 12.6911 | 3.88763 | -0.0078 | no |
+| 387 | chi_c0_4500 | charmonium | 14.6527 | 14.6527 | 4.48851 | -0.0039 | no |
+| 482 | chi_c0_4500 | charmonium | 14.7098 | 14.7098 | 4.506 | +0.0000 | no |
 | 212 | chi_c1 | charmonium | 11.3838 | 11.3838 | 3.48716 | -0.0067 | no |
 | 351 | chi_c1 | charmonium | 11.3906 | 11.3906 | 3.48923 | -0.0061 | no |
 | 356 | chi_c1 | charmonium | 11.4291 | 11.4291 | 3.50103 | -0.0027 | no |
@@ -230,10 +230,10 @@
 | 863 | chi_c1 | charmonium | 11.5023 | 11.5023 | 3.52348 | +0.0036 | no |
 | 963 | chi_c1 | charmonium | 11.4757 | 11.4757 | 3.51531 | +0.0013 | no |
 | 1058 | chi_c1 | charmonium | 11.4002 | 11.4002 | 3.49218 | -0.0053 | no |
-| 133 | chi_c1_3872* | charmonium | 12.5756 | 6.37714 | 1.95349 | -0.4954 | yes |
-| 150 | chi_c1_3872* | charmonium | 12.5279 | 6.4863 | 1.98693 | -0.4868 | yes |
-| 646 | chi_c1_3872* | charmonium | 12.5308 | 6.40918 | 1.9633 | -0.4929 | yes |
-| 884 | chi_c1_3872* | charmonium | 12.6731 | 6.37888 | 1.95402 | -0.4953 | yes |
+| 133 | chi_c1_3872 | charmonium | 12.5756 | 12.5756 | 3.85226 | -0.0050 | no |
+| 150 | chi_c1_3872 | charmonium | 12.5279 | 12.5279 | 3.83764 | -0.0088 | no |
+| 646 | chi_c1_3872 | charmonium | 12.5308 | 12.5308 | 3.83853 | -0.0086 | no |
+| 884 | chi_c1_3872 | charmonium | 12.6731 | 12.6731 | 3.88212 | +0.0027 | no |
 | 94 | chi_c2 | charmonium | 11.6888 | 11.6888 | 3.58058 | +0.0069 | no |
 | 268 | chi_c2 | charmonium | 11.594 | 11.594 | 3.55156 | -0.0013 | no |
 | 534 | chi_c2 | charmonium | 11.7403 | 11.7403 | 3.59636 | +0.0113 | no |
@@ -288,7 +288,7 @@
 * = harmonic-guard aplicado
 
 ## Promedio cósmico (Ola1)
-- cosmic_chaos_temp (PE avg): 0.7000
+- cosmic_chaos_temp (PE avg): 0.7001
 - cosmic_disorder (H_mean avg): 0.0052
 
 ## Caos/desorden por run
@@ -1568,6 +1568,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.3243
 - first_energy: 1.98456
 - harmonic_ratio: 1.748
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.419
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.5881%
 - H_block (lock_quality): 0.008
@@ -1590,10 +1592,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.9333
 - first_energy: 1.9814
 - harmonic_ratio: 2.154
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.46824
-- mass_sim_used_gev: 1.9814
-- Δ_mass_sim vs SM: -53.1585%
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.532
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.9019%
 - H_block (lock_quality): 0.010
 - band_power_capture: 0.16718901711767212
 - chaos_mode=dynamic, PE_tick_norm=0.6050497378843505, T_ticks=200
@@ -1614,6 +1616,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.42769
 - first_energy: 1.97516
 - harmonic_ratio: 1.462
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.308
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1189%
 - H_block (lock_quality): 0.005
@@ -1636,6 +1640,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.4781
 - first_energy: 1.97101
 - harmonic_ratio: 1.007
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8162%
 - H_block (lock_quality): 0.004
@@ -1658,6 +1664,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.94021
 - first_energy: 1.95349
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.101
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.5152%
 - H_block (lock_quality): 0.011
@@ -1680,6 +1688,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.76229
 - first_energy: 1.95294
 - harmonic_ratio: 1.531
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.346
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2195%
 - H_block (lock_quality): 0.001
@@ -1702,6 +1712,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.27118
 - first_energy: 1.96364
 - harmonic_ratio: 1.446
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.312
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5598%
 - H_block (lock_quality): 0.006
@@ -1724,6 +1736,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92208
 - first_energy: 1.97297
 - harmonic_ratio: 0.919
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.112
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2023%
 - H_block (lock_quality): 0.004
@@ -1746,6 +1760,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.48079
 - first_energy: 1.97872
 - harmonic_ratio: 1.003
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8581%
 - H_block (lock_quality): 0.007
@@ -1768,6 +1784,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05121
 - first_energy: 1.96491
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.054
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6002%
 - H_block (lock_quality): 0.006
@@ -1790,6 +1808,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.07748
 - first_energy: 1.93103
 - harmonic_ratio: 1.281
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.218
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2626%
 - H_block (lock_quality): 0.004
@@ -1812,6 +1832,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.24849
 - first_energy: 1.99153
 - harmonic_ratio: 1.423
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.291
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8593%
 - H_block (lock_quality): 0.007
@@ -1834,6 +1856,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09423
 - first_energy: 1.91489
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.027
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1065%
 - H_block (lock_quality): 0.003
@@ -1856,6 +1880,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.86847
 - first_energy: 1.93846
 - harmonic_ratio: 0.927
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.092
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2772%
 - H_block (lock_quality): 0.004
@@ -1878,6 +1904,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3601
 - first_energy: 1.91837
 - harmonic_ratio: 1.654
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.381
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.4756%
 - H_block (lock_quality): 0.003
@@ -1900,6 +1928,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.95578
 - first_energy: 1.96923
 - harmonic_ratio: 1.393
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.288
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8172%
 - H_block (lock_quality): 0.006
@@ -1922,6 +1952,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.4291
 - first_energy: 1.95
 - harmonic_ratio: 1.795
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.445
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2745%
 - H_block (lock_quality): 0.001
@@ -1944,6 +1976,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.5471
 - first_energy: 1.97959
 - harmonic_ratio: 1.013
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0646%
 - H_block (lock_quality): 0.007
@@ -1966,6 +2000,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.47355
 - first_energy: 1.96721
 - harmonic_ratio: 1.008
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7454%
 - H_block (lock_quality): 0.009
@@ -1988,6 +2024,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.74077
 - first_energy: 1.95745
 - harmonic_ratio: 0.898
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.103
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9267%
 - H_block (lock_quality): 0.008
@@ -2010,6 +2048,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.08853
 - first_energy: 1.97386
 - harmonic_ratio: 1.255
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.200
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3997%
 - H_block (lock_quality): 0.007
@@ -2032,6 +2072,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.42825
 - first_energy: 1.98148
 - harmonic_ratio: 0.994
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.007
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0404%
 - H_block (lock_quality): 0.001
@@ -2054,6 +2096,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.8122
 - first_energy: 1.9823
 - harmonic_ratio: 1.671
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.419
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.0060%
 - H_block (lock_quality): 0.005
@@ -2076,6 +2120,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.48684
 - first_energy: 1.96262
 - harmonic_ratio: 1.012
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.003
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9523%
 - H_block (lock_quality): 0.006
@@ -2098,6 +2144,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09413
 - first_energy: 1.97163
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1049%
 - H_block (lock_quality): 0.004
@@ -2120,6 +2168,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3106
 - first_energy: 1.97727
 - harmonic_ratio: 1.597
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.362
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9862%
 - H_block (lock_quality): 0.002
@@ -2142,6 +2192,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28314
 - first_energy: 1.97674
 - harmonic_ratio: 0.974
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.030
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2445%
 - H_block (lock_quality): 0.003
@@ -2164,6 +2216,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.58546
 - first_energy: 1.9322
 - harmonic_ratio: 1.203
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.166
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2559%
 - H_block (lock_quality): 0.001
@@ -2186,6 +2240,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.50636
 - first_energy: 1.96552
 - harmonic_ratio: 1.326
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.242
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5199%
 - H_block (lock_quality): 0.007
@@ -2208,6 +2264,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.5966
 - first_energy: 1.94521
 - harmonic_ratio: 1.039
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.032
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5200%
 - H_block (lock_quality): 0.002
@@ -2230,6 +2288,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.42377
 - first_energy: 1.9845
 - harmonic_ratio: 0.992
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0293%
 - H_block (lock_quality): 0.003
@@ -2252,6 +2312,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96416
 - first_energy: 1.9619
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.038
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8430%
 - H_block (lock_quality): 0.004
@@ -2274,6 +2336,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.29978
 - first_energy: 1.96
 - harmonic_ratio: 1.297
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.206
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.0219%
 - H_block (lock_quality): 0.004
@@ -2296,6 +2360,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00051
 - first_energy: 1.92157
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2570%
 - H_block (lock_quality): 0.011
@@ -2318,6 +2384,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.17439
 - first_energy: 1.99078
 - harmonic_ratio: 1.104
+- err_raw_vs_sm: 0.040
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.0483%
 - H_block (lock_quality): 0.007
@@ -2340,6 +2408,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.30637
 - first_energy: 1.95455
 - harmonic_ratio: 1.459
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.316
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1824%
 - H_block (lock_quality): 0.009
@@ -2362,6 +2432,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.8717
 - first_energy: 1.95556
 - harmonic_ratio: 1.860
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.463
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0762%
 - H_block (lock_quality): 0.003
@@ -2384,6 +2456,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.19634
 - first_energy: 1.95122
 - harmonic_ratio: 0.973
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.027
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0998%
 - H_block (lock_quality): 0.004
@@ -2406,6 +2480,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3279
 - first_energy: 1.95652
 - harmonic_ratio: 1.617
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.368
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1572%
 - H_block (lock_quality): 0.003
@@ -2428,6 +2504,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05874
 - first_energy: 1.9802
 - harmonic_ratio: 0.937
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4764%
 - H_block (lock_quality): 0.010
@@ -2450,6 +2528,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38438
 - first_energy: 1.9646
 - harmonic_ratio: 0.995
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.007
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2927%
 - H_block (lock_quality): 0.001
@@ -2472,6 +2552,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.55701
 - first_energy: 1.98799
 - harmonic_ratio: 1.010
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0866%
 - H_block (lock_quality): 0.005
@@ -2494,6 +2576,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06624
 - first_energy: 1.97688
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3533%
 - H_block (lock_quality): 0.003
@@ -2516,6 +2600,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.89434
 - first_energy: 1.9708
 - harmonic_ratio: 1.382
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.287
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.4977%
 - H_block (lock_quality): 0.003
@@ -2538,6 +2624,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06313
 - first_energy: 1.94521
 - harmonic_ratio: 0.955
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.043
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4044%
 - H_block (lock_quality): 0.006
@@ -2560,6 +2648,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.05303
 - first_energy: 1.97701
 - harmonic_ratio: 1.093
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.064
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2883%
 - H_block (lock_quality): 0.004
@@ -2582,6 +2672,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.82067
 - first_energy: 1.93846
 - harmonic_ratio: 0.920
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.092
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4523%
 - H_block (lock_quality): 0.003
@@ -2604,6 +2696,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.193
 - first_energy: 1.97101
 - harmonic_ratio: 0.962
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1536%
 - H_block (lock_quality): 0.007
@@ -2626,6 +2720,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.34533
 - first_energy: 1.9604
 - harmonic_ratio: 1.460
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.314
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2355%
 - H_block (lock_quality): 0.014
@@ -2648,6 +2744,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35868
 - first_energy: 1.96639
 - harmonic_ratio: 0.991
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1111%
 - H_block (lock_quality): 0.008
@@ -2670,6 +2768,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05531
 - first_energy: 1.99521
 - harmonic_ratio: 0.930
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.070
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5328%
 - H_block (lock_quality): 0.006
@@ -2692,6 +2792,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.022
 - first_energy: 1.99101
 - harmonic_ratio: 0.927
+- err_raw_vs_sm: 0.029
+- err_fix_vs_sm: 0.048
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9105%
 - H_block (lock_quality): 0.009
@@ -2714,6 +2816,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.32813
 - first_energy: 1.9759
 - harmonic_ratio: 1.291
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.199
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.3737%
 - H_block (lock_quality): 0.004
@@ -2736,6 +2840,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.39259
 - first_energy: 1.99349
 - harmonic_ratio: 1.136
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.128
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9583%
 - H_block (lock_quality): 0.005
@@ -2758,6 +2864,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.51155
 - first_energy: 1.99868
 - harmonic_ratio: 0.998
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6073%
 - H_block (lock_quality): 0.000
@@ -2780,6 +2888,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.75324
 - first_energy: 1.95506
 - harmonic_ratio: 1.215
+- err_raw_vs_sm: 0.038
+- err_fix_vs_sm: 0.208
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.7622%
 - H_block (lock_quality): 0.003
@@ -2802,6 +2912,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.6655
 - first_energy: 1.98473
 - harmonic_ratio: 1.029
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7425%
 - H_block (lock_quality): 0.002
@@ -2824,6 +2936,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.29477
 - first_energy: 1.98742
 - harmonic_ratio: 0.970
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.030
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0903%
 - H_block (lock_quality): 0.003
@@ -2846,6 +2960,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.98452
 - first_energy: 1.98165
 - harmonic_ratio: 1.389
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.284
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4989%
 - H_block (lock_quality): 0.002
@@ -2868,6 +2984,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.1295
 - first_energy: 1.94286
 - harmonic_ratio: 1.597
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.373
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1953%
 - H_block (lock_quality): 0.002
@@ -2890,6 +3008,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.29551
 - first_energy: 1.95604
 - harmonic_ratio: 0.986
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0785%
 - H_block (lock_quality): 0.005
@@ -2912,6 +3032,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.00695
 - first_energy: 1.96992
 - harmonic_ratio: 1.401
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.288
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2505%
 - H_block (lock_quality): 0.003
@@ -2934,6 +3056,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38893
 - first_energy: 1.97688
 - harmonic_ratio: 0.990
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3642%
 - H_block (lock_quality): 0.004
@@ -2956,6 +3080,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.88861
 - first_energy: 1.97163
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.111
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6248%
 - H_block (lock_quality): 0.006
@@ -2978,6 +3104,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.97402
 - first_energy: 1.96639
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.6841%
 - H_block (lock_quality): 0.002
@@ -3000,6 +3128,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.77945
 - first_energy: 1.95455
 - harmonic_ratio: 0.906
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.101
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2591%
 - H_block (lock_quality): 0.001
@@ -3022,6 +3152,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.10969
 - first_energy: 1.70732
 - harmonic_ratio: 1.276
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.192
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.1099%
 - H_block (lock_quality): 0.002
@@ -3044,6 +3176,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.90858
 - first_energy: 1.95294
 - harmonic_ratio: 0.927
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.100
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9695%
 - H_block (lock_quality): 0.005
@@ -3066,6 +3200,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.79267
 - first_energy: 1.9403
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.093
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0310%
 - H_block (lock_quality): 0.006
@@ -3088,6 +3224,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.2373
 - first_energy: 1.99163
 - harmonic_ratio: 0.959
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.043
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0342%
 - H_block (lock_quality): 0.005
@@ -3110,6 +3248,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.94325
 - first_energy: 1.98261
 - harmonic_ratio: 0.918
+- err_raw_vs_sm: 0.026
+- err_fix_vs_sm: 0.117
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.5678%
 - H_block (lock_quality): 0.001
@@ -3132,6 +3272,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21337
 - first_energy: 1.98431
 - harmonic_ratio: 0.959
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.044
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1749%
 - H_block (lock_quality): 0.000
@@ -3154,6 +3296,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.52685
 - first_energy: 1.98985
 - harmonic_ratio: 1.005
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3738%
 - H_block (lock_quality): 0.004
@@ -3176,6 +3320,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.477
 - first_energy: 1.96491
 - harmonic_ratio: 1.010
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.002
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7991%
 - H_block (lock_quality): 0.002
@@ -3198,6 +3344,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.93353
 - first_energy: 1.98784
 - harmonic_ratio: 0.914
+- err_raw_vs_sm: 0.024
+- err_fix_vs_sm: 0.120
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.3999%
 - H_block (lock_quality): 0.004
@@ -3220,6 +3368,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.9334
 - first_energy: 1.95745
 - harmonic_ratio: 1.867
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.462
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4427%
 - H_block (lock_quality): 0.005
@@ -3242,6 +3392,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.80955
 - first_energy: 1.98381
 - harmonic_ratio: 1.051
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.061
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2430%
 - H_block (lock_quality): 0.005
@@ -3264,6 +3416,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.22061
 - first_energy: 1.9619
 - harmonic_ratio: 1.127
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.142
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2624%
 - H_block (lock_quality): 0.004
@@ -3286,6 +3440,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.43527
 - first_energy: 1.97203
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.002
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1496%
 - H_block (lock_quality): 0.002
@@ -3308,6 +3464,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.80646
 - first_energy: 1.94595
 - harmonic_ratio: 1.229
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.211
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1015%
 - H_block (lock_quality): 0.005
@@ -3330,6 +3488,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.02856
 - first_energy: 1.96992
 - harmonic_ratio: 1.248
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.199
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0056%
 - H_block (lock_quality): 0.002
@@ -3352,6 +3512,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.88182
 - first_energy: 1.89474
 - harmonic_ratio: 0.951
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.067
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.5076%
 - H_block (lock_quality): 0.008
@@ -3374,6 +3536,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.26213
 - first_energy: 1.97122
 - harmonic_ratio: 0.973
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.027
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0906%
 - H_block (lock_quality): 0.005
@@ -3396,6 +3560,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.64104
 - first_energy: 1.95745
 - harmonic_ratio: 1.039
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3692%
 - H_block (lock_quality): 0.001
@@ -3418,6 +3584,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.87992
 - first_energy: 1.93548
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.090
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4747%
 - H_block (lock_quality): 0.007
@@ -3440,6 +3608,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.90745
 - first_energy: 1.9834
 - harmonic_ratio: 0.912
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.117
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9499%
 - H_block (lock_quality): 0.006
@@ -3462,6 +3632,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.90652
 - first_energy: 1.94444
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.095
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9339%
 - H_block (lock_quality): 0.016
@@ -3484,6 +3656,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.61852
 - first_energy: 1.97546
 - harmonic_ratio: 1.181
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.148
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6928%
 - H_block (lock_quality): 0.003
@@ -3506,6 +3680,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.04809
 - first_energy: 1.97484
 - harmonic_ratio: 1.093
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.065
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2166%
 - H_block (lock_quality): 0.004
@@ -3528,6 +3704,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08759
 - first_energy: 1.97576
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0026%
 - H_block (lock_quality): 0.002
@@ -3550,10 +3728,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.0988
 - first_energy: 1.92308
 - harmonic_ratio: 1.927
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.27786
-- mass_sim_used_gev: 1.92308
-- Δ_mass_sim vs SM: -47.8290%
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.478
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.5449%
 - H_block (lock_quality): 0.005
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.7827757546749674, T_ticks=200
@@ -3574,6 +3752,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99674
 - first_energy: 1.98462
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.045
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3178%
 - H_block (lock_quality): 0.006
@@ -3596,6 +3776,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.46316
 - first_energy: 1.98095
 - harmonic_ratio: 0.999
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5837%
 - H_block (lock_quality): 0.008
@@ -3618,6 +3800,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00222
 - first_energy: 1.98456
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.045
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2294%
 - H_block (lock_quality): 0.005
@@ -3640,6 +3824,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.94169
 - first_energy: 1.97203
 - harmonic_ratio: 1.544
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.363
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.6627%
 - H_block (lock_quality): 0.005
@@ -3662,6 +3848,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.77331
 - first_energy: 1.96667
 - harmonic_ratio: 1.211
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.203
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.5130%
 - H_block (lock_quality): 0.014
@@ -3684,6 +3872,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.36236
 - first_energy: 1.94805
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0532%
 - H_block (lock_quality): 0.003
@@ -3706,6 +3896,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.18
 - first_energy: 1.95402
 - harmonic_ratio: 1.753
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.428
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2941%
 - H_block (lock_quality): 0.004
@@ -3728,6 +3920,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06708
 - first_energy: 1.95789
 - harmonic_ratio: 0.949
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.050
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3395%
 - H_block (lock_quality): 0.005
@@ -3750,6 +3944,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.5989
 - first_energy: 1.97826
 - harmonic_ratio: 1.641
+- err_raw_vs_sm: 0.048
+- err_fix_vs_sm: 0.361
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.8378%
 - H_block (lock_quality): 0.007
@@ -3772,6 +3968,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16017
 - first_energy: 1.99703
 - harmonic_ratio: 0.945
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.051
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6828%
 - H_block (lock_quality): 0.013
@@ -3794,10 +3992,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.8775
 - first_energy: 1.91111
 - harmonic_ratio: 1.904
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.2388
-- mass_sim_used_gev: 1.91111
-- Δ_mass_sim vs SM: -47.4883%
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.475
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.0278%
 - H_block (lock_quality): 0.005
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.7956350825752009, T_ticks=200
@@ -3818,6 +4016,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12368
 - first_energy: 1.96923
 - harmonic_ratio: 0.953
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.050
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0127%
 - H_block (lock_quality): 0.003
@@ -3840,10 +4040,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.4369
 - first_energy: 1.91837
 - harmonic_ratio: 2.146
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.26249
-- mass_sim_used_gev: 1.91837
-- Δ_mass_sim vs SM: -52.5039%
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.525
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +1.9086%
 - H_block (lock_quality): 0.005
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.7679853371916887, T_ticks=200
@@ -3864,6 +4064,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28443
 - first_energy: 1.93939
 - harmonic_ratio: 0.993
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2544%
 - H_block (lock_quality): 0.002
@@ -3886,6 +4088,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.7403
 - first_energy: 1.98964
 - harmonic_ratio: 1.808
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.441
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1303%
 - H_block (lock_quality): 0.014
@@ -3908,6 +4112,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.96922
 - first_energy: 1.96
 - harmonic_ratio: 1.402
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.291
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6683%
 - H_block (lock_quality): 0.002
@@ -3930,6 +4136,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98608
 - first_energy: 1.92593
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.4896%
 - H_block (lock_quality): 0.004
@@ -3952,6 +4160,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.61218
 - first_energy: 1.97516
 - harmonic_ratio: 1.181
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.148
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6090%
 - H_block (lock_quality): 0.006
@@ -3974,6 +4184,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.22387
 - first_energy: 1.91111
 - harmonic_ratio: 1.158
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.164
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2188%
 - H_block (lock_quality): 0.005
@@ -3996,6 +4208,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.06978
 - first_energy: 1.95699
 - harmonic_ratio: 1.263
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.207
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1669%
 - H_block (lock_quality): 0.005
@@ -4018,6 +4232,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11287
 - first_energy: 1.91304
 - harmonic_ratio: 0.979
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.023
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1538%
 - H_block (lock_quality): 0.004
@@ -4040,6 +4256,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.57775
 - first_energy: 1.97122
 - harmonic_ratio: 1.333
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.250
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0196%
 - H_block (lock_quality): 0.012
@@ -4062,6 +4280,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35401
 - first_energy: 1.97101
 - harmonic_ratio: 0.988
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1844%
 - H_block (lock_quality): 0.005
@@ -4084,6 +4304,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.4757
 - first_energy: 1.97059
 - harmonic_ratio: 1.784
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.439
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1321%
 - H_block (lock_quality): 0.006
@@ -4106,6 +4328,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92757
 - first_energy: 1.98261
 - harmonic_ratio: 0.916
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.117
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2972%
 - H_block (lock_quality): 0.007
@@ -4128,6 +4352,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.97815
 - first_energy: 1.96581
 - harmonic_ratio: 1.243
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.201
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6334%
 - H_block (lock_quality): 0.006
@@ -4150,6 +4376,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.84837
 - first_energy: 1.92308
 - harmonic_ratio: 0.932
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.083
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9303%
 - H_block (lock_quality): 0.006
@@ -4172,6 +4400,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.37879
 - first_energy: 1.9646
 - harmonic_ratio: 0.995
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.007
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2048%
 - H_block (lock_quality): 0.005
@@ -4194,6 +4424,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.90669
 - first_energy: 1.98157
 - harmonic_ratio: 1.068
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1659%
 - H_block (lock_quality): 0.003
@@ -4216,6 +4448,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.41653
 - first_energy: 1.97802
 - harmonic_ratio: 0.994
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1420%
 - H_block (lock_quality): 0.003
@@ -4238,6 +4472,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.42543
 - first_energy: 1.9685
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.000
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0034%
 - H_block (lock_quality): 0.007
@@ -4260,6 +4496,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.11277
 - first_energy: 1.9871
 - harmonic_ratio: 1.096
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.1547%
 - H_block (lock_quality): 0.006
@@ -4282,10 +4520,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.0124
 - first_energy: 1.2043
 - harmonic_ratio: 2.801
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 3.93143
-- mass_sim_used_gev: 1.2043
-- Δ_mass_sim vs SM: -64.7319%
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.647
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -1.2100%
 - H_block (lock_quality): 0.008
 - band_power_capture: 0.16999709092560197
 - chaos_mode=dynamic, PE_tick_norm=0.7939974414304781, T_ticks=200
@@ -4306,6 +4544,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.97353
 - first_energy: 1.9596
 - harmonic_ratio: 0.934
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.6920%
 - H_block (lock_quality): 0.002
@@ -4328,6 +4568,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.85875
 - first_energy: 1.96923
 - harmonic_ratio: 1.067
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.068
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5293%
 - H_block (lock_quality): 0.004
@@ -4350,6 +4592,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98112
 - first_energy: 1.88889
 - harmonic_ratio: 0.970
+- err_raw_vs_sm: 0.036
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.5697%
 - H_block (lock_quality): 0.007
@@ -4372,6 +4616,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.42189
 - first_energy: 1.97037
 - harmonic_ratio: 1.154
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.138
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5658%
 - H_block (lock_quality): 0.002
@@ -4394,6 +4640,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.49577
 - first_energy: 1.95402
 - harmonic_ratio: 1.332
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.246
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3947%
 - H_block (lock_quality): 0.001
@@ -4416,6 +4664,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.83565
 - first_energy: 1.92453
 - harmonic_ratio: 1.406
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.304
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.1476%
 - H_block (lock_quality): 0.002
@@ -4438,6 +4688,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.01846
 - first_energy: 1.90909
 - harmonic_ratio: 1.287
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.224
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1314%
 - H_block (lock_quality): 0.002
@@ -4460,6 +4712,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.8016
 - first_energy: 1.95876
 - harmonic_ratio: 0.907
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.102
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0184%
 - H_block (lock_quality): 0.002
@@ -4482,6 +4736,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.80795
 - first_energy: 1.97516
 - harmonic_ratio: 1.521
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.338
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6883%
 - H_block (lock_quality): 0.007
@@ -4504,6 +4760,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.12091
 - first_energy: 1.94737
 - harmonic_ratio: 1.277
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.211
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8016%
 - H_block (lock_quality): 0.007
@@ -4526,6 +4784,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.86999
 - first_energy: 1.95455
 - harmonic_ratio: 0.920
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.101
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3035%
 - H_block (lock_quality): 0.002
@@ -4548,6 +4808,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.62528
 - first_energy: 1.91304
 - harmonic_ratio: 0.901
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.112
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1846%
 - H_block (lock_quality): 0.004
@@ -4570,6 +4832,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09585
 - first_energy: 1.97315
 - harmonic_ratio: 0.946
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.058
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1331%
 - H_block (lock_quality): 0.008
@@ -4592,6 +4856,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.39535
 - first_energy: 1.90909
 - harmonic_ratio: 0.866
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.178
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.0211%
 - H_block (lock_quality): 0.010
@@ -4614,6 +4880,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16539
 - first_energy: 1.97861
 - harmonic_ratio: 0.955
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5987%
 - H_block (lock_quality): 0.001
@@ -4636,6 +4904,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.31432
 - first_energy: 1.94737
 - harmonic_ratio: 0.993
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2200%
 - H_block (lock_quality): 0.005
@@ -4658,6 +4928,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92963
 - first_energy: 1.97895
 - harmonic_ratio: 0.918
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.115
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.3327%
 - H_block (lock_quality): 0.002
@@ -4680,6 +4952,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.61269
 - first_energy: 1.9322
 - harmonic_ratio: 0.890
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.123
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0397%
 - H_block (lock_quality): 0.004
@@ -4702,6 +4976,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.47856
 - first_energy: 1.97297
 - harmonic_ratio: 1.006
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.002
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8233%
 - H_block (lock_quality): 0.002
@@ -4724,6 +5000,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96306
 - first_energy: 1.96774
 - harmonic_ratio: 0.928
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8607%
 - H_block (lock_quality): 0.005
@@ -4746,6 +5024,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.17922
 - first_energy: 1.9604
 - harmonic_ratio: 1.122
+- err_raw_vs_sm: 0.041
+- err_fix_vs_sm: 0.072
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.1184%
 - H_block (lock_quality): 0.002
@@ -4768,6 +5048,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.45291
 - first_energy: 1.98851
 - harmonic_ratio: 1.148
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.130
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1502%
 - H_block (lock_quality): 0.004
@@ -4790,6 +5072,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00865
 - first_energy: 1.9779
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1258%
 - H_block (lock_quality): 0.008
@@ -4812,6 +5096,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.78996
 - first_energy: 1.96078
 - harmonic_ratio: 1.373
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.291
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.6536%
 - H_block (lock_quality): 0.008
@@ -4834,6 +5120,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.75717
 - first_energy: 1.95604
 - harmonic_ratio: 1.528
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.344
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1670%
 - H_block (lock_quality): 0.004
@@ -4856,6 +5144,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.3838
 - first_energy: 1.96522
 - harmonic_ratio: 1.774
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.440
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6696%
 - H_block (lock_quality): 0.011
@@ -4878,6 +5168,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.1934
 - first_energy: 1.98485
 - harmonic_ratio: 1.110
+- err_raw_vs_sm: 0.043
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.3240%
 - H_block (lock_quality): 0.005
@@ -4900,6 +5192,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.81398
 - first_energy: 1.95699
 - harmonic_ratio: 0.910
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.103
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3369%
 - H_block (lock_quality): 0.007
@@ -4922,6 +5216,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.60723
 - first_energy: 1.93103
 - harmonic_ratio: 1.207
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.167
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5436%
 - H_block (lock_quality): 0.013
@@ -4944,6 +5240,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.66697
 - first_energy: 1.92727
 - harmonic_ratio: 0.901
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.121
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9271%
 - H_block (lock_quality): 0.002
@@ -4966,6 +5264,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06965
 - first_energy: 1.96947
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.056
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2972%
 - H_block (lock_quality): 0.005
@@ -4988,6 +5288,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.64928
 - first_energy: 1.92157
 - harmonic_ratio: 1.379
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.274
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1412%
 - H_block (lock_quality): 0.009
@@ -5010,6 +5312,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.32097
 - first_energy: 1.97386
 - harmonic_ratio: 1.136
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.137
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.9179%
 - H_block (lock_quality): 0.002
@@ -5032,6 +5336,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.2646
 - first_energy: 1.97163
 - harmonic_ratio: 1.750
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.423
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0526%
 - H_block (lock_quality): 0.005
@@ -5054,6 +5360,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.64523
 - first_energy: 1.97315
 - harmonic_ratio: 1.187
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.149
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0458%
 - H_block (lock_quality): 0.006
@@ -5076,6 +5384,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.2652
 - first_energy: 1.98068
 - harmonic_ratio: 0.969
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.032
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0418%
 - H_block (lock_quality): 0.007
@@ -5098,6 +5408,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38594
 - first_energy: 1.94937
 - harmonic_ratio: 1.003
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.000
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3171%
 - H_block (lock_quality): 0.014
@@ -5120,6 +5432,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21405
 - first_energy: 1.9403
 - harmonic_ratio: 0.981
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1859%
 - H_block (lock_quality): 0.003
@@ -5142,6 +5456,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.24477
 - first_energy: 1.96117
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.027
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1539%
 - H_block (lock_quality): 0.006
@@ -5164,6 +5480,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.91836
 - first_energy: 1.99878
 - harmonic_ratio: 1.367
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.277
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2317%
 - H_block (lock_quality): 0.002
@@ -5186,6 +5504,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.53479
 - first_energy: 1.90244
 - harmonic_ratio: 0.891
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.119
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2675%
 - H_block (lock_quality): 0.006
@@ -5208,6 +5528,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.63201
 - first_energy: 1.89744
 - harmonic_ratio: 0.909
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.103
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3044%
 - H_block (lock_quality): 0.003
@@ -5230,6 +5552,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.4433
 - first_energy: 1.96721
 - harmonic_ratio: 1.003
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2746%
 - H_block (lock_quality): 0.004
@@ -5252,6 +5576,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.10388
 - first_energy: 1.97917
 - harmonic_ratio: 0.945
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0065%
 - H_block (lock_quality): 0.007
@@ -5274,6 +5600,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12069
 - first_energy: 1.97605
 - harmonic_ratio: 0.949
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.054
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0362%
 - H_block (lock_quality): 0.010
@@ -5296,6 +5624,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.06497
 - first_energy: 1.9322
 - harmonic_ratio: 1.437
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.301
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3920%
 - H_block (lock_quality): 0.003
@@ -5318,6 +5648,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.69067
 - first_energy: 1.98571
 - harmonic_ratio: 1.032
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1267%
 - H_block (lock_quality): 0.003
@@ -5340,6 +5672,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.34938
 - first_energy: 1.96774
 - harmonic_ratio: 0.988
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2572%
 - H_block (lock_quality): 0.011
@@ -5362,6 +5696,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.88327
 - first_energy: 1.94366
 - harmonic_ratio: 1.400
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.297
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.6202%
 - H_block (lock_quality): 0.002
@@ -5384,6 +5720,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09694
 - first_energy: 1.95122
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.044
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1072%
 - H_block (lock_quality): 0.012
@@ -5406,6 +5744,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.5844
 - first_energy: 1.98437
 - harmonic_ratio: 1.634
+- err_raw_vs_sm: 0.047
+- err_fix_vs_sm: 0.359
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.6950%
 - H_block (lock_quality): 0.010
@@ -5428,6 +5768,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.64444
 - first_energy: 1.97222
 - harmonic_ratio: 1.343
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.255
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0852%
 - H_block (lock_quality): 0.011
@@ -5450,6 +5792,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20164
 - first_energy: 1.94521
 - harmonic_ratio: 0.977
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0142%
 - H_block (lock_quality): 0.009
@@ -5472,10 +5816,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.80998
 - first_energy: 0.297491
 - harmonic_ratio: 5.983
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 0.971156
-- mass_sim_used_gev: 0.297491
-- Δ_mass_sim vs SM: -83.2399%
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.832
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.2678%
 - H_block (lock_quality): 0.392
 - band_power_capture: 0.17338558096960965
 - chaos_mode=dynamic, PE_tick_norm=0.845416153988296, T_ticks=200
@@ -5496,6 +5840,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11299
 - first_energy: 1.9908
 - harmonic_ratio: 0.941
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.065
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1557%
 - H_block (lock_quality): 0.014
@@ -5518,6 +5864,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.24484
 - first_energy: 1.98769
 - harmonic_ratio: 0.962
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1551%
 - H_block (lock_quality): 0.007
@@ -5540,6 +5888,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.75912
 - first_energy: 1.94203
 - harmonic_ratio: 0.908
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.094
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6100%
 - H_block (lock_quality): 0.010
@@ -5562,6 +5912,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.90919
 - first_energy: 1.95506
 - harmonic_ratio: 1.396
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.293
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.3332%
 - H_block (lock_quality): 0.012
@@ -5584,6 +5936,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.2706
 - first_energy: 1.98834
 - harmonic_ratio: 0.966
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0445%
 - H_block (lock_quality): 0.011
@@ -5606,6 +5960,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.50796
 - first_energy: 1.98479
 - harmonic_ratio: 1.004
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6620%
 - H_block (lock_quality): 0.005
@@ -5628,6 +5984,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.39797
 - first_energy: 1.94444
 - harmonic_ratio: 1.008
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.003
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5062%
 - H_block (lock_quality): 0.001
@@ -5650,6 +6008,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.11608
 - first_energy: 1.9604
 - harmonic_ratio: 1.268
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.206
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7416%
 - H_block (lock_quality): 0.004
@@ -5672,6 +6032,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.71647
 - first_energy: 1.91304
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.078
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.3461%
 - H_block (lock_quality): 0.003
@@ -5694,6 +6056,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.01733
 - first_energy: 1.9871
 - harmonic_ratio: 0.928
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9858%
 - H_block (lock_quality): 0.005
@@ -5716,6 +6080,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.76917
 - first_energy: 1.99015
 - harmonic_ratio: 1.504
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.333
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2902%
 - H_block (lock_quality): 0.016
@@ -5738,6 +6104,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.19659
 - first_energy: 1.89189
 - harmonic_ratio: 1.327
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.233
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7410%
 - H_block (lock_quality): 0.006
@@ -5760,6 +6128,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.90553
 - first_energy: 1.93548
 - harmonic_ratio: 0.935
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.090
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9167%
 - H_block (lock_quality): 0.001
@@ -5782,6 +6152,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.2659
 - first_energy: 1.98104
 - harmonic_ratio: 1.124
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.134
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.6556%
 - H_block (lock_quality): 0.004
@@ -5804,6 +6176,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6831
 - first_energy: 1.95876
 - harmonic_ratio: 1.671
+- err_raw_vs_sm: 0.057
+- err_fix_vs_sm: 0.368
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +5.6710%
 - H_block (lock_quality): 0.002
@@ -5826,6 +6200,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21312
 - first_energy: 1.98068
 - harmonic_ratio: 0.961
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.042
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1708%
 - H_block (lock_quality): 0.010
@@ -5848,6 +6224,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.37209
 - first_energy: 1.97647
 - harmonic_ratio: 0.988
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0995%
 - H_block (lock_quality): 0.002
@@ -5870,6 +6248,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.00371
 - first_energy: 1.99107
 - harmonic_ratio: 1.078
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.5730%
 - H_block (lock_quality): 0.007
@@ -5892,6 +6272,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.95239
 - first_energy: 1.97727
 - harmonic_ratio: 0.922
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.114
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.7255%
 - H_block (lock_quality): 0.003
@@ -5914,10 +6296,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.534
 - first_energy: 1.97241
 - harmonic_ratio: 2.102
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.43892
-- mass_sim_used_gev: 1.97241
-- Δ_mass_sim vs SM: -52.9369%
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.529
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -1.0775%
 - H_block (lock_quality): 0.008
 - band_power_capture: 0.16396147455994642
 - chaos_mode=dynamic, PE_tick_norm=0.5882495694458846, T_ticks=200
@@ -5938,6 +6320,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.9506
 - first_energy: 1.98561
 - harmonic_ratio: 1.844
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.454
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5876%
 - H_block (lock_quality): 0.006
@@ -5960,6 +6344,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98552
 - first_energy: 1.94595
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.4987%
 - H_block (lock_quality): 0.005
@@ -5982,6 +6368,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.94781
 - first_energy: 1.97647
 - harmonic_ratio: 1.232
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.196
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.0113%
 - H_block (lock_quality): 0.009
@@ -6004,6 +6392,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.72042
 - first_energy: 1.89189
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.066
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2778%
 - H_block (lock_quality): 0.003
@@ -6026,6 +6416,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.58545
 - first_energy: 1.98246
 - harmonic_ratio: 1.018
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3503%
 - H_block (lock_quality): 0.005
@@ -6048,10 +6440,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.29628
 - first_energy: 1.32492
 - harmonic_ratio: 2.149
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 4.32519
-- mass_sim_used_gev: 1.32492
-- Δ_mass_sim vs SM: -53.6092%
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.536
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.2907%
 - H_block (lock_quality): 0.012
 - band_power_capture: 0.16937671909430224
 - chaos_mode=dynamic, PE_tick_norm=0.5688604485017406, T_ticks=200
@@ -6072,6 +6464,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.02358
 - first_energy: 1.97959
 - harmonic_ratio: 0.932
+- err_raw_vs_sm: 0.029
+- err_fix_vs_sm: 0.042
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.8851%
 - H_block (lock_quality): 0.003
@@ -6094,6 +6488,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16871
 - first_energy: 1.96947
 - harmonic_ratio: 0.959
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5453%
 - H_block (lock_quality): 0.004
@@ -6116,6 +6512,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.56059
 - first_energy: 1.98381
 - harmonic_ratio: 1.167
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.144
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0729%
 - H_block (lock_quality): 0.005
@@ -6138,6 +6536,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.47729
 - first_energy: 1.9834
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8036%
 - H_block (lock_quality): 0.002
@@ -6160,6 +6560,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.69195
 - first_energy: 1.93443
 - harmonic_ratio: 0.901
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.125
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3719%
 - H_block (lock_quality): 0.002
@@ -6182,6 +6584,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.22135
 - first_energy: 1.98601
 - harmonic_ratio: 0.960
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.040
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2216%
 - H_block (lock_quality): 0.003
@@ -6204,6 +6608,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.1521
 - first_energy: 1.94805
 - harmonic_ratio: 1.754
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.430
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0438%
 - H_block (lock_quality): 0.001
@@ -6226,6 +6632,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38276
 - first_energy: 1.97647
 - harmonic_ratio: 0.989
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2673%
 - H_block (lock_quality): 0.001
@@ -6248,6 +6656,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.99656
 - first_energy: 1.95833
 - harmonic_ratio: 1.407
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.292
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3656%
 - H_block (lock_quality): 0.004
@@ -6270,6 +6680,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.0261
 - first_energy: 1.9661
 - harmonic_ratio: 1.562
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.365
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8282%
 - H_block (lock_quality): 0.006
@@ -6292,6 +6704,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.9573
 - first_energy: 1.95876
 - harmonic_ratio: 0.932
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.104
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.8103%
 - H_block (lock_quality): 0.005
@@ -6314,6 +6728,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.73786
 - first_energy: 1.90909
 - harmonic_ratio: 1.402
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.310
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2306%
 - H_block (lock_quality): 0.006
@@ -6336,6 +6752,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.1796
 - first_energy: 1.94203
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3697%
 - H_block (lock_quality): 0.009
@@ -6358,6 +6776,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.4506
 - first_energy: 1.98077
 - harmonic_ratio: 0.998
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3882%
 - H_block (lock_quality): 0.003
@@ -6380,6 +6800,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18651
 - first_energy: 1.94872
 - harmonic_ratio: 0.972
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.026
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2582%
 - H_block (lock_quality): 0.002
@@ -6402,10 +6824,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.3235
 - first_energy: 1.92
 - harmonic_ratio: 1.966
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.26782
-- mass_sim_used_gev: 1.92
-- Δ_mass_sim vs SM: -49.1216%
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.491
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.0348%
 - H_block (lock_quality): 0.004
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.7085083722007445, T_ticks=200
@@ -6426,6 +6848,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.88479
 - first_energy: 1.93651
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.091
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.5589%
 - H_block (lock_quality): 0.003
@@ -6448,6 +6872,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.87924
 - first_energy: 1.96522
 - harmonic_ratio: 0.916
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.107
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4631%
 - H_block (lock_quality): 0.006
@@ -6470,6 +6896,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.3874
 - first_energy: 1.968
 - harmonic_ratio: 0.994
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3402%
 - H_block (lock_quality): 0.002
@@ -6492,6 +6920,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.95441
 - first_energy: 1.96552
 - harmonic_ratio: 0.928
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.107
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.7604%
 - H_block (lock_quality): 0.006
@@ -6514,6 +6944,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08936
 - first_energy: 1.95181
 - harmonic_ratio: 0.956
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.047
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0265%
 - H_block (lock_quality): 0.003
@@ -6536,6 +6968,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.30982
 - first_energy: 1.9697
 - harmonic_ratio: 1.292
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.202
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.1465%
 - H_block (lock_quality): 0.010
@@ -6558,6 +6992,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.73892
 - first_energy: 1.92982
 - harmonic_ratio: 1.070
+- err_raw_vs_sm: 0.029
+- err_fix_vs_sm: 0.038
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.8632%
 - H_block (lock_quality): 0.002
@@ -6580,6 +7016,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21937
 - first_energy: 1.94737
 - harmonic_ratio: 0.978
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2716%
 - H_block (lock_quality): 0.001
@@ -6602,6 +7040,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.75787
 - first_energy: 1.97605
 - harmonic_ratio: 1.203
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.199
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.7047%
 - H_block (lock_quality): 0.005
@@ -6624,6 +7064,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20113
 - first_energy: 1.95604
 - harmonic_ratio: 0.971
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.029
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0225%
 - H_block (lock_quality): 0.004
@@ -6646,6 +7088,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.29677
 - first_energy: 1.97849
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0585%
 - H_block (lock_quality): 0.003
@@ -6668,6 +7112,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.07948
 - first_energy: 1.97661
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1358%
 - H_block (lock_quality): 0.003
@@ -6690,6 +7136,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.00927
 - first_energy: 1.97468
 - harmonic_ratio: 1.087
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.065
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6536%
 - H_block (lock_quality): 0.004
@@ -6712,6 +7160,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.7432
 - first_energy: 1.97484
 - harmonic_ratio: 1.201
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.200
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8868%
 - H_block (lock_quality): 0.001
@@ -6734,6 +7184,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.71738
 - first_energy: 1.92593
 - harmonic_ratio: 0.909
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.085
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.3302%
 - H_block (lock_quality): 0.003
@@ -6756,6 +7208,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.54706
 - first_energy: 1.96667
 - harmonic_ratio: 1.176
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.151
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2517%
 - H_block (lock_quality): 0.005
@@ -6778,6 +7232,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.97112
 - first_energy: 1.94286
 - harmonic_ratio: 0.941
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.023
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.7309%
 - H_block (lock_quality): 0.000
@@ -6800,6 +7256,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.2331
 - first_energy: 1.98354
 - harmonic_ratio: 1.735
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.419
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7703%
 - H_block (lock_quality): 0.007
@@ -6822,6 +7280,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03969
 - first_energy: 1.92982
 - harmonic_ratio: 0.959
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7893%
 - H_block (lock_quality): 0.001
@@ -6844,6 +7304,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.1666
 - first_energy: 1.93103
 - harmonic_ratio: 1.771
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.434
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1736%
 - H_block (lock_quality): 0.005
@@ -6866,6 +7328,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.68847
 - first_energy: 1.97531
 - harmonic_ratio: 1.347
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.253
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5950%
 - H_block (lock_quality): 0.006
@@ -6888,6 +7352,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.89503
 - first_energy: 1.97203
 - harmonic_ratio: 1.537
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.363
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.1243%
 - H_block (lock_quality): 0.003
@@ -6910,6 +7376,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.67938
 - first_energy: 1.95833
 - harmonic_ratio: 1.045
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9544%
 - H_block (lock_quality): 0.004
@@ -6932,6 +7400,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00982
 - first_energy: 1.95833
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1069%
 - H_block (lock_quality): 0.007
@@ -6954,6 +7424,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.70326
 - first_energy: 1.89744
 - harmonic_ratio: 0.921
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.103
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.5734%
 - H_block (lock_quality): 0.002
@@ -6976,10 +7448,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.5756
 - first_energy: 1.95349
 - harmonic_ratio: 1.972
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.37714
-- mass_sim_used_gev: 1.95349
-- Δ_mass_sim vs SM: -49.5443%
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.495
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.5019%
 - H_block (lock_quality): 0.008
 - band_power_capture: 0.16711019510002284
 - chaos_mode=dynamic, PE_tick_norm=0.6379188785649585, T_ticks=200
@@ -7000,10 +7472,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.3017
 - first_energy: 1.95181
 - harmonic_ratio: 1.931
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.37165
-- mass_sim_used_gev: 1.95181
-- Δ_mass_sim vs SM: -48.2787%
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.483
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.1417%
 - H_block (lock_quality): 0.004
 - band_power_capture: 0.16809874869077512
 - chaos_mode=dynamic, PE_tick_norm=0.6669273331019936, T_ticks=200
@@ -7024,6 +7496,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.86769
 - first_energy: 1.97753
 - harmonic_ratio: 1.219
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.199
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.3415%
 - H_block (lock_quality): 0.005
@@ -7046,6 +7520,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.44247
 - first_energy: 1.95
 - harmonic_ratio: 1.012
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2617%
 - H_block (lock_quality): 0.001
@@ -7068,6 +7544,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.66112
 - first_energy: 1.98577
 - harmonic_ratio: 1.182
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.143
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2558%
 - H_block (lock_quality): 0.008
@@ -7090,10 +7568,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.1756
 - first_energy: 1.95181
 - harmonic_ratio: 2.068
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.37165
-- mass_sim_used_gev: 1.95181
-- Δ_mass_sim vs SM: -51.6760%
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.517
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.0731%
 - H_block (lock_quality): 0.001
 - band_power_capture: 0.16809089918555686
 - chaos_mode=dynamic, PE_tick_norm=0.7182873840796541, T_ticks=200
@@ -7114,6 +7592,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.33246
 - first_energy: 1.97814
 - harmonic_ratio: 0.981
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5229%
 - H_block (lock_quality): 0.007
@@ -7136,6 +7616,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.32754
 - first_energy: 1.97037
 - harmonic_ratio: 1.139
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.138
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.8298%
 - H_block (lock_quality): 0.008
@@ -7158,6 +7640,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.1174
 - first_energy: 1.97674
 - harmonic_ratio: 1.258
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.199
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7580%
 - H_block (lock_quality): 0.003
@@ -7180,6 +7664,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.95914
 - first_energy: 1.98206
 - harmonic_ratio: 0.921
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.043
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.9240%
 - H_block (lock_quality): 0.010
@@ -7202,6 +7688,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.05776
 - first_energy: 1.92593
 - harmonic_ratio: 1.123
+- err_raw_vs_sm: 0.024
+- err_fix_vs_sm: 0.088
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.3569%
 - H_block (lock_quality): 0.002
@@ -7224,6 +7712,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38789
 - first_energy: 1.95918
 - harmonic_ratio: 0.999
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3478%
 - H_block (lock_quality): 0.005
@@ -7246,6 +7736,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08378
 - first_energy: 1.99041
 - harmonic_ratio: 0.936
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.067
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0652%
 - H_block (lock_quality): 0.005
@@ -7268,6 +7760,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0616
 - first_energy: 1.92308
 - harmonic_ratio: 0.966
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4295%
 - H_block (lock_quality): 0.001
@@ -7290,6 +7784,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.67729
 - first_energy: 1.93443
 - harmonic_ratio: 0.899
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.125
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1109%
 - H_block (lock_quality): 0.014
@@ -7312,6 +7808,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.46133
 - first_energy: 1.98394
 - harmonic_ratio: 1.152
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.132
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0374%
 - H_block (lock_quality): 0.008
@@ -7334,6 +7832,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.67397
 - first_energy: 1.97315
 - harmonic_ratio: 1.036
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.8719%
 - H_block (lock_quality): 0.016
@@ -7356,6 +7856,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35362
 - first_energy: 1.9759
 - harmonic_ratio: 0.985
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1905%
 - H_block (lock_quality): 0.003
@@ -7378,6 +7880,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.58983
 - first_energy: 1.94203
 - harmonic_ratio: 1.039
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.034
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4170%
 - H_block (lock_quality): 0.001
@@ -7400,6 +7904,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.30929
 - first_energy: 1.9646
 - harmonic_ratio: 0.984
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1401%
 - H_block (lock_quality): 0.005
@@ -7422,6 +7928,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.969
 - first_energy: 1.97015
 - harmonic_ratio: 1.706
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.423
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.5988%
 - H_block (lock_quality): 0.006
@@ -7444,6 +7952,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.19797
 - first_energy: 1.9802
 - harmonic_ratio: 0.959
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.042
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0735%
 - H_block (lock_quality): 0.008
@@ -7466,6 +7976,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.80648
 - first_energy: 1.94667
 - harmonic_ratio: 0.914
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.096
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1024%
 - H_block (lock_quality): 0.007
@@ -7488,6 +8000,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.95693
 - first_energy: 1.9697
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.110
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.8039%
 - H_block (lock_quality): 0.008
@@ -7510,6 +8024,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.89829
 - first_energy: 1.93548
 - harmonic_ratio: 0.934
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.090
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7918%
 - H_block (lock_quality): 0.003
@@ -7532,6 +8048,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.82304
 - first_energy: 1.96154
 - harmonic_ratio: 1.066
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.071
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.0472%
 - H_block (lock_quality): 0.004
@@ -7554,6 +8072,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.62206
 - first_energy: 1.90244
 - harmonic_ratio: 0.905
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.106
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1272%
 - H_block (lock_quality): 0.005
@@ -7576,6 +8096,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.47473
 - first_energy: 1.97419
 - harmonic_ratio: 1.005
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.003
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7638%
 - H_block (lock_quality): 0.002
@@ -7598,6 +8120,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.32655
 - first_energy: 1.97037
 - harmonic_ratio: 0.984
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4140%
 - H_block (lock_quality): 0.004
@@ -7620,6 +8144,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09511
 - first_energy: 1.97241
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.058
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1209%
 - H_block (lock_quality): 0.006
@@ -7642,6 +8168,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.73736
 - first_energy: 1.98616
 - harmonic_ratio: 1.039
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.010
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.8394%
 - H_block (lock_quality): 0.009
@@ -7664,6 +8192,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.77402
 - first_energy: 1.98621
 - harmonic_ratio: 1.353
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.282
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.8302%
 - H_block (lock_quality): 0.008
@@ -7686,6 +8216,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.81083
 - first_energy: 1.97297
 - harmonic_ratio: 1.523
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.339
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7179%
 - H_block (lock_quality): 0.006
@@ -7708,6 +8240,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.2461
 - first_energy: 1.91489
 - harmonic_ratio: 1.639
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.382
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3484%
 - H_block (lock_quality): 0.005
@@ -7730,6 +8264,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.07424
 - first_energy: 1.94203
 - harmonic_ratio: 0.958
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2218%
 - H_block (lock_quality): 0.003
@@ -7752,6 +8288,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.4002
 - first_energy: 1.93333
 - harmonic_ratio: 1.806
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.449
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5266%
 - H_block (lock_quality): 0.001
@@ -7774,6 +8312,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.32027
 - first_energy: 1.97183
 - harmonic_ratio: 0.982
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3144%
 - H_block (lock_quality): 0.006
@@ -7796,6 +8336,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6042
 - first_energy: 1.97531
 - harmonic_ratio: 1.644
+- err_raw_vs_sm: 0.049
+- err_fix_vs_sm: 0.362
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.8905%
 - H_block (lock_quality): 0.006
@@ -7818,6 +8360,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.23159
 - first_energy: 1.92308
 - harmonic_ratio: 1.311
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.236
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1293%
 - H_block (lock_quality): 0.004
@@ -7840,6 +8384,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.85795
 - first_energy: 1.91837
 - harmonic_ratio: 1.414
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.306
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.9007%
 - H_block (lock_quality): 0.005
@@ -7862,6 +8408,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.84564
 - first_energy: 1.96992
 - harmonic_ratio: 0.909
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.110
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8832%
 - H_block (lock_quality): 0.008
@@ -7884,6 +8432,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35767
 - first_energy: 1.98367
 - harmonic_ratio: 0.982
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1269%
 - H_block (lock_quality): 0.007
@@ -7906,6 +8456,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28144
 - first_energy: 1.97183
 - harmonic_ratio: 0.976
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.027
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2174%
 - H_block (lock_quality): 0.001
@@ -7928,6 +8480,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38499
 - first_energy: 1.98077
 - harmonic_ratio: 0.987
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3023%
 - H_block (lock_quality): 0.003
@@ -7950,6 +8504,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.15413
 - first_energy: 1.95918
 - harmonic_ratio: 1.119
+- err_raw_vs_sm: 0.038
+- err_fix_vs_sm: 0.072
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.7545%
 - H_block (lock_quality): 0.008
@@ -7972,6 +8528,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.4451
 - first_energy: 1.96262
 - harmonic_ratio: 1.786
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.441
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1344%
 - H_block (lock_quality): 0.004
@@ -7994,6 +8552,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.41823
 - first_energy: 1.96667
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1156%
 - H_block (lock_quality): 0.001
@@ -8016,6 +8576,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12062
 - first_energy: 1.99029
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.061
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0374%
 - H_block (lock_quality): 0.002
@@ -8038,6 +8600,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.70443
 - first_energy: 1.98936
 - harmonic_ratio: 1.032
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.3369%
 - H_block (lock_quality): 0.011
@@ -8060,6 +8624,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.48626
 - first_energy: 1.93443
 - harmonic_ratio: 1.502
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.323
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7471%
 - H_block (lock_quality): 0.015
@@ -8082,6 +8648,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.40525
 - first_energy: 1.88235
 - harmonic_ratio: 0.880
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.162
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2082%
 - H_block (lock_quality): 0.004
@@ -8104,6 +8672,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.31365
 - first_energy: 1.97315
 - harmonic_ratio: 0.980
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2093%
 - H_block (lock_quality): 0.001
@@ -8126,6 +8696,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09155
 - first_energy: 1.95506
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.048
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0625%
 - H_block (lock_quality): 0.003
@@ -8148,6 +8720,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.43267
 - first_energy: 1.98387
 - harmonic_ratio: 1.148
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.132
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4213%
 - H_block (lock_quality): 0.003
@@ -8170,6 +8744,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.25423
 - first_energy: 1.98122
 - harmonic_ratio: 0.967
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.032
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2167%
 - H_block (lock_quality): 0.007
@@ -8192,6 +8768,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.75254
 - first_energy: 1.90244
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.072
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7235%
 - H_block (lock_quality): 0.002
@@ -8214,6 +8792,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00937
 - first_energy: 1.95918
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1142%
 - H_block (lock_quality): 0.001
@@ -8236,6 +8816,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.07763
 - first_energy: 1.94872
 - harmonic_ratio: 1.113
+- err_raw_vs_sm: 0.026
+- err_fix_vs_sm: 0.077
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.6450%
 - H_block (lock_quality): 0.004
@@ -8258,6 +8840,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.76535
 - first_energy: 1.98473
 - harmonic_ratio: 1.044
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.8839%
 - H_block (lock_quality): 0.001
@@ -8280,6 +8864,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.90262
 - first_energy: 1.97203
 - harmonic_ratio: 0.917
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.111
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.8666%
 - H_block (lock_quality): 0.001
@@ -8302,6 +8888,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.28434
 - first_energy: 1.93651
 - harmonic_ratio: 1.310
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.215
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.8302%
 - H_block (lock_quality): 0.006
@@ -8324,6 +8912,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.07902
 - first_energy: 1.9798
 - harmonic_ratio: 1.250
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.198
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2817%
 - H_block (lock_quality): 0.006
@@ -8346,6 +8936,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.94124
 - first_energy: 1.93846
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.092
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.5331%
 - H_block (lock_quality): 0.004
@@ -8368,6 +8960,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.72655
 - first_energy: 1.97386
 - harmonic_ratio: 1.044
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.6745%
 - H_block (lock_quality): 0.005
@@ -8390,6 +8984,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13469
 - first_energy: 1.96694
 - harmonic_ratio: 0.955
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.049
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1925%
 - H_block (lock_quality): 0.004
@@ -8412,6 +9008,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.2313
 - first_energy: 1.95122
 - harmonic_ratio: 1.606
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.370
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2023%
 - H_block (lock_quality): 0.006
@@ -8434,6 +9032,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.2066
 - first_energy: 1.96078
 - harmonic_ratio: 0.970
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.032
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0656%
 - H_block (lock_quality): 0.004
@@ -8456,6 +9056,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.50299
 - first_energy: 1.92857
 - harmonic_ratio: 1.192
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.157
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5208%
 - H_block (lock_quality): 0.002
@@ -8478,6 +9080,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.29816
 - first_energy: 1.97949
 - harmonic_ratio: 1.284
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.198
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.0017%
 - H_block (lock_quality): 0.007
@@ -8500,6 +9104,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.1229
 - first_energy: 1.9604
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.045
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0000%
 - H_block (lock_quality): 0.001
@@ -8522,6 +9128,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00834
 - first_energy: 1.95294
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.028
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1307%
 - H_block (lock_quality): 0.003
@@ -8544,6 +9152,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.39943
 - first_energy: 1.98077
 - harmonic_ratio: 0.990
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5291%
 - H_block (lock_quality): 0.003
@@ -8566,6 +9176,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.92586
 - first_energy: 1.97241
 - harmonic_ratio: 1.231
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.198
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2847%
 - H_block (lock_quality): 0.007
@@ -8588,6 +9200,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.12566
 - first_energy: 1.99888
 - harmonic_ratio: 1.398
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.288
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4801%
 - H_block (lock_quality): 0.000
@@ -8610,6 +9224,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12347
 - first_energy: 1.96667
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.049
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0092%
 - H_block (lock_quality): 0.006
@@ -8632,6 +9248,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.06523
 - first_energy: 1.97143
 - harmonic_ratio: 1.409
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.287
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3949%
 - H_block (lock_quality): 0.012
@@ -8654,6 +9272,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.90953
 - first_energy: 1.91667
 - harmonic_ratio: 1.104
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.093
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2071%
 - H_block (lock_quality): 0.006
@@ -8676,6 +9296,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.54725
 - first_energy: 1.98222
 - harmonic_ratio: 1.012
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.012
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0623%
 - H_block (lock_quality): 0.005
@@ -8698,6 +9320,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.26484
 - first_energy: 1.9661
 - harmonic_ratio: 0.976
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0475%
 - H_block (lock_quality): 0.004
@@ -8720,6 +9344,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.87131
 - first_energy: 1.92857
 - harmonic_ratio: 0.933
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.087
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3261%
 - H_block (lock_quality): 0.007
@@ -8742,6 +9368,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.7237
 - first_energy: 1.94737
 - harmonic_ratio: 1.844
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.452
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9872%
 - H_block (lock_quality): 0.003
@@ -8764,6 +9392,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.57419
 - first_energy: 1.94118
 - harmonic_ratio: 1.195
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.162
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1070%
 - H_block (lock_quality): 0.004
@@ -8786,6 +9416,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3279
 - first_energy: 1.98387
 - harmonic_ratio: 1.595
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.359
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1569%
 - H_block (lock_quality): 0.006
@@ -8808,6 +9440,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.5914
 - first_energy: 1.97701
 - harmonic_ratio: 1.641
+- err_raw_vs_sm: 0.048
+- err_fix_vs_sm: 0.362
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.7639%
 - H_block (lock_quality): 0.006
@@ -8830,6 +9464,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.87462
 - first_energy: 1.95294
 - harmonic_ratio: 0.921
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.100
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3832%
 - H_block (lock_quality): 0.004
@@ -8852,6 +9488,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35791
 - first_energy: 1.95349
 - harmonic_ratio: 0.997
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.002
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1232%
 - H_block (lock_quality): 0.003
@@ -8874,6 +9512,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.9631
 - first_energy: 1.96262
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8602%
 - H_block (lock_quality): 0.012
@@ -8896,6 +9536,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.85867
 - first_energy: 1.94667
 - harmonic_ratio: 0.922
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.097
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1081%
 - H_block (lock_quality): 0.002
@@ -8918,6 +9560,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.56228
 - first_energy: 1.88889
 - harmonic_ratio: 0.902
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.111
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2280%
 - H_block (lock_quality): 0.002
@@ -8940,6 +9584,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.2209
 - first_energy: 1.91304
 - harmonic_ratio: 1.637
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.382
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0989%
 - H_block (lock_quality): 0.003
@@ -8962,6 +9608,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.55369
 - first_energy: 1.95238
 - harmonic_ratio: 1.185
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.158
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1641%
 - H_block (lock_quality): 0.005
@@ -8984,6 +9632,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.0139
 - first_energy: 1.968
 - harmonic_ratio: 1.559
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.365
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9487%
 - H_block (lock_quality): 0.008
@@ -9006,6 +9656,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.36271
 - first_energy: 1.9646
 - harmonic_ratio: 1.304
+- err_raw_vs_sm: 0.038
+- err_fix_vs_sm: 0.204
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.8029%
 - H_block (lock_quality): 0.004
@@ -9028,6 +9680,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.52444
 - first_energy: 1.98535
 - harmonic_ratio: 1.007
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4106%
 - H_block (lock_quality): 0.005
@@ -9050,6 +9704,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.25406
 - first_energy: 1.97241
 - harmonic_ratio: 1.282
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.201
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.4544%
 - H_block (lock_quality): 0.003
@@ -9072,6 +9728,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20556
 - first_energy: 1.99383
 - harmonic_ratio: 0.953
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.049
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0489%
 - H_block (lock_quality): 0.004
@@ -9094,6 +9752,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.69305
 - first_energy: 1.95699
 - harmonic_ratio: 1.048
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1632%
 - H_block (lock_quality): 0.009
@@ -9116,6 +9776,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.62478
 - first_energy: 1.98394
 - harmonic_ratio: 1.023
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1210%
 - H_block (lock_quality): 0.005
@@ -9138,6 +9800,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.34651
 - first_energy: 1.96154
 - harmonic_ratio: 1.147
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.142
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.5756%
 - H_block (lock_quality): 0.002
@@ -9160,6 +9824,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.079
 - first_energy: 1.93651
 - harmonic_ratio: 1.436
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.300
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5474%
 - H_block (lock_quality): 0.002
@@ -9182,6 +9848,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.75415
 - first_energy: 1.99481
 - harmonic_ratio: 1.037
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.0957%
 - H_block (lock_quality): 0.004
@@ -9204,6 +9872,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09429
 - first_energy: 1.97516
 - harmonic_ratio: 0.945
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1075%
 - H_block (lock_quality): 0.003
@@ -9226,6 +9896,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11792
 - first_energy: 1.97917
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.055
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0814%
 - H_block (lock_quality): 0.004
@@ -9248,6 +9920,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.18885
 - first_energy: 1.9375
 - harmonic_ratio: 1.295
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.215
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6450%
 - H_block (lock_quality): 0.003
@@ -9270,10 +9944,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.6731
 - first_energy: 1.95402
 - harmonic_ratio: 1.987
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.37888
-- mass_sim_used_gev: 1.95402
-- Δ_mass_sim vs SM: -49.5305%
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.495
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.2695%
 - H_block (lock_quality): 0.004
 - band_power_capture: 0.1673600562053695
 - chaos_mode=dynamic, PE_tick_norm=0.7619036942265696, T_ticks=200
@@ -9294,6 +9968,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96288
 - first_energy: 1.92982
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8636%
 - H_block (lock_quality): 0.001
@@ -9316,6 +9992,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.27196
 - first_energy: 1.97849
 - harmonic_ratio: 0.971
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.030
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0661%
 - H_block (lock_quality): 0.017
@@ -9338,6 +10016,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.02191
 - first_energy: 1.9875
 - harmonic_ratio: 1.082
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.8369%
 - H_block (lock_quality): 0.014
@@ -9360,6 +10040,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.67828
 - first_energy: 1.96491
 - harmonic_ratio: 1.197
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.152
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4826%
 - H_block (lock_quality): 0.004
@@ -9382,6 +10064,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.81103
 - first_energy: 1.92453
 - harmonic_ratio: 0.925
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.084
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2858%
 - H_block (lock_quality): 0.009
@@ -9404,6 +10088,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.68283
 - first_energy: 1.91111
 - harmonic_ratio: 0.911
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.111
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2094%
 - H_block (lock_quality): 0.004
@@ -9426,6 +10112,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.97443
 - first_energy: 1.94118
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.6775%
 - H_block (lock_quality): 0.003
@@ -9448,6 +10136,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.30065
 - first_energy: 1.98945
 - harmonic_ratio: 0.970
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0030%
 - H_block (lock_quality): 0.007
@@ -9470,6 +10160,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.28052
 - first_energy: 1.95455
 - harmonic_ratio: 1.298
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.208
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.7828%
 - H_block (lock_quality): 0.004
@@ -9492,6 +10184,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.94908
 - first_energy: 1.92308
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.083
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.6684%
 - H_block (lock_quality): 0.001
@@ -9514,6 +10208,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.5798
 - first_energy: 1.96694
 - harmonic_ratio: 1.803
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.447
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2522%
 - H_block (lock_quality): 0.004
@@ -9536,6 +10232,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16205
 - first_energy: 1.93333
 - harmonic_ratio: 0.976
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6525%
 - H_block (lock_quality): 0.005
@@ -9558,6 +10256,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.23654
 - first_energy: 1.97927
 - harmonic_ratio: 0.965
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0219%
 - H_block (lock_quality): 0.002
@@ -9580,6 +10280,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.2468
 - first_energy: 1.93651
 - harmonic_ratio: 1.305
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.231
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3143%
 - H_block (lock_quality): 0.002
@@ -9602,6 +10304,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91848
 - first_energy: 1.97241
 - harmonic_ratio: 0.919
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.111
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1402%
 - H_block (lock_quality): 0.002
@@ -9624,6 +10328,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.80895
 - first_energy: 1.96721
 - harmonic_ratio: 1.060
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.069
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2516%
 - H_block (lock_quality): 0.002
@@ -9646,6 +10352,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.31647
 - first_energy: 1.96581
 - harmonic_ratio: 1.140
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.140
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.9781%
 - H_block (lock_quality): 0.005
@@ -9668,6 +10376,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.42481
 - first_energy: 1.96639
 - harmonic_ratio: 1.468
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.311
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0880%
 - H_block (lock_quality): 0.008
@@ -9690,6 +10400,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00923
 - first_energy: 1.98283
 - harmonic_ratio: 0.928
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.044
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1164%
 - H_block (lock_quality): 0.006
@@ -9712,6 +10424,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.0672
 - first_energy: 1.96899
 - harmonic_ratio: 1.722
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.423
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7179%
 - H_block (lock_quality): 0.010
@@ -9734,6 +10448,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09487
 - first_energy: 1.96748
 - harmonic_ratio: 0.949
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.055
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1169%
 - H_block (lock_quality): 0.000
@@ -9756,6 +10472,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06959
 - first_energy: 1.97315
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.058
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2983%
 - H_block (lock_quality): 0.004
@@ -9778,6 +10496,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18497
 - first_energy: 1.99878
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2830%
 - H_block (lock_quality): 0.000
@@ -9800,6 +10520,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.54623
 - first_energy: 1.97351
 - harmonic_ratio: 1.016
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0779%
 - H_block (lock_quality): 0.006
@@ -9822,6 +10544,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.02214
 - first_energy: 1.92157
 - harmonic_ratio: 1.119
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.090
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.8402%
 - H_block (lock_quality): 0.002
@@ -9844,6 +10568,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.73387
 - first_energy: 1.95181
 - harmonic_ratio: 0.900
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.100
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.0457%
 - H_block (lock_quality): 0.010
@@ -9866,6 +10592,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00599
 - first_energy: 1.9403
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1686%
 - H_block (lock_quality): 0.003
@@ -9888,10 +10616,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.5308
 - first_energy: 1.9633
 - harmonic_ratio: 1.955
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.40918
-- mass_sim_used_gev: 1.9633
-- Δ_mass_sim vs SM: -49.2908%
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.493
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.8565%
 - H_block (lock_quality): 0.006
 - band_power_capture: 0.1665161054276013
 - chaos_mode=dynamic, PE_tick_norm=0.7858397179245205, T_ticks=200
@@ -9912,6 +10640,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.37995
 - first_energy: 1.99132
 - harmonic_ratio: 0.981
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2230%
 - H_block (lock_quality): 0.003
@@ -9934,6 +10664,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.82078
 - first_energy: 1.94118
 - harmonic_ratio: 0.919
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.094
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4541%
 - H_block (lock_quality): 0.005
@@ -9956,6 +10688,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.10477
 - first_energy: 1.98606
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0211%
 - H_block (lock_quality): 0.007
@@ -9978,6 +10712,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.4225
 - first_energy: 1.97419
 - harmonic_ratio: 1.617
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.363
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.0929%
 - H_block (lock_quality): 0.004
@@ -10000,6 +10736,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.5479
 - first_energy: 1.9322
 - harmonic_ratio: 1.038
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0525%
 - H_block (lock_quality): 0.006
@@ -10022,6 +10760,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98378
 - first_energy: 1.91667
 - harmonic_ratio: 0.956
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.5268%
 - H_block (lock_quality): 0.003
@@ -10044,6 +10784,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.88783
 - first_energy: 1.94667
 - harmonic_ratio: 0.927
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.097
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6112%
 - H_block (lock_quality): 0.004
@@ -10066,6 +10808,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.83311
 - first_energy: 1.97403
 - harmonic_ratio: 1.060
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.065
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9012%
 - H_block (lock_quality): 0.016
@@ -10088,6 +10832,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.00202
 - first_energy: 1.96639
 - harmonic_ratio: 1.247
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.200
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3361%
 - H_block (lock_quality): 0.006
@@ -10110,6 +10856,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.30409
 - first_energy: 1.96396
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0576%
 - H_block (lock_quality): 0.003
@@ -10132,6 +10880,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.27774
 - first_energy: 1.92857
 - harmonic_ratio: 1.474
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.325
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4895%
 - H_block (lock_quality): 0.003
@@ -10154,6 +10904,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03016
 - first_energy: 1.95604
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.029
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.7790%
 - H_block (lock_quality): 0.008
@@ -10176,6 +10928,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.20143
 - first_energy: 1.9726
 - harmonic_ratio: 1.118
+- err_raw_vs_sm: 0.044
+- err_fix_vs_sm: 0.066
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.4404%
 - H_block (lock_quality): 0.003
@@ -10198,6 +10952,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.00806
 - first_energy: 1.98354
 - harmonic_ratio: 1.082
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.061
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6361%
 - H_block (lock_quality): 0.014
@@ -10220,6 +10976,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11076
 - first_energy: 1.97315
 - harmonic_ratio: 0.949
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.055
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1193%
 - H_block (lock_quality): 0.010
@@ -10242,6 +11000,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.48918
 - first_energy: 1.98802
 - harmonic_ratio: 1.154
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.131
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3358%
 - H_block (lock_quality): 0.008
@@ -10264,6 +11024,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.67695
 - first_energy: 1.94444
 - harmonic_ratio: 0.894
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.130
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1047%
 - H_block (lock_quality): 0.003
@@ -10286,6 +11048,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.45877
 - first_energy: 1.68944
 - harmonic_ratio: 1.352
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.261
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0717%
 - H_block (lock_quality): 0.001
@@ -10308,6 +11072,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09982
 - first_energy: 1.9322
 - harmonic_ratio: 0.967
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0600%
 - H_block (lock_quality): 0.002
@@ -10330,6 +11096,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.03969
 - first_energy: 1.97403
 - harmonic_ratio: 1.403
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.286
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1120%
 - H_block (lock_quality): 0.003
@@ -10352,6 +11120,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.90996
 - first_energy: 1.96875
 - harmonic_ratio: 0.920
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.109
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9932%
 - H_block (lock_quality): 0.003
@@ -10374,6 +11144,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.42382
 - first_energy: 1.97368
 - harmonic_ratio: 0.997
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.003
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0286%
 - H_block (lock_quality): 0.004
@@ -10396,6 +11168,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.53512
 - first_energy: 1.98
 - harmonic_ratio: 1.011
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2475%
 - H_block (lock_quality): 0.011
@@ -10418,6 +11192,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.19682
 - first_energy: 1.96721
 - harmonic_ratio: 0.965
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0920%
 - H_block (lock_quality): 0.006
@@ -10440,6 +11216,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.63952
 - first_energy: 1.92
 - harmonic_ratio: 0.900
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.116
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4381%
 - H_block (lock_quality): 0.005
@@ -10462,6 +11240,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.77931
 - first_energy: 1.98462
 - harmonic_ratio: 1.509
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.335
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3943%
 - H_block (lock_quality): 0.009
@@ -10484,6 +11264,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3604
 - first_energy: 1.91489
 - harmonic_ratio: 1.657
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.382
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.4785%
 - H_block (lock_quality): 0.007
@@ -10506,6 +11288,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92008
 - first_energy: 1.96667
 - harmonic_ratio: 0.922
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.108
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1678%
 - H_block (lock_quality): 0.002
@@ -10528,6 +11312,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.23275
 - first_energy: 1.97368
 - harmonic_ratio: 0.967
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0388%
 - H_block (lock_quality): 0.003
@@ -10550,6 +11336,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0282
 - first_energy: 1.97778
 - harmonic_ratio: 0.934
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.8106%
 - H_block (lock_quality): 0.002
@@ -10572,6 +11360,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.1324
 - first_energy: 1.94805
 - harmonic_ratio: 0.964
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.039
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1551%
 - H_block (lock_quality): 0.009
@@ -10594,6 +11384,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.88682
 - first_energy: 1.96
 - harmonic_ratio: 1.233
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.206
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.1040%
 - H_block (lock_quality): 0.002
@@ -10616,6 +11408,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.80193
 - first_energy: 1.96226
 - harmonic_ratio: 1.218
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.205
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1577%
 - H_block (lock_quality): 0.007
@@ -10638,6 +11432,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.97417
 - first_energy: 1.98157
 - harmonic_ratio: 1.078
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1446%
 - H_block (lock_quality): 0.003
@@ -10660,6 +11456,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6833
 - first_energy: 1.97576
 - harmonic_ratio: 1.656
+- err_raw_vs_sm: 0.057
+- err_fix_vs_sm: 0.362
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +5.6724%
 - H_block (lock_quality): 0.003
@@ -10682,6 +11480,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.58091
 - first_energy: 1.96774
 - harmonic_ratio: 1.024
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2811%
 - H_block (lock_quality): 0.004
@@ -10704,6 +11504,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.44473
 - first_energy: 1.96262
 - harmonic_ratio: 1.006
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.003
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2969%
 - H_block (lock_quality): 0.008
@@ -10726,6 +11528,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0382
 - first_energy: 1.97059
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8138%
 - H_block (lock_quality): 0.001
@@ -10748,6 +11552,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.26359
 - first_energy: 1.98847
 - harmonic_ratio: 0.965
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0675%
 - H_block (lock_quality): 0.008
@@ -10770,6 +11576,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04779
 - first_energy: 1.95349
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.048
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6563%
 - H_block (lock_quality): 0.004
@@ -10792,6 +11600,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.81866
 - first_energy: 1.97015
 - harmonic_ratio: 1.527
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.340
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7982%
 - H_block (lock_quality): 0.005
@@ -10814,6 +11624,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28711
 - first_energy: 1.96226
 - harmonic_ratio: 0.981
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2120%
 - H_block (lock_quality): 0.002
@@ -10836,6 +11648,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.34155
 - first_energy: 1.99217
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3802%
 - H_block (lock_quality): 0.002
@@ -10858,6 +11672,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.89351
 - first_energy: 1.96226
 - harmonic_ratio: 0.920
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.106
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7093%
 - H_block (lock_quality): 0.005
@@ -10880,6 +11696,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04257
 - first_energy: 1.96581
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.054
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7421%
 - H_block (lock_quality): 0.001
@@ -10902,6 +11720,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.48163
 - first_energy: 1.90698
 - harmonic_ratio: 0.881
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.140
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4018%
 - H_block (lock_quality): 0.002
@@ -10924,6 +11744,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.36636
 - first_energy: 1.98551
 - harmonic_ratio: 1.445
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.305
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4610%
 - H_block (lock_quality): 0.008
@@ -10946,6 +11768,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.5347
 - first_energy: 1.96226
 - harmonic_ratio: 1.645
+- err_raw_vs_sm: 0.042
+- err_fix_vs_sm: 0.366
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.2030%
 - H_block (lock_quality): 0.007
@@ -10968,6 +11792,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.30883
 - first_energy: 1.96522
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1328%
 - H_block (lock_quality): 0.006
@@ -10990,6 +11816,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.33335
 - first_energy: 1.9646
 - harmonic_ratio: 1.299
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.204
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.4385%
 - H_block (lock_quality): 0.002
@@ -11012,6 +11840,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.14439
 - first_energy: 1.9403
 - harmonic_ratio: 0.970
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9374%
 - H_block (lock_quality): 0.003
@@ -11034,6 +11864,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.4718
 - first_energy: 1.88571
 - harmonic_ratio: 0.889
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.128
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2219%
 - H_block (lock_quality): 0.003
@@ -11056,6 +11888,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03935
 - first_energy: 1.968
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.055
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7951%
 - H_block (lock_quality): 0.003
@@ -11078,6 +11912,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.96148
 - first_energy: 1.96748
 - harmonic_ratio: 1.551
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.365
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.4670%
 - H_block (lock_quality): 0.005
@@ -11100,6 +11936,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.37092
 - first_energy: 1.98462
 - harmonic_ratio: 1.292
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.196
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.9049%
 - H_block (lock_quality): 0.002
@@ -11122,6 +11960,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05227
 - first_energy: 1.95062
 - harmonic_ratio: 0.950
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5827%
 - H_block (lock_quality): 0.005
@@ -11144,6 +11984,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99686
 - first_energy: 1.98529
 - harmonic_ratio: 0.925
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.045
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3158%
 - H_block (lock_quality): 0.005
@@ -11166,6 +12008,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21063
 - first_energy: 1.99885
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1307%
 - H_block (lock_quality): 0.001
@@ -11188,6 +12032,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.49312
 - first_energy: 1.96226
 - harmonic_ratio: 1.170
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.142
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3885%
 - H_block (lock_quality): 0.003
@@ -11210,6 +12056,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.75627
 - first_energy: 1.93939
 - harmonic_ratio: 0.909
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.093
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6592%
 - H_block (lock_quality): 0.004
@@ -11232,6 +12080,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04238
 - first_energy: 1.96
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.051
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7453%
 - H_block (lock_quality): 0.010
@@ -11254,6 +12104,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.57829
 - first_energy: 1.94286
 - harmonic_ratio: 1.353
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.261
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0133%
 - H_block (lock_quality): 0.006
@@ -11276,6 +12128,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.85376
 - first_energy: 1.93443
 - harmonic_ratio: 0.927
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.090
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0233%
 - H_block (lock_quality): 0.007
@@ -11298,6 +12152,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.22188
 - first_energy: 1.98611
 - harmonic_ratio: 1.114
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.131
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2454%
 - H_block (lock_quality): 0.005
@@ -11320,6 +12176,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.76275
 - first_energy: 1.96296
 - harmonic_ratio: 0.899
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.106
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5473%
 - H_block (lock_quality): 0.007
@@ -11342,6 +12200,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12366
 - first_energy: 1.97701
 - harmonic_ratio: 0.949
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.054
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0124%
 - H_block (lock_quality): 0.002
@@ -11364,10 +12224,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 14.6527
 - first_energy: 1.98387
 - harmonic_ratio: 2.263
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.47632
-- mass_sim_used_gev: 1.98387
-- Δ_mass_sim vs SM: -55.9727%
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.560
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.3881%
 - H_block (lock_quality): 0.008
 - band_power_capture: 0.16805825746104427
 - chaos_mode=dynamic, PE_tick_norm=0.5931565346468998, T_ticks=200
@@ -11388,6 +12248,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08298
 - first_energy: 1.98502
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.064
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0782%
 - H_block (lock_quality): 0.008
@@ -11410,10 +12272,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.2316
 - first_energy: 1.97647
 - harmonic_ratio: 2.051
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.45216
-- mass_sim_used_gev: 1.97647
-- Δ_mass_sim vs SM: -51.0653%
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.511
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.3514%
 - H_block (lock_quality): 0.012
 - band_power_capture: 0.16519028792416152
 - chaos_mode=dynamic, PE_tick_norm=0.5855614835099273, T_ticks=200
@@ -11434,6 +12296,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.65073
 - first_energy: 1.93333
 - harmonic_ratio: 0.895
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.124
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6377%
 - H_block (lock_quality): 0.002
@@ -11456,10 +12320,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.0333
 - first_energy: 1.96694
 - harmonic_ratio: 2.030
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.42106
-- mass_sim_used_gev: 1.96694
-- Δ_mass_sim vs SM: -51.3013%
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.513
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -1.1522%
 - H_block (lock_quality): 0.006
 - band_power_capture: 0.16989008224126614
 - chaos_mode=dynamic, PE_tick_norm=0.5622577968053578, T_ticks=200
@@ -11480,6 +12344,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.88257
 - first_energy: 1.94667
 - harmonic_ratio: 1.083
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.078
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1839%
 - H_block (lock_quality): 0.001
@@ -11502,6 +12368,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08493
 - first_energy: 1.98039
 - harmonic_ratio: 0.941
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0463%
 - H_block (lock_quality): 0.004
@@ -11524,6 +12392,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.33001
 - first_energy: 1.9797
 - harmonic_ratio: 0.979
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.015
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5615%
 - H_block (lock_quality): 0.012
@@ -11546,6 +12416,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.13756
 - first_energy: 1.95876
 - harmonic_ratio: 1.273
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.206
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0083%
 - H_block (lock_quality): 0.003
@@ -11568,6 +12440,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.07137
 - first_energy: 1.92857
 - harmonic_ratio: 0.964
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.034
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2691%
 - H_block (lock_quality): 0.008
@@ -11590,6 +12464,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11837
 - first_energy: 1.99382
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.063
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0741%
 - H_block (lock_quality): 0.012
@@ -11612,6 +12488,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3603
 - first_energy: 1.96226
 - harmonic_ratio: 1.617
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.366
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.4777%
 - H_block (lock_quality): 0.002
@@ -11634,10 +12512,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.355
 - first_energy: 1.90698
 - harmonic_ratio: 2.145
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.2253
-- mass_sim_used_gev: 1.90698
-- Δ_mass_sim vs SM: -52.7859%
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.528
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +1.2872%
 - H_block (lock_quality): 0.004
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.8672935599868578, T_ticks=200
@@ -11658,6 +12536,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.59252
 - first_energy: 1.98889
 - harmonic_ratio: 1.169
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.142
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3491%
 - H_block (lock_quality): 0.005
@@ -11680,6 +12560,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92574
 - first_energy: 1.96522
 - harmonic_ratio: 0.924
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.107
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2656%
 - H_block (lock_quality): 0.006
@@ -11702,6 +12584,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.66143
 - first_energy: 1.91667
 - harmonic_ratio: 0.905
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.114
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8283%
 - H_block (lock_quality): 0.001
@@ -11724,6 +12608,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91023
 - first_energy: 1.95506
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.101
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9979%
 - H_block (lock_quality): 0.005
@@ -11746,6 +12632,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04365
 - first_energy: 1.98113
 - harmonic_ratio: 0.934
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7244%
 - H_block (lock_quality): 0.001
@@ -11768,6 +12656,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92839
 - first_energy: 1.95699
 - harmonic_ratio: 0.928
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.103
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.3112%
 - H_block (lock_quality): 0.005
@@ -11790,6 +12680,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.10246
 - first_energy: 1.96721
 - harmonic_ratio: 0.950
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0167%
 - H_block (lock_quality): 0.004
@@ -11812,6 +12704,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04701
 - first_energy: 1.92857
 - harmonic_ratio: 0.960
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.034
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6692%
 - H_block (lock_quality): 0.006
@@ -11834,6 +12728,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.65557
 - first_energy: 1.93548
 - harmonic_ratio: 0.895
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.125
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7240%
 - H_block (lock_quality): 0.006
@@ -11856,6 +12752,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.19686
 - first_energy: 1.96581
 - harmonic_ratio: 0.966
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0913%
 - H_block (lock_quality): 0.004
@@ -11878,6 +12776,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.17883
 - first_energy: 1.97403
 - harmonic_ratio: 0.959
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.039
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3821%
 - H_block (lock_quality): 0.002
@@ -11900,6 +12800,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.61142
 - first_energy: 1.98854
 - harmonic_ratio: 1.173
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.142
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5989%
 - H_block (lock_quality): 0.010
@@ -11922,6 +12824,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13332
 - first_energy: 1.96923
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.050
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1701%
 - H_block (lock_quality): 0.002
@@ -11944,6 +12848,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.84715
 - first_energy: 1.97241
 - harmonic_ratio: 1.219
+- err_raw_vs_sm: 0.026
+- err_fix_vs_sm: 0.201
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.5965%
 - H_block (lock_quality): 0.003
@@ -11966,6 +12872,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.49962
 - first_energy: 1.99274
 - harmonic_ratio: 0.999
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.007
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7894%
 - H_block (lock_quality): 0.014
@@ -11988,6 +12896,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.41708
 - first_energy: 1.9779
 - harmonic_ratio: 0.994
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1335%
 - H_block (lock_quality): 0.007
@@ -12010,6 +12920,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16439
 - first_energy: 1.9646
 - harmonic_ratio: 0.961
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.034
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6149%
 - H_block (lock_quality): 0.006
@@ -12032,6 +12944,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.8095
 - first_energy: 1.93548
 - harmonic_ratio: 1.869
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.468
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5997%
 - H_block (lock_quality): 0.005
@@ -12054,6 +12968,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35174
 - first_energy: 1.98431
 - harmonic_ratio: 0.981
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2201%
 - H_block (lock_quality): 0.004
@@ -12076,6 +12992,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.1809
 - first_energy: 1.96522
 - harmonic_ratio: 1.743
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.424
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3016%
 - H_block (lock_quality): 0.004
@@ -12098,6 +13016,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.57678
 - first_energy: 1.96262
 - harmonic_ratio: 1.183
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.153
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1412%
 - H_block (lock_quality): 0.002
@@ -12120,6 +13040,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04076
 - first_energy: 1.9646
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.053
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7718%
 - H_block (lock_quality): 0.002
@@ -12142,6 +13064,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99378
 - first_energy: 1.94737
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3655%
 - H_block (lock_quality): 0.004
@@ -12164,6 +13088,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98862
 - first_energy: 1.9697
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.4487%
 - H_block (lock_quality): 0.006
@@ -12186,6 +13112,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.04572
 - first_energy: 1.92308
 - harmonic_ratio: 1.122
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.090
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1822%
 - H_block (lock_quality): 0.001
@@ -12208,6 +13136,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03024
 - first_energy: 1.96429
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.034
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.7777%
 - H_block (lock_quality): 0.002
@@ -12230,6 +13160,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.59684
 - first_energy: 1.96262
 - harmonic_ratio: 1.342
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.253
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2029%
 - H_block (lock_quality): 0.003
@@ -12252,6 +13184,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.0412
 - first_energy: 1.96117
 - harmonic_ratio: 1.725
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.426
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9509%
 - H_block (lock_quality): 0.006
@@ -12274,6 +13208,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6471
 - first_energy: 1.95402
 - harmonic_ratio: 1.669
+- err_raw_vs_sm: 0.053
+- err_fix_vs_sm: 0.369
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +5.3150%
 - H_block (lock_quality): 0.004
@@ -12296,6 +13232,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.17337
 - first_energy: 1.95699
 - harmonic_ratio: 0.966
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.030
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4701%
 - H_block (lock_quality): 0.009
@@ -12318,6 +13256,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.9879
 - first_energy: 1.95238
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.028
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.4603%
 - H_block (lock_quality): 0.001
@@ -12340,6 +13280,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.26361
 - first_energy: 1.95876
 - harmonic_ratio: 0.980
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.020
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0671%
 - H_block (lock_quality): 0.005
@@ -12362,6 +13304,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11501
 - first_energy: 1.98995
 - harmonic_ratio: 0.941
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.064
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1888%
 - H_block (lock_quality): 0.008
@@ -12384,6 +13328,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.51678
 - first_energy: 1.9596
 - harmonic_ratio: 1.019
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5274%
 - H_block (lock_quality): 0.002
@@ -12406,6 +13352,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08464
 - first_energy: 1.98039
 - harmonic_ratio: 0.941
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0511%
 - H_block (lock_quality): 0.007
@@ -12428,6 +13376,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.02341
 - first_energy: 1.975
 - harmonic_ratio: 1.244
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.197
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0697%
 - H_block (lock_quality): 0.006
@@ -12450,6 +13400,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.17831
 - first_energy: 1.98198
 - harmonic_ratio: 1.109
+- err_raw_vs_sm: 0.041
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.1052%
 - H_block (lock_quality): 0.003
@@ -12472,6 +13424,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.051
 - first_energy: 1.94937
 - harmonic_ratio: 1.579
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.371
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5811%
 - H_block (lock_quality): 0.004
@@ -12494,6 +13448,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05872
 - first_energy: 1.95122
 - harmonic_ratio: 0.951
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4768%
 - H_block (lock_quality): 0.002
@@ -12516,6 +13472,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.6888
 - first_energy: 1.94667
 - harmonic_ratio: 1.839
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.453
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6865%
 - H_block (lock_quality): 0.010
@@ -12538,6 +13496,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.23454
 - first_energy: 1.968
 - harmonic_ratio: 1.437
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.299
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7072%
 - H_block (lock_quality): 0.002
@@ -12560,10 +13520,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 14.7098
 - first_energy: 1.93651
 - harmonic_ratio: 2.327
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.32171
-- mass_sim_used_gev: 1.93651
-- Δ_mass_sim vs SM: -57.0238%
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.570
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.0000%
 - H_block (lock_quality): 0.008
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.7163680440175081, T_ticks=200
@@ -12584,6 +13544,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.70584
 - first_energy: 1.9
 - harmonic_ratio: 0.920
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.105
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6193%
 - H_block (lock_quality): 0.002
@@ -12606,6 +13568,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.45949
 - first_energy: 1.89474
 - harmonic_ratio: 0.883
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.133
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0036%
 - H_block (lock_quality): 0.001
@@ -12628,6 +13592,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.15241
 - first_energy: 1.95699
 - harmonic_ratio: 1.120
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.073
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.7296%
 - H_block (lock_quality): 0.004
@@ -12650,6 +13616,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.9083
 - first_energy: 1.97959
 - harmonic_ratio: 0.914
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.115
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9646%
 - H_block (lock_quality): 0.010
@@ -12672,6 +13640,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.36665
 - first_energy: 1.99307
 - harmonic_ratio: 0.979
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0141%
 - H_block (lock_quality): 0.008
@@ -12694,6 +13664,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05249
 - first_energy: 1.96552
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.054
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5792%
 - H_block (lock_quality): 0.002
@@ -12716,6 +13688,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.36248
 - first_energy: 1.97015
 - harmonic_ratio: 1.456
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.310
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4194%
 - H_block (lock_quality): 0.005
@@ -12738,6 +13712,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12827
 - first_energy: 1.97101
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.051
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0877%
 - H_block (lock_quality): 0.001
@@ -12760,6 +13736,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.20476
 - first_energy: 1.52294
 - harmonic_ratio: 1.650
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.395
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1971%
 - H_block (lock_quality): 0.003
@@ -12782,6 +13760,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.15754
 - first_energy: 1.95833
 - harmonic_ratio: 0.963
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7252%
 - H_block (lock_quality): 0.005
@@ -12804,6 +13784,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13038
 - first_energy: 1.93846
 - harmonic_ratio: 0.969
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.034
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1221%
 - H_block (lock_quality): 0.008
@@ -12826,6 +13808,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.01831
 - first_energy: 1.93333
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9699%
 - H_block (lock_quality): 0.005
@@ -12848,6 +13832,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.5566
 - first_energy: 1.98611
 - harmonic_ratio: 1.165
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.143
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1256%
 - H_block (lock_quality): 0.012
@@ -12870,6 +13856,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.56847
 - first_energy: 1.96667
 - harmonic_ratio: 1.179
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.151
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0313%
 - H_block (lock_quality): 0.006
@@ -12892,6 +13880,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.87196
 - first_energy: 1.92308
 - harmonic_ratio: 0.935
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.083
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3375%
 - H_block (lock_quality): 0.001
@@ -12914,6 +13904,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.24068
 - first_energy: 1.95789
 - harmonic_ratio: 0.976
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0883%
 - H_block (lock_quality): 0.007
@@ -12936,6 +13928,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.73762
 - first_energy: 1.98387
 - harmonic_ratio: 1.195
+- err_raw_vs_sm: 0.040
+- err_fix_vs_sm: 0.196
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.9560%
 - H_block (lock_quality): 0.010
@@ -12958,6 +13952,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.3906
 - first_energy: 1.92982
 - harmonic_ratio: 1.808
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.450
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6106%
 - H_block (lock_quality): 0.004
@@ -12980,6 +13976,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21328
 - first_energy: 1.97279
 - harmonic_ratio: 0.965
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.038
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1734%
 - H_block (lock_quality): 0.006
@@ -13002,6 +14000,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.54754
 - first_energy: 1.9697
 - harmonic_ratio: 1.018
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.019
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0579%
 - H_block (lock_quality): 0.005
@@ -13024,6 +14024,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.19715
 - first_energy: 1.92982
 - harmonic_ratio: 1.142
+- err_raw_vs_sm: 0.044
+- err_fix_vs_sm: 0.086
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.3784%
 - H_block (lock_quality): 0.003
@@ -13046,6 +14048,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.30721
 - first_energy: 1.9322
 - harmonic_ratio: 1.476
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.323
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1734%
 - H_block (lock_quality): 0.004
@@ -13068,6 +14072,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.89302
 - first_energy: 1.9
 - harmonic_ratio: 0.950
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.070
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7008%
 - H_block (lock_quality): 0.005
@@ -13090,6 +14096,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18617
 - first_energy: 1.97241
 - harmonic_ratio: 0.961
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.038
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2637%
 - H_block (lock_quality): 0.008
@@ -13112,6 +14120,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.50999
 - first_energy: 1.98734
 - harmonic_ratio: 1.003
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.010
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6311%
 - H_block (lock_quality): 0.003
@@ -13134,6 +14144,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.67706
 - first_energy: 1.98913
 - harmonic_ratio: 1.028
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9191%
 - H_block (lock_quality): 0.007
@@ -13156,6 +14168,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20055
 - first_energy: 1.96748
 - harmonic_ratio: 0.965
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0318%
 - H_block (lock_quality): 0.001
@@ -13178,6 +14192,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.31128
 - first_energy: 1.97688
 - harmonic_ratio: 0.978
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1717%
 - H_block (lock_quality): 0.007
@@ -13200,6 +14216,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.47376
 - first_energy: 1.97183
 - harmonic_ratio: 1.316
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.239
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1346%
 - H_block (lock_quality): 0.004
@@ -13222,6 +14240,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.7136
 - first_energy: 1.94805
 - harmonic_ratio: 0.898
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.133
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7575%
 - H_block (lock_quality): 0.003
@@ -13244,6 +14264,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.3075
 - first_energy: 1.99751
 - harmonic_ratio: 1.274
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.191
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.1177%
 - H_block (lock_quality): 0.017
@@ -13266,6 +14288,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.60532
 - first_energy: 1.98817
 - harmonic_ratio: 1.018
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6530%
 - H_block (lock_quality): 0.004
@@ -13288,6 +14312,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.0622
 - first_energy: 1.97778
 - harmonic_ratio: 1.868
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.463
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2404%
 - H_block (lock_quality): 0.009
@@ -13310,6 +14336,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.82207
 - first_energy: 1.93333
 - harmonic_ratio: 0.922
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.089
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4765%
 - H_block (lock_quality): 0.002
@@ -13332,6 +14360,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.93373
 - first_energy: 1.96078
 - harmonic_ratio: 0.927
+- err_raw_vs_sm: 0.024
+- err_fix_vs_sm: 0.105
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.4035%
 - H_block (lock_quality): 0.007
@@ -13354,6 +14384,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13057
 - first_energy: 1.97315
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1252%
 - H_block (lock_quality): 0.001
@@ -13376,6 +14408,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0759
 - first_energy: 1.98701
 - harmonic_ratio: 0.937
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.066
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1947%
 - H_block (lock_quality): 0.006
@@ -13398,6 +14432,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.66047
 - first_energy: 1.92453
 - harmonic_ratio: 0.901
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.119
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8112%
 - H_block (lock_quality): 0.004
@@ -13420,6 +14456,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.81729
 - first_energy: 1.98864
 - harmonic_ratio: 1.358
+- err_raw_vs_sm: 0.024
+- err_fix_vs_sm: 0.281
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.3510%
 - H_block (lock_quality): 0.010
@@ -13442,10 +14480,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.65745
 - first_energy: 1.37391
 - harmonic_ratio: 2.153
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 4.48512
-- mass_sim_used_gev: 1.37391
-- Δ_mass_sim vs SM: -53.9558%
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.540
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.8567%
 - H_block (lock_quality): 0.010
 - band_power_capture: 0.16374567763390713
 - chaos_mode=dynamic, PE_tick_norm=0.639935730245916, T_ticks=200
@@ -13466,6 +14504,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.73738
 - first_energy: 1.96667
 - harmonic_ratio: 1.517
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.341
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0362%
 - H_block (lock_quality): 0.009
@@ -13488,6 +14528,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09511
 - first_energy: 1.99232
 - harmonic_ratio: 0.937
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.068
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1210%
 - H_block (lock_quality): 0.002
@@ -13510,6 +14552,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.37391
 - first_energy: 1.98333
 - harmonic_ratio: 1.139
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.133
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2085%
 - H_block (lock_quality): 0.011
@@ -13532,6 +14576,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.00748
 - first_energy: 1.97633
 - harmonic_ratio: 1.396
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.285
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2447%
 - H_block (lock_quality): 0.010
@@ -13554,6 +14600,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.54364
 - first_energy: 1.9375
 - harmonic_ratio: 1.509
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.351
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.0251%
 - H_block (lock_quality): 0.013
@@ -13576,6 +14624,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.24489
 - first_energy: 1.96296
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.028
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1559%
 - H_block (lock_quality): 0.006
@@ -13598,6 +14648,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.49869
 - first_energy: 1.96581
 - harmonic_ratio: 1.013
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.020
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8036%
 - H_block (lock_quality): 0.001
@@ -13620,6 +14672,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.73649
 - first_energy: 1.99871
 - harmonic_ratio: 1.032
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.8263%
 - H_block (lock_quality): 0.000
@@ -13642,6 +14696,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.8108
 - first_energy: 1.91111
 - harmonic_ratio: 1.733
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.440
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.0181%
 - H_block (lock_quality): 0.002
@@ -13664,6 +14720,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20921
 - first_energy: 1.9596
 - harmonic_ratio: 0.971
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1078%
 - H_block (lock_quality): 0.005
@@ -13686,6 +14744,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.33612
 - first_energy: 1.96947
 - harmonic_ratio: 0.986
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.010
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4655%
 - H_block (lock_quality): 0.009
@@ -13708,6 +14768,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6019
 - first_energy: 1.95402
 - harmonic_ratio: 1.662
+- err_raw_vs_sm: 0.049
+- err_fix_vs_sm: 0.369
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.8679%
 - H_block (lock_quality): 0.003
@@ -13730,6 +14792,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.9063
 - first_energy: 1.95876
 - harmonic_ratio: 0.924
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.104
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9300%
 - H_block (lock_quality): 0.004
@@ -13752,6 +14816,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.32514
 - first_energy: 1.95789
 - harmonic_ratio: 1.146
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.144
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.8620%
 - H_block (lock_quality): 0.005
@@ -13774,6 +14840,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.25099
 - first_energy: 1.95349
 - harmonic_ratio: 0.980
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.023
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2537%
 - H_block (lock_quality): 0.003
@@ -13796,6 +14864,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.35564
 - first_energy: 1.98649
 - harmonic_ratio: 1.443
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.304
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3461%
 - H_block (lock_quality): 0.007
@@ -13818,6 +14888,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.72853
 - first_energy: 1.96296
 - harmonic_ratio: 1.050
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.7047%
 - H_block (lock_quality): 0.004
@@ -13840,6 +14912,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.57944
 - first_energy: 1.95238
 - harmonic_ratio: 1.503
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.346
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.6576%
 - H_block (lock_quality): 0.004
@@ -13862,6 +14936,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35421
 - first_energy: 1.98086
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1813%
 - H_block (lock_quality): 0.006
@@ -13884,6 +14960,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.0158
 - first_energy: 1.94366
 - harmonic_ratio: 1.579
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.372
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9296%
 - H_block (lock_quality): 0.002
@@ -13906,6 +14984,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.08242
 - first_energy: 1.97605
 - harmonic_ratio: 1.098
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.064
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.7144%
 - H_block (lock_quality): 0.005
@@ -13928,6 +15008,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96586
 - first_energy: 1.91489
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.038
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8157%
 - H_block (lock_quality): 0.003
@@ -13950,6 +15032,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.2803
 - first_energy: 1.97279
 - harmonic_ratio: 1.596
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.363
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6870%
 - H_block (lock_quality): 0.008
@@ -13972,6 +15056,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21689
 - first_energy: 1.9661
 - harmonic_ratio: 0.969
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2316%
 - H_block (lock_quality): 0.001
@@ -13994,6 +15080,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.05119
 - first_energy: 1.9375
 - harmonic_ratio: 1.273
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.215
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0638%
 - H_block (lock_quality): 0.008
@@ -14016,6 +15104,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.23269
 - first_energy: 1.98485
 - harmonic_ratio: 1.271
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.212
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1427%
 - H_block (lock_quality): 0.003
@@ -14038,6 +15128,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.26438
 - first_energy: 1.97059
 - harmonic_ratio: 0.974
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.026
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0548%
 - H_block (lock_quality): 0.002
@@ -14060,6 +15152,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.01547
 - first_energy: 1.93443
 - harmonic_ratio: 0.953
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.0158%
 - H_block (lock_quality): 0.004
@@ -14082,6 +15176,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.56731
 - first_energy: 1.91667
 - harmonic_ratio: 0.890
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.127
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3185%
 - H_block (lock_quality): 0.007
@@ -14104,6 +15200,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38607
 - first_energy: 1.97059
 - harmonic_ratio: 0.993
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3193%
 - H_block (lock_quality): 0.010
@@ -14126,6 +15224,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.8864
 - first_energy: 1.94521
 - harmonic_ratio: 1.714
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.430
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.3399%
 - H_block (lock_quality): 0.005
@@ -14148,6 +15248,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.06963
 - first_energy: 1.98206
 - harmonic_ratio: 1.247
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.197
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1651%
 - H_block (lock_quality): 0.016
@@ -14170,6 +15272,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.46058
 - first_energy: 1.97222
 - harmonic_ratio: 1.159
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.137
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0474%
 - H_block (lock_quality): 0.008
@@ -14192,6 +15296,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.41319
 - first_energy: 1.97619
 - harmonic_ratio: 0.994
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1939%
 - H_block (lock_quality): 0.002
@@ -14214,6 +15320,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.75218
 - first_energy: 1.94203
 - harmonic_ratio: 0.907
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.094
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7298%
 - H_block (lock_quality): 0.015
@@ -14236,6 +15344,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.24133
 - first_energy: 1.98326
 - harmonic_ratio: 1.118
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.133
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9847%
 - H_block (lock_quality): 0.007
@@ -14258,6 +15368,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.23554
 - first_energy: 1.98662
 - harmonic_ratio: 0.961
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.040
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0060%
 - H_block (lock_quality): 0.010
@@ -14280,6 +15392,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.2084
 - first_energy: 1.87879
 - harmonic_ratio: 1.012
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0947%
 - H_block (lock_quality): 0.002
@@ -14302,6 +15416,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.40324
 - first_energy: 1.98431
 - harmonic_ratio: 0.988
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3488%
 - H_block (lock_quality): 0.006
@@ -14324,6 +15440,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.93391
 - first_energy: 1.95
 - harmonic_ratio: 0.932
+- err_raw_vs_sm: 0.024
+- err_fix_vs_sm: 0.099
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.4065%
 - H_block (lock_quality): 0.003
@@ -14346,6 +15464,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12557
 - first_energy: 1.98246
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0435%
 - H_block (lock_quality): 0.002
@@ -14368,10 +15488,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.6062
 - first_energy: 1.95833
 - harmonic_ratio: 2.128
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.39295
-- mass_sim_used_gev: 1.95833
-- Δ_mass_sim vs SM: -53.2729%
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.533
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.5499%
 - H_block (lock_quality): 0.002
 - band_power_capture: 0.16591656232839772
 - chaos_mode=dynamic, PE_tick_norm=0.6396608464614915, T_ticks=200
@@ -14392,6 +15512,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92679
 - first_energy: 1.90909
 - harmonic_ratio: 0.951
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.076
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2837%
 - H_block (lock_quality): 0.004
@@ -14414,6 +15536,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.89694
 - first_energy: 1.95402
 - harmonic_ratio: 0.924
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.101
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7685%
 - H_block (lock_quality): 0.005
@@ -14436,6 +15560,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18593
 - first_energy: 1.9403
 - harmonic_ratio: 0.977
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2675%
 - H_block (lock_quality): 0.002
@@ -14458,6 +15584,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35572
 - first_energy: 1.96262
 - harmonic_ratio: 0.992
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1576%
 - H_block (lock_quality): 0.003
@@ -14480,6 +15608,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.7539
 - first_energy: 1.92982
 - harmonic_ratio: 0.913
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.087
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7001%
 - H_block (lock_quality): 0.004
@@ -14502,6 +15632,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.14386
 - first_energy: 1.96296
 - harmonic_ratio: 0.959
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9459%
 - H_block (lock_quality): 0.010
@@ -14524,6 +15656,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.28847
 - first_energy: 1.88235
 - harmonic_ratio: 0.861
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.162
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0000%
 - H_block (lock_quality): 0.004
@@ -14546,6 +15680,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.07788
 - first_energy: 1.96875
 - harmonic_ratio: 0.946
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.056
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1621%
 - H_block (lock_quality): 0.002
@@ -14568,6 +15704,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.45661
 - first_energy: 1.9779
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4818%
 - H_block (lock_quality): 0.004
@@ -14590,6 +15728,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.44509
 - first_energy: 1.97633
 - harmonic_ratio: 0.999
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3024%
 - H_block (lock_quality): 0.005
@@ -14612,6 +15752,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.97282
 - first_energy: 1.96552
 - harmonic_ratio: 1.398
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.289
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6286%
 - H_block (lock_quality): 0.003
@@ -14634,6 +15776,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.32582
 - first_energy: 1.97826
 - harmonic_ratio: 1.134
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.135
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.8528%
 - H_block (lock_quality): 0.002
@@ -14656,6 +15800,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.16714
 - first_energy: 1.97203
 - harmonic_ratio: 1.424
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.298
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0277%
 - H_block (lock_quality): 0.009
@@ -14678,6 +15824,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.50341
 - first_energy: 1.91667
 - harmonic_ratio: 1.359
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.261
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4850%
 - H_block (lock_quality): 0.002
@@ -14700,6 +15848,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.67623
 - first_energy: 1.97714
 - harmonic_ratio: 1.034
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.015
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9064%
 - H_block (lock_quality): 0.020
@@ -14722,6 +15872,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18008
 - first_energy: 1.96748
 - harmonic_ratio: 0.962
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3618%
 - H_block (lock_quality): 0.008
@@ -14744,6 +15896,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.79029
 - first_energy: 1.92308
 - harmonic_ratio: 1.082
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.090
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.5222%
 - H_block (lock_quality): 0.005
@@ -14766,6 +15920,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.4731
 - first_energy: 1.9802
 - harmonic_ratio: 1.001
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7384%
 - H_block (lock_quality): 0.007
@@ -14788,6 +15944,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.45061
 - first_energy: 1.95506
 - harmonic_ratio: 1.167
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.145
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1810%
 - H_block (lock_quality): 0.001
@@ -14810,6 +15968,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.49594
 - first_energy: 1.95918
 - harmonic_ratio: 1.016
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8455%
 - H_block (lock_quality): 0.002
@@ -14832,6 +15992,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.36388
 - first_energy: 1.94667
 - harmonic_ratio: 1.001
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.002
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0294%
 - H_block (lock_quality): 0.005
@@ -14854,10 +16016,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.9397
 - first_energy: 1.14286
 - harmonic_ratio: 2.932
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 3.73084
-- mass_sim_used_gev: 1.14286
-- Δ_mass_sim vs SM: -66.5313%
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.665
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -1.8623%
 - H_block (lock_quality): 0.004
 - band_power_capture: 0.16998167148088555
 - chaos_mode=dynamic, PE_tick_norm=0.7498699821239433, T_ticks=200
@@ -14878,6 +16040,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.02945
 - first_energy: 1.97849
 - harmonic_ratio: 0.934
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.7904%
 - H_block (lock_quality): 0.008
@@ -14900,6 +16064,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.69611
 - first_energy: 1.93939
 - harmonic_ratio: 0.900
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.128
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4459%
 - H_block (lock_quality): 0.006
@@ -14922,6 +16088,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.4366
 - first_energy: 1.72277
 - harmonic_ratio: 1.322
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.247
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3687%
 - H_block (lock_quality): 0.001
@@ -14944,6 +16112,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.30967
 - first_energy: 1.97333
 - harmonic_ratio: 0.979
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1462%
 - H_block (lock_quality): 0.005
@@ -14966,6 +16136,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.30062
 - first_energy: 1.97386
 - harmonic_ratio: 1.133
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.137
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.1904%
 - H_block (lock_quality): 0.012
@@ -14988,6 +16160,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.31905
 - first_energy: 1.98479
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.028
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2951%
 - H_block (lock_quality): 0.007
@@ -15010,6 +16184,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.8219
 - first_energy: 1.97183
 - harmonic_ratio: 1.681
+- err_raw_vs_sm: 0.029
+- err_fix_vs_sm: 0.423
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9184%
 - H_block (lock_quality): 0.004
@@ -15032,6 +16208,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18224
 - first_energy: 1.95918
 - harmonic_ratio: 0.967
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3271%
 - H_block (lock_quality): 0.004
@@ -15054,6 +16232,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.59037
 - first_energy: 1.95181
 - harmonic_ratio: 1.191
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.158
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3208%
 - H_block (lock_quality): 0.008
@@ -15076,6 +16256,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.01527
 - first_energy: 1.96923
 - harmonic_ratio: 0.936
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.0191%
 - H_block (lock_quality): 0.001
@@ -15098,6 +16280,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.60897
 - first_energy: 1.93548
 - harmonic_ratio: 1.521
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.351
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.3545%
 - H_block (lock_quality): 0.003
@@ -15120,6 +16304,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.70181
 - first_energy: 1.98485
 - harmonic_ratio: 1.034
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2969%
 - H_block (lock_quality): 0.001
@@ -15142,6 +16328,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.44464
 - first_energy: 1.97403
 - harmonic_ratio: 1.155
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.137
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2610%
 - H_block (lock_quality): 0.002
@@ -15164,6 +16352,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91981
 - first_energy: 1.9779
 - harmonic_ratio: 0.917
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.114
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1631%
 - H_block (lock_quality): 0.015
@@ -15186,6 +16376,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.76317
 - first_energy: 1.98592
 - harmonic_ratio: 1.197
+- err_raw_vs_sm: 0.036
+- err_fix_vs_sm: 0.195
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.6388%
 - H_block (lock_quality): 0.017
@@ -15208,6 +16400,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.15225
 - first_energy: 1.92857
 - harmonic_ratio: 0.977
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.015
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8106%
 - H_block (lock_quality): 0.003
@@ -15230,6 +16424,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20673
 - first_energy: 1.97906
 - harmonic_ratio: 0.961
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.042
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0678%
 - H_block (lock_quality): 0.005
@@ -15252,6 +16448,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.80681
 - first_energy: 1.95349
 - harmonic_ratio: 0.911
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.099
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1082%
 - H_block (lock_quality): 0.002
@@ -15274,6 +16472,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16007
 - first_energy: 1.9726
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.038
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6845%
 - H_block (lock_quality): 0.003
@@ -15296,6 +16496,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.9718
 - first_energy: 1.99877
 - harmonic_ratio: 1.222
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.187
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7124%
 - H_block (lock_quality): 0.000
@@ -15318,6 +16520,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99515
 - first_energy: 1.984
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.044
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3434%
 - H_block (lock_quality): 0.008
@@ -15340,6 +16544,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3626
 - first_energy: 1.96396
 - harmonic_ratio: 1.616
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.366
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.5002%
 - H_block (lock_quality): 0.010
@@ -15362,6 +16568,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06768
 - first_energy: 1.97143
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3296%
 - H_block (lock_quality): 0.007
@@ -15384,6 +16592,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.24717
 - first_energy: 1.95918
 - harmonic_ratio: 0.977
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.026
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1924%
 - H_block (lock_quality): 0.004
@@ -15406,6 +16616,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.2626
 - first_energy: 1.97122
 - harmonic_ratio: 1.129
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.138
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.6999%
 - H_block (lock_quality): 0.009
@@ -15428,6 +16640,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.34524
 - first_energy: 1.97203
 - harmonic_ratio: 0.986
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3222%
 - H_block (lock_quality): 0.005
@@ -15450,6 +16664,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.15724
 - first_energy: 1.98214
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.043
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7301%
 - H_block (lock_quality): 0.007
@@ -15472,6 +16688,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96252
 - first_energy: 1.96947
 - harmonic_ratio: 0.927
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8694%
 - H_block (lock_quality): 0.005
@@ -15494,6 +16712,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.98842
 - first_energy: 1.97753
 - harmonic_ratio: 1.083
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.064
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3513%
 - H_block (lock_quality): 0.002
@@ -15516,6 +16736,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.14175
 - first_energy: 1.91304
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.007
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9799%
 - H_block (lock_quality): 0.012
@@ -15538,6 +16760,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.22069
 - first_energy: 1.9905
 - harmonic_ratio: 1.111
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.129
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2613%
 - H_block (lock_quality): 0.007
@@ -15560,10 +16784,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.5279
 - first_energy: 1.98693
 - harmonic_ratio: 1.931
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.4863
-- mass_sim_used_gev: 1.98693
-- Δ_mass_sim vs SM: -48.6806%
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.487
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.8794%
 - H_block (lock_quality): 0.013
 - band_power_capture: 0.15434941066205346
 - chaos_mode=dynamic, PE_tick_norm=0.5651075774125219, T_ticks=200
@@ -15584,6 +16808,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.3585
 - first_energy: 1.98718
 - harmonic_ratio: 1.751
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.434
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8902%
 - H_block (lock_quality): 0.011
@@ -15606,6 +16832,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.50156
 - first_energy: 1.94937
 - harmonic_ratio: 1.493
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.347
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.4571%
 - H_block (lock_quality): 0.004
@@ -15628,6 +16856,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.37096
 - first_energy: 1.94737
 - harmonic_ratio: 1.002
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0818%
 - H_block (lock_quality): 0.004
@@ -15650,6 +16880,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06359
 - first_energy: 1.96078
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.051
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3968%
 - H_block (lock_quality): 0.003
@@ -15672,6 +16904,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.68538
 - first_energy: 1.99684
 - harmonic_ratio: 1.332
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.245
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5592%
 - H_block (lock_quality): 0.008
@@ -15694,6 +16928,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.94021
 - first_energy: 1.96117
 - harmonic_ratio: 1.240
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.203
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.1060%
 - H_block (lock_quality): 0.003
@@ -15716,6 +16952,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.71445
 - first_energy: 1.91304
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.112
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7727%
 - H_block (lock_quality): 0.004
@@ -15738,6 +16976,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91672
 - first_energy: 1.98077
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.116
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1098%
 - H_block (lock_quality): 0.003
@@ -15760,6 +17000,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.80997
 - first_energy: 1.96117
 - harmonic_ratio: 1.376
+- err_raw_vs_sm: 0.024
+- err_fix_vs_sm: 0.291
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.4320%
 - H_block (lock_quality): 0.008
@@ -15782,6 +17024,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.27969
 - first_energy: 1.55897
 - harmonic_ratio: 1.234
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.188
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1895%
 - H_block (lock_quality): 0.005
@@ -15804,6 +17048,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.49053
 - first_energy: 1.97333
 - harmonic_ratio: 1.008
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9281%
 - H_block (lock_quality): 0.005
@@ -15826,6 +17072,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.31769
 - first_energy: 1.95699
 - harmonic_ratio: 0.989
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2734%
 - H_block (lock_quality): 0.008
@@ -15848,6 +17096,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.5954
 - first_energy: 1.90476
 - harmonic_ratio: 1.061
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5019%
 - H_block (lock_quality): 0.002
@@ -15870,6 +17120,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.80478
 - first_energy: 1.9646
 - harmonic_ratio: 1.217
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.204
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1224%
 - H_block (lock_quality): 0.012
@@ -15892,6 +17144,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.8965
 - first_energy: 1.9403
 - harmonic_ratio: 1.089
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.081
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0182%
 - H_block (lock_quality): 0.007
@@ -15914,6 +17168,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.2172
 - first_energy: 1.95349
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.028
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2365%
 - H_block (lock_quality): 0.002
@@ -15936,6 +17192,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98616
 - first_energy: 1.92157
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.4883%
 - H_block (lock_quality): 0.006
@@ -15958,6 +17216,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12
 - first_energy: 1.98864
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0475%
 - H_block (lock_quality): 0.004
@@ -15980,6 +17240,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21345
 - first_energy: 1.95
 - harmonic_ratio: 0.976
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.026
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1761%
 - H_block (lock_quality): 0.006
@@ -16002,6 +17264,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.2631
 - first_energy: 1.94805
 - harmonic_ratio: 1.771
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.430
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0393%
 - H_block (lock_quality): 0.004
@@ -16024,6 +17288,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.79384
 - first_energy: 1.95833
 - harmonic_ratio: 0.906
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.103
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0108%
 - H_block (lock_quality): 0.005
@@ -16046,6 +17312,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.46923
 - first_energy: 1.98077
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6782%
 - H_block (lock_quality): 0.005
@@ -16068,6 +17336,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.15185
 - first_energy: 1.98122
 - harmonic_ratio: 0.951
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.043
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8171%
 - H_block (lock_quality): 0.009
@@ -16090,6 +17360,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96708
 - first_energy: 1.94937
 - harmonic_ratio: 0.938
+- err_raw_vs_sm: 0.038
+- err_fix_vs_sm: 0.026
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.7960%
 - H_block (lock_quality): 0.003
@@ -16112,6 +17384,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.68662
 - first_energy: 1.98953
 - harmonic_ratio: 1.030
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.0650%
 - H_block (lock_quality): 0.008
@@ -16134,6 +17408,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.60907
 - first_energy: 1.92727
 - harmonic_ratio: 1.368
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.267
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3455%
 - H_block (lock_quality): 0.002
@@ -16156,6 +17432,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.9022
 - first_energy: 1.97241
 - harmonic_ratio: 1.693
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.422
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.1984%
 - H_block (lock_quality): 0.005
@@ -16178,6 +17456,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.22289
 - first_energy: 1.95833
 - harmonic_ratio: 0.973
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1969%
 - H_block (lock_quality): 0.004
@@ -16200,6 +17480,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.19257
 - first_energy: 1.9901
 - harmonic_ratio: 0.953
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.047
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1606%
 - H_block (lock_quality): 0.009
@@ -16222,6 +17504,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.8531
 - first_energy: 1.94805
 - harmonic_ratio: 0.920
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.097
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0119%
 - H_block (lock_quality): 0.003
@@ -16244,6 +17528,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03936
 - first_energy: 1.96262
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7948%
 - H_block (lock_quality): 0.002
@@ -16266,6 +17552,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.72314
 - first_energy: 1.98701
 - harmonic_ratio: 1.036
+- err_raw_vs_sm: 0.026
+- err_fix_vs_sm: 0.010
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.6224%
 - H_block (lock_quality): 0.005
@@ -16288,6 +17576,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.16094
 - first_energy: 1.94521
 - harmonic_ratio: 1.443
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.307
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0954%
 - H_block (lock_quality): 0.005
@@ -16310,6 +17600,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.15232
 - first_energy: 1.93103
 - harmonic_ratio: 1.293
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.218
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1915%
 - H_block (lock_quality): 0.006
@@ -16332,6 +17624,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.97493
 - first_energy: 1.94805
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.6694%
 - H_block (lock_quality): 0.005
@@ -16354,6 +17648,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.45004
 - first_energy: 1.93991
 - harmonic_ratio: 1.019
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3795%
 - H_block (lock_quality): 0.006
@@ -16376,6 +17672,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.45338
 - first_energy: 1.98374
 - harmonic_ratio: 0.997
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4315%
 - H_block (lock_quality): 0.008
@@ -16398,6 +17696,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.39297
 - first_energy: 1.89474
 - harmonic_ratio: 0.872
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.170
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9760%
 - H_block (lock_quality): 0.003
@@ -16420,6 +17720,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.95295
 - first_energy: 1.9322
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.089
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.7351%
 - H_block (lock_quality): 0.002
@@ -16442,6 +17744,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.4699
 - first_energy: 1.97884
 - harmonic_ratio: 1.002
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6886%
 - H_block (lock_quality): 0.003
@@ -16464,6 +17768,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3777
 - first_energy: 1.98582
 - harmonic_ratio: 1.601
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.359
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.6504%
 - H_block (lock_quality): 0.004
@@ -16486,6 +17792,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.1399
 - first_energy: 1.97315
 - harmonic_ratio: 1.108
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.066
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.5481%
 - H_block (lock_quality): 0.003
@@ -16508,6 +17816,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.71408
 - first_energy: 1.58442
 - harmonic_ratio: 1.491
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.316
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9558%
 - H_block (lock_quality): 0.001
@@ -16530,6 +17840,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00418
 - first_energy: 1.92857
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.015
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1979%
 - H_block (lock_quality): 0.003
@@ -16552,6 +17864,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03051
 - first_energy: 1.93443
 - harmonic_ratio: 0.955
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.7733%
 - H_block (lock_quality): 0.003
@@ -16574,6 +17888,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99994
 - first_energy: 1.97101
 - harmonic_ratio: 0.932
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2662%
 - H_block (lock_quality): 0.002
@@ -16596,6 +17912,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.43509
 - first_energy: 1.97633
 - harmonic_ratio: 0.997
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1468%
 - H_block (lock_quality): 0.003
@@ -16618,6 +17936,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35923
 - first_energy: 1.98639
 - harmonic_ratio: 0.981
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.019
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1024%
 - H_block (lock_quality): 0.007
@@ -16640,6 +17960,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96633
 - first_energy: 1.93103
 - harmonic_ratio: 0.946
+- err_raw_vs_sm: 0.038
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8080%
 - H_block (lock_quality): 0.003
@@ -16662,6 +17984,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.17647
 - first_energy: 1.9914
 - harmonic_ratio: 1.104
+- err_raw_vs_sm: 0.041
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.0784%
 - H_block (lock_quality): 0.007
@@ -16684,6 +18008,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.87398
 - first_energy: 1.97546
 - harmonic_ratio: 1.221
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.200
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.2634%
 - H_block (lock_quality): 0.005
@@ -16706,6 +18032,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09508
 - first_energy: 1.975
 - harmonic_ratio: 0.945
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1205%
 - H_block (lock_quality): 0.001
@@ -16728,6 +18056,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21377
 - first_energy: 1.99175
 - harmonic_ratio: 0.956
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.048
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1814%
 - H_block (lock_quality): 0.006
@@ -16750,6 +18080,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12017
 - first_energy: 1.9685
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.050
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0447%
 - H_block (lock_quality): 0.005
@@ -16772,6 +18104,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.594
 - first_energy: 1.96581
 - harmonic_ratio: 1.807
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.447
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1296%
 - H_block (lock_quality): 0.003
@@ -16794,6 +18128,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.40672
 - first_energy: 1.9619
 - harmonic_ratio: 1.156
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.142
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7690%
 - H_block (lock_quality): 0.004
@@ -16816,6 +18152,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0946
 - first_energy: 1.88889
 - harmonic_ratio: 0.988
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1126%
 - H_block (lock_quality): 0.003
@@ -16838,6 +18176,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.91976
 - first_energy: 1.96154
 - harmonic_ratio: 1.237
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.202
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.3607%
 - H_block (lock_quality): 0.008
@@ -16860,6 +18200,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.3778
 - first_energy: 1.90476
 - harmonic_ratio: 1.026
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.023
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1893%
 - H_block (lock_quality): 0.004
@@ -16882,6 +18224,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.84468
 - first_energy: 1.95455
 - harmonic_ratio: 0.916
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.101
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8666%
 - H_block (lock_quality): 0.003
@@ -16904,6 +18248,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.74134
 - first_energy: 1.94366
 - harmonic_ratio: 1.220
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.212
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.9098%
 - H_block (lock_quality): 0.017
@@ -16926,7 +18272,9 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 19.9423
 - first_energy: 1.9961
 - harmonic_ratio: 3.060
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
+- err_raw_vs_sm: 2.818
+- err_fix_vs_sm: 0.248
+- omega_ref_guard_applied: true (sm_err_better)
 - omega_ref_used: 6.51625
 - mass_sim_used_gev: 1.9961
 - Δ_mass_sim vs SM: +24.7563%
@@ -16950,6 +18298,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.32398
 - first_energy: 1.99198
 - harmonic_ratio: 0.973
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.032
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3733%
 - H_block (lock_quality): 0.006
@@ -16972,6 +18322,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99586
 - first_energy: 1.95652
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.030
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3320%
 - H_block (lock_quality): 0.002
@@ -16994,6 +18346,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.98181
 - first_energy: 1.87619
 - harmonic_ratio: 1.140
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.112
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2554%
 - H_block (lock_quality): 0.004
@@ -17016,6 +18370,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.35947
 - first_energy: 1.984
 - harmonic_ratio: 1.136
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.132
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.4020%
 - H_block (lock_quality): 0.006
@@ -17038,6 +18394,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.102
 - first_energy: 1.91667
 - harmonic_ratio: 1.455
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.318
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7381%
 - H_block (lock_quality): 0.004
@@ -17060,6 +18418,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.86316
 - first_energy: 1.97576
 - harmonic_ratio: 0.909
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.113
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1856%
 - H_block (lock_quality): 0.007
@@ -17082,6 +18442,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.2537
 - first_energy: 1.95556
 - harmonic_ratio: 0.980
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.019
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2252%
 - H_block (lock_quality): 0.003
@@ -17104,6 +18466,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.4944
 - first_energy: 1.992
 - harmonic_ratio: 0.999
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.007
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8691%
 - H_block (lock_quality): 0.012
@@ -17126,6 +18490,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.92017
 - first_energy: 1.98058
 - harmonic_ratio: 1.070
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3614%
 - H_block (lock_quality): 0.003
@@ -17148,6 +18514,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.21824
 - first_energy: 1.9375
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.020
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2533%
 - H_block (lock_quality): 0.004
@@ -17170,6 +18538,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.33438
 - first_energy: 1.97674
 - harmonic_ratio: 1.137
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.135
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.7382%
 - H_block (lock_quality): 0.002
@@ -17192,6 +18562,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35782
 - first_energy: 1.98326
 - harmonic_ratio: 0.982
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1245%
 - H_block (lock_quality): 0.012
@@ -17214,6 +18586,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.33565
 - first_energy: 1.91837
 - harmonic_ratio: 1.331
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.223
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.4671%
 - H_block (lock_quality): 0.003
@@ -17236,6 +18610,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28518
 - first_energy: 1.98726
 - harmonic_ratio: 0.969
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.030
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2426%
 - H_block (lock_quality): 0.006
@@ -17258,6 +18634,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.24047
 - first_energy: 1.96429
 - harmonic_ratio: 1.285
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.220
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2374%
 - H_block (lock_quality): 0.003
@@ -17280,6 +18658,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.88432
 - first_energy: 1.96117
 - harmonic_ratio: 0.919
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.105
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.5507%
 - H_block (lock_quality): 0.004
@@ -17302,6 +18682,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99796
 - first_energy: 1.92727
 - harmonic_ratio: 0.953
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2982%
 - H_block (lock_quality): 0.007
@@ -17324,6 +18706,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.86685
 - first_energy: 1.90476
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.073
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2492%
 - H_block (lock_quality): 0.003
@@ -17346,6 +18730,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06499
 - first_energy: 1.94118
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3737%
 - H_block (lock_quality): 0.003
@@ -17368,6 +18754,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.25892
 - first_energy: 1.96748
 - harmonic_ratio: 0.974
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1420%
 - H_block (lock_quality): 0.007
@@ -17390,10 +18778,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.9227
 - first_energy: 1.94521
 - harmonic_ratio: 2.035
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.3501
-- mass_sim_used_gev: 1.94521
-- Δ_mass_sim vs SM: -50.3521%
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.504
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +1.0351%
 - H_block (lock_quality): 0.004
 - band_power_capture: 0.16994304979231123
 - chaos_mode=dynamic, PE_tick_norm=0.5990353309170604, T_ticks=200
@@ -17414,6 +18802,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.34915
 - first_energy: 1.97419
 - harmonic_ratio: 0.985
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.012
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2608%
 - H_block (lock_quality): 0.011
@@ -17436,6 +18826,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.25296
 - first_energy: 1.98901
 - harmonic_ratio: 0.963
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2853%
 - H_block (lock_quality): 0.008
@@ -17458,6 +18850,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.36373
 - first_energy: 1.97826
 - harmonic_ratio: 0.985
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0317%
 - H_block (lock_quality): 0.006
@@ -17480,6 +18874,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.33111
 - first_energy: 1.94521
 - harmonic_ratio: 0.997
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.002
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5442%
 - H_block (lock_quality): 0.001
@@ -17502,6 +18898,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.73745
 - first_energy: 1.96581
 - harmonic_ratio: 1.517
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.341
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0355%
 - H_block (lock_quality): 0.003
@@ -17524,6 +18922,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.09895
 - first_energy: 1.96262
 - harmonic_ratio: 1.420
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.301
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7714%
 - H_block (lock_quality): 0.008
@@ -17546,6 +18946,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.2944
 - first_energy: 1.98545
 - harmonic_ratio: 1.897
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.474
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2017%
 - H_block (lock_quality): 0.009
@@ -17568,10 +18970,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.6911
 - first_energy: 1.92727
 - harmonic_ratio: 2.017
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.29156
-- mass_sim_used_gev: 1.92727
-- Δ_mass_sim vs SM: -50.8098%
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.508
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.7751%
 - H_block (lock_quality): 0.004
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.7126845988573784, T_ticks=200
@@ -17592,6 +18994,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08851
 - first_energy: 1.96364
 - harmonic_ratio: 0.950
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.053
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0125%
 - H_block (lock_quality): 0.006
@@ -17614,6 +19018,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.0165
 - first_energy: 1.98566
 - harmonic_ratio: 1.082
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7584%
 - H_block (lock_quality): 0.002
@@ -17636,6 +19042,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.9581
 - first_energy: 1.98374
 - harmonic_ratio: 1.692
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.419
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.6971%
 - H_block (lock_quality): 0.006
@@ -17658,6 +19066,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06738
 - first_energy: 1.93846
 - harmonic_ratio: 0.959
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.039
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3346%
 - H_block (lock_quality): 0.001
@@ -17680,6 +19090,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.43385
 - first_energy: 1.88889
 - harmonic_ratio: 0.881
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.129
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4733%
 - H_block (lock_quality): 0.005
@@ -17702,6 +19114,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.7707
 - first_energy: 1.95
 - harmonic_ratio: 1.535
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.346
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3059%
 - H_block (lock_quality): 0.001
@@ -17724,6 +19138,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.29769
 - first_energy: 1.98966
 - harmonic_ratio: 0.970
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0440%
 - H_block (lock_quality): 0.008
@@ -17746,6 +19162,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.25474
 - first_energy: 1.9854
 - harmonic_ratio: 0.965
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.034
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2086%
 - H_block (lock_quality): 0.010
@@ -17768,6 +19186,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.3567
 - first_energy: 1.98847
 - harmonic_ratio: 1.287
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.194
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.7284%
 - H_block (lock_quality): 0.007
@@ -17790,6 +19210,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.14724
 - first_energy: 1.9619
 - harmonic_ratio: 1.428
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.302
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2447%
 - H_block (lock_quality): 0.004
@@ -17812,6 +19234,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.88382
 - first_energy: 1.97633
 - harmonic_ratio: 1.532
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.362
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.2352%
 - H_block (lock_quality): 0.008
@@ -17834,6 +19258,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.25056
 - first_energy: 1.94805
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.020
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2468%
 - H_block (lock_quality): 0.005
@@ -17856,6 +19282,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28406
 - first_energy: 1.95652
 - harmonic_ratio: 0.984
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.019
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2592%
 - H_block (lock_quality): 0.003
@@ -17878,6 +19306,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.02421
 - first_energy: 1.97516
 - harmonic_ratio: 0.934
+- err_raw_vs_sm: 0.029
+- err_fix_vs_sm: 0.040
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.8748%
 - H_block (lock_quality): 0.004
@@ -17900,6 +19330,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.90371
 - first_energy: 1.97241
 - harmonic_ratio: 0.917
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.111
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.8853%
 - H_block (lock_quality): 0.004
@@ -17922,6 +19354,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.09201
 - first_energy: 1.89744
 - harmonic_ratio: 1.468
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.324
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8471%
 - H_block (lock_quality): 0.009
@@ -17944,6 +19378,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.89227
 - first_energy: 1.96396
 - harmonic_ratio: 1.075
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.070
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0433%
 - H_block (lock_quality): 0.006
@@ -17966,6 +19402,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11285
 - first_energy: 1.95652
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1535%
 - H_block (lock_quality): 0.006
@@ -17988,6 +19426,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.29052
 - first_energy: 1.95652
 - harmonic_ratio: 0.985
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1578%
 - H_block (lock_quality): 0.003
@@ -18010,6 +19450,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92644
 - first_energy: 1.98734
 - harmonic_ratio: 0.913
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.120
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2775%
 - H_block (lock_quality): 0.008
@@ -18032,6 +19474,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.67627
 - first_energy: 1.98635
 - harmonic_ratio: 1.184
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.143
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4561%
 - H_block (lock_quality): 0.015
@@ -18054,6 +19498,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04967
 - first_energy: 1.9619
 - harmonic_ratio: 0.945
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6254%
 - H_block (lock_quality): 0.002
@@ -18076,6 +19522,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98077
 - first_energy: 1.96364
 - harmonic_ratio: 0.933
+- err_raw_vs_sm: 0.036
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.5752%
 - H_block (lock_quality): 0.003
@@ -18098,10 +19546,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.3474
 - first_energy: 1.95122
 - harmonic_ratio: 1.938
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.36973
-- mass_sim_used_gev: 1.95122
-- Δ_mass_sim vs SM: -48.2943%
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.483
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.2289%
 - H_block (lock_quality): 0.001
 - band_power_capture: 0.16850272958954932
 - chaos_mode=dynamic, PE_tick_norm=0.6668847761585183, T_ticks=200
@@ -18122,6 +19570,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.27643
 - first_energy: 1.98039
 - harmonic_ratio: 0.971
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.031
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1375%
 - H_block (lock_quality): 0.005
@@ -18144,6 +19594,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09315
 - first_energy: 1.98387
 - harmonic_ratio: 0.941
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.064
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0888%
 - H_block (lock_quality): 0.005
@@ -18166,6 +19618,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.8648
 - first_energy: 1.99364
 - harmonic_ratio: 1.055
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.056
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4416%
 - H_block (lock_quality): 0.009
@@ -18188,6 +19642,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.89189
 - first_energy: 1.94203
 - harmonic_ratio: 1.245
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.213
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.0412%
 - H_block (lock_quality): 0.005
@@ -18210,6 +19666,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.86776
 - first_energy: 1.92157
 - harmonic_ratio: 0.935
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.083
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2649%
 - H_block (lock_quality): 0.003
@@ -18232,6 +19690,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.95791
 - first_energy: 1.98942
 - harmonic_ratio: 1.071
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.058
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9087%
 - H_block (lock_quality): 0.003
@@ -18254,6 +19714,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.51728
 - first_energy: 1.97884
 - harmonic_ratio: 1.009
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5198%
 - H_block (lock_quality): 0.002
@@ -18276,6 +19738,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.78354
 - first_energy: 1.94286
 - harmonic_ratio: 0.912
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.095
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1885%
 - H_block (lock_quality): 0.003
@@ -18298,6 +19762,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.17098
 - first_energy: 1.95455
 - harmonic_ratio: 0.967
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.029
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5087%
 - H_block (lock_quality): 0.003
@@ -18320,6 +19786,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.77943
 - first_energy: 1.92453
 - harmonic_ratio: 0.920
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.084
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2594%
 - H_block (lock_quality): 0.002
@@ -18342,6 +19810,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.12126
 - first_energy: 1.9759
 - harmonic_ratio: 1.104
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.065
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.2777%
 - H_block (lock_quality): 0.005
@@ -18364,6 +19834,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.88073
 - first_energy: 1.9322
 - harmonic_ratio: 0.932
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.089
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4888%
 - H_block (lock_quality): 0.002
@@ -18386,6 +19858,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.86771
 - first_energy: 1.98701
 - harmonic_ratio: 1.213
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.195
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.3413%
 - H_block (lock_quality): 0.008
@@ -18408,6 +19882,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18687
 - first_energy: 1.98122
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.043
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2525%
 - H_block (lock_quality): 0.009
@@ -18430,6 +19906,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.21881
 - first_energy: 1.97279
 - harmonic_ratio: 1.276
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.217
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0261%
 - H_block (lock_quality): 0.004
@@ -18452,6 +19930,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.0454
 - first_energy: 1.96522
 - harmonic_ratio: 1.722
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.424
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9140%
 - H_block (lock_quality): 0.002
@@ -18474,6 +19954,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99803
 - first_energy: 1.97297
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.038
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2969%
 - H_block (lock_quality): 0.011
@@ -18496,6 +19978,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28924
 - first_energy: 1.97633
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1781%
 - H_block (lock_quality): 0.001
@@ -18518,6 +20002,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.72107
 - first_energy: 1.92593
 - harmonic_ratio: 0.910
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.085
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2666%
 - H_block (lock_quality): 0.003
@@ -18540,6 +20026,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.36354
 - first_energy: 1.98214
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0348%
 - H_block (lock_quality): 0.010
@@ -18562,6 +20050,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.92194
 - first_energy: 1.98545
 - harmonic_ratio: 1.377
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.282
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.1920%
 - H_block (lock_quality): 0.005
@@ -18584,6 +20074,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.48158
 - first_energy: 1.98095
 - harmonic_ratio: 1.002
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8703%
 - H_block (lock_quality): 0.003
@@ -18606,6 +20098,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.98833
 - first_energy: 1.94805
 - harmonic_ratio: 1.099
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.078
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.3500%
 - H_block (lock_quality): 0.007
@@ -18628,6 +20122,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.10326
 - first_energy: 1.97241
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.055
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0036%
 - H_block (lock_quality): 0.013
@@ -18650,6 +20146,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20015
 - first_energy: 1.91489
 - harmonic_ratio: 0.992
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0384%
 - H_block (lock_quality): 0.005
@@ -18672,6 +20170,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.84918
 - first_energy: 1.97333
 - harmonic_ratio: 0.908
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.112
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9443%
 - H_block (lock_quality): 0.004
@@ -18694,6 +20194,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.0991
 - first_energy: 1.97143
 - harmonic_ratio: 1.725
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.423
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4320%
 - H_block (lock_quality): 0.002
@@ -18716,6 +20218,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.77678
 - first_energy: 1.94118
 - harmonic_ratio: 1.385
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.298
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.7996%
 - H_block (lock_quality): 0.001
@@ -18738,6 +20242,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.27073
 - first_energy: 1.95238
 - harmonic_ratio: 1.298
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.209
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.6612%
 - H_block (lock_quality): 0.001
@@ -18760,6 +20266,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.48098
 - first_energy: 1.95652
 - harmonic_ratio: 1.328
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.245
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2200%
 - H_block (lock_quality): 0.007
@@ -18782,6 +20290,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.33093
 - first_energy: 1.9685
 - harmonic_ratio: 1.296
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.202
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.4085%
 - H_block (lock_quality): 0.008
@@ -18804,6 +20314,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18477
 - first_energy: 1.98671
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2862%
 - H_block (lock_quality): 0.006
@@ -18826,6 +20338,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.50157
 - first_energy: 1.98131
 - harmonic_ratio: 1.005
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7597%
 - H_block (lock_quality): 0.007
@@ -18848,6 +20362,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.59963
 - first_energy: 1.97826
 - harmonic_ratio: 1.486
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.337
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.4503%
 - H_block (lock_quality): 0.005
@@ -18870,6 +20386,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.26963
 - first_energy: 1.98467
 - harmonic_ratio: 0.968
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.034
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0290%
 - H_block (lock_quality): 0.013
@@ -18892,6 +20410,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03334
 - first_energy: 1.97059
 - harmonic_ratio: 0.938
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8936%
 - H_block (lock_quality): 0.006
@@ -18914,6 +20434,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.47925
 - first_energy: 1.94286
 - harmonic_ratio: 1.022
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8341%
 - H_block (lock_quality): 0.019
@@ -18936,6 +20458,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.93017
 - first_energy: 1.92
 - harmonic_ratio: 0.946
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.082
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.3420%
 - H_block (lock_quality): 0.004
@@ -18958,6 +20482,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91011
 - first_energy: 1.94118
 - harmonic_ratio: 0.933
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.094
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.9958%
 - H_block (lock_quality): 0.004
@@ -18980,6 +20506,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.31663
 - first_energy: 1.93548
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.003
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2567%
 - H_block (lock_quality): 0.002
@@ -19002,6 +20530,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6299
 - first_energy: 1.98131
 - harmonic_ratio: 1.643
+- err_raw_vs_sm: 0.051
+- err_fix_vs_sm: 0.360
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +5.1450%
 - H_block (lock_quality): 0.009
@@ -19024,6 +20554,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04455
 - first_energy: 1.97814
 - harmonic_ratio: 0.936
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.061
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7096%
 - H_block (lock_quality): 0.005
@@ -19046,6 +20578,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.23734
 - first_energy: 1.95604
 - harmonic_ratio: 1.447
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.304
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7377%
 - H_block (lock_quality): 0.006
@@ -19068,6 +20602,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.58655
 - first_energy: 1.88235
 - harmonic_ratio: 0.909
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.107
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6653%
 - H_block (lock_quality): 0.010
@@ -19090,6 +20626,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.86811
 - first_energy: 1.98157
 - harmonic_ratio: 1.371
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.284
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.7882%
 - H_block (lock_quality): 0.006
@@ -19112,6 +20650,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98629
 - first_energy: 1.92157
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.4862%
 - H_block (lock_quality): 0.003
@@ -19134,6 +20674,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.23761
 - first_energy: 1.97895
 - harmonic_ratio: 1.120
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.134
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.0346%
 - H_block (lock_quality): 0.010
@@ -19156,6 +20698,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.63301
 - first_energy: 1.9322
 - harmonic_ratio: 0.893
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.123
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3223%
 - H_block (lock_quality): 0.003
@@ -19178,6 +20722,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.21463
 - first_energy: 1.96875
 - harmonic_ratio: 1.123
+- err_raw_vs_sm: 0.046
+- err_fix_vs_sm: 0.068
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.6319%
 - H_block (lock_quality): 0.009
@@ -19200,6 +20746,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.68671
 - first_energy: 1.9819
 - harmonic_ratio: 1.343
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.251
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5746%
 - H_block (lock_quality): 0.015
@@ -19222,6 +20770,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.50223
 - first_energy: 1.9871
 - harmonic_ratio: 1.002
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.010
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7496%
 - H_block (lock_quality): 0.003
@@ -19244,6 +20794,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.91176
 - first_energy: 1.98587
 - harmonic_ratio: 1.066
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2395%
 - H_block (lock_quality): 0.006
@@ -19266,6 +20818,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.08844
 - first_energy: 1.95062
 - harmonic_ratio: 1.270
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.210
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3985%
 - H_block (lock_quality): 0.005
@@ -19288,6 +20842,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.24336
 - first_energy: 1.96581
 - harmonic_ratio: 1.129
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.140
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9576%
 - H_block (lock_quality): 0.002
@@ -19310,6 +20866,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.77726
 - first_energy: 1.95181
 - harmonic_ratio: 0.907
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.100
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2969%
 - H_block (lock_quality): 0.005
@@ -19332,6 +20890,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16677
 - first_energy: 1.9375
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.020
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5765%
 - H_block (lock_quality): 0.003
@@ -19354,6 +20914,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16441
 - first_energy: 1.97895
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.042
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6145%
 - H_block (lock_quality): 0.002
@@ -19376,6 +20938,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.83378
 - first_energy: 1.94118
 - harmonic_ratio: 0.921
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.094
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6784%
 - H_block (lock_quality): 0.002
@@ -19398,6 +20962,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.14422
 - first_energy: 1.99107
 - harmonic_ratio: 1.407
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.291
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2778%
 - H_block (lock_quality): 0.014
@@ -19420,6 +20986,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.33258
 - first_energy: 1.98922
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.020
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5211%
 - H_block (lock_quality): 0.004
@@ -19442,6 +21010,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.72665
 - first_energy: 1.92857
 - harmonic_ratio: 0.910
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.087
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.1704%
 - H_block (lock_quality): 0.003
@@ -19464,6 +21034,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05243
 - first_energy: 1.96429
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.053
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5801%
 - H_block (lock_quality): 0.016
@@ -19486,6 +21058,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.07148
 - first_energy: 1.97531
 - harmonic_ratio: 1.407
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.286
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4641%
 - H_block (lock_quality): 0.003
@@ -19508,6 +21082,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.24477
 - first_energy: 1.94203
 - harmonic_ratio: 0.985
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1539%
 - H_block (lock_quality): 0.005
@@ -19530,6 +21106,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20857
 - first_energy: 1.98701
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0974%
 - H_block (lock_quality): 0.008
@@ -19552,6 +21130,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.62713
 - first_energy: 1.96923
 - harmonic_ratio: 1.186
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.150
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8066%
 - H_block (lock_quality): 0.005
@@ -19574,6 +21154,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.06078
 - first_energy: 1.95122
 - harmonic_ratio: 1.265
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.209
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0552%
 - H_block (lock_quality): 0.013
@@ -19596,6 +21178,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.42488
 - first_energy: 1.98974
 - harmonic_ratio: 0.989
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0120%
 - H_block (lock_quality): 0.011
@@ -19618,6 +21202,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.1701
 - first_energy: 1.97143
 - harmonic_ratio: 1.891
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.471
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0171%
 - H_block (lock_quality): 0.011
@@ -19640,6 +21226,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.65297
 - first_energy: 1.97884
 - harmonic_ratio: 1.185
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.146
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1481%
 - H_block (lock_quality): 0.012
@@ -19662,6 +21250,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.69876
 - first_energy: 1.96923
 - harmonic_ratio: 1.509
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.340
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4327%
 - H_block (lock_quality): 0.005
@@ -19684,6 +21274,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.48094
 - first_energy: 1.97222
 - harmonic_ratio: 1.007
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.002
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8604%
 - H_block (lock_quality): 0.002
@@ -19706,6 +21298,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.76513
 - first_energy: 1.98113
 - harmonic_ratio: 1.201
+- err_raw_vs_sm: 0.036
+- err_fix_vs_sm: 0.197
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.6146%
 - H_block (lock_quality): 0.014
@@ -19728,6 +21322,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.9877
 - first_energy: 1.98268
 - harmonic_ratio: 1.698
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.419
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.4312%
 - H_block (lock_quality): 0.009
@@ -19750,6 +21346,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.99786
 - first_energy: 1.56911
 - harmonic_ratio: 1.561
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.362
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3879%
 - H_block (lock_quality): 0.010
@@ -19772,6 +21370,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.77947
 - first_energy: 1.95294
 - harmonic_ratio: 0.907
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.100
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2588%
 - H_block (lock_quality): 0.004
@@ -19794,6 +21394,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.2874
 - first_energy: 1.92593
 - harmonic_ratio: 1.795
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.436
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2573%
 - H_block (lock_quality): 0.004
@@ -19816,6 +21418,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13476
 - first_energy: 1.94521
 - harmonic_ratio: 0.966
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1937%
 - H_block (lock_quality): 0.005
@@ -19838,6 +21442,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.01667
 - first_energy: 1.97436
 - harmonic_ratio: 0.934
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.039
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9965%
 - H_block (lock_quality): 0.007
@@ -19860,6 +21466,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96187
 - first_energy: 1.90909
 - harmonic_ratio: 0.957
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8800%
 - H_block (lock_quality): 0.009
@@ -19882,6 +21490,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06331
 - first_energy: 1.97436
 - harmonic_ratio: 0.941
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4014%
 - H_block (lock_quality): 0.003
@@ -19904,6 +21514,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6865
 - first_energy: 1.92857
 - harmonic_ratio: 1.697
+- err_raw_vs_sm: 0.057
+- err_fix_vs_sm: 0.377
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +5.7042%
 - H_block (lock_quality): 0.002
@@ -19926,6 +21538,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91329
 - first_energy: 1.91304
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.078
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.0507%
 - H_block (lock_quality): 0.002
@@ -19948,6 +21562,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0162
 - first_energy: 1.98444
 - harmonic_ratio: 0.929
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.044
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.0041%
 - H_block (lock_quality): 0.006
@@ -19970,6 +21586,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03585
 - first_energy: 1.97059
 - harmonic_ratio: 0.938
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8525%
 - H_block (lock_quality): 0.002
@@ -19992,10 +21610,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.0229
 - first_energy: 1.9322
 - harmonic_ratio: 1.906
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.30765
-- mass_sim_used_gev: 1.9322
-- Δ_mass_sim vs SM: -47.5814%
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.476
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.0859%
 - H_block (lock_quality): 0.004
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.7363081159934589, T_ticks=200
@@ -20016,6 +21634,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.36135
 - first_energy: 1.97183
 - harmonic_ratio: 1.144
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.138
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.3768%
 - H_block (lock_quality): 0.005
@@ -20038,6 +21658,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20581
 - first_energy: 1.96774
 - harmonic_ratio: 0.966
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0529%
 - H_block (lock_quality): 0.004
@@ -20060,6 +21682,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6763
 - first_energy: 1.92157
 - harmonic_ratio: 1.702
+- err_raw_vs_sm: 0.056
+- err_fix_vs_sm: 0.380
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +5.6037%
 - H_block (lock_quality): 0.002
@@ -20082,6 +21706,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.38263
 - first_energy: 1.96262
 - harmonic_ratio: 1.308
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.239
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3924%
 - H_block (lock_quality): 0.002
@@ -20104,6 +21730,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.25063
 - first_energy: 1.97884
 - harmonic_ratio: 1.432
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.296
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8827%
 - H_block (lock_quality): 0.004
@@ -20126,6 +21754,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.92692
 - first_energy: 1.94595
 - harmonic_ratio: 1.405
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.296
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.1369%
 - H_block (lock_quality): 0.003
@@ -20148,6 +21778,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.49987
 - first_energy: 1.90698
 - harmonic_ratio: 0.883
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.122
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8965%
 - H_block (lock_quality): 0.008
@@ -20170,6 +21802,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04394
 - first_energy: 1.93846
 - harmonic_ratio: 0.955
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.039
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7197%
 - H_block (lock_quality): 0.002
@@ -20192,6 +21826,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.57507
 - first_energy: 1.98485
 - harmonic_ratio: 1.015
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1921%
 - H_block (lock_quality): 0.005
@@ -20214,6 +21850,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.73897
 - first_energy: 1.9596
 - harmonic_ratio: 0.897
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.104
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9577%
 - H_block (lock_quality): 0.009
@@ -20236,6 +21874,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.00105
 - first_energy: 1.95556
 - harmonic_ratio: 1.097
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.074
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.5343%
 - H_block (lock_quality): 0.001
@@ -20258,6 +21898,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06055
 - first_energy: 1.94595
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.043
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4468%
 - H_block (lock_quality): 0.001
@@ -20280,6 +21922,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.88904
 - first_energy: 1.97872
 - harmonic_ratio: 0.912
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.115
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6321%
 - H_block (lock_quality): 0.010
@@ -20302,6 +21946,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.91997
 - first_energy: 1.97949
 - harmonic_ratio: 1.226
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.195
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.3580%
 - H_block (lock_quality): 0.011
@@ -20324,6 +21970,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.06623
 - first_energy: 1.88652
 - harmonic_ratio: 1.147
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.107
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.4797%
 - H_block (lock_quality): 0.001
@@ -20346,6 +21994,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.34759
 - first_energy: 1.9604
 - harmonic_ratio: 0.992
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2852%
 - H_block (lock_quality): 0.008
@@ -20368,6 +22018,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.25073
 - first_energy: 1.98
 - harmonic_ratio: 0.967
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2495%
 - H_block (lock_quality): 0.004
@@ -20390,6 +22042,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.62478
 - first_energy: 1.96491
 - harmonic_ratio: 1.189
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.152
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7755%
 - H_block (lock_quality): 0.003
@@ -20412,6 +22066,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.29501
 - first_energy: 1.9646
 - harmonic_ratio: 0.982
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0866%
 - H_block (lock_quality): 0.003
@@ -20434,6 +22090,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.61829
 - first_energy: 1.90698
 - harmonic_ratio: 0.902
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.109
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0600%
 - H_block (lock_quality): 0.002
@@ -20456,6 +22114,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.32798
 - first_energy: 1.98283
 - harmonic_ratio: 1.132
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.133
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.8239%
 - H_block (lock_quality): 0.008
@@ -20478,6 +22138,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0701
 - first_energy: 1.97403
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2899%
 - H_block (lock_quality): 0.002
@@ -20500,6 +22162,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03594
 - first_energy: 1.99304
 - harmonic_ratio: 0.928
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.069
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8510%
 - H_block (lock_quality): 0.003
@@ -20522,6 +22186,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.3324
 - first_energy: 1.95652
 - harmonic_ratio: 1.305
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.207
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.4267%
 - H_block (lock_quality): 0.001
@@ -20544,6 +22210,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.55937
 - first_energy: 1.91304
 - harmonic_ratio: 0.890
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.125
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1755%
 - H_block (lock_quality): 0.002
@@ -20566,6 +22234,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.44617
 - first_energy: 1.90244
 - harmonic_ratio: 1.038
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3194%
 - H_block (lock_quality): 0.005
@@ -20588,6 +22258,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.8976
 - first_energy: 1.95918
 - harmonic_ratio: 0.922
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.104
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7799%
 - H_block (lock_quality): 0.014
@@ -20610,6 +22282,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.05092
 - first_energy: 1.90698
 - harmonic_ratio: 1.293
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.227
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0671%
 - H_block (lock_quality): 0.001
@@ -20632,10 +22306,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.9168
 - first_energy: 1.94595
 - harmonic_ratio: 2.033
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.35252
-- mass_sim_used_gev: 1.94595
-- Δ_mass_sim vs SM: -50.3332%
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.503
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.9895%
 - H_block (lock_quality): 0.002
 - band_power_capture: 0.16736049832487934
 - chaos_mode=dynamic, PE_tick_norm=0.6494828597688922, T_ticks=200
@@ -20656,6 +22330,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.68315
 - first_energy: 1.94667
 - harmonic_ratio: 0.894
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.132
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2152%
 - H_block (lock_quality): 0.005
@@ -20678,6 +22354,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.60555
 - first_energy: 1.98746
 - harmonic_ratio: 1.018
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6564%
 - H_block (lock_quality): 0.005
@@ -20700,6 +22378,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.42405
 - first_energy: 1.96581
 - harmonic_ratio: 1.001
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0249%
 - H_block (lock_quality): 0.010
@@ -20722,6 +22402,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.98652
 - first_energy: 1.97927
 - harmonic_ratio: 1.546
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.361
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2193%
 - H_block (lock_quality): 0.009
@@ -20744,6 +22426,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.01782
 - first_energy: 1.98992
 - harmonic_ratio: 1.080
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.058
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7777%
 - H_block (lock_quality): 0.009
@@ -20766,6 +22450,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.43934
 - first_energy: 1.97906
 - harmonic_ratio: 0.997
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2130%
 - H_block (lock_quality): 0.004
@@ -20788,6 +22474,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.14624
 - first_energy: 1.99631
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.051
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9075%
 - H_block (lock_quality): 0.009
@@ -20810,6 +22498,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.39213
 - first_energy: 1.9797
 - harmonic_ratio: 0.989
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.015
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4144%
 - H_block (lock_quality): 0.004
@@ -20832,6 +22522,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.04629
 - first_energy: 1.96296
 - harmonic_ratio: 1.100
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.071
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1905%
 - H_block (lock_quality): 0.005
@@ -20854,6 +22546,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.07995
 - first_energy: 1.98347
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.064
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1281%
 - H_block (lock_quality): 0.007
@@ -20876,7 +22570,9 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 19.9367
 - first_energy: 1.99466
 - harmonic_ratio: 3.062
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
+- err_raw_vs_sm: 2.817
+- err_fix_vs_sm: 0.247
+- omega_ref_guard_applied: true (sm_err_better)
 - omega_ref_used: 6.51154
 - mass_sim_used_gev: 1.99466
 - Δ_mass_sim vs SM: +24.6662%
@@ -20900,6 +22596,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.85648
 - first_energy: 1.90476
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.073
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0702%
 - H_block (lock_quality): 0.006
@@ -20922,6 +22620,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.4241
 - first_energy: 1.99197
 - harmonic_ratio: 1.142
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.129
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5362%
 - H_block (lock_quality): 0.015
@@ -20944,6 +22644,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.12035
 - first_energy: 1.97647
 - harmonic_ratio: 1.414
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.296
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5381%
 - H_block (lock_quality): 0.003
@@ -20966,6 +22668,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.78571
 - first_energy: 1.97701
 - harmonic_ratio: 1.206
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.199
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3591%
 - H_block (lock_quality): 0.002
@@ -20988,6 +22692,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.36817
 - first_energy: 1.97333
 - harmonic_ratio: 1.144
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.137
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2855%
 - H_block (lock_quality): 0.007
@@ -21010,6 +22716,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.6603
 - first_energy: 1.92453
 - harmonic_ratio: 0.901
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.119
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.8082%
 - H_block (lock_quality): 0.005
@@ -21032,6 +22740,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96089
 - first_energy: 1.91111
 - harmonic_ratio: 0.955
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8957%
 - H_block (lock_quality): 0.004
@@ -21054,6 +22764,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.97724
 - first_energy: 1.98667
 - harmonic_ratio: 1.076
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1891%
 - H_block (lock_quality): 0.012
@@ -21076,6 +22788,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13593
 - first_energy: 1.9801
 - harmonic_ratio: 0.949
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.056
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2128%
 - H_block (lock_quality): 0.002
@@ -21098,6 +22812,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.73019
 - first_energy: 1.91667
 - harmonic_ratio: 0.916
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.080
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.1093%
 - H_block (lock_quality): 0.007
@@ -21120,6 +22836,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.95164
 - first_energy: 1.92453
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.084
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.7126%
 - H_block (lock_quality): 0.007
@@ -21142,6 +22860,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.41495
 - first_energy: 1.95062
 - harmonic_ratio: 1.321
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.243
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0084%
 - H_block (lock_quality): 0.001
@@ -21164,6 +22884,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.47604
 - first_energy: 1.9646
 - harmonic_ratio: 1.010
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.002
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7842%
 - H_block (lock_quality): 0.007
@@ -21186,6 +22908,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.4365
 - first_energy: 1.95604
 - harmonic_ratio: 1.008
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1688%
 - H_block (lock_quality): 0.003
@@ -21208,6 +22932,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.14486
 - first_energy: 1.98792
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9297%
 - H_block (lock_quality): 0.006
@@ -21230,6 +22956,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.31039
 - first_energy: 1.93103
 - harmonic_ratio: 1.001
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1576%
 - H_block (lock_quality): 0.001
@@ -21252,6 +22980,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04115
 - first_energy: 1.9708
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.057
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7653%
 - H_block (lock_quality): 0.004
@@ -21274,6 +23004,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16145
 - first_energy: 1.96
 - harmonic_ratio: 0.963
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.032
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6623%
 - H_block (lock_quality): 0.007
@@ -21296,6 +23028,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.44588
 - first_energy: 1.98157
 - harmonic_ratio: 0.996
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.007
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3148%
 - H_block (lock_quality): 0.010
@@ -21318,6 +23052,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.80077
 - first_energy: 1.95506
 - harmonic_ratio: 0.909
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.100
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0039%
 - H_block (lock_quality): 0.003
@@ -21340,6 +23076,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92139
 - first_energy: 1.98261
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.117
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1904%
 - H_block (lock_quality): 0.007
@@ -21362,6 +23100,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.4663
 - first_energy: 1.94937
 - harmonic_ratio: 1.645
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.371
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.5266%
 - H_block (lock_quality): 0.002
@@ -21384,6 +23124,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.8645
 - first_energy: 1.99878
 - harmonic_ratio: 1.052
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.054
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4460%
 - H_block (lock_quality): 0.000
@@ -21406,6 +23148,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.15393
 - first_energy: 1.93846
 - harmonic_ratio: 1.289
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.215
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2114%
 - H_block (lock_quality): 0.002
@@ -21428,6 +23172,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.85544
 - first_energy: 1.88571
 - harmonic_ratio: 1.439
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.318
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.9285%
 - H_block (lock_quality): 0.002
@@ -21450,6 +23196,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.22842
 - first_energy: 1.9403
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1083%
 - H_block (lock_quality): 0.005
@@ -21472,6 +23220,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.9282
 - first_energy: 1.9619
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.105
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.3080%
 - H_block (lock_quality): 0.003
@@ -21494,6 +23244,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04673
 - first_energy: 1.92982
 - harmonic_ratio: 0.960
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6737%
 - H_block (lock_quality): 0.004
@@ -21516,6 +23268,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.94054
 - first_energy: 1.98601
 - harmonic_ratio: 0.916
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.119
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.5209%
 - H_block (lock_quality): 0.007
@@ -21538,6 +23292,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05009
 - first_energy: 1.96721
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.055
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6186%
 - H_block (lock_quality): 0.007
@@ -21560,6 +23316,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.77303
 - first_energy: 1.9685
 - harmonic_ratio: 1.054
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.068
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.7725%
 - H_block (lock_quality): 0.003
@@ -21582,6 +23340,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.9121
 - first_energy: 1.9
 - harmonic_ratio: 0.953
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.070
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.0301%
 - H_block (lock_quality): 0.001
@@ -21604,6 +23364,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.23773
 - first_energy: 1.9814
 - harmonic_ratio: 0.964
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.037
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0411%
 - H_block (lock_quality): 0.004
@@ -21626,6 +23388,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.79841
 - first_energy: 1.95062
 - harmonic_ratio: 1.539
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.346
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5903%
 - H_block (lock_quality): 0.004
@@ -21648,6 +23412,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.71941
 - first_energy: 1.95349
 - harmonic_ratio: 1.054
+- err_raw_vs_sm: 0.026
+- err_fix_vs_sm: 0.027
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.5656%
 - H_block (lock_quality): 0.009
@@ -21670,6 +23436,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.68281
 - first_energy: 1.95604
 - harmonic_ratio: 1.516
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.344
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5964%
 - H_block (lock_quality): 0.005
@@ -21692,6 +23460,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.8768
 - first_energy: 1.9
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.070
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4209%
 - H_block (lock_quality): 0.005
@@ -21714,6 +23484,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.01297
 - first_energy: 1.9661
 - harmonic_ratio: 1.248
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.199
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0281%
 - H_block (lock_quality): 0.003
@@ -21736,6 +23508,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.24197
 - first_energy: 1.95652
 - harmonic_ratio: 0.977
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1090%
 - H_block (lock_quality): 0.006
@@ -21758,6 +23532,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.37983
 - first_energy: 1.97241
 - harmonic_ratio: 1.301
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.235
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4257%
 - H_block (lock_quality): 0.006
@@ -21780,6 +23556,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.47577
 - first_energy: 1.98491
 - harmonic_ratio: 0.999
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7800%
 - H_block (lock_quality): 0.009
@@ -21802,6 +23580,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.92757
 - first_energy: 1.97633
 - harmonic_ratio: 1.539
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.362
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.8024%
 - H_block (lock_quality): 0.006
@@ -21824,6 +23604,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.29551
 - first_energy: 1.96154
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0786%
 - H_block (lock_quality): 0.005
@@ -21846,6 +23628,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.40817
 - first_energy: 1.99091
 - harmonic_ratio: 0.986
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2722%
 - H_block (lock_quality): 0.002
@@ -21868,6 +23652,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.26529
 - first_energy: 1.95
 - harmonic_ratio: 0.984
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0403%
 - H_block (lock_quality): 0.001
@@ -21890,6 +23676,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.3521
 - first_energy: 1.92593
 - harmonic_ratio: 1.010
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.012
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2144%
 - H_block (lock_quality): 0.002
@@ -21912,6 +23700,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.02845
 - first_energy: 1.96875
 - harmonic_ratio: 0.938
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.8066%
 - H_block (lock_quality): 0.003
@@ -21934,6 +23724,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.36681
 - first_energy: 1.97143
 - harmonic_ratio: 0.989
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0166%
 - H_block (lock_quality): 0.001
@@ -21956,6 +23748,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.51789
 - first_energy: 1.95918
 - harmonic_ratio: 1.488
+- err_raw_vs_sm: 0.023
+- err_fix_vs_sm: 0.343
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.2894%
 - H_block (lock_quality): 0.003
@@ -21978,6 +23772,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.252
 - first_energy: 1.94366
 - harmonic_ratio: 1.616
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.372
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4064%
 - H_block (lock_quality): 0.006
@@ -22000,6 +23796,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.92464
 - first_energy: 1.95556
 - harmonic_ratio: 1.085
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.074
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4262%
 - H_block (lock_quality): 0.001
@@ -22022,6 +23820,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.01935
 - first_energy: 1.98086
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.043
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9532%
 - H_block (lock_quality): 0.004
@@ -22044,6 +23844,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.22665
 - first_energy: 1.95789
 - harmonic_ratio: 0.974
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1367%
 - H_block (lock_quality): 0.005
@@ -22066,6 +23868,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.3756
 - first_energy: 1.98283
 - harmonic_ratio: 0.985
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1547%
 - H_block (lock_quality): 0.007
@@ -22088,6 +23892,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38337
 - first_energy: 1.96396
 - harmonic_ratio: 0.996
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.007
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2767%
 - H_block (lock_quality): 0.006
@@ -22110,6 +23916,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.53755
 - first_energy: 1.9801
 - harmonic_ratio: 1.011
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2104%
 - H_block (lock_quality): 0.004
@@ -22132,6 +23940,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.74595
 - first_energy: 1.95789
 - harmonic_ratio: 1.212
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.207
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8527%
 - H_block (lock_quality): 0.002
@@ -22154,6 +23964,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.42667
 - first_energy: 1.97605
 - harmonic_ratio: 0.996
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0158%
 - H_block (lock_quality): 0.005
@@ -22176,6 +23988,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.81651
 - first_energy: 1.93333
 - harmonic_ratio: 0.922
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.089
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3804%
 - H_block (lock_quality): 0.005
@@ -22198,6 +24012,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.02869
 - first_energy: 1.98354
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.028
+- err_fix_vs_sm: 0.044
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.8026%
 - H_block (lock_quality): 0.004
@@ -22220,6 +24036,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16453
 - first_energy: 1.91837
 - harmonic_ratio: 0.984
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.010
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6126%
 - H_block (lock_quality): 0.001
@@ -22242,6 +24060,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16934
 - first_energy: 1.95745
 - harmonic_ratio: 0.965
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.030
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5350%
 - H_block (lock_quality): 0.003
@@ -22264,6 +24084,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.0366
 - first_energy: 1.95604
 - harmonic_ratio: 1.728
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.427
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9925%
 - H_block (lock_quality): 0.005
@@ -22286,6 +24108,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.3614
 - first_energy: 1.98738
 - harmonic_ratio: 0.981
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.019
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0683%
 - H_block (lock_quality): 0.009
@@ -22308,6 +24132,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.43647
 - first_energy: 1.91667
 - harmonic_ratio: 1.029
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.026
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1683%
 - H_block (lock_quality): 0.009
@@ -22330,6 +24156,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.30953
 - first_energy: 1.98039
 - harmonic_ratio: 0.976
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.026
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1440%
 - H_block (lock_quality): 0.008
@@ -22352,6 +24180,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.15787
 - first_energy: 1.97333
 - harmonic_ratio: 1.111
+- err_raw_vs_sm: 0.038
+- err_fix_vs_sm: 0.066
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.8087%
 - H_block (lock_quality): 0.007
@@ -22374,6 +24204,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13206
 - first_energy: 1.95745
 - harmonic_ratio: 0.960
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.044
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1495%
 - H_block (lock_quality): 0.002
@@ -22396,6 +24228,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.8432
 - first_energy: 1.97101
 - harmonic_ratio: 1.685
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.423
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.7273%
 - H_block (lock_quality): 0.014
@@ -22418,6 +24252,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.21703
 - first_energy: 1.97838
 - harmonic_ratio: 1.427
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.296
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5163%
 - H_block (lock_quality): 0.005
@@ -22440,6 +24276,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.80514
 - first_energy: 1.875
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.055
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0794%
 - H_block (lock_quality): 0.006
@@ -22462,6 +24300,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.74993
 - first_energy: 1.99884
 - harmonic_ratio: 1.034
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.0313%
 - H_block (lock_quality): 0.003
@@ -22484,6 +24324,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.22918
 - first_energy: 1.96262
 - harmonic_ratio: 1.284
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.221
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1000%
 - H_block (lock_quality): 0.007
@@ -22506,6 +24348,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11514
 - first_energy: 1.96262
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1269%
 - H_block (lock_quality): 0.003
@@ -22528,6 +24372,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.90386
 - first_energy: 1.9322
 - harmonic_ratio: 0.936
+- err_raw_vs_sm: 0.019
+- err_fix_vs_sm: 0.089
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.8880%
 - H_block (lock_quality): 0.006
@@ -22550,6 +24396,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.55057
 - first_energy: 1.97849
 - harmonic_ratio: 1.169
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.146
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2053%
 - H_block (lock_quality): 0.003
@@ -22572,6 +24420,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.14554
 - first_energy: 1.98966
 - harmonic_ratio: 0.946
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.047
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9187%
 - H_block (lock_quality): 0.012
@@ -22594,6 +24444,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35387
 - first_energy: 1.99871
 - harmonic_ratio: 0.974
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1866%
 - H_block (lock_quality): 0.000
@@ -22616,6 +24468,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.60865
 - first_energy: 1.9726
 - harmonic_ratio: 1.026
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.019
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7037%
 - H_block (lock_quality): 0.004
@@ -22638,6 +24492,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.1195
 - first_energy: 1.9403
 - harmonic_ratio: 1.598
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.373
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0962%
 - H_block (lock_quality): 0.001
@@ -22660,6 +24516,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.40885
 - first_energy: 1.99642
 - harmonic_ratio: 0.983
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2616%
 - H_block (lock_quality): 0.007
@@ -22682,6 +24540,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.80952
 - first_energy: 1.93443
 - harmonic_ratio: 0.920
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.090
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2599%
 - H_block (lock_quality): 0.003
@@ -22704,6 +24564,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.39066
 - first_energy: 1.97605
 - harmonic_ratio: 0.991
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3913%
 - H_block (lock_quality): 0.001
@@ -22726,6 +24588,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.89649
 - first_energy: 1.90476
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.073
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7607%
 - H_block (lock_quality): 0.003
@@ -22748,6 +24612,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.74259
 - first_energy: 1.94521
 - harmonic_ratio: 0.904
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.096
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8952%
 - H_block (lock_quality): 0.004
@@ -22770,6 +24636,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.9163
 - first_energy: 1.96226
 - harmonic_ratio: 1.080
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.071
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3053%
 - H_block (lock_quality): 0.008
@@ -22792,6 +24660,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18186
 - first_energy: 1.99766
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.051
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3331%
 - H_block (lock_quality): 0.020
@@ -22814,6 +24684,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.11989
 - first_energy: 1.96117
 - harmonic_ratio: 1.112
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.072
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.2578%
 - H_block (lock_quality): 0.001
@@ -22836,6 +24708,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.6779
 - first_energy: 1.96522
 - harmonic_ratio: 1.664
+- err_raw_vs_sm: 0.056
+- err_fix_vs_sm: 0.365
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +5.6192%
 - H_block (lock_quality): 0.003
@@ -22858,6 +24732,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.0401
 - first_energy: 1.98524
 - harmonic_ratio: 1.086
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1008%
 - H_block (lock_quality): 0.008
@@ -22880,6 +24756,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.8214
 - first_energy: 1.91111
 - harmonic_ratio: 1.735
+- err_raw_vs_sm: 0.029
+- err_fix_vs_sm: 0.440
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9234%
 - H_block (lock_quality): 0.006
@@ -22902,6 +24780,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.37397
 - first_energy: 1.94203
 - harmonic_ratio: 1.479
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.320
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5426%
 - H_block (lock_quality): 0.001
@@ -22924,6 +24804,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.42732
 - first_energy: 1.95349
 - harmonic_ratio: 1.165
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.146
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4930%
 - H_block (lock_quality): 0.014
@@ -22946,6 +24828,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.1751
 - first_energy: 1.95181
 - harmonic_ratio: 0.969
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.027
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4422%
 - H_block (lock_quality): 0.002
@@ -22968,6 +24852,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.47406
 - first_energy: 1.92727
 - harmonic_ratio: 1.506
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.325
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.6162%
 - H_block (lock_quality): 0.009
@@ -22990,6 +24876,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.22968
 - first_energy: 1.98131
 - harmonic_ratio: 1.118
+- err_raw_vs_sm: 0.031
+- err_fix_vs_sm: 0.133
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1409%
 - H_block (lock_quality): 0.009
@@ -23012,6 +24900,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91985
 - first_energy: 1.95122
 - harmonic_ratio: 0.929
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.099
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1639%
 - H_block (lock_quality): 0.007
@@ -23034,6 +24924,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.63405
 - first_energy: 1.98419
 - harmonic_ratio: 1.024
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2625%
 - H_block (lock_quality): 0.007
@@ -23056,6 +24948,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.92295
 - first_energy: 1.9604
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.104
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2174%
 - H_block (lock_quality): 0.002
@@ -23078,6 +24972,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09962
 - first_energy: 1.96
 - harmonic_ratio: 0.953
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.048
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0633%
 - H_block (lock_quality): 0.007
@@ -23100,6 +24996,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.67368
 - first_energy: 1.90698
 - harmonic_ratio: 0.911
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.109
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0465%
 - H_block (lock_quality): 0.001
@@ -23122,6 +25020,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.69899
 - first_energy: 1.96364
 - harmonic_ratio: 1.201
+- err_raw_vs_sm: 0.018
+- err_fix_vs_sm: 0.153
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7563%
 - H_block (lock_quality): 0.005
@@ -23144,6 +25044,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.57326
 - first_energy: 1.93651
 - harmonic_ratio: 1.514
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.351
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.7210%
 - H_block (lock_quality): 0.001
@@ -23166,6 +25068,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06042
 - first_energy: 1.92982
 - harmonic_ratio: 0.962
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4489%
 - H_block (lock_quality): 0.002
@@ -23188,6 +25092,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.43775
 - first_energy: 1.98438
 - harmonic_ratio: 0.994
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1883%
 - H_block (lock_quality): 0.002
@@ -23210,6 +25116,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.07116
 - first_energy: 1.91111
 - harmonic_ratio: 0.973
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2725%
 - H_block (lock_quality): 0.004
@@ -23232,6 +25140,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.85019
 - first_energy: 1.9726
 - harmonic_ratio: 1.530
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.339
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1219%
 - H_block (lock_quality): 0.011
@@ -23254,6 +25164,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.18525
 - first_energy: 1.95062
 - harmonic_ratio: 0.971
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.027
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2785%
 - H_block (lock_quality): 0.006
@@ -23276,6 +25188,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.42186
 - first_energy: 1.92982
 - harmonic_ratio: 1.496
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.324
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.0563%
 - H_block (lock_quality): 0.002
@@ -23298,6 +25212,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.4175
 - first_energy: 1.97403
 - harmonic_ratio: 1.151
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.137
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6246%
 - H_block (lock_quality): 0.005
@@ -23320,6 +25236,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.65527
 - first_energy: 1.60345
 - harmonic_ratio: 1.462
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.308
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1786%
 - H_block (lock_quality): 0.009
@@ -23342,6 +25260,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.31281
 - first_energy: 1.97333
 - harmonic_ratio: 1.290
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.200
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.1836%
 - H_block (lock_quality): 0.007
@@ -23364,6 +25284,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.19409
 - first_energy: 1.96226
 - harmonic_ratio: 0.967
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1360%
 - H_block (lock_quality): 0.005
@@ -23386,6 +25308,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3356
 - first_energy: 1.97351
 - harmonic_ratio: 1.604
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.363
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.2334%
 - H_block (lock_quality): 0.006
@@ -23408,6 +25332,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91403
 - first_energy: 1.96552
 - harmonic_ratio: 0.922
+- err_raw_vs_sm: 0.021
+- err_fix_vs_sm: 0.107
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.0635%
 - H_block (lock_quality): 0.004
@@ -23430,6 +25356,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.3846
 - first_energy: 1.93846
 - harmonic_ratio: 1.483
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.321
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6567%
 - H_block (lock_quality): 0.002
@@ -23452,6 +25380,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.00412
 - first_energy: 1.95604
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.032
+- err_fix_vs_sm: 0.029
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.1988%
 - H_block (lock_quality): 0.003
@@ -23474,6 +25404,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.83483
 - first_energy: 1.95604
 - harmonic_ratio: 1.070
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.074
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8763%
 - H_block (lock_quality): 0.006
@@ -23496,6 +25428,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.55149
 - first_energy: 1.92
 - harmonic_ratio: 0.886
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.129
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0335%
 - H_block (lock_quality): 0.005
@@ -23518,6 +25452,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99495
 - first_energy: 1.94805
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3466%
 - H_block (lock_quality): 0.002
@@ -23540,6 +25476,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.3314
 - first_energy: 1.94667
 - harmonic_ratio: 1.626
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.371
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1920%
 - H_block (lock_quality): 0.004
@@ -23562,10 +25500,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.4859
 - first_energy: 1.9322
 - harmonic_ratio: 2.138
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.30765
-- mass_sim_used_gev: 1.9322
-- Δ_mass_sim vs SM: -53.8964%
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.539
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -1.4292%
 - H_block (lock_quality): 0.007
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.6668424534789105, T_ticks=200
@@ -23586,6 +25524,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.10596
 - first_energy: 1.94872
 - harmonic_ratio: 1.431
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.306
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6950%
 - H_block (lock_quality): 0.002
@@ -23608,6 +25548,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98173
 - first_energy: 1.96748
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.036
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.5598%
 - H_block (lock_quality): 0.003
@@ -23630,6 +25572,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.86023
 - first_energy: 1.94937
 - harmonic_ratio: 0.921
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.098
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1350%
 - H_block (lock_quality): 0.007
@@ -23652,6 +25596,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.64271
 - first_energy: 1.88889
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.098
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4950%
 - H_block (lock_quality): 0.002
@@ -23674,6 +25620,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06541
 - first_energy: 1.98802
 - harmonic_ratio: 0.935
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.066
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3669%
 - H_block (lock_quality): 0.009
@@ -23696,6 +25644,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.58596
 - first_energy: 1.97222
 - harmonic_ratio: 1.334
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.250
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0761%
 - H_block (lock_quality): 0.001
@@ -23718,6 +25668,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.5023
 - first_energy: 1.88889
 - harmonic_ratio: 1.865
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.462
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3648%
 - H_block (lock_quality): 0.005
@@ -23740,6 +25692,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.74282
 - first_energy: 1.9819
 - harmonic_ratio: 1.506
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.336
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0197%
 - H_block (lock_quality): 0.011
@@ -23762,6 +25716,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.97277
 - first_energy: 1.95349
 - harmonic_ratio: 0.937
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.028
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.7043%
 - H_block (lock_quality): 0.003
@@ -23784,6 +25740,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.62933
 - first_energy: 1.99871
 - harmonic_ratio: 1.016
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1905%
 - H_block (lock_quality): 0.000
@@ -23806,6 +25764,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.1224
 - first_energy: 1.95349
 - harmonic_ratio: 1.117
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.075
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.2943%
 - H_block (lock_quality): 0.005
@@ -23828,6 +25788,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.47509
 - first_energy: 1.98479
 - harmonic_ratio: 0.999
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.7693%
 - H_block (lock_quality): 0.008
@@ -23850,6 +25812,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.84973
 - first_energy: 1.92727
 - harmonic_ratio: 0.930
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.086
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9537%
 - H_block (lock_quality): 0.006
@@ -23872,6 +25836,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20796
 - first_energy: 1.99248
 - harmonic_ratio: 0.954
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.049
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0876%
 - H_block (lock_quality): 0.009
@@ -23894,6 +25860,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06811
 - first_energy: 1.96748
 - harmonic_ratio: 0.945
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.055
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3226%
 - H_block (lock_quality): 0.008
@@ -23916,6 +25884,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.9141
 - first_energy: 1.98039
 - harmonic_ratio: 1.379
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.284
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.2789%
 - H_block (lock_quality): 0.011
@@ -23938,6 +25908,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.2518
 - first_energy: 1.94366
 - harmonic_ratio: 1.616
+- err_raw_vs_sm: 0.014
+- err_fix_vs_sm: 0.372
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.4048%
 - H_block (lock_quality): 0.005
@@ -23960,6 +25932,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.0026
 - first_energy: 1.9596
 - harmonic_ratio: 1.564
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.367
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.0604%
 - H_block (lock_quality): 0.001
@@ -23982,6 +25956,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28525
 - first_energy: 1.96522
 - harmonic_ratio: 0.980
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.018
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2414%
 - H_block (lock_quality): 0.007
@@ -24004,10 +25980,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.3953
 - first_energy: 1.94737
 - harmonic_ratio: 1.950
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.35716
-- mass_sim_used_gev: 1.94737
-- Δ_mass_sim vs SM: -48.3963%
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.484
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.6178%
 - H_block (lock_quality): 0.006
 - band_power_capture: 0.1672875811084077
 - chaos_mode=dynamic, PE_tick_norm=0.6883404585527152, T_ticks=200
@@ -24028,6 +26004,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.03422
 - first_energy: 1.94203
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8792%
 - H_block (lock_quality): 0.012
@@ -24050,6 +26028,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99598
 - first_energy: 1.94805
 - harmonic_ratio: 0.943
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.025
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3300%
 - H_block (lock_quality): 0.001
@@ -24072,6 +26052,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.27056
 - first_energy: 1.98276
 - harmonic_ratio: 1.123
+- err_raw_vs_sm: 0.026
+- err_fix_vs_sm: 0.133
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.5933%
 - H_block (lock_quality): 0.006
@@ -24094,6 +26076,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.9556
 - first_energy: 1.94595
 - harmonic_ratio: 1.882
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.465
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6298%
 - H_block (lock_quality): 0.003
@@ -24116,6 +26100,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.50349
 - first_energy: 1.9708
 - harmonic_ratio: 1.322
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.240
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4860%
 - H_block (lock_quality): 0.002
@@ -24138,6 +26124,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.80072
 - first_energy: 1.97315
 - harmonic_ratio: 1.366
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.287
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.5345%
 - H_block (lock_quality): 0.006
@@ -24160,6 +26148,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.60477
 - first_energy: 1.93939
 - harmonic_ratio: 0.885
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.128
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1807%
 - H_block (lock_quality): 0.003
@@ -24182,6 +26172,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.30116
 - first_energy: 1.92727
 - harmonic_ratio: 1.160
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.157
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.1832%
 - H_block (lock_quality): 0.006
@@ -24204,6 +26196,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.15812
 - first_energy: 1.98268
 - harmonic_ratio: 1.260
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.197
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2635%
 - H_block (lock_quality): 0.003
@@ -24226,6 +26220,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.42415
 - first_energy: 1.99052
 - harmonic_ratio: 0.989
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0235%
 - H_block (lock_quality): 0.011
@@ -24248,6 +26244,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.4671
 - first_energy: 1.98406
 - harmonic_ratio: 0.998
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.008
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6450%
 - H_block (lock_quality): 0.002
@@ -24270,6 +26268,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99245
 - first_energy: 1.97576
 - harmonic_ratio: 0.929
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.040
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3870%
 - H_block (lock_quality): 0.006
@@ -24292,6 +26292,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.94228
 - first_energy: 1.9797
 - harmonic_ratio: 0.919
+- err_raw_vs_sm: 0.026
+- err_fix_vs_sm: 0.115
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.5509%
 - H_block (lock_quality): 0.008
@@ -24314,6 +26316,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.15802
 - first_energy: 1.96117
 - harmonic_ratio: 0.962
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.032
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7175%
 - H_block (lock_quality): 0.003
@@ -24336,6 +26340,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06187
 - first_energy: 1.95604
 - harmonic_ratio: 0.949
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.049
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4250%
 - H_block (lock_quality): 0.003
@@ -24358,6 +26364,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.17228
 - first_energy: 1.94737
 - harmonic_ratio: 1.443
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.307
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0282%
 - H_block (lock_quality): 0.002
@@ -24380,6 +26388,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.98737
 - first_energy: 1.93939
 - harmonic_ratio: 0.946
+- err_raw_vs_sm: 0.035
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.4689%
 - H_block (lock_quality): 0.004
@@ -24402,6 +26412,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.27207
 - first_energy: 1.98312
 - harmonic_ratio: 0.969
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0679%
 - H_block (lock_quality): 0.006
@@ -24424,6 +26436,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.44146
 - first_energy: 1.9375
 - harmonic_ratio: 1.018
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2460%
 - H_block (lock_quality): 0.002
@@ -24446,6 +26460,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.45883
 - first_energy: 1.97701
 - harmonic_ratio: 1.001
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.004
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5164%
 - H_block (lock_quality): 0.010
@@ -24468,10 +26484,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.5174
 - first_energy: 1.98276
 - harmonic_ratio: 1.934
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.47269
-- mass_sim_used_gev: 1.98276
-- Δ_mass_sim vs SM: -47.4585%
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.475
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +1.6089%
 - H_block (lock_quality): 0.014
 - band_power_capture: 0.1673040299200441
 - chaos_mode=dynamic, PE_tick_norm=0.6315547508381831, T_ticks=200
@@ -24492,10 +26508,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.2489
 - first_energy: 1.93651
 - harmonic_ratio: 1.938
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.32171
-- mass_sim_used_gev: 1.93651
-- Δ_mass_sim vs SM: -48.0464%
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.480
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.6646%
 - H_block (lock_quality): 0.005
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.8835447075047508, T_ticks=200
@@ -24516,6 +26532,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.5682
 - first_energy: 1.89189
 - harmonic_ratio: 1.063
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.059
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0874%
 - H_block (lock_quality): 0.006
@@ -24538,6 +26556,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.5667
 - first_energy: 1.98762
 - harmonic_ratio: 1.320
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.244
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1484%
 - H_block (lock_quality): 0.006
@@ -24560,6 +26580,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12909
 - first_energy: 1.97241
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1011%
 - H_block (lock_quality): 0.005
@@ -24582,10 +26604,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.753
 - first_energy: 1.94444
 - harmonic_ratio: 2.009
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.34761
-- mass_sim_used_gev: 1.94444
-- Δ_mass_sim vs SM: -50.3715%
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.504
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.2910%
 - H_block (lock_quality): 0.004
 - band_power_capture: 0.16777462652442013
 - chaos_mode=dynamic, PE_tick_norm=0.646647586800716, T_ticks=200
@@ -24606,6 +26628,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.09664
 - first_energy: 1.96721
 - harmonic_ratio: 1.261
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.203
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5003%
 - H_block (lock_quality): 0.003
@@ -24628,6 +26652,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.02454
 - first_energy: 1.88889
 - harmonic_ratio: 0.977
+- err_raw_vs_sm: 0.029
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.8695%
 - H_block (lock_quality): 0.003
@@ -24650,6 +26676,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35023
 - first_energy: 1.95652
 - harmonic_ratio: 0.994
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.003
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2439%
 - H_block (lock_quality): 0.005
@@ -24672,6 +26700,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.96404
 - first_energy: 1.98551
 - harmonic_ratio: 1.074
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.060
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9977%
 - H_block (lock_quality): 0.005
@@ -24694,6 +26724,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.43401
 - first_energy: 1.94444
 - harmonic_ratio: 1.014
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.012
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1301%
 - H_block (lock_quality): 0.004
@@ -24716,6 +26748,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.8325
 - first_energy: 1.91837
 - harmonic_ratio: 0.931
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.081
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.6564%
 - H_block (lock_quality): 0.002
@@ -24738,6 +26772,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.04222
 - first_energy: 1.9322
 - harmonic_ratio: 0.958
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7479%
 - H_block (lock_quality): 0.002
@@ -24760,6 +26796,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.041
 - first_energy: 1.96078
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.051
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.7679%
 - H_block (lock_quality): 0.011
@@ -24782,6 +26820,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.82557
 - first_energy: 1.96748
 - harmonic_ratio: 1.063
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.069
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.0105%
 - H_block (lock_quality): 0.002
@@ -24804,6 +26844,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.44811
 - first_energy: 1.99419
 - harmonic_ratio: 0.990
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3496%
 - H_block (lock_quality): 0.008
@@ -24826,6 +26868,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.05626
 - first_energy: 1.97315
 - harmonic_ratio: 0.940
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.058
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5172%
 - H_block (lock_quality): 0.004
@@ -24848,6 +26892,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08833
 - first_energy: 1.96117
 - harmonic_ratio: 0.951
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0097%
 - H_block (lock_quality): 0.002
@@ -24870,6 +26916,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.07368
 - first_energy: 1.98
 - harmonic_ratio: 1.404
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.284
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4885%
 - H_block (lock_quality): 0.006
@@ -24892,6 +26940,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.66634
 - first_energy: 1.89744
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.103
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9158%
 - H_block (lock_quality): 0.002
@@ -24914,6 +26964,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.35316
 - first_energy: 1.97241
 - harmonic_ratio: 1.297
+- err_raw_vs_sm: 0.037
+- err_fix_vs_sm: 0.201
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.6845%
 - H_block (lock_quality): 0.003
@@ -24936,6 +26988,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08449
 - first_energy: 1.92157
 - harmonic_ratio: 0.970
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.030
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0535%
 - H_block (lock_quality): 0.002
@@ -24958,6 +27012,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.04466
 - first_energy: 1.9633
 - harmonic_ratio: 1.099
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.070
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1668%
 - H_block (lock_quality): 0.002
@@ -24980,6 +27036,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0252
 - first_energy: 1.93103
 - harmonic_ratio: 0.956
+- err_raw_vs_sm: 0.029
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.8590%
 - H_block (lock_quality): 0.003
@@ -25002,6 +27060,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.28129
 - first_energy: 1.9604
 - harmonic_ratio: 0.981
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2149%
 - H_block (lock_quality): 0.002
@@ -25024,6 +27084,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.51753
 - first_energy: 1.98841
 - harmonic_ratio: 1.004
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5161%
 - H_block (lock_quality): 0.009
@@ -25046,6 +27108,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 11.7426
 - first_energy: 1.91111
 - harmonic_ratio: 1.882
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.463
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.1500%
 - H_block (lock_quality): 0.001
@@ -25068,6 +27132,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.15252
 - first_energy: 1.98916
 - harmonic_ratio: 0.947
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.047
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8062%
 - H_block (lock_quality): 0.019
@@ -25090,6 +27156,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.11308
 - first_energy: 1.98319
 - harmonic_ratio: 0.944
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.061
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1573%
 - H_block (lock_quality): 0.003
@@ -25112,6 +27180,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.75644
 - first_energy: 1.95181
 - harmonic_ratio: 0.903
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.100
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6562%
 - H_block (lock_quality): 0.005
@@ -25134,10 +27204,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.448
 - first_energy: 1.94118
 - harmonic_ratio: 1.964
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.33695
-- mass_sim_used_gev: 1.94118
-- Δ_mass_sim vs SM: -48.5604%
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.486
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +1.0456%
 - H_block (lock_quality): 0.004
 - band_power_capture: 0.17224715675360758
 - chaos_mode=dynamic, PE_tick_norm=0.7140574195692788, T_ticks=200
@@ -25158,6 +27228,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.01772
 - first_energy: 1.92
 - harmonic_ratio: 0.960
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.011
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.9795%
 - H_block (lock_quality): 0.003
@@ -25180,6 +27252,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.46084
 - first_energy: 1.97927
 - harmonic_ratio: 1.000
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.006
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5475%
 - H_block (lock_quality): 0.003
@@ -25202,6 +27276,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.9216
 - first_energy: 1.96552
 - harmonic_ratio: 1.702
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.424
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.0240%
 - H_block (lock_quality): 0.005
@@ -25224,6 +27300,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 10.1008
 - first_energy: 1.94286
 - harmonic_ratio: 1.593
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.373
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0888%
 - H_block (lock_quality): 0.001
@@ -25246,10 +27324,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.2036
 - first_energy: 1.91837
 - harmonic_ratio: 1.949
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.26249
-- mass_sim_used_gev: 1.91837
-- Δ_mass_sim vs SM: -48.5331%
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.485
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.2930%
 - H_block (lock_quality): 0.007
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.8787643079179922, T_ticks=200
@@ -25270,6 +27348,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.78475
 - first_energy: 1.97826
 - harmonic_ratio: 1.051
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.063
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.6025%
 - H_block (lock_quality): 0.001
@@ -25292,6 +27372,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.81524
 - first_energy: 1.88571
 - harmonic_ratio: 0.945
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.062
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3586%
 - H_block (lock_quality): 0.003
@@ -25314,6 +27396,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.49508
 - first_energy: 1.92727
 - harmonic_ratio: 1.191
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.157
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4149%
 - H_block (lock_quality): 0.002
@@ -25336,6 +27420,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06617
 - first_energy: 1.97814
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.061
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3543%
 - H_block (lock_quality): 0.006
@@ -25358,6 +27444,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.86696
 - first_energy: 1.92
 - harmonic_ratio: 0.936
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.082
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2511%
 - H_block (lock_quality): 0.008
@@ -25380,6 +27468,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.04533
 - first_energy: 1.95122
 - harmonic_ratio: 1.263
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.209
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1365%
 - H_block (lock_quality): 0.014
@@ -25402,6 +27492,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.07851
 - first_energy: 1.96947
 - harmonic_ratio: 0.945
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.056
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1517%
 - H_block (lock_quality): 0.004
@@ -25424,6 +27516,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.93515
 - first_energy: 1.96875
 - harmonic_ratio: 1.546
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.364
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.7275%
 - H_block (lock_quality): 0.006
@@ -25446,6 +27540,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.2724
 - first_energy: 1.9834
 - harmonic_ratio: 1.278
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.196
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.6820%
 - H_block (lock_quality): 0.008
@@ -25468,6 +27564,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.48585
 - first_energy: 1.97814
 - harmonic_ratio: 1.469
+- err_raw_vs_sm: 0.017
+- err_fix_vs_sm: 0.307
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.7427%
 - H_block (lock_quality): 0.004
@@ -25490,10 +27588,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.0134
 - first_energy: 1.92727
 - harmonic_ratio: 1.909
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.29156
-- mass_sim_used_gev: 1.92727
-- Δ_mass_sim vs SM: -47.7151%
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.477
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: -0.1646%
 - H_block (lock_quality): 0.004
 - band_power_capture: 1.0
 - chaos_mode=dynamic, PE_tick_norm=0.6903167610802076, T_ticks=200
@@ -25514,6 +27612,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38301
 - first_energy: 1.95238
 - harmonic_ratio: 1.001
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.001
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2711%
 - H_block (lock_quality): 0.005
@@ -25536,6 +27636,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.64573
 - first_energy: 1.96774
 - harmonic_ratio: 1.502
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.341
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9771%
 - H_block (lock_quality): 0.002
@@ -25558,6 +27660,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.96217
 - first_energy: 1.94521
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.039
+- err_fix_vs_sm: 0.024
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.8751%
 - H_block (lock_quality): 0.002
@@ -25580,6 +27684,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.10021
 - first_energy: 1.9646
 - harmonic_ratio: 1.107
+- err_raw_vs_sm: 0.030
+- err_fix_vs_sm: 0.070
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.9724%
 - H_block (lock_quality): 0.002
@@ -25602,6 +27708,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.15056
 - first_energy: 1.97826
 - harmonic_ratio: 0.952
+- err_raw_vs_sm: 0.008
+- err_fix_vs_sm: 0.041
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8379%
 - H_block (lock_quality): 0.010
@@ -25624,6 +27732,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.33411
 - first_energy: 1.94805
 - harmonic_ratio: 1.311
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.211
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +3.4479%
 - H_block (lock_quality): 0.002
@@ -25646,6 +27756,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.08911
 - first_energy: 1.99065
 - harmonic_ratio: 0.937
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.067
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0224%
 - H_block (lock_quality): 0.009
@@ -25668,6 +27780,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.78604
 - first_energy: 1.93939
 - harmonic_ratio: 0.914
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.093
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1454%
 - H_block (lock_quality): 0.005
@@ -25690,6 +27804,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.91924
 - first_energy: 1.98104
 - harmonic_ratio: 0.915
+- err_raw_vs_sm: 0.022
+- err_fix_vs_sm: 0.116
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.1534%
 - H_block (lock_quality): 0.007
@@ -25712,6 +27828,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.26614
 - first_energy: 1.96078
 - harmonic_ratio: 1.448
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.313
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6139%
 - H_block (lock_quality): 0.001
@@ -25734,6 +27852,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.50841
 - first_energy: 1.96296
 - harmonic_ratio: 1.016
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6552%
 - H_block (lock_quality): 0.008
@@ -25756,6 +27876,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.39885
 - first_energy: 1.97531
 - harmonic_ratio: 0.992
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.5200%
 - H_block (lock_quality): 0.002
@@ -25778,6 +27900,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.36874
 - first_energy: 1.97531
 - harmonic_ratio: 0.988
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.013
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0469%
 - H_block (lock_quality): 0.007
@@ -25800,6 +27924,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.31587
 - first_energy: 1.98898
 - harmonic_ratio: 1.127
+- err_raw_vs_sm: 0.020
+- err_fix_vs_sm: 0.130
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.9862%
 - H_block (lock_quality): 0.010
@@ -25822,6 +27948,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.77941
 - first_energy: 1.9798
 - harmonic_ratio: 1.204
+- err_raw_vs_sm: 0.034
+- err_fix_vs_sm: 0.198
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.4373%
 - H_block (lock_quality): 0.004
@@ -25844,6 +27972,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.96134
 - first_energy: 1.95402
 - harmonic_ratio: 1.562
+- err_raw_vs_sm: 0.015
+- err_fix_vs_sm: 0.369
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.4684%
 - H_block (lock_quality): 0.004
@@ -25866,6 +27996,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.18251
 - first_energy: 1.96774
 - harmonic_ratio: 1.274
+- err_raw_vs_sm: 0.016
+- err_fix_vs_sm: 0.203
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.5662%
 - H_block (lock_quality): 0.007
@@ -25888,6 +28020,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.06461
 - first_energy: 1.92982
 - harmonic_ratio: 0.963
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.3800%
 - H_block (lock_quality): 0.003
@@ -25910,6 +28044,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13418
 - first_energy: 1.94118
 - harmonic_ratio: 0.968
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.035
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1842%
 - H_block (lock_quality): 0.002
@@ -25932,6 +28068,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.21508
 - first_energy: 1.97163
 - harmonic_ratio: 1.121
+- err_raw_vs_sm: 0.046
+- err_fix_vs_sm: 0.067
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +4.6384%
 - H_block (lock_quality): 0.004
@@ -25954,6 +28092,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.5007
 - first_energy: 1.95181
 - harmonic_ratio: 1.177
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.146
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4900%
 - H_block (lock_quality): 0.002
@@ -25976,10 +28116,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.7906
 - first_energy: 1.9798
 - harmonic_ratio: 1.979
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.46303
-- mass_sim_used_gev: 1.9798
-- Δ_mass_sim vs SM: -49.4692%
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.495
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +0.0025%
 - H_block (lock_quality): 0.009
 - band_power_capture: 0.16847262534709556
 - chaos_mode=dynamic, PE_tick_norm=0.6316589488043959, T_ticks=200
@@ -26000,6 +28140,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.73084
 - first_energy: 1.98961
 - harmonic_ratio: 1.036
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.009
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.7399%
 - H_block (lock_quality): 0.008
@@ -26022,6 +28164,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.08734
 - first_energy: 1.57303
 - harmonic_ratio: 1.575
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.363
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3849%
 - H_block (lock_quality): 0.002
@@ -26044,6 +28188,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.22857
 - first_energy: 1.99638
 - harmonic_ratio: 0.956
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.045
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.1058%
 - H_block (lock_quality): 0.020
@@ -26066,6 +28212,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.3233
 - first_energy: 1.98621
 - harmonic_ratio: 0.975
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.029
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3625%
 - H_block (lock_quality): 0.011
@@ -26088,6 +28236,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.24406
 - first_energy: 1.94286
 - harmonic_ratio: 0.984
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.017
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1425%
 - H_block (lock_quality): 0.008
@@ -26110,6 +28260,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.83342
 - first_energy: 1.96721
 - harmonic_ratio: 1.064
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.069
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8967%
 - H_block (lock_quality): 0.005
@@ -26132,6 +28284,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.77027
 - first_energy: 1.90909
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.076
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4175%
 - H_block (lock_quality): 0.006
@@ -26154,6 +28308,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.52876
 - first_energy: 1.94667
 - harmonic_ratio: 1.342
+- err_raw_vs_sm: 0.006
+- err_fix_vs_sm: 0.259
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5906%
 - H_block (lock_quality): 0.001
@@ -26176,6 +28332,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.99907
 - first_energy: 1.98556
 - harmonic_ratio: 0.926
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.045
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.2803%
 - H_block (lock_quality): 0.001
@@ -26198,6 +28356,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.63384
 - first_energy: 1.90909
 - harmonic_ratio: 0.904
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.110
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.3370%
 - H_block (lock_quality): 0.003
@@ -26220,6 +28380,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.49398
 - first_energy: 1.94595
 - harmonic_ratio: 1.180
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.149
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.4001%
 - H_block (lock_quality): 0.003
@@ -26242,6 +28404,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.12353
 - first_energy: 1.99048
 - harmonic_ratio: 0.942
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.061
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0102%
 - H_block (lock_quality): 0.007
@@ -26264,6 +28428,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.86036
 - first_energy: 1.93548
 - harmonic_ratio: 1.561
+- err_raw_vs_sm: 0.012
+- err_fix_vs_sm: 0.351
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +1.2263%
 - H_block (lock_quality): 0.005
@@ -26286,6 +28452,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.0907
 - first_energy: 1.92727
 - harmonic_ratio: 0.968
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0486%
 - H_block (lock_quality): 0.008
@@ -26308,10 +28476,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 13.3313
 - first_energy: 1.97368
 - harmonic_ratio: 2.069
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.44307
-- mass_sim_used_gev: 1.97368
-- Δ_mass_sim vs SM: -51.1343%
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.511
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +1.1079%
 - H_block (lock_quality): 0.007
 - band_power_capture: 0.1635543897247146
 - chaos_mode=dynamic, PE_tick_norm=0.6874204850584593, T_ticks=200
@@ -26332,6 +28500,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.20599
 - first_energy: 1.94872
 - harmonic_ratio: 0.976
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.026
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0559%
 - H_block (lock_quality): 0.004
@@ -26354,6 +28524,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.26726
 - first_energy: 1.94937
 - harmonic_ratio: 0.985
+- err_raw_vs_sm: 0.000
+- err_fix_vs_sm: 0.015
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.0089%
 - H_block (lock_quality): 0.001
@@ -26376,6 +28548,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.14711
 - first_energy: 1.98662
 - harmonic_ratio: 0.948
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.046
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8934%
 - H_block (lock_quality): 0.008
@@ -26398,6 +28572,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 8.2282
 - first_energy: 1.97203
 - harmonic_ratio: 1.278
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.217
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0881%
 - H_block (lock_quality): 0.003
@@ -26420,6 +28596,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 9.10745
 - first_energy: 1.97661
 - harmonic_ratio: 1.411
+- err_raw_vs_sm: 0.007
+- err_fix_vs_sm: 0.296
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.6787%
 - H_block (lock_quality): 0.005
@@ -26442,6 +28620,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.14741
 - first_energy: 1.92593
 - harmonic_ratio: 0.978
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8887%
 - H_block (lock_quality): 0.003
@@ -26464,6 +28644,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.07396
 - first_energy: 1.96117
 - harmonic_ratio: 0.949
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.052
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2265%
 - H_block (lock_quality): 0.005
@@ -26486,6 +28668,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.57776
 - first_energy: 1.97727
 - harmonic_ratio: 1.019
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2330%
 - H_block (lock_quality): 0.006
@@ -26508,6 +28692,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.74322
 - first_energy: 1.95349
 - harmonic_ratio: 0.901
+- err_raw_vs_sm: 0.009
+- err_fix_vs_sm: 0.101
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.8843%
 - H_block (lock_quality): 0.003
@@ -26530,6 +28716,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.1413
 - first_energy: 1.95604
 - harmonic_ratio: 0.962
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.029
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.9871%
 - H_block (lock_quality): 0.005
@@ -26552,10 +28740,10 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 12.9617
 - first_energy: 1.96154
 - harmonic_ratio: 2.024
-- omega_ref_guard_applied: true (harmonic_ratio_exceeded)
-- omega_ref_used: 6.40342
-- mass_sim_used_gev: 1.96154
-- Δ_mass_sim vs SM: -49.9352%
+- err_raw_vs_sm: 0.013
+- err_fix_vs_sm: 0.499
+- omega_ref_guard_applied: false
+- Δ_mass_sim vs SM: +1.3403%
 - H_block (lock_quality): 0.007
 - band_power_capture: 0.17208982330390668
 - chaos_mode=dynamic, PE_tick_norm=0.5812482716531341, T_ticks=200
@@ -26576,6 +28764,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38205
 - first_energy: 1.99089
 - harmonic_ratio: 0.982
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.021
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2561%
 - H_block (lock_quality): 0.002
@@ -26598,6 +28788,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.16945
 - first_energy: 1.96226
 - harmonic_ratio: 0.963
+- err_raw_vs_sm: 0.005
+- err_fix_vs_sm: 0.033
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.5333%
 - H_block (lock_quality): 0.011
@@ -26620,6 +28812,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.09253
 - first_energy: 1.98824
 - harmonic_ratio: 0.939
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.066
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.0785%
 - H_block (lock_quality): 0.001
@@ -26642,6 +28836,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.78964
 - first_energy: 1.95455
 - harmonic_ratio: 1.221
+- err_raw_vs_sm: 0.033
+- err_fix_vs_sm: 0.208
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -3.3103%
 - H_block (lock_quality): 0.006
@@ -26664,6 +28860,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 5.49074
 - first_energy: 1.88889
 - harmonic_ratio: 0.890
+- err_raw_vs_sm: 0.011
+- err_fix_vs_sm: 0.111
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -1.0611%
 - H_block (lock_quality): 0.001
@@ -26686,6 +28884,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.06771
 - first_energy: 1.97452
 - harmonic_ratio: 1.096
+- err_raw_vs_sm: 0.025
+- err_fix_vs_sm: 0.065
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +2.5012%
 - H_block (lock_quality): 0.005
@@ -26708,6 +28908,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.28796
 - first_energy: 1.95402
 - harmonic_ratio: 1.143
+- err_raw_vs_sm: 0.024
+- err_fix_vs_sm: 0.145
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.3601%
 - H_block (lock_quality): 0.005
@@ -26730,6 +28932,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.17697
 - first_energy: 1.92593
 - harmonic_ratio: 0.982
+- err_raw_vs_sm: 0.004
+- err_fix_vs_sm: 0.014
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.4120%
 - H_block (lock_quality): 0.001
@@ -26752,6 +28956,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 7.84181
 - first_energy: 1.98726
 - harmonic_ratio: 1.209
+- err_raw_vs_sm: 0.027
+- err_fix_vs_sm: 0.195
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -2.6627%
 - H_block (lock_quality): 0.009
@@ -26774,6 +28980,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.53188
 - first_energy: 1.99646
 - harmonic_ratio: 1.002
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.005
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2970%
 - H_block (lock_quality): 0.014
@@ -26796,6 +29004,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.13065
 - first_energy: 1.91667
 - harmonic_ratio: 0.980
+- err_raw_vs_sm: 0.001
+- err_fix_vs_sm: 0.022
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.1265%
 - H_block (lock_quality): 0.008
@@ -26818,6 +29028,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.9626
 - first_energy: 1.9619
 - harmonic_ratio: 1.087
+- err_raw_vs_sm: 0.010
+- err_fix_vs_sm: 0.071
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.9768%
 - H_block (lock_quality): 0.004
@@ -26840,6 +29052,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.38048
 - first_energy: 1.97315
 - harmonic_ratio: 0.991
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.012
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2314%
 - H_block (lock_quality): 0.003
@@ -26862,6 +29076,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.35141
 - first_energy: 1.98148
 - harmonic_ratio: 0.982
+- err_raw_vs_sm: 0.002
+- err_fix_vs_sm: 0.016
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: -0.2253%
 - H_block (lock_quality): 0.003
@@ -26884,6 +29100,8 @@ Sin candidatos cercanos fuera de la selección.
 - omega_ref_raw: 6.25126
 - first_energy: 1.97826
 - harmonic_ratio: 0.968
+- err_raw_vs_sm: 0.003
+- err_fix_vs_sm: 0.036
 - omega_ref_guard_applied: false
 - Δ_mass_sim vs SM: +0.2581%
 - H_block (lock_quality): 0.008

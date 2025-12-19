@@ -408,6 +408,12 @@ def main():
         default=1.9,
         help="Umbral max de mass_sim_gev/first_energy para activar guard.",
     )
+    parser.add_argument(
+        "--harmonic-err-trigger",
+        type=float,
+        default=0.20,
+        help="Umbral de error relativo vs SM para activar guard (0.20=20%).",
+    )
     parser.add_argument("--output", type=Path, default=None, help="Reporte markdown de salida.")
     args = parser.parse_args()
 
@@ -606,16 +612,25 @@ def main():
                         omega_used = omega_raw
                         msim_used = msim_val
                         guard_applied = False
+                        err_raw = None
+                        err_fix = None
+                        if sm_mass is not None and sm_mass != 0:
+                            err_raw = abs(msim_val - sm_mass) / sm_mass
+                            if first_energy is not None:
+                                err_fix = abs(first_energy - sm_mass) / sm_mass
                         if (
                             args.harmonic_guard_enabled
-                            and harmonic_ratio is not None
-                            and harmonic_ratio > args.harmonic_ratio_max
                             and hbar_est is not None
                             and first_energy is not None
+                            and err_raw is not None
+                            and err_fix is not None
+                            and err_raw > args.harmonic_err_trigger
+                            and err_fix < err_raw
                         ):
-                            omega_used = first_energy / hbar_est
-                            msim_used = first_energy
-                            guard_applied = True
+                            if harmonic_ratio is not None and harmonic_ratio > args.harmonic_ratio_max:
+                                omega_used = first_energy / hbar_est
+                                msim_used = first_energy
+                                guard_applied = True
                         dev_sim = ((msim_used - sm_mass) / sm_mass) * 100.0
                         block_lines.append(f"- mass_sim_raw_gev: {msim_val:.6g}")
                         if omega_raw is not None:
@@ -624,8 +639,12 @@ def main():
                             block_lines.append(f"- first_energy: {first_energy:.6g}")
                         if harmonic_ratio is not None:
                             block_lines.append(f"- harmonic_ratio: {harmonic_ratio:.3f}")
+                        if err_raw is not None:
+                            block_lines.append(f"- err_raw_vs_sm: {err_raw:.3f}")
+                        if err_fix is not None:
+                            block_lines.append(f"- err_fix_vs_sm: {err_fix:.3f}")
                         if guard_applied:
-                            block_lines.append("- omega_ref_guard_applied: true (harmonic_ratio_exceeded)")
+                            block_lines.append("- omega_ref_guard_applied: true (sm_err_better)")
                             if omega_used is not None:
                                 block_lines.append(f"- omega_ref_used: {omega_used:.6g}")
                             block_lines.append(f"- mass_sim_used_gev: {msim_used:.6g}")
@@ -797,16 +816,25 @@ def main():
                     omega_used = omega_raw_val
                     msim_used = msim_val
                     guard_applied = False
+                    err_raw = None
+                    err_fix = None
+                    if sm_ref is not None and sm_ref != 0:
+                        err_raw = abs(msim_val - sm_ref) / sm_ref
+                        if first_energy is not None:
+                            err_fix = abs(first_energy - sm_ref) / sm_ref
                     if (
                         args.harmonic_guard_enabled
-                        and harmonic_ratio is not None
-                        and harmonic_ratio > args.harmonic_ratio_max
                         and hbar_est is not None
                         and first_energy is not None
+                        and err_raw is not None
+                        and err_fix is not None
+                        and err_raw > args.harmonic_err_trigger
+                        and err_fix < err_raw
                     ):
-                        omega_used = first_energy / hbar_est
-                        msim_used = first_energy
-                        guard_applied = True
+                        if harmonic_ratio is not None and harmonic_ratio > args.harmonic_ratio_max:
+                            omega_used = first_energy / hbar_est
+                            msim_used = first_energy
+                            guard_applied = True
                     rel_err = None
                     if sm_ref:
                         rel_err = (msim_used - sm_ref) / sm_ref
