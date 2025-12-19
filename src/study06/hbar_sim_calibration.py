@@ -173,6 +173,7 @@ def main():
     h_vals = np.array(h_vals, dtype=float)
     weights = np.array(weights, dtype=float)
     if h_vals.size == 0:
+        print("!!~~~## hbar_sim: sin h_i válidos (candidatos filtrados a 0).", flush=True)
         raise ValueError("hbar_sim: no se pudieron construir h_i válidos.")
     # trim percentiles
     lo, hi = np.percentile(h_vals, [10, 90])
@@ -182,6 +183,11 @@ def main():
     kept_trim = [k for k, m in zip(kept, mask) if m]
     hbar_final = _weighted_median(h_trim, w_trim)
     if hbar_final is None:
+        print(
+            f"!!~~~## hbar_sim: weighted median falló (candidatos={len(candidates)}, "
+            f"clustered={len(clustered)}, kept_trim={len(kept_trim)}).",
+            flush=True,
+        )
         raise ValueError("hbar_sim: weighted median falló.")
 
     # payload

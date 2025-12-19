@@ -289,6 +289,10 @@ def load_zoo_matches(path: Path) -> List[Dict]:
                 row["d_total"] = float(row.get("d_total", "nan"))
             except Exception:
                 pass
+            try:
+                row["run_sector_confidence"] = float(row.get("run_sector_confidence", "nan"))
+            except Exception:
+                pass
             rows.append(row)
     return rows
 
@@ -559,6 +563,7 @@ def main():
             fm = None
             h_block = None
             sm_mass = None
+            capture = None
             pname = str(b.get("particle_name", "")).strip()
             if pname and sm_masses:
                 sm_mass = sm_masses.get(pname)
@@ -703,7 +708,7 @@ def main():
             if h_block is not None:
                 block_lines.append(f"- H_block (lock_quality): {h_block:.3f}")
             if capture is not None:
-                    block_lines.append(f"- band_power_capture: {capture}")
+                block_lines.append(f"- band_power_capture: {capture}")
             if ec:
                 block_lines.append(
                     f"- chaos_mode={ec.get('chaos_mode')}, PE_tick_norm={ec.get('PE_tick_norm')}, T_ticks={ec.get('T_ticks')}"
@@ -1340,6 +1345,33 @@ def main():
             lines.append(f"| {particle} | {count} | {best:.3f} |")
     else:
         lines.append("Sin candidatos cercanos fuera de la selección.")
+    lines.append("")
+
+    lines.append("## Harmonic Policy Rejects (tagger)")
+    policy_rejects = []
+    for row in zoo:
+        try:
+            rejected = str(row.get("policy_rejected", "0")).lower() in {"1", "true", "yes"}
+        except Exception:
+            rejected = False
+        if rejected:
+            policy_rejects.append(row)
+    if policy_rejects:
+        for row in policy_rejects[:20]:
+            target = row.get("target_name", "unknown")
+            jpc = row.get("jpc", "n/a")
+            policy_parity = row.get("policy_preferred_parity", "any")
+            policy_k = row.get("policy_allowed_k", "[]")
+            run_parity = row.get("run_dominant_parity", "n/a")
+            run_k = row.get("run_k_used", "n/a")
+            run_conf = row.get("run_sector_confidence", "n/a")
+            reason = row.get("policy_reason", "policy_mismatch")
+            lines.append(
+                f"- run_id={row.get('run_id')} candidate jpc={jpc} -> policy {policy_parity}/{policy_k} | "
+                f"run parity={run_parity}, k={run_k}, conf={run_conf} -> REJECT ({reason})"
+            )
+    else:
+        lines.append("Sin rechazos por política armónica.")
     lines.append("")
 
     lines.append("## Pareto de rechazos (causas en selección)")

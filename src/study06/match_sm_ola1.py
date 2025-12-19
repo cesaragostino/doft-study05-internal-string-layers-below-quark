@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -27,10 +28,89 @@ def parse_proxies_csv(path: Path) -> List[Dict]:
     return rows
 
 
+def _to_float(value) -> Optional[float]:
+    try:
+        f = float(value)
+        if np.isfinite(f):
+            return f
+    except Exception:
+        pass
+    return None
+
+
+def _to_int(value) -> Optional[int]:
+    f = _to_float(value)
+    if f is None:
+        return None
+    try:
+        return int(round(f))
+    except Exception:
+        return None
+
+
+def _load_harmonic_mode_config(path: Path) -> Dict:
+    defaults = {
+        "schema_version": "harmonic_mode_matching_v1",
+        "sector_confidence_min": 0.60,
+        "policy_on_low_conf": "ignore",
+        "action_on_mismatch": "reject",
+    }
+    if not path or not path.exists():
+        return defaults
+    try:
+        data = json.loads(path.read_text())
+        out = defaults.copy()
+        out.update({k: v for k, v in data.items() if v is not None})
+        return out
+    except Exception:
+        return defaults
+
+
+def _evaluate_harmonic_policy(
+    row: Dict, particle: Dict, config: Dict
+) -> Tuple[str, str, str, List[int], Optional[int], Optional[str], Optional[float]]:
+    policy = (particle.get("doft") or {}).get("postulate_lock_mode") or {}
+    preferred_parity = str(policy.get("preferred_parity", "any")).lower()
+    allowed_k = policy.get("allowed_k", [1, 2, 3, 4, 5])
+    if not isinstance(allowed_k, list):
+        allowed_k = [1, 2, 3, 4, 5]
+
+    k_used = _to_int(row.get("k_used"))
+    dominant_parity = row.get("dominant_parity")
+    if isinstance(dominant_parity, str):
+        dominant_parity = dominant_parity.lower().strip()
+    sector_conf = _to_float(row.get("sector_confidence"))
+    conf_min = _to_float(config.get("sector_confidence_min")) or 0.0
+    low_conf_policy = str(config.get("policy_on_low_conf", "ignore")).lower()
+    action_on_mismatch = str(config.get("action_on_mismatch", "reject")).lower()
+
+    if sector_conf is None or k_used is None or dominant_parity not in {"odd", "even"}:
+        return ("ignore", "missing_fields", preferred_parity, allowed_k, k_used, dominant_parity, sector_conf)
+    if sector_conf < conf_min:
+        return (low_conf_policy, "low_confidence", preferred_parity, allowed_k, k_used, dominant_parity, sector_conf)
+
+    parity_mismatch = preferred_parity in {"odd", "even"} and dominant_parity != preferred_parity
+    k_mismatch = allowed_k and k_used not in allowed_k
+    if parity_mismatch or k_mismatch:
+        reasons = []
+        if parity_mismatch:
+            reasons.append("parity_mismatch")
+        if k_mismatch:
+            reasons.append("k_mismatch")
+        return (action_on_mismatch, "|".join(reasons), preferred_parity, allowed_k, k_used, dominant_parity, sector_conf)
+    return ("pass", "", preferred_parity, allowed_k, k_used, dominant_parity, sector_conf)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Match spectra against SM catalog (Ola1).")
     parser.add_argument("--proxies-csv", type=Path, required=True)
     parser.add_argument("--sm-universe", type=Path, default=Path("data/raw/sm_universe.json"))
+    parser.add_argument(
+        "--harmonic-mode-config",
+        type=Path,
+        default=Path("data/raw/harmonic_mode_matching.json"),
+        help="Config for harmonic mode policy matching (optional).",
+    )
     parser.add_argument("--output", type=Path, default=Path("data/processed/ola1"))
     parser.add_argument("--digest", type=Path, default=Path("data/processed/digest/ola1"), help="Directory to store summary outputs.")
     parser.add_argument(
@@ -48,6 +128,7 @@ def main():
 
     universe = load_universe(args.sm_universe)
     catalog = universe.get("particles", [])
+    harmonic_cfg = _load_harmonic_mode_config(args.harmonic_mode_config)
     rows = parse_proxies_csv(args.proxies_csv)
     match_rows: List[Dict] = []
     best_rows: List[Dict] = []
@@ -100,18 +181,39 @@ def main():
         for particle in catalog:
             levels = [e for e in levels_full if _in_window(e, particle.get("energy_window", [0.0, 10.0]))]
             res = compute_match_stats(levels, particle.get("masses_gev", []), particle.get("tolerances", {}))
+            (
+                policy_action,
+                policy_reason,
+                policy_preferred_parity,
+                policy_allowed_k,
+                run_k_used,
+                run_parity,
+                run_conf,
+            ) = _evaluate_harmonic_policy(row, particle, harmonic_cfg)
+            policy_rejected = policy_action == "reject"
+            if policy_rejected:
+                res["d_total"] = float("inf")
             match_rows.append(
                 {
                     "run_id": run_id,
                     "target_name": particle["name"],
                     "family": particle.get("family"),
                     "type": particle.get("type"),
+                    "jpc": particle.get("jpc"),
                     "d_total": res["d_total"],
                     "d_spacing": res["d_spacing"],
                     "d_mass": res["d_mass"],
                     "enough_levels_full": int(res["has_enough_levels_full"]),
                     "enough_levels_partial": int(res["has_enough_levels_partial"]),
                     "n_levels_sim": res["n_levels_sim"],
+                    "policy_status": policy_action,
+                    "policy_reason": policy_reason,
+                    "policy_rejected": int(policy_rejected),
+                    "policy_preferred_parity": policy_preferred_parity,
+                    "policy_allowed_k": json.dumps(policy_allowed_k, ensure_ascii=True),
+                    "run_dominant_parity": run_parity,
+                    "run_k_used": run_k_used,
+                    "run_sector_confidence": run_conf,
                 }
             )
             if np.isfinite(res["d_total"]):

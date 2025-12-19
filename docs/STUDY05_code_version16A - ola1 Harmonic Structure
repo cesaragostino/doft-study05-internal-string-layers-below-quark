@@ -3,7 +3,7 @@
 
 ## Document purpose
 
-This document defines a theoretical rationale and an implementation specification to upgrade DOFT Wave1 sweep outputs so that harmonic structure (integer-mode selection and parity sector) is explicitly measured and persisted. The upgrade enables a single canonical mass per run (`mass_sim_used_gev`) derived from a structure-consistent resonance mode, with optional future conditioning by SM structural descriptors (family, `J`, `J^PC`) from `sm_universe.json`.
+This document defines a theoretical rationale and an implementation specification to upgrade DOFT Wave1 mass evaluation **without touching the sweep**. The sweep keeps doing what it does today: compute spectral peaks and persist them in JSON. The harmonic structure (integer-mode selection and parity sector), canonical mass (`mass_sim_used_gev`), and SM-conditioned policies are computed **post-run** by secondary scripts using the sweep outputs plus `sm_universe.json`.
 
 ---
 
@@ -11,20 +11,21 @@ This document defines a theoretical rationale and an implementation specificatio
 
 ### In-scope
 
-- Persist richer spectral information (Top-N FFT peaks + fundamental anchor) for each Wave1 run.
-- Compute harmonic structure descriptors: `dominant_k`, `dominant_parity`, `sector_confidence`.
-- Compute a single canonical mass (`mass_sim_used_gev`) from a structure-consistent mode selection.
+- Preserve the sweep as-is; use its existing peak outputs as inputs.
+- Compute harmonic structure descriptors post-run: `dominant_k`, `dominant_parity`, `sector_confidence`.
+- Compute a single canonical mass (`mass_sim_used_gev`) via deterministic post-processing.
 
 ### Out-of-scope (v1)
 
 - Changing Wave1 lock dynamics (ODE / scan / Q–S1–S2 locking).
-- Using the SM target to force sweep dynamics.
+- Modifying the sweep outputs schema beyond what is already stored today.
 - Hard “filtering” of runs during sweep; selection occurs in evaluation/tagging/reporting.
 
 ### Non-negotiables
 
+- The sweep remains untouched; all selection logic is post-run.
 - Single canonical mass in downstream system logic: `mass_sim_used_gev`.
-- All intermediate quantities used to select the mode must be persisted (JSON/JSONL) so runs can be resumed or post-processed without rerunning the sweep.
+- Post-processing must be deterministic and reproducible from stored sweep peaks.
 - No run record should fail to be written due to missing derived fields (robust persistence).
 
 ---
@@ -107,12 +108,13 @@ In v1, `\Pi_{\text{target}}` defaults to unconstrained; selection is structure-o
 
 ## 2) Implementation Specification (Programmer)
 
-### 2.1 Persistence rule: JSONL is the durable store
+### 2.1 Persistence rule: sweep JSON is the durable store
 
-Because arrays inflate CSV size, we define:
+The sweep already persists its spectral outputs (e.g., `omega_peaks`, `fft_peak_*`) in JSON.
+Post-processing does **not** add new arrays to the sweep outputs. Instead:
 
-- **JSONL/JSON**: complete per-run records, including top-N arrays and all derived values.
-- **CSV**: lightweight summary only (scalars; no large arrays).
+- **Sweep JSON/JSONL** remains the durable store for peaks.
+- **Post-process outputs** (CSV/JSONL) add derived harmonic fields and canonical mass.
 
 No run should be dropped or fail to write due to missing optional fields.
 
@@ -140,45 +142,26 @@ Existing lock metrics (e.g., `H_block`, `lock_S1_series`, etc.) as already recor
 - `omega_ref_raw` (float|null) (keep)
 - `mass_sim_raw_gev` (float|null) (keep)
 
-#### 2.2.4 hbar availability (required)
+#### 2.2.4 hbar availability (post-run)
 
-To prevent missing-data failures, Wave1 sweep must persist:
+`hbar_sim_live` is read from the calibration output (e.g., `hbar_sim_calibration.json`), not from the sweep.
 
-- `hbar_sim_live` (float) **required**
+If it is missing, set:
 
-Fallback (transition only, if legacy data):
+- `hbar_status = "missing"`
+- `mass_sim_used_gev = null`
 
-- `hbar_inferred` (float|null) computed as `mass_sim_raw_gev / omega_ref_raw` when both exist.
-- `hbar_status` (string): `"direct"` | `"inferred"` | `"missing"`
+The record is still written and can be analyzed structurally.
 
-v1 requirement: new runs must output `hbar_sim_live` so `hbar_status="direct"`.
+#### 2.2.5 Spectral evidence inputs (no top-N assumption)
 
-#### 2.2.5 Top-N FFT peaks bundle (required)
+Use only what the sweep already persists:
 
-Persist top-N peaks for the FFT of the chosen signal:
+- `omega_peaks` (array[float]) from the sweep JSON.
+- `fft_peak_index`, `fft_peak_delta`, `fft_peak_mag_km1`, `fft_peak_mag_k`, `fft_peak_mag_kp1` (if present).
+- `band_energies_gev` (array[float]) for the anchor.
 
-- `fft_topN_count` (int) default `8`
-- `fft_topN_freq` (array[float], length N) (descending by magnitude)
-- `fft_topN_mag` (array[float], length N)
-- `fft_topN_prominence` (array[float], length N) optional but recommended
-
-FFT reproducibility metadata:
-
-```json
-{
-  "signal_name": "string",
-  "window": "string",
-  "nfft": 0,
-  "fs": 0.0,
-  "df": 0.0,
-  "detrend": "string or bool",
-  "preprocess": "string or object (optional)"
-}
-```
-
-Backward compatibility: keep existing fields:
-
-- `fft_peak_index`, `fft_peak_delta`, `fft_peak_mag_km1`, `fft_peak_mag_k`, `fft_peak_mag_kp1` (if currently produced).
+If only the dominant peak is available, compute evidence from its proximity to integer `k` (score-based, not power-based).
 
 #### 2.2.6 Fundamental anchor (v1: band_anchor)
 
@@ -214,9 +197,9 @@ Derived:
 - `dominant_k` (int)
 - `dominant_parity` (`"odd"` | `"even"`)
 - `sector_confidence` (float in `[0,1]`)
-- `peak_used_index` (int) — which FFT peak supported the selected `k`
-- `omega_peak_used` (float)
-- `omega_peak_dominant` (float) = `fft_topN_freq[0]`
+- `peak_used_index` (int) — index into `omega_peaks`
+- `omega_peak_used` (float) — `omega_peaks[peak_used_index]`
+- `omega_peak_dominant` (float) — use `omega_ref_raw` if present
 
 #### 2.2.8 Canonical selection result (required)
 
@@ -224,7 +207,7 @@ Derived:
 - `selection_reason` (string) e.g., `"argmax_score"`
 - `k_used` (int) (== `dominant_k` in v1)
 - `omega_eff` (float) = `omega_peak_used / k_used`
-- `mass_sim_used_gev` (float) = `hbar_sim_live * omega_eff`
+- `mass_sim_used_gev` (float) = `hbar_sim_live * omega_eff` (from calibration file)
 
 > **Important:** downstream systems must treat `mass_sim_used_gev` as the single canonical mass.
 
@@ -237,8 +220,7 @@ CSV remains small for quick scans/joins. Recommended columns:
 - `omega_eff`, `mass_sim_used_gev`
 - `k_used`, `dominant_parity`, `sector_confidence`
 - `omega_peak_dominant`, `omega_peak_used`
-- `fft_topN_count`
-- (optional) `fft_peak0_mag`, `fft_peak1_mag`, `fft_mag_ratio_01`
+- `omega_peaks_count`
 
 No arrays in CSV.
 
@@ -246,15 +228,17 @@ No arrays in CSV.
 
 **Inputs**
 
-- `fft_topN_freq[j]`, `fft_topN_mag[j]` for `j = 0..N-1`
+- `omega_peaks[j]` for `j = 0..N-1`
 - `omega_anchor = omega_fund` (band-anchor)
 - `k_range = 1..K` (K = 5)
 - `k_tol = 0.07`
 
-**Normalize magnitudes**
+**Evidence weights**
+
+If no peak magnitudes are stored, use a neutral weight:
 
 \[
-\tilde{A}_j = \frac{A_j}{\max_j A_j + \varepsilon}
+\tilde{A}_j = 1
 \]
 
 **Score definition**
@@ -271,7 +255,7 @@ Also store the maximizing index `j^*(k)`.
 
 - `k_used = argmax_k score(k)`
 - `peak_used_index = j^*(k_used)`
-- `omega_peak_used = fft_topN_freq[peak_used_index]`
+- `omega_peak_used = omega_peaks[peak_used_index]`
 - `omega_eff = omega_peak_used / k_used`
 
 **Canonical mass**
@@ -282,10 +266,8 @@ m_{\text{sim}}^{(\text{used})} = \hbar_{\text{sim}}\,\omega_{\text{eff}}
 
 **Sector confidence**
 
-Let `s1` be best score, `s2` second-best:
-
 \[
-\text{sector\_confidence} = \max\big(0,\,\min(1, s_1 - s_2)\big)
+\text{sector\_confidence} = \frac{\text{score}(k_{\text{used}})}{\sum_k \text{score}(k) + \varepsilon}
 \]
 
 **Parity**
@@ -332,7 +314,7 @@ Optional audit columns may show `mass_sim_raw_gev`, but the canonical error is b
 **Run Summary**
 
 - total runs, successes, missing data counts (should be zero for `hbar` in new runs)
-- config snapshot (`k_tol`, `K`, top-N count, FFT meta summary)
+- config snapshot (`k_tol`, `K`, anchor method)
 
 **Mass Error vs SM (Canonical)**
 
@@ -371,14 +353,130 @@ Once enabled:
 
 ## 5) Rollout Plan (safe)
 
-1. Implement persistence + compute `mass_sim_used_gev` while keeping raw fields.
-2. Update reporting/aggregation to use `mass_sim_used_gev` as canonical.
-3. Validate correlation analysis and stability.
-4. (Optional v2) add `omega_fund` autocorr/cepstrum estimators and/or enable `harmonic_policy` constraints per family/target.
+1. Keep the sweep unchanged (only peak persistence as today).
+2. Post-process sweep outputs to compute `mass_sim_used_gev` while keeping raw fields.
+3. Update reporting/aggregation to use `mass_sim_used_gev` as canonical.
+4. Validate correlation analysis and stability.
+5. (Optional v2) add `omega_fund` autocorr/cepstrum estimators and/or enable `harmonic_policy` constraints per family/target.
 
 ---
 
 ## 6) Notes on “no missing outputs” guarantee
 
-- New sweep must always store `hbar_sim_live`.
-- If legacy runs lack it, record must still be written with `hbar_status="missing"` and `mass_sim_used_gev=null`, while preserving harmonic evidence; this is a transitional compatibility path, not the desired end state.
+- `hbar_sim_live` is sourced from the calibration output.
+- If it is missing, record must still be written with `hbar_status="missing"` and `mass_sim_used_gev=null`, while preserving harmonic evidence; this is a transitional compatibility path, not the desired end state.
+
+# Amendment (Programmer Spec) — Embed Harmonic Policy in `sm_universe.json` (No Separate Config)
+
+**Purpose:** Keep a single source of truth by storing the mode-selection policy directly in `sm_universe.json`, without introducing an additional config file. This should require minimal or no code changes if the implementation already supports an optional `harmonic_policy` / `policy` object — only the loading source changes.
+
+---
+
+## 1) `sm_universe.json` schema addition (optional per particle)
+
+Add an optional block under each particle entry:
+
+```json
+"doft": {
+  "postulate_lock_mode": {
+    "preferred_parity": "odd|even|any",
+    "allowed_k": [1, 2, 3, 4, 5]
+  }
+}
+```
+
+- **preferred_parity**:
+  - `"odd"` → restrict to odd `k` when possible  
+  - `"even"` → restrict to even `k` when possible  
+  - `"any"` → no parity restriction  
+
+- **allowed_k**: explicit allowed harmonic indices (default `[1,2,3,4,5]`)
+
+This is intentionally minimal: no notes, no evidence metadata.
+
+---
+
+## 2) Resolution and fallback rules (must be deterministic)
+
+When selecting the canonical mode (`k_used`) and canonical mass (`mass_sim_used_gev`):
+
+1. Read target structural labels from `sm_universe.json` as usual (family, `jpc`, type, etc.).
+2. If `doft.postulate_lock_mode` exists for the target particle:
+   - Use it as the policy constraint:
+     - `candidate set = allowed_k`
+     - Optional parity preference = `preferred_parity`
+3. If the block is missing:
+   - Use defaults:
+     - `preferred_parity = "any"`
+     - `allowed_k = [1,2,3,4,5]`
+
+**Parity application rule (recommended):**
+
+- If `preferred_parity != "any"`:
+  - Filter candidate `k` by parity **only if** at least one candidate has `score(k) >= score_floor` (e.g. `score_floor = 0.05`).
+- Otherwise fall back to the unfiltered candidate set to avoid forcing bad selections.
+
+---
+
+## 3) Canonical mass remains single-valued (system-wide)
+
+The canonical mass used by the system remains:
+
+```text
+mass_sim_used_gev = hbar_sim_live * omega_eff
+omega_eff          = omega_peak_used / k_used
+```
+
+Raw values remain for audit only:
+
+- `omega_ref_raw`
+- `mass_sim_raw_gev`
+
+Downstream error tables and matching must use **only** `mass_sim_used_gev`.
+
+---
+
+## 4) Persistence requirement (post-run)
+
+All inputs and outputs used in mode selection must be persisted in JSON/JSONL per run:
+
+- `omega_peaks` (from sweep)
+- `fft_peak_*` (if present in sweep)
+- `omega_fund`, `harmonic_scores`, `k_used`
+- `omega_eff`, `mass_sim_used_gev`
+
+---
+
+## 5) Minimal implementation impact
+
+If the current code already supports:
+
+- loading `sm_universe.json` to obtain `family` / `jpc` / ..., and  
+- applying optional constraints,
+
+then the only change should be:
+
+```python
+policy = target_entry.get("doft", {}).get("postulate_lock_mode")
+```
+
+instead of a separate policy file.
+
+If no constraints exist, defaults apply and behavior matches the existing **structure-only** selector.
+
+---
+
+## 7) Outputs (revamp closure)
+
+Required end-state artifacts after running the post-process + matching + report:
+
+- `data/processed/ola1/Ola1_3-2-5_all_runs_proxies.csv` (augmented with `mass_sim_used_gev`, `k_used`, `dominant_parity`, `sector_confidence`, `omega_eff`, `omega_peak_used`, `omega_peak_dominant`, `hbar_status`)
+- `data/processed/ola1/hbar_sim_calibration.json` (source of `hbar_sim_live`)
+- `data/processed/ola1/zoo_matches.csv` (matching results)
+- `data/processed/ola1/simple_blocks.json` (promoted blocks for Wave2)
+- `data/processed/ola1/Ola1_3-2-5_ola1_report.md` (canonical report using `mass_sim_used_gev`)
+
+Optional audit artifacts:
+
+- `data/processed/ola1/ola1_blocks_selection.csv`
+- `data/processed/digest/ola1/*`

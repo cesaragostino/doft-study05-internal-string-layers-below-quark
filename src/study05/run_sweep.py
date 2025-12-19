@@ -326,6 +326,7 @@ def _rescale_energies(energies: np.ndarray, target: float = TARGET_ENERGY_GEV) -
     return energies * scale, scale
 
 
+
 def _weighted_std(values: np.ndarray, weights: np.ndarray) -> float:
     if values.size == 0 or weights.size == 0:
         return 0.0
@@ -704,45 +705,6 @@ def run_sweep(
             spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
         )
         peaks_raw_count = len(omega_peaks)
-        # FFT top-N peaks (for audit); stored in JSON only, CSV gets summaries.
-        top_n = 8
-        fft_topN_freq = []
-        fft_topN_mag = []
-        fft_topN_prominence = []
-        fft_peak0_freq = None
-        fft_peak0_mag = None
-        fft_peak1_freq = None
-        fft_peak1_mag = None
-        fft_peaks_entropy = None
-        fft_mag_ratio_01 = None
-        peak_used_index = None
-        omega_peak_dominant = None
-        omega_peak_used = None
-        if omega_peaks is not None and peak_powers:
-            try:
-                idxs = np.argsort(np.array(peak_powers))[::-1]
-                idxs = idxs[: min(top_n, len(idxs))]
-                fft_topN_freq = [float(omega_peaks[i]) for i in idxs]
-                fft_topN_mag = [float(peak_powers[i]) for i in idxs]
-                if fft_topN_freq:
-                    omega_peak_dominant = fft_topN_freq[0]
-                    fft_peak0_freq = fft_topN_freq[0]
-                if fft_topN_mag:
-                    fft_peak0_mag = fft_topN_mag[0]
-                if len(fft_topN_freq) > 1:
-                    fft_peak1_freq = fft_topN_freq[1]
-                if len(fft_topN_mag) > 1:
-                    fft_peak1_mag = fft_topN_mag[1]
-                if fft_topN_mag:
-                    mags = np.array(fft_topN_mag, dtype=float)
-                    mags_sum = float(np.sum(mags))
-                    if mags_sum > 0:
-                        p = mags / mags_sum
-                        fft_peaks_entropy = float(-np.sum(p * np.log(p + 1e-12)))
-                        if len(fft_topN_mag) > 1:
-                            fft_mag_ratio_01 = float(fft_topN_mag[0] / (fft_topN_mag[1] + 1e-12))
-            except Exception:
-                pass
         energies_gev, scale = _rescale_energies(omega_peaks, target=TARGET_ENERGY_GEV)
 
         band_mask = (energies_gev >= band_min) & (energies_gev <= band_max)
@@ -1090,7 +1052,6 @@ def run_sweep(
         band_count_run = int(band_energies.size)
         omega_peaks_raw = omega_peaks.tolist() if omega_peaks is not None else []
         omega_ref = omega_ref_interp if omega_ref_interp is not None else (float(min(omega_peaks_raw)) if omega_peaks_raw else None)
-        omega_ref_raw = omega_ref
 
         # Layer volume proxy
         V_layers = float(math.exp(H_layers)) if H_layers is not None else None
@@ -1135,67 +1096,6 @@ def run_sweep(
                 mass_sim_gev = hbar_sim_live * omega_ref
             except Exception:
                 mass_sim_gev = None
-
-        # Harmonic-aware mode selection (v1: band_anchor)
-        hbar_inferred = None
-        hbar_status = "direct" if hbar_sim_live is not None else "missing"
-        if hbar_sim_live is None and mass_sim_gev is not None and omega_ref_raw is not None:
-            try:
-                hbar_inferred = float(mass_sim_gev) / float(omega_ref_raw)
-                hbar_status = "inferred"
-            except Exception:
-                hbar_inferred = None
-        hbar_used = hbar_sim_live if hbar_sim_live is not None else hbar_inferred
-        omega_fund_method = "band_anchor"
-        omega_fund_conf = 0.5
-        omega_fund_method_fallback = False
-        omega_band = None
-        if hbar_used is not None and band_energies.size > 0:
-            try:
-                omega_band = float(np.median(band_energies)) / float(hbar_used)
-            except Exception:
-                omega_band = None
-        omega_anchor = omega_band
-        harmonic_k_max = 5
-        k_tol = 0.07
-        harmonic_scores: Dict[str, float] = {}
-        dominant_k = None
-        dominant_parity = None
-        sector_confidence = None
-        k_used = None
-        selection_method = "structure_only"
-        selection_reason = "maximize_score"
-        omega_eff = None
-        mass_sim_used_gev = None
-        if omega_anchor is not None and fft_topN_freq and fft_topN_mag:
-            try:
-                max_mag = max(fft_topN_mag) if fft_topN_mag else 0.0
-                norm_mag = [m / max_mag if max_mag > 0 else 0.0 for m in fft_topN_mag]
-                best_scores = {}
-                for k in range(1, harmonic_k_max + 1):
-                    best_score = -1.0
-                    best_idx = None
-                    for j, w in enumerate(fft_topN_freq):
-                        score = norm_mag[j] * math.exp(-((w / omega_anchor - k) / k_tol) ** 2)
-                        if score > best_score:
-                            best_score = score
-                            best_idx = j
-                    harmonic_scores[str(k)] = float(best_score)
-                    best_scores[k] = (best_score, best_idx)
-                k_used = max(best_scores, key=lambda kk: best_scores[kk][0])
-                peak_used_index = best_scores[k_used][1]
-                dominant_k = k_used
-                dominant_parity = "odd" if k_used % 2 == 1 else "even"
-                score_sum = sum(harmonic_scores.values())
-                if score_sum > 0:
-                    sector_confidence = float(harmonic_scores[str(k_used)] / score_sum)
-                if peak_used_index is not None:
-                    omega_peak_used = fft_topN_freq[peak_used_index]
-                    omega_eff = omega_peak_used / float(k_used)
-                    if hbar_used is not None:
-                        mass_sim_used_gev = float(hbar_used) * float(omega_eff)
-            except Exception:
-                pass
 
         # snapshot for console logging
         current_mass_proxies["M1"] = M1
@@ -1276,14 +1176,10 @@ def run_sweep(
             "t_trace": sim_result["times"].tolist(),
             "dt_used": sim_result.get("dt_used"),
             "E_internal": e_internal,
-            "hbar_sim_live": hbar_sim_live,
-            "hbar_inferred": hbar_inferred,
-            "hbar_status": hbar_status,
             "omega_peaks": omega_peaks_raw,
             "f_ref": f_ref,
             "omega_ref": omega_ref,
             "omega_ref_interp": omega_ref_interp,
-            "omega_ref_raw": omega_ref_raw,
             "delta_omega": delta_omega,
             "delta_f": delta_f,
             "dt_sample_fft": sim_result.get("dt_used") * sim_params.sample_stride if sim_result.get("dt_used") else None,
@@ -1295,25 +1191,6 @@ def run_sweep(
             "fft_peak_mag_km1": fft_mag_km1,
             "fft_peak_mag_k": fft_mag_k,
             "fft_peak_mag_kp1": fft_mag_kp1,
-            "fft_topN_count": len(fft_topN_freq),
-            "fft_topN_freq": fft_topN_freq,
-            "fft_topN_mag": fft_topN_mag,
-            "fft_topN_prominence": fft_topN_prominence,
-            "fft_peak0_freq": fft_peak0_freq,
-            "fft_peak0_mag": fft_peak0_mag,
-            "fft_peak1_freq": fft_peak1_freq,
-            "fft_peak1_mag": fft_peak1_mag,
-            "fft_peaks_entropy": fft_peaks_entropy,
-            "fft_mag_ratio_01": fft_mag_ratio_01,
-            "fft_meta": {
-                "signal_name": "Q_layer_power" if per_mode is not None else "power_total",
-                "window": "hann",
-                "nfft": spectrum.get("n_padded"),
-                "fs": 1.0 / spectrum.get("dt_sample") if spectrum.get("dt_sample") else None,
-                "df": spectrum.get("delta_f"),
-                "detrend": False,
-                "zero_pad_factor": 4,
-            },
             "V_layers": V_layers,
             "V_lock": V_lock,
             "D_stat": D_stat,
@@ -1324,25 +1201,6 @@ def run_sweep(
             "M2": M2,
             "M3": M3,
             "mass_sim_gev": mass_sim_gev,
-            "mass_sim_raw_gev": mass_sim_gev,
-            "omega_fund_method": omega_fund_method,
-            "omega_fund": omega_band,
-            "omega_fund_conf": omega_fund_conf,
-            "omega_fund_method_fallback": omega_fund_method_fallback,
-            "harmonic_k_max": harmonic_k_max,
-            "harmonic_scores": harmonic_scores,
-            "dominant_k": dominant_k,
-            "dominant_parity": dominant_parity,
-            "sector_confidence": sector_confidence,
-            "k_tol": k_tol,
-            "k_used": k_used,
-            "selection_method": selection_method,
-            "selection_reason": selection_reason,
-            "peak_used_index": peak_used_index,
-            "omega_peak_used": omega_peak_used,
-            "omega_peak_dominant": omega_peak_dominant,
-            "omega_eff": omega_eff,
-            "mass_sim_used_gev": mass_sim_used_gev,
             "entropy_status": entropy_status,
             "entropy_reason": entropy_reason,
             "lyapunov_local": None,

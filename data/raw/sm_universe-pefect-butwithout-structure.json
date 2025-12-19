@@ -1,0 +1,889 @@
+{
+  "name": "sm_universe_complete_v4_modified",
+  "energy_window_gev": [0.05, 10.0],
+  "particles": [
+    {
+      "name": "electron",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.000511,
+      "masses_gev": [0.000511],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.0001, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "muon",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.10566,
+      "masses_gev": [0.10566],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.01, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "pion",
+      "family": "pion_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.13957,
+      "masses_gev": [0.139, 1.3, 1.8],
+      "widths_gev": [0.0, 0.4, 0.25],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.2, "spacing_rel": 0.3}
+    },
+    {
+      "name": "eta",
+      "family": "eta_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.54786,
+      "masses_gev": [0.547, 1.295],
+      "widths_gev": [0.0, 0.05],
+      "tolerances": {"mass_abs": 0.06, "width_abs": 0.1, "spacing_rel": 0.35}
+    },
+    {
+      "name": "rho",
+      "family": "rho_like",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 0.77526,
+      "masses_gev": [0.775, 1.45, 1.72],
+      "widths_gev": [0.15, 0.4, 0.25],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35}
+    },
+    {
+      "name": "omega_782",
+      "family": "omega_like",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 0.78265,
+      "masses_gev": [0.782, 1.42, 1.67],
+      "widths_gev": [0.008, 0.2, 0.15],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.35}
+    },
+    {
+      "name": "proton",
+      "family": "baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.93827,
+      "masses_gev": [0.938, 1.44, 1.71],
+      "widths_gev": [0.0, 0.3, 0.1],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.3}
+    },
+    {
+      "name": "neutron",
+      "family": "baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.93957,
+      "masses_gev": [0.939, 1.44, 1.71],
+      "widths_gev": [0.0, 0.3, 0.1],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.3}
+    },
+    {
+      "name": "eta_prime",
+      "family": "eta_prime_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.95778,
+      "masses_gev": [0.958],
+      "widths_gev": [0.0002],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.35}
+    },
+    {
+      "name": "phi",
+      "family": "phi_like",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 1.01946,
+      "masses_gev": [1.019, 1.68],
+      "widths_gev": [0.004, 0.15],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.05, "spacing_rel": 0.35}
+    },
+    {
+      "name": "lambda",
+      "family": "baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.11568,
+      "masses_gev": [1.115],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "sigma",
+      "family": "baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.18937,
+      "masses_gev": [1.189, 1.192, 1.197],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "delta_1232",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.232,
+      "masses_gev": [1.232],
+      "widths_gev": [0.117],
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.4}
+    },
+    {
+      "name": "delta_1600",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.600,
+      "masses_gev": [1.6],
+      "widths_gev": [0.3],
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.25, "spacing_rel": 0.35}
+    },
+    {
+      "name": "delta_1620",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "1/2-",
+      "sm_mass_gev": 1.620,
+      "masses_gev": [1.620],
+      "widths_gev": [0.150],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35}
+    },
+    {
+      "name": "delta_1700",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "3/2-",
+      "sm_mass_gev": 1.700,
+      "masses_gev": [1.700],
+      "widths_gev": [0.300],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35}
+    },
+    {
+      "name": "delta_1900",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.900,
+      "masses_gev": [1.9],
+      "widths_gev": [0.2],
+      "tolerances": {"mass_abs": 0.06, "width_abs": 0.15, "spacing_rel": 0.15}
+    },
+    {
+      "name": "delta_1910",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.910,
+      "masses_gev": [1.910],
+      "widths_gev": [0.200],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.15, "spacing_rel": 0.25}
+    },
+    {
+      "name": "delta_1920",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.920,
+      "masses_gev": [1.920],
+      "widths_gev": [0.260],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.2}
+    },
+    {
+      "name": "delta_1930",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "5/2-",
+      "sm_mass_gev": 1.930,
+      "masses_gev": [1.930],
+      "widths_gev": [0.285],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.15}
+    },
+    {
+      "name": "delta_1950",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "7/2+",
+      "sm_mass_gev": 1.950,
+      "masses_gev": [1.950],
+      "widths_gev": [0.285],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.15, "spacing_rel": 0.2}
+    },
+    {
+      "name": "tau",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.77686,
+      "masses_gev": [1.777],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "deuteron",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "1+",
+      "sm_mass_gev": 1.87561,
+      "masses_gev": [1.8756],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "triton",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.80892113298,
+      "masses_gev": [2.80892113298],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.25}
+    },
+    {
+      "name": "helium3",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.80839160743,
+      "masses_gev": [2.80839160743],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.0002, "width_abs": 0.0, "spacing_rel": 0.25}
+    },
+    {
+      "name": "alpha",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 3.72738,
+      "masses_gev": [3.7274],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "carbon12",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 11.17486,
+      "masses_gev": [11.17486],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.0, "spacing_rel": 0.4}
+    },
+    {
+      "name": "eta_c",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 2.9839,
+      "masses_gev": [2.984],
+      "widths_gev": [0.032],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.25}
+    },
+    {
+      "name": "j_psi",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 3.0969,
+      "masses_gev": [3.097],
+      "widths_gev": [0.00009],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "lambda_c",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.28646,
+      "masses_gev": [2.286],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_d0",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 1.86484,
+      "masses_gev": [1.865],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_d_plus",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 1.86966,
+      "masses_gev": [1.870],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_ds",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 1.96835,
+      "masses_gev": [1.968],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_ds0_2317",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "0+",
+      "sm_mass_gev": 2.3177,
+      "masses_gev": [2.318],
+      "widths_gev": [0.0001],
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.001, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_ds1_2460",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1+",
+      "sm_mass_gev": 2.4595,
+      "masses_gev": [2.460],
+      "widths_gev": [0.0001],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.2}
+    },
+    {
+      "name": "omega_baryon",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.67245,
+      "masses_gev": [1.672],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "xi_minus",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.32171,
+      "masses_gev": [1.322],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "xi_zero",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.31486,
+      "masses_gev": [1.315],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "sigma_star_1385",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.385,
+      "masses_gev": [1.385],
+      "widths_gev": [0.036],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_d_star_zero",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 2.00685,
+      "masses_gev": [2.007],
+      "widths_gev": [0.002],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "meson_d_star_plus",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 2.01026,
+      "masses_gev": [2.010],
+      "widths_gev": [0.00008],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.18}
+    },
+    {
+      "name": "meson_ds_star",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 2.1122,
+      "masses_gev": [2.112],
+      "widths_gev": [0.0019],
+      "tolerances": {"mass_abs": 0.020, "width_abs": 0.002, "spacing_rel": 0.18}
+    },
+    {
+      "name": "xi_c_plus",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.46787,
+      "masses_gev": [2.468],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.25}
+    },
+    {
+      "name": "rho_1700",
+      "family": "rho_like",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 1.720,
+      "masses_gev": [1.720],
+      "widths_gev": [0.250],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "nucleon_1720",
+      "family": "nucleon_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.720,
+      "masses_gev": [1.720],
+      "widths_gev": [0.200],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "sigma_1775",
+      "family": "strange_baryon",
+      "type": "baryon",
+      "jpc": "5/2-",
+      "sm_mass_gev": 1.775,
+      "masses_gev": [1.775],
+      "widths_gev": [0.120],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "chi_c0",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0+",
+      "sm_mass_gev": 3.4147,
+      "masses_gev": [3.415],
+      "widths_gev": [0.010],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "chi_c1",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1+",
+      "sm_mass_gev": 3.51067,
+      "masses_gev": [3.511],
+      "widths_gev": [0.00084],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15}
+    },
+    {
+      "name": "chi_c2",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "2+",
+      "sm_mass_gev": 3.55617,
+      "masses_gev": [3.556],
+      "widths_gev": [0.0019],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15}
+    },
+    {
+      "name": "psi_2s",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 3.68610,
+      "masses_gev": [3.686],
+      "widths_gev": [0.00029],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.25}
+    },
+    {
+      "name": "magnesium24",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 22.3419,
+      "masses_gev": [22.342],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "silicon28",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 26.0603,
+      "masses_gev": [26.060],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "sulfur32",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 29.7818,
+      "masses_gev": [29.782],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "iron56",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 52.103,
+      "masses_gev": [52.103],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.25, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "copper63",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "3/2-",
+      "sm_mass_gev": 58.628,
+      "masses_gev": [58.628],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.30, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "magnesium24",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 22.3419,
+      "masses_gev": [22.342],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "w_boson",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1+",
+      "sm_mass_gev": 80.377,
+      "masses_gev": [80.377],
+      "widths_gev": [2.085],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3}
+    },
+    {
+      "name": "z_boson",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1+",
+      "sm_mass_gev": 91.1876,
+      "masses_gev": [91.188],
+      "widths_gev": [2.4952],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3}
+    },
+    {
+      "name": "higgs",
+      "family": "higgs",
+      "type": "elementary",
+      "jpc": "0+",
+      "sm_mass_gev": 125.25,
+      "masses_gev": [125.25],
+      "widths_gev": [0.00407],
+      "tolerances": {"mass_abs": 0.2, "width_abs": 0.002, "spacing_rel": 0.3}
+    },
+    {
+      "name": "quark_u",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00216,
+      "masses_gev": [0.00216],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_d",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00467,
+      "masses_gev": [0.00467],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_s",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.093,
+      "masses_gev": [0.093],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.01, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_c",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.27,
+      "masses_gev": [1.27],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "quark_t",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 172.57,
+      "masses_gev": [172.57],
+      "widths_gev": [1.42],
+      "tolerances": {"mass_abs": 0.5, "width_abs": 0.1, "spacing_rel": 0.5}
+    },
+    {
+      "name": "neutrino_e",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.0000022,
+      "masses_gev": [0.0000022],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.000001, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "neutrino_mu",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00017,
+      "masses_gev": [0.00017],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.00005, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "neutrino_tau",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.0155,
+      "masses_gev": [0.0155],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "kaon_k_plus",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.49368,
+      "masses_gev": [0.494],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "kaon_k_zero",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.49761,
+      "masses_gev": [0.498],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
+    },
+    {
+      "name": "kaon_k_star",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 0.89166,
+      "masses_gev": [0.892],
+      "widths_gev": [0.051],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.02, "spacing_rel": 0.3}
+    },
+    {
+      "name": "photon",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1-",
+      "sm_mass_gev": 0.0,
+      "masses_gev": [0.0],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "gluon",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1-",
+      "sm_mass_gev": 0.0,
+      "masses_gev": [0.0],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5}
+    },
+    {
+      "name": "sigma_c_2455",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.4539,
+      "masses_gev": [2.454],
+      "widths_gev": [0.002],
+      "tolerances": {"mass_abs": 0.003, "width_abs": 0.001, "spacing_rel": 0.2}
+    },
+    {
+      "name": "sigma_c_2520",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 2.5183,
+      "masses_gev": [2.518],
+      "widths_gev": [0.0155],
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.005, "spacing_rel": 0.2}
+    },
+    {
+      "name": "lambda_c_2595",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "1/2-",
+      "sm_mass_gev": 2.59225,
+      "masses_gev": [2.592],
+      "widths_gev": [0.0036],
+      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2}
+    },
+    {
+      "name": "lambda_c_2625",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "3/2-",
+      "sm_mass_gev": 2.62811,
+      "masses_gev": [2.628],
+      "widths_gev": [0.00097],
+      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2}
+    },
+    {
+      "name": "xi_c_prime_2575",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.57794,
+      "masses_gev": [2.578],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.004, "width_abs": 0.0, "spacing_rel": 0.2}
+    },
+    {
+      "name": "xi_c_2645",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 2.64577,
+      "masses_gev": [2.646],
+      "widths_gev": [0.0024],
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.002, "spacing_rel": 0.2}
+    },
+    {
+      "name": "psi_3770",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 3.7737,
+      "masses_gev": [3.774],
+      "widths_gev": [0.0272],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.008, "spacing_rel": 0.2}
+    },
+    {
+      "name": "chi_c1_3872",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1+",
+      "sm_mass_gev": 3.87169,
+      "masses_gev": [3.872],
+      "widths_gev": [0.00117],
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.002, "spacing_rel": 0.2}
+    },
+    {
+      "name": "psi_4040",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 4.039,
+      "masses_gev": [4.039],
+      "widths_gev": [0.080],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.04, "spacing_rel": 0.2}
+    },
+    {
+      "name": "psi_4160",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 4.191,
+      "masses_gev": [4.191],
+      "widths_gev": [0.070],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.2}
+    },
+    {
+      "name": "chi_c0_3915",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0+",
+      "sm_mass_gev": 3.918,
+      "masses_gev": [3.918],
+      "widths_gev": [0.020],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.01, "spacing_rel": 0.2}
+    },
+    {
+      "name": "psi_4230",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 4.230,
+      "masses_gev": [4.230],
+      "widths_gev": [0.055],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.2}
+    },
+    {
+      "name": "chi_c0_4500",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0+",
+      "sm_mass_gev": 4.506,
+      "masses_gev": [4.506],
+      "widths_gev": [0.092],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.2}
+    },
+    {
+      "name": "eta_c_2s",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 3.6394,
+      "masses_gev": [3.639],
+      "widths_gev": [0.0114],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.01, "spacing_rel": 0.2},
+      "comment": "NUEVO - eta_c(2S), entre eta_c y psi_2s"
+    },
+    {
+      "name": "lambda_c_2765",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "?",
+      "sm_mass_gev": 2.766,
+      "masses_gev": [2.766],
+      "widths_gev": [0.05],
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.03, "spacing_rel": 0.2},
+      "comment": "NUEVO - Lambda_c(2765), capturará casos intermedios"
+    },
+    {
+      "name": "lambda_c_2860",
+      "family": "charmed_baryon",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 2.856,
+      "masses_gev": [2.856],
+      "widths_gev": [0.068],
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.03, "spacing_rel": 0.2},
+      "comment": "NUEVO - Lambda_c(2860), D-wave state"
+    }
+  ]
+}

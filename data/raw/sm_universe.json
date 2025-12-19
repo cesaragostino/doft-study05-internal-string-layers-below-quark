@@ -10,7 +10,13 @@
       "sm_mass_gev": 0.000511,
       "masses_gev": [0.000511],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.0001, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.0001, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "muon",
@@ -20,7 +26,13 @@
       "sm_mass_gev": 0.10566,
       "masses_gev": [0.10566],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.01, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.01, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "pion",
@@ -30,7 +42,13 @@
       "sm_mass_gev": 0.13957,
       "masses_gev": [0.139, 1.3, 1.8],
       "widths_gev": [0.0, 0.4, 0.25],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.2, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.2, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "eta",
@@ -40,7 +58,13 @@
       "sm_mass_gev": 0.54786,
       "masses_gev": [0.547, 1.295],
       "widths_gev": [0.0, 0.05],
-      "tolerances": {"mass_abs": 0.06, "width_abs": 0.1, "spacing_rel": 0.35}
+      "tolerances": {"mass_abs": 0.06, "width_abs": 0.1, "spacing_rel": 0.35},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "rho",
@@ -50,7 +74,13 @@
       "sm_mass_gev": 0.77526,
       "masses_gev": [0.775, 1.45, 1.72],
       "widths_gev": [0.15, 0.4, 0.25],
-      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35}
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "omega_782",
@@ -60,7 +90,13 @@
       "sm_mass_gev": 0.78265,
       "masses_gev": [0.782, 1.42, 1.67],
       "widths_gev": [0.008, 0.2, 0.15],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.35}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.35},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "proton",
@@ -70,7 +106,13 @@
       "sm_mass_gev": 0.93827,
       "masses_gev": [0.938, 1.44, 1.71],
       "widths_gev": [0.0, 0.3, 0.1],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "neutron",
@@ -80,7 +122,13 @@
       "sm_mass_gev": 0.93957,
       "masses_gev": [0.939, 1.44, 1.71],
       "widths_gev": [0.0, 0.3, 0.1],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.1, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "eta_prime",
@@ -90,7 +138,13 @@
       "sm_mass_gev": 0.95778,
       "masses_gev": [0.958],
       "widths_gev": [0.0002],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.35}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.35},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "phi",
@@ -100,7 +154,13 @@
       "sm_mass_gev": 1.01946,
       "masses_gev": [1.019, 1.68],
       "widths_gev": [0.004, 0.15],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.05, "spacing_rel": 0.35}
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.05, "spacing_rel": 0.35},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "lambda",
@@ -110,7 +170,13 @@
       "sm_mass_gev": 1.11568,
       "masses_gev": [1.115],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "sigma",
@@ -120,7 +186,13 @@
       "sm_mass_gev": 1.18937,
       "masses_gev": [1.189, 1.192, 1.197],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1232",
@@ -130,87 +202,141 @@
       "sm_mass_gev": 1.232,
       "masses_gev": [1.232],
       "widths_gev": [0.117],
-      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.4}
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.4},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1600",
       "family": "delta_like",
       "type": "baryon",
       "jpc": "3/2+",
-      "sm_mass_gev": 1.600,
+      "sm_mass_gev": 1.6,
       "masses_gev": [1.6],
       "widths_gev": [0.3],
-      "tolerances": {"mass_abs": 0.1, "width_abs": 0.25, "spacing_rel": 0.35}
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.25, "spacing_rel": 0.35},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1620",
       "family": "delta_like",
       "type": "baryon",
       "jpc": "1/2-",
-      "sm_mass_gev": 1.620,
-      "masses_gev": [1.620],
-      "widths_gev": [0.150],
-      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35}
+      "sm_mass_gev": 1.62,
+      "masses_gev": [1.62],
+      "widths_gev": [0.15],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1700",
       "family": "delta_like",
       "type": "baryon",
       "jpc": "3/2-",
-      "sm_mass_gev": 1.700,
-      "masses_gev": [1.700],
-      "widths_gev": [0.300],
-      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35}
+      "sm_mass_gev": 1.7,
+      "masses_gev": [1.7],
+      "widths_gev": [0.3],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1900",
       "family": "delta_like",
       "type": "baryon",
       "jpc": "3/2+",
-      "sm_mass_gev": 1.900,
+      "sm_mass_gev": 1.9,
       "masses_gev": [1.9],
       "widths_gev": [0.2],
-      "tolerances": {"mass_abs": 0.06, "width_abs": 0.15, "spacing_rel": 0.15}
+      "tolerances": {"mass_abs": 0.06, "width_abs": 0.15, "spacing_rel": 0.15},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1910",
       "family": "delta_like",
       "type": "baryon",
       "jpc": "1/2+",
-      "sm_mass_gev": 1.910,
-      "masses_gev": [1.910],
-      "widths_gev": [0.200],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.15, "spacing_rel": 0.25}
+      "sm_mass_gev": 1.91,
+      "masses_gev": [1.91],
+      "widths_gev": [0.2],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.15, "spacing_rel": 0.25},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1920",
       "family": "delta_like",
       "type": "baryon",
       "jpc": "3/2+",
-      "sm_mass_gev": 1.920,
-      "masses_gev": [1.920],
-      "widths_gev": [0.260],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.2}
+      "sm_mass_gev": 1.92,
+      "masses_gev": [1.92],
+      "widths_gev": [0.26],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1930",
       "family": "delta_like",
       "type": "baryon",
       "jpc": "5/2-",
-      "sm_mass_gev": 1.930,
-      "masses_gev": [1.930],
+      "sm_mass_gev": 1.93,
+      "masses_gev": [1.93],
       "widths_gev": [0.285],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.15}
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.15},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "delta_1950",
       "family": "delta_like",
       "type": "baryon",
       "jpc": "7/2+",
-      "sm_mass_gev": 1.950,
-      "masses_gev": [1.950],
+      "sm_mass_gev": 1.95,
+      "masses_gev": [1.95],
       "widths_gev": [0.285],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.15, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.15, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "tau",
@@ -220,7 +346,13 @@
       "sm_mass_gev": 1.77686,
       "masses_gev": [1.777],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "deuteron",
@@ -230,7 +362,13 @@
       "sm_mass_gev": 1.87561,
       "masses_gev": [1.8756],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "triton",
@@ -240,7 +378,13 @@
       "sm_mass_gev": 2.80892113298,
       "masses_gev": [2.80892113298],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.25}
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.25},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "helium3",
@@ -250,7 +394,13 @@
       "sm_mass_gev": 2.80839160743,
       "masses_gev": [2.80839160743],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.0002, "width_abs": 0.0, "spacing_rel": 0.25}
+      "tolerances": {"mass_abs": 0.0002, "width_abs": 0.0, "spacing_rel": 0.25},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "alpha",
@@ -260,7 +410,13 @@
       "sm_mass_gev": 3.72738,
       "masses_gev": [3.7274],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "carbon12",
@@ -270,7 +426,13 @@
       "sm_mass_gev": 11.17486,
       "masses_gev": [11.17486],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.1, "width_abs": 0.0, "spacing_rel": 0.4}
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.0, "spacing_rel": 0.4},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "eta_c",
@@ -280,7 +442,13 @@
       "sm_mass_gev": 2.9839,
       "masses_gev": [2.984],
       "widths_gev": [0.032],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.25}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.25},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "j_psi",
@@ -289,8 +457,14 @@
       "jpc": "1-",
       "sm_mass_gev": 3.0969,
       "masses_gev": [3.097],
-      "widths_gev": [0.00009],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+      "widths_gev": [9e-05],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "lambda_c",
@@ -300,7 +474,13 @@
       "sm_mass_gev": 2.28646,
       "masses_gev": [2.286],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "meson_d0",
@@ -310,7 +490,13 @@
       "sm_mass_gev": 1.86484,
       "masses_gev": [1.865],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "meson_d_plus",
@@ -318,9 +504,15 @@
       "type": "meson",
       "jpc": "0-",
       "sm_mass_gev": 1.86966,
-      "masses_gev": [1.870],
+      "masses_gev": [1.87],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "meson_ds",
@@ -330,7 +522,13 @@
       "sm_mass_gev": 1.96835,
       "masses_gev": [1.968],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "meson_ds0_2317",
@@ -340,7 +538,13 @@
       "sm_mass_gev": 2.3177,
       "masses_gev": [2.318],
       "widths_gev": [0.0001],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.001, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.001, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "meson_ds1_2460",
@@ -348,9 +552,15 @@
       "type": "meson",
       "jpc": "1+",
       "sm_mass_gev": 2.4595,
-      "masses_gev": [2.460],
+      "masses_gev": [2.46],
       "widths_gev": [0.0001],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "omega_baryon",
@@ -360,7 +570,13 @@
       "sm_mass_gev": 1.67245,
       "masses_gev": [1.672],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "xi_minus",
@@ -370,7 +586,13 @@
       "sm_mass_gev": 1.32171,
       "masses_gev": [1.322],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "xi_zero",
@@ -380,7 +602,13 @@
       "sm_mass_gev": 1.31486,
       "masses_gev": [1.315],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "sigma_star_1385",
@@ -390,7 +618,13 @@
       "sm_mass_gev": 1.385,
       "masses_gev": [1.385],
       "widths_gev": [0.036],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "meson_d_star_zero",
@@ -400,7 +634,13 @@
       "sm_mass_gev": 2.00685,
       "masses_gev": [2.007],
       "widths_gev": [0.002],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "meson_d_star_plus",
@@ -408,9 +648,15 @@
       "type": "meson",
       "jpc": "1-",
       "sm_mass_gev": 2.01026,
-      "masses_gev": [2.010],
-      "widths_gev": [0.00008],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.18}
+      "masses_gev": [2.01],
+      "widths_gev": [8e-05],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.18},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "meson_ds_star",
@@ -420,7 +666,13 @@
       "sm_mass_gev": 2.1122,
       "masses_gev": [2.112],
       "widths_gev": [0.0019],
-      "tolerances": {"mass_abs": 0.020, "width_abs": 0.002, "spacing_rel": 0.18}
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.002, "spacing_rel": 0.18},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "xi_c_plus",
@@ -430,27 +682,45 @@
       "sm_mass_gev": 2.46787,
       "masses_gev": [2.468],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.25}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.25},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "rho_1700",
       "family": "rho_like",
       "type": "meson",
       "jpc": "1-",
-      "sm_mass_gev": 1.720,
-      "masses_gev": [1.720],
-      "widths_gev": [0.250],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+      "sm_mass_gev": 1.72,
+      "masses_gev": [1.72],
+      "widths_gev": [0.25],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "nucleon_1720",
       "family": "nucleon_like",
       "type": "baryon",
       "jpc": "3/2+",
-      "sm_mass_gev": 1.720,
-      "masses_gev": [1.720],
-      "widths_gev": [0.200],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2}
+      "sm_mass_gev": 1.72,
+      "masses_gev": [1.72],
+      "widths_gev": [0.2],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "sigma_1775",
@@ -459,8 +729,14 @@
       "jpc": "5/2-",
       "sm_mass_gev": 1.775,
       "masses_gev": [1.775],
-      "widths_gev": [0.120],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+      "widths_gev": [0.12],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "chi_c0",
@@ -469,8 +745,14 @@
       "jpc": "0+",
       "sm_mass_gev": 3.4147,
       "masses_gev": [3.415],
-      "widths_gev": [0.010],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
+      "widths_gev": [0.01],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "chi_c1",
@@ -480,7 +762,13 @@
       "sm_mass_gev": 3.51067,
       "masses_gev": [3.511],
       "widths_gev": [0.00084],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "chi_c2",
@@ -490,17 +778,29 @@
       "sm_mass_gev": 3.55617,
       "masses_gev": [3.556],
       "widths_gev": [0.0019],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "psi_2s",
       "family": "charmonium",
       "type": "meson",
       "jpc": "1-",
-      "sm_mass_gev": 3.68610,
+      "sm_mass_gev": 3.6861,
       "masses_gev": [3.686],
       "widths_gev": [0.00029],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.25}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.25},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "magnesium24",
@@ -510,7 +810,13 @@
       "sm_mass_gev": 22.3419,
       "masses_gev": [22.342],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "silicon28",
@@ -518,9 +824,15 @@
       "type": "composite",
       "jpc": "0+",
       "sm_mass_gev": 26.0603,
-      "masses_gev": [26.060],
+      "masses_gev": [26.06],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "sulfur32",
@@ -530,7 +842,13 @@
       "sm_mass_gev": 29.7818,
       "masses_gev": [29.782],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "iron56",
@@ -540,7 +858,13 @@
       "sm_mass_gev": 52.103,
       "masses_gev": [52.103],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.25, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.25, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "copper63",
@@ -550,7 +874,13 @@
       "sm_mass_gev": 58.628,
       "masses_gev": [58.628],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.30, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.3, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "magnesium24",
@@ -560,7 +890,13 @@
       "sm_mass_gev": 22.3419,
       "masses_gev": [22.342],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "w_boson",
@@ -570,7 +906,13 @@
       "sm_mass_gev": 80.377,
       "masses_gev": [80.377],
       "widths_gev": [2.085],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "z_boson",
@@ -580,7 +922,13 @@
       "sm_mass_gev": 91.1876,
       "masses_gev": [91.188],
       "widths_gev": [2.4952],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "higgs",
@@ -590,7 +938,13 @@
       "sm_mass_gev": 125.25,
       "masses_gev": [125.25],
       "widths_gev": [0.00407],
-      "tolerances": {"mass_abs": 0.2, "width_abs": 0.002, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.2, "width_abs": 0.002, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "quark_u",
@@ -600,7 +954,13 @@
       "sm_mass_gev": 0.00216,
       "masses_gev": [0.00216],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "quark_d",
@@ -610,7 +970,13 @@
       "sm_mass_gev": 0.00467,
       "masses_gev": [0.00467],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "quark_s",
@@ -620,7 +986,13 @@
       "sm_mass_gev": 0.093,
       "masses_gev": [0.093],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.01, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.01, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "quark_c",
@@ -630,7 +1002,13 @@
       "sm_mass_gev": 1.27,
       "masses_gev": [1.27],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "quark_t",
@@ -640,17 +1018,29 @@
       "sm_mass_gev": 172.57,
       "masses_gev": [172.57],
       "widths_gev": [1.42],
-      "tolerances": {"mass_abs": 0.5, "width_abs": 0.1, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.5, "width_abs": 0.1, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "neutrino_e",
       "family": "lepton",
       "type": "elementary",
       "jpc": "1/2+",
-      "sm_mass_gev": 0.0000022,
-      "masses_gev": [0.0000022],
+      "sm_mass_gev": 2.2e-06,
+      "masses_gev": [2.2e-06],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.000001, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 1e-06, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "neutrino_mu",
@@ -660,7 +1050,13 @@
       "sm_mass_gev": 0.00017,
       "masses_gev": [0.00017],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.00005, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 5e-05, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "neutrino_tau",
@@ -670,7 +1066,13 @@
       "sm_mass_gev": 0.0155,
       "masses_gev": [0.0155],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.005, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "kaon_k_plus",
@@ -680,7 +1082,13 @@
       "sm_mass_gev": 0.49368,
       "masses_gev": [0.494],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "kaon_k_zero",
@@ -690,7 +1098,13 @@
       "sm_mass_gev": 0.49761,
       "masses_gev": [0.498],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "kaon_k_star",
@@ -700,7 +1114,13 @@
       "sm_mass_gev": 0.89166,
       "masses_gev": [0.892],
       "widths_gev": [0.051],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.02, "spacing_rel": 0.3}
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.02, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "photon",
@@ -710,7 +1130,13 @@
       "sm_mass_gev": 0.0,
       "masses_gev": [0.0],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "gluon",
@@ -720,7 +1146,13 @@
       "sm_mass_gev": 0.0,
       "masses_gev": [0.0],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5}
+      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "sigma_c_2455",
@@ -730,7 +1162,13 @@
       "sm_mass_gev": 2.4539,
       "masses_gev": [2.454],
       "widths_gev": [0.002],
-      "tolerances": {"mass_abs": 0.003, "width_abs": 0.001, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.003, "width_abs": 0.001, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "sigma_c_2520",
@@ -740,7 +1178,13 @@
       "sm_mass_gev": 2.5183,
       "masses_gev": [2.518],
       "widths_gev": [0.0155],
-      "tolerances": {"mass_abs": 0.005, "width_abs": 0.005, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.005, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "lambda_c_2595",
@@ -750,7 +1194,13 @@
       "sm_mass_gev": 2.59225,
       "masses_gev": [2.592],
       "widths_gev": [0.0036],
-      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "lambda_c_2625",
@@ -760,7 +1210,13 @@
       "sm_mass_gev": 2.62811,
       "masses_gev": [2.628],
       "widths_gev": [0.00097],
-      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "xi_c_prime_2575",
@@ -770,7 +1226,13 @@
       "sm_mass_gev": 2.57794,
       "masses_gev": [2.578],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.004, "width_abs": 0.0, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.004, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "xi_c_2645",
@@ -780,7 +1242,13 @@
       "sm_mass_gev": 2.64577,
       "masses_gev": [2.646],
       "widths_gev": [0.0024],
-      "tolerances": {"mass_abs": 0.005, "width_abs": 0.002, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.002, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     },
     {
       "name": "psi_3770",
@@ -790,7 +1258,13 @@
       "sm_mass_gev": 3.7737,
       "masses_gev": [3.774],
       "widths_gev": [0.0272],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.008, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.008, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "chi_c1_3872",
@@ -800,7 +1274,13 @@
       "sm_mass_gev": 3.87169,
       "masses_gev": [3.872],
       "widths_gev": [0.00117],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.002, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.002, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "psi_4040",
@@ -809,8 +1289,14 @@
       "jpc": "1-",
       "sm_mass_gev": 4.039,
       "masses_gev": [4.039],
-      "widths_gev": [0.080],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.04, "spacing_rel": 0.2}
+      "widths_gev": [0.08],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.04, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "psi_4160",
@@ -819,8 +1305,14 @@
       "jpc": "1-",
       "sm_mass_gev": 4.191,
       "masses_gev": [4.191],
-      "widths_gev": [0.070],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.2}
+      "widths_gev": [0.07],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "chi_c0_3915",
@@ -829,18 +1321,30 @@
       "jpc": "0+",
       "sm_mass_gev": 3.918,
       "masses_gev": [3.918],
-      "widths_gev": [0.020],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.01, "spacing_rel": 0.2}
+      "widths_gev": [0.02],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.01, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "psi_4230",
       "family": "charmonium",
       "type": "meson",
       "jpc": "1-",
-      "sm_mass_gev": 4.230,
-      "masses_gev": [4.230],
+      "sm_mass_gev": 4.23,
+      "masses_gev": [4.23],
       "widths_gev": [0.055],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "chi_c0_4500",
@@ -850,7 +1354,13 @@
       "sm_mass_gev": 4.506,
       "masses_gev": [4.506],
       "widths_gev": [0.092],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "eta_c_2s",
@@ -861,7 +1371,13 @@
       "masses_gev": [3.639],
       "widths_gev": [0.0114],
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.01, "spacing_rel": 0.2},
-      "comment": "NUEVO - eta_c(2S), entre eta_c y psi_2s"
+      "comment": "NUEVO - eta_c(2S), entre eta_c y psi_2s",
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "lambda_c_2765",
@@ -872,7 +1388,13 @@
       "masses_gev": [2.766],
       "widths_gev": [0.05],
       "tolerances": {"mass_abs": 0.02, "width_abs": 0.03, "spacing_rel": 0.2},
-      "comment": "NUEVO - Lambda_c(2765), capturará casos intermedios"
+      "comment": "NUEVO - Lambda_c(2765), capturar\u00e1 casos intermedios",
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "any",
+          "allowed_k": [1, 2, 3, 4, 5]
+        }
+      }
     },
     {
       "name": "lambda_c_2860",
@@ -883,7 +1405,13 @@
       "masses_gev": [2.856],
       "widths_gev": [0.068],
       "tolerances": {"mass_abs": 0.02, "width_abs": 0.03, "spacing_rel": 0.2},
-      "comment": "NUEVO - Lambda_c(2860), D-wave state"
+      "comment": "NUEVO - Lambda_c(2860), D-wave state",
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
     }
   ]
 }
