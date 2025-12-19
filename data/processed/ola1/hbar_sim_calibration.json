@@ -1,14 +1,14 @@
 {
   "hbar_sim": 0.306576287961637,
   "units": "GeV per rad/time_unit",
-  "n_used": 202,
+  "n_used": 204,
   "n_rejected": 182,
-  "omega0": 5.927761705504315,
+  "omega0": 5.927886700697126,
   "cluster_tol_rel": 0.1,
   "h_i_percentiles": {
-    "p10": 0.2922916617927292,
+    "p10": 0.2922579811332995,
     "p50": 0.3063995353212846,
-    "p90": 0.3175423827058416
+    "p90": 0.3175300244704933
   },
   "mode": "seed",
   "seed_particle": "deuteron",
