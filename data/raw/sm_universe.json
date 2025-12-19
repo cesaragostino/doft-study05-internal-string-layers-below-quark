@@ -133,6 +133,16 @@
       "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.4}
     },
     {
+      "name": "delta_1600",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.600,
+      "masses_gev": [1.6],
+      "widths_gev": [0.3],
+      "tolerances": {"mass_abs": 0.1, "width_abs": 0.25, "spacing_rel": 0.35}
+    },
+    {
       "name": "delta_1620",
       "family": "delta_like",
       "type": "baryon",
