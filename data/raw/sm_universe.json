@@ -190,7 +190,47 @@
       "sm_mass_gev": 1.900,
       "masses_gev": [1.9],
       "widths_gev": [0.2],
-      "tolerances": {"mass_abs": 0.1, "width_abs": 0.3, "spacing_rel": 0.1}
+      "tolerances": {"mass_abs": 0.06, "width_abs": 0.15, "spacing_rel": 0.15}
+    },
+    {
+      "name": "delta_1910",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.910,
+      "masses_gev": [1.910],
+      "widths_gev": [0.250],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.20, "spacing_rel": 0.3}
+    },
+    {
+      "name": "delta_1920",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "3/2+",
+      "sm_mass_gev": 1.920,
+      "masses_gev": [1.920],
+      "widths_gev": [0.260],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.20, "spacing_rel": 0.3}
+    },
+    {
+      "name": "delta_1930",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "5/2-",
+      "sm_mass_gev": 1.930,
+      "masses_gev": [1.930],
+      "widths_gev": [0.285],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.20, "spacing_rel": 0.3}
+    },
+    {
+      "name": "delta_1950",
+      "family": "delta_like",
+      "type": "baryon",
+      "jpc": "7/2+",
+      "sm_mass_gev": 1.950,
+      "masses_gev": [1.950],
+      "widths_gev": [0.300],
+      "tolerances": {"mass_abs": 0.08, "width_abs": 0.20, "spacing_rel": 0.3}
     },
     {
       "name": "tau",
@@ -243,16 +283,6 @@
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3}
     },
     {
-      "name": "beryllium8",
-      "family": "nucleus",
-      "type": "composite",
-      "jpc": "0+",
-      "sm_mass_gev": 7.45485,
-      "masses_gev": [7.45485],
-      "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.4}
-    },
-    {
       "name": "carbon12",
       "family": "nucleus",
       "type": "composite",
@@ -290,7 +320,7 @@
       "sm_mass_gev": 2.28646,
       "masses_gev": [2.286],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.25}
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.2}
     },
     {
       "name": "meson_d0",
@@ -461,16 +491,6 @@
       "masses_gev": [3.415],
       "widths_gev": [0.010],
       "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2}
-    },
-    {
-      "name": "delta_1900",
-      "family": "delta_like",
-      "type": "baryon",
-      "jpc": "3/2+",
-      "sm_mass_gev": 1.900,
-      "masses_gev": [1.900],
-      "widths_gev": [0.200],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.1, "spacing_rel": 0.1}
     },
     {
       "name": "chi_c1",
@@ -820,7 +840,57 @@
       "sm_mass_gev": 3.87169,
       "masses_gev": [3.872],
       "widths_gev": [0.00117],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.003, "spacing_rel": 0.2}
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.002, "spacing_rel": 0.2}
+    },
+    {
+      "name": "psi_4040",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 4.039,
+      "masses_gev": [4.039],
+      "widths_gev": [0.080],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.04, "spacing_rel": 0.2}
+    },
+    {
+      "name": "psi_4160",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 4.191,
+      "masses_gev": [4.191],
+      "widths_gev": [0.070],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.04, "spacing_rel": 0.2}
+    },
+    {
+      "name": "chi_c0_3915",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0+",
+      "sm_mass_gev": 3.918,
+      "masses_gev": [3.918],
+      "widths_gev": [0.020],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.01, "spacing_rel": 0.2}
+    },
+    {
+      "name": "psi_4230",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 4.230,
+      "masses_gev": [4.230],
+      "widths_gev": [0.055],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.03, "spacing_rel": 0.2}
+    },
+    {
+      "name": "chi_c0_4500",
+      "family": "charmonium",
+      "type": "meson",
+      "jpc": "0+",
+      "sm_mass_gev": 4.506,
+      "masses_gev": [4.506],
+      "widths_gev": [0.092],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.2}
     },
     {
       "name": "eta_c_2s",
