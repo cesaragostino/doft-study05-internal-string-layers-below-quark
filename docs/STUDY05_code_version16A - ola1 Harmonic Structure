@@ -1,0 +1,384 @@
+# DOFT Wave1 Harmonic Structure Upgrade
+## Target-Conditioned Resonance Mode Selection for Canonical Mass Evaluation (v1)
+
+## Document purpose
+
+This document defines a theoretical rationale and an implementation specification to upgrade DOFT Wave1 sweep outputs so that harmonic structure (integer-mode selection and parity sector) is explicitly measured and persisted. The upgrade enables a single canonical mass per run (`mass_sim_used_gev`) derived from a structure-consistent resonance mode, with optional future conditioning by SM structural descriptors (family, `J`, `J^PC`) from `sm_universe.json`.
+
+---
+
+## 0) Scope and Constraints
+
+### In-scope
+
+- Persist richer spectral information (Top-N FFT peaks + fundamental anchor) for each Wave1 run.
+- Compute harmonic structure descriptors: `dominant_k`, `dominant_parity`, `sector_confidence`.
+- Compute a single canonical mass (`mass_sim_used_gev`) from a structure-consistent mode selection.
+
+### Out-of-scope (v1)
+
+- Changing Wave1 lock dynamics (ODE / scan / Q–S1–S2 locking).
+- Using the SM target to force sweep dynamics.
+- Hard “filtering” of runs during sweep; selection occurs in evaluation/tagging/reporting.
+
+### Non-negotiables
+
+- Single canonical mass in downstream system logic: `mass_sim_used_gev`.
+- All intermediate quantities used to select the mode must be persisted (JSON/JSONL) so runs can be resumed or post-processed without rerunning the sweep.
+- No run record should fail to be written due to missing derived fields (robust persistence).
+
+---
+
+## 1) Theory (scientific)
+
+### 1.1 Canonical mass proxy
+
+Wave1 uses an operational mass proxy computed from an estimated reference angular frequency:
+
+\[
+m_{\text{sim}} = \hbar_{\text{sim}}\,\omega_{\text{ref}}
+\]
+
+where:
+
+- `\omega_\text{ref}` is extracted from spectral analysis of a lock-derived time series,
+- `\hbar_\text{sim}` is a simulation scale factor (must be available per run).
+
+### 1.2 Resonant mode families and integer scaling
+
+A resonant system exhibits a fundamental mode `\omega_1` and harmonic modes:
+
+\[
+\omega_k \approx k\,\omega_1 \quad (k \in \mathbb{N})
+\]
+
+If the reference frequency estimator selects `\omega_k` (dominant harmonic) rather than `\omega_1`, then:
+
+\[
+m_{\text{sim}}(\omega_k) = \hbar_{\text{sim}}\,\omega_k \approx k\,\hbar_{\text{sim}}\,\omega_1
+\]
+
+Hence, integer errors in mode selection manifest as integer-scaled mass shifts, which are structured (not random).
+
+### 1.3 Harmonic parity as a structural sector (symmetry constraint)
+
+The presence of dominant odd harmonics (3, 5, …) vs even harmonics (2, 4, …) is governed by classical symmetry properties of the measured signal `x(t)`:
+
+Half-wave anti-symmetry:
+
+\[
+x(t + T/2) = -x(t)
+\]
+
+implies even harmonics vanish, yielding an odd-harmonic spectrum.
+
+Breaking this symmetry (offset/rectification/asymmetry) restores even harmonics.
+
+Therefore, *odd vs even harmonic dominance* is a discrete structural signature of the measured resonance observable.
+
+### 1.4 Hypothesized correlation with SM structural descriptors (testable)
+
+Standard Model labels such as family and quantum numbers `J`, `P`, `C`, and `J^{PC}` classify states by transformation properties under symmetries (rotations/parity/charge conjugation). In DOFT, harmonic parity and integer-mode structure classify the resonance observable by internal symmetry properties of the lock dynamics and the measured channel.
+
+**Hypothesis:** groups of targets defined by SM structural descriptors correlate statistically with harmonic sectors (odd/even dominance and characteristic integer `k`.  
+This is an empirical claim to be evaluated by correlation analysis; it is not asserted as a proven identity.
+
+### 1.5 Single canonical mass via structure-consistent mode selection
+
+The system must output one canonical mass per run for downstream matching and aggregation:
+
+\[
+m_{\text{sim}}^{(\text{used})} = \hbar_{\text{sim}}\,\omega_{\text{eff}}
+\]
+
+where `\omega_\text{eff}` is obtained by a deterministic mode selection operator:
+
+\[
+\omega_{\text{eff}} = S(\{\omega_i, A_i\}, \omega_{\text{anchor}}, \Pi_{\text{target}})
+\]
+
+- `{\omega_i, A_i}`: stored FFT peaks (frequency and magnitude),
+- `\omega_{\text{anchor}}`: fundamental anchor (v1 uses band-anchored fundamental),
+- `\Pi_{\text{target}}`: optional (future) SM-informed preference policy (parity/`k` constraints).
+
+In v1, `\Pi_{\text{target}}` defaults to unconstrained; selection is structure-only.
+
+---
+
+## 2) Implementation Specification (Programmer)
+
+### 2.1 Persistence rule: JSONL is the durable store
+
+Because arrays inflate CSV size, we define:
+
+- **JSONL/JSON**: complete per-run records, including top-N arrays and all derived values.
+- **CSV**: lightweight summary only (scalars; no large arrays).
+
+No run should be dropped or fail to write due to missing optional fields.
+
+### 2.2 Required per-run persisted fields (JSONL)
+
+#### 2.2.1 Identifiers and provenance (required)
+
+- `run_id` (int)
+- `attempt_id` (string/int; existing convention)
+- `seed` (int, if applicable)
+- `input_source` (string): e.g., Wave1 compound file path or run batch name
+- `timestamp_utc` (string ISO8601) (optional but recommended)
+
+#### 2.2.2 Target metadata (required if available)
+
+- `particle_name` (string)
+- `family` (string) — from `sm_universe` mapping
+- `jpc` (string|null) — if present in `sm_universe`
+
+#### 2.2.3 Core lock/sweep outputs (kept)
+
+Existing lock metrics (e.g., `H_block`, `lock_S1_series`, etc.) as already recorded.
+
+- `band_energies_gev` (array[float]) (keep)
+- `omega_ref_raw` (float|null) (keep)
+- `mass_sim_raw_gev` (float|null) (keep)
+
+#### 2.2.4 hbar availability (required)
+
+To prevent missing-data failures, Wave1 sweep must persist:
+
+- `hbar_sim_live` (float) **required**
+
+Fallback (transition only, if legacy data):
+
+- `hbar_inferred` (float|null) computed as `mass_sim_raw_gev / omega_ref_raw` when both exist.
+- `hbar_status` (string): `"direct"` | `"inferred"` | `"missing"`
+
+v1 requirement: new runs must output `hbar_sim_live` so `hbar_status="direct"`.
+
+#### 2.2.5 Top-N FFT peaks bundle (required)
+
+Persist top-N peaks for the FFT of the chosen signal:
+
+- `fft_topN_count` (int) default `8`
+- `fft_topN_freq` (array[float], length N) (descending by magnitude)
+- `fft_topN_mag` (array[float], length N)
+- `fft_topN_prominence` (array[float], length N) optional but recommended
+
+FFT reproducibility metadata:
+
+```json
+{
+  "signal_name": "string",
+  "window": "string",
+  "nfft": 0,
+  "fs": 0.0,
+  "df": 0.0,
+  "detrend": "string or bool",
+  "preprocess": "string or object (optional)"
+}
+```
+
+Backward compatibility: keep existing fields:
+
+- `fft_peak_index`, `fft_peak_delta`, `fft_peak_mag_km1`, `fft_peak_mag_k`, `fft_peak_mag_kp1` (if currently produced).
+
+#### 2.2.6 Fundamental anchor (v1: band_anchor)
+
+Persist:
+
+- `omega_fund_method = "band_anchor"`
+- `omega_fund` (float) = `ω_band` (defined below)
+- `omega_fund_conf` (float) = `0.5` (placeholder for v1)
+- `omega_fund_method_fallback` (bool) default `false`
+
+Band-anchored fundamental:
+
+\[
+E_{\text{band}} = \text{median}(\text{band\_energies\_gev})
+\]
+
+\[
+\omega_{\text{band}} = \frac{E_{\text{band}}}{\hbar_{\text{sim}}}
+\]
+
+Set `omega_fund = omega_band`.
+
+#### 2.2.7 Harmonic evidence and sector descriptors (required)
+
+Config persisted per run:
+
+- `harmonic_k_max` (int) default `5`
+- `k_tol` (float) default `0.07`
+
+Derived:
+
+- `harmonic_scores` (object mapping `"1"`..`"K"` to float)
+- `dominant_k` (int)
+- `dominant_parity` (`"odd"` | `"even"`)
+- `sector_confidence` (float in `[0,1]`)
+- `peak_used_index` (int) — which FFT peak supported the selected `k`
+- `omega_peak_used` (float)
+- `omega_peak_dominant` (float) = `fft_topN_freq[0]`
+
+#### 2.2.8 Canonical selection result (required)
+
+- `selection_method = "structure_only"` (v1)
+- `selection_reason` (string) e.g., `"argmax_score"`
+- `k_used` (int) (== `dominant_k` in v1)
+- `omega_eff` (float) = `omega_peak_used / k_used`
+- `mass_sim_used_gev` (float) = `hbar_sim_live * omega_eff`
+
+> **Important:** downstream systems must treat `mass_sim_used_gev` as the single canonical mass.
+
+### 2.3 CSV summary fields (small only)
+
+CSV remains small for quick scans/joins. Recommended columns:
+
+- Identifiers: `run_id`, `particle_name`, `family`, `jpc`
+- `omega_ref_raw`, `mass_sim_raw_gev`
+- `omega_eff`, `mass_sim_used_gev`
+- `k_used`, `dominant_parity`, `sector_confidence`
+- `omega_peak_dominant`, `omega_peak_used`
+- `fft_topN_count`
+- (optional) `fft_peak0_mag`, `fft_peak1_mag`, `fft_mag_ratio_01`
+
+No arrays in CSV.
+
+### 2.4 Deterministic scoring and selection algorithm (v1)
+
+**Inputs**
+
+- `fft_topN_freq[j]`, `fft_topN_mag[j]` for `j = 0..N-1`
+- `omega_anchor = omega_fund` (band-anchor)
+- `k_range = 1..K` (K = 5)
+- `k_tol = 0.07`
+
+**Normalize magnitudes**
+
+\[
+\tilde{A}_j = \frac{A_j}{\max_j A_j + \varepsilon}
+\]
+
+**Score definition**
+
+For each `k`:
+
+\[
+\text{score}(k) = \max_j \left[ \tilde{A}_j \cdot \exp\left(-\left(\frac{\omega_j/\omega_{\text{anchor}} - k}{k_{\text{tol}}}\right)^2\right) \right]
+\]
+
+Also store the maximizing index `j^*(k)`.
+
+**Choose k and supporting peak**
+
+- `k_used = argmax_k score(k)`
+- `peak_used_index = j^*(k_used)`
+- `omega_peak_used = fft_topN_freq[peak_used_index]`
+- `omega_eff = omega_peak_used / k_used`
+
+**Canonical mass**
+
+\[
+m_{\text{sim}}^{(\text{used})} = \hbar_{\text{sim}}\,\omega_{\text{eff}}
+\]
+
+**Sector confidence**
+
+Let `s1` be best score, `s2` second-best:
+
+\[
+\text{sector\_confidence} = \max\big(0,\,\min(1, s_1 - s_2)\big)
+\]
+
+**Parity**
+
+- `dominant_parity = "odd"` if `k_used` is odd, else `"even"`.
+
+### 2.5 `harmonic_policy` in `sm_universe` (v1 default)
+
+v1 does not constrain selection by target. However, schema is reserved:
+
+If present, `harmonic_policy` may contain:
+
+- `preferred_parity`: `"odd"` | `"even"` | `"any"`
+- `allowed_k`: `[1,2,3,4,5]`
+
+v1 default for all targets:
+
+- `preferred_parity = "any"`
+- `allowed_k = [1..5]`
+
+Therefore `selection_method = "structure_only"`.
+
+Future versions may enable `selection_method = "target_conditioned"` while preserving all persisted evidence.
+
+---
+
+## 3) Report.md Contract (clean, stable)
+
+### 3.1 Single report file
+
+Output only: `report.md`  
+Do not produce `report_partial.md`.
+
+### 3.2 Report must use canonical mass
+
+All “mass error vs SM” summary tables must use:
+
+- `mass_sim_used_gev`
+
+Optional audit columns may show `mass_sim_raw_gev`, but the canonical error is based on `mass_sim_used_gev`.
+
+### 3.3 Required sections (Wave1 report)
+
+**Run Summary**
+
+- total runs, successes, missing data counts (should be zero for `hbar` in new runs)
+- config snapshot (`k_tol`, `K`, top-N count, FFT meta summary)
+
+**Mass Error vs SM (Canonical)**
+
+- table aggregated by particle: mean/min/max error using `mass_sim_used_gev`
+
+**Harmonic Structure Summary**
+
+- counts by `k_used`
+- counts by `dominant_parity`
+- distribution summary of `sector_confidence`
+
+**Correlation (Exploratory)**
+
+- `family × dominant_parity`
+- `family × k_used`
+- `jpc × dominant_parity` (if available)
+- `jpc × k_used` (if available)
+
+Explicitly labeled as *exploratory correlation*, not proof.
+
+**Outlier Audit**
+
+- list runs with `k_used >= 3` and high `sector_confidence`
+- show raw vs used omega/mass fields for traceability
+
+---
+
+## 4) System-wide Impact (explicit)
+
+Once enabled:
+
+- `mass_sim_used_gev` becomes the single **canonical mass** for matching, ranking, and aggregation.
+- `mass_sim_raw_gev` and `omega_ref_raw` remain stored for auditing/back-compat but are **not** used as canonical once the upgrade is turned on.
+
+---
+
+## 5) Rollout Plan (safe)
+
+1. Implement persistence + compute `mass_sim_used_gev` while keeping raw fields.
+2. Update reporting/aggregation to use `mass_sim_used_gev` as canonical.
+3. Validate correlation analysis and stability.
+4. (Optional v2) add `omega_fund` autocorr/cepstrum estimators and/or enable `harmonic_policy` constraints per family/target.
+
+---
+
+## 6) Notes on “no missing outputs” guarantee
+
+- New sweep must always store `hbar_sim_live`.
+- If legacy runs lack it, record must still be written with `hbar_status="missing"` and `mass_sim_used_gev=null`, while preserving harmonic evidence; this is a transitional compatibility path, not the desired end state.
