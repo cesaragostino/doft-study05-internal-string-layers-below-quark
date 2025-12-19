@@ -432,6 +432,7 @@ def main():
             "fft_peak_mag_k": _to_float(proxy_row.get("fft_peak_mag_k")),
             "fft_peak_mag_kp1": _to_float(proxy_row.get("fft_peak_mag_kp1")),
             "mass_sim_gev": _to_float(proxy_row.get("mass_sim_gev")),
+            "mass_sim_used_gev": _to_float(proxy_row.get("mass_sim_used_gev")),
         }
         theta_full = run_theta.get(str(proxy_row.get("run_id")))
         if theta_full:

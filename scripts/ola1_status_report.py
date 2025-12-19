@@ -599,11 +599,34 @@ def main():
                 #     block_lines.append(f"- Δ_mass vs SM: {dev:+.4f}%")
                 #     mass_errors_by_particle[pname].append(dev)
                 dev = None
-                # NEW (current): mass_sim_gev = hbar_sim * omega_ref (calibrated).
-                msim = b.get("mass_sim_gev")
-                if msim is not None:
+                # NEW (current): mass_sim_used_gev from harmonic-aware selection (if present).
+                msim_raw = b.get("mass_sim_raw_gev") or b.get("mass_sim_gev")
+                msim_used = None
+                omega_used = None
+                if run:
+                    msim_used = run.get("mass_sim_used_gev")
+                    omega_used = run.get("omega_eff")
+                if msim_used is None and b.get("mass_sim_used_gev") is not None:
+                    msim_used = b.get("mass_sim_used_gev")
+                if omega_used is None and b.get("omega_eff") is not None:
+                    omega_used = b.get("omega_eff")
+                if msim_used is not None:
                     try:
-                        msim_val = float(msim)
+                        msim_used_val = float(msim_used)
+                        dev_sim = ((msim_used_val - sm_mass) / sm_mass) * 100.0
+                        if msim_raw is not None:
+                            block_lines.append(f"- mass_sim_raw_gev: {float(msim_raw):.6g}")
+                        if omega_used is not None:
+                            block_lines.append(f"- omega_ref_used: {float(omega_used):.6g}")
+                        block_lines.append(f"- mass_sim_used_gev: {msim_used_val:.6g}")
+                        block_lines.append(f"- Δ_mass_sim vs SM: {dev_sim:+.4f}%")
+                        mass_sim_errors_by_particle[pname].append(dev_sim)
+                    except Exception:
+                        pass
+                elif msim_raw is not None:
+                    # Fallback: report-only harmonic guard (legacy runs).
+                    try:
+                        msim_val = float(msim_raw)
                         omega_raw = None
                         if b.get("omega_ref") is not None:
                             try:
@@ -812,6 +835,8 @@ def main():
                 msim_val = float(b.get("mass_sim_gev"))
                 if math.isfinite(msim_val):
                     sm_ref = sm_masses.get(str(pname_row))
+                    run = runs_by_id.get(omega_row) if omega_row is not None else None
+                    msim_raw = msim_val
                     omega_raw = b.get("omega_ref") or b.get("omega_ref_interp")
                     omega_raw_val = None
                     if omega_raw is not None:
@@ -819,46 +844,62 @@ def main():
                             omega_raw_val = float(omega_raw)
                         except Exception:
                             omega_raw_val = None
-                    first_energy = None
-                    run = runs_by_id.get(omega_row) if omega_row is not None else None
-                    if run:
-                        energies = run.get("band_energies_gev") or []
-                        try:
-                            energies_f = [float(x) for x in energies if math.isfinite(float(x))]
-                            if energies_f:
-                                first_energy = min(energies_f)
-                        except Exception:
-                            first_energy = None
-                    hbar_est = None
-                    if omega_raw_val is not None and omega_raw_val > 0:
-                        hbar_est = msim_val / omega_raw_val
-                    harmonic_ratio = None
-                    if first_energy is not None and first_energy > 0:
-                        harmonic_ratio = msim_val / first_energy
-                    omega_used = omega_raw_val
-                    msim_used = msim_val
+                    msim_used = None
+                    omega_used = None
                     guard_applied = False
-                    err_raw = None
-                    err_fix = None
-                    if sm_ref is not None and sm_ref != 0:
-                        err_raw = abs(msim_val - sm_ref) / sm_ref
-                        if first_energy is not None:
-                            err_fix = abs(first_energy - sm_ref) / sm_ref
-                    if (
-                        args.harmonic_guard_enabled
-                        and hbar_est is not None
-                        and first_energy is not None
-                        and err_raw is not None
-                        and err_fix is not None
-                        and err_raw > args.harmonic_err_trigger
-                        and err_fix < err_raw
-                    ):
-                        if harmonic_ratio is not None and harmonic_ratio > args.harmonic_ratio_max:
-                            omega_used = first_energy / hbar_est
-                            msim_used = first_energy
-                            guard_applied = True
+                    if run:
+                        msim_used = run.get("mass_sim_used_gev")
+                        omega_used = run.get("omega_eff")
+                    if msim_used is not None:
+                        try:
+                            msim_used = float(msim_used)
+                        except Exception:
+                            msim_used = None
+                    if omega_used is not None:
+                        try:
+                            omega_used = float(omega_used)
+                        except Exception:
+                            omega_used = None
+                    if msim_used is None:
+                        # Fallback to report-only guard for legacy runs.
+                        first_energy = None
+                        if run:
+                            energies = run.get("band_energies_gev") or []
+                            try:
+                                energies_f = [float(x) for x in energies if math.isfinite(float(x))]
+                                if energies_f:
+                                    first_energy = min(energies_f)
+                            except Exception:
+                                first_energy = None
+                        hbar_est = None
+                        if omega_raw_val is not None and omega_raw_val > 0:
+                            hbar_est = msim_val / omega_raw_val
+                        harmonic_ratio = None
+                        if first_energy is not None and first_energy > 0:
+                            harmonic_ratio = msim_val / first_energy
+                        omega_used = omega_raw_val
+                        msim_used = msim_val
+                        err_raw = None
+                        err_fix = None
+                        if sm_ref is not None and sm_ref != 0:
+                            err_raw = abs(msim_val - sm_ref) / sm_ref
+                            if first_energy is not None:
+                                err_fix = abs(first_energy - sm_ref) / sm_ref
+                        if (
+                            args.harmonic_guard_enabled
+                            and hbar_est is not None
+                            and first_energy is not None
+                            and err_raw is not None
+                            and err_fix is not None
+                            and err_raw > args.harmonic_err_trigger
+                            and err_fix < err_raw
+                        ):
+                            if harmonic_ratio is not None and harmonic_ratio > args.harmonic_ratio_max:
+                                omega_used = first_energy / hbar_est
+                                msim_used = first_energy
+                                guard_applied = True
                     rel_err = None
-                    if sm_ref:
+                    if sm_ref and msim_used is not None:
                         rel_err = (msim_used - sm_ref) / sm_ref
                     mass_sim_rows.append(
                         (
@@ -1083,7 +1124,7 @@ def main():
     # lines.append("")
 
     # NEW (current): mass_sim_gev vs SM using hbar_sim calibration.
-    lines.append("## Error de mass_sim vs SM")
+    lines.append("## Error de mass_sim_used vs SM")
     if mass_sim_errors_by_particle:
         lines.append("| Partícula | Δ_mean% | Δ_min% | Δ_max% | n |")
         lines.append("|-----------|---------|--------|--------|---|")
@@ -1094,10 +1135,10 @@ def main():
                 vmax = max(vals)
                 lines.append(f"| {pname} | {mean:+.4f}% | {vmin:+.4f}% | {vmax:+.4f}% | {len(vals)} |")
     else:
-        lines.append("Sin desviaciones mass_sim calculadas (no hay mass_sim_gev).")
+        lines.append("Sin desviaciones mass_sim calculadas (no hay mass_sim_used_gev).")
     lines.append("")
 
-    lines.append("## Masa por frecuencia (mass_sim_gev)")
+    lines.append("## Masa por frecuencia (mass_sim_used_gev)")
     if mass_sim_rows:
         rows_sorted = sorted(mass_sim_rows, key=lambda x: (str(x[1]), x[0]))
         lines.append("| run | particle | family | omega_ref_raw | omega_ref_used | mass_sim_used_gev | rel_err_vs_SM | guard |")
@@ -1121,7 +1162,7 @@ def main():
         lines.append("")
         lines.append("* = harmonic-guard aplicado")
     else:
-        lines.append("- No hay mass_sim_gev disponibles (ejecute la calibración hbar_sim).")
+        lines.append("- No hay mass_sim_used_gev disponibles (ejecute la calibración hbar_sim).")
     lines.append("")
 
     # Harmonic structure vs SM quantum numbers (v1 proxy)

@@ -73,7 +73,9 @@ def main():
     for row in rows:
         mass_sim = None
         if args.use_mass_sim:
-            mass_sim = row.get("mass_sim_gev")
+            mass_sim = row.get("mass_sim_used_gev")
+            if mass_sim is None:
+                mass_sim = row.get("mass_sim_gev")
             if mass_sim is None and hbar_sim is not None:
                 omega_ref = row.get("omega_ref") or row.get("omega_ref_interp")
                 try:
