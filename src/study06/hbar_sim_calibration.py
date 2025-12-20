@@ -131,6 +131,10 @@ def main():
     )
     args = parser.parse_args()
 
+    # Always recompute: remove any previous calibration file first.
+    if args.output and args.output.exists():
+        args.output.unlink()
+
     blocks = _load_blocks(args.blocks)
     sm_masses = _load_sm_masses(args.sm_universe)
     cfg = _load_calibration_config(args.config)

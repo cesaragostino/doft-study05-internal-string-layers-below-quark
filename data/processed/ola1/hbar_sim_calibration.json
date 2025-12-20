@@ -1,26 +1,25 @@
 {
-  "hbar_sim": 0.29888120930215245,
+  "hbar_sim": 0.31635137610913855,
   "units": "GeV per rad/time_unit",
-  "n_used": 25,
-  "n_rejected": 11,
-  "omega0": 6.0723346101053846,
+  "n_used": 27,
+  "n_rejected": 14,
+  "omega0": 6.079321136042824,
   "cluster_tol_rel": 0.1,
   "fallback_reason": null,
   "h_i_percentiles": {
-    "p10": 0.28855219264981535,
-    "p50": 0.29888120930215245,
-    "p90": 0.30923369507774906
+    "p10": 0.30799494418933987,
+    "p50": 0.31635137610913855,
+    "p90": 0.32915385188745
   },
-  "mode": "seed",
-  "seed_particle": "deuteron",
+  "mode": "auto",
+  "seed_particle": null,
   "selection": {
-    "auto": null,
-    "seed": {
-      "q_lock_min": 0.9,
-      "band_count_exact": 2,
-      "omega_max": 12.0,
-      "seed_particle": "deuteron"
+    "auto": {
+      "q_lock_min": 0.85,
+      "d_total_max": 3.0,
+      "min_band_count": 2
     },
-    "grade_filter": null
+    "seed": null,
+    "grade_filter": "A/B with enough_levels_full"
   }
 }

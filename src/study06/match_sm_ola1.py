@@ -170,6 +170,12 @@ def main():
         help="Usar mass_sim_gev/omega_ref en lugar de band_energies_gev para el matching. Útil en fase 2/3.",
     )
     parser.add_argument(
+        "--score-mode",
+        choices=["total", "spacing_only"],
+        default="total",
+        help="Define el score para elegir el nombre SM: total (d_spacing + d_mass) o spacing_only.",
+    )
+    parser.add_argument(
         "--update-proxies",
         action="store_true",
         help="Escribir k_used/parity/sector_confidence/mass_sim_used_gev en el proxies CSV.",
@@ -230,14 +236,30 @@ def main():
         if not levels_full:
             levels_full = extract_levels(row.get("band_energies_gev", "[]"))
         run_id = row.get("run_id", row.get("id", len(match_rows)))
-        best = {"run_id": run_id, "best_target": None, "best_family": None, "best_d_total": float("inf")}
+        best = {
+            "run_id": run_id,
+            "best_target": None,
+            "best_family": None,
+            "best_d_total": float("inf"),
+            "best_score_used": float("inf"),
+            "score_mode": args.score_mode,
+        }
         best_raw = float("inf")
-        second: Dict[str, object] = {"target": None, "family": None, "d_total": float("inf")}
+        second: Dict[str, object] = {
+            "target": None,
+            "family": None,
+            "d_total": float("inf"),
+            "score_used": float("inf"),
+        }
         for particle in catalog:
             levels = [e for e in levels_full if _in_window(e, particle.get("energy_window", [0.0, 10.0]))]
             res = compute_match_stats(levels, particle.get("masses_gev", []), particle.get("tolerances", {}))
             if np.isfinite(res["d_total"]) and res["d_total"] < best_raw:
                 best_raw = res["d_total"]
+            if args.score_mode == "spacing_only":
+                score_used = res["d_spacing"] if np.isfinite(res["d_spacing"]) else res["d_total"]
+            else:
+                score_used = res["d_total"]
             (
                 policy_action,
                 policy_reason,
@@ -258,6 +280,8 @@ def main():
                     "d_total": res["d_total"],
                     "d_spacing": res["d_spacing"],
                     "d_mass": res["d_mass"],
+                    "score_used": score_used,
+                    "score_mode": args.score_mode,
                     "enough_levels_full": int(res["has_enough_levels_full"]),
                     "enough_levels_partial": int(res["has_enough_levels_partial"]),
                     "n_levels_sim": res["n_levels_sim"],
@@ -271,30 +295,38 @@ def main():
                     "run_sector_confidence": run_conf,
                 }
             )
-            if np.isfinite(res["d_total"]):
-                if res["d_total"] < best["best_d_total"]:
+            if np.isfinite(score_used):
+                if score_used < best.get("best_score_used", float("inf")):
                     # shift best to second
                     second = {
                         "target": best.get("best_target"),
                         "family": best.get("best_family"),
                         "d_total": best.get("best_d_total"),
+                        "score_used": best.get("best_score_used"),
                     }
                     best.update(
                         {
                             "best_target": particle["name"],
                             "best_family": particle.get("family"),
                             "best_d_total": res["d_total"],
+                            "best_score_used": score_used,
                         }
                     )
-                elif res["d_total"] < second.get("d_total", float("inf")):
-                    second = {"target": particle["name"], "family": particle.get("family"), "d_total": res["d_total"]}
+                elif score_used < second.get("score_used", float("inf")):
+                    second = {
+                        "target": particle["name"],
+                        "family": particle.get("family"),
+                        "d_total": res["d_total"],
+                        "score_used": score_used,
+                    }
         # margin
         delta_margin = None
-        if np.isfinite(best.get("best_d_total", np.inf)) and np.isfinite(second.get("d_total", np.inf)):
-            delta_margin = second.get("d_total") - best.get("best_d_total")
+        if np.isfinite(best.get("best_score_used", np.inf)) and np.isfinite(second.get("score_used", np.inf)):
+            delta_margin = second.get("score_used") - best.get("best_score_used")
         best["second_best_target"] = second.get("target")
         best["second_best_family"] = second.get("family")
         best["second_best_d_total"] = second.get("d_total")
+        best["second_best_score_used"] = second.get("score_used")
         best["delta_margin"] = delta_margin
         best_rows.append(best)
 
