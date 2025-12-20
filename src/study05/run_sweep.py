@@ -427,6 +427,9 @@ def run_sweep(
     stop_file: Optional[str] = None,
     compute_entropy: bool = False,
 ):
+    peak_selector_frac = 0.20
+    peak_selector_frac_struct = 0.08
+    peak_selector_snr_min = 5.0
     rng = np.random.default_rng(seed)
     run_session_id = uuid.uuid4().hex
     session_tag = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
@@ -699,8 +702,13 @@ def run_sweep(
         else:
             mag_q = power_total
         f_ref, omega_ref_interp, fft_k_peak, fft_peak_delta, fft_mag_km1, fft_mag_k, fft_mag_kp1 = _select_peak_and_interp(
-            mag_q, delta_f, omega_max_cutoff=OMEGA_MAX_CUTOFF, frac_of_max=0.20, snr_min=5.0
+            mag_q,
+            delta_f,
+            omega_max_cutoff=OMEGA_MAX_CUTOFF,
+            frac_of_max=peak_selector_frac,
+            snr_min=peak_selector_snr_min,
         )
+        peak_selector_mode = "default"
         omega_peaks, weights_peaks, peak_powers = pick_peaks(
             spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
         )
@@ -766,6 +774,26 @@ def run_sweep(
                     continue
                 dom = band_dominant_layers[idx] if idx < len(band_dominant_layers) else None
                 structural_dom_layers.append(dom["layer"] if dom else None)
+        structural_complex = (
+            "structural_band_cap_hit" in structural_flags or "structural_subset_low_capture" in structural_flags
+        )
+        if structural_complex and peak_selector_frac_struct < peak_selector_frac:
+            (
+                f_ref,
+                omega_ref_interp,
+                fft_k_peak,
+                fft_peak_delta,
+                fft_mag_km1,
+                fft_mag_k,
+                fft_mag_kp1,
+            ) = _select_peak_and_interp(
+                mag_q,
+                delta_f,
+                omega_max_cutoff=OMEGA_MAX_CUTOFF,
+                frac_of_max=peak_selector_frac_struct,
+                snr_min=peak_selector_snr_min,
+            )
+            peak_selector_mode = "structural_low_frac"
         band_dom_counts_total: Dict[str, int] = {}
         for item in band_dominant_layers:
             if item and item.get("layer"):
@@ -1466,6 +1494,39 @@ def main():
                 pass
         memory_cfg = engine_cfg.get("memory")
         adaptive_cfg = engine_cfg.get("adaptive_lock")
+        peak_selector_cfg = spec_band.get("peak_selector", {})
+        peak_selector_frac = float(peak_selector_cfg.get("frac_of_max", 0.20))
+        peak_selector_frac_struct = float(peak_selector_cfg.get("frac_of_max_structural", 0.08))
+        peak_selector_snr_min = float(peak_selector_cfg.get("snr_min", 5.0))
+        # Dynamic t_max to ensure adaptive lock updates for low frequencies.
+        if adaptive_cfg and adaptive_cfg.get("enabled") and sim_params_cfg and dt_cfg and t_max_cfg:
+            try:
+                dynamic_t_max = adaptive_cfg.get("dynamic_t_max", True)
+                min_updates = int(adaptive_cfg.get("min_window_updates", 3))
+                window_cycles = float(adaptive_cfg.get("window_cycles", 20.0))
+                ref_layer = adaptive_cfg.get("ref_frequency_layer", "Q")
+                min_omega = None
+                if spec_layers and ref_layer in spec_layers:
+                    freq_range = spec_layers.get(ref_layer, {}).get("freq_range")
+                    if isinstance(freq_range, list) and freq_range:
+                        min_omega = float(min(freq_range))
+                if min_omega is None or min_omega <= 0:
+                    min_omega = 1.0
+                if dynamic_t_max and min_updates > 0:
+                    window_duration = window_cycles * (2 * np.pi) / max(min_omega, 1e-8)
+                    t_min_needed = min_updates * window_duration
+                    t_max_base = float(t_max_cfg)
+                    if t_min_needed > t_max_base:
+                        t_max_used = t_min_needed
+                        sim_params_cfg["total_steps"] = int(t_max_used / float(dt_cfg))
+                        print(
+                            "!!~~~## adaptive_lock t_max extended "
+                            f"(base={t_max_base:.3f}, used={t_max_used:.3f}, "
+                            f"min_omega={min_omega:.3f}, window_cycles={window_cycles:.1f}, "
+                            f"min_updates={min_updates})"
+                        )
+            except Exception:
+                pass
     else:
         args.n_q = args.n_q if args.n_q is not None else DEFAULT_N_Q
         args.n_s1 = args.n_s1 if args.n_s1 is not None else DEFAULT_N_INTERNAL
@@ -1478,6 +1539,9 @@ def main():
         sim_params_cfg = None
         memory_cfg = None
         adaptive_cfg = None
+        peak_selector_frac = 0.20
+        peak_selector_frac_struct = 0.08
+        peak_selector_snr_min = 5.0
     layer_cfg = _load_layer_state_config(args.layer_states)
     family_spec = None
     family_fp = None
@@ -1491,6 +1555,11 @@ def main():
         family_priors = make_priors_for_family(family_spec, family_fp)
         # Override band window if provided by family
         args.band_min, args.band_max = family_spec.energy_window
+
+    # Default peak selector settings (may be overridden by engine config).
+    peak_selector_frac = 0.20
+    peak_selector_frac_struct = 0.08
+    peak_selector_snr_min = 5.0
 
     # Resolve dirs to detect existing outputs (after family is known)
     raw_dir = args.raw_dir

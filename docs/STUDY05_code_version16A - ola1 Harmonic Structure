@@ -480,3 +480,85 @@ Optional audit artifacts:
 
 - `data/processed/ola1/ola1_blocks_selection.csv`
 - `data/processed/digest/ola1/*`
+
+
+
+# Amendment: Theoretical Translation of SM Descriptors to DOFT Resonant Dynamics
+
+## Abstract
+
+In Delayed Oscillator Field Theory (DOFT), the Standard Model (SM) is interpreted as an *"External Observer’s Catalog"* of internal resonant states. This document formalizes the mapping of quantum numbers ($J, P, C$) and Mass ($M$) to the underlying phase-locking dynamics of internal string layers (Q, S1, S2).
+
+---
+
+## 1. Mass ($M$) as a Phase-Locking Filter
+
+In the SM, mass is an intrinsic scalar property.  
+In DOFT, mass is an emergent **frequency proxy**.
+
+The "External" mass is defined as:
+
+$$
+M = \hbar_{\text{sim}} \cdot \omega_{\text{eff}}
+$$
+
+where $\omega_{\text{eff}}$ is the fundamental frequency obtained by dividing the measured spectral peak by its harmonic index $k$.
+
+**Translation:**  
+Matter is a standing wave of memory. A particle *“exists”* when its internal layers achieve a stable resonance lock.
+
+---
+
+## 2. Parity ($P$) as Harmonic Symmetry
+
+The SM Parity ($P$) reflects the symmetry of the wave function under spatial inversion.  
+In DOFT, $P$ is the **Harmonic Sector** of the resonance.
+
+### 2.1 Odd Parity ($P = -1$)
+
+Corresponds to signals with **Half-Wave Anti-Symmetry**:
+
+$$
+x(t + T/2) = -x(t)
+$$
+
+This symmetry naturally suppresses even harmonics, yielding a spectrum where:
+
+$$
+k \in \{1, 3, 5, \dots\}
+$$
+
+### 2.2 Even Parity ($P = +1$)
+
+Corresponds to signals with **Symmetric / Rectified** dynamics that allow even harmonic components:
+
+$$
+k \in \{1, 2, 4, \dots\}
+$$
+
+---
+
+## 3. Spin ($J$) as Locking Topology
+
+While the SM views Spin as intrinsic angular momentum, DOFT treats $J$ as the **Topology of the Phase-Lock**.
+
+The Spin state is determined by the rational ratio $p : q$ between coupled layers.
+
+### 3.1 Fermionic Spin ($J = 1/2$)
+
+Emerges from complex locking where the system requires **multiple internal phase rotations** to return to its initial state — a hallmark of **high-order rational locking**, e.g.:
+
+- $3 : 2$
+- $5 : 3$
+
+These nontrivial $p : q$ relationships encode the effective “spin-like” behavior in the phase topology rather than in a literal angular momentum.
+
+---
+
+## 4. Charge Conjugation ($C$) as Phase Polarity
+
+The SM Charge Conjugation ($C$) relates to the transformation between particles and antiparticles.  
+In DOFT, $C$ represents the **Orientation of the Delay Kernel**.
+
+$C$ is encoded in the **sign and direction of the causal delay** between oscillators.  
+A $C$-inversion is a transformation of the phase-lead/lag relationship within the global memory field $Z(t)$, effectively flipping the polarity of how past states influence the present lock configuration.
