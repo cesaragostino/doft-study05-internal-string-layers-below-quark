@@ -627,6 +627,23 @@
       }
     },
     {
+      "name": "meson_phi_1680",
+      "family": "meson",
+      "type": "vector",
+      "masses_gev": [1.680],
+      "tolerances": {
+        "mass_abs": 0.03,
+        "width_abs": 0.05,
+        "spacing_rel": 0.05
+      },
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2]
+        }
+      }
+    },
+    {
       "name": "meson_d_star_zero",
       "family": "charmed_meson",
       "type": "meson",

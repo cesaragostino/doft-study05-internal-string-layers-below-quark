@@ -8,6 +8,7 @@
 | 20 | 0.24851243858936167 | A | 4.113110007134626 | 2.311931405897532 |  | 0.6037041171839128 | 30 | 0.18753361931951423 | 0.0005983081709339789 | 0.010146659709441815 |
 | 73 | 0.2570243932330521 | A | 8.854107212583143 | 4.134265611177589 |  | 0.65362834518646 | 30 | 0.2689285268440207 | 0.0010521224497154148 | 0.015467145848017366 |
 | 66 | 0.26349241374575222 | A | 8.705727988865915 | 7.878289032610127 |  | 0.6214940568141406 | 30 | 0.4740435042178108 | 0.00011235355062495793 | 0.012417365208580658 |
+| 107 | 0.27905806111416964 | A | 2.84575696414408 | 2.2790057313803844 |  | 0.6122652635745094 | 11 | 0.38096270095651436 | 0.9997879347203124 | 0.0020767050726623448 |
 | 96 | 0.2845759577188528 | A | 4.5400417384837635 | 9.098554000493092 |  | 0.6088053248151286 | 12 | 0.22100385621097166 | 0.00010985671967206379 | 0.004257181466831519 |
 | 12 | 0.2979954637170027 | A | 3.54184425470706 | 2.8220194724182037 |  | 0.6513240748259799 | 28 | 0.13463832970264347 | 0.9990232924557076 | 0.00824852482648902 |
 | 52 | 0.30036868447405574 | A | 3.4044429119164112 | 3.5381185964033977 |  | 0.6060498345020249 | 11 | 0.7074445502768345 | 0.9977567529053051 | 0.017353899389785914 |
@@ -110,6 +111,7 @@
 | 31 | 0.61320035942703222 | B | 8.557635187269982 | 5.865302047942965 |  | 0.6304145125873649 | 28 | 0.2719725400449226 | 0.9996433392706029 | 0.0033998829446081967 |
 | 25 | 0.61647507523627865 | B | 6.596938199646023 | 8.90276158797709 |  | 0.6151898371637343 | 28 | 0.2334350234786211 | 0.9998457376075336 | 0.0016151149928469017 |
 | 13 | 0.62950817573770468 | B | 6.274601095260091 | 9.94831338304731 |  | 0.6571399745927542 | 25 | 0.3118615844335179 | 0.9998047036917365 | 0.0019851055473094842 |
+| 106 | 0.64233126693252507 | B | 7.391289498595708 | 7.975442456571783 |  | 0.6007827882365187 | 17 | 0.3793744741369485 | 0.9989067826968293 | 0.00896861423059165 |
 | 100 | 0.64338622194003847 | B | 8.46243732763316 | 6.928672869955678 |  | 0.6238184390075737 | 18 | 0.2939255203418937 | 0.9986971068861007 | 0.010780319780401355 |
 | 30 | 0.64472571690576597 | B | 9.876607301128313 | 7.422566953534375 |  | 0.5994272868496464 | 12 | 0.34941090879090086 | 0.9995300057172082 | 0.004250479721719321 |
 
@@ -129,6 +131,7 @@
 | 2.55 | 9.95 | 1 | 1 | 0 | 0 |
 | 2.57 | 8.42 | 1 | 1 | 0 | 0 |
 | 2.62 | 9.00 | 1 | 1 | 0 | 0 |
+| 2.85 | 2.28 | 1 | 1 | 0 | 0 |
 | 2.89 | 5.76 | 1 | 1 | 0 | 0 |
 | 3.40 | 3.51 | 1 | 1 | 0 | 0 |
 | 3.40 | 3.54 | 1 | 1 | 0 | 0 |
@@ -185,6 +188,7 @@
 | 7.10 | 2.40 | 1 | 1 | 0 | 0 |
 | 7.13 | 6.91 | 1 | 1 | 0 | 0 |
 | 7.33 | 9.72 | 1 | 0 | 1 | 0 |
+| 7.39 | 7.98 | 1 | 0 | 1 | 0 |
 | 7.41 | 2.61 | 1 | 1 | 0 | 0 |
 | 7.44 | 5.81 | 1 | 1 | 0 | 0 |
 | 7.46 | 3.19 | 1 | 1 | 0 | 0 |
@@ -228,27 +232,27 @@
 | 9.94 | 3.29 | 1 | 1 | 0 | 0 |
 
 ## Semáforo de salud
-- Runs totales: 106
-- Runs aceptados: 35 (33.0%)
+- Runs totales: 108
+- Runs aceptados: 35 (32.4%)
 - Alertas: ninguna
 
 ## Entropía / Caos (nuevo)
 - Fuente de datos: partial_runs
-- Runs con entropy_chaos: 104
-- chaos_mode: dynamic=104, ensemble=0
-- PE_tick_norm (mean/med/min/max): 0.667 / 0.659 / 0.212 / 0.924
+- Runs con entropy_chaos: 106
+- chaos_mode: dynamic=106, ensemble=0
+- PE_tick_norm (mean/med/min/max): 0.666 / 0.653 / 0.212 / 0.924
 - T_ticks (mean/med/min/max): 201.0 / 201.0 / 201 / 201
 - mean_H_lock_norm (mean/med): 0.006 / 0.004
 - mixture_entropy_blocks_norm (mean/med): 0.000 / -0.000
 - structure_mix_norm (mean/med): 0.000 / 0.000
-- fraction_structured (mean/med): 0.048 / 0.000
+- fraction_structured (mean/med): 0.047 / 0.000
 
 ## Energía interna (E_internal)
-- Runs con E_internal: 104 / 106
-- E_internal runs (mean/med/min/max): 111.346 / 3.57202e-05 / 7.63742e-12 / 8886.63
-- Bloques con internal_energy: 104 / 106
-- internal_energy bloques (mean/med/min/max): 111.346 / 3.57202e-05 / 7.63742e-12 / 8886.63
-- mass_sim_gev bloques (mean/med/min/max): 2.53268 / 2.30043 / 1.87731 / 4.33199
+- Runs con E_internal: 106 / 108
+- E_internal runs (mean/med/min/max): 109.245 / 3.57202e-05 / 7.63742e-12 / 8886.63
+- Bloques con internal_energy: 106 / 108
+- internal_energy bloques (mean/med/min/max): 109.245 / 3.57202e-05 / 7.63742e-12 / 8886.63
+- mass_sim_gev bloques (mean/med/min/max): 2.52321 / 2.25567 / 1.87731 / 4.33199
 
 ## Proxies de masa/lock (unidades internas)
 | run | particle | family | omega_ref | M_spec | M1 | M2 | M3 |
@@ -350,9 +354,9 @@
 | 103 | unknown | unknown | 6.554e+00 | 6.554e+00 | 2.102e+01 | 1.378e+02 | 2.404e+01 |
 | 104 | unknown | unknown | 6.458e+00 | 6.458e+00 | 2.001e+01 | 1.292e+02 | 4.314e+01 |
 | 105 | unknown | unknown | 9.249e+00 | 9.249e+00 | 1.100e+01 | 1.018e+02 | 4.723e+01 |
+| 106 | unknown | unknown | 6.453e+00 | 6.453e+00 | 1.701e+01 | 1.098e+02 | 4.199e+01 |
+| 107 | unknown | unknown | 6.388e+00 | 6.388e+00 | 1.100e+01 | 7.028e+01 | 2.682e+01 |
 | 58 | xi_c_2645 | charmed_baryon | 8.433e+00 | 8.433e+00 | 1.401e+01 | 1.181e+02 | 6.450e+01 |
-| 69 | xi_c_2645 | charmed_baryon | 8.437e+00 | 8.437e+00 | 2.102e+01 | 1.773e+02 | 2.870e+01 |
-| 19 | xi_c_plus | charmed_baryon | 7.874e+00 | 7.874e+00 | 1.901e+01 | 1.497e+02 | 6.245e+01 |
 
 ## Energía calibrada por bloque
 - No se pudo construir la tabla (falta internal_energy, mass_gev o sm_mass_gev).
@@ -474,11 +478,11 @@
 | 103 | unknown | unknown | 6.5539 | 6.5539 | 2.07333 | n/d | no |
 | 104 | unknown | unknown | 6.45773 | 6.45773 | 2.04291 | n/d | no |
 | 105 | unknown | unknown | 9.24923 | 9.24923 | 2.92601 | n/d | no |
+| 106 | unknown | unknown | 6.45256 | 6.45256 | 2.04128 | n/d | no |
+| 107 | unknown | unknown | 6.38767 | 6.38767 | 2.02075 | n/d | no |
 | 58 | xi_c_2645 | charmed_baryon | 8.4326 | 8.4326 | 2.66766 | +0.0083 | no |
 | 69 | xi_c_2645 | charmed_baryon | 8.43688 | 8.43688 | 2.66902 | +0.0088 | no |
 | 19 | xi_c_plus | charmed_baryon | 7.87369 | 7.87369 | 2.49085 | +0.0093 | no |
-| 20 | xi_c_plus | charmed_baryon | 7.51152 | 7.51152 | 2.37628 | -0.0371 | no |
-| 22 | xi_c_plus | charmed_baryon | 7.57977 | 7.57977 | 2.39787 | -0.0284 | no |
 
 * = harmonic-guard aplicado
 
@@ -493,7 +497,7 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 | charmed_meson | 3 | 0.000 | 1.000 | 0.000 |
 | delta_like | 19 | 1.000 | 0.000 | 1.000 |
 | nucleus | 3 | 1.000 | 0.000 | 1.000 |
-| unknown | 58 | 0.693 | 0.307 | 0.690 |
+| unknown | 60 | 0.703 | 0.297 | 0.700 |
 
 ### By J^PC
 | jpc | count | odd_frac_mean | even_frac_mean | odd_dominant_frac |
@@ -505,29 +509,29 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 | 5/2- | 3 | 1.000 | 0.000 | 1.000 |
 | 7/2+ | 9 | 1.000 | 0.000 | 1.000 |
 | ? | 3 | 1.000 | 0.000 | 1.000 |
-| unknown | 58 | 0.693 | 0.307 | 0.690 |
+| unknown | 60 | 0.703 | 0.297 | 0.700 |
 
 ### Top 10 particles by odd evidence
 | particle | odd_evidence_frac | even_evidence_frac |
 |----------|-------------------|--------------------|
-| delta_1950 | 1.000 | 0.000 |
 | delta_1910 | 1.000 | 0.000 |
 | lambda_c | 1.000 | 0.000 |
-| delta_1930 | 1.000 | 0.000 |
+| delta_1950 | 1.000 | 0.000 |
 | xi_c_plus | 1.000 | 0.000 |
+| delta_1930 | 1.000 | 0.000 |
 | delta_1920 | 1.000 | 0.000 |
-| delta_1900 | 1.000 | 0.000 |
 | lambda_c_2625 | 1.000 | 0.000 |
+| delta_1900 | 1.000 | 0.000 |
 | xi_c_2645 | 1.000 | 0.000 |
 | lambda_c_2765 | 1.000 | 0.000 |
 
 ### Top 10 particles by even evidence
 | particle | odd_evidence_frac | even_evidence_frac |
 |----------|-------------------|--------------------|
-| meson_d_star_plus | 0.000 | 1.000 |
 | meson_d_star_zero | 0.000 | 1.000 |
+| meson_d_star_plus | 0.000 | 1.000 |
 | meson_ds_star | 0.000 | 1.000 |
-| unknown | 0.693 | 0.307 |
+| unknown | 0.703 | 0.297 |
 | lambda_c_2860 | 1.000 | 0.000 |
 | triton | 1.000 | 0.000 |
 | lambda_c_2765 | 1.000 | 0.000 |
@@ -536,7 +540,7 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 | xi_c_plus | 1.000 | 0.000 |
 
 ## Promedio cósmico (Ola1)
-- cosmic_chaos_temp (PE avg): 0.6671
+- cosmic_chaos_temp (PE avg): 0.6661
 - cosmic_disorder (H_mean avg): 0.0059
 
 ## Caos/desorden por run
@@ -648,6 +652,8 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 | 103 | 0.8238 | 0.0095 |
 | 104 | 0.6644 | 0.0050 |
 | 105 | 0.5347 | 0.0026 |
+| 106 | 0.6144 | 0.0082 |
+| 107 | 0.6176 | 0.0019 |
 
 ## Inventario (cosecha)
 | Partícula | Cantidad | Mejor d_total | Promedio d_total |
@@ -665,7 +671,7 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 | meson_d_star_zero | 1 | 0.000 | 0.000 |
 | meson_ds_star | 1 | 2.700 | 2.700 |
 | triton | 3 | 0.193 | 0.690 |
-| unknown | 58 | 0.005 | 0.868 |
+| unknown | 60 | 0.005 | 0.865 |
 | xi_c_2645 | 2 | 4.333 | 4.468 |
 | xi_c_plus | 7 | 0.003 | 1.888 |
 
@@ -685,14 +691,14 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 | meson_d_star_zero | 1 | 0.000 | 0.000 | 0.000 | level1:1 | none:1 |
 | meson_ds_star | 1 | 2.700 | 2.700 | 2.700 | level1:1 | none:1 |
 | triton | 3 | 0.193 | 0.853 | 1.025 | level1:3 | none:3 |
-| unknown | 58 | 0.005 | 0.614 | 3.599 | :2, level1:56, none:2 | :2, latent:5, none:53 |
+| unknown | 60 | 0.005 | 0.614 | 3.599 | :2, level1:58, none:2 | :2, latent:5, none:55 |
 | xi_c_2645 | 2 | 4.333 | 4.468 | 4.604 | level1:2 | latent:1, none:1 |
 | xi_c_plus | 7 | 0.003 | 2.261 | 3.082 | level1:6, none:1 | latent:1, none:6 |
 
 ## Radar del Zoo (d_total < 5.0) no aceptados
 | Partícula | Cantidad | Mejor d_total |
 |-----------|----------|---------------|
-| unknown | 680 | 0.003 |
+| unknown | 713 | 0.003 |
 
 ## Harmonic Policy Rejects (tagger)
 - run_id=0.0 candidate jpc=1/2+ -> policy odd/[1, 3, 5] | run parity=even, k=2, conf=1.0 -> REJECT (parity_mismatch|k_mismatch)
@@ -719,208 +725,27 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 ## Pareto de rechazos (causas en selección)
 | Razón | Cuenta |
 |-------|--------|
-| policy_rejected | 58 |
-| dof_grade_not_a | 29 |
+| policy_rejected | 60 |
+| dof_grade_not_a | 30 |
 | dof_missing | 2 |
 | missing_match | 2 |
 | unknown_particle | 2 |
 
 ## Bloques aceptados con métricas de entropía/caos
-### triton_block_0001 (run_id=53)
-- Partícula: triton, tier: level1, s2_state: none
-- match_score.d_total: 1.025
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.993243243243243, 1.9966216216216217, 1.9999999999999998, 2.003378378378378, 2.0067567567567566, 2.010135135135135, 2.013513513513513, 2.016891891891892, 2.02027027027027, 2.0236486486486482, 2.027027027027027, 2.060810810810811, 2.0641891891891895, 2.0675675675675675, 2.070945945945946, 2.0743243243243246, 2.0777027027027026, 2.081081081081081, 2.0844594594594597, 2.087837837837838, 2.091216216216216, 2.0945945945945943, 2.097972972972973]
-- F_m (base): 1.993 GeV
-- M_eff (base≈F_m): 1.993
-- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.007)
-- sm_mass_gev: 2.809
-- mass_sim_raw_gev: 2.83454
-- mass_sim_used_gev: 2.83454
-- Δ_mass_sim vs SM: +0.9119%
-- H_block (lock_quality): 0.007
-- band_power_capture: 0.1663166554073374
-- chaos_mode=dynamic, PE_tick_norm=0.6332935988045326, T_ticks=201
-- mean_H_lock_norm=0.007016264798180396, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0016 / 0.0002 / 0.0031
-
-### triton_block_0002 (run_id=68)
-- Partícula: triton, tier: level1, s2_state: none
-- match_score.d_total: 0.853
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9966414777497903, 1.9983207388748951, 2.0, 2.001679261125105, 2.00335852225021, 2.005037783375315, 2.00671704450042, 2.0083963056255247, 2.0100755667506296, 2.0117548278757345, 2.0134340890008398]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.005)
-- sm_mass_gev: 2.809
-- mass_sim_raw_gev: 2.7876
-- mass_sim_used_gev: 2.7876
-- Δ_mass_sim vs SM: -0.7591%
-- H_block (lock_quality): 0.005
-- band_power_capture: 0.16641503560915957
-- chaos_mode=dynamic, PE_tick_norm=0.7027571904992455, T_ticks=201
-- mean_H_lock_norm=0.005254889799866969, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0049 / 0.0006 / 0.0114
-
-### unknown_block_0001 (run_id=105)
+### unknown_block_0001 (run_id=94)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.933
+- match_score.d_total: 0.154
 - Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9972640218878253, 1.998632010943913, 2.0, 2.001367989056088, 2.002735978112175, 2.004103967168263, 2.005471956224351, 2.006839945280438, 2.008207934336526, 2.009575923392613, 2.0109439124487007]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.992 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.1672774513070109
-- chaos_mode=dynamic, PE_tick_norm=0.5347066134765406, T_ticks=201
-- mean_H_lock_norm=0.0026378914507315656, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0042 / 0.0003 / 0.0099
-
-### unknown_block_0002 (run_id=4)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.830
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9905660377358492, 1.9952830188679247, 2.0, 2.0047169811320757, 2.0094339622641515, 2.014150943396227, 2.0188679245283025, 2.023584905660378, 2.028301886792453, 2.0330188679245285, 2.037735849056604, 2.0424528301886795]
-- F_m (base): 1.991 GeV
-- M_eff (base≈F_m): 1.991
-- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.16302040693834596
-- chaos_mode=dynamic, PE_tick_norm=0.516348136180885, T_ticks=201
-- mean_H_lock_norm=0.0031717388704359784, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0020 / 0.0007 / 0.0048
-
-### unknown_block_0003 (run_id=82)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.084
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9889807162534434, 1.9944903581267215, 2.0, 2.0055096418732785, 2.011019283746556, 2.0165289256198347, 2.0220385674931127, 2.0275482093663912, 2.0330578512396693, 2.038567493112948, 2.044077134986226, 2.0495867768595044, 2.3856749311294765, 2.3911845730027546, 2.396694214876033, 2.402203856749311, 2.4077134986225897, 2.4132231404958677, 2.4187327823691462, 2.4242424242424243]
-- F_m (base): 1.989 GeV
-- M_eff (base≈F_m): 1.989
-- M_corrected (F_m*(1-H_block)): 1.975 (H_block=0.007)
-- H_block (lock_quality): 0.007
-- band_power_capture: 0.1661053215370441
-- chaos_mode=dynamic, PE_tick_norm=0.45814722568252414, T_ticks=201
-- mean_H_lock_norm=0.0071987316864046275, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0007 / 0.0000 / 0.0012
-
-### unknown_block_0004 (run_id=48)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.210
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9957401490947817, 1.997870074547391, 2.0, 2.0021299254526093, 2.004259850905218, 2.0063897763578273, 2.0085197018104366, 2.0106496272630454, 2.012779552715655, 2.014909478168264, 2.017039403620873, 2.0191693290734825]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.15740465469687623
-- chaos_mode=dynamic, PE_tick_norm=0.6444174212609663, T_ticks=201
-- mean_H_lock_norm=0.0027130206934600307, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0006 / 0.0001 / 0.0011
-
-### meson_d_star_plus_block_0001 (run_id=59)
-- Partícula: meson_d_star_plus, tier: level1, s2_state: none
-- match_score.d_total: 0.016
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9969879518072284, 1.9984939759036142, 2.0, 2.001506024096386, 2.003012048192771, 2.0045180722891565]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.970 (H_block=0.014)
-- sm_mass_gev: 2.010
-- mass_sim_raw_gev: 4.02082
-- mass_sim_used_gev: 2.01041
-- Δ_mass_sim vs SM: +0.0074%
-- H_block (lock_quality): 0.014
-- band_power_capture: 0.20821229822582799
-- chaos_mode=dynamic, PE_tick_norm=0.8117714540664375, T_ticks=201
-- mean_H_lock_norm=0.013749097685098221, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.9782 / 0.8592 / 0.9972
-
-### delta_1950_block_0001 (run_id=45)
-- Partícula: delta_1950, tier: level1, s2_state: none
-- match_score.d_total: 0.047
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9809523809523806, 1.99047619047619, 1.9999999999999998, 2.0095238095238095, 2.0190476190476185, 2.028571428571428, 2.0380952380952375, 2.0476190476190474, 2.057142857142857, 2.0666666666666664, 2.076190476190476, 2.552380952380952, 2.5619047619047617, 2.571428571428571, 2.58095238095238, 2.5904761904761897, 2.5999999999999996, 2.609523809523809, 2.6190476190476186, 2.628571428571428, 2.6380952380952376, 2.647619047619047]
-- F_m (base): 1.981 GeV
-- M_eff (base≈F_m): 1.981
-- M_corrected (F_m*(1-H_block)): 1.976 (H_block=0.003)
-- sm_mass_gev: 1.950
-- mass_sim_raw_gev: 1.94763
-- mass_sim_used_gev: 1.94763
-- Δ_mass_sim vs SM: -0.1217%
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.1637949710455913
-- chaos_mode=dynamic, PE_tick_norm=0.8355560314444546, T_ticks=201
-- mean_H_lock_norm=0.0024996231727179036, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0013 / 0.0000 / 0.0035
-
-### unknown_block_0005 (run_id=61)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.112
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9914163090128754, 1.9957081545064377, 2.0, 2.0257510729613735, 2.0300429184549356, 2.0343347639484977, 2.03862660944206, 2.0429184549356223, 2.0472103004291844, 2.051502145922747, 2.055793991416309, 2.060085836909871, 2.0643776824034337, 2.0686695278969958]
-- F_m (base): 1.991 GeV
-- M_eff (base≈F_m): 1.991
-- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.16295184995384276
-- chaos_mode=dynamic, PE_tick_norm=0.6600048819310081, T_ticks=201
-- mean_H_lock_norm=0.004431428506100115, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0019 / 0.0007 / 0.0041
-
-### unknown_block_0006 (run_id=34)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.499
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9929824561403509, 1.9964912280701754, 1.9999999999999998, 2.003508771929824, 2.007017543859649, 2.0105263157894737, 2.0140350877192983, 2.0175438596491224, 2.0210526315789474, 2.024561403508772, 2.0280701754385966, 2.0385964912280703, 2.042105263157895, 2.045614035087719, 2.0491228070175436, 2.052631578947368, 2.056140350877193, 2.0596491228070173, 2.0631578947368423, 2.0666666666666664, 2.070175438596491, 2.0736842105263156]
-- F_m (base): 1.993 GeV
-- M_eff (base≈F_m): 1.993
-- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.09330696368335424
-- chaos_mode=dynamic, PE_tick_norm=0.6903336199491703, T_ticks=201
-- mean_H_lock_norm=0.001712219798501031, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0005 / 0.0000 / 0.0010
-
-### unknown_block_0007 (run_id=29)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.090
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9957939011566772, 1.9978969505783388, 2.0, 2.0021030494216614, 2.0042060988433232, 2.006309148264984, 2.0084121976866456, 2.010515247108307, 2.012618296529969, 2.0147213459516298, 2.0168243953732916, 2.0189274447949526]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
+- band_energies_gev: [1.9950920245398773, 1.9975460122699387, 2.0, 2.0024539877300613, 2.0049079754601227, 2.007361963190184, 2.0098159509202453, 2.0122699386503067, 2.014723926380368, 2.01717791411043, 2.0196319018404907, 2.0220858895705525, 2.0245398773006134, 2.026993865030675, 2.0294478527607365, 2.031901840490798]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
 - M_corrected (F_m*(1-H_block)): 1.974 (H_block=0.011)
 - H_block (lock_quality): 0.011
-- band_power_capture: 0.1636252681848124
-- chaos_mode=dynamic, PE_tick_norm=0.5570705990635477, T_ticks=201
-- mean_H_lock_norm=0.011154811724762398, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- band_power_capture: 0.13036036063554368
+- chaos_mode=dynamic, PE_tick_norm=0.4799636697701587, T_ticks=201
+- mean_H_lock_norm=0.010721316620832613, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0094 / 0.0007 / 0.0254
-
-### unknown_block_0008 (run_id=43)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.209
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9916142557651997, 1.9958071278826, 2.0, 2.0041928721174003, 2.008385744234801, 2.0125786163522017, 2.016771488469602, 2.0209643605870022, 2.0251572327044025, 2.5408805031446544, 2.5450733752620547, 2.5492662473794554, 2.5534591194968557, 2.557651991614256, 2.561844863731656, 2.5660377358490565, 2.5702306079664576, 2.5744234800838575, 2.5786163522012577, 2.582809224318659]
-- F_m (base): 1.992 GeV
-- M_eff (base≈F_m): 1.992
-- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.16867912655870262
-- chaos_mode=dynamic, PE_tick_norm=0.8307433097926981, T_ticks=201
-- mean_H_lock_norm=0.0044701406430492354, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0008 / 0.0001 / 0.0022
+- lock_S1_series (mean/min/max): 0.0166 / 0.0012 / 0.0571
 
 ### delta_1910_block_0001 (run_id=93)
 - Partícula: delta_1910, tier: level1, s2_state: none
@@ -941,35 +766,224 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0002 / 0.0000 / 0.0004
 
-### unknown_block_0009 (run_id=101)
+### unknown_block_0002 (run_id=36)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.066
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9963603275705188, 1.9981801637852594, 2.0, 2.001819836214741, 2.003639672429481, 2.005459508644222, 2.0072793448589628, 2.009099181073703, 2.010919017288444, 2.0127388535031847, 2.014558689717925]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.987 (H_block=0.005)
-- H_block (lock_quality): 0.005
-- band_power_capture: 0.16669637379051674
-- chaos_mode=dynamic, PE_tick_norm=0.6029142948196766, T_ticks=201
-- mean_H_lock_norm=0.004801105508919095, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- match_score.d_total: 0.186
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9847328244274807, 1.9923664122137403, 1.9999999999999998, 2.007633587786259, 2.0152671755725184, 2.022900763358778, 2.343511450381679, 2.3511450381679384, 2.3587786259541983, 2.3664122137404577, 2.374045801526717, 2.381679389312977, 2.3893129770992365, 2.3969465648854955, 2.404580152671755, 2.412213740458015, 2.4198473282442743, 2.4274809160305337, 2.435114503816793, 2.442748091603053, 2.4503816793893125, 2.458015267175572, 2.465648854961832, 2.4732824427480913, 2.4809160305343507, 2.4885496183206106, 2.4961832061068696, 2.503816793893129, 2.5114503816793885]
+- F_m (base): 1.985 GeV
+- M_eff (base≈F_m): 1.985
+- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.10078120143745636
+- chaos_mode=dynamic, PE_tick_norm=0.747827650719195, T_ticks=201
+- mean_H_lock_norm=0.002766159109329394, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0006 / 0.0002 / 0.0010
+- lock_S1_series (mean/min/max): 0.0013 / 0.0000 / 0.0042
 
-### unknown_block_0010 (run_id=16)
+### unknown_block_0003 (run_id=107)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.726
+- match_score.d_total: 0.430
 - Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.992156862745098, 1.9960784313725493, 2.0, 2.003921568627451, 2.0078431372549024, 2.011764705882353, 2.0156862745098043, 2.019607843137255, 2.0235294117647062, 2.027450980392157, 2.0313725490196077]
+- band_energies_gev: [1.998628257887517, 1.9993141289437586, 2.0, 2.000685871056241, 2.001371742112483, 2.0020576131687244, 2.0027434842249656, 2.0034293552812072, 2.0041152263374484, 2.0048010973936896, 2.0054869684499312]
+- F_m (base): 1.999 GeV
+- M_eff (base≈F_m): 1.999
+- M_corrected (F_m*(1-H_block)): 1.995 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.1670603375742651
+- chaos_mode=dynamic, PE_tick_norm=0.6175929385442122, T_ticks=201
+- mean_H_lock_norm=0.0018902984175945027, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0005 / 0.0000 / 0.0019
+
+### unknown_block_0004 (run_id=54)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 2.043
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9939849624060153, 1.9969924812030075, 2.0, 2.0030075187969927, 2.0210526315789474, 2.0240601503759397, 2.0270676691729324, 2.030075187969925, 2.0330827067669173, 2.0360902255639095, 2.039097744360902, 2.042105263157895, 2.045112781954887, 2.04812030075188, 2.051127819548872, 2.0541353383458647]
+- F_m (base): 1.994 GeV
+- M_eff (base≈F_m): 1.994
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.1572247017586755
+- chaos_mode=dynamic, PE_tick_norm=0.5931610261988653, T_ticks=201
+- mean_H_lock_norm=0.004253889681447445, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0020 / 0.0003 / 0.0051
+
+### lambda_c_block_0001 (run_id=44)
+- Partícula: lambda_c, tier: level1, s2_state: latent
+- match_score.d_total: 4.590
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9954853273137698, 1.997742663656885, 1.9999999999999998, 2.0022573363431153, 2.00451467268623, 2.0067720090293455, 2.0090293453724604, 2.0112866817155757, 2.0135440180586905, 2.015801354401806, 2.018058690744921, 2.020316027088036]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
+- M_corrected (F_m*(1-H_block)): 1.968 (H_block=0.014)
+- sm_mass_gev: 2.286
+- mass_sim_raw_gev: 2.21714
+- mass_sim_used_gev: 2.21714
+- Δ_mass_sim vs SM: -3.0316%
+- H_block (lock_quality): 0.014
+- band_power_capture: 0.16335449062157736
+- chaos_mode=dynamic, PE_tick_norm=0.6101756409619795, T_ticks=201
+- mean_H_lock_norm=0.013682013944975953, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0009 / 0.0006 / 0.0011
+
+### triton_block_0001 (run_id=68)
+- Partícula: triton, tier: level1, s2_state: none
+- match_score.d_total: 0.853
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9966414777497903, 1.9983207388748951, 2.0, 2.001679261125105, 2.00335852225021, 2.005037783375315, 2.00671704450042, 2.0083963056255247, 2.0100755667506296, 2.0117548278757345, 2.0134340890008398]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.005)
+- sm_mass_gev: 2.809
+- mass_sim_raw_gev: 2.7876
+- mass_sim_used_gev: 2.7876
+- Δ_mass_sim vs SM: -0.7591%
+- H_block (lock_quality): 0.005
+- band_power_capture: 0.16641503560915957
+- chaos_mode=dynamic, PE_tick_norm=0.7027571904992455, T_ticks=201
+- mean_H_lock_norm=0.005254889799866969, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0049 / 0.0006 / 0.0114
+
+### lambda_c_2860_block_0001 (run_id=85)
+- Partícula: lambda_c_2860, tier: level1, s2_state: none
+- match_score.d_total: 0.512
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9928057553956835, 1.9964028776978417, 2.0, 2.0035971223021583, 2.007194244604317, 2.010791366906475, 2.0143884892086334, 2.0179856115107917, 2.02158273381295, 2.0251798561151078, 2.028776978417266, 2.061151079136691, 2.0647482014388494, 2.0683453237410077, 2.071942446043166, 2.0755395683453237, 2.079136690647482, 2.08273381294964, 2.0863309352517985]
+- F_m (base): 1.993 GeV
+- M_eff (base≈F_m): 1.993
+- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.001)
+- sm_mass_gev: 2.856
+- mass_sim_raw_gev: 2.84575
+- mass_sim_used_gev: 2.84575
+- Δ_mass_sim vs SM: -0.3588%
+- H_block (lock_quality): 0.001
+- band_power_capture: 0.16932459450075696
+- chaos_mode=dynamic, PE_tick_norm=0.6162723103467541, T_ticks=201
+- mean_H_lock_norm=0.0008003694037714719, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0012 / 0.0001 / 0.0028
+
+### delta_1950_block_0001 (run_id=51)
+- Partícula: delta_1950, tier: level1, s2_state: none
+- match_score.d_total: 0.091
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9965811965811964, 1.998290598290598, 2.0, 2.0017094017094017, 2.0034188034188034, 2.005128205128205, 2.006837606837607, 2.0085470085470085, 2.01025641025641, 2.011965811965812, 2.0136752136752136, 2.0153846153846153]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.003)
+- sm_mass_gev: 1.950
+- mass_sim_raw_gev: 1.95455
+- mass_sim_used_gev: 1.95455
+- Δ_mass_sim vs SM: +0.2332%
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.164890175055516
+- chaos_mode=dynamic, PE_tick_norm=0.6803700969059597, T_ticks=201
+- mean_H_lock_norm=0.0026934587160687266, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0004 / 0.0000 / 0.0016
+
+### unknown_block_0005 (run_id=9)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.634
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9813953488372098, 1.990697674418605, 2.0, 2.0093023255813955, 2.018604651162791, 2.0279069767441866, 2.0372093023255817, 2.046511627906977, 2.7441860465116283, 2.7534883720930234, 2.7627906976744194, 2.7720930232558145, 2.7813953488372096, 2.790697674418605, 2.8000000000000003, 2.8093023255813954, 2.8186046511627914, 2.8279069767441865, 2.8372093023255816, 2.8465116279069775, 2.8558139534883726, 2.865116279069768, 2.8744186046511633]
+- F_m (base): 1.981 GeV
+- M_eff (base≈F_m): 1.981
+- M_corrected (F_m*(1-H_block)): 1.970 (H_block=0.006)
+- H_block (lock_quality): 0.006
+- band_power_capture: 0.14160160168823227
+- chaos_mode=dynamic, PE_tick_norm=0.843478555034114, T_ticks=201
+- mean_H_lock_norm=0.005673895645962608, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0012 / 0.0000 / 0.0031
+
+### xi_c_plus_block_0001 (run_id=60)
+- Partícula: xi_c_plus, tier: level1, s2_state: latent
+- match_score.d_total: 2.261
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9965367965367966, 1.9982683982683984, 2.0, 2.001731601731602, 2.0034632034632036, 2.0051948051948054, 2.0069264069264072, 2.0086580086580086, 2.0103896103896104, 2.012121212121212, 2.013852813852814]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.009)
+- sm_mass_gev: 2.468
+- mass_sim_raw_gev: 2.40018
+- mass_sim_used_gev: 2.40018
+- Δ_mass_sim vs SM: -2.7430%
+- H_block (lock_quality): 0.009
+- band_power_capture: 0.16825393897743252
+- chaos_mode=dynamic, PE_tick_norm=0.5525951214799794, T_ticks=201
+- mean_H_lock_norm=0.008963505085162514, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0012 / 0.0002 / 0.0024
+
+### unknown_block_0006 (run_id=23)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.780
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9924670433145009, 1.9962335216572502, 2.0, 2.0037664783427496, 2.007532956685499, 2.0112994350282483, 2.015065913370998, 2.0188323917137474, 2.022598870056497, 2.0263653483992465, 2.030131826741996, 2.0338983050847457]
 - F_m (base): 1.992 GeV
 - M_eff (base≈F_m): 1.992
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.16744446121769366
-- chaos_mode=dynamic, PE_tick_norm=0.6285185052551079, T_ticks=201
-- mean_H_lock_norm=0.0031138035296883384, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.1626376003715073
+- chaos_mode=dynamic, PE_tick_norm=0.5187179064070442, T_ticks=201
+- mean_H_lock_norm=0.0037116701994275563, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0016 / 0.0005 / 0.0036
+- lock_S1_series (mean/min/max): 0.0023 / 0.0015 / 0.0032
+
+### lambda_c_2765_block_0001 (run_id=38)
+- Partícula: lambda_c_2765, tier: level1, s2_state: none
+- match_score.d_total: 2.846
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9945280437756496, 1.9972640218878244, 2.0, 2.0027359781121747, 2.00547195622435, 2.0082079343365256, 2.0109439124487003, 2.0136798905608755, 2.0164158686730507, 2.0191518467852254, 2.0218878248974006, 2.024623803009576, 2.0273597811217505]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
+- M_corrected (F_m*(1-H_block)): 1.980 (H_block=0.007)
+- sm_mass_gev: 2.766
+- mass_sim_raw_gev: 2.70908
+- mass_sim_used_gev: 2.70908
+- Δ_mass_sim vs SM: -2.0577%
+- H_block (lock_quality): 0.007
+- band_power_capture: 0.16193753798274732
+- chaos_mode=dynamic, PE_tick_norm=0.5591035071606903, T_ticks=201
+- mean_H_lock_norm=0.007368288674114052, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0041 / 0.0005 / 0.0107
+
+### unknown_block_0007 (run_id=105)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.933
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9972640218878253, 1.998632010943913, 2.0, 2.001367989056088, 2.002735978112175, 2.004103967168263, 2.005471956224351, 2.006839945280438, 2.008207934336526, 2.009575923392613, 2.0109439124487007]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.992 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.1672774513070109
+- chaos_mode=dynamic, PE_tick_norm=0.5347066134765406, T_ticks=201
+- mean_H_lock_norm=0.0026378914507315656, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0042 / 0.0003 / 0.0099
+
+### unknown_block_0008 (run_id=13)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.065
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9868852459016393, 1.9934426229508198, 2.0, 2.0065573770491802, 2.013114754098361, 2.019672131147541, 2.026229508196722, 2.0327868852459017, 2.039344262295082, 2.0459016393442626, 2.734426229508197, 2.740983606557377, 2.747540983606558, 2.754098360655738, 2.760655737704918, 2.7672131147540986, 2.773770491803279, 2.780327868852459, 2.7868852459016393, 2.79344262295082, 2.8000000000000003, 2.8065573770491805, 2.813114754098361, 2.8196721311475414, 2.8262295081967213]
+- F_m (base): 1.987 GeV
+- M_eff (base≈F_m): 1.987
+- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.15415457705212188
+- chaos_mode=dynamic, PE_tick_norm=0.6870098867025489, T_ticks=201
+- mean_H_lock_norm=0.0018019725015719077, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0016 / 0.0001 / 0.0042
 
 ### xi_c_2645_block_0001 (run_id=69)
 - Partícula: xi_c_2645, tier: level1, s2_state: latent
@@ -990,154 +1004,52 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0018 / 0.0002 / 0.0063
 
-### lambda_c_2765_block_0001 (run_id=80)
-- Partícula: lambda_c_2765, tier: level1, s2_state: latent
-- match_score.d_total: 0.505
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9963403476669714, 1.9981701738334858, 2.0, 2.001829826166514, 2.003659652333028, 2.005489478499542, 2.0073193046660567, 2.009149130832571, 2.0109789569990846, 2.012808783165599, 2.0146386093321134, 2.0164684354986275]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.977 (H_block=0.010)
-- sm_mass_gev: 2.766
-- mass_sim_raw_gev: 2.7761
-- mass_sim_used_gev: 2.7761
-- Δ_mass_sim vs SM: +0.3652%
-- H_block (lock_quality): 0.010
-- band_power_capture: 0.16061581756922416
-- chaos_mode=dynamic, PE_tick_norm=0.522047428809671, T_ticks=201
-- mean_H_lock_norm=0.009723383829986354, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0036 / 0.0011 / 0.0075
-
-### unknown_block_0011 (run_id=39)
+### unknown_block_0009 (run_id=106)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.581
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9975046787273862, 1.998752339363693, 2.0, 2.0012476606363068, 2.002495321272614, 2.0037429819089208, 2.0049906425452275, 2.0062383031815343, 2.0074859638178415, 2.0087336244541483, 2.0099812850904555]
-- F_m (base): 1.998 GeV
-- M_eff (base≈F_m): 1.998
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.006)
-- H_block (lock_quality): 0.006
-- band_power_capture: 0.1666416912238699
-- chaos_mode=dynamic, PE_tick_norm=0.21244207729538747, T_ticks=201
-- mean_H_lock_norm=0.005804518528986572, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0023 / 0.0006 / 0.0049
-
-### unknown_block_0012 (run_id=95)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.872
+- match_score.d_total: 1.143
 - Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.989795918367347, 1.9948979591836735, 2.0, 2.0051020408163267, 2.010204081632653, 2.0153061224489797, 2.0204081632653064, 2.0255102040816326, 2.0306122448979593, 2.035714285714286, 2.040816326530612, 2.0459183673469385, 2.9489795918367347, 2.9540816326530615, 2.959183673469388, 2.9642857142857144, 2.969387755102041]
-- F_m (base): 1.990 GeV
-- M_eff (base≈F_m): 1.990
-- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.003)
+- band_energies_gev: [1.987730061349693, 1.9938650306748469, 2.0, 2.0061349693251533, 2.0122699386503067, 2.01840490797546, 2.576687116564417, 2.5828220858895707, 2.5889570552147236, 2.595092024539877, 2.6012269938650308, 2.6073619631901837, 2.613496932515337, 2.6196319018404908, 2.625766871165644, 2.6319018404907975, 2.638036809815951]
+- F_m (base): 1.988 GeV
+- M_eff (base≈F_m): 1.988
+- M_corrected (F_m*(1-H_block)): 1.972 (H_block=0.008)
+- H_block (lock_quality): 0.008
+- band_power_capture: 0.17016930867887056
+- chaos_mode=dynamic, PE_tick_norm=0.6143569362575834, T_ticks=201
+- mean_H_lock_norm=0.008157913774418813, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0016 / 0.0007 / 0.0030
+
+### unknown_block_0010 (run_id=40)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.644
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9938650306748467, 1.9969325153374236, 1.9999999999999998, 2.0030674846625764, 2.0061349693251533, 2.0092024539877302, 2.0122699386503067, 2.015337423312883, 2.0184049079754605, 2.147239263803681, 2.150306748466258, 2.153374233128834, 2.1564417177914113, 2.1595092024539877, 2.162576687116564, 2.165644171779141, 2.168711656441718, 2.1717791411042944, 2.174846625766871, 2.177914110429448, 2.1809815950920246, 2.184049079754601, 2.187116564417178, 2.1901840490797544, 2.1932515337423313, 2.196319018404908]
+- F_m (base): 1.994 GeV
+- M_eff (base≈F_m): 1.994
+- M_corrected (F_m*(1-H_block)): 1.988 (H_block=0.003)
 - H_block (lock_quality): 0.003
-- band_power_capture: 0.16862500535764055
-- chaos_mode=dynamic, PE_tick_norm=0.8654225723239964, T_ticks=201
-- mean_H_lock_norm=0.0025823597602880684, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- band_power_capture: 0.14348623834793456
+- chaos_mode=dynamic, PE_tick_norm=0.799187714143535, T_ticks=201
+- mean_H_lock_norm=0.0026840678586831468, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0006 / 0.0000 / 0.0016
+- lock_S1_series (mean/min/max): 0.0009 / 0.0001 / 0.0021
 
-### unknown_block_0013 (run_id=70)
+### unknown_block_0011 (run_id=43)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.401
+- match_score.d_total: 1.209
 - Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9932432432432436, 1.996621621621622, 2.0, 2.0033783783783785, 2.006756756756757, 2.0101351351351355, 2.013513513513514, 2.016891891891892, 2.0202702702702706, 2.0236486486486487, 2.027027027027027, 2.0304054054054057, 2.628378378378379, 2.631756756756757]
-- F_m (base): 1.993 GeV
-- M_eff (base≈F_m): 1.993
-- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.005)
-- H_block (lock_quality): 0.005
-- band_power_capture: 0.1711330875572164
-- chaos_mode=dynamic, PE_tick_norm=0.7242066193329059, T_ticks=201
-- mean_H_lock_norm=0.004917227317851937, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0024 / 0.0001 / 0.0054
-
-### unknown_block_0014 (run_id=86)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.842
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.995943204868154, 1.9979716024340768, 1.9999999999999998, 2.0020283975659225, 2.0040567951318455, 2.0060851926977685, 2.0081135902636915, 2.0101419878296145, 2.012170385395537, 2.0141987829614605, 2.016227180527383]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.006)
-- H_block (lock_quality): 0.006
-- band_power_capture: 0.16707993687893813
-- chaos_mode=dynamic, PE_tick_norm=0.565918857660839, T_ticks=201
-- mean_H_lock_norm=0.006092085282754131, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0045 / 0.0003 / 0.0120
-
-### unknown_block_0015 (run_id=18)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.018
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.995515695067265, 1.9977578475336328, 2.0, 2.002242152466368, 2.0044843049327357, 2.0986547085201797, 2.1008968609865475, 2.1031390134529153, 2.1053811659192827, 2.1076233183856505, 2.1098654708520184, 2.112107623318386, 2.1143497757847536, 2.1165919282511214, 2.1188340807174892, 2.121076233183857]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.17228380931949608
-- chaos_mode=dynamic, PE_tick_norm=0.7991979924332363, T_ticks=201
-- mean_H_lock_norm=0.002198552726295773, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0002 / 0.0000 / 0.0005
-
-### unknown_block_0016 (run_id=46)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 2.554
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9924242424242422, 1.996212121212121, 2.0, 2.0037878787878785, 2.0075757575757573, 2.0113636363636362, 2.015151515151515, 2.0189393939393936, 2.0227272727272725, 2.0265151515151514, 2.0303030303030303, 2.0340909090909087]
+- band_energies_gev: [1.9916142557651997, 1.9958071278826, 2.0, 2.0041928721174003, 2.008385744234801, 2.0125786163522017, 2.016771488469602, 2.0209643605870022, 2.0251572327044025, 2.5408805031446544, 2.5450733752620547, 2.5492662473794554, 2.5534591194968557, 2.557651991614256, 2.561844863731656, 2.5660377358490565, 2.5702306079664576, 2.5744234800838575, 2.5786163522012577, 2.582809224318659]
 - F_m (base): 1.992 GeV
 - M_eff (base≈F_m): 1.992
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.16619714686386516
-- chaos_mode=dynamic, PE_tick_norm=0.6421689925649102, T_ticks=201
-- mean_H_lock_norm=0.003024423858180588, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.16867912655870262
+- chaos_mode=dynamic, PE_tick_norm=0.8307433097926981, T_ticks=201
+- mean_H_lock_norm=0.0044701406430492354, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0024 / 0.0003 / 0.0061
+- lock_S1_series (mean/min/max): 0.0008 / 0.0001 / 0.0022
 
-### lambda_c_block_0001 (run_id=67)
-- Partícula: lambda_c, tier: level1, s2_state: none
-- match_score.d_total: 3.926
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9969088098918084, 1.9984544049459043, 2.0, 2.001545595054096, 2.003091190108192, 2.0046367851622873, 2.006182380216383, 2.007727975270479, 2.009273570324575, 2.010819165378671, 2.012364760432767]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.003)
-- sm_mass_gev: 2.286
-- mass_sim_raw_gev: 2.22711
-- mass_sim_used_gev: 2.22711
-- Δ_mass_sim vs SM: -2.5956%
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.16510028203966073
-- chaos_mode=dynamic, PE_tick_norm=0.540865686996301, T_ticks=201
-- mean_H_lock_norm=0.003425418460708898, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0008 / 0.0003 / 0.0013
-
-### lambda_c_2765_block_0002 (run_id=38)
-- Partícula: lambda_c_2765, tier: level1, s2_state: none
-- match_score.d_total: 2.846
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9945280437756496, 1.9972640218878244, 2.0, 2.0027359781121747, 2.00547195622435, 2.0082079343365256, 2.0109439124487003, 2.0136798905608755, 2.0164158686730507, 2.0191518467852254, 2.0218878248974006, 2.024623803009576, 2.0273597811217505]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.980 (H_block=0.007)
-- sm_mass_gev: 2.766
-- mass_sim_raw_gev: 2.70908
-- mass_sim_used_gev: 2.70908
-- Δ_mass_sim vs SM: -2.0577%
-- H_block (lock_quality): 0.007
-- band_power_capture: 0.16193753798274732
-- chaos_mode=dynamic, PE_tick_norm=0.5591035071606903, T_ticks=201
-- mean_H_lock_norm=0.007368288674114052, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0041 / 0.0005 / 0.0107
-
-### unknown_block_0017 (run_id=66)
+### unknown_block_0012 (run_id=66)
 - Partícula: unknown, tier: none, s2_state: latent
 - match_score.d_total: 0.153
 - Bandas: count=1.0, s2_band_fraction=0.0
@@ -1152,230 +1064,7 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=1.0
 - lock_S1_series (mean/min/max): 0.9594 / 0.8773 / 0.9975
 
-### delta_1930_block_0001 (run_id=77)
-- Partícula: delta_1930, tier: level1, s2_state: none
-- match_score.d_total: 0.032
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9926470588235297, 1.9963235294117645, 2.0, 2.003676470588235, 2.0073529411764706, 2.011029411764706, 2.014705882352941, 2.0183823529411766, 2.602941176470588, 2.6066176470588234, 2.610294117647059, 2.613970588235294, 2.6176470588235294, 2.6213235294117645, 2.625, 2.6286764705882355, 2.6323529411764706, 2.6360294117647056, 2.639705882352941, 2.643382352941176]
-- F_m (base): 1.993 GeV
-- M_eff (base≈F_m): 1.993
-- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.002)
-- sm_mass_gev: 1.930
-- mass_sim_raw_gev: 1.93127
-- mass_sim_used_gev: 1.93127
-- Δ_mass_sim vs SM: +0.0660%
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.16812375355580322
-- chaos_mode=dynamic, PE_tick_norm=0.7248661432414408, T_ticks=201
-- mean_H_lock_norm=0.001701094321510609, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0022 / 0.0001 / 0.0054
-
-### delta_1950_block_0002 (run_id=102)
-- Partícula: delta_1950, tier: level1, s2_state: none
-- match_score.d_total: 0.144
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9942528735632186, 1.9971264367816095, 2.0, 2.002873563218391, 2.005747126436782, 2.0086206896551726, 2.0114942528735633, 2.014367816091954, 2.017241379310345, 2.020114942528736, 2.2758620689655173, 2.278735632183908, 2.281609195402299, 2.28448275862069, 2.2873563218390807, 2.290229885057471, 2.293103448275862, 2.295977011494253, 2.298850574712644, 2.3017241379310347, 2.304597701149425, 2.307471264367816]
-- F_m (base): 1.994 GeV
-- M_eff (base≈F_m): 1.994
-- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.002)
-- sm_mass_gev: 1.950
-- mass_sim_raw_gev: 1.94279
-- mass_sim_used_gev: 1.94279
-- Δ_mass_sim vs SM: -0.3697%
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.16461839671606826
-- chaos_mode=dynamic, PE_tick_norm=0.7180366544348066, T_ticks=201
-- mean_H_lock_norm=0.0018194403491020123, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0008 / 0.0000 / 0.0020
-
-### unknown_block_0018 (run_id=32)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.859
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.983673469387755, 1.9918367346938777, 2.0, 2.008163265306122, 2.0163265306122446, 3.640816326530612, 3.6489795918367345, 3.657142857142857, 3.6653061224489796, 3.6734693877551017, 3.6816326530612242, 3.6897959183673468, 3.6979591836734693, 3.706122448979592, 3.7142857142857144, 3.722448979591837, 3.730612244897959]
-- F_m (base): 1.984 GeV
-- M_eff (base≈F_m): 1.984
-- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.16490701110217332
-- chaos_mode=dynamic, PE_tick_norm=0.6268052213802572, T_ticks=201
-- mean_H_lock_norm=0.0022401879973174, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0057 / 0.0004 / 0.0196
-
-### unknown_block_0019 (run_id=76)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.761
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9910112359550562, 1.9955056179775281, 2.0, 2.004494382022472, 2.0089887640449438, 2.013483146067416, 2.0179775280898875, 2.022471910112359, 2.0269662921348313, 2.0314606741573034, 2.035955056179775]
-- F_m (base): 1.991 GeV
-- M_eff (base≈F_m): 1.991
-- M_corrected (F_m*(1-H_block)): 1.988 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.16881350683133298
-- chaos_mode=dynamic, PE_tick_norm=0.597575449643224, T_ticks=201
-- mean_H_lock_norm=0.001538743983348704, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0013 / 0.0004 / 0.0023
-
-### unknown_block_0020 (run_id=7)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.536
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9913978494623659, 1.9956989247311827, 2.0, 2.004301075268817, 2.0086021505376346, 2.0129032258064514, 2.0172043010752687, 2.021505376344086, 2.0258064516129033, 2.03010752688172, 2.034408602150538, 2.0387096774193547, 2.0774193548387094, 2.081720430107527, 2.086021505376344, 2.0903225806451613, 2.094623655913978, 2.098924731182796, 2.1032258064516127, 2.10752688172043, 2.1118279569892473, 2.1161290322580646, 2.1204301075268814]
-- F_m (base): 1.991 GeV
-- M_eff (base≈F_m): 1.991
-- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.001)
-- H_block (lock_quality): 0.001
-- band_power_capture: 0.16672777833047478
-- chaos_mode=dynamic, PE_tick_norm=0.7180793315600255, T_ticks=201
-- mean_H_lock_norm=0.0010178606855118105, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.4830 / 0.0727 / 0.9014
-
-### xi_c_plus_block_0001 (run_id=22)
-- Partícula: xi_c_plus, tier: level1, s2_state: none
-- match_score.d_total: 2.338
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9941605839416057, 1.9970802919708028, 2.0, 2.002919708029197, 2.005839416058394, 2.0087591240875913, 2.011678832116788, 2.014598540145985, 2.0175182481751825, 2.0204379562043795, 2.023357664233577]
-- F_m (base): 1.994 GeV
-- M_eff (base≈F_m): 1.994
-- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.005)
-- sm_mass_gev: 2.468
-- mass_sim_raw_gev: 2.39787
-- mass_sim_used_gev: 2.39787
-- Δ_mass_sim vs SM: -2.8364%
-- H_block (lock_quality): 0.005
-- band_power_capture: 0.16820358975095834
-- chaos_mode=dynamic, PE_tick_norm=0.742830566090492, T_ticks=201
-- mean_H_lock_norm=0.0051851667182352896, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0011 / 0.0003 / 0.0029
-
-### delta_1950_block_0003 (run_id=78)
-- Partícula: delta_1950, tier: level1, s2_state: none
-- match_score.d_total: 0.083
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.984496124031008, 1.992248062015504, 2.0, 2.007751937984496, 2.0155038759689927, 2.0232558139534884, 2.0310077519379846, 2.0387596899224807, 2.046511627906977, 2.0542635658914734, 2.062015503875969, 3.031007751937985, 3.038759689922481, 3.046511627906977, 3.0542635658914734, 3.0620155038759695, 3.0697674418604652, 3.077519379844962, 3.085271317829458, 3.0930232558139537, 3.1007751937984502, 3.1085271317829464, 3.1162790697674425]
-- F_m (base): 1.984 GeV
-- M_eff (base≈F_m): 1.984
-- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.002)
-- sm_mass_gev: 1.950
-- mass_sim_raw_gev: 1.95414
-- mass_sim_used_gev: 1.95414
-- Δ_mass_sim vs SM: +0.2121%
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.16222050328362042
-- chaos_mode=dynamic, PE_tick_norm=0.7866900371683049, T_ticks=201
-- mean_H_lock_norm=0.0018136313587479816, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0007 / 0.0000 / 0.0016
-
-### unknown_block_0021 (run_id=17)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.042
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9898218829516543, 1.994910941475827, 2.0, 2.005089058524173, 2.0101781170483464, 2.015267175572519, 2.0203562340966923, 2.0254452926208653, 2.030534351145038, 2.035623409669211, 2.0407124681933846, 2.9720101781170483, 2.9770992366412217, 2.9821882951653946, 2.9872773536895676, 2.9923664122137406, 2.9974554707379135, 3.002544529262087, 3.00763358778626, 3.012722646310433, 3.017811704834606, 3.0229007633587788, 3.027989821882952]
-- F_m (base): 1.990 GeV
-- M_eff (base≈F_m): 1.990
-- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.16236906575443363
-- chaos_mode=dynamic, PE_tick_norm=0.7974805272696648, T_ticks=201
-- mean_H_lock_norm=0.0029454429407879484, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0031 / 0.0002 / 0.0072
-
-### lambda_c_2860_block_0001 (run_id=55)
-- Partícula: lambda_c_2860, tier: level1, s2_state: none
-- match_score.d_total: 0.404
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9951338199513384, 1.9975669099756694, 2.0, 2.0024330900243315, 2.0048661800486625, 2.007299270072993, 2.009732360097324, 2.012165450121655, 2.0145985401459856, 2.017031630170316, 2.019464720194647]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.974 (H_block=0.010)
-- sm_mass_gev: 2.856
-- mass_sim_raw_gev: 2.84791
-- mass_sim_used_gev: 2.84791
-- Δ_mass_sim vs SM: -0.2831%
-- H_block (lock_quality): 0.010
-- band_power_capture: 0.16765961099819207
-- chaos_mode=dynamic, PE_tick_norm=0.4515763514257429, T_ticks=201
-- mean_H_lock_norm=0.010430691004627833, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0066 / 0.0007 / 0.0174
-
-### delta_1950_block_0004 (run_id=51)
-- Partícula: delta_1950, tier: level1, s2_state: none
-- match_score.d_total: 0.091
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9965811965811964, 1.998290598290598, 2.0, 2.0017094017094017, 2.0034188034188034, 2.005128205128205, 2.006837606837607, 2.0085470085470085, 2.01025641025641, 2.011965811965812, 2.0136752136752136, 2.0153846153846153]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.003)
-- sm_mass_gev: 1.950
-- mass_sim_raw_gev: 1.95455
-- mass_sim_used_gev: 1.95455
-- Δ_mass_sim vs SM: +0.2332%
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.164890175055516
-- chaos_mode=dynamic, PE_tick_norm=0.6803700969059597, T_ticks=201
-- mean_H_lock_norm=0.0026934587160687266, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0004 / 0.0000 / 0.0016
-
-### delta_1920_block_0001 (run_id=47)
-- Partícula: delta_1920, tier: level1, s2_state: none
-- match_score.d_total: 0.030
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9960317460317458, 1.998015873015873, 2.0, 2.001984126984127, 2.003968253968254, 2.005952380952381, 2.007936507936508, 2.009920634920635, 2.011904761904762, 2.013888888888889, 2.015873015873016, 2.242063492063492, 2.244047619047619, 2.246031746031746, 2.248015873015873, 2.2500000000000004, 2.251984126984127, 2.253968253968254, 2.255952380952381, 2.257936507936508, 2.259920634920635, 2.2619047619047623, 2.2638888888888893, 2.265873015873016, 2.267857142857143, 2.2698412698412698, 2.2718253968253967, 2.2738095238095237, 2.275793650793651, 2.277777777777778]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.003)
-- sm_mass_gev: 1.920
-- mass_sim_raw_gev: 1.91878
-- mass_sim_used_gev: 1.91878
-- Δ_mass_sim vs SM: -0.0635%
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.13634660704614082
-- chaos_mode=dynamic, PE_tick_norm=0.7321933106158612, T_ticks=201
-- mean_H_lock_norm=0.0029967632426092143, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0003 / 0.0000 / 0.0005
-
-### unknown_block_0022 (run_id=37)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.594
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9942938659058487, 1.9971469329529246, 2.0, 2.0028530670470754, 2.0057061340941513, 2.008559201141227, 2.0114122681883027, 2.014265335235378, 2.0171184022824535, 2.0199714693295294, 2.022824536376605, 2.0256776034236803]
-- F_m (base): 1.994 GeV
-- M_eff (base≈F_m): 1.994
-- M_corrected (F_m*(1-H_block)): 1.987 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.1535506155582346
-- chaos_mode=dynamic, PE_tick_norm=0.6439606330031474, T_ticks=201
-- mean_H_lock_norm=0.003577595695303231, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0034 / 0.0003 / 0.0103
-
-### unknown_block_0023 (run_id=104)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.197
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9966527196652721, 1.9983263598326362, 2.0, 2.0016736401673643, 2.003347280334728, 2.0050209205020924, 2.006694560669456, 2.00836820083682, 2.0100418410041843, 2.0117154811715485, 2.0133891213389123, 2.9255230125523015, 2.927196652719666, 2.9288702928870296, 2.9305439330543934, 2.9322175732217577, 2.9338912133891215, 2.9355648535564858, 2.9372384937238496, 2.9389121338912134]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.005)
-- H_block (lock_quality): 0.005
-- band_power_capture: 0.16748983939675371
-- chaos_mode=dynamic, PE_tick_norm=0.6644302101295407, T_ticks=201
-- mean_H_lock_norm=0.005043181829407633, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0043 / 0.0005 / 0.0102
-
-### unknown_block_0024 (run_id=0)
+### unknown_block_0013 (run_id=0)
 - Partícula: unknown, tier: level1, s2_state: none
 - match_score.d_total: 0.013
 - Bandas: count=1.0, s2_band_fraction=0.0
@@ -1390,524 +1079,37 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0079 / 0.0005 / 0.0213
 
-### unknown_block_0025 (run_id=65)
+### unknown_block_0014 (run_id=18)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.142
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9940828402366864, 1.9970414201183433, 2.0, 2.002958579881657, 2.0059171597633134, 2.0088757396449703, 2.0118343195266273, 2.0147928994082838, 2.0177514792899407, 2.0207100591715976, 2.0236686390532546, 2.026627218934911]
-- F_m (base): 1.994 GeV
-- M_eff (base≈F_m): 1.994
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.161658635920044
-- chaos_mode=dynamic, PE_tick_norm=0.6049455797354495, T_ticks=201
-- mean_H_lock_norm=0.004100388618860309, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0032 / 0.0007 / 0.0085
-
-### unknown_block_0026 (run_id=8)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.979
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9950372208436724, 1.9975186104218363, 2.0, 2.002481389578164, 2.004962779156328, 2.0074441687344917, 2.009925558312655, 2.012406947890819, 2.014888337468983, 2.0173697270471465, 2.0198511166253104]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.992 (H_block=0.001)
-- H_block (lock_quality): 0.001
-- band_power_capture: 0.16723455529927272
-- chaos_mode=dynamic, PE_tick_norm=0.8675016565408591, T_ticks=201
-- mean_H_lock_norm=0.0014079620816907948, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0019 / 0.0001 / 0.0054
-
-### unknown_block_0027 (run_id=64)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.556
+- match_score.d_total: 0.018
 - Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9964633068081348, 1.9982316534040674, 2.0, 2.001768346595933, 2.0035366931918657, 2.0053050397877983, 2.0070733863837313, 2.0088417329796644, 2.010610079575597, 2.0123784261715296, 2.0141467727674622, 2.0159151193633953, 2.127320954907162, 2.129089301503095, 2.1308576480990276, 2.13262599469496, 2.1343943412908932, 2.136162687886826, 2.137931034482759, 2.1396993810786915]
+- band_energies_gev: [1.995515695067265, 1.9977578475336328, 2.0, 2.002242152466368, 2.0044843049327357, 2.0986547085201797, 2.1008968609865475, 2.1031390134529153, 2.1053811659192827, 2.1076233183856505, 2.1098654708520184, 2.112107623318386, 2.1143497757847536, 2.1165919282511214, 2.1188340807174892, 2.121076233183857]
 - F_m (base): 1.996 GeV
 - M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.15970316218184283
-- chaos_mode=dynamic, PE_tick_norm=0.5904293725995309, T_ticks=201
-- mean_H_lock_norm=0.003424422271486445, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.17228380931949608
+- chaos_mode=dynamic, PE_tick_norm=0.7991979924332363, T_ticks=201
+- mean_H_lock_norm=0.002198552726295773, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0004 / 0.0001 / 0.0011
+- lock_S1_series (mean/min/max): 0.0002 / 0.0000 / 0.0005
 
-### unknown_block_0028 (run_id=79)
+### unknown_block_0015 (run_id=63)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.508
+- match_score.d_total: 2.101
 - Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9951040391676866, 1.9975520195838434, 2.0, 2.002447980416157, 2.0048959608323136, 2.00734394124847, 2.0097919216646267, 2.0122399020807835, 2.01468788249694, 2.0171358629130967, 2.0195838433292534, 2.02203182374541]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.988 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.16254537310950798
-- chaos_mode=dynamic, PE_tick_norm=0.785598900290279, T_ticks=201
-- mean_H_lock_norm=0.0033388996654027526, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0013 / 0.0001 / 0.0032
-
-### delta_1950_block_0005 (run_id=2)
-- Partícula: delta_1950, tier: level1, s2_state: none
-- match_score.d_total: 0.065
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9861111111111112, 1.9930555555555556, 1.9999999999999998, 2.006944444444444, 2.013888888888889, 2.020833333333333, 2.0277777777777777, 3.333333333333333, 3.3402777777777777, 3.347222222222222, 3.3541666666666665, 3.3611111111111107]
-- F_m (base): 1.986 GeV
-- M_eff (base≈F_m): 1.986
-- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.003)
-- sm_mass_gev: 1.950
-- mass_sim_raw_gev: 1.94675
-- mass_sim_used_gev: 1.94675
-- Δ_mass_sim vs SM: -0.1665%
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.20428979189290092
-- chaos_mode=dynamic, PE_tick_norm=0.8933003893794171, T_ticks=201
-- mean_H_lock_norm=0.002766425889241407, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.9907 / 0.9660 / 0.9977
-
-### delta_1920_block_0002 (run_id=56)
-- Partícula: delta_1920, tier: level1, s2_state: none
-- match_score.d_total: 0.067
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9858657243816251, 1.9929328621908127, 1.9999999999999998, 2.007067137809187, 2.014134275618374, 2.0212014134275615, 2.028268551236749, 2.035335689045936, 2.0424028268551235, 2.049469964664311, 2.056537102473498, 2.6713780918727905, 2.6784452296819783, 2.6855123674911656, 2.692579505300353, 2.6996466431095403, 2.706713780918727, 2.7137809187279145, 2.720848056537102, 2.7279151943462896, 2.734982332155477]
-- F_m (base): 1.986 GeV
-- M_eff (base≈F_m): 1.986
-- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.001)
-- sm_mass_gev: 1.920
-- mass_sim_raw_gev: 1.91734
-- mass_sim_used_gev: 1.91734
-- Δ_mass_sim vs SM: -0.1386%
-- H_block (lock_quality): 0.001
-- band_power_capture: 0.16804961060856285
-- chaos_mode=dynamic, PE_tick_norm=0.8017764171942876, T_ticks=201
-- mean_H_lock_norm=0.00110384619355851, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0022 / 0.0001 / 0.0079
-
-### lambda_c_block_0002 (run_id=15)
-- Partícula: lambda_c, tier: level1, s2_state: none
-- match_score.d_total: 1.419
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9943741209563994, 1.9971870604782, 2.0, 2.002812939521801, 2.005625879043601, 2.008438818565401, 2.0112517580872016, 2.0140646976090015, 2.016877637130802, 2.0196905766526023, 2.0225035161744027, 2.0253164556962027, 2.028129395218003, 2.0309423347398035]
-- F_m (base): 1.994 GeV
-- M_eff (base≈F_m): 1.994
-- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.005)
-- sm_mass_gev: 2.286
-- mass_sim_raw_gev: 2.26472
-- mass_sim_used_gev: 2.26472
-- Δ_mass_sim vs SM: -0.9510%
-- H_block (lock_quality): 0.005
-- band_power_capture: 0.14531081188308628
-- chaos_mode=dynamic, PE_tick_norm=0.6937950213463957, T_ticks=201
-- mean_H_lock_norm=0.004682519288743721, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0008 / 0.0001 / 0.0017
-
-### lambda_c_2860_block_0002 (run_id=85)
-- Partícula: lambda_c_2860, tier: level1, s2_state: none
-- match_score.d_total: 0.512
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9928057553956835, 1.9964028776978417, 2.0, 2.0035971223021583, 2.007194244604317, 2.010791366906475, 2.0143884892086334, 2.0179856115107917, 2.02158273381295, 2.0251798561151078, 2.028776978417266, 2.061151079136691, 2.0647482014388494, 2.0683453237410077, 2.071942446043166, 2.0755395683453237, 2.079136690647482, 2.08273381294964, 2.0863309352517985]
+- band_energies_gev: [1.9929577464788735, 1.9964788732394365, 2.0, 2.0035211267605635, 2.007042253521127, 2.01056338028169, 2.014084507042254, 2.017605633802817, 2.0211267605633805, 2.024647887323944, 2.028169014084507, 2.03169014084507]
 - F_m (base): 1.993 GeV
 - M_eff (base≈F_m): 1.993
-- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.001)
-- sm_mass_gev: 2.856
-- mass_sim_raw_gev: 2.84575
-- mass_sim_used_gev: 2.84575
-- Δ_mass_sim vs SM: -0.3588%
-- H_block (lock_quality): 0.001
-- band_power_capture: 0.16932459450075696
-- chaos_mode=dynamic, PE_tick_norm=0.6162723103467541, T_ticks=201
-- mean_H_lock_norm=0.0008003694037714719, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0012 / 0.0001 / 0.0028
-
-### meson_d_star_zero_block_0001 (run_id=24)
-- Partícula: meson_d_star_zero, tier: level1, s2_state: none
-- match_score.d_total: 0.000
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.993031358885017, 1.9965156794425087, 2.0, 2.0034843205574915, 2.006968641114982, 2.010452961672474, 2.013937282229965, 2.0174216027874565, 2.0209059233449476, 2.024390243902439, 2.0278745644599305, 2.0313588850174216, 2.0348432055749126, 2.038327526132404, 2.0418118466898956, 2.045296167247387, 2.0487804878048776, 2.052264808362369, 2.0557491289198606, 2.059233449477352]
-- F_m (base): 1.993 GeV
-- M_eff (base≈F_m): 1.993
-- M_corrected (F_m*(1-H_block)): 1.987 (H_block=0.003)
-- sm_mass_gev: 2.007
-- mass_sim_raw_gev: 4.01401
-- mass_sim_used_gev: 2.007
-- Δ_mass_sim vs SM: +0.0077%
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.14521098565385268
-- chaos_mode=dynamic, PE_tick_norm=0.604097159447214, T_ticks=201
-- mean_H_lock_norm=0.0030210601547596846, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0026 / 0.0003 / 0.0095
-
-### unknown_block_0029 (run_id=6)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.478
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9901234567901234, 1.9950617283950614, 2.0, 2.0049382716049386, 2.0098765432098764, 2.0148148148148146, 2.019753086419753, 2.0246913580246915, 2.0296296296296297, 2.034567901234568, 2.039506172839506, 2.0444444444444443, 2.0493827160493825, 2.0543209876543207, 2.0592592592592593, 2.0641975308641975, 2.0691358024691358, 2.074074074074074]
-- F_m (base): 1.990 GeV
-- M_eff (base≈F_m): 1.990
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.15088810495145621
-- chaos_mode=dynamic, PE_tick_norm=0.6811822862387781, T_ticks=201
-- mean_H_lock_norm=0.0018928565944374277, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0022 / 0.0003 / 0.0052
-
-### unknown_block_0030 (run_id=10)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.862
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9861111111111112, 1.9930555555555556, 2.0, 2.0069444444444446, 2.013888888888889, 4.020833333333333, 4.027777777777778, 4.034722222222222, 4.041666666666667, 4.048611111111111, 4.055555555555555, 4.0625, 4.069444444444444, 4.076388888888889, 4.083333333333334, 4.090277777777779, 4.097222222222222]
-- F_m (base): 1.986 GeV
-- M_eff (base≈F_m): 1.986
-- M_corrected (F_m*(1-H_block)): 1.982 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.16667252732331841
-- chaos_mode=dynamic, PE_tick_norm=0.8107174387034924, T_ticks=201
-- mean_H_lock_norm=0.0019097880444193444, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0036 / 0.0005 / 0.0091
-
-### unknown_block_0031 (run_id=21)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.058
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9954128440366972, 1.997706422018349, 2.0, 2.0022935779816518, 2.0045871559633026, 2.0068807339449544, 2.0091743119266057, 2.011467889908257, 2.0137614678899083, 2.0160550458715596, 2.018348623853211]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.006)
+- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.006)
 - H_block (lock_quality): 0.006
-- band_power_capture: 0.16735644309073336
-- chaos_mode=dynamic, PE_tick_norm=0.5406677560914794, T_ticks=201
-- mean_H_lock_norm=0.006233225194954187, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- band_power_capture: 0.16327888120653414
+- chaos_mode=dynamic, PE_tick_norm=0.6078647863376788, T_ticks=201
+- mean_H_lock_norm=0.005931736560121452, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0094 / 0.0006 / 0.0262
+- lock_S1_series (mean/min/max): 0.0007 / 0.0003 / 0.0010
 
-### delta_1900_block_0001 (run_id=73)
-- Partícula: delta_1900, tier: none, s2_state: none
-- match_score.d_total: 0.016
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9992892679459842, 1.9996446339729923, 2.0, 2.0003553660270077, 2.0007107320540154, 2.0010660980810235, 2.0014214641080312, 2.001776830135039, 2.0021321961620466, 2.0024875621890548, 2.0028429282160625, 2.00319829424307, 2.0035536602700783, 2.003909026297086, 2.0042643923240937, 2.0046197583511014, 2.0049751243781095, 2.0053304904051172, 2.005685856432125, 2.0060412224591326, 2.0063965884861408, 2.0067519545131485, 2.007107320540156, 2.007462686567164, 2.007818052594172, 2.00817341862118, 2.0085287846481874, 2.0088841506751955, 2.0092395167022032, 2.0095948827292114]
-- F_m (base): 1.999 GeV
-- M_eff (base≈F_m): 1.999
-- M_corrected (F_m*(1-H_block)): 1.971 (H_block=0.014)
-- sm_mass_gev: 1.900
-- mass_sim_raw_gev: 1.89904
-- mass_sim_used_gev: 1.89904
-- Δ_mass_sim vs SM: -0.0503%
-- H_block (lock_quality): 0.014
-- band_power_capture: 0.06475984527595882
-- chaos_mode=dynamic, PE_tick_norm=0.7233361544301757, T_ticks=201
-- mean_H_lock_norm=0.01407867647555908, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=1.0
-- lock_S1_series (mean/min/max): 0.9915 / 0.9691 / 0.9977
-
-### unknown_block_0032 (run_id=54)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 2.043
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9939849624060153, 1.9969924812030075, 2.0, 2.0030075187969927, 2.0210526315789474, 2.0240601503759397, 2.0270676691729324, 2.030075187969925, 2.0330827067669173, 2.0360902255639095, 2.039097744360902, 2.042105263157895, 2.045112781954887, 2.04812030075188, 2.051127819548872, 2.0541353383458647]
-- F_m (base): 1.994 GeV
-- M_eff (base≈F_m): 1.994
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.1572247017586755
-- chaos_mode=dynamic, PE_tick_norm=0.5931610261988653, T_ticks=201
-- mean_H_lock_norm=0.004253889681447445, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0020 / 0.0003 / 0.0051
-
-### xi_c_plus_block_0002 (run_id=20)
-- Partícula: xi_c_plus, tier: none, s2_state: none
-- match_score.d_total: 3.057
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9995446265938068, 1.9997723132969034, 2.0, 2.000227686703097, 2.000455373406193, 2.0006830601092895, 2.0009107468123863, 2.0011384335154827, 2.0013661202185795, 2.001593806921676, 2.0018214936247722, 2.002049180327869, 2.002276867030966, 2.0025045537340618, 2.0027322404371586, 2.0029599271402554, 2.0031876138433518, 2.003415300546448, 2.0036429872495445, 2.0038706739526413, 2.004098360655738, 2.0043260473588345, 2.004553734061931, 2.004781420765027, 2.005009107468124, 2.0052367941712204, 2.0054644808743167, 2.0056921675774135, 2.00591985428051, 2.0061475409836067]
-- F_m (base): 2.000 GeV
-- M_eff (base≈F_m): 2.000
-- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.009)
-- sm_mass_gev: 2.468
-- mass_sim_raw_gev: 2.37628
-- mass_sim_used_gev: 2.37628
-- Δ_mass_sim vs SM: -3.7113%
-- H_block (lock_quality): 0.009
-- band_power_capture: 0.035137321433464576
-- chaos_mode=dynamic, PE_tick_norm=0.8089537142440062, T_ticks=201
-- mean_H_lock_norm=0.009235881970300674, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=1.0
-- lock_S1_series (mean/min/max): 0.9978 / 0.9963 / 0.9989
-
-### unknown_block_0033 (run_id=100)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.575
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9873015873015873, 1.9936507936507937, 2.0, 2.0063492063492063, 2.012698412698413, 2.0190476190476194, 3.8666666666666676, 3.8730158730158735, 3.87936507936508, 3.885714285714286, 3.8920634920634924, 3.8984126984126988, 3.904761904761905, 3.9111111111111114, 3.9174603174603178, 3.923809523809524, 3.930158730158731, 3.936507936507937]
-- F_m (base): 1.987 GeV
-- M_eff (base≈F_m): 1.987
-- M_corrected (F_m*(1-H_block)): 1.968 (H_block=0.010)
-- H_block (lock_quality): 0.010
-- band_power_capture: 0.16733084966444453
-- chaos_mode=dynamic, PE_tick_norm=0.7002516098806791, T_ticks=201
-- mean_H_lock_norm=0.00970845430245005, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0076 / 0.0002 / 0.0372
-
-### delta_1920_block_0003 (run_id=71)
-- Partícula: delta_1920, tier: none, s2_state: latent
-- match_score.d_total: 0.017
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9996841689696014, 1.9998420844848008, 2.0, 2.0001579155152, 2.000315831030399, 2.000473746545598, 2.0006316620607976, 2.0007895775759974, 2.0009474930911963, 2.0011054086063957, 2.0012633241215947, 2.0014212396367945, 2.001579155151994, 2.0017370706671933, 2.0018949861823923, 2.0020529016975916, 2.0022108172127915, 2.002368732727991, 2.00252664824319, 2.002684563758389, 2.002842479273589, 2.003000394788788, 2.0031583103039874, 2.003316225819187, 2.0034741413343866, 2.0036320568495856, 2.003789972364785, 2.0039478878799843, 2.0041058033951837, 2.004263718910383]
-- F_m (base): 2.000 GeV
-- M_eff (base≈F_m): 2.000
-- M_corrected (F_m*(1-H_block)): 1.837 (H_block=0.082)
-- sm_mass_gev: 1.920
-- mass_sim_raw_gev: 1.91931
-- mass_sim_used_gev: 1.91931
-- Δ_mass_sim vs SM: -0.0361%
-- H_block (lock_quality): 0.082
-- band_power_capture: 0.03626577832840322
-- chaos_mode=dynamic, PE_tick_norm=0.6959085492671689, T_ticks=201
-- mean_H_lock_norm=0.08153200182354023, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=1.0
-- lock_S1_series (mean/min/max): 0.2304 / 0.0002 / 0.9817
-
-### unknown_block_0034 (run_id=96)
-- Partícula: unknown, tier: none, s2_state: none
-- match_score.d_total: 0.358
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9984627209838586, 1.9992313604919292, 2.0, 2.000768639508071, 2.001537279016141, 2.0023059185242125, 2.003074558032283, 2.0038431975403537, 2.0046118370484245, 2.005380476556495, 2.0061491160645657, 2.006917755572636]
-- F_m (base): 1.998 GeV
-- M_eff (base≈F_m): 1.998
-- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.15389142095660138
-- chaos_mode=dynamic, PE_tick_norm=0.7772733327528007, T_ticks=201
-- mean_H_lock_norm=0.003875053460027957, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=1.0
-- lock_S1_series (mean/min/max): 0.9806 / 0.9182 / 0.9967
-
-### xi_c_plus_block_0003 (run_id=60)
-- Partícula: xi_c_plus, tier: level1, s2_state: latent
-- match_score.d_total: 2.261
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9965367965367966, 1.9982683982683984, 2.0, 2.001731601731602, 2.0034632034632036, 2.0051948051948054, 2.0069264069264072, 2.0086580086580086, 2.0103896103896104, 2.012121212121212, 2.013852813852814]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.009)
-- sm_mass_gev: 2.468
-- mass_sim_raw_gev: 2.40018
-- mass_sim_used_gev: 2.40018
-- Δ_mass_sim vs SM: -2.7430%
-- H_block (lock_quality): 0.009
-- band_power_capture: 0.16825393897743252
-- chaos_mode=dynamic, PE_tick_norm=0.5525951214799794, T_ticks=201
-- mean_H_lock_norm=0.008963505085162514, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0012 / 0.0002 / 0.0024
-
-### unknown_block_0035 (run_id=75)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.088
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9974779319041613, 1.9987389659520807, 2.0, 2.001261034047919, 2.002522068095838, 2.0037831021437578, 2.005044136191677, 2.0063051702395964, 2.0075662042875155, 2.008827238335435, 2.010088272383354]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.006)
-- H_block (lock_quality): 0.006
-- band_power_capture: 0.1685002754134143
-- chaos_mode=dynamic, PE_tick_norm=0.2802560523916099, T_ticks=201
-- mean_H_lock_norm=0.00623307118004708, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0186 / 0.0011 / 0.0513
-
-### unknown_block_0036 (run_id=36)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.186
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9847328244274807, 1.9923664122137403, 1.9999999999999998, 2.007633587786259, 2.0152671755725184, 2.022900763358778, 2.343511450381679, 2.3511450381679384, 2.3587786259541983, 2.3664122137404577, 2.374045801526717, 2.381679389312977, 2.3893129770992365, 2.3969465648854955, 2.404580152671755, 2.412213740458015, 2.4198473282442743, 2.4274809160305337, 2.435114503816793, 2.442748091603053, 2.4503816793893125, 2.458015267175572, 2.465648854961832, 2.4732824427480913, 2.4809160305343507, 2.4885496183206106, 2.4961832061068696, 2.503816793893129, 2.5114503816793885]
-- F_m (base): 1.985 GeV
-- M_eff (base≈F_m): 1.985
-- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.10078120143745636
-- chaos_mode=dynamic, PE_tick_norm=0.747827650719195, T_ticks=201
-- mean_H_lock_norm=0.002766159109329394, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0013 / 0.0000 / 0.0042
-
-### unknown_block_0037 (run_id=9)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.634
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9813953488372098, 1.990697674418605, 2.0, 2.0093023255813955, 2.018604651162791, 2.0279069767441866, 2.0372093023255817, 2.046511627906977, 2.7441860465116283, 2.7534883720930234, 2.7627906976744194, 2.7720930232558145, 2.7813953488372096, 2.790697674418605, 2.8000000000000003, 2.8093023255813954, 2.8186046511627914, 2.8279069767441865, 2.8372093023255816, 2.8465116279069775, 2.8558139534883726, 2.865116279069768, 2.8744186046511633]
-- F_m (base): 1.981 GeV
-- M_eff (base≈F_m): 1.981
-- M_corrected (F_m*(1-H_block)): 1.970 (H_block=0.006)
-- H_block (lock_quality): 0.006
-- band_power_capture: 0.14160160168823227
-- chaos_mode=dynamic, PE_tick_norm=0.843478555034114, T_ticks=201
-- mean_H_lock_norm=0.005673895645962608, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0012 / 0.0000 / 0.0031
-
-### unknown_block_0038 (run_id=5)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.467
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.994729907773386, 1.997364953886693, 2.0, 2.0026350461133067, 2.005270092226614, 2.007905138339921, 2.010540184453228, 2.013175230566535, 2.015810276679842, 2.018445322793149, 2.021080368906456]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.16516101139845044
-- chaos_mode=dynamic, PE_tick_norm=0.6103003305028971, T_ticks=201
-- mean_H_lock_norm=0.004493286341759505, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0036 / 0.0011 / 0.0070
-
-### xi_c_plus_block_0004 (run_id=52)
-- Partícula: xi_c_plus, tier: level1, s2_state: none
-- match_score.d_total: 1.713
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9979889391654098, 1.9989944695827047, 2.0, 2.001005530417295, 2.0020110608345902, 2.0030165912518854, 2.0040221216691805, 2.0050276520864756, 2.0060331825037703, 2.007038712921066, 2.008044243338361]
-- F_m (base): 1.998 GeV
-- M_eff (base≈F_m): 1.998
-- M_corrected (F_m*(1-H_block)): 1.966 (H_block=0.016)
-- sm_mass_gev: 2.468
-- mass_sim_raw_gev: 2.41662
-- mass_sim_used_gev: 2.41662
-- Δ_mass_sim vs SM: -2.0769%
-- H_block (lock_quality): 0.016
-- band_power_capture: 0.16760305049249535
-- chaos_mode=dynamic, PE_tick_norm=0.2696646360623446, T_ticks=201
-- mean_H_lock_norm=0.015796199958797618, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0077 / 0.0015 / 0.0165
-
-### unknown_block_0039 (run_id=92)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.113
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.993759750390016, 1.9968798751950079, 2.0, 2.0031201248049926, 2.0062402496099847, 2.009360374414977, 2.012480499219969, 2.015600624024961, 2.0187207488299532, 2.0218408736349454, 2.024960998439938]
-- F_m (base): 1.994 GeV
-- M_eff (base≈F_m): 1.994
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.166428772935367
-- chaos_mode=dynamic, PE_tick_norm=0.8919249079737667, T_ticks=201
-- mean_H_lock_norm=0.004002194440268924, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.9637 / 0.9253 / 0.9875
-
-### triton_block_0003 (run_id=11)
-- Partícula: triton, tier: level1, s2_state: none
-- match_score.d_total: 0.193
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.991578947368421, 1.9957894736842108, 2.0, 2.004210526315789, 2.0168421052631578, 2.0210526315789474, 2.025263157894737, 2.0294736842105263, 2.033684210526316, 2.0378947368421056, 2.042105263157895, 2.046315789473684, 2.0505263157894733, 2.0547368421052634, 2.0589473684210526]
-- F_m (base): 1.992 GeV
-- M_eff (base≈F_m): 1.992
-- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.001)
-- sm_mass_gev: 2.809
-- mass_sim_raw_gev: 2.80409
-- mass_sim_used_gev: 2.80409
-- Δ_mass_sim vs SM: -0.1721%
-- H_block (lock_quality): 0.001
-- band_power_capture: 0.1605462067865705
-- chaos_mode=dynamic, PE_tick_norm=0.6177777102636764, T_ticks=201
-- mean_H_lock_norm=0.0007107685954658795, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0007 / 0.0001 / 0.0016
-
-### unknown_block_0040 (run_id=89)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.129
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9963167587476982, 1.9981583793738489, 2.0, 2.001841620626151, 2.003683241252302, 2.005524861878453, 2.007366482504604, 2.009208103130755, 2.029465930018416, 2.0313075506445677, 2.033149171270719, 2.0349907918968695, 2.0368324125230206, 2.0386740331491717, 2.0405156537753224, 2.042357274401473, 2.044198895027624, 2.0460405156537753, 2.0478821362799264]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.14539521647216958
-- chaos_mode=dynamic, PE_tick_norm=0.6231914384788971, T_ticks=201
-- mean_H_lock_norm=0.0035676306116855035, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0051 / 0.0006 / 0.0122
-
-### delta_1950_block_0006 (run_id=27)
-- Partícula: delta_1950, tier: level1, s2_state: none
-- match_score.d_total: 0.067
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.984848484848485, 1.9924242424242427, 2.0, 2.007575757575758, 2.0151515151515156, 2.022727272727273, 2.0303030303030303, 2.037878787878788, 2.045454545454546, 2.0530303030303036, 2.3863636363636367, 2.3939393939393945, 2.4015151515151514, 2.409090909090909, 2.416666666666667, 2.4242424242424243, 2.431818181818182, 2.43939393939394, 2.4469696969696972, 2.454545454545455, 2.4621212121212124, 2.4696969696969697]
-- F_m (base): 1.985 GeV
-- M_eff (base≈F_m): 1.985
-- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.003)
-- sm_mass_gev: 1.950
-- mass_sim_raw_gev: 1.94667
-- mass_sim_used_gev: 1.94667
-- Δ_mass_sim vs SM: -0.1708%
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.1651839717645658
-- chaos_mode=dynamic, PE_tick_norm=0.8256388225511797, T_ticks=201
-- mean_H_lock_norm=0.002880258803451573, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0164 / 0.0001 / 0.1881
-
-### xi_c_plus_block_0005 (run_id=91)
-- Partícula: xi_c_plus, tier: level1, s2_state: none
-- match_score.d_total: 3.082
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9970282317979198, 1.9985141158989597, 2.0, 2.00148588410104, 2.00297176820208, 2.0044576523031203, 2.00594353640416, 2.0074294205052006, 2.0089153046062402, 2.010401188707281, 2.011887072808321, 2.013372956909361]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.009)
-- sm_mass_gev: 2.468
-- mass_sim_raw_gev: 2.56045
-- mass_sim_used_gev: 2.56045
-- Δ_mass_sim vs SM: +3.7515%
-- H_block (lock_quality): 0.009
-- band_power_capture: 0.1616131160657486
-- chaos_mode=dynamic, PE_tick_norm=0.5756612388474693, T_ticks=201
-- mean_H_lock_norm=0.009219761310595915, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0032 / 0.0004 / 0.0074
-
-### unknown_block_0041 (run_id=81)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.167
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9949494949494953, 1.9974747474747476, 2.0, 2.0025252525252526, 2.005050505050505, 2.007575757575758, 2.0101010101010104, 2.0126262626262625, 2.0151515151515156, 2.0176767676767677, 2.0202020202020203]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.005)
-- H_block (lock_quality): 0.005
-- band_power_capture: 0.16737690436519054
-- chaos_mode=dynamic, PE_tick_norm=0.6580491307862464, T_ticks=201
-- mean_H_lock_norm=0.004954585296426153, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0033 / 0.0003 / 0.0192
-
-### unknown_block_0042 (run_id=1)
-- Partícula: unknown, tier: level1, s2_state: latent
-- match_score.d_total: 3.599
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9954389965792474, 1.9977194982896243, 2.0, 2.002280501710376, 2.0045610034207524, 2.0068415051311295, 2.0091220068415057, 2.0114025085518814, 2.013683010262258, 2.0159635119726342, 2.0182440136830104]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.970 (H_block=0.013)
-- H_block (lock_quality): 0.013
-- band_power_capture: 0.1683220935751636
-- chaos_mode=dynamic, PE_tick_norm=0.6017195977935832, T_ticks=201
-- mean_H_lock_norm=0.012613196227817923, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0009 / 0.0006 / 0.0011
-
-### delta_1950_block_0007 (run_id=90)
+### delta_1950_block_0002 (run_id=90)
 - Partícula: delta_1950, tier: level1, s2_state: none
 - match_score.d_total: 0.038
 - Bandas: count=2.0, s2_band_fraction=0.0
@@ -1926,109 +1128,86 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0009 / 0.0001 / 0.0020
 
-### delta_1950_block_0008 (run_id=83)
-- Partícula: delta_1950, tier: level1, s2_state: none
-- match_score.d_total: 0.164
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9889196675900276, 1.994459833795014, 2.0, 2.005540166204986, 2.011080332409972, 2.0166204986149583, 2.0221606648199444, 4.077562326869805, 4.083102493074792, 4.0886426592797775, 4.094182825484765, 4.099722991689751, 4.105263157894737, 4.110803324099723, 4.116343490304709, 4.121883656509695, 4.127423822714681, 4.132963988919667, 4.138504155124653]
-- F_m (base): 1.989 GeV
-- M_eff (base≈F_m): 1.989
-- M_corrected (F_m*(1-H_block)): 1.982 (H_block=0.003)
-- sm_mass_gev: 1.950
-- mass_sim_raw_gev: 1.95821
-- mass_sim_used_gev: 1.95821
-- Δ_mass_sim vs SM: +0.4212%
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.16648303111755958
-- chaos_mode=dynamic, PE_tick_norm=0.8913608787360737, T_ticks=201
-- mean_H_lock_norm=0.003416183719824637, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.2901 / 0.0035 / 0.8662
-
-### lambda_c_2765_block_0003 (run_id=98)
-- Partícula: lambda_c_2765, tier: level1, s2_state: none
-- match_score.d_total: 3.718
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9893333333333332, 1.9946666666666666, 2.0, 2.005333333333333, 2.0106666666666664, 2.016, 2.021333333333333, 2.0266666666666664, 2.032, 2.037333333333333, 2.0426666666666664, 2.048, 2.0533333333333332, 2.0586666666666664, 2.0639999999999996]
-- F_m (base): 1.989 GeV
-- M_eff (base≈F_m): 1.989
-- M_corrected (F_m*(1-H_block)): 1.976 (H_block=0.007)
-- sm_mass_gev: 2.766
-- mass_sim_raw_gev: 2.69165
-- mass_sim_used_gev: 2.69165
-- Δ_mass_sim vs SM: -2.6881%
-- H_block (lock_quality): 0.007
-- band_power_capture: 0.15249136931545748
-- chaos_mode=dynamic, PE_tick_norm=0.871288298206709, T_ticks=201
-- mean_H_lock_norm=0.006787879104220199, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0226 / 0.0007 / 0.2718
-
-### unknown_block_0043 (run_id=40)
+### unknown_block_0016 (run_id=104)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.644
+- match_score.d_total: 1.197
 - Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9938650306748467, 1.9969325153374236, 1.9999999999999998, 2.0030674846625764, 2.0061349693251533, 2.0092024539877302, 2.0122699386503067, 2.015337423312883, 2.0184049079754605, 2.147239263803681, 2.150306748466258, 2.153374233128834, 2.1564417177914113, 2.1595092024539877, 2.162576687116564, 2.165644171779141, 2.168711656441718, 2.1717791411042944, 2.174846625766871, 2.177914110429448, 2.1809815950920246, 2.184049079754601, 2.187116564417178, 2.1901840490797544, 2.1932515337423313, 2.196319018404908]
-- F_m (base): 1.994 GeV
-- M_eff (base≈F_m): 1.994
-- M_corrected (F_m*(1-H_block)): 1.988 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.14348623834793456
-- chaos_mode=dynamic, PE_tick_norm=0.799187714143535, T_ticks=201
-- mean_H_lock_norm=0.0026840678586831468, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0009 / 0.0001 / 0.0021
-
-### unknown_block_0044 (run_id=31)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.114
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9886039886039888, 1.9943019943019944, 1.9999999999999998, 2.005698005698006, 2.011396011396011, 2.017094017094017, 2.022792022792023, 2.0284900284900282, 2.034188034188034, 2.03988603988604, 2.0455840455840457, 3.566951566951567, 3.5726495726495724, 3.5783475783475787, 3.584045584045584, 3.5897435897435894, 3.5954415954415953, 3.6011396011396006, 3.606837606837607, 3.6125356125356127, 3.618233618233618, 3.6239316239316235, 3.6296296296296298, 3.635327635327635, 3.641025641025641, 3.6467236467236464, 3.6524216524216526, 3.658119658119658]
-- F_m (base): 1.989 GeV
-- M_eff (base≈F_m): 1.989
-- M_corrected (F_m*(1-H_block)): 1.982 (H_block=0.003)
-- H_block (lock_quality): 0.003
-- band_power_capture: 0.1501948289304002
-- chaos_mode=dynamic, PE_tick_norm=0.7263666782026361, T_ticks=201
-- mean_H_lock_norm=0.00298389701894013, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0050 / 0.0003 / 0.0143
-
-### delta_1930_block_0002 (run_id=84)
-- Partícula: delta_1930, tier: level1, s2_state: none
-- match_score.d_total: 0.106
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9974259974259976, 1.9987129987129988, 2.0, 2.001287001287001, 2.002574002574003, 2.003861003861004, 2.0051480051480053, 2.0064350064350065, 2.0077220077220077, 2.009009009009009, 2.0102960102960106, 2.011583011583012, 2.012870012870013, 2.3011583011583014, 2.3024453024453027, 2.303732303732304, 2.305019305019305, 2.3063063063063063, 2.307593307593308, 2.308880308880309, 2.3101673101673104, 2.3114543114543116, 2.312741312741313]
+- band_energies_gev: [1.9966527196652721, 1.9983263598326362, 2.0, 2.0016736401673643, 2.003347280334728, 2.0050209205020924, 2.006694560669456, 2.00836820083682, 2.0100418410041843, 2.0117154811715485, 2.0133891213389123, 2.9255230125523015, 2.927196652719666, 2.9288702928870296, 2.9305439330543934, 2.9322175732217577, 2.9338912133891215, 2.9355648535564858, 2.9372384937238496, 2.9389121338912134]
 - F_m (base): 1.997 GeV
 - M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.006)
-- sm_mass_gev: 1.930
-- mass_sim_raw_gev: 1.93424
-- mass_sim_used_gev: 1.93424
-- Δ_mass_sim vs SM: +0.2197%
-- H_block (lock_quality): 0.006
-- band_power_capture: 0.14710176423348226
-- chaos_mode=dynamic, PE_tick_norm=0.8100657112345272, T_ticks=201
-- mean_H_lock_norm=0.00557550705210068, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.005)
+- H_block (lock_quality): 0.005
+- band_power_capture: 0.16748983939675371
+- chaos_mode=dynamic, PE_tick_norm=0.6644302101295407, T_ticks=201
+- mean_H_lock_norm=0.005043181829407633, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0056 / 0.0001 / 0.3333
+- lock_S1_series (mean/min/max): 0.0043 / 0.0005 / 0.0102
 
-### unknown_block_0045 (run_id=25)
+### unknown_block_0017 (run_id=82)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.005
+- match_score.d_total: 0.084
 - Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9885057471264367, 1.9942528735632186, 2.0, 2.005747126436782, 2.011494252873563, 2.0172413793103448, 2.0229885057471266, 2.028735632183908, 2.03448275862069, 2.0402298850574714, 3.293103448275862, 3.2988505747126435, 3.3045977011494254, 3.310344827586207, 3.3160919540229887, 3.3218390804597697, 3.3275862068965516, 3.3333333333333335, 3.339080459770115, 3.344827586206897, 3.3505747126436782, 3.3563218390804597, 3.362068965517241, 3.367816091954023, 3.3735632183908044, 3.3793103448275863, 3.385057471264368, 3.390804597701149]
+- band_energies_gev: [1.9889807162534434, 1.9944903581267215, 2.0, 2.0055096418732785, 2.011019283746556, 2.0165289256198347, 2.0220385674931127, 2.0275482093663912, 2.0330578512396693, 2.038567493112948, 2.044077134986226, 2.0495867768595044, 2.3856749311294765, 2.3911845730027546, 2.396694214876033, 2.402203856749311, 2.4077134986225897, 2.4132231404958677, 2.4187327823691462, 2.4242424242424243]
 - F_m (base): 1.989 GeV
 - M_eff (base≈F_m): 1.989
-- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.001)
-- H_block (lock_quality): 0.001
-- band_power_capture: 0.15568737808015987
-- chaos_mode=dynamic, PE_tick_norm=0.7658803842409685, T_ticks=201
-- mean_H_lock_norm=0.0014561129616150641, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- M_corrected (F_m*(1-H_block)): 1.975 (H_block=0.007)
+- H_block (lock_quality): 0.007
+- band_power_capture: 0.1661053215370441
+- chaos_mode=dynamic, PE_tick_norm=0.45814722568252414, T_ticks=201
+- mean_H_lock_norm=0.0071987316864046275, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0013 / 0.0001 / 0.0039
+- lock_S1_series (mean/min/max): 0.0007 / 0.0000 / 0.0012
 
-### lambda_c_block_0003 (run_id=99)
+### unknown_block_0018 (run_id=92)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.113
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.993759750390016, 1.9968798751950079, 2.0, 2.0031201248049926, 2.0062402496099847, 2.009360374414977, 2.012480499219969, 2.015600624024961, 2.0187207488299532, 2.0218408736349454, 2.024960998439938]
+- F_m (base): 1.994 GeV
+- M_eff (base≈F_m): 1.994
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.166428772935367
+- chaos_mode=dynamic, PE_tick_norm=0.8919249079737667, T_ticks=201
+- mean_H_lock_norm=0.004002194440268924, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.9637 / 0.9253 / 0.9875
+
+### lambda_c_2860_block_0002 (run_id=55)
+- Partícula: lambda_c_2860, tier: level1, s2_state: none
+- match_score.d_total: 0.404
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9951338199513384, 1.9975669099756694, 2.0, 2.0024330900243315, 2.0048661800486625, 2.007299270072993, 2.009732360097324, 2.012165450121655, 2.0145985401459856, 2.017031630170316, 2.019464720194647]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
+- M_corrected (F_m*(1-H_block)): 1.974 (H_block=0.010)
+- sm_mass_gev: 2.856
+- mass_sim_raw_gev: 2.84791
+- mass_sim_used_gev: 2.84791
+- Δ_mass_sim vs SM: -0.2831%
+- H_block (lock_quality): 0.010
+- band_power_capture: 0.16765961099819207
+- chaos_mode=dynamic, PE_tick_norm=0.4515763514257429, T_ticks=201
+- mean_H_lock_norm=0.010430691004627833, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0066 / 0.0007 / 0.0174
+
+### unknown_block_0019 (run_id=4)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.830
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9905660377358492, 1.9952830188679247, 2.0, 2.0047169811320757, 2.0094339622641515, 2.014150943396227, 2.0188679245283025, 2.023584905660378, 2.028301886792453, 2.0330188679245285, 2.037735849056604, 2.0424528301886795]
+- F_m (base): 1.991 GeV
+- M_eff (base≈F_m): 1.991
+- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.16302040693834596
+- chaos_mode=dynamic, PE_tick_norm=0.516348136180885, T_ticks=201
+- mean_H_lock_norm=0.0031717388704359784, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0020 / 0.0007 / 0.0048
+
+### lambda_c_block_0002 (run_id=99)
 - Partícula: lambda_c, tier: level1, s2_state: none
 - match_score.d_total: 2.626
 - Bandas: count=1.0, s2_band_fraction=0.0
@@ -2047,35 +1226,20 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0005 / 0.0003 / 0.0010
 
-### unknown_block_0046 (run_id=23)
+### unknown_block_0020 (run_id=81)
 - Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.780
+- match_score.d_total: 0.167
 - Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9924670433145009, 1.9962335216572502, 2.0, 2.0037664783427496, 2.007532956685499, 2.0112994350282483, 2.015065913370998, 2.0188323917137474, 2.022598870056497, 2.0263653483992465, 2.030131826741996, 2.0338983050847457]
-- F_m (base): 1.992 GeV
-- M_eff (base≈F_m): 1.992
-- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.004)
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.1626376003715073
-- chaos_mode=dynamic, PE_tick_norm=0.5187179064070442, T_ticks=201
-- mean_H_lock_norm=0.0037116701994275563, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- band_energies_gev: [1.9949494949494953, 1.9974747474747476, 2.0, 2.0025252525252526, 2.005050505050505, 2.007575757575758, 2.0101010101010104, 2.0126262626262625, 2.0151515151515156, 2.0176767676767677, 2.0202020202020203]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
+- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.005)
+- H_block (lock_quality): 0.005
+- band_power_capture: 0.16737690436519054
+- chaos_mode=dynamic, PE_tick_norm=0.6580491307862464, T_ticks=201
+- mean_H_lock_norm=0.004954585296426153, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0023 / 0.0015 / 0.0032
-
-### unknown_block_0047 (run_id=13)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.065
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9868852459016393, 1.9934426229508198, 2.0, 2.0065573770491802, 2.013114754098361, 2.019672131147541, 2.026229508196722, 2.0327868852459017, 2.039344262295082, 2.0459016393442626, 2.734426229508197, 2.740983606557377, 2.747540983606558, 2.754098360655738, 2.760655737704918, 2.7672131147540986, 2.773770491803279, 2.780327868852459, 2.7868852459016393, 2.79344262295082, 2.8000000000000003, 2.8065573770491805, 2.813114754098361, 2.8196721311475414, 2.8262295081967213]
-- F_m (base): 1.987 GeV
-- M_eff (base≈F_m): 1.987
-- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.15415457705212188
-- chaos_mode=dynamic, PE_tick_norm=0.6870098867025489, T_ticks=201
-- mean_H_lock_norm=0.0018019725015719077, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0016 / 0.0001 / 0.0042
+- lock_S1_series (mean/min/max): 0.0033 / 0.0003 / 0.0192
 
 ### lambda_c_2860_block_0003 (run_id=42)
 - Partícula: lambda_c_2860, tier: level1, s2_state: none
@@ -2096,24 +1260,616 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.2036 / 0.0009 / 0.8364
 
-### meson_ds_star_block_0001 (run_id=97)
-- Partícula: meson_ds_star, tier: level1, s2_state: none
-- match_score.d_total: 2.700
+### xi_c_plus_block_0002 (run_id=19)
+- Partícula: xi_c_plus, tier: level1, s2_state: none
+- match_score.d_total: 0.762
 - Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9953051643192492, 1.9976525821596247, 2.0, 2.0023474178403755, 2.004694835680751, 2.007042253521127, 2.0093896713615025, 2.0117370892018784, 2.0140845070422535, 2.0164319248826295, 2.018779342723005]
+- band_energies_gev: [1.9976985040276176, 1.998849252013809, 1.9999999999999998, 2.0011507479861903, 2.002301495972382, 2.003452243958573, 2.004602991944764, 2.006904487917146, 2.008055235903337, 2.0092059838895278, 2.010356731875719, 2.01150747986191, 2.0126582278481013, 2.013808975834292, 2.014959723820483, 2.016110471806674, 2.017261219792865, 2.018411967779056, 2.019562715765247]
+- F_m (base): 1.998 GeV
+- M_eff (base≈F_m): 1.998
+- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.007)
+- sm_mass_gev: 2.468
+- mass_sim_raw_gev: 2.49085
+- mass_sim_used_gev: 2.49085
+- Δ_mass_sim vs SM: +0.9313%
+- H_block (lock_quality): 0.007
+- band_power_capture: 0.14899380184932468
+- chaos_mode=dynamic, PE_tick_norm=0.5797831123574368, T_ticks=201
+- mean_H_lock_norm=0.007207855848787647, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0055 / 0.0008 / 0.0126
+
+### lambda_c_block_0003 (run_id=67)
+- Partícula: lambda_c, tier: level1, s2_state: none
+- match_score.d_total: 3.926
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9969088098918084, 1.9984544049459043, 2.0, 2.001545595054096, 2.003091190108192, 2.0046367851622873, 2.006182380216383, 2.007727975270479, 2.009273570324575, 2.010819165378671, 2.012364760432767]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.003)
+- sm_mass_gev: 2.286
+- mass_sim_raw_gev: 2.22711
+- mass_sim_used_gev: 2.22711
+- Δ_mass_sim vs SM: -2.5956%
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.16510028203966073
+- chaos_mode=dynamic, PE_tick_norm=0.540865686996301, T_ticks=201
+- mean_H_lock_norm=0.003425418460708898, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0008 / 0.0003 / 0.0013
+
+### lambda_c_block_0004 (run_id=12)
+- Partícula: lambda_c, tier: level1, s2_state: none
+- match_score.d_total: 4.965
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9980601357904946, 1.9990300678952473, 1.9999999999999998, 2.0009699321047525, 2.0019398642095054, 2.002909796314258, 2.0038797284190104, 2.004849660523763, 2.005819592628516, 2.0067895247332688, 2.0077594568380213, 2.0087293889427738, 2.0096993210475267, 2.074684772065955, 2.0756547041707076, 2.0766246362754606, 2.077594568380213, 2.078564500484966, 2.0795344325897185, 2.0805043646944714, 2.0814742967992244, 2.082444228903977, 2.0834141610087293, 2.084384093113482, 2.0853540252182348, 2.0863239573229873, 2.0872938894277397, 2.0882638215324927]
+- F_m (base): 1.998 GeV
+- M_eff (base≈F_m): 1.998
+- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.008)
+- sm_mass_gev: 2.286
+- mass_sim_raw_gev: 2.21152
+- mass_sim_used_gev: 2.21152
+- Δ_mass_sim vs SM: -3.2776%
+- H_block (lock_quality): 0.008
+- band_power_capture: 0.14245067689810562
+- chaos_mode=dynamic, PE_tick_norm=0.8633172870474974, T_ticks=201
+- mean_H_lock_norm=0.007505366094030249, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0015 / 0.0003 / 0.0031
+
+### unknown_block_0021 (run_id=50)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.808
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9977728285077951, 1.9988864142538973, 2.0, 2.0011135857461024, 2.002227171492205, 2.003340757238307, 2.0044543429844097, 2.005567928730512, 2.0066815144766146, 2.007795100222717, 2.0089086859688194, 2.0100222717149223, 2.0111358574610243]
+- F_m (base): 1.998 GeV
+- M_eff (base≈F_m): 1.998
+- M_corrected (F_m*(1-H_block)): 1.993 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.1549924585860075
+- chaos_mode=dynamic, PE_tick_norm=0.5945236208636879, T_ticks=201
+- mean_H_lock_norm=0.002236700587627459, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0006 / 0.0001 / 0.0011
+
+### unknown_block_0022 (run_id=14)
+- Partícula: unknown, tier: level1, s2_state: latent
+- match_score.d_total: 1.888
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9974968710888612, 1.9987484355444303, 2.0, 2.0012515644555697, 2.002503128911139, 2.0037546933667083, 2.0050062578222776, 2.0062578222778473, 2.007509386733417, 2.0087609511889863, 2.0100125156445556, 2.011264080100125, 2.0125156445556946, 2.013767209011264, 2.0150187734668337, 2.0162703379224034, 2.0175219023779722]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.973 (H_block=0.012)
+- H_block (lock_quality): 0.012
+- band_power_capture: 0.1021468231068432
+- chaos_mode=dynamic, PE_tick_norm=0.46565145758292276, T_ticks=201
+- mean_H_lock_norm=0.011999274348205784, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0035 / 0.0009 / 0.0089
+
+### unknown_block_0023 (run_id=17)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.042
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9898218829516543, 1.994910941475827, 2.0, 2.005089058524173, 2.0101781170483464, 2.015267175572519, 2.0203562340966923, 2.0254452926208653, 2.030534351145038, 2.035623409669211, 2.0407124681933846, 2.9720101781170483, 2.9770992366412217, 2.9821882951653946, 2.9872773536895676, 2.9923664122137406, 2.9974554707379135, 3.002544529262087, 3.00763358778626, 3.012722646310433, 3.017811704834606, 3.0229007633587788, 3.027989821882952]
+- F_m (base): 1.990 GeV
+- M_eff (base≈F_m): 1.990
+- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.16236906575443363
+- chaos_mode=dynamic, PE_tick_norm=0.7974805272696648, T_ticks=201
+- mean_H_lock_norm=0.0029454429407879484, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0031 / 0.0002 / 0.0072
+
+### delta_1950_block_0003 (run_id=2)
+- Partícula: delta_1950, tier: level1, s2_state: none
+- match_score.d_total: 0.065
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9861111111111112, 1.9930555555555556, 1.9999999999999998, 2.006944444444444, 2.013888888888889, 2.020833333333333, 2.0277777777777777, 3.333333333333333, 3.3402777777777777, 3.347222222222222, 3.3541666666666665, 3.3611111111111107]
+- F_m (base): 1.986 GeV
+- M_eff (base≈F_m): 1.986
+- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.003)
+- sm_mass_gev: 1.950
+- mass_sim_raw_gev: 1.94675
+- mass_sim_used_gev: 1.94675
+- Δ_mass_sim vs SM: -0.1665%
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.20428979189290092
+- chaos_mode=dynamic, PE_tick_norm=0.8933003893794171, T_ticks=201
+- mean_H_lock_norm=0.002766425889241407, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.9907 / 0.9660 / 0.9977
+
+### unknown_block_0024 (run_id=65)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.142
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9940828402366864, 1.9970414201183433, 2.0, 2.002958579881657, 2.0059171597633134, 2.0088757396449703, 2.0118343195266273, 2.0147928994082838, 2.0177514792899407, 2.0207100591715976, 2.0236686390532546, 2.026627218934911]
+- F_m (base): 1.994 GeV
+- M_eff (base≈F_m): 1.994
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.161658635920044
+- chaos_mode=dynamic, PE_tick_norm=0.6049455797354495, T_ticks=201
+- mean_H_lock_norm=0.004100388618860309, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0032 / 0.0007 / 0.0085
+
+### unknown_block_0025 (run_id=7)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.536
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9913978494623659, 1.9956989247311827, 2.0, 2.004301075268817, 2.0086021505376346, 2.0129032258064514, 2.0172043010752687, 2.021505376344086, 2.0258064516129033, 2.03010752688172, 2.034408602150538, 2.0387096774193547, 2.0774193548387094, 2.081720430107527, 2.086021505376344, 2.0903225806451613, 2.094623655913978, 2.098924731182796, 2.1032258064516127, 2.10752688172043, 2.1118279569892473, 2.1161290322580646, 2.1204301075268814]
+- F_m (base): 1.991 GeV
+- M_eff (base≈F_m): 1.991
+- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.001)
+- H_block (lock_quality): 0.001
+- band_power_capture: 0.16672777833047478
+- chaos_mode=dynamic, PE_tick_norm=0.7180793315600255, T_ticks=201
+- mean_H_lock_norm=0.0010178606855118105, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.4830 / 0.0727 / 0.9014
+
+### unknown_block_0026 (run_id=75)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.088
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9974779319041613, 1.9987389659520807, 2.0, 2.001261034047919, 2.002522068095838, 2.0037831021437578, 2.005044136191677, 2.0063051702395964, 2.0075662042875155, 2.008827238335435, 2.010088272383354]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.006)
+- H_block (lock_quality): 0.006
+- band_power_capture: 0.1685002754134143
+- chaos_mode=dynamic, PE_tick_norm=0.2802560523916099, T_ticks=201
+- mean_H_lock_norm=0.00623307118004708, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0186 / 0.0011 / 0.0513
+
+### triton_block_0002 (run_id=53)
+- Partícula: triton, tier: level1, s2_state: none
+- match_score.d_total: 1.025
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.993243243243243, 1.9966216216216217, 1.9999999999999998, 2.003378378378378, 2.0067567567567566, 2.010135135135135, 2.013513513513513, 2.016891891891892, 2.02027027027027, 2.0236486486486482, 2.027027027027027, 2.060810810810811, 2.0641891891891895, 2.0675675675675675, 2.070945945945946, 2.0743243243243246, 2.0777027027027026, 2.081081081081081, 2.0844594594594597, 2.087837837837838, 2.091216216216216, 2.0945945945945943, 2.097972972972973]
+- F_m (base): 1.993 GeV
+- M_eff (base≈F_m): 1.993
+- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.007)
+- sm_mass_gev: 2.809
+- mass_sim_raw_gev: 2.83454
+- mass_sim_used_gev: 2.83454
+- Δ_mass_sim vs SM: +0.9119%
+- H_block (lock_quality): 0.007
+- band_power_capture: 0.1663166554073374
+- chaos_mode=dynamic, PE_tick_norm=0.6332935988045326, T_ticks=201
+- mean_H_lock_norm=0.007016264798180396, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0016 / 0.0002 / 0.0031
+
+### unknown_block_0027 (run_id=74)
+- Partícula: unknown, tier: , s2_state: 
+- Bandas: count=None, s2_band_fraction=0.0
+- band_energies_gev: []
+- H_block (lock_quality): 1.000
+- entropy_chaos: no encontrado para este run.
+
+### delta_1950_block_0004 (run_id=27)
+- Partícula: delta_1950, tier: level1, s2_state: none
+- match_score.d_total: 0.067
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.984848484848485, 1.9924242424242427, 2.0, 2.007575757575758, 2.0151515151515156, 2.022727272727273, 2.0303030303030303, 2.037878787878788, 2.045454545454546, 2.0530303030303036, 2.3863636363636367, 2.3939393939393945, 2.4015151515151514, 2.409090909090909, 2.416666666666667, 2.4242424242424243, 2.431818181818182, 2.43939393939394, 2.4469696969696972, 2.454545454545455, 2.4621212121212124, 2.4696969696969697]
+- F_m (base): 1.985 GeV
+- M_eff (base≈F_m): 1.985
+- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.003)
+- sm_mass_gev: 1.950
+- mass_sim_raw_gev: 1.94667
+- mass_sim_used_gev: 1.94667
+- Δ_mass_sim vs SM: -0.1708%
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.1651839717645658
+- chaos_mode=dynamic, PE_tick_norm=0.8256388225511797, T_ticks=201
+- mean_H_lock_norm=0.002880258803451573, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0164 / 0.0001 / 0.1881
+
+### unknown_block_0028 (run_id=70)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.401
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9932432432432436, 1.996621621621622, 2.0, 2.0033783783783785, 2.006756756756757, 2.0101351351351355, 2.013513513513514, 2.016891891891892, 2.0202702702702706, 2.0236486486486487, 2.027027027027027, 2.0304054054054057, 2.628378378378379, 2.631756756756757]
+- F_m (base): 1.993 GeV
+- M_eff (base≈F_m): 1.993
+- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.005)
+- H_block (lock_quality): 0.005
+- band_power_capture: 0.1711330875572164
+- chaos_mode=dynamic, PE_tick_norm=0.7242066193329059, T_ticks=201
+- mean_H_lock_norm=0.004917227317851937, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0024 / 0.0001 / 0.0054
+
+### unknown_block_0029 (run_id=101)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.066
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9963603275705188, 1.9981801637852594, 2.0, 2.001819836214741, 2.003639672429481, 2.005459508644222, 2.0072793448589628, 2.009099181073703, 2.010919017288444, 2.0127388535031847, 2.014558689717925]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.987 (H_block=0.005)
+- H_block (lock_quality): 0.005
+- band_power_capture: 0.16669637379051674
+- chaos_mode=dynamic, PE_tick_norm=0.6029142948196766, T_ticks=201
+- mean_H_lock_norm=0.004801105508919095, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0006 / 0.0002 / 0.0010
+
+### delta_1930_block_0001 (run_id=28)
+- Partícula: delta_1930, tier: level1, s2_state: none
+- match_score.d_total: 0.071
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9919517102615696, 1.9959758551307847, 2.0, 2.004024144869215, 2.0080482897384306, 2.0120724346076457, 2.0160965794768613, 2.0201207243460764, 2.024144869215292, 2.028169014084507, 2.0321931589537225, 2.0362173038229376, 2.482897384305835, 2.4869215291750506, 2.4909456740442657, 2.4949698189134812, 2.4989939637826963, 2.503018108651912, 2.507042253521127, 2.5110663983903425, 2.5150905432595576, 2.5191146881287727, 2.5231388329979882]
+- F_m (base): 1.992 GeV
+- M_eff (base≈F_m): 1.992
+- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.004)
+- sm_mass_gev: 1.930
+- mass_sim_raw_gev: 1.92714
+- mass_sim_used_gev: 1.92714
+- Δ_mass_sim vs SM: -0.1481%
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.1645298428505622
+- chaos_mode=dynamic, PE_tick_norm=0.8449294480968051, T_ticks=201
+- mean_H_lock_norm=0.003546580965532169, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0006 / 0.0001 / 0.0016
+
+### meson_d_star_zero_block_0001 (run_id=24)
+- Partícula: meson_d_star_zero, tier: level1, s2_state: none
+- match_score.d_total: 0.000
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.993031358885017, 1.9965156794425087, 2.0, 2.0034843205574915, 2.006968641114982, 2.010452961672474, 2.013937282229965, 2.0174216027874565, 2.0209059233449476, 2.024390243902439, 2.0278745644599305, 2.0313588850174216, 2.0348432055749126, 2.038327526132404, 2.0418118466898956, 2.045296167247387, 2.0487804878048776, 2.052264808362369, 2.0557491289198606, 2.059233449477352]
+- F_m (base): 1.993 GeV
+- M_eff (base≈F_m): 1.993
+- M_corrected (F_m*(1-H_block)): 1.987 (H_block=0.003)
+- sm_mass_gev: 2.007
+- mass_sim_raw_gev: 4.01401
+- mass_sim_used_gev: 2.007
+- Δ_mass_sim vs SM: +0.0077%
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.14521098565385268
+- chaos_mode=dynamic, PE_tick_norm=0.604097159447214, T_ticks=201
+- mean_H_lock_norm=0.0030210601547596846, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0026 / 0.0003 / 0.0095
+
+### unknown_block_0030 (run_id=21)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.058
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9954128440366972, 1.997706422018349, 2.0, 2.0022935779816518, 2.0045871559633026, 2.0068807339449544, 2.0091743119266057, 2.011467889908257, 2.0137614678899083, 2.0160550458715596, 2.018348623853211]
 - F_m (base): 1.995 GeV
 - M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.975 (H_block=0.010)
-- sm_mass_gev: 2.112
-- mass_sim_raw_gev: 4.33199
-- mass_sim_used_gev: 2.16599
-- Δ_mass_sim vs SM: +2.5468%
-- H_block (lock_quality): 0.010
-- band_power_capture: 0.1660182207106187
-- chaos_mode=dynamic, PE_tick_norm=0.6075364561720565, T_ticks=201
-- mean_H_lock_norm=0.010248847468495638, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.006)
+- H_block (lock_quality): 0.006
+- band_power_capture: 0.16735644309073336
+- chaos_mode=dynamic, PE_tick_norm=0.5406677560914794, T_ticks=201
+- mean_H_lock_norm=0.006233225194954187, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0203 / 0.0007 / 0.0666
+- lock_S1_series (mean/min/max): 0.0094 / 0.0006 / 0.0262
+
+### unknown_block_0031 (run_id=34)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.499
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9929824561403509, 1.9964912280701754, 1.9999999999999998, 2.003508771929824, 2.007017543859649, 2.0105263157894737, 2.0140350877192983, 2.0175438596491224, 2.0210526315789474, 2.024561403508772, 2.0280701754385966, 2.0385964912280703, 2.042105263157895, 2.045614035087719, 2.0491228070175436, 2.052631578947368, 2.056140350877193, 2.0596491228070173, 2.0631578947368423, 2.0666666666666664, 2.070175438596491, 2.0736842105263156]
+- F_m (base): 1.993 GeV
+- M_eff (base≈F_m): 1.993
+- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.09330696368335424
+- chaos_mode=dynamic, PE_tick_norm=0.6903336199491703, T_ticks=201
+- mean_H_lock_norm=0.001712219798501031, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0005 / 0.0000 / 0.0010
+
+### unknown_block_0032 (run_id=35)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.332
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9854014598540146, 1.9927007299270076, 2.0, 2.007299270072993, 2.0145985401459856, 2.021897810218978, 2.0291970802919708, 2.036496350364964, 2.0437956204379564, 2.0510948905109494, 2.058394160583942, 2.0656934306569346, 2.7956204379562046, 2.802919708029197, 2.8102189781021902, 2.817518248175183, 2.8248175182481754]
+- F_m (base): 1.985 GeV
+- M_eff (base≈F_m): 1.985
+- M_corrected (F_m*(1-H_block)): 1.982 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16820271827004757
+- chaos_mode=dynamic, PE_tick_norm=0.7917336488064249, T_ticks=201
+- mean_H_lock_norm=0.0016341427756706784, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0011 / 0.0001 / 0.0024
+
+### unknown_block_0033 (run_id=16)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.726
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.992156862745098, 1.9960784313725493, 2.0, 2.003921568627451, 2.0078431372549024, 2.011764705882353, 2.0156862745098043, 2.019607843137255, 2.0235294117647062, 2.027450980392157, 2.0313725490196077]
+- F_m (base): 1.992 GeV
+- M_eff (base≈F_m): 1.992
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.16744446121769366
+- chaos_mode=dynamic, PE_tick_norm=0.6285185052551079, T_ticks=201
+- mean_H_lock_norm=0.0031138035296883384, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0016 / 0.0005 / 0.0036
+
+### unknown_block_0034 (run_id=62)
+- Partícula: unknown, tier: level1, s2_state: latent
+- match_score.d_total: 0.277
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9889196675900278, 1.9944598337950137, 1.9999999999999998, 2.005540166204986, 2.011080332409972, 2.0166204986149583, 2.0221606648199444, 2.0277008310249305, 2.033240997229917, 2.038781163434903, 2.044321329639889, 2.0498614958448753, 2.0554016620498614, 2.060941828254848, 2.0664819944598336]
+- F_m (base): 1.989 GeV
+- M_eff (base≈F_m): 1.989
+- M_corrected (F_m*(1-H_block)): 1.964 (H_block=0.013)
+- H_block (lock_quality): 0.013
+- band_power_capture: 0.11944105099887718
+- chaos_mode=dynamic, PE_tick_norm=0.5909654825373496, T_ticks=201
+- mean_H_lock_norm=0.012562045009070134, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0016 / 0.0001 / 0.0028
+
+### meson_d_star_plus_block_0001 (run_id=59)
+- Partícula: meson_d_star_plus, tier: level1, s2_state: none
+- match_score.d_total: 0.016
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9969879518072284, 1.9984939759036142, 2.0, 2.001506024096386, 2.003012048192771, 2.0045180722891565]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.970 (H_block=0.014)
+- sm_mass_gev: 2.010
+- mass_sim_raw_gev: 4.02082
+- mass_sim_used_gev: 2.01041
+- Δ_mass_sim vs SM: +0.0074%
+- H_block (lock_quality): 0.014
+- band_power_capture: 0.20821229822582799
+- chaos_mode=dynamic, PE_tick_norm=0.8117714540664375, T_ticks=201
+- mean_H_lock_norm=0.013749097685098221, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.9782 / 0.8592 / 0.9972
+
+### delta_1930_block_0002 (run_id=77)
+- Partícula: delta_1930, tier: level1, s2_state: none
+- match_score.d_total: 0.032
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9926470588235297, 1.9963235294117645, 2.0, 2.003676470588235, 2.0073529411764706, 2.011029411764706, 2.014705882352941, 2.0183823529411766, 2.602941176470588, 2.6066176470588234, 2.610294117647059, 2.613970588235294, 2.6176470588235294, 2.6213235294117645, 2.625, 2.6286764705882355, 2.6323529411764706, 2.6360294117647056, 2.639705882352941, 2.643382352941176]
+- F_m (base): 1.993 GeV
+- M_eff (base≈F_m): 1.993
+- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.002)
+- sm_mass_gev: 1.930
+- mass_sim_raw_gev: 1.93127
+- mass_sim_used_gev: 1.93127
+- Δ_mass_sim vs SM: +0.0660%
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16812375355580322
+- chaos_mode=dynamic, PE_tick_norm=0.7248661432414408, T_ticks=201
+- mean_H_lock_norm=0.001701094321510609, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0022 / 0.0001 / 0.0054
+
+### unknown_block_0035 (run_id=89)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.129
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9963167587476982, 1.9981583793738489, 2.0, 2.001841620626151, 2.003683241252302, 2.005524861878453, 2.007366482504604, 2.009208103130755, 2.029465930018416, 2.0313075506445677, 2.033149171270719, 2.0349907918968695, 2.0368324125230206, 2.0386740331491717, 2.0405156537753224, 2.042357274401473, 2.044198895027624, 2.0460405156537753, 2.0478821362799264]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.14539521647216958
+- chaos_mode=dynamic, PE_tick_norm=0.6231914384788971, T_ticks=201
+- mean_H_lock_norm=0.0035676306116855035, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0051 / 0.0006 / 0.0122
+
+### unknown_block_0036 (run_id=29)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.090
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9957939011566772, 1.9978969505783388, 2.0, 2.0021030494216614, 2.0042060988433232, 2.006309148264984, 2.0084121976866456, 2.010515247108307, 2.012618296529969, 2.0147213459516298, 2.0168243953732916, 2.0189274447949526]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.974 (H_block=0.011)
+- H_block (lock_quality): 0.011
+- band_power_capture: 0.1636252681848124
+- chaos_mode=dynamic, PE_tick_norm=0.5570705990635477, T_ticks=201
+- mean_H_lock_norm=0.011154811724762398, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0094 / 0.0007 / 0.0254
+
+### unknown_block_0037 (run_id=25)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.005
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9885057471264367, 1.9942528735632186, 2.0, 2.005747126436782, 2.011494252873563, 2.0172413793103448, 2.0229885057471266, 2.028735632183908, 2.03448275862069, 2.0402298850574714, 3.293103448275862, 3.2988505747126435, 3.3045977011494254, 3.310344827586207, 3.3160919540229887, 3.3218390804597697, 3.3275862068965516, 3.3333333333333335, 3.339080459770115, 3.344827586206897, 3.3505747126436782, 3.3563218390804597, 3.362068965517241, 3.367816091954023, 3.3735632183908044, 3.3793103448275863, 3.385057471264368, 3.390804597701149]
+- F_m (base): 1.989 GeV
+- M_eff (base≈F_m): 1.989
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.001)
+- H_block (lock_quality): 0.001
+- band_power_capture: 0.15568737808015987
+- chaos_mode=dynamic, PE_tick_norm=0.7658803842409685, T_ticks=201
+- mean_H_lock_norm=0.0014561129616150641, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0013 / 0.0001 / 0.0039
+
+### delta_1920_block_0001 (run_id=47)
+- Partícula: delta_1920, tier: level1, s2_state: none
+- match_score.d_total: 0.030
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9960317460317458, 1.998015873015873, 2.0, 2.001984126984127, 2.003968253968254, 2.005952380952381, 2.007936507936508, 2.009920634920635, 2.011904761904762, 2.013888888888889, 2.015873015873016, 2.242063492063492, 2.244047619047619, 2.246031746031746, 2.248015873015873, 2.2500000000000004, 2.251984126984127, 2.253968253968254, 2.255952380952381, 2.257936507936508, 2.259920634920635, 2.2619047619047623, 2.2638888888888893, 2.265873015873016, 2.267857142857143, 2.2698412698412698, 2.2718253968253967, 2.2738095238095237, 2.275793650793651, 2.277777777777778]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.003)
+- sm_mass_gev: 1.920
+- mass_sim_raw_gev: 1.91878
+- mass_sim_used_gev: 1.91878
+- Δ_mass_sim vs SM: -0.0635%
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.13634660704614082
+- chaos_mode=dynamic, PE_tick_norm=0.7321933106158612, T_ticks=201
+- mean_H_lock_norm=0.0029967632426092143, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0003 / 0.0000 / 0.0005
+
+### delta_1950_block_0005 (run_id=72)
+- Partícula: delta_1950, tier: level1, s2_state: none
+- match_score.d_total: 0.087
+- Bandas: count=3.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9922178988326849, 1.9961089494163424, 2.0, 2.0038910505836576, 2.007782101167315, 2.0116731517509727, 2.0155642023346303, 2.019455252918288, 2.023346303501946, 2.428015564202335, 2.4319066147859925, 2.4357976653696496, 2.4396887159533076, 2.4435797665369656, 2.4474708171206228, 2.4513618677042803, 2.455252918287938, 2.4591439688715955, 2.4630350194552535, 2.4669260700389106, 2.5291828793774322, 2.5330739299610903, 2.5369649805447474, 2.540856031128405, 2.5447470817120625, 2.54863813229572, 2.5525291828793777, 2.5564202334630353, 2.560311284046693, 2.5642023346303504]
+- F_m (base): 1.992 GeV
+- M_eff (base≈F_m): 1.992
+- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.002)
+- sm_mass_gev: 1.950
+- mass_sim_raw_gev: 1.94564
+- mass_sim_used_gev: 1.94564
+- Δ_mass_sim vs SM: -0.2235%
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16846901385539734
+- chaos_mode=dynamic, PE_tick_norm=0.861070411552758, T_ticks=201
+- mean_H_lock_norm=0.0017183384895000703, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0005 / 0.0001 / 0.0014
+
+### unknown_block_0038 (run_id=10)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.862
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9861111111111112, 1.9930555555555556, 2.0, 2.0069444444444446, 2.013888888888889, 4.020833333333333, 4.027777777777778, 4.034722222222222, 4.041666666666667, 4.048611111111111, 4.055555555555555, 4.0625, 4.069444444444444, 4.076388888888889, 4.083333333333334, 4.090277777777779, 4.097222222222222]
+- F_m (base): 1.986 GeV
+- M_eff (base≈F_m): 1.986
+- M_corrected (F_m*(1-H_block)): 1.982 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16667252732331841
+- chaos_mode=dynamic, PE_tick_norm=0.8107174387034924, T_ticks=201
+- mean_H_lock_norm=0.0019097880444193444, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0036 / 0.0005 / 0.0091
+
+### triton_block_0003 (run_id=11)
+- Partícula: triton, tier: level1, s2_state: none
+- match_score.d_total: 0.193
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.991578947368421, 1.9957894736842108, 2.0, 2.004210526315789, 2.0168421052631578, 2.0210526315789474, 2.025263157894737, 2.0294736842105263, 2.033684210526316, 2.0378947368421056, 2.042105263157895, 2.046315789473684, 2.0505263157894733, 2.0547368421052634, 2.0589473684210526]
+- F_m (base): 1.992 GeV
+- M_eff (base≈F_m): 1.992
+- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.001)
+- sm_mass_gev: 2.809
+- mass_sim_raw_gev: 2.80409
+- mass_sim_used_gev: 2.80409
+- Δ_mass_sim vs SM: -0.1721%
+- H_block (lock_quality): 0.001
+- band_power_capture: 0.1605462067865705
+- chaos_mode=dynamic, PE_tick_norm=0.6177777102636764, T_ticks=201
+- mean_H_lock_norm=0.0007107685954658795, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0007 / 0.0001 / 0.0016
+
+### unknown_block_0039 (run_id=32)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.859
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.983673469387755, 1.9918367346938777, 2.0, 2.008163265306122, 2.0163265306122446, 3.640816326530612, 3.6489795918367345, 3.657142857142857, 3.6653061224489796, 3.6734693877551017, 3.6816326530612242, 3.6897959183673468, 3.6979591836734693, 3.706122448979592, 3.7142857142857144, 3.722448979591837, 3.730612244897959]
+- F_m (base): 1.984 GeV
+- M_eff (base≈F_m): 1.984
+- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16490701110217332
+- chaos_mode=dynamic, PE_tick_norm=0.6268052213802572, T_ticks=201
+- mean_H_lock_norm=0.0022401879973174, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0057 / 0.0004 / 0.0196
+
+### unknown_block_0040 (run_id=76)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.761
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9910112359550562, 1.9955056179775281, 2.0, 2.004494382022472, 2.0089887640449438, 2.013483146067416, 2.0179775280898875, 2.022471910112359, 2.0269662921348313, 2.0314606741573034, 2.035955056179775]
+- F_m (base): 1.991 GeV
+- M_eff (base≈F_m): 1.991
+- M_corrected (F_m*(1-H_block)): 1.988 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16881350683133298
+- chaos_mode=dynamic, PE_tick_norm=0.597575449643224, T_ticks=201
+- mean_H_lock_norm=0.001538743983348704, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0013 / 0.0004 / 0.0023
+
+### delta_1920_block_0002 (run_id=87)
+- Partícula: delta_1920, tier: level1, s2_state: none
+- match_score.d_total: 0.080
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.983122362869198, 1.991561181434599, 2.0, 2.0084388185654007, 2.0168776371308015, 2.0253164556962022, 2.0337552742616034, 2.042194092827004, 2.050632911392405, 2.059071729957806, 2.067510548523207, 2.0759493670886076, 4.0, 4.0084388185654, 4.0168776371308015, 4.025316455696203, 4.033755274261603, 4.042194092827004, 4.0506329113924044, 4.059071729957806, 4.067510548523207, 4.075949367088607, 4.084388185654008, 4.0928270042194095, 4.10126582278481, 4.109704641350211, 4.118143459915612, 4.1265822784810124, 4.135021097046414, 4.143459915611814]
+- F_m (base): 1.983 GeV
+- M_eff (base≈F_m): 1.983
+- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.001)
+- sm_mass_gev: 1.920
+- mass_sim_raw_gev: 1.9232
+- mass_sim_used_gev: 1.9232
+- Δ_mass_sim vs SM: +0.1668%
+- H_block (lock_quality): 0.001
+- band_power_capture: 0.1377080479159802
+- chaos_mode=dynamic, PE_tick_norm=0.8826084393701489, T_ticks=201
+- mean_H_lock_norm=0.0011542905355903525, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0052 / 0.0002 / 0.0784
+
+### delta_1950_block_0006 (run_id=78)
+- Partícula: delta_1950, tier: level1, s2_state: none
+- match_score.d_total: 0.083
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.984496124031008, 1.992248062015504, 2.0, 2.007751937984496, 2.0155038759689927, 2.0232558139534884, 2.0310077519379846, 2.0387596899224807, 2.046511627906977, 2.0542635658914734, 2.062015503875969, 3.031007751937985, 3.038759689922481, 3.046511627906977, 3.0542635658914734, 3.0620155038759695, 3.0697674418604652, 3.077519379844962, 3.085271317829458, 3.0930232558139537, 3.1007751937984502, 3.1085271317829464, 3.1162790697674425]
+- F_m (base): 1.984 GeV
+- M_eff (base≈F_m): 1.984
+- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.002)
+- sm_mass_gev: 1.950
+- mass_sim_raw_gev: 1.95414
+- mass_sim_used_gev: 1.95414
+- Δ_mass_sim vs SM: +0.2121%
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16222050328362042
+- chaos_mode=dynamic, PE_tick_norm=0.7866900371683049, T_ticks=201
+- mean_H_lock_norm=0.0018136313587479816, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0007 / 0.0000 / 0.0016
+
+### unknown_block_0041 (run_id=39)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.581
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9975046787273862, 1.998752339363693, 2.0, 2.0012476606363068, 2.002495321272614, 2.0037429819089208, 2.0049906425452275, 2.0062383031815343, 2.0074859638178415, 2.0087336244541483, 2.0099812850904555]
+- F_m (base): 1.998 GeV
+- M_eff (base≈F_m): 1.998
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.006)
+- H_block (lock_quality): 0.006
+- band_power_capture: 0.1666416912238699
+- chaos_mode=dynamic, PE_tick_norm=0.21244207729538747, T_ticks=201
+- mean_H_lock_norm=0.005804518528986572, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0023 / 0.0006 / 0.0049
+
+### lambda_c_2765_block_0002 (run_id=80)
+- Partícula: lambda_c_2765, tier: level1, s2_state: latent
+- match_score.d_total: 0.505
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9963403476669714, 1.9981701738334858, 2.0, 2.001829826166514, 2.003659652333028, 2.005489478499542, 2.0073193046660567, 2.009149130832571, 2.0109789569990846, 2.012808783165599, 2.0146386093321134, 2.0164684354986275]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.977 (H_block=0.010)
+- sm_mass_gev: 2.766
+- mass_sim_raw_gev: 2.7761
+- mass_sim_used_gev: 2.7761
+- Δ_mass_sim vs SM: +0.3652%
+- H_block (lock_quality): 0.010
+- band_power_capture: 0.16061581756922416
+- chaos_mode=dynamic, PE_tick_norm=0.522047428809671, T_ticks=201
+- mean_H_lock_norm=0.009723383829986354, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0036 / 0.0011 / 0.0075
 
 ### xi_c_2645_block_0002 (run_id=58)
 - Partícula: xi_c_2645, tier: level1, s2_state: none
@@ -2134,153 +1890,41 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0040 / 0.0004 / 0.0089
 
-### unknown_block_0048 (run_id=50)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.808
+### xi_c_plus_block_0003 (run_id=91)
+- Partícula: xi_c_plus, tier: level1, s2_state: none
+- match_score.d_total: 3.082
 - Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9977728285077951, 1.9988864142538973, 2.0, 2.0011135857461024, 2.002227171492205, 2.003340757238307, 2.0044543429844097, 2.005567928730512, 2.0066815144766146, 2.007795100222717, 2.0089086859688194, 2.0100222717149223, 2.0111358574610243]
-- F_m (base): 1.998 GeV
-- M_eff (base≈F_m): 1.998
-- M_corrected (F_m*(1-H_block)): 1.993 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.1549924585860075
-- chaos_mode=dynamic, PE_tick_norm=0.5945236208636879, T_ticks=201
-- mean_H_lock_norm=0.002236700587627459, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0006 / 0.0001 / 0.0011
-
-### unknown_block_0049 (run_id=57)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 1.596
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9970845481049562, 1.998542274052478, 2.0, 2.0014577259475215, 2.002915451895044, 2.0043731778425657, 2.005830903790087, 2.007288629737609, 2.008746355685131, 2.010204081632653, 2.011661807580175, 2.013119533527697, 2.349854227405248, 2.3513119533527695, 2.3527696793002915, 2.3542274052478134, 2.355685131195335, 2.357142857142857, 2.358600583090379]
+- band_energies_gev: [1.9970282317979198, 1.9985141158989597, 2.0, 2.00148588410104, 2.00297176820208, 2.0044576523031203, 2.00594353640416, 2.0074294205052006, 2.0089153046062402, 2.010401188707281, 2.011887072808321, 2.013372956909361]
 - F_m (base): 1.997 GeV
 - M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.994 (H_block=0.002)
+- M_corrected (F_m*(1-H_block)): 1.979 (H_block=0.009)
+- sm_mass_gev: 2.468
+- mass_sim_raw_gev: 2.56045
+- mass_sim_used_gev: 2.56045
+- Δ_mass_sim vs SM: +3.7515%
+- H_block (lock_quality): 0.009
+- band_power_capture: 0.1616131160657486
+- chaos_mode=dynamic, PE_tick_norm=0.5756612388474693, T_ticks=201
+- mean_H_lock_norm=0.009219761310595915, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0032 / 0.0004 / 0.0074
+
+### unknown_block_0042 (run_id=6)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.478
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9901234567901234, 1.9950617283950614, 2.0, 2.0049382716049386, 2.0098765432098764, 2.0148148148148146, 2.019753086419753, 2.0246913580246915, 2.0296296296296297, 2.034567901234568, 2.039506172839506, 2.0444444444444443, 2.0493827160493825, 2.0543209876543207, 2.0592592592592593, 2.0641975308641975, 2.0691358024691358, 2.074074074074074]
+- F_m (base): 1.990 GeV
+- M_eff (base≈F_m): 1.990
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.002)
 - H_block (lock_quality): 0.002
-- band_power_capture: 0.16539230346055442
-- chaos_mode=dynamic, PE_tick_norm=0.8237916915286727, T_ticks=201
-- mean_H_lock_norm=0.0017218388201713673, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- band_power_capture: 0.15088810495145621
+- chaos_mode=dynamic, PE_tick_norm=0.6811822862387781, T_ticks=201
+- mean_H_lock_norm=0.0018928565944374277, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0009 / 0.0000 / 0.0031
+- lock_S1_series (mean/min/max): 0.0022 / 0.0003 / 0.0052
 
-### unknown_block_0050 (run_id=26)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.721
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9974683544303795, 1.9987341772151899, 2.0, 2.0012658227848097, 2.00253164556962, 2.00379746835443, 2.0050632911392405, 2.0063291139240507, 2.0075949367088604, 2.0088607594936705, 2.0101265822784806]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.988 (H_block=0.005)
-- H_block (lock_quality): 0.005
-- band_power_capture: 0.16818445075279687
-- chaos_mode=dynamic, PE_tick_norm=0.36380490519686315, T_ticks=201
-- mean_H_lock_norm=0.004570782725421989, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0003 / 0.0002 / 0.0005
-
-### unknown_block_0051 (run_id=35)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.332
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9854014598540146, 1.9927007299270076, 2.0, 2.007299270072993, 2.0145985401459856, 2.021897810218978, 2.0291970802919708, 2.036496350364964, 2.0437956204379564, 2.0510948905109494, 2.058394160583942, 2.0656934306569346, 2.7956204379562046, 2.802919708029197, 2.8102189781021902, 2.817518248175183, 2.8248175182481754]
-- F_m (base): 1.985 GeV
-- M_eff (base≈F_m): 1.985
-- M_corrected (F_m*(1-H_block)): 1.982 (H_block=0.002)
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.16820271827004757
-- chaos_mode=dynamic, PE_tick_norm=0.7917336488064249, T_ticks=201
-- mean_H_lock_norm=0.0016341427756706784, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0011 / 0.0001 / 0.0024
-
-### lambda_c_block_0004 (run_id=44)
-- Partícula: lambda_c, tier: level1, s2_state: latent
-- match_score.d_total: 4.590
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9954853273137698, 1.997742663656885, 1.9999999999999998, 2.0022573363431153, 2.00451467268623, 2.0067720090293455, 2.0090293453724604, 2.0112866817155757, 2.0135440180586905, 2.015801354401806, 2.018058690744921, 2.020316027088036]
-- F_m (base): 1.995 GeV
-- M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.968 (H_block=0.014)
-- sm_mass_gev: 2.286
-- mass_sim_raw_gev: 2.21714
-- mass_sim_used_gev: 2.21714
-- Δ_mass_sim vs SM: -3.0316%
-- H_block (lock_quality): 0.014
-- band_power_capture: 0.16335449062157736
-- chaos_mode=dynamic, PE_tick_norm=0.6101756409619795, T_ticks=201
-- mean_H_lock_norm=0.013682013944975953, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0009 / 0.0006 / 0.0011
-
-### unknown_block_0052 (run_id=63)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 2.101
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9929577464788735, 1.9964788732394365, 2.0, 2.0035211267605635, 2.007042253521127, 2.01056338028169, 2.014084507042254, 2.017605633802817, 2.0211267605633805, 2.024647887323944, 2.028169014084507, 2.03169014084507]
-- F_m (base): 1.993 GeV
-- M_eff (base≈F_m): 1.993
-- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.006)
-- H_block (lock_quality): 0.006
-- band_power_capture: 0.16327888120653414
-- chaos_mode=dynamic, PE_tick_norm=0.6078647863376788, T_ticks=201
-- mean_H_lock_norm=0.005931736560121452, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0007 / 0.0003 / 0.0010
-
-### unknown_block_0053 (run_id=3)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.057
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9963898916967506, 1.9981949458483754, 2.0, 2.0018050541516246, 2.003610108303249, 2.0054151624548737, 2.007220216606498, 2.0090252707581224, 2.0108303249097474, 2.0126353790613716, 2.0144404332129966, 2.0162454873646207]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.980 (H_block=0.008)
-- H_block (lock_quality): 0.008
-- band_power_capture: 0.16303090732763015
-- chaos_mode=dynamic, PE_tick_norm=0.5930597289965321, T_ticks=201
-- mean_H_lock_norm=0.008347151006301881, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0079 / 0.0007 / 0.0211
-
-### unknown_block_0054 (run_id=62)
-- Partícula: unknown, tier: level1, s2_state: latent
-- match_score.d_total: 0.277
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9889196675900278, 1.9944598337950137, 1.9999999999999998, 2.005540166204986, 2.011080332409972, 2.0166204986149583, 2.0221606648199444, 2.0277008310249305, 2.033240997229917, 2.038781163434903, 2.044321329639889, 2.0498614958448753, 2.0554016620498614, 2.060941828254848, 2.0664819944598336]
-- F_m (base): 1.989 GeV
-- M_eff (base≈F_m): 1.989
-- M_corrected (F_m*(1-H_block)): 1.964 (H_block=0.013)
-- H_block (lock_quality): 0.013
-- band_power_capture: 0.11944105099887718
-- chaos_mode=dynamic, PE_tick_norm=0.5909654825373496, T_ticks=201
-- mean_H_lock_norm=0.012562045009070134, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0016 / 0.0001 / 0.0028
-
-### unknown_block_0055 (run_id=49)
-- Partícula: unknown, tier: , s2_state: 
-- Bandas: count=None, s2_band_fraction=0.0
-- band_energies_gev: []
-- H_block (lock_quality): 1.000
-- entropy_chaos: no encontrado para este run.
-
-### unknown_block_0056 (run_id=103)
-- Partícula: unknown, tier: level1, s2_state: latent
-- match_score.d_total: 1.933
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9962825278810408, 1.9981412639405203, 2.0, 2.0018587360594795, 2.003717472118959, 2.0055762081784385, 2.0074349442379185, 2.0092936802973975, 2.0111524163568775, 2.0130111524163565, 2.0148698884758365, 2.0167286245353155, 2.0185873605947955, 2.057620817843866, 2.0594795539033455, 2.0613382899628254, 2.0631970260223045, 2.0650557620817844, 2.066914498141264, 2.0687732342007434, 2.0706319702602225]
-- F_m (base): 1.996 GeV
-- M_eff (base≈F_m): 1.996
-- M_corrected (F_m*(1-H_block)): 1.977 (H_block=0.010)
-- H_block (lock_quality): 0.010
-- band_power_capture: 0.1516650468402012
-- chaos_mode=dynamic, PE_tick_norm=0.8237916915286726, T_ticks=201
-- mean_H_lock_norm=0.009505710249466698, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0004 / 0.0001 / 0.0008
-
-### unknown_block_0057 (run_id=33)
+### unknown_block_0043 (run_id=33)
 - Partícula: unknown, tier: level1, s2_state: none
 - match_score.d_total: 1.717
 - Bandas: count=2.0, s2_band_fraction=0.0
@@ -2294,127 +1938,6 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - mean_H_lock_norm=0.0036843642534137356, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0054 / 0.0006 / 0.0189
-
-### delta_1950_block_0009 (run_id=72)
-- Partícula: delta_1950, tier: level1, s2_state: none
-- match_score.d_total: 0.087
-- Bandas: count=3.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9922178988326849, 1.9961089494163424, 2.0, 2.0038910505836576, 2.007782101167315, 2.0116731517509727, 2.0155642023346303, 2.019455252918288, 2.023346303501946, 2.428015564202335, 2.4319066147859925, 2.4357976653696496, 2.4396887159533076, 2.4435797665369656, 2.4474708171206228, 2.4513618677042803, 2.455252918287938, 2.4591439688715955, 2.4630350194552535, 2.4669260700389106, 2.5291828793774322, 2.5330739299610903, 2.5369649805447474, 2.540856031128405, 2.5447470817120625, 2.54863813229572, 2.5525291828793777, 2.5564202334630353, 2.560311284046693, 2.5642023346303504]
-- F_m (base): 1.992 GeV
-- M_eff (base≈F_m): 1.992
-- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.002)
-- sm_mass_gev: 1.950
-- mass_sim_raw_gev: 1.94564
-- mass_sim_used_gev: 1.94564
-- Δ_mass_sim vs SM: -0.2235%
-- H_block (lock_quality): 0.002
-- band_power_capture: 0.16846901385539734
-- chaos_mode=dynamic, PE_tick_norm=0.861070411552758, T_ticks=201
-- mean_H_lock_norm=0.0017183384895000703, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0005 / 0.0001 / 0.0014
-
-### delta_1930_block_0003 (run_id=28)
-- Partícula: delta_1930, tier: level1, s2_state: none
-- match_score.d_total: 0.071
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9919517102615696, 1.9959758551307847, 2.0, 2.004024144869215, 2.0080482897384306, 2.0120724346076457, 2.0160965794768613, 2.0201207243460764, 2.024144869215292, 2.028169014084507, 2.0321931589537225, 2.0362173038229376, 2.482897384305835, 2.4869215291750506, 2.4909456740442657, 2.4949698189134812, 2.4989939637826963, 2.503018108651912, 2.507042253521127, 2.5110663983903425, 2.5150905432595576, 2.5191146881287727, 2.5231388329979882]
-- F_m (base): 1.992 GeV
-- M_eff (base≈F_m): 1.992
-- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.004)
-- sm_mass_gev: 1.930
-- mass_sim_raw_gev: 1.92714
-- mass_sim_used_gev: 1.92714
-- Δ_mass_sim vs SM: -0.1481%
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.1645298428505622
-- chaos_mode=dynamic, PE_tick_norm=0.8449294480968051, T_ticks=201
-- mean_H_lock_norm=0.003546580965532169, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0006 / 0.0001 / 0.0016
-
-### delta_1900_block_0002 (run_id=88)
-- Partícula: delta_1900, tier: level1, s2_state: none
-- match_score.d_total: 0.010
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9970972423802615, 1.998548621190131, 2.0, 2.00145137880987, 2.002902757619739, 2.0043541364296082, 2.005805515239478, 2.0072568940493474, 2.0087082728592165, 2.010159651669086, 2.011611030478955, 2.0130624092888243]
-- F_m (base): 1.997 GeV
-- M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.006)
-- sm_mass_gev: 1.900
-- mass_sim_raw_gev: 1.89941
-- mass_sim_used_gev: 1.89941
-- Δ_mass_sim vs SM: -0.0312%
-- H_block (lock_quality): 0.006
-- band_power_capture: 0.16529042523488593
-- chaos_mode=dynamic, PE_tick_norm=0.5512287155946721, T_ticks=201
-- mean_H_lock_norm=0.005956025441615783, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0009 / 0.0000 / 0.0017
-
-### xi_c_plus_block_0006 (run_id=30)
-- Partícula: xi_c_plus, tier: level1, s2_state: none
-- match_score.d_total: 0.003
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9873417721518987, 1.9936708860759491, 1.9999999999999998, 2.0063291139240507, 2.012658227848101, 2.0189873417721516, 2.0253164556962022, 2.031645569620253, 2.0379746835443036, 2.0443037974683542, 2.0506329113924053, 2.056962025316455]
-- F_m (base): 1.987 GeV
-- M_eff (base≈F_m): 1.987
-- M_corrected (F_m*(1-H_block)): 1.980 (H_block=0.004)
-- sm_mass_gev: 2.468
-- mass_sim_raw_gev: 2.46792
-- mass_sim_used_gev: 2.46792
-- Δ_mass_sim vs SM: +0.0019%
-- H_block (lock_quality): 0.004
-- band_power_capture: 0.1658151915417274
-- chaos_mode=dynamic, PE_tick_norm=0.6478854572968956, T_ticks=201
-- mean_H_lock_norm=0.0038241215793713233, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0013 / 0.0009 / 0.0019
-
-### unknown_block_0058 (run_id=74)
-- Partícula: unknown, tier: , s2_state: 
-- Bandas: count=None, s2_band_fraction=0.0
-- band_energies_gev: []
-- H_block (lock_quality): 1.000
-- entropy_chaos: no encontrado para este run.
-
-### xi_c_plus_block_0007 (run_id=19)
-- Partícula: xi_c_plus, tier: level1, s2_state: none
-- match_score.d_total: 0.762
-- Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9976985040276176, 1.998849252013809, 1.9999999999999998, 2.0011507479861903, 2.002301495972382, 2.003452243958573, 2.004602991944764, 2.006904487917146, 2.008055235903337, 2.0092059838895278, 2.010356731875719, 2.01150747986191, 2.0126582278481013, 2.013808975834292, 2.014959723820483, 2.016110471806674, 2.017261219792865, 2.018411967779056, 2.019562715765247]
-- F_m (base): 1.998 GeV
-- M_eff (base≈F_m): 1.998
-- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.007)
-- sm_mass_gev: 2.468
-- mass_sim_raw_gev: 2.49085
-- mass_sim_used_gev: 2.49085
-- Δ_mass_sim vs SM: +0.9313%
-- H_block (lock_quality): 0.007
-- band_power_capture: 0.14899380184932468
-- chaos_mode=dynamic, PE_tick_norm=0.5797831123574368, T_ticks=201
-- mean_H_lock_norm=0.007207855848787647, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0055 / 0.0008 / 0.0126
-
-### delta_1920_block_0004 (run_id=87)
-- Partícula: delta_1920, tier: level1, s2_state: none
-- match_score.d_total: 0.080
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.983122362869198, 1.991561181434599, 2.0, 2.0084388185654007, 2.0168776371308015, 2.0253164556962022, 2.0337552742616034, 2.042194092827004, 2.050632911392405, 2.059071729957806, 2.067510548523207, 2.0759493670886076, 4.0, 4.0084388185654, 4.0168776371308015, 4.025316455696203, 4.033755274261603, 4.042194092827004, 4.0506329113924044, 4.059071729957806, 4.067510548523207, 4.075949367088607, 4.084388185654008, 4.0928270042194095, 4.10126582278481, 4.109704641350211, 4.118143459915612, 4.1265822784810124, 4.135021097046414, 4.143459915611814]
-- F_m (base): 1.983 GeV
-- M_eff (base≈F_m): 1.983
-- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.001)
-- sm_mass_gev: 1.920
-- mass_sim_raw_gev: 1.9232
-- mass_sim_used_gev: 1.9232
-- Δ_mass_sim vs SM: +0.1668%
-- H_block (lock_quality): 0.001
-- band_power_capture: 0.1377080479159802
-- chaos_mode=dynamic, PE_tick_norm=0.8826084393701489, T_ticks=201
-- mean_H_lock_norm=0.0011542905355903525, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0052 / 0.0002 / 0.0784
 
 ### lambda_c_2625_block_0001 (run_id=41)
 - Partícula: lambda_c_2625, tier: level1, s2_state: none
@@ -2435,260 +1958,777 @@ dominant_k, dominant_parity, sector_confidence_v1 computed from k-matching score
 - fraction_structured=0.0
 - lock_S1_series (mean/min/max): 0.0023 / 0.0006 / 0.0046
 
-### unknown_block_0059 (run_id=14)
-- Partícula: unknown, tier: level1, s2_state: latent
-- match_score.d_total: 1.888
+### unknown_block_0044 (run_id=3)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.057
 - Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9974968710888612, 1.9987484355444303, 2.0, 2.0012515644555697, 2.002503128911139, 2.0037546933667083, 2.0050062578222776, 2.0062578222778473, 2.007509386733417, 2.0087609511889863, 2.0100125156445556, 2.011264080100125, 2.0125156445556946, 2.013767209011264, 2.0150187734668337, 2.0162703379224034, 2.0175219023779722]
+- band_energies_gev: [1.9963898916967506, 1.9981949458483754, 2.0, 2.0018050541516246, 2.003610108303249, 2.0054151624548737, 2.007220216606498, 2.0090252707581224, 2.0108303249097474, 2.0126353790613716, 2.0144404332129966, 2.0162454873646207]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.980 (H_block=0.008)
+- H_block (lock_quality): 0.008
+- band_power_capture: 0.16303090732763015
+- chaos_mode=dynamic, PE_tick_norm=0.5930597289965321, T_ticks=201
+- mean_H_lock_norm=0.008347151006301881, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0079 / 0.0007 / 0.0211
+
+### delta_1900_block_0001 (run_id=88)
+- Partícula: delta_1900, tier: level1, s2_state: none
+- match_score.d_total: 0.010
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9970972423802615, 1.998548621190131, 2.0, 2.00145137880987, 2.002902757619739, 2.0043541364296082, 2.005805515239478, 2.0072568940493474, 2.0087082728592165, 2.010159651669086, 2.011611030478955, 2.0130624092888243]
 - F_m (base): 1.997 GeV
 - M_eff (base≈F_m): 1.997
-- M_corrected (F_m*(1-H_block)): 1.973 (H_block=0.012)
-- H_block (lock_quality): 0.012
-- band_power_capture: 0.1021468231068432
-- chaos_mode=dynamic, PE_tick_norm=0.46565145758292276, T_ticks=201
-- mean_H_lock_norm=0.011999274348205784, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.006)
+- sm_mass_gev: 1.900
+- mass_sim_raw_gev: 1.89941
+- mass_sim_used_gev: 1.89941
+- Δ_mass_sim vs SM: -0.0312%
+- H_block (lock_quality): 0.006
+- band_power_capture: 0.16529042523488593
+- chaos_mode=dynamic, PE_tick_norm=0.5512287155946721, T_ticks=201
+- mean_H_lock_norm=0.005956025441615783, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0035 / 0.0009 / 0.0089
+- lock_S1_series (mean/min/max): 0.0009 / 0.0000 / 0.0017
 
-### lambda_c_block_0005 (run_id=12)
-- Partícula: lambda_c, tier: level1, s2_state: none
-- match_score.d_total: 4.965
-- Bandas: count=2.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9980601357904946, 1.9990300678952473, 1.9999999999999998, 2.0009699321047525, 2.0019398642095054, 2.002909796314258, 2.0038797284190104, 2.004849660523763, 2.005819592628516, 2.0067895247332688, 2.0077594568380213, 2.0087293889427738, 2.0096993210475267, 2.074684772065955, 2.0756547041707076, 2.0766246362754606, 2.077594568380213, 2.078564500484966, 2.0795344325897185, 2.0805043646944714, 2.0814742967992244, 2.082444228903977, 2.0834141610087293, 2.084384093113482, 2.0853540252182348, 2.0863239573229873, 2.0872938894277397, 2.0882638215324927]
-- F_m (base): 1.998 GeV
-- M_eff (base≈F_m): 1.998
-- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.008)
-- sm_mass_gev: 2.286
-- mass_sim_raw_gev: 2.21152
-- mass_sim_used_gev: 2.21152
-- Δ_mass_sim vs SM: -3.2776%
-- H_block (lock_quality): 0.008
-- band_power_capture: 0.14245067689810562
-- chaos_mode=dynamic, PE_tick_norm=0.8633172870474974, T_ticks=201
-- mean_H_lock_norm=0.007505366094030249, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
-- fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0015 / 0.0003 / 0.0031
-
-### unknown_block_0060 (run_id=94)
-- Partícula: unknown, tier: level1, s2_state: none
-- match_score.d_total: 0.154
+### xi_c_plus_block_0004 (run_id=20)
+- Partícula: xi_c_plus, tier: none, s2_state: none
+- match_score.d_total: 3.057
 - Bandas: count=1.0, s2_band_fraction=0.0
-- band_energies_gev: [1.9950920245398773, 1.9975460122699387, 2.0, 2.0024539877300613, 2.0049079754601227, 2.007361963190184, 2.0098159509202453, 2.0122699386503067, 2.014723926380368, 2.01717791411043, 2.0196319018404907, 2.0220858895705525, 2.0245398773006134, 2.026993865030675, 2.0294478527607365, 2.031901840490798]
+- band_energies_gev: [1.9995446265938068, 1.9997723132969034, 2.0, 2.000227686703097, 2.000455373406193, 2.0006830601092895, 2.0009107468123863, 2.0011384335154827, 2.0013661202185795, 2.001593806921676, 2.0018214936247722, 2.002049180327869, 2.002276867030966, 2.0025045537340618, 2.0027322404371586, 2.0029599271402554, 2.0031876138433518, 2.003415300546448, 2.0036429872495445, 2.0038706739526413, 2.004098360655738, 2.0043260473588345, 2.004553734061931, 2.004781420765027, 2.005009107468124, 2.0052367941712204, 2.0054644808743167, 2.0056921675774135, 2.00591985428051, 2.0061475409836067]
+- F_m (base): 2.000 GeV
+- M_eff (base≈F_m): 2.000
+- M_corrected (F_m*(1-H_block)): 1.981 (H_block=0.009)
+- sm_mass_gev: 2.468
+- mass_sim_raw_gev: 2.37628
+- mass_sim_used_gev: 2.37628
+- Δ_mass_sim vs SM: -3.7113%
+- H_block (lock_quality): 0.009
+- band_power_capture: 0.035137321433464576
+- chaos_mode=dynamic, PE_tick_norm=0.8089537142440062, T_ticks=201
+- mean_H_lock_norm=0.009235881970300674, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=1.0
+- lock_S1_series (mean/min/max): 0.9978 / 0.9963 / 0.9989
+
+### unknown_block_0045 (run_id=79)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.508
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9951040391676866, 1.9975520195838434, 2.0, 2.002447980416157, 2.0048959608323136, 2.00734394124847, 2.0097919216646267, 2.0122399020807835, 2.01468788249694, 2.0171358629130967, 2.0195838433292534, 2.02203182374541]
 - F_m (base): 1.995 GeV
 - M_eff (base≈F_m): 1.995
-- M_corrected (F_m*(1-H_block)): 1.974 (H_block=0.011)
-- H_block (lock_quality): 0.011
-- band_power_capture: 0.13036036063554368
-- chaos_mode=dynamic, PE_tick_norm=0.4799636697701587, T_ticks=201
-- mean_H_lock_norm=0.010721316620832613, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- M_corrected (F_m*(1-H_block)): 1.988 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.16254537310950798
+- chaos_mode=dynamic, PE_tick_norm=0.785598900290279, T_ticks=201
+- mean_H_lock_norm=0.0033388996654027526, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
 - fraction_structured=0.0
-- lock_S1_series (mean/min/max): 0.0166 / 0.0012 / 0.0571
+- lock_S1_series (mean/min/max): 0.0013 / 0.0001 / 0.0032
 
-- M2 (omega_ref*V_lock*D_stat): 206.219
-- M3 (omega_ref*V_lock*rho_lock): 75.0914
-- M2 (omega_ref*V_lock*D_stat): 96.9778
-- M3 (omega_ref*V_lock*rho_lock): 28.6745
-- M2 (omega_ref*V_lock*D_stat): 101.768
-- M3 (omega_ref*V_lock*rho_lock): 47.2269
-- M2 (omega_ref*V_lock*D_stat): 137.22
-- M3 (omega_ref*V_lock*rho_lock): 66.1561
-- M2 (omega_ref*V_lock*D_stat): 124.345
-- M3 (omega_ref*V_lock*rho_lock): 66.8918
-- M2 (omega_ref*V_lock*D_stat): 88.6395
-- M3 (omega_ref*V_lock*rho_lock): 31.4332
-- M2 (omega_ref*V_lock*D_stat): 76.3561
-- M3 (omega_ref*V_lock*rho_lock): 14.1748
-- M2 (omega_ref*V_lock*D_stat): 135.477
-- M3 (omega_ref*V_lock*rho_lock): 22.2227
-- M2 (omega_ref*V_lock*D_stat): 144.239
-- M3 (omega_ref*V_lock*rho_lock): 48.8231
-- M2 (omega_ref*V_lock*D_stat): 147.594
-- M3 (omega_ref*V_lock*rho_lock): 45.6265
-- M2 (omega_ref*V_lock*D_stat): 112.066
-- M3 (omega_ref*V_lock*rho_lock): 49.0836
-- M2 (omega_ref*V_lock*D_stat): 129.232
-- M3 (omega_ref*V_lock*rho_lock): 21.7756
+### unknown_block_0046 (run_id=61)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.112
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9914163090128754, 1.9957081545064377, 2.0, 2.0257510729613735, 2.0300429184549356, 2.0343347639484977, 2.03862660944206, 2.0429184549356223, 2.0472103004291844, 2.051502145922747, 2.055793991416309, 2.060085836909871, 2.0643776824034337, 2.0686695278969958]
+- F_m (base): 1.991 GeV
+- M_eff (base≈F_m): 1.991
+- M_corrected (F_m*(1-H_block)): 1.983 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.16295184995384276
+- chaos_mode=dynamic, PE_tick_norm=0.6600048819310081, T_ticks=201
+- mean_H_lock_norm=0.004431428506100115, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0019 / 0.0007 / 0.0041
+
+### delta_1900_block_0002 (run_id=73)
+- Partícula: delta_1900, tier: none, s2_state: none
+- match_score.d_total: 0.016
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9992892679459842, 1.9996446339729923, 2.0, 2.0003553660270077, 2.0007107320540154, 2.0010660980810235, 2.0014214641080312, 2.001776830135039, 2.0021321961620466, 2.0024875621890548, 2.0028429282160625, 2.00319829424307, 2.0035536602700783, 2.003909026297086, 2.0042643923240937, 2.0046197583511014, 2.0049751243781095, 2.0053304904051172, 2.005685856432125, 2.0060412224591326, 2.0063965884861408, 2.0067519545131485, 2.007107320540156, 2.007462686567164, 2.007818052594172, 2.00817341862118, 2.0085287846481874, 2.0088841506751955, 2.0092395167022032, 2.0095948827292114]
+- F_m (base): 1.999 GeV
+- M_eff (base≈F_m): 1.999
+- M_corrected (F_m*(1-H_block)): 1.971 (H_block=0.014)
+- sm_mass_gev: 1.900
+- mass_sim_raw_gev: 1.89904
+- mass_sim_used_gev: 1.89904
+- Δ_mass_sim vs SM: -0.0503%
+- H_block (lock_quality): 0.014
+- band_power_capture: 0.06475984527595882
+- chaos_mode=dynamic, PE_tick_norm=0.7233361544301757, T_ticks=201
+- mean_H_lock_norm=0.01407867647555908, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=1.0
+- lock_S1_series (mean/min/max): 0.9915 / 0.9691 / 0.9977
+
+### unknown_block_0047 (run_id=5)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.467
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.994729907773386, 1.997364953886693, 2.0, 2.0026350461133067, 2.005270092226614, 2.007905138339921, 2.010540184453228, 2.013175230566535, 2.015810276679842, 2.018445322793149, 2.021080368906456]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.16516101139845044
+- chaos_mode=dynamic, PE_tick_norm=0.6103003305028971, T_ticks=201
+- mean_H_lock_norm=0.004493286341759505, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0036 / 0.0011 / 0.0070
+
+### xi_c_plus_block_0005 (run_id=22)
+- Partícula: xi_c_plus, tier: level1, s2_state: none
+- match_score.d_total: 2.338
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9941605839416057, 1.9970802919708028, 2.0, 2.002919708029197, 2.005839416058394, 2.0087591240875913, 2.011678832116788, 2.014598540145985, 2.0175182481751825, 2.0204379562043795, 2.023357664233577]
+- F_m (base): 1.994 GeV
+- M_eff (base≈F_m): 1.994
+- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.005)
+- sm_mass_gev: 2.468
+- mass_sim_raw_gev: 2.39787
+- mass_sim_used_gev: 2.39787
+- Δ_mass_sim vs SM: -2.8364%
+- H_block (lock_quality): 0.005
+- band_power_capture: 0.16820358975095834
+- chaos_mode=dynamic, PE_tick_norm=0.742830566090492, T_ticks=201
+- mean_H_lock_norm=0.0051851667182352896, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0011 / 0.0003 / 0.0029
+
+### unknown_block_0048 (run_id=100)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.575
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9873015873015873, 1.9936507936507937, 2.0, 2.0063492063492063, 2.012698412698413, 2.0190476190476194, 3.8666666666666676, 3.8730158730158735, 3.87936507936508, 3.885714285714286, 3.8920634920634924, 3.8984126984126988, 3.904761904761905, 3.9111111111111114, 3.9174603174603178, 3.923809523809524, 3.930158730158731, 3.936507936507937]
+- F_m (base): 1.987 GeV
+- M_eff (base≈F_m): 1.987
+- M_corrected (F_m*(1-H_block)): 1.968 (H_block=0.010)
+- H_block (lock_quality): 0.010
+- band_power_capture: 0.16733084966444453
+- chaos_mode=dynamic, PE_tick_norm=0.7002516098806791, T_ticks=201
+- mean_H_lock_norm=0.00970845430245005, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0076 / 0.0002 / 0.0372
+
+### lambda_c_block_0005 (run_id=15)
+- Partícula: lambda_c, tier: level1, s2_state: none
+- match_score.d_total: 1.419
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9943741209563994, 1.9971870604782, 2.0, 2.002812939521801, 2.005625879043601, 2.008438818565401, 2.0112517580872016, 2.0140646976090015, 2.016877637130802, 2.0196905766526023, 2.0225035161744027, 2.0253164556962027, 2.028129395218003, 2.0309423347398035]
+- F_m (base): 1.994 GeV
+- M_eff (base≈F_m): 1.994
+- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.005)
+- sm_mass_gev: 2.286
+- mass_sim_raw_gev: 2.26472
+- mass_sim_used_gev: 2.26472
+- Δ_mass_sim vs SM: -0.9510%
+- H_block (lock_quality): 0.005
+- band_power_capture: 0.14531081188308628
+- chaos_mode=dynamic, PE_tick_norm=0.6937950213463957, T_ticks=201
+- mean_H_lock_norm=0.004682519288743721, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0008 / 0.0001 / 0.0017
+
+### unknown_block_0049 (run_id=26)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.721
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9974683544303795, 1.9987341772151899, 2.0, 2.0012658227848097, 2.00253164556962, 2.00379746835443, 2.0050632911392405, 2.0063291139240507, 2.0075949367088604, 2.0088607594936705, 2.0101265822784806]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.988 (H_block=0.005)
+- H_block (lock_quality): 0.005
+- band_power_capture: 0.16818445075279687
+- chaos_mode=dynamic, PE_tick_norm=0.36380490519686315, T_ticks=201
+- mean_H_lock_norm=0.004570782725421989, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0003 / 0.0002 / 0.0005
+
+### delta_1920_block_0003 (run_id=71)
+- Partícula: delta_1920, tier: none, s2_state: latent
+- match_score.d_total: 0.017
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9996841689696014, 1.9998420844848008, 2.0, 2.0001579155152, 2.000315831030399, 2.000473746545598, 2.0006316620607976, 2.0007895775759974, 2.0009474930911963, 2.0011054086063957, 2.0012633241215947, 2.0014212396367945, 2.001579155151994, 2.0017370706671933, 2.0018949861823923, 2.0020529016975916, 2.0022108172127915, 2.002368732727991, 2.00252664824319, 2.002684563758389, 2.002842479273589, 2.003000394788788, 2.0031583103039874, 2.003316225819187, 2.0034741413343866, 2.0036320568495856, 2.003789972364785, 2.0039478878799843, 2.0041058033951837, 2.004263718910383]
+- F_m (base): 2.000 GeV
+- M_eff (base≈F_m): 2.000
+- M_corrected (F_m*(1-H_block)): 1.837 (H_block=0.082)
+- sm_mass_gev: 1.920
+- mass_sim_raw_gev: 1.91931
+- mass_sim_used_gev: 1.91931
+- Δ_mass_sim vs SM: -0.0361%
+- H_block (lock_quality): 0.082
+- band_power_capture: 0.03626577832840322
+- chaos_mode=dynamic, PE_tick_norm=0.6959085492671689, T_ticks=201
+- mean_H_lock_norm=0.08153200182354023, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=1.0
+- lock_S1_series (mean/min/max): 0.2304 / 0.0002 / 0.9817
+
+### unknown_block_0050 (run_id=49)
+- Partícula: unknown, tier: , s2_state: 
+- Bandas: count=None, s2_band_fraction=0.0
+- band_energies_gev: []
+- H_block (lock_quality): 1.000
+- entropy_chaos: no encontrado para este run.
+
+### delta_1920_block_0004 (run_id=56)
+- Partícula: delta_1920, tier: level1, s2_state: none
+- match_score.d_total: 0.067
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9858657243816251, 1.9929328621908127, 1.9999999999999998, 2.007067137809187, 2.014134275618374, 2.0212014134275615, 2.028268551236749, 2.035335689045936, 2.0424028268551235, 2.049469964664311, 2.056537102473498, 2.6713780918727905, 2.6784452296819783, 2.6855123674911656, 2.692579505300353, 2.6996466431095403, 2.706713780918727, 2.7137809187279145, 2.720848056537102, 2.7279151943462896, 2.734982332155477]
+- F_m (base): 1.986 GeV
+- M_eff (base≈F_m): 1.986
+- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.001)
+- sm_mass_gev: 1.920
+- mass_sim_raw_gev: 1.91734
+- mass_sim_used_gev: 1.91734
+- Δ_mass_sim vs SM: -0.1386%
+- H_block (lock_quality): 0.001
+- band_power_capture: 0.16804961060856285
+- chaos_mode=dynamic, PE_tick_norm=0.8017764171942876, T_ticks=201
+- mean_H_lock_norm=0.00110384619355851, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0022 / 0.0001 / 0.0079
+
+### unknown_block_0051 (run_id=57)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.596
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9970845481049562, 1.998542274052478, 2.0, 2.0014577259475215, 2.002915451895044, 2.0043731778425657, 2.005830903790087, 2.007288629737609, 2.008746355685131, 2.010204081632653, 2.011661807580175, 2.013119533527697, 2.349854227405248, 2.3513119533527695, 2.3527696793002915, 2.3542274052478134, 2.355685131195335, 2.357142857142857, 2.358600583090379]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.994 (H_block=0.002)
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16539230346055442
+- chaos_mode=dynamic, PE_tick_norm=0.8237916915286727, T_ticks=201
+- mean_H_lock_norm=0.0017218388201713673, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0009 / 0.0000 / 0.0031
+
+### unknown_block_0052 (run_id=64)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.556
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9964633068081348, 1.9982316534040674, 2.0, 2.001768346595933, 2.0035366931918657, 2.0053050397877983, 2.0070733863837313, 2.0088417329796644, 2.010610079575597, 2.0123784261715296, 2.0141467727674622, 2.0159151193633953, 2.127320954907162, 2.129089301503095, 2.1308576480990276, 2.13262599469496, 2.1343943412908932, 2.136162687886826, 2.137931034482759, 2.1396993810786915]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.989 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.15970316218184283
+- chaos_mode=dynamic, PE_tick_norm=0.5904293725995309, T_ticks=201
+- mean_H_lock_norm=0.003424422271486445, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0004 / 0.0001 / 0.0011
+
+### xi_c_plus_block_0006 (run_id=52)
+- Partícula: xi_c_plus, tier: level1, s2_state: none
+- match_score.d_total: 1.713
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9979889391654098, 1.9989944695827047, 2.0, 2.001005530417295, 2.0020110608345902, 2.0030165912518854, 2.0040221216691805, 2.0050276520864756, 2.0060331825037703, 2.007038712921066, 2.008044243338361]
+- F_m (base): 1.998 GeV
+- M_eff (base≈F_m): 1.998
+- M_corrected (F_m*(1-H_block)): 1.966 (H_block=0.016)
+- sm_mass_gev: 2.468
+- mass_sim_raw_gev: 2.41662
+- mass_sim_used_gev: 2.41662
+- Δ_mass_sim vs SM: -2.0769%
+- H_block (lock_quality): 0.016
+- band_power_capture: 0.16760305049249535
+- chaos_mode=dynamic, PE_tick_norm=0.2696646360623446, T_ticks=201
+- mean_H_lock_norm=0.015796199958797618, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0077 / 0.0015 / 0.0165
+
+### unknown_block_0053 (run_id=103)
+- Partícula: unknown, tier: level1, s2_state: latent
+- match_score.d_total: 1.933
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9962825278810408, 1.9981412639405203, 2.0, 2.0018587360594795, 2.003717472118959, 2.0055762081784385, 2.0074349442379185, 2.0092936802973975, 2.0111524163568775, 2.0130111524163565, 2.0148698884758365, 2.0167286245353155, 2.0185873605947955, 2.057620817843866, 2.0594795539033455, 2.0613382899628254, 2.0631970260223045, 2.0650557620817844, 2.066914498141264, 2.0687732342007434, 2.0706319702602225]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.977 (H_block=0.010)
+- H_block (lock_quality): 0.010
+- band_power_capture: 0.1516650468402012
+- chaos_mode=dynamic, PE_tick_norm=0.8237916915286726, T_ticks=201
+- mean_H_lock_norm=0.009505710249466698, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0004 / 0.0001 / 0.0008
+
+### delta_1950_block_0007 (run_id=83)
+- Partícula: delta_1950, tier: level1, s2_state: none
+- match_score.d_total: 0.164
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9889196675900276, 1.994459833795014, 2.0, 2.005540166204986, 2.011080332409972, 2.0166204986149583, 2.0221606648199444, 4.077562326869805, 4.083102493074792, 4.0886426592797775, 4.094182825484765, 4.099722991689751, 4.105263157894737, 4.110803324099723, 4.116343490304709, 4.121883656509695, 4.127423822714681, 4.132963988919667, 4.138504155124653]
+- F_m (base): 1.989 GeV
+- M_eff (base≈F_m): 1.989
+- M_corrected (F_m*(1-H_block)): 1.982 (H_block=0.003)
+- sm_mass_gev: 1.950
+- mass_sim_raw_gev: 1.95821
+- mass_sim_used_gev: 1.95821
+- Δ_mass_sim vs SM: +0.4212%
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.16648303111755958
+- chaos_mode=dynamic, PE_tick_norm=0.8913608787360737, T_ticks=201
+- mean_H_lock_norm=0.003416183719824637, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.2901 / 0.0035 / 0.8662
+
+### unknown_block_0054 (run_id=8)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.979
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9950372208436724, 1.9975186104218363, 2.0, 2.002481389578164, 2.004962779156328, 2.0074441687344917, 2.009925558312655, 2.012406947890819, 2.014888337468983, 2.0173697270471465, 2.0198511166253104]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
+- M_corrected (F_m*(1-H_block)): 1.992 (H_block=0.001)
+- H_block (lock_quality): 0.001
+- band_power_capture: 0.16723455529927272
+- chaos_mode=dynamic, PE_tick_norm=0.8675016565408591, T_ticks=201
+- mean_H_lock_norm=0.0014079620816907948, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0019 / 0.0001 / 0.0054
+
+### unknown_block_0055 (run_id=95)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.872
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.989795918367347, 1.9948979591836735, 2.0, 2.0051020408163267, 2.010204081632653, 2.0153061224489797, 2.0204081632653064, 2.0255102040816326, 2.0306122448979593, 2.035714285714286, 2.040816326530612, 2.0459183673469385, 2.9489795918367347, 2.9540816326530615, 2.959183673469388, 2.9642857142857144, 2.969387755102041]
+- F_m (base): 1.990 GeV
+- M_eff (base≈F_m): 1.990
+- M_corrected (F_m*(1-H_block)): 1.985 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.16862500535764055
+- chaos_mode=dynamic, PE_tick_norm=0.8654225723239964, T_ticks=201
+- mean_H_lock_norm=0.0025823597602880684, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0006 / 0.0000 / 0.0016
+
+### delta_1950_block_0008 (run_id=45)
+- Partícula: delta_1950, tier: level1, s2_state: none
+- match_score.d_total: 0.047
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9809523809523806, 1.99047619047619, 1.9999999999999998, 2.0095238095238095, 2.0190476190476185, 2.028571428571428, 2.0380952380952375, 2.0476190476190474, 2.057142857142857, 2.0666666666666664, 2.076190476190476, 2.552380952380952, 2.5619047619047617, 2.571428571428571, 2.58095238095238, 2.5904761904761897, 2.5999999999999996, 2.609523809523809, 2.6190476190476186, 2.628571428571428, 2.6380952380952376, 2.647619047619047]
+- F_m (base): 1.981 GeV
+- M_eff (base≈F_m): 1.981
+- M_corrected (F_m*(1-H_block)): 1.976 (H_block=0.003)
+- sm_mass_gev: 1.950
+- mass_sim_raw_gev: 1.94763
+- mass_sim_used_gev: 1.94763
+- Δ_mass_sim vs SM: -0.1217%
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.1637949710455913
+- chaos_mode=dynamic, PE_tick_norm=0.8355560314444546, T_ticks=201
+- mean_H_lock_norm=0.0024996231727179036, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0013 / 0.0000 / 0.0035
+
+### unknown_block_0056 (run_id=1)
+- Partícula: unknown, tier: level1, s2_state: latent
+- match_score.d_total: 3.599
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9954389965792474, 1.9977194982896243, 2.0, 2.002280501710376, 2.0045610034207524, 2.0068415051311295, 2.0091220068415057, 2.0114025085518814, 2.013683010262258, 2.0159635119726342, 2.0182440136830104]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
+- M_corrected (F_m*(1-H_block)): 1.970 (H_block=0.013)
+- H_block (lock_quality): 0.013
+- band_power_capture: 0.1683220935751636
+- chaos_mode=dynamic, PE_tick_norm=0.6017195977935832, T_ticks=201
+- mean_H_lock_norm=0.012613196227817923, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0009 / 0.0006 / 0.0011
+
+### meson_ds_star_block_0001 (run_id=97)
+- Partícula: meson_ds_star, tier: level1, s2_state: none
+- match_score.d_total: 2.700
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9953051643192492, 1.9976525821596247, 2.0, 2.0023474178403755, 2.004694835680751, 2.007042253521127, 2.0093896713615025, 2.0117370892018784, 2.0140845070422535, 2.0164319248826295, 2.018779342723005]
+- F_m (base): 1.995 GeV
+- M_eff (base≈F_m): 1.995
+- M_corrected (F_m*(1-H_block)): 1.975 (H_block=0.010)
+- sm_mass_gev: 2.112
+- mass_sim_raw_gev: 4.33199
+- mass_sim_used_gev: 2.16599
+- Δ_mass_sim vs SM: +2.5468%
+- H_block (lock_quality): 0.010
+- band_power_capture: 0.1660182207106187
+- chaos_mode=dynamic, PE_tick_norm=0.6075364561720565, T_ticks=201
+- mean_H_lock_norm=0.010248847468495638, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0203 / 0.0007 / 0.0666
+
+### delta_1930_block_0003 (run_id=84)
+- Partícula: delta_1930, tier: level1, s2_state: none
+- match_score.d_total: 0.106
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9974259974259976, 1.9987129987129988, 2.0, 2.001287001287001, 2.002574002574003, 2.003861003861004, 2.0051480051480053, 2.0064350064350065, 2.0077220077220077, 2.009009009009009, 2.0102960102960106, 2.011583011583012, 2.012870012870013, 2.3011583011583014, 2.3024453024453027, 2.303732303732304, 2.305019305019305, 2.3063063063063063, 2.307593307593308, 2.308880308880309, 2.3101673101673104, 2.3114543114543116, 2.312741312741313]
+- F_m (base): 1.997 GeV
+- M_eff (base≈F_m): 1.997
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.006)
+- sm_mass_gev: 1.930
+- mass_sim_raw_gev: 1.93424
+- mass_sim_used_gev: 1.93424
+- Δ_mass_sim vs SM: +0.2197%
+- H_block (lock_quality): 0.006
+- band_power_capture: 0.14710176423348226
+- chaos_mode=dynamic, PE_tick_norm=0.8100657112345272, T_ticks=201
+- mean_H_lock_norm=0.00557550705210068, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0056 / 0.0001 / 0.3333
+
+### unknown_block_0057 (run_id=48)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 1.210
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9957401490947817, 1.997870074547391, 2.0, 2.0021299254526093, 2.004259850905218, 2.0063897763578273, 2.0085197018104366, 2.0106496272630454, 2.012779552715655, 2.014909478168264, 2.017039403620873, 2.0191693290734825]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.990 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.15740465469687623
+- chaos_mode=dynamic, PE_tick_norm=0.6444174212609663, T_ticks=201
+- mean_H_lock_norm=0.0027130206934600307, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0006 / 0.0001 / 0.0011
+
+### delta_1950_block_0009 (run_id=102)
+- Partícula: delta_1950, tier: level1, s2_state: none
+- match_score.d_total: 0.144
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9942528735632186, 1.9971264367816095, 2.0, 2.002873563218391, 2.005747126436782, 2.0086206896551726, 2.0114942528735633, 2.014367816091954, 2.017241379310345, 2.020114942528736, 2.2758620689655173, 2.278735632183908, 2.281609195402299, 2.28448275862069, 2.2873563218390807, 2.290229885057471, 2.293103448275862, 2.295977011494253, 2.298850574712644, 2.3017241379310347, 2.304597701149425, 2.307471264367816]
+- F_m (base): 1.994 GeV
+- M_eff (base≈F_m): 1.994
+- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.002)
+- sm_mass_gev: 1.950
+- mass_sim_raw_gev: 1.94279
+- mass_sim_used_gev: 1.94279
+- Δ_mass_sim vs SM: -0.3697%
+- H_block (lock_quality): 0.002
+- band_power_capture: 0.16461839671606826
+- chaos_mode=dynamic, PE_tick_norm=0.7180366544348066, T_ticks=201
+- mean_H_lock_norm=0.0018194403491020123, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0008 / 0.0000 / 0.0020
+
+### unknown_block_0058 (run_id=86)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.842
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.995943204868154, 1.9979716024340768, 1.9999999999999998, 2.0020283975659225, 2.0040567951318455, 2.0060851926977685, 2.0081135902636915, 2.0101419878296145, 2.012170385395537, 2.0141987829614605, 2.016227180527383]
+- F_m (base): 1.996 GeV
+- M_eff (base≈F_m): 1.996
+- M_corrected (F_m*(1-H_block)): 1.984 (H_block=0.006)
+- H_block (lock_quality): 0.006
+- band_power_capture: 0.16707993687893813
+- chaos_mode=dynamic, PE_tick_norm=0.565918857660839, T_ticks=201
+- mean_H_lock_norm=0.006092085282754131, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0045 / 0.0003 / 0.0120
+
+### lambda_c_2765_block_0003 (run_id=98)
+- Partícula: lambda_c_2765, tier: level1, s2_state: none
+- match_score.d_total: 3.718
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9893333333333332, 1.9946666666666666, 2.0, 2.005333333333333, 2.0106666666666664, 2.016, 2.021333333333333, 2.0266666666666664, 2.032, 2.037333333333333, 2.0426666666666664, 2.048, 2.0533333333333332, 2.0586666666666664, 2.0639999999999996]
+- F_m (base): 1.989 GeV
+- M_eff (base≈F_m): 1.989
+- M_corrected (F_m*(1-H_block)): 1.976 (H_block=0.007)
+- sm_mass_gev: 2.766
+- mass_sim_raw_gev: 2.69165
+- mass_sim_used_gev: 2.69165
+- Δ_mass_sim vs SM: -2.6881%
+- H_block (lock_quality): 0.007
+- band_power_capture: 0.15249136931545748
+- chaos_mode=dynamic, PE_tick_norm=0.871288298206709, T_ticks=201
+- mean_H_lock_norm=0.006787879104220199, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0226 / 0.0007 / 0.2718
+
+### unknown_block_0059 (run_id=37)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.594
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9942938659058487, 1.9971469329529246, 2.0, 2.0028530670470754, 2.0057061340941513, 2.008559201141227, 2.0114122681883027, 2.014265335235378, 2.0171184022824535, 2.0199714693295294, 2.022824536376605, 2.0256776034236803]
+- F_m (base): 1.994 GeV
+- M_eff (base≈F_m): 1.994
+- M_corrected (F_m*(1-H_block)): 1.987 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.1535506155582346
+- chaos_mode=dynamic, PE_tick_norm=0.6439606330031474, T_ticks=201
+- mean_H_lock_norm=0.003577595695303231, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0034 / 0.0003 / 0.0103
+
+### unknown_block_0060 (run_id=96)
+- Partícula: unknown, tier: none, s2_state: none
+- match_score.d_total: 0.358
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9984627209838586, 1.9992313604919292, 2.0, 2.000768639508071, 2.001537279016141, 2.0023059185242125, 2.003074558032283, 2.0038431975403537, 2.0046118370484245, 2.005380476556495, 2.0061491160645657, 2.006917755572636]
+- F_m (base): 1.998 GeV
+- M_eff (base≈F_m): 1.998
+- M_corrected (F_m*(1-H_block)): 1.991 (H_block=0.004)
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.15389142095660138
+- chaos_mode=dynamic, PE_tick_norm=0.7772733327528007, T_ticks=201
+- mean_H_lock_norm=0.003875053460027957, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=1.0
+- lock_S1_series (mean/min/max): 0.9806 / 0.9182 / 0.9967
+
+### xi_c_plus_block_0007 (run_id=30)
+- Partícula: xi_c_plus, tier: level1, s2_state: none
+- match_score.d_total: 0.003
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9873417721518987, 1.9936708860759491, 1.9999999999999998, 2.0063291139240507, 2.012658227848101, 2.0189873417721516, 2.0253164556962022, 2.031645569620253, 2.0379746835443036, 2.0443037974683542, 2.0506329113924053, 2.056962025316455]
+- F_m (base): 1.987 GeV
+- M_eff (base≈F_m): 1.987
+- M_corrected (F_m*(1-H_block)): 1.980 (H_block=0.004)
+- sm_mass_gev: 2.468
+- mass_sim_raw_gev: 2.46792
+- mass_sim_used_gev: 2.46792
+- Δ_mass_sim vs SM: +0.0019%
+- H_block (lock_quality): 0.004
+- band_power_capture: 0.1658151915417274
+- chaos_mode=dynamic, PE_tick_norm=0.6478854572968956, T_ticks=201
+- mean_H_lock_norm=0.0038241215793713233, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0013 / 0.0009 / 0.0019
+
+### unknown_block_0061 (run_id=31)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 0.114
+- Bandas: count=2.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9886039886039888, 1.9943019943019944, 1.9999999999999998, 2.005698005698006, 2.011396011396011, 2.017094017094017, 2.022792022792023, 2.0284900284900282, 2.034188034188034, 2.03988603988604, 2.0455840455840457, 3.566951566951567, 3.5726495726495724, 3.5783475783475787, 3.584045584045584, 3.5897435897435894, 3.5954415954415953, 3.6011396011396006, 3.606837606837607, 3.6125356125356127, 3.618233618233618, 3.6239316239316235, 3.6296296296296298, 3.635327635327635, 3.641025641025641, 3.6467236467236464, 3.6524216524216526, 3.658119658119658]
+- F_m (base): 1.989 GeV
+- M_eff (base≈F_m): 1.989
+- M_corrected (F_m*(1-H_block)): 1.982 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.1501948289304002
+- chaos_mode=dynamic, PE_tick_norm=0.7263666782026361, T_ticks=201
+- mean_H_lock_norm=0.00298389701894013, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0050 / 0.0003 / 0.0143
+
+### unknown_block_0062 (run_id=46)
+- Partícula: unknown, tier: level1, s2_state: none
+- match_score.d_total: 2.554
+- Bandas: count=1.0, s2_band_fraction=0.0
+- band_energies_gev: [1.9924242424242422, 1.996212121212121, 2.0, 2.0037878787878785, 2.0075757575757573, 2.0113636363636362, 2.015151515151515, 2.0189393939393936, 2.0227272727272725, 2.0265151515151514, 2.0303030303030303, 2.0340909090909087]
+- F_m (base): 1.992 GeV
+- M_eff (base≈F_m): 1.992
+- M_corrected (F_m*(1-H_block)): 1.986 (H_block=0.003)
+- H_block (lock_quality): 0.003
+- band_power_capture: 0.16619714686386516
+- chaos_mode=dynamic, PE_tick_norm=0.6421689925649102, T_ticks=201
+- mean_H_lock_norm=0.003024423858180588, mixture_entropy_blocks_norm=-0.0, structure_mix_norm=0.0
+- fraction_structured=0.0
+- lock_S1_series (mean/min/max): 0.0024 / 0.0003 / 0.0061
+
+- M2 (omega_ref*V_lock*D_stat): 191.447
+- M3 (omega_ref*V_lock*rho_lock): 98.4918
 - M2 (omega_ref*V_lock*D_stat): 133.002
 - M3 (omega_ref*V_lock*rho_lock): 18.1313
-- M2 (omega_ref*V_lock*D_stat): 68.5312
-- M3 (omega_ref*V_lock*rho_lock): 27.0821
-- M2 (omega_ref*V_lock*D_stat): 106.253
-- M3 (omega_ref*V_lock*rho_lock): 39.3481
-- M2 (omega_ref*V_lock*D_stat): 177.33
-- M3 (omega_ref*V_lock*rho_lock): 28.7036
-- M2 (omega_ref*V_lock*D_stat): 105.4
-- M3 (omega_ref*V_lock*rho_lock): 49.8866
-- M2 (omega_ref*V_lock*D_stat): 85.0799
-- M3 (omega_ref*V_lock*rho_lock): 66.6164
-- M2 (omega_ref*V_lock*D_stat): 110.898
-- M3 (omega_ref*V_lock*rho_lock): 14.8858
-- M2 (omega_ref*V_lock*D_stat): 89.4372
-- M3 (omega_ref*V_lock*rho_lock): 24.5449
-- M2 (omega_ref*V_lock*D_stat): 105.473
-- M3 (omega_ref*V_lock*rho_lock): 45.5049
-- M2 (omega_ref*V_lock*D_stat): 101.557
-- M3 (omega_ref*V_lock*rho_lock): 20.348
-- M2 (omega_ref*V_lock*D_stat): 110.317
-- M3 (omega_ref*V_lock*rho_lock): 39.3554
-- M2 (omega_ref*V_lock*D_stat): 77.4657
-- M3 (omega_ref*V_lock*rho_lock): 35.4453
+- M2 (omega_ref*V_lock*D_stat): 183.52
+- M3 (omega_ref*V_lock*rho_lock): 46.1505
+- M2 (omega_ref*V_lock*D_stat): 70.2773
+- M3 (omega_ref*V_lock*rho_lock): 26.8237
+- M2 (omega_ref*V_lock*D_stat): 147.882
+- M3 (omega_ref*V_lock*rho_lock): 59.9082
+- M2 (omega_ref*V_lock*D_stat): 84.2074
+- M3 (omega_ref*V_lock*rho_lock): 32.377
+- M2 (omega_ref*V_lock*D_stat): 96.9778
+- M3 (omega_ref*V_lock*rho_lock): 28.6745
+- M2 (omega_ref*V_lock*D_stat): 170.929
+- M3 (omega_ref*V_lock*rho_lock): 65.5376
+- M2 (omega_ref*V_lock*D_stat): 74.1603
+- M3 (omega_ref*V_lock*rho_lock): 23.64
+- M2 (omega_ref*V_lock*D_stat): 144.543
+- M3 (omega_ref*V_lock*rho_lock): 22.4957
+- M2 (omega_ref*V_lock*D_stat): 83.528
+- M3 (omega_ref*V_lock*rho_lock): 37.0359
+- M2 (omega_ref*V_lock*D_stat): 137.078
+- M3 (omega_ref*V_lock*rho_lock): 65.7284
 - M2 (omega_ref*V_lock*D_stat): 111.404
 - M3 (omega_ref*V_lock*rho_lock): 48.7556
+- M2 (omega_ref*V_lock*D_stat): 101.768
+- M3 (omega_ref*V_lock*rho_lock): 47.2269
+- M2 (omega_ref*V_lock*D_stat): 161.158
+- M3 (omega_ref*V_lock*rho_lock): 50.35
+- M2 (omega_ref*V_lock*D_stat): 177.33
+- M3 (omega_ref*V_lock*rho_lock): 28.7036
+- M2 (omega_ref*V_lock*D_stat): 109.778
+- M3 (omega_ref*V_lock*rho_lock): 41.9898
+- M2 (omega_ref*V_lock*D_stat): 169.046
+- M3 (omega_ref*V_lock*rho_lock): 33.8554
+- M2 (omega_ref*V_lock*D_stat): 129.232
+- M3 (omega_ref*V_lock*rho_lock): 21.7756
 - M2 (omega_ref*V_lock*D_stat): 368.776
 - M3 (omega_ref*V_lock*rho_lock): 176.814
+- M2 (omega_ref*V_lock*D_stat): 135.605
+- M3 (omega_ref*V_lock*rho_lock): 72.2442
+- M2 (omega_ref*V_lock*D_stat): 101.557
+- M3 (omega_ref*V_lock*rho_lock): 20.348
+- M2 (omega_ref*V_lock*D_stat): 89.1734
+- M3 (omega_ref*V_lock*rho_lock): 34.7606
+- M2 (omega_ref*V_lock*D_stat): 123.197
+- M3 (omega_ref*V_lock*rho_lock): 9.32327
+- M2 (omega_ref*V_lock*D_stat): 129.221
+- M3 (omega_ref*V_lock*rho_lock): 43.1439
+- M2 (omega_ref*V_lock*D_stat): 124.345
+- M3 (omega_ref*V_lock*rho_lock): 66.8918
+- M2 (omega_ref*V_lock*D_stat): 116.556
+- M3 (omega_ref*V_lock*rho_lock): 12.5464
+- M2 (omega_ref*V_lock*D_stat): 99.1226
+- M3 (omega_ref*V_lock*rho_lock): 53.7942
+- M2 (omega_ref*V_lock*D_stat): 137.22
+- M3 (omega_ref*V_lock*rho_lock): 66.1561
+- M2 (omega_ref*V_lock*D_stat): 78.1577
+- M3 (omega_ref*V_lock*rho_lock): 37.0134
+- M2 (omega_ref*V_lock*D_stat): 85.433
+- M3 (omega_ref*V_lock*rho_lock): 29.0692
+- M2 (omega_ref*V_lock*D_stat): 100.985
+- M3 (omega_ref*V_lock*rho_lock): 27.3376
+- M2 (omega_ref*V_lock*D_stat): 149.703
+- M3 (omega_ref*V_lock*rho_lock): 62.4542
+- M2 (omega_ref*V_lock*D_stat): 77.4657
+- M3 (omega_ref*V_lock*rho_lock): 35.4453
+- M2 (omega_ref*V_lock*D_stat): 195.879
+- M3 (omega_ref*V_lock*rho_lock): 26.5723
+- M2 (omega_ref*V_lock*D_stat): 88.2951
+- M3 (omega_ref*V_lock*rho_lock): 35.7215
+- M2 (omega_ref*V_lock*D_stat): 157.484
+- M3 (omega_ref*V_lock*rho_lock): 83.1418
+- M2 (omega_ref*V_lock*D_stat): 146.052
+- M3 (omega_ref*V_lock*rho_lock): 29.4912
+- M2 (omega_ref*V_lock*D_stat): 73.8653
+- M3 (omega_ref*V_lock*rho_lock): 7.8596
+- M2 (omega_ref*V_lock*D_stat): 129.882
+- M3 (omega_ref*V_lock*rho_lock): 51.1001
+- M2 (omega_ref*V_lock*D_stat): 152.786
+- M3 (omega_ref*V_lock*rho_lock): 43.0297
+- M2 (omega_ref*V_lock*D_stat): 133.211
+- M3 (omega_ref*V_lock*rho_lock): 95.2804
+- M2 (omega_ref*V_lock*D_stat): 206.219
+- M3 (omega_ref*V_lock*rho_lock): 75.0914
+- M2 (omega_ref*V_lock*D_stat): 135.415
+- M3 (omega_ref*V_lock*rho_lock): 23.5431
+- M2 (omega_ref*V_lock*D_stat): 89.4372
+- M3 (omega_ref*V_lock*rho_lock): 24.5449
+- M2 (omega_ref*V_lock*D_stat): 68.5312
+- M3 (omega_ref*V_lock*rho_lock): 27.0821
+- M2 (omega_ref*V_lock*D_stat): 140.159
+- M3 (omega_ref*V_lock*rho_lock): 21.6575
+- M2 (omega_ref*V_lock*D_stat): 253.844
+- M3 (omega_ref*V_lock*rho_lock): 100.194
+- M2 (omega_ref*V_lock*D_stat): 116.224
+- M3 (omega_ref*V_lock*rho_lock): 53.0528
+- M2 (omega_ref*V_lock*D_stat): 147.594
+- M3 (omega_ref*V_lock*rho_lock): 45.6265
+- M2 (omega_ref*V_lock*D_stat): 108.476
+- M3 (omega_ref*V_lock*rho_lock): 22.5551
+- M2 (omega_ref*V_lock*D_stat): 106.253
+- M3 (omega_ref*V_lock*rho_lock): 39.3481
+- M2 (omega_ref*V_lock*D_stat): 149.28
+- M3 (omega_ref*V_lock*rho_lock): 60.2937
+- M2 (omega_ref*V_lock*D_stat): 76.3561
+- M3 (omega_ref*V_lock*rho_lock): 14.1748
 - M2 (omega_ref*V_lock*D_stat): 122.117
 - M3 (omega_ref*V_lock*rho_lock): 33.5414
-- M2 (omega_ref*V_lock*D_stat): 135.131
-- M3 (omega_ref*V_lock*rho_lock): 38.0328
+- M2 (omega_ref*V_lock*D_stat): 179.049
+- M3 (omega_ref*V_lock*rho_lock): 67.2264
+- M2 (omega_ref*V_lock*D_stat): 112.066
+- M3 (omega_ref*V_lock*rho_lock): 49.0836
+- M2 (omega_ref*V_lock*D_stat): 177.65
+- M3 (omega_ref*V_lock*rho_lock): 41.5308
+- M2 (omega_ref*V_lock*D_stat): 182.013
+- M3 (omega_ref*V_lock*rho_lock): 48.5983
+- M2 (omega_ref*V_lock*D_stat): 184.539
+- M3 (omega_ref*V_lock*rho_lock): 25.5938
+- M2 (omega_ref*V_lock*D_stat): 213.586
+- M3 (omega_ref*V_lock*rho_lock): 40.3509
+- M2 (omega_ref*V_lock*D_stat): 132.967
+- M3 (omega_ref*V_lock*rho_lock): 50.7868
 - M2 (omega_ref*V_lock*D_stat): 204.005
 - M3 (omega_ref*V_lock*rho_lock): 75.9632
 - M2 (omega_ref*V_lock*D_stat): 105.991
 - M3 (omega_ref*V_lock*rho_lock): 42.5878
-- M2 (omega_ref*V_lock*D_stat): 152.786
-- M3 (omega_ref*V_lock*rho_lock): 43.0297
-- M2 (omega_ref*V_lock*D_stat): 83.419
-- M3 (omega_ref*V_lock*rho_lock): 21.3416
-- M2 (omega_ref*V_lock*D_stat): 142.099
-- M3 (omega_ref*V_lock*rho_lock): 30.2561
-- M2 (omega_ref*V_lock*D_stat): 146.052
-- M3 (omega_ref*V_lock*rho_lock): 29.4912
-- M2 (omega_ref*V_lock*D_stat): 99.1226
-- M3 (omega_ref*V_lock*rho_lock): 53.7942
-- M2 (omega_ref*V_lock*D_stat): 74.1603
-- M3 (omega_ref*V_lock*rho_lock): 23.64
-- M2 (omega_ref*V_lock*D_stat): 182.013
-- M3 (omega_ref*V_lock*rho_lock): 48.5983
-- M2 (omega_ref*V_lock*D_stat): 116.919
-- M3 (omega_ref*V_lock*rho_lock): 41.4788
-- M2 (omega_ref*V_lock*D_stat): 129.221
-- M3 (omega_ref*V_lock*rho_lock): 43.1439
-- M2 (omega_ref*V_lock*D_stat): 135.605
-- M3 (omega_ref*V_lock*rho_lock): 72.2442
-- M2 (omega_ref*V_lock*D_stat): 129.882
-- M3 (omega_ref*V_lock*rho_lock): 51.1001
-- M2 (omega_ref*V_lock*D_stat): 71.8601
-- M3 (omega_ref*V_lock*rho_lock): 9.50794
-- M2 (omega_ref*V_lock*D_stat): 129.881
-- M3 (omega_ref*V_lock*rho_lock): 53.0133
-- M2 (omega_ref*V_lock*D_stat): 77.8722
-- M3 (omega_ref*V_lock*rho_lock): 16.6401
-- M2 (omega_ref*V_lock*D_stat): 73.8653
-- M3 (omega_ref*V_lock*rho_lock): 7.8596
-- M2 (omega_ref*V_lock*D_stat): 127.29
-- M3 (omega_ref*V_lock*rho_lock): 25.2041
-- M2 (omega_ref*V_lock*D_stat): 100.27
-- M3 (omega_ref*V_lock*rho_lock): 30.5594
-- M2 (omega_ref*V_lock*D_stat): 170.929
-- M3 (omega_ref*V_lock*rho_lock): 65.5376
-- M2 (omega_ref*V_lock*D_stat): 253.844
-- M3 (omega_ref*V_lock*rho_lock): 100.194
-- M2 (omega_ref*V_lock*D_stat): 176.667
-- M3 (omega_ref*V_lock*rho_lock): 56.2178
-- M2 (omega_ref*V_lock*D_stat): 213.586
-- M3 (omega_ref*V_lock*rho_lock): 40.3509
-- M2 (omega_ref*V_lock*D_stat): 116.224
-- M3 (omega_ref*V_lock*rho_lock): 53.0528
-- M2 (omega_ref*V_lock*D_stat): 180.321
-- M3 (omega_ref*V_lock*rho_lock): 49.1859
-- M2 (omega_ref*V_lock*D_stat): 147.882
-- M3 (omega_ref*V_lock*rho_lock): 59.9082
-- M2 (omega_ref*V_lock*D_stat): 225.541
-- M3 (omega_ref*V_lock*rho_lock): 42.6909
-- M2 (omega_ref*V_lock*D_stat): 113.062
-- M3 (omega_ref*V_lock*rho_lock): 33.5611
-- M2 (omega_ref*V_lock*D_stat): 182.836
-- M3 (omega_ref*V_lock*rho_lock): 51.0657
-- M2 (omega_ref*V_lock*D_stat): 76.6127
-- M3 (omega_ref*V_lock*rho_lock): 16.9976
-- M2 (omega_ref*V_lock*D_stat): 83.528
-- M3 (omega_ref*V_lock*rho_lock): 37.0359
-- M2 (omega_ref*V_lock*D_stat): 133.211
-- M3 (omega_ref*V_lock*rho_lock): 95.2804
-- M2 (omega_ref*V_lock*D_stat): 183.52
-- M3 (omega_ref*V_lock*rho_lock): 46.1505
-- M2 (omega_ref*V_lock*D_stat): 144.543
-- M3 (omega_ref*V_lock*rho_lock): 22.4957
-- M2 (omega_ref*V_lock*D_stat): 108.068
-- M3 (omega_ref*V_lock*rho_lock): 41.9248
-- M2 (omega_ref*V_lock*D_stat): 84.1496
-- M3 (omega_ref*V_lock*rho_lock): 60.4867
-- M2 (omega_ref*V_lock*D_stat): 116.556
-- M3 (omega_ref*V_lock*rho_lock): 12.5464
-- M2 (omega_ref*V_lock*D_stat): 132.967
-- M3 (omega_ref*V_lock*rho_lock): 50.7868
-- M2 (omega_ref*V_lock*D_stat): 179.049
-- M3 (omega_ref*V_lock*rho_lock): 67.2264
-- M2 (omega_ref*V_lock*D_stat): 135.415
-- M3 (omega_ref*V_lock*rho_lock): 23.5431
-- M2 (omega_ref*V_lock*D_stat): 97.2085
-- M3 (omega_ref*V_lock*rho_lock): 40.869
-- M2 (omega_ref*V_lock*D_stat): 85.433
-- M3 (omega_ref*V_lock*rho_lock): 29.0692
-- M2 (omega_ref*V_lock*D_stat): 76.0289
-- M3 (omega_ref*V_lock*rho_lock): 29.8989
-- M2 (omega_ref*V_lock*D_stat): 123.197
-- M3 (omega_ref*V_lock*rho_lock): 9.32327
-- M2 (omega_ref*V_lock*D_stat): 117.649
-- M3 (omega_ref*V_lock*rho_lock): 12.7377
-- M2 (omega_ref*V_lock*D_stat): 127.709
-- M3 (omega_ref*V_lock*rho_lock): 16.3261
-- M2 (omega_ref*V_lock*D_stat): 169.046
-- M3 (omega_ref*V_lock*rho_lock): 33.8554
-- M2 (omega_ref*V_lock*D_stat): 166.209
-- M3 (omega_ref*V_lock*rho_lock): 45.3446
-- M2 (omega_ref*V_lock*D_stat): 140.702
-- M3 (omega_ref*V_lock*rho_lock): 26.5752
-- M2 (omega_ref*V_lock*D_stat): 177.65
-- M3 (omega_ref*V_lock*rho_lock): 41.5308
-- M2 (omega_ref*V_lock*D_stat): 78.1577
-- M3 (omega_ref*V_lock*rho_lock): 37.0134
-- M2 (omega_ref*V_lock*D_stat): 137.078
-- M3 (omega_ref*V_lock*rho_lock): 65.7284
-- M2 (omega_ref*V_lock*D_stat): 161.158
-- M3 (omega_ref*V_lock*rho_lock): 50.35
-- M2 (omega_ref*V_lock*D_stat): 100.985
-- M3 (omega_ref*V_lock*rho_lock): 27.3376
-- M2 (omega_ref*V_lock*D_stat): 150.774
-- M3 (omega_ref*V_lock*rho_lock): 58.5668
-- M2 (omega_ref*V_lock*D_stat): 118.131
-- M3 (omega_ref*V_lock*rho_lock): 64.5011
-- M2 (omega_ref*V_lock*D_stat): 88.2951
-- M3 (omega_ref*V_lock*rho_lock): 35.7215
-- M2 (omega_ref*V_lock*D_stat): 123.437
-- M3 (omega_ref*V_lock*rho_lock): 21.7131
-- M2 (omega_ref*V_lock*D_stat): 72.9679
-- M3 (omega_ref*V_lock*rho_lock): 46.2096
-- M2 (omega_ref*V_lock*D_stat): 108.476
-- M3 (omega_ref*V_lock*rho_lock): 22.5551
-- M2 (omega_ref*V_lock*D_stat): 84.2074
-- M3 (omega_ref*V_lock*rho_lock): 32.377
-- M2 (omega_ref*V_lock*D_stat): 89.1734
-- M3 (omega_ref*V_lock*rho_lock): 34.7606
-- M2 (omega_ref*V_lock*D_stat): 121.909
-- M3 (omega_ref*V_lock*rho_lock): 49.1956
-- M2 (omega_ref*V_lock*D_stat): 149.28
-- M3 (omega_ref*V_lock*rho_lock): 60.2937
-- M2 (omega_ref*V_lock*D_stat): 137.755
-- M3 (omega_ref*V_lock*rho_lock): 24.0428
-- M2 (omega_ref*V_lock*D_stat): 130.19
-- M3 (omega_ref*V_lock*rho_lock): 45.6016
-- M2 (omega_ref*V_lock*D_stat): 184.539
-- M3 (omega_ref*V_lock*rho_lock): 25.5938
-- M2 (omega_ref*V_lock*D_stat): 140.159
-- M3 (omega_ref*V_lock*rho_lock): 21.6575
-- M2 (omega_ref*V_lock*D_stat): 72.0903
-- M3 (omega_ref*V_lock*rho_lock): 32.1594
-- M2 (omega_ref*V_lock*D_stat): 93.6493
-- M3 (omega_ref*V_lock*rho_lock): 32.8492
-- M2 (omega_ref*V_lock*D_stat): 149.703
-- M3 (omega_ref*V_lock*rho_lock): 62.4542
 - M2 (omega_ref*V_lock*D_stat): 182.401
 - M3 (omega_ref*V_lock*rho_lock): 21.3876
+- M2 (omega_ref*V_lock*D_stat): 142.099
+- M3 (omega_ref*V_lock*rho_lock): 30.2561
+- M2 (omega_ref*V_lock*D_stat): 85.0799
+- M3 (omega_ref*V_lock*rho_lock): 66.6164
+- M2 (omega_ref*V_lock*D_stat): 105.4
+- M3 (omega_ref*V_lock*rho_lock): 49.8866
+- M2 (omega_ref*V_lock*D_stat): 118.131
+- M3 (omega_ref*V_lock*rho_lock): 64.5011
+- M2 (omega_ref*V_lock*D_stat): 97.2085
+- M3 (omega_ref*V_lock*rho_lock): 40.869
+- M2 (omega_ref*V_lock*D_stat): 176.667
+- M3 (omega_ref*V_lock*rho_lock): 56.2178
+- M2 (omega_ref*V_lock*D_stat): 130.19
+- M3 (omega_ref*V_lock*rho_lock): 45.6016
 - M2 (omega_ref*V_lock*D_stat): 91.207
 - M3 (omega_ref*V_lock*rho_lock): 49.3145
-- M2 (omega_ref*V_lock*D_stat): 157.484
-- M3 (omega_ref*V_lock*rho_lock): 83.1418
-- M2 (omega_ref*V_lock*D_stat): 195.879
-- M3 (omega_ref*V_lock*rho_lock): 26.5723
-- M2 (omega_ref*V_lock*D_stat): 191.447
-- M3 (omega_ref*V_lock*rho_lock): 98.4918
+- M2 (omega_ref*V_lock*D_stat): 121.909
+- M3 (omega_ref*V_lock*rho_lock): 49.1956
+- M2 (omega_ref*V_lock*D_stat): 72.0903
+- M3 (omega_ref*V_lock*rho_lock): 32.1594
+- M2 (omega_ref*V_lock*D_stat): 225.541
+- M3 (omega_ref*V_lock*rho_lock): 42.6909
+- M2 (omega_ref*V_lock*D_stat): 77.8722
+- M3 (omega_ref*V_lock*rho_lock): 16.6401
+- M2 (omega_ref*V_lock*D_stat): 144.239
+- M3 (omega_ref*V_lock*rho_lock): 48.8231
+- M2 (omega_ref*V_lock*D_stat): 180.321
+- M3 (omega_ref*V_lock*rho_lock): 49.1859
+- M2 (omega_ref*V_lock*D_stat): 108.068
+- M3 (omega_ref*V_lock*rho_lock): 41.9248
+- M2 (omega_ref*V_lock*D_stat): 83.419
+- M3 (omega_ref*V_lock*rho_lock): 21.3416
+- M2 (omega_ref*V_lock*D_stat): 113.062
+- M3 (omega_ref*V_lock*rho_lock): 33.5611
+- M2 (omega_ref*V_lock*D_stat): 100.27
+- M3 (omega_ref*V_lock*rho_lock): 30.5594
+- M2 (omega_ref*V_lock*D_stat): 72.9679
+- M3 (omega_ref*V_lock*rho_lock): 46.2096
+- M2 (omega_ref*V_lock*D_stat): 182.836
+- M3 (omega_ref*V_lock*rho_lock): 51.0657
+- M2 (omega_ref*V_lock*D_stat): 127.29
+- M3 (omega_ref*V_lock*rho_lock): 25.2041
+- M2 (omega_ref*V_lock*D_stat): 123.437
+- M3 (omega_ref*V_lock*rho_lock): 21.7131
+- M2 (omega_ref*V_lock*D_stat): 129.881
+- M3 (omega_ref*V_lock*rho_lock): 53.0133
+- M2 (omega_ref*V_lock*D_stat): 84.1496
+- M3 (omega_ref*V_lock*rho_lock): 60.4867
+- M2 (omega_ref*V_lock*D_stat): 137.755
+- M3 (omega_ref*V_lock*rho_lock): 24.0428
+- M2 (omega_ref*V_lock*D_stat): 117.649
+- M3 (omega_ref*V_lock*rho_lock): 12.7377
+- M2 (omega_ref*V_lock*D_stat): 71.8601
+- M3 (omega_ref*V_lock*rho_lock): 9.50794
+- M2 (omega_ref*V_lock*D_stat): 110.898
+- M3 (omega_ref*V_lock*rho_lock): 14.8858
+- M2 (omega_ref*V_lock*D_stat): 135.477
+- M3 (omega_ref*V_lock*rho_lock): 22.2227
+- M2 (omega_ref*V_lock*D_stat): 76.0289
+- M3 (omega_ref*V_lock*rho_lock): 29.8989
+- M2 (omega_ref*V_lock*D_stat): 150.774
+- M3 (omega_ref*V_lock*rho_lock): 58.5668
+- M2 (omega_ref*V_lock*D_stat): 140.702
+- M3 (omega_ref*V_lock*rho_lock): 26.5752
+- M2 (omega_ref*V_lock*D_stat): 88.6395
+- M3 (omega_ref*V_lock*rho_lock): 31.4332
+- M2 (omega_ref*V_lock*D_stat): 135.131
+- M3 (omega_ref*V_lock*rho_lock): 38.0328
+- M2 (omega_ref*V_lock*D_stat): 105.473
+- M3 (omega_ref*V_lock*rho_lock): 45.5049
+- M2 (omega_ref*V_lock*D_stat): 127.709
+- M3 (omega_ref*V_lock*rho_lock): 16.3261
+- M2 (omega_ref*V_lock*D_stat): 116.919
+- M3 (omega_ref*V_lock*rho_lock): 41.4788
+- M2 (omega_ref*V_lock*D_stat): 76.6127
+- M3 (omega_ref*V_lock*rho_lock): 16.9976
+- M2 (omega_ref*V_lock*D_stat): 93.6493
+- M3 (omega_ref*V_lock*rho_lock): 32.8492
+- M2 (omega_ref*V_lock*D_stat): 166.209
+- M3 (omega_ref*V_lock*rho_lock): 45.3446
+- M2 (omega_ref*V_lock*D_stat): 110.317
+- M3 (omega_ref*V_lock*rho_lock): 39.3554
