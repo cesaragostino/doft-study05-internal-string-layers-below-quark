@@ -30,6 +30,58 @@ def parse_proxies_csv(path: Path) -> List[Dict]:
     return rows
 
 
+def _grade_from_d_total(d_total: Optional[float]) -> str:
+    if d_total is None or not np.isfinite(d_total):
+        return "C"
+    if d_total < 0.5:
+        return "A"
+    if d_total < 1.5:
+        return "B"
+    return "C"
+
+
+def _build_dna_catalog(rows: List[Dict], best_by_run: Dict[str, Dict], out_path: Path) -> None:
+    dna_rows: List[Dict[str, object]] = []
+    for row in rows:
+        run_id = row.get("run_id", row.get("id"))
+        run_key = str(run_id)
+        best = best_by_run.get(run_key) or {}
+        d_total = _to_float(best.get("d_total"))
+        dna_rows.append(
+            {
+                "run_id": run_id,
+                "R_S1_Q": row.get("R_S1_Q"),
+                "R_S2_S1": row.get("R_S2_S1"),
+                "dominant_parity": row.get("dominant_parity"),
+                "lock_Q0_S1_0_1-1_ratio": row.get("lock_Q0_S1_0_1-1_ratio"),
+                "band_count": row.get("band_count"),
+                "rho_lock": row.get("rho_lock"),
+                "lock_quality_Q": row.get("lock_quality_Q"),
+                "participation_entropy": row.get("participation_entropy"),
+                "d_total": d_total,
+            }
+        )
+    dna_rows.sort(key=lambda r: (r.get("d_total") is None, r.get("d_total")))
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "run_id",
+        "R_S1_Q",
+        "R_S2_S1",
+        "dominant_parity",
+        "lock_Q0_S1_0_1-1_ratio",
+        "band_count",
+        "rho_lock",
+        "lock_quality_Q",
+        "participation_entropy",
+        "d_total",
+    ]
+    with out_path.open("w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(dna_rows)
+    print(f"[match_sm_ola1] dof_dna_catalog escrito -> {out_path}")
+
+
 def _to_float(value) -> Optional[float]:
     try:
         f = float(value)
@@ -173,6 +225,12 @@ def main():
         "--update-proxies",
         action="store_true",
         help="Escribir k_used/parity/sector_confidence/mass_sim_used_gev en el proxies CSV.",
+    )
+    parser.add_argument(
+        "--dof-dna-output",
+        type=Path,
+        default=None,
+        help="Salida del catalogo DOF DNA (CSV).",
     )
     args = parser.parse_args()
 
@@ -324,6 +382,14 @@ def main():
             writer.writeheader()
             writer.writerows(rows)
         print(f"[match_sm_ola1] proxies updated -> {args.proxies_csv}")
+
+    # DOF DNA catalog (no SM naming columns)
+    best_by_run = {}
+    for row in best_rows:
+        rid = str(row.get("run_id"))
+        best_by_run[rid] = {"d_total": row.get("best_d_total")}
+    dna_out = args.dof_dna_output or (out_dir / "dof_dna_catalog.csv")
+    _build_dna_catalog(rows, best_by_run, dna_out)
 
 
 def _in_window(val: float, window):

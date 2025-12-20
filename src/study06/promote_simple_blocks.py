@@ -66,6 +66,22 @@ def read_matches(path: Path) -> List[Dict]:
     return rows
 
 
+def read_dof_catalog(path: Path) -> Dict[str, float | None]:
+    if not path.exists():
+        return {}
+    rows: Dict[str, float | None] = {}
+    with path.open() as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            rid = str(row.get("run_id"))
+            try:
+                d_total = float(row.get("d_total"))
+            except Exception:
+                d_total = None
+            rows[rid] = d_total
+    return rows
+
+
 def _tier_rank(tier: str) -> int:
     order = {"none": 0, "level1": 1, "level2": 2, "level3": 3}
     return order.get(str(tier), 0)
@@ -136,6 +152,12 @@ def main():
         default=Path("data/processed/ola1/ola1_blocks_selection.csv"),
         help="Optional CSV log of accepted/rejected runs.",
     )
+    parser.add_argument(
+        "--dof-dna-catalog",
+        type=Path,
+        default=None,
+        help="Optional DOF DNA catalog; only Grade A runs are promoted.",
+    )
     parser.add_argument("--d-total-max", type=float, default=None, help="Deprecated: ignored.")
     parser.add_argument("--max-blocks-per-particle", type=int, default=5000)
     args = parser.parse_args()
@@ -186,6 +208,8 @@ def main():
     catalog = universe.get("particles", universe)
     cat_by_name = {p["name"]: p for p in catalog}
     proxy_by_run = {str(r.get("run_id")): r for r in proxies}
+    dna_path = args.dof_dna_catalog or (Path(args.proxies_csv).parent / "dof_dna_catalog.csv")
+    dof_by_run = read_dof_catalog(dna_path)
 
     def _to_float(val):
         try:
@@ -245,6 +269,12 @@ def main():
             lock_q = None
         structure_tier = proxy_row.get("structure_tier", "none") if proxy_row else "none"
         reasons: List[str] = []
+        dof_d_total = dof_by_run.get(str(run_id))
+        if dof_by_run:
+            if dof_d_total is not None and np.isfinite(dof_d_total) and dof_d_total >= 0.5:
+                reasons.append("dof_grade_not_a")
+            elif dof_d_total is None:
+                reasons.append("dof_missing")
 
         def reject(reason: str):
             m = match or {}

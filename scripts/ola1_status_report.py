@@ -269,6 +269,21 @@ def load_selection_log(path: Path) -> List[Dict]:
     return rows
 
 
+def load_dof_catalog(path: Path) -> List[Dict]:
+    rows: List[Dict] = []
+    if not path.exists():
+        return rows
+    with path.open() as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            try:
+                row["d_total"] = float(row.get("d_total", "nan"))
+            except Exception:
+                pass
+            rows.append(row)
+    return rows
+
+
 def load_simple_blocks(path: Path) -> List[Dict]:
     if not path.exists():
         return []
@@ -417,6 +432,7 @@ def main():
     parser.add_argument("--case", default="Ola1_Discovery_3-2-5", help="Nombre del caso (para ubicar archivos).")
     parser.add_argument("--processed-dir", type=Path, default=Path("data/processed/ola1"), help="Dir base processed.")
     parser.add_argument("--selection-log", type=Path, default=None, help="Override path a ola1_blocks_selection.csv")
+    parser.add_argument("--dof-dna-catalog", type=Path, default=None, help="Override path a dof_dna_catalog.csv")
     parser.add_argument("--simple-blocks", type=Path, default=None, help="Override path a simple_blocks.json")
     parser.add_argument("--zoo-matches", type=Path, default=None, help="Override path a zoo_matches.csv")
     parser.add_argument("--sweep-results", type=Path, default=None, help="Override path a sweep_results.json")
@@ -444,6 +460,7 @@ def main():
     proc = args.processed_dir
     case = args.case
     selection_path = args.selection_log or proc / "ola1_blocks_selection.csv"
+    dna_path = args.dof_dna_catalog or proc / "dof_dna_catalog.csv"
     blocks_path = args.simple_blocks or proc / "simple_blocks.json"
     zoo_path = args.zoo_matches or proc / "zoo_matches.csv"
     sweep_candidates = []
@@ -464,6 +481,7 @@ def main():
     entropy_summary = load_entropy_summary(sweep_candidates)
 
     selection_rows = load_selection_log(selection_path)
+    dna_rows = load_dof_catalog(dna_path)
     blocks = load_simple_blocks(blocks_path)
     zoo = load_zoo_matches(zoo_path)
     sm_masses = load_sm_masses(Path("data/raw/sm_universe.json"))
@@ -742,6 +760,44 @@ def main():
     else:
         lines.append("- Alertas: ninguna")
     lines.append("")
+
+    if dna_rows:
+        lines.append("## DNA Catalog (DOF Individuals)")
+
+        def _fmt_dna(v):
+            try:
+                f = float(v)
+                return f"{f:.6g}"
+            except Exception:
+                return str(v) if v is not None else ""
+
+        def _emit_grade(title: str, rows: List[Dict]):
+            lines.append(title)
+            lines.append("| run_id | R_S1_Q | R_S2_S1 | dominant_parity | lock_Q0_S1_0_1-1_ratio | band_count | rho_lock | lock_quality_Q | participation_entropy | d_total |")
+            lines.append("|--------|--------|---------|-----------------|------------------------|-----------|---------|---------------|-----------------------|---------|")
+            for r in rows:
+                lines.append(
+                    f"| {r.get('run_id')} | {_fmt_dna(r.get('R_S1_Q'))} | {_fmt_dna(r.get('R_S2_S1'))} | {r.get('dominant_parity')} | "
+                    f"{_fmt_dna(r.get('lock_Q0_S1_0_1-1_ratio'))} | {_fmt_dna(r.get('band_count'))} | {_fmt_dna(r.get('rho_lock'))} | "
+                    f"{_fmt_dna(r.get('lock_quality_Q'))} | {_fmt_dna(r.get('participation_entropy'))} | {_fmt_dna(r.get('d_total'))} |"
+                )
+
+        def _dof_val(r):
+            try:
+                return float(r.get("d_total"))
+            except Exception:
+                return None
+
+        grade_a = [r for r in dna_rows if (v := _dof_val(r)) is not None and v < 0.5]
+        grade_b = [r for r in dna_rows if (v := _dof_val(r)) is not None and 0.5 <= v < 1.5]
+        grade_c = [r for r in dna_rows if _dof_val(r) is None or _dof_val(r) >= 1.5]
+
+        _emit_grade("### DOF Grade A (Excellent): d_total < 0.5", grade_a)
+        lines.append("")
+        _emit_grade("### DOF Grade B (Acceptable): 0.5 <= d_total < 1.5", grade_b)
+        lines.append("")
+        _emit_grade("### DOF Grade C (Noise/Ghosts): d_total >= 1.5", grade_c)
+        lines.append("")
 
     lines.append("## Entropía / Caos (nuevo)")
     if entropy_summary and entropy_summary.get("total_runs", 0) > 0:
