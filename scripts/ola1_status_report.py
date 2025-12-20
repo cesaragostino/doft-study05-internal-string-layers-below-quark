@@ -771,15 +771,21 @@ def main():
             except Exception:
                 return str(v) if v is not None else ""
 
+        def _fmt_run_id(val):
+            try:
+                return str(int(float(val)))
+            except Exception:
+                return str(val) if val is not None else ""
+
         def _emit_grade(title: str, rows: List[Dict]):
             lines.append(title)
-            lines.append("| run_id | R_S1_Q | R_S2_S1 | dominant_parity | lock_Q0_S1_0_1-1_ratio | band_count | rho_lock | lock_quality_Q | participation_entropy | d_total |")
-            lines.append("|--------|--------|---------|-----------------|------------------------|-----------|---------|---------------|-----------------------|---------|")
+            lines.append("| run_id | d_total | R_S1_Q | R_S2_S1 | dominant_parity | lock_Q0_S1_0_1-1_ratio | band_count | rho_lock | lock_quality_Q | participation_entropy |")
+            lines.append("|--------|---------|--------|---------|-----------------|------------------------|-----------|---------|---------------|-----------------------|")
             for r in rows:
                 lines.append(
-                    f"| {r.get('run_id')} | {_fmt_dna(r.get('R_S1_Q'))} | {_fmt_dna(r.get('R_S2_S1'))} | {r.get('dominant_parity')} | "
-                    f"{_fmt_dna(r.get('lock_Q0_S1_0_1-1_ratio'))} | {_fmt_dna(r.get('band_count'))} | {_fmt_dna(r.get('rho_lock'))} | "
-                    f"{_fmt_dna(r.get('lock_quality_Q'))} | {_fmt_dna(r.get('participation_entropy'))} | {_fmt_dna(r.get('d_total'))} |"
+                    f"| {_fmt_run_id(r.get('run_id'))} | {_fmt_dna(r.get('d_total'))} | {_fmt_dna(r.get('R_S1_Q'))} | {_fmt_dna(r.get('R_S2_S1'))} | "
+                    f"{r.get('dominant_parity')} | {_fmt_dna(r.get('lock_Q0_S1_0_1-1_ratio'))} | {_fmt_dna(r.get('band_count'))} | "
+                    f"{_fmt_dna(r.get('rho_lock'))} | {_fmt_dna(r.get('lock_quality_Q'))} | {_fmt_dna(r.get('participation_entropy'))} |"
                 )
 
         def _dof_val(r):
