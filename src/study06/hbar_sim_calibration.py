@@ -64,6 +64,33 @@ def _write_calibration(path: Path, payload: Dict[str, Any]):
     print(f"[hbar_sim] escrito {path} (hbar_sim={payload.get('hbar_sim'):.6g}, n_used={payload.get('n_used')}, dropped={payload.get('n_rejected')})")
 
 
+def _load_calibration_config(path: Path) -> Dict[str, Any]:
+    defaults = {
+        "schema_version": "hbar_sim_calibration_v2",
+        "mode": "auto",
+        "auto": {
+            "q_lock_min": 0.9,
+            "d_total_max": 1.5,
+            "min_band_count": 2,
+        },
+        "seed": {
+            "q_lock_min": 0.9,
+            "band_count_exact": 2,
+            "omega_max": 12.0,
+            "seed_particle": "deuteron",
+        },
+    }
+    if not path or not path.exists():
+        return defaults
+    try:
+        data = json.loads(path.read_text())
+    except Exception:
+        return defaults
+    cfg = defaults.copy()
+    cfg.update({k: v for k, v in data.items() if v is not None})
+    return cfg
+
+
 def _update_proxies(proxies_path: Path, hbar: float) -> None:
     rows: List[Dict[str, Any]] = []
     with proxies_path.open() as f:
@@ -92,6 +119,12 @@ def main():
     parser.add_argument("--proxies-csv", type=Path, default=None, help="Opcional: actualizar mass_sim_gev en proxies.")
     parser.add_argument("--blocks-output", type=Path, default=None, help="Opcional: escribir bloques enriquecidos en otro path.")
     parser.add_argument(
+        "--config",
+        type=Path,
+        default=Path("data/raw/hbar_sim_calibration_config.json"),
+        help="Config JSON con umbrales y modo de calibracion.",
+    )
+    parser.add_argument(
         "--seed-mode",
         action="store_true",
         help="Usar solo semillas (Q>=0.9, band_count==2, omega_ref bajo) y masa de deuteron para hbar_seed.",
@@ -100,6 +133,12 @@ def main():
 
     blocks = _load_blocks(args.blocks)
     sm_masses = _load_sm_masses(args.sm_universe)
+    cfg = _load_calibration_config(args.config)
+    mode = "seed" if args.seed_mode else str(cfg.get("mode", "auto")).lower()
+    if mode not in {"seed", "auto"}:
+        mode = "auto"
+    cfg_seed = cfg.get("seed", {})
+    cfg_auto = cfg.get("auto", {})
 
     candidates = []
     for b in blocks:
@@ -114,8 +153,8 @@ def main():
         if omega is None or omega <= 0:
             continue
         pname = b.get("particle_name")
-        if args.seed_mode:
-            # semillas: Q>=0.9, band_count==2, omega_ref bajo
+        if mode == "seed":
+            # semillas: Q>=min, band_count exacto, omega_ref bajo
             try:
                 q_lock = float((b.get("lock_quality") or {}).get("Q"))
             except Exception:
@@ -124,12 +163,40 @@ def main():
                 band_count = int(float(b.get("band_count")))
             except Exception:
                 band_count = 0
-            if q_lock < 0.9 or band_count != 2 or omega <= 0 or omega > 12.0:
+            q_lock_min = float(cfg_seed.get("q_lock_min", 0.9))
+            band_exact = int(cfg_seed.get("band_count_exact", 2))
+            omega_max = float(cfg_seed.get("omega_max", 12.0))
+            if q_lock < q_lock_min or band_count != band_exact or omega <= 0 or omega > omega_max:
                 continue
-            pname = "deuteron"  # fijamos masa deuteron como referencia seed
+            seed_particle = cfg_seed.get("seed_particle")
+            if seed_particle:
+                pname = seed_particle
         m_sm = sm_masses.get(str(pname))
         if m_sm is None:
             continue
+        if mode == "auto":
+            try:
+                q_lock = float((b.get("lock_quality") or {}).get("Q"))
+            except Exception:
+                q_lock = 0.0
+            q_lock_min = cfg_auto.get("q_lock_min")
+            if q_lock_min is not None and q_lock < float(q_lock_min):
+                continue
+            d_total = ms.get("d_total")
+            try:
+                d_total = float(d_total)
+            except Exception:
+                d_total = None
+            d_total_max = cfg_auto.get("d_total_max")
+            if d_total_max is not None and d_total is not None and d_total > float(d_total_max):
+                continue
+            try:
+                band_count = int(float(b.get("band_count")))
+            except Exception:
+                band_count = None
+            min_band_count = cfg_auto.get("min_band_count")
+            if min_band_count is not None and band_count is not None and band_count < int(min_band_count):
+                continue
         q_lock = None
         lq = b.get("lock_quality") or {}
         try:
@@ -181,6 +248,13 @@ def main():
     h_trim = h_vals[mask]
     w_trim = weights[mask]
     kept_trim = [k for k, m in zip(kept, mask) if m]
+    hbar_final = None
+    fallback_reason = None
+    if h_trim.size == 0 or w_trim.size == 0:
+        h_trim = h_vals
+        w_trim = weights
+        kept_trim = kept
+        fallback_reason = "trim_empty_used_full"
     hbar_final = _weighted_median(h_trim, w_trim)
     if hbar_final is None:
         print(
@@ -188,7 +262,12 @@ def main():
             f"clustered={len(clustered)}, kept_trim={len(kept_trim)}).",
             flush=True,
         )
-        raise ValueError("hbar_sim: weighted median falló.")
+        if h_vals.size > 0:
+            hbar_final = float(np.median(h_vals))
+            fallback_reason = (fallback_reason + "|") if fallback_reason else ""
+            fallback_reason = f"{fallback_reason}fallback_unweighted_median"
+        else:
+            raise ValueError("hbar_sim: weighted median falló.")
 
     # payload
     payload = {
@@ -198,18 +277,18 @@ def main():
         "n_rejected": len(candidates) - len(kept_trim),
         "omega0": omega0,
         "cluster_tol_rel": cluster_tol,
+        "fallback_reason": fallback_reason,
         "h_i_percentiles": {
             "p10": float(lo),
             "p50": float(np.percentile(h_vals, 50)),
             "p90": float(hi),
         },
-        "mode": "seed" if args.seed_mode else "global",
-        "seed_particle": "deuteron" if args.seed_mode else None,
+        "mode": mode,
+        "seed_particle": cfg_seed.get("seed_particle") if mode == "seed" else None,
         "selection": {
-            "q_lock_min": 0.9 if args.seed_mode else None,
-            "band_count_exact": 2 if args.seed_mode else None,
-            "omega_max": 12.0 if args.seed_mode else None,
-            "grade_filter": None if args.seed_mode else "A/B with enough_levels_full",
+            "auto": cfg_auto if mode == "auto" else None,
+            "seed": cfg_seed if mode == "seed" else None,
+            "grade_filter": None if mode == "seed" else "A/B with enough_levels_full",
         },
     }
     _write_calibration(args.output, payload)

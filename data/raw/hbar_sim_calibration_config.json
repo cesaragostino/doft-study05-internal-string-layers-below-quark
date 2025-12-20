@@ -1,0 +1,15 @@
+{
+  "schema_version": "hbar_sim_calibration_v2",
+  "mode": "auto",
+  "auto": {
+    "q_lock_min": 0.85,
+    "d_total_max": 3.0,
+    "min_band_count": 2
+  },
+  "seed": {
+    "q_lock_min": 0.9,
+    "band_count_exact": 2,
+    "omega_max": 12.0,
+    "seed_particle": "deuteron"
+  }
+}

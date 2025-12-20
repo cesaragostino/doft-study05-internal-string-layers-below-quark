@@ -5,3 +5,15 @@ run_id,best_target,best_family,best_d_total,second_best_target,second_best_famil
 3.0,meson_d_star_zero,charmed_meson,0.35367026498597415,meson_d_star_plus,charmed_meson,0.5444043103537939,0.19073404536781974
 4.0,meson_d_star_zero,charmed_meson,0.5477987238784074,meson_ds,charmed_meson,0.7522012327882656,0.20440250890985812
 5.0,meson_d_star_zero,charmed_meson,0.40900306058703556,meson_d_star_plus,charmed_meson,0.6108036646324052,0.20180060404536965
+6.0,meson_d_star_zero,charmed_meson,0.5625514215775109,meson_ds,charmed_meson,0.7374485350891621,0.17489711351165116
+7.0,meson_d_star_zero,charmed_meson,0.5200716672520862,meson_d_star_plus,charmed_meson,0.7440859917419171,0.22401432448983094
+8.0,meson_d_star_zero,charmed_meson,0.3987592919189472,meson_d_star_plus,charmed_meson,0.5985111423126493,0.19975185039370214
+9.0,meson_ds,charmed_meson,0.44651161302327397,delta_1950,delta_like,0.6279069641860576,0.18139535116278366
+10.0,meson_ds,charmed_meson,0.6037036835802502,meson_d_star_zero,charmed_meson,0.6962962730864228,0.09259258950617266
+11.0,meson_d_star_zero,charmed_meson,0.5140350705848051,meson_d_star_plus,charmed_meson,0.7368420757894727,0.22280700520466756
+12.0,meson_d_star_zero,charmed_meson,0.2979954637170027,meson_d_star_plus,charmed_meson,0.4775945492764265,0.17959908555942383
+13.0,meson_ds,charmed_meson,0.6295081757377047,meson_d_star_zero,charmed_meson,0.6704917809289684,0.04098360519126376
+14.0,meson_d_star_zero,charmed_meson,0.3167709531455987,meson_d_star_plus,charmed_meson,0.5001251364405379,0.1833541832949392
+15.0,meson_d_star_zero,charmed_meson,0.4208626207579355,meson_d_star_plus,charmed_meson,0.6250351367426087,0.20417251598467318
+16.0,meson_d_star_zero,charmed_meson,0.4947712253376942,meson_d_star_plus,charmed_meson,0.7137254616470503,0.21895423630935612
+17.0,meson_d_star_zero,charmed_meson,0.5726038825247313,meson_ds,charmed_meson,0.7273960741419417,0.15479219161721047
