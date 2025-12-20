@@ -1455,7 +1455,7 @@
       "sm_mass_gev": 2.856,
       "masses_gev": [2.856],
       "widths_gev": [0.068],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.03, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.01, "width_abs": 0.03, "spacing_rel": 0.2},
       "comment": "NUEVO - Lambda_c(2860), D-wave state",
       "doft": {
         "postulate_lock_mode": {
