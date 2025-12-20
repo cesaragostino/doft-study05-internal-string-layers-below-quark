@@ -699,7 +699,7 @@
       "sm_mass_gev": 2.46787,
       "masses_gev": [2.468],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.15},
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
