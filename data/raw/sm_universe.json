@@ -563,6 +563,23 @@
       }
     },
     {
+      "name": "meson_ds1_2536",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1+",
+      "sm_mass_gev": 2.5352,
+      "masses_gev": [2.535],
+      "widths_gev": [0.00092],
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.002, "spacing_rel": 0.18},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      },
+      "comment": "NUEVO - Ds1(2536) estado P-wave, capturará el DOF en ~2.166 GeV"
+    },
+    {
       "name": "omega_baryon",
       "family": "strange_baryon",
       "type": "baryon",
@@ -683,7 +700,7 @@
       "sm_mass_gev": 2.1122,
       "masses_gev": [2.112],
       "widths_gev": [0.0019],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.002, "spacing_rel": 0.18},
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.002, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
@@ -1243,7 +1260,7 @@
       "sm_mass_gev": 2.57794,
       "masses_gev": [2.578],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.004, "width_abs": 0.0, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.004, "width_abs": 0.0, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
@@ -1259,7 +1276,7 @@
       "sm_mass_gev": 2.64577,
       "masses_gev": [2.646],
       "widths_gev": [0.0024],
-      "tolerances": {"mass_abs": 0.005, "width_abs": 0.002, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.002, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
