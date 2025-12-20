@@ -1,0 +1,7 @@
+run_id,best_target,best_family,best_d_total,second_best_target,second_best_family,second_best_d_total,delta_margin
+0.0,meson_d_star_zero,charmed_meson,0.3991707992979694,meson_d_star_plus,charmed_meson,0.599004951164184,0.19983415186621456
+1.0,meson_d_star_zero,charmed_meson,0.38536676784619855,meson_d_star_plus,charmed_meson,0.5824401135324913,0.1970733456862927
+2.0,meson_ds,charmed_meson,0.6037036835802502,meson_d_star_zero,charmed_meson,0.6962962730864228,0.09259258950617266
+3.0,meson_d_star_zero,charmed_meson,0.35367026498597415,meson_d_star_plus,charmed_meson,0.5444043103537939,0.19073404536781974
+4.0,meson_d_star_zero,charmed_meson,0.5477987238784074,meson_ds,charmed_meson,0.7522012327882656,0.20440250890985812
+5.0,meson_d_star_zero,charmed_meson,0.40900306058703556,meson_d_star_plus,charmed_meson,0.6108036646324052,0.20180060404536965

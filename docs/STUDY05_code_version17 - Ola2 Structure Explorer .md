@@ -527,3 +527,67 @@ If engine variation is disabled, `parameter_bin_id = "fixed_defaults"`.
   }
 }
 ```
+# Amendment: Mass Defect as Emergent Phase Coherence in Ola 2 (Compound Structures)
+
+## Abstract
+
+This amendment defines the transition of Wave 2 (Ola 2) from a simplified Kuramoto-based approach to a fully differential dynamical model. This shift ensures consistency with the Wave 1 (Ola 1) engine and establishes the **Mass Defect** as a physical observable derived from the global synchronization of internal block phases.
+
+---
+
+## 1. From “Kuramoto” to “Differential Coupling”
+
+While Kuramoto models provide rapid insights into synchronization, the transition to **differential equations** allows Ola 2 to preserve the causal integrity of the DOFT framework.
+
+- **Consistency:**  
+  Compound structures (Baryons, Meson Dimers) are modeled as coupled systems of differential equations where internal ratios and delays must achieve a joint attractor.
+
+- **Shape Search:**  
+  Instead of arbitrary combinations, the system employs a **Shape Searcher**.  
+  A topology is only considered *valid* if the differential engine can find a stable phase-locked solution $\Delta\theta_{ij}$ under the influence of the Global Memory Field $Z(t)$.
+
+---
+
+## 2. Mass Defect ($E_{bind}$) as Binding Coherence
+
+In the SM, binding energy is often treated as a static subtraction.  
+In DOFT Ola 2, the **Mass Defect** is the energy “saved” by the system when moving from independent oscillations to a collective unison.
+
+- **Emergence:**  
+  The final mass $M_{final}$ is the total sum of constituent masses $M_i$ minus an energy term $E_{bind,\text{mass}}$ that is directly proportional to the **Global Coherence** $R_{final}$ and the **Quality of the Lock**.
+
+- **Binding Energy Formula:**
+
+  $$
+  M_{final} = \sum_i M_i - \big( \gamma \cdot \sum_i M_i \cdot R_{final} \cdot QualityLock \big)
+  $$
+
+---
+
+## 3. Topological Complexity and Spin ($J$)
+
+The transition to differential forms allows for a direct mapping between the **Geometric Template** and the observed Spin $J$.
+
+- **Topological Filtering:**  
+  Just as Ola 1 filters for harmonic modes $k$, Ola 2 filters for stable **shapes**.
+
+- **Interpretation:**  
+  The external observation of Spin ($J$) is the manifestation of the internal *twisting* or complexity of the phase-locked shape.  
+  For example:
+  - A **Baryon Triangle** exhibits higher topological complexity than a **Meson Dimer**.
+
+---
+
+## 4. The Role of the Global Memory Field $Z(t)$
+
+The stability of a compound structure depends on the relaxation time $\tau$ and the coupling $\kappa$ of the Global Memory Field.
+
+- The field acts as a **Causal Glue**, where the memory of previous cycles reinforces the current phase lock, allowing the system to resist structural noise.
+
+---
+
+## Theoretical Conclusion
+
+The **Mass Defect** is not a fixed constant; it is a measure of **phase-locking efficiency**.
+
+By using differential equations, Ola 2 treats the compound particle as a single, higher-order resonant attractor, where the “lost mass” is simply the energy density no longer required to sustain independent, non-coherent vibrations.
