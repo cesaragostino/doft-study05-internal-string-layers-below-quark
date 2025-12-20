@@ -144,21 +144,22 @@ def main():
     for b in blocks:
         grade = str(b.get("grade", "")).upper()
         ms = b.get("match_score") or {}
+        try:
+            q_lock = float((b.get("lock_quality") or {}).get("Q"))
+        except Exception:
+            q_lock = 0.0
+        pname = b.get("particle_name")
+        allow_unknown_by_lock = str(pname).lower() == "unknown" and q_lock >= 0.90
         if not args.seed_mode:
-            if grade not in {"A", "B"}:
+            if grade not in {"A", "B"} and not allow_unknown_by_lock:
                 continue
-            if not bool(ms.get("has_enough_levels_full")):
+            if not bool(ms.get("has_enough_levels_full")) and not allow_unknown_by_lock:
                 continue
         omega = _to_float(b.get("omega_ref")) or _to_float(b.get("omega_ref_interp"))
         if omega is None or omega <= 0:
             continue
-        pname = b.get("particle_name")
         if mode == "seed":
             # semillas: Q>=min, band_count exacto, omega_ref bajo
-            try:
-                q_lock = float((b.get("lock_quality") or {}).get("Q"))
-            except Exception:
-                q_lock = 0.0
             try:
                 band_count = int(float(b.get("band_count")))
             except Exception:
@@ -175,10 +176,6 @@ def main():
         if m_sm is None:
             continue
         if mode == "auto":
-            try:
-                q_lock = float((b.get("lock_quality") or {}).get("Q"))
-            except Exception:
-                q_lock = 0.0
             q_lock_min = cfg_auto.get("q_lock_min")
             if q_lock_min is not None and q_lock < float(q_lock_min):
                 continue
@@ -197,12 +194,6 @@ def main():
             min_band_count = cfg_auto.get("min_band_count")
             if min_band_count is not None and band_count is not None and band_count < int(min_band_count):
                 continue
-        q_lock = None
-        lq = b.get("lock_quality") or {}
-        try:
-            q_lock = float(lq.get("Q"))
-        except Exception:
-            q_lock = None
         d_total = _to_float(ms.get("d_total")) or 0.0
         candidates.append({"block": b, "omega_ref": omega, "sm_mass": m_sm, "q_lock": q_lock, "d_total": d_total})
 
@@ -232,7 +223,7 @@ def main():
         h_vals.append(h_i)
         q_lock = c.get("q_lock") if c.get("q_lock") is not None else 0.0
         d_total = c.get("d_total") if c.get("d_total") is not None else 0.0
-        w = float(q_lock) / (1.0 + float(d_total)) if (q_lock is not None) else 1.0
+        w = float(q_lock) ** 2 if (q_lock is not None) else 1.0
         if not np.isfinite(w) or w <= 0:
             w = 1.0
         weights.append(w)

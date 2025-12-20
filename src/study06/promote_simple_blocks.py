@@ -51,6 +51,14 @@ def _hash_text(text: str) -> str:
         return ""
 
 
+def _norm_run_id(val) -> str:
+    try:
+        f = float(val)
+        return str(int(f))
+    except Exception:
+        return str(val)
+
+
 def read_matches(path: Path) -> List[Dict]:
     rows = []
     with path.open() as f:
@@ -73,7 +81,7 @@ def read_dof_catalog(path: Path) -> Dict[str, float | None]:
     with path.open() as f:
         reader = csv.DictReader(f)
         for row in reader:
-            rid = str(row.get("run_id"))
+            rid = _norm_run_id(row.get("run_id"))
             try:
                 d_total = float(row.get("d_total"))
             except Exception:
@@ -207,7 +215,7 @@ def main():
     universe = load_universe(args.sm_universe)
     catalog = universe.get("particles", universe)
     cat_by_name = {p["name"]: p for p in catalog}
-    proxy_by_run = {str(r.get("run_id")): r for r in proxies}
+    proxy_by_run = {_norm_run_id(r.get("run_id")): r for r in proxies}
     dna_path = args.dof_dna_catalog or (Path(args.proxies_csv).parent / "dof_dna_catalog.csv")
     dof_by_run = read_dof_catalog(dna_path)
 
@@ -233,7 +241,7 @@ def main():
     # choose best match per run (lowest finite d_total)
     best_by_run: Dict[str, Dict] = {}
     for m in matches:
-        rid = str(m.get("run_id"))
+        rid = _norm_run_id(m.get("run_id"))
         d_total = m.get("d_total", np.inf)
         if not np.isfinite(d_total):
             continue
@@ -241,7 +249,7 @@ def main():
         if prev is None or d_total < prev.get("d_total", np.inf):
             best_by_run[rid] = m
     # ensure all runs from proxies are considered (even without match)
-    all_run_ids = {str(r.get("run_id")) for r in proxies}
+    all_run_ids = {_norm_run_id(r.get("run_id")) for r in proxies}
 
     blocks: List[Dict] = []
     blocks_per_particle: Dict[str, int] = {}
@@ -253,7 +261,7 @@ def main():
         match = best_by_run.get(run_id)
         target = match.get("target_name") if match else None
         particle = cat_by_name.get(target or "") if match else None
-        proxy_row = proxy_by_run.get(str(run_id))
+        proxy_row = proxy_by_run.get(run_id)
         band_count_struct = proxy_row.get("band_count_structural") if proxy_row else None
         band_count = band_count_struct if band_count_struct is not None else proxy_row.get("band_count") if proxy_row else None
         band_count = _to_float(band_count)
@@ -269,28 +277,12 @@ def main():
             lock_q = None
         structure_tier = proxy_row.get("structure_tier", "none") if proxy_row else "none"
         reasons: List[str] = []
-        dof_d_total = dof_by_run.get(str(run_id))
+        dof_d_total = dof_by_run.get(run_id)
         if dof_by_run:
             if dof_d_total is not None and np.isfinite(dof_d_total) and dof_d_total >= 0.5:
                 reasons.append("dof_grade_not_a")
             elif dof_d_total is None:
                 reasons.append("dof_missing")
-
-        def reject(reason: str):
-            m = match or {}
-            rejected_rows.append(
-                {
-                    "run_id": run_id,
-                    "best_target": target,
-                    "type": particle.get("type") if particle else "",
-                    "best_d_total": m.get("d_total"),
-                    "structure_tier": proxy_row.get("structure_tier") if proxy_row else "",
-                    "s2_state": proxy_row.get("s2_state") if proxy_row else "",
-                    "enough_levels_full": m.get("enough_levels_full"),
-                    "enough_levels_partial": m.get("enough_levels_partial"),
-                    "reason": reason,
-                }
-            )
 
         # Physical filters (no d_total here)
         try:
@@ -321,6 +313,14 @@ def main():
             reasons.append("unknown_particle")
         if proxy_row is None:
             reasons.append("missing_proxy")
+        policy_rejected = 0
+        if match:
+            try:
+                policy_rejected = int(float(match.get("policy_rejected", 0)))
+            except Exception:
+                policy_rejected = 0
+            if policy_rejected:
+                reasons.append("policy_rejected")
 
         if particle and particle.get("type") == "baryon":
             baryon_candidates.append(
@@ -355,19 +355,33 @@ def main():
                 }
             )
 
-        if reasons:
-            reject(";".join(reasons))
-            continue
+        name_allowed = True
+        if match is None or target is None or particle is None:
+            name_allowed = False
+        if policy_rejected:
+            name_allowed = False
+        if match is not None:
+            try:
+                n_levels_sim = float(match.get("n_levels_sim", 0))
+            except Exception:
+                n_levels_sim = 0.0
+            if n_levels_sim <= 0:
+                name_allowed = False
 
-        # max blocks per particle
-        cnt = blocks_per_particle.get(target, 0)
+        target_name = target if name_allowed else "unknown"
+        particle_name = target_name
+        particle_obj = particle if name_allowed else None
+        cnt = blocks_per_particle.get(target_name, 0)
         if cnt >= args.max_blocks_per_particle:
-            reject("max_blocks_reached")
-            continue
-        blocks_per_particle[target] = cnt + 1
+            name_allowed = False
+            target_name = "unknown"
+            particle_name = "unknown"
+            particle_obj = None
+            cnt = blocks_per_particle.get(target_name, 0)
+        blocks_per_particle[target_name] = cnt + 1
 
-        block_id = f"{target}_block_{cnt+1:04d}"
-        d_total = match.get("d_total", np.inf)
+        block_id = f"{target_name}_block_{cnt+1:04d}"
+        d_total = (match or {}).get("d_total", np.inf)
         grade_cfg = sel_cfg.get("grades", {})
         grade_A = grade_cfg.get("grade_A_d_total_max", 0.5)
         grade_B = grade_cfg.get("grade_B_d_total_max", 1.5)
@@ -396,16 +410,25 @@ def main():
                 return v if np.isfinite(v) else None
             except Exception:
                 return None
-        d_spacing_clean = _nan_to_none(match.get("d_spacing"))
-        d_mass_clean = _nan_to_none(match.get("d_mass"))
-        d_total_clean = _nan_to_none(match.get("d_total"))
+        d_spacing_clean = _nan_to_none((match or {}).get("d_spacing"))
+        d_mass_clean = _nan_to_none((match or {}).get("d_mass"))
+        d_total_clean = _nan_to_none((match or {}).get("d_total"))
+        dna_grade = "unknown"
+        if dof_d_total is not None and np.isfinite(dof_d_total):
+            if dof_d_total < 0.5:
+                dna_grade = "A"
+            elif dof_d_total < 1.5:
+                dna_grade = "B"
+            else:
+                dna_grade = "C"
         block = {
             "block_id": block_id,
             "origin_run_id": proxy_row.get("run_id"),
-            "particle_name": target,
-            "family": particle.get("family"),
-            "type": particle.get("type"),
+            "particle_name": particle_name,
+            "family": (particle_obj.get("family") if particle_obj else "unknown"),
+            "type": (particle_obj.get("type") if particle_obj else "unknown"),
             "grade": grade,
+            "dna_grade": dna_grade,
             "structure_tier": structure_tier,
             "lock_quality": {
                 "Q": proxy_row.get("lock_quality_Q"),
@@ -423,9 +446,9 @@ def main():
                 "d_total": d_total_clean,
                 "d_spacing": d_spacing_clean,
                 "d_mass": d_mass_clean,
-                "n_levels_sim": match.get("n_levels_sim"),
-                "has_enough_levels_full": bool(match.get("enough_levels_full")),
-                "has_enough_levels_partial": bool(match.get("enough_levels_partial")),
+                "n_levels_sim": (match or {}).get("n_levels_sim"),
+                "has_enough_levels_full": bool((match or {}).get("enough_levels_full")),
+                "has_enough_levels_partial": bool((match or {}).get("enough_levels_partial")),
             },
             "theta_internal": {
                 "R_S1_Q": proxy_row.get("R_S1_Q"),

@@ -29,9 +29,14 @@ CHAOS_EPS = 1e-12
 
 def _lock_entropy_norm_from_weights(weights: Dict[str, float]) -> float:
     """Shannon entropy normalized for 3 components (Q, S1, S2)."""
-    q = max(float(weights.get("Q", 0.0)), 0.0)
-    s1 = max(float(weights.get("S1", 0.0)), 0.0)
-    s2 = max(float(weights.get("S2", 0.0)), 0.0)
+    def _to_float(val):
+        try:
+            return float(val)
+        except Exception:
+            return 0.0
+    q = max(_to_float(weights.get("Q", 0.0)), 0.0)
+    s1 = max(_to_float(weights.get("S1", 0.0)), 0.0)
+    s2 = max(_to_float(weights.get("S2", 0.0)), 0.0)
     s = q + s1 + s2
     if s <= CHAOS_EPS:
         p = [1 / 3, 1 / 3, 1 / 3]
@@ -751,23 +756,15 @@ def main():
         block_lines.append("Sin bloques aceptados o no se encontraron runs para mapear entropy_chaos.")
         block_lines.append("")
 
-    lines.append("## Semáforo de salud")
-    lines.append(f"- Runs totales: {runs_total}")
-    lines.append(f"- Runs aceptados: {runs_valid} ({success_rate:.1f}%)")
-    if alerts:
-        for a in alerts:
-            lines.append(f"- {a}")
-    else:
-        lines.append("- Alertas: ninguna")
-    lines.append("")
-
     if dna_rows:
         lines.append("## DNA Catalog (DOF Individuals)")
 
         def _fmt_dna(v):
+            if isinstance(v, str):
+                return v
             try:
                 f = float(v)
-                return f"{f:.6g}"
+                return f"{f:.17g}"
             except Exception:
                 return str(v) if v is not None else ""
 
@@ -779,13 +776,14 @@ def main():
 
         def _emit_grade(title: str, rows: List[Dict]):
             lines.append(title)
-            lines.append("| run_id | d_total | R_S1_Q | R_S2_S1 | dominant_parity | lock_Q0_S1_0_1-1_ratio | band_count | rho_lock | lock_quality_Q | participation_entropy |")
-            lines.append("|--------|---------|--------|---------|-----------------|------------------------|-----------|---------|---------------|-----------------------|")
+            lines.append("| run_id | d_total | dna_grade | R_S1_Q | R_S2_S1 | dominant_parity | lock_Q0_S1_0_1-1_ratio | band_count | rho_lock | lock_quality_Q | participation_entropy |")
+            lines.append("|--------|---------|-----------|--------|---------|-----------------|------------------------|-----------|---------|---------------|-----------------------|")
             for r in rows:
                 lines.append(
-                    f"| {_fmt_run_id(r.get('run_id'))} | {_fmt_dna(r.get('d_total'))} | {_fmt_dna(r.get('R_S1_Q'))} | {_fmt_dna(r.get('R_S2_S1'))} | "
-                    f"{r.get('dominant_parity')} | {_fmt_dna(r.get('lock_Q0_S1_0_1-1_ratio'))} | {_fmt_dna(r.get('band_count'))} | "
-                    f"{_fmt_dna(r.get('rho_lock'))} | {_fmt_dna(r.get('lock_quality_Q'))} | {_fmt_dna(r.get('participation_entropy'))} |"
+                    f"| {_fmt_run_id(r.get('run_id'))} | {_fmt_dna(r.get('d_total'))} | {r.get('dna_grade')} | {_fmt_dna(r.get('R_S1_Q'))} | "
+                    f"{_fmt_dna(r.get('R_S2_S1'))} | {r.get('dominant_parity')} | {_fmt_dna(r.get('lock_Q0_S1_0_1-1_ratio'))} | "
+                    f"{_fmt_dna(r.get('band_count'))} | {_fmt_dna(r.get('rho_lock'))} | {_fmt_dna(r.get('lock_quality_Q'))} | "
+                    f"{_fmt_dna(r.get('participation_entropy'))} |"
                 )
 
         def _dof_val(r):
@@ -804,6 +802,53 @@ def main():
         lines.append("")
         _emit_grade("### DOF Grade C (Noise/Ghosts): d_total >= 1.5", grade_c)
         lines.append("")
+        lines.append("### DNA Pareto (R1/R2 agrupados a 2 decimales)")
+        lines.append("| R_S1_Q_2dp | R_S2_S1_2dp | n | grade_A | grade_B | grade_C |")
+        lines.append("|-----------|------------|---|---------|---------|---------|")
+
+        def _round_2(val):
+            try:
+                return f"{float(val):.2f}"
+            except Exception:
+                return ""
+
+        def _grade_from_d_total(val):
+            try:
+                f = float(val)
+            except Exception:
+                return "C"
+            if f < 0.5:
+                return "A"
+            if f < 1.5:
+                return "B"
+            return "C"
+
+        group_counts: Dict[tuple, Dict[str, int]] = {}
+        for r in dna_rows:
+            r1 = _round_2(r.get("R_S1_Q"))
+            r2 = _round_2(r.get("R_S2_S1"))
+            if not r1 or not r2:
+                continue
+            key = (r1, r2)
+            bucket = group_counts.setdefault(key, {"n": 0, "A": 0, "B": 0, "C": 0})
+            bucket["n"] += 1
+            bucket[_grade_from_d_total(r.get("d_total"))] += 1
+
+        for (r1, r2), counts in sorted(group_counts.items(), key=lambda kv: (-kv[1]["n"], kv[0][0], kv[0][1])):
+            lines.append(
+                f"| {r1} | {r2} | {counts['n']} | {counts['A']} | {counts['B']} | {counts['C']} |"
+            )
+        lines.append("")
+
+    lines.append("## Semáforo de salud")
+    lines.append(f"- Runs totales: {runs_total}")
+    lines.append(f"- Runs aceptados: {runs_valid} ({success_rate:.1f}%)")
+    if alerts:
+        for a in alerts:
+            lines.append(f"- {a}")
+    else:
+        lines.append("- Alertas: ninguna")
+    lines.append("")
 
     lines.append("## Entropía / Caos (nuevo)")
     if entropy_summary and entropy_summary.get("total_runs", 0) > 0:
