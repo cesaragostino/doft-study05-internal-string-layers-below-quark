@@ -538,7 +538,7 @@
       "sm_mass_gev": 2.3177,
       "masses_gev": [2.318],
       "widths_gev": [0.0001],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.001, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.001, "spacing_rel": 0.1},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
@@ -700,7 +700,7 @@
       "sm_mass_gev": 2.1122,
       "masses_gev": [2.112],
       "widths_gev": [0.0019],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.002, "spacing_rel": 0.10},
+      "tolerances": {"mass_abs": 0.018, "width_abs": 0.002, "spacing_rel": 0.10},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
