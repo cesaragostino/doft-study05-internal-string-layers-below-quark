@@ -580,6 +580,23 @@
       "comment": "NUEVO - Ds1(2536) estado P-wave, capturará el DOF en ~2.166 GeV"
     },
     {
+      "name": "meson_ds_star_2166_catch",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "?-",
+      "sm_mass_gev": 2.166,
+      "masses_gev": [2.166],
+      "widths_gev": [0.05],
+      "tolerances": {"mass_abs": 0.020, "width_abs": 0.03, "spacing_rel": 0.08},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      },
+      "comment": "TRAMPA - Estado no confirmado en PDG. Captura DOF rebelde en ~2.166 GeV para análisis"
+    },
+    {
       "name": "omega_baryon",
       "family": "strange_baryon",
       "type": "baryon",
