@@ -42,7 +42,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 0.0,meson_phi_1680,meson,vector,,8.978325144389167,nan,8.978325144389167,8.978325144389167,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 0.0,meson_d_star_zero,charmed_meson,meson,1-,1.9216744922775177,nan,1.9216744922775177,1.9216744922775177,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 0.0,meson_d_star_plus,charmed_meson,meson,1-,2.426009370559613,nan,2.426009370559613,2.426009370559613,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-0.0,meson_ds_star,charmed_meson,meson,1-,16.265022042497797,nan,16.265022042497797,16.265022042497797,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+0.0,meson_ds_star,charmed_meson,meson,1-,10.843348389776775,nan,10.843348389776775,10.843348389776775,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 0.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.746008637759648,nan,20.746008637759648,20.746008637759648,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 0.0,rho_1700,rho_like,meson,1-,4.586995174460099,nan,4.586995174460099,4.586995174460099,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 0.0,nucleon_1720,nucleon_like,baryon,3/2+,4.586995174460099,nan,4.586995174460099,4.586995174460099,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -132,7 +132,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 1.0,meson_phi_1680,meson,vector,,16.79961084901298,nan,16.79961084901298,16.79961084901298,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 1.0,meson_d_star_zero,charmed_meson,meson,1-,5.8996112123462945,nan,5.8996112123462945,5.8996112123462945,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 1.0,meson_d_star_plus,charmed_meson,meson,1-,6.959533412418678,nan,6.959533412418678,6.959533412418678,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-1.0,meson_ds_star,charmed_meson,meson,1-,7.198833507116656,nan,7.198833507116656,7.198833507116656,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+1.0,meson_ds_star,charmed_meson,meson,1-,4.799222498051837,nan,4.799222498051837,4.799222498051837,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 1.0,xi_c_plus,charmed_baryon,baryon,1/2+,11.360465854781358,nan,11.360465854781358,11.360465854781358,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 1.0,rho_1700,rho_like,meson,1-,9.27976665980467,nan,9.27976665980467,9.27976665980467,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 1.0,nucleon_1720,nucleon_like,baryon,3/2+,9.27976665980467,nan,9.27976665980467,9.27976665980467,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -222,7 +222,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 2.0,meson_phi_1680,meson,vector,,8.891760535941314,nan,8.891760535941314,8.891760535941314,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 2.0,meson_d_star_zero,charmed_meson,meson,1-,2.0082391007253704,nan,2.0082391007253704,2.0082391007253704,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 2.0,meson_d_star_plus,charmed_meson,meson,1-,2.529886900004519,nan,2.529886900004519,2.529886900004519,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-2.0,meson_ds_star,charmed_meson,meson,1-,16.524715850528434,nan,16.524715850528434,16.524715850528434,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+2.0,meson_ds_star,charmed_meson,meson,1-,11.016477600901506,nan,11.016477600901506,11.016477600901506,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 2.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.849886167204556,nan,20.849886167204556,20.849886167204556,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 2.0,rho_1700,rho_like,meson,1-,4.53505640869887,nan,4.53505640869887,4.53505640869887,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 2.0,nucleon_1720,nucleon_like,baryon,3/2+,4.53505640869887,nan,4.53505640869887,4.53505640869887,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -312,7 +312,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 3.0,meson_phi_1680,meson,vector,,2.478177277394091,nan,2.478177277394091,2.478177277394091,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 3.0,meson_d_star_zero,charmed_meson,meson,1-,13.378176914060777,nan,13.378176914060777,13.378176914060777,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 3.0,meson_d_star_plus,charmed_meson,meson,1-,16.173812185047506,nan,16.173812185047506,16.173812185047506,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-3.0,meson_ds_star,charmed_meson,meson,1-,50.63452701654732,nan,50.63452701654732,50.63452701654732,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+3.0,meson_ds_star,charmed_meson,meson,1-,33.75635246957651,nan,33.75635246957651,33.75635246957651,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 3.0,xi_c_plus,charmed_baryon,baryon,1/2+,34.49381145224754,nan,34.49381145224754,34.49381145224754,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 3.0,rho_1700,rho_like,meson,1-,2.2869063702618733,nan,2.2869063702618733,2.2869063702618733,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 3.0,nucleon_1720,nucleon_like,baryon,3/2+,2.2869063702618733,nan,2.2869063702618733,2.2869063702618733,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -402,7 +402,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 4.0,meson_phi_1680,meson,vector,,4.272670232910994,nan,4.272670232910994,4.272670232910994,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 4.0,meson_d_star_zero,charmed_meson,meson,1-,6.627329403755691,nan,6.627329403755691,6.627329403755691,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 4.0,meson_d_star_plus,charmed_meson,meson,1-,8.072795226688182,nan,8.072795226688182,8.072795226688182,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-4.0,meson_ds_star,charmed_meson,meson,1-,30.381985835801427,nan,30.381985835801427,30.381985835801427,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+4.0,meson_ds_star,charmed_meson,meson,1-,20.254657899022813,nan,20.254657899022813,20.254657899022813,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 4.0,xi_c_plus,charmed_baryon,baryon,1/2+,26.392794493888218,nan,26.392794493888218,26.392794493888218,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 4.0,rho_1700,rho_like,meson,1-,1.7636021899279566,nan,1.7636021899279566,1.7636021899279566,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 4.0,nucleon_1720,nucleon_like,baryon,3/2+,1.7636021899279566,nan,1.7636021899279566,1.7636021899279566,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -492,7 +492,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 5.0,meson_phi_1680,meson,vector,,4.22327351455755,nan,4.22327351455755,4.22327351455755,total,1,1,1,pass,,0,even,"[1, 2]",even,2,0.999934
 5.0,meson_d_star_zero,charmed_meson,meson,1-,15.123273151224236,nan,15.123273151224236,15.123273151224236,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999934
 5.0,meson_d_star_plus,charmed_meson,meson,1-,18.267927655682886,nan,18.267927655682886,18.267927655682886,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999934
-5.0,meson_ds_star,charmed_meson,meson,1-,55.86981537901848,nan,55.86981537901848,55.86981537901848,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999934
+5.0,meson_ds_star,charmed_meson,meson,1-,37.24654482756369,nan,37.24654482756369,37.24654482756369,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999934
 5.0,xi_c_plus,charmed_baryon,baryon,1/2+,36.58792692288292,nan,36.58792692288292,36.58792692288292,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.999934
 5.0,rho_1700,rho_like,meson,1-,3.3339641265207183,nan,3.3339641265207183,3.3339641265207183,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999934
 5.0,nucleon_1720,nucleon_like,baryon,3/2+,3.3339641265207183,nan,3.3339641265207183,3.3339641265207183,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.999934
@@ -582,7 +582,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 6.0,meson_phi_1680,meson,vector,,4.260779937640669,nan,4.260779937640669,4.260779937640669,total,1,1,1,pass,,0,even,"[1, 2]",even,2,0.996476
 6.0,meson_d_star_zero,charmed_meson,meson,1-,15.160779574307355,nan,15.160779574307355,15.160779574307355,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.996476
 6.0,meson_d_star_plus,charmed_meson,meson,1-,18.31293536308258,nan,18.31293536308258,18.31293536308258,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.996476
-6.0,meson_ds_star,charmed_meson,meson,1-,55.98233464076655,nan,55.98233464076655,55.98233464076655,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.996476
+6.0,meson_ds_star,charmed_meson,meson,1-,37.321557671229506,nan,37.321557671229506,37.321557671229506,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.996476
 6.0,xi_c_plus,charmed_baryon,baryon,1/2+,36.63293463028261,nan,36.63293463028261,36.63293463028261,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.996476
 6.0,rho_1700,rho_like,meson,1-,3.356467980670641,nan,3.356467980670641,3.356467980670641,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.996476
 6.0,nucleon_1720,nucleon_like,baryon,3/2+,3.356467980670641,nan,3.356467980670641,3.356467980670641,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.996476
@@ -672,7 +672,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 7.0,meson_phi_1680,meson,vector,,14.042417082919428,nan,14.042417082919428,14.042417082919428,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 7.0,meson_d_star_zero,charmed_meson,meson,1-,3.142417446252743,nan,3.142417446252743,3.142417446252743,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 7.0,meson_d_star_plus,charmed_meson,meson,1-,3.650900915163966,nan,3.650900915163966,3.650900915163966,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-7.0,meson_ds_star,charmed_meson,meson,1-,1.0727472397253008,nan,1.0727472397253008,1.0727472397253008,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+7.0,meson_ds_star,charmed_meson,meson,1-,0.7151648503223599,nan,0.7151648503223599,0.7151648503223599,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 7.0,xi_c_plus,charmed_baryon,baryon,1/2+,14.66909835203607,nan,14.66909835203607,14.66909835203607,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 7.0,rho_1700,rho_like,meson,1-,7.6254503780909895,nan,7.6254503780909895,7.6254503780909895,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 7.0,nucleon_1720,nucleon_like,baryon,3/2+,7.6254503780909895,nan,7.6254503780909895,7.6254503780909895,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -762,7 +762,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 8.0,meson_phi_1680,meson,vector,,12.87853965138202,nan,12.87853965138202,12.87853965138202,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 8.0,meson_d_star_zero,charmed_meson,meson,1-,1.978540014715335,nan,1.978540014715335,1.978540014715335,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 8.0,meson_d_star_plus,charmed_meson,meson,1-,2.254248006630095,nan,2.254248006630095,2.254248006630095,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-8.0,meson_ds_star,charmed_meson,meson,1-,4.564379301562062,nan,4.564379301562062,4.564379301562062,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+8.0,meson_ds_star,charmed_meson,meson,1-,3.0429196358053527,nan,3.0429196358053527,3.0429196358053527,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 8.0,xi_c_plus,charmed_baryon,baryon,1/2+,16.06575126056994,nan,16.06575126056994,16.06575126056994,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 8.0,rho_1700,rho_like,meson,1-,6.927123909857525,nan,6.927123909857525,6.927123909857525,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 8.0,nucleon_1720,nucleon_like,baryon,3/2+,6.927123909857525,nan,6.927123909857525,6.927123909857525,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -852,7 +852,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 9.0,meson_phi_1680,meson,vector,,10.234061582531286,nan,10.234061582531286,10.234061582531286,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 9.0,meson_d_star_zero,charmed_meson,meson,1-,0.6659380541354001,nan,0.6659380541354001,0.6659380541354001,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 9.0,meson_d_star_plus,charmed_meson,meson,1-,0.9191256548349628,nan,0.9191256548349628,0.9191256548349628,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-9.0,meson_ds_star,charmed_meson,meson,1-,12.497812979218706,nan,12.497812979218706,12.497812979218706,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+9.0,meson_ds_star,charmed_meson,meson,1-,8.331875597208297,nan,8.331875597208297,8.331875597208297,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 9.0,xi_c_plus,charmed_baryon,baryon,1/2+,19.239124922035,nan,19.239124922035,19.239124922035,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 9.0,rho_1700,rho_like,meson,1-,5.34043704739126,nan,5.34043704739126,5.34043704739126,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 9.0,nucleon_1720,nucleon_like,baryon,3/2+,5.34043704739126,nan,5.34043704739126,5.34043704739126,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -942,7 +942,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 10.0,meson_phi_1680,meson,vector,,76.46180763193975,nan,76.46180763193975,76.46180763193975,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 10.0,meson_d_star_zero,charmed_meson,meson,1-,65.56180799527307,nan,65.56180799527307,65.56180799527307,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 10.0,meson_d_star_plus,charmed_meson,meson,1-,78.55416907463325,nan,78.55416907463325,78.55416907463325,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-10.0,meson_ds_star,charmed_meson,meson,1-,186.18541192345882,nan,186.18541192345882,186.18541192345882,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+10.0,meson_ds_star,charmed_meson,meson,1-,124.12361208642588,nan,124.12361208642588,124.12361208642588,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 10.0,xi_c_plus,charmed_baryon,baryon,1/2+,60.23416980743321,nan,60.23416980743321,60.23416980743321,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 10.0,rho_1700,rho_like,meson,1-,45.07708520685829,nan,45.07708520685829,45.07708520685829,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 10.0,nucleon_1720,nucleon_like,baryon,3/2+,45.07708520685829,nan,45.07708520685829,45.07708520685829,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1032,7 +1032,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 11.0,meson_phi_1680,meson,vector,,37.46955858634805,nan,37.46955858634805,37.46955858634805,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 11.0,meson_d_star_zero,charmed_meson,meson,1-,26.569558949681362,nan,26.569558949681362,26.569558949681362,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 11.0,meson_d_star_plus,charmed_meson,meson,1-,31.763470531861184,nan,31.763470531861184,31.763470531861184,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-11.0,meson_ds_star,charmed_meson,meson,1-,69.20867258513273,nan,69.20867258513273,69.20867258513273,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+11.0,meson_ds_star,charmed_meson,meson,1-,46.13911659472555,nan,46.13911659472555,46.13911659472555,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 11.0,xi_c_plus,charmed_baryon,baryon,1/2+,13.443471264661147,nan,13.443471264661147,13.443471264661147,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 11.0,rho_1700,rho_like,meson,1-,21.68173546756529,nan,21.68173546756529,21.68173546756529,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 11.0,nucleon_1720,nucleon_like,baryon,3/2+,21.68173546756529,nan,21.68173546756529,21.68173546756529,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1122,7 +1122,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 12.0,meson_phi_1680,meson,vector,,17.717278573424043,nan,17.717278573424043,17.717278573424043,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 12.0,meson_d_star_zero,charmed_meson,meson,1-,6.817278936757359,nan,6.817278936757359,6.817278936757359,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 12.0,meson_d_star_plus,charmed_meson,meson,1-,8.060734674370613,nan,8.060734674370613,8.060734674370613,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-12.0,meson_ds_star,charmed_meson,meson,1-,9.951836496816322,nan,9.951836496816322,9.951836496816322,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+12.0,meson_ds_star,charmed_meson,meson,1-,6.634557885696122,nan,6.634557885696122,6.634557885696122,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 12.0,xi_c_plus,charmed_baryon,baryon,1/2+,10.259264592829423,nan,10.259264592829423,10.259264592829423,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 12.0,rho_1700,rho_like,meson,1-,9.83036730179265,nan,9.83036730179265,9.83036730179265,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 12.0,nucleon_1720,nucleon_like,baryon,3/2+,9.83036730179265,nan,9.83036730179265,9.83036730179265,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1212,7 +1212,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 13.0,meson_phi_1680,meson,vector,,11.964813900172867,nan,11.964813900172867,11.964813900172867,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 13.0,meson_d_star_zero,charmed_meson,meson,1-,1.064814263506182,nan,1.064814263506182,1.064814263506182,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 13.0,meson_d_star_plus,charmed_meson,meson,1-,1.1577771124889173,nan,1.1577771124889173,1.1577771124889173,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-13.0,meson_ds_star,charmed_meson,meson,1-,7.305556372444389,nan,7.305556372444389,7.305556372444389,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+13.0,meson_ds_star,charmed_meson,meson,1-,4.870371077308613,nan,4.870371077308613,4.870371077308613,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 13.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.16222215471112,nan,17.16222215471112,17.16222215471112,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 13.0,rho_1700,rho_like,meson,1-,6.3788884518222275,nan,6.3788884518222275,6.3788884518222275,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 13.0,nucleon_1720,nucleon_like,baryon,3/2+,6.3788884518222275,nan,6.3788884518222275,6.3788884518222275,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1302,7 +1302,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 14.0,meson_phi_1680,meson,vector,,41.57830915305637,nan,41.57830915305637,41.57830915305637,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,0.999803
 14.0,meson_d_star_zero,charmed_meson,meson,1-,30.678309516389678,nan,30.678309516389678,30.678309516389678,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999803
 14.0,meson_d_star_plus,charmed_meson,meson,1-,36.69397117904116,nan,36.69397117904116,36.69397117904116,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999803
-14.0,meson_ds_star,charmed_meson,meson,1-,81.53492346350764,nan,81.53492346350764,81.53492346350764,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999803
+14.0,meson_ds_star,charmed_meson,meson,1-,54.35661745422549,nan,54.35661745422549,54.35661745422549,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999803
 14.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.37397191184112,nan,18.37397191184112,18.37397191184112,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999803
 14.0,rho_1700,rho_like,meson,1-,24.14698584046028,nan,24.14698584046028,24.14698584046028,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999803
 14.0,nucleon_1720,nucleon_like,baryon,3/2+,24.14698584046028,nan,24.14698584046028,24.14698584046028,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999803
@@ -1392,7 +1392,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 15.0,meson_phi_1680,meson,vector,,19.490504617983184,nan,19.490504617983184,19.490504617983184,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 15.0,meson_d_star_zero,charmed_meson,meson,1-,8.590504981316498,nan,8.590504981316498,8.590504981316498,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 15.0,meson_d_star_plus,charmed_meson,meson,1-,10.188605913655772,nan,10.188605913655772,10.188605913655772,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-15.0,meson_ds_star,charmed_meson,meson,1-,15.271514275848563,nan,15.271514275848563,15.271514275848563,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+15.0,meson_ds_star,charmed_meson,meson,1-,10.181009856599337,nan,10.181009856599337,10.181009856599337,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 15.0,xi_c_plus,charmed_baryon,baryon,1/2+,8.131393353544263,nan,8.131393353544263,8.131393353544263,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 15.0,rho_1700,rho_like,meson,1-,10.894302942713942,nan,10.894302942713942,10.894302942713942,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 15.0,nucleon_1720,nucleon_like,baryon,3/2+,10.894302942713942,nan,10.894302942713942,10.894302942713942,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1482,7 +1482,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 16.0,meson_phi_1680,meson,vector,,5.0861890907936935,nan,5.0861890907936935,5.0861890907936935,total,1,1,1,pass,,0,even,"[1, 2]",even,2,0.977508
 16.0,meson_d_star_zero,charmed_meson,meson,1-,15.986188727460378,nan,15.986188727460378,15.986188727460378,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.977508
 16.0,meson_d_star_plus,charmed_meson,meson,1-,19.303426340262934,nan,19.303426340262934,19.303426340262934,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.977508
-16.0,meson_ds_star,charmed_meson,meson,1-,58.45856193514381,nan,58.45856193514381,58.45856193514381,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.977508
+16.0,meson_ds_star,charmed_meson,meson,1-,38.97237592250828,nan,38.97237592250828,38.97237592250828,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.977508
 16.0,xi_c_plus,charmed_baryon,baryon,1/2+,37.62342560746297,nan,37.62342560746297,37.62342560746297,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.977508
 16.0,rho_1700,rho_like,meson,1-,3.8517134791657286,nan,3.8517134791657286,3.8517134791657286,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.977508
 16.0,nucleon_1720,nucleon_like,baryon,3/2+,3.8517134791657286,nan,3.8517134791657286,3.8517134791657286,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.977508
@@ -1572,7 +1572,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 17.0,meson_phi_1680,meson,vector,,10.942413637919547,nan,10.942413637919547,10.942413637919547,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 17.0,meson_d_star_zero,charmed_meson,meson,1-,0.042414001252861176,nan,0.042414001252861176,0.042414001252861176,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 17.0,meson_d_star_plus,charmed_meson,meson,1-,0.06910319403586557,nan,0.06910319403586557,0.06910319403586557,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-17.0,meson_ds_star,charmed_meson,meson,1-,10.37275695472432,nan,10.37275695472432,10.37275695472432,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+17.0,meson_ds_star,charmed_meson,meson,1-,6.915171533655242,nan,6.915171533655242,6.915171533655242,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 17.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.3891024612359,nan,18.3891024612359,18.3891024612359,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 17.0,rho_1700,rho_like,meson,1-,5.765448286291034,nan,5.765448286291034,5.765448286291034,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 17.0,nucleon_1720,nucleon_like,baryon,3/2+,5.765448286291034,nan,5.765448286291034,5.765448286291034,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1662,7 +1662,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 18.0,meson_phi_1680,meson,vector,,10.918318455056058,nan,10.918318455056058,10.918318455056058,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 18.0,meson_d_star_zero,charmed_meson,meson,1-,0.01831881838937252,nan,0.01831881838937252,0.01831881838937252,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 18.0,meson_d_star_plus,charmed_meson,meson,1-,0.09801741327929049,nan,0.09801741327929049,0.09801741327929049,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-18.0,meson_ds_star,charmed_meson,meson,1-,10.445042498495749,nan,10.445042498495749,10.445042498495749,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+18.0,meson_ds_star,charmed_meson,meson,1-,6.963361897775873,nan,6.963361897775873,6.963361897775873,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 18.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.418016680479326,nan,18.418016680479326,18.418016680479326,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 18.0,rho_1700,rho_like,meson,1-,5.750991176380179,nan,5.750991176380179,5.750991176380179,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 18.0,nucleon_1720,nucleon_like,baryon,3/2+,5.750991176380179,nan,5.750991176380179,5.750991176380179,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1752,7 +1752,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 19.0,meson_phi_1680,meson,vector,,27.028469391384352,nan,27.028469391384352,27.028469391384352,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 19.0,meson_d_star_zero,charmed_meson,meson,1-,16.128469754717663,nan,16.128469754717663,16.128469754717663,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 19.0,meson_d_star_plus,charmed_meson,meson,1-,19.234163581433457,nan,19.234163581433457,19.234163581433457,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-19.0,meson_ds_star,charmed_meson,meson,1-,37.88540708845926,nan,37.88540708845926,37.88540708845926,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+19.0,meson_ds_star,charmed_meson,meson,1-,25.256938900870722,nan,25.256938900870722,25.256938900870722,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 19.0,xi_c_plus,charmed_baryon,baryon,1/2+,0.9141643142334205,nan,0.9141643142334205,0.9141643142334205,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 19.0,rho_1700,rho_like,meson,1-,15.417081867058359,nan,15.417081867058359,15.417081867058359,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 19.0,nucleon_1720,nucleon_like,baryon,3/2+,15.417081867058359,nan,15.417081867058359,15.417081867058359,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1842,7 +1842,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 20.0,meson_phi_1680,meson,vector,,23.209363029354574,nan,23.209363029354574,23.209363029354574,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 20.0,meson_d_star_zero,charmed_meson,meson,1-,12.309363392687887,nan,12.309363392687887,12.309363392687887,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 20.0,meson_d_star_plus,charmed_meson,meson,1-,14.651235977550572,nan,14.651235977550572,14.651235977550572,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-20.0,meson_ds_star,charmed_meson,meson,1-,26.428088766191124,nan,26.428088766191124,26.428088766191124,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+20.0,meson_ds_star,charmed_meson,meson,1-,17.61872643141824,nan,17.61872643141824,17.61872643141824,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 20.0,xi_c_plus,charmed_baryon,baryon,1/2+,3.6687632896494637,nan,3.6687632896494637,3.6687632896494637,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 20.0,rho_1700,rho_like,meson,1-,13.125618019287641,nan,13.125618019287641,13.125618019287641,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 20.0,nucleon_1720,nucleon_like,baryon,3/2+,13.125618019287641,nan,13.125618019287641,13.125618019287641,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -1932,7 +1932,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 21.0,meson_phi_1680,meson,vector,,0.32448905185036464,nan,0.32448905185036464,0.32448905185036464,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 21.0,meson_d_star_zero,charmed_meson,meson,1-,11.22448868851705,nan,11.22448868851705,11.22448868851705,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 21.0,meson_d_star_plus,charmed_meson,meson,1-,13.58938633162454,nan,13.58938633162454,13.58938633162454,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-21.0,meson_ds_star,charmed_meson,meson,1-,44.17346277065374,nan,44.17346277065374,44.17346277065374,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+21.0,meson_ds_star,charmed_meson,meson,1-,29.448976162068266,nan,29.448976162068266,29.448976162068266,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 21.0,xi_c_plus,charmed_baryon,baryon,1/2+,31.909385598824574,nan,31.909385598824574,31.909385598824574,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 21.0,rho_1700,rho_like,meson,1-,0.9946934177061321,nan,0.9946934177061321,0.9946934177061321,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 21.0,nucleon_1720,nucleon_like,baryon,3/2+,0.9946934177061321,nan,0.9946934177061321,0.9946934177061321,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -2022,7 +2022,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 22.0,meson_phi_1680,meson,vector,,23.929033283698892,nan,23.929033283698892,23.929033283698892,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 22.0,meson_d_star_zero,charmed_meson,meson,1-,13.029033647032207,nan,13.029033647032207,13.029033647032207,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 22.0,meson_d_star_plus,charmed_meson,meson,1-,15.514840277006394,nan,15.514840277006394,15.514840277006394,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-22.0,meson_ds_star,charmed_meson,meson,1-,28.587099385290045,nan,28.587099385290045,28.587099385290045,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+22.0,meson_ds_star,charmed_meson,meson,1-,19.058066892128863,nan,19.058066892128863,19.058066892128863,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 22.0,xi_c_plus,charmed_baryon,baryon,1/2+,2.8051589901936413,nan,2.8051589901936413,2.8051589901936413,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 22.0,rho_1700,rho_like,meson,1-,13.557420177651595,nan,13.557420177651595,13.557420177651595,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 22.0,nucleon_1720,nucleon_like,baryon,3/2+,13.557420177651595,nan,13.557420177651595,13.557420177651595,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -2112,7 +2112,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 23.0,meson_phi_1680,meson,vector,,4.207322707089249,nan,4.207322707089249,4.207322707089249,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 23.0,meson_d_star_zero,charmed_meson,meson,1-,6.692676929577436,nan,6.692676929577436,6.692676929577436,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 23.0,meson_d_star_plus,charmed_meson,meson,1-,8.151212257151496,nan,8.151212257151496,8.151212257151496,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-23.0,meson_ds_star,charmed_meson,meson,1-,30.57802840019716,nan,30.57802840019716,30.57802840019716,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+23.0,meson_ds_star,charmed_meson,meson,1-,20.385352946309805,nan,20.385352946309805,20.385352946309805,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 23.0,xi_c_plus,charmed_baryon,baryon,1/2+,26.47121152435153,nan,26.47121152435153,26.47121152435153,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 23.0,rho_1700,rho_like,meson,1-,1.7243936739121293,nan,1.7243936739121293,1.7243936739121293,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 23.0,nucleon_1720,nucleon_like,baryon,3/2+,1.7243936739121293,nan,1.7243936739121293,1.7243936739121293,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -2202,7 +2202,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 24.0,meson_phi_1680,meson,vector,,10.900129407329016,nan,10.900129407329016,10.900129407329016,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 24.0,meson_d_star_zero,charmed_meson,meson,1-,0.00012977066233129216,nan,0.00012977066233129216,0.00012977066233129216,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 24.0,meson_d_star_plus,charmed_meson,meson,1-,0.11984427040622758,nan,0.11984427040622758,0.11984427040622758,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-24.0,meson_ds_star,charmed_meson,meson,1-,10.499609638039065,nan,10.499609638039065,10.499609638039065,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+24.0,meson_ds_star,charmed_meson,meson,1-,6.999739992017353,nan,6.999739992017353,6.999739992017353,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 24.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.439843537606265,nan,18.439843537606265,18.439843537606265,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 24.0,rho_1700,rho_like,meson,1-,5.740077747598442,nan,5.740077747598442,5.740077747598442,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 24.0,nucleon_1720,nucleon_like,baryon,3/2+,5.740077747598442,nan,5.740077747598442,5.740077747598442,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -2292,7 +2292,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 25.0,meson_phi_1680,meson,vector,,10.894999636833349,nan,10.894999636833349,10.894999636833349,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 25.0,meson_d_star_zero,charmed_meson,meson,1-,0.004999999833336489,nan,0.004999999833336489,0.004999999833336489,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 25.0,meson_d_star_plus,charmed_meson,meson,1-,0.12599999495999076,nan,0.12599999495999076,0.12599999495999076,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-25.0,meson_ds_star,charmed_meson,meson,1-,10.514998948500113,nan,10.514998948500113,10.514998948500113,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+25.0,meson_ds_star,charmed_meson,meson,1-,7.009999532666703,nan,7.009999532666703,7.009999532666703,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 25.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.445999262160026,nan,18.445999262160026,18.445999262160026,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 25.0,rho_1700,rho_like,meson,1-,5.736999885260003,nan,5.736999885260003,5.736999885260003,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 25.0,nucleon_1720,nucleon_like,baryon,3/2+,5.736999885260003,nan,5.736999885260003,5.736999885260003,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -2382,7 +2382,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 26.0,meson_phi_1680,meson,vector,,13.919183965027207,nan,13.919183965027207,13.919183965027207,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 26.0,meson_d_star_zero,charmed_meson,meson,1-,3.0191843283605215,nan,3.0191843283605215,3.0191843283605215,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 26.0,meson_d_star_plus,charmed_meson,meson,1-,3.5030211746791653,nan,3.5030211746791653,3.5030211746791653,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-26.0,meson_ds_star,charmed_meson,meson,1-,1.4424465687553438,nan,1.4424465687553438,1.4424465687553438,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+26.0,meson_ds_star,charmed_meson,meson,1-,0.961631077891262,nan,0.961631077891262,0.961631077891262,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 26.0,xi_c_plus,charmed_baryon,baryon,1/2+,14.816978092520872,nan,14.816978092520872,14.816978092520872,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 26.0,rho_1700,rho_like,meson,1-,7.551510506369792,nan,7.551510506369792,7.551510506369792,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 26.0,nucleon_1720,nucleon_like,baryon,3/2+,7.551510506369792,nan,7.551510506369792,7.551510506369792,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -2472,7 +2472,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 27.0,meson_phi_1680,meson,vector,,8.889007330699757,nan,8.889007330699757,8.889007330699757,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 27.0,meson_d_star_zero,charmed_meson,meson,1-,2.0109923059669286,nan,2.0109923059669286,2.0109923059669286,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 27.0,meson_d_star_plus,charmed_meson,meson,1-,2.5331907462723633,nan,2.5331907462723633,2.5331907462723633,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-27.0,meson_ds_star,charmed_meson,meson,1-,16.532975465702467,nan,16.532975465702467,16.532975465702467,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+27.0,meson_ds_star,charmed_meson,meson,1-,11.021984011201075,nan,11.021984011201075,11.021984011201075,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 27.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.8531900134724,nan,20.8531900134724,20.8531900134724,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 27.0,rho_1700,rho_like,meson,1-,4.53340448553191,nan,4.53340448553191,4.53340448553191,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 27.0,nucleon_1720,nucleon_like,baryon,3/2+,4.53340448553191,nan,4.53340448553191,4.53340448553191,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -2562,7 +2562,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 28.0,meson_phi_1680,meson,vector,,8.238086593730452,nan,8.238086593730452,8.238086593730452,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 28.0,meson_d_star_zero,charmed_meson,meson,1-,2.661913042936233,nan,2.661913042936233,2.661913042936233,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 28.0,meson_d_star_plus,charmed_meson,meson,1-,3.3142956254281626,nan,3.3142956254281626,3.3142956254281626,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-28.0,meson_ds_star,charmed_meson,meson,1-,18.485737546426247,nan,18.485737546426247,18.485737546426247,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+28.0,meson_ds_star,charmed_meson,meson,1-,12.323825441744972,nan,12.323825441744972,12.323825441744972,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 28.0,xi_c_plus,charmed_baryon,baryon,1/2+,21.634294892628198,nan,21.634294892628198,21.634294892628198,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 28.0,rho_1700,rho_like,meson,1-,4.142852038142961,nan,4.142852038142961,4.142852038142961,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 28.0,nucleon_1720,nucleon_like,baryon,3/2+,4.142852038142961,nan,4.142852038142961,4.142852038142961,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -2652,7 +2652,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 29.0,meson_phi_1680,meson,vector,,42.37633192712228,nan,42.37633192712228,42.37633192712228,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,0.997705
 29.0,meson_d_star_zero,charmed_meson,meson,1-,31.476332290455595,nan,31.476332290455595,31.476332290455595,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.997705
 29.0,meson_d_star_plus,charmed_meson,meson,1-,37.65159850153608,nan,37.65159850153608,37.65159850153608,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.997705
-29.0,meson_ds_star,charmed_meson,meson,1-,83.92899162610085,nan,83.92899162610085,83.92899162610085,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.997705
+29.0,meson_ds_star,charmed_meson,meson,1-,55.952662949155815,nan,55.952662949155815,55.952662949155815,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.997705
 29.0,xi_c_plus,charmed_baryon,baryon,1/2+,19.33159923433604,nan,19.33159923433604,19.33159923433604,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.997705
 29.0,rho_1700,rho_like,meson,1-,24.625799511284015,nan,24.625799511284015,24.625799511284015,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.997705
 29.0,nucleon_1720,nucleon_like,baryon,3/2+,24.625799511284015,nan,24.625799511284015,24.625799511284015,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.997705
@@ -2742,7 +2742,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 30.0,meson_phi_1680,meson,vector,,26.263910761869642,nan,26.263910761869642,26.263910761869642,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 30.0,meson_d_star_zero,charmed_meson,meson,1-,15.363911125202957,nan,15.363911125202957,15.363911125202957,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 30.0,meson_d_star_plus,charmed_meson,meson,1-,18.316693232132277,nan,18.316693232132277,18.316693232132277,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-30.0,meson_ds_star,charmed_meson,meson,1-,35.59173135282685,nan,35.59173135282685,35.59173135282685,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+30.0,meson_ds_star,charmed_meson,meson,1-,23.72782169281188,nan,23.72782169281188,23.72782169281188,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 30.0,xi_c_plus,charmed_baryon,baryon,1/2+,0.0033060350677599866,nan,0.0033060350677599866,0.0033060350677599866,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 30.0,rho_1700,rho_like,meson,1-,14.958346683233065,nan,14.958346683233065,14.958346683233065,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 30.0,nucleon_1720,nucleon_like,baryon,3/2+,14.958346683233065,nan,14.958346683233065,14.958346683233065,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -2832,7 +2832,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 31.0,meson_phi_1680,meson,vector,,6.576889515437015,nan,6.576889515437015,6.576889515437015,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 31.0,meson_d_star_zero,charmed_meson,meson,1-,4.3231101212296705,nan,4.3231101212296705,4.3231101212296705,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 31.0,meson_d_star_plus,charmed_meson,meson,1-,5.307732106090711,nan,5.307732106090711,5.307732106090711,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-31.0,meson_ds_star,charmed_meson,meson,1-,23.469328449067177,nan,23.469328449067177,23.469328449067177,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+31.0,meson_ds_star,charmed_meson,meson,1-,15.646219487585382,nan,15.646219487585382,15.646219487585382,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 31.0,xi_c_plus,charmed_baryon,baryon,1/2+,23.627731373290747,nan,23.627731373290747,23.627731373290747,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 31.0,rho_1700,rho_like,meson,1-,3.146133777877323,nan,3.146133777877323,3.146133777877323,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 31.0,nucleon_1720,nucleon_like,baryon,3/2+,3.146133777877323,nan,3.146133777877323,3.146133777877323,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -2922,7 +2922,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 32.0,meson_phi_1680,meson,vector,,70.51549622481681,nan,70.51549622481681,70.51549622481681,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 32.0,meson_d_star_zero,charmed_meson,meson,1-,59.615496588150116,nan,59.615496588150116,59.615496588150116,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 32.0,meson_d_star_plus,charmed_meson,meson,1-,71.4185954336562,nan,71.4185954336562,71.4185954336562,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-32.0,meson_ds_star,charmed_meson,meson,1-,168.34647889135212,nan,168.34647889135212,168.34647889135212,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+32.0,meson_ds_star,charmed_meson,meson,1-,112.2309896686007,nan,112.2309896686007,112.2309896686007,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 32.0,xi_c_plus,charmed_baryon,baryon,1/2+,53.098596166456154,nan,53.098596166456154,53.098596166456154,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 32.0,rho_1700,rho_like,meson,1-,41.509298315014036,nan,41.509298315014036,41.509298315014036,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 32.0,nucleon_1720,nucleon_like,baryon,3/2+,41.509298315014036,nan,41.509298315014036,41.509298315014036,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3012,7 +3012,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 33.0,meson_phi_1680,meson,vector,,12.617258288424729,nan,12.617258288424729,12.617258288424729,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 33.0,meson_d_star_zero,charmed_meson,meson,1-,1.7172586517580437,nan,1.7172586517580437,1.7172586517580437,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 33.0,meson_d_star_plus,charmed_meson,meson,1-,1.9407103731715967,nan,1.9407103731715967,1.9407103731715967,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-33.0,meson_ds_star,charmed_meson,meson,1-,5.348223338177668,nan,5.348223338177668,5.348223338177668,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+33.0,meson_ds_star,charmed_meson,meson,1-,3.5654823443011785,nan,3.5654823443011785,3.5654823443011785,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 33.0,xi_c_plus,charmed_baryon,baryon,1/2+,16.379288894028438,nan,16.379288894028438,16.379288894028438,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 33.0,rho_1700,rho_like,meson,1-,6.7703550899929,nan,6.7703550899929,6.7703550899929,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 33.0,nucleon_1720,nucleon_like,baryon,3/2+,6.7703550899929,nan,6.7703550899929,6.7703550899929,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3102,7 +3102,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 34.0,meson_phi_1680,meson,vector,,14.732775027240834,nan,14.732775027240834,14.732775027240834,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 34.0,meson_d_star_zero,charmed_meson,meson,1-,3.832775390574148,nan,3.832775390574148,3.832775390574148,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 34.0,meson_d_star_plus,charmed_meson,meson,1-,4.479330442826789,nan,4.479330442826789,4.479330442826789,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-34.0,meson_ds_star,charmed_meson,meson,1-,0.9983264551673388,nan,0.9983264551673388,0.9983264551673388,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+34.0,meson_ds_star,charmed_meson,meson,1-,0.6655509922965901,nan,0.6655509922965901,0.6655509922965901,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 34.0,xi_c_plus,charmed_baryon,baryon,1/2+,13.840668824373248,nan,13.840668824373248,13.840668824373248,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 34.0,rho_1700,rho_like,meson,1-,8.039665150206696,nan,8.039665150206696,8.039665150206696,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 34.0,nucleon_1720,nucleon_like,baryon,3/2+,8.039665150206696,nan,8.039665150206696,8.039665150206696,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3192,7 +3192,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 35.0,meson_phi_1680,meson,vector,,11.27679045744032,nan,11.27679045744032,11.27679045744032,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 35.0,meson_d_star_zero,charmed_meson,meson,1-,0.3767908207736352,nan,0.3767908207736352,0.3767908207736352,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 35.0,meson_d_star_plus,charmed_meson,meson,1-,0.33214898671404874,nan,0.33214898671404874,0.33214898671404874,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-35.0,meson_ds_star,charmed_meson,meson,1-,9.369626563037354,nan,9.369626563037354,9.369626563037354,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+35.0,meson_ds_star,charmed_meson,meson,1-,6.24641791690548,nan,6.24641791690548,6.24641791690548,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 35.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.987850280485986,nan,17.987850280485986,17.987850280485986,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 35.0,rho_1700,rho_like,meson,1-,5.966074380678513,nan,5.966074380678513,5.966074380678513,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 35.0,nucleon_1720,nucleon_like,baryon,3/2+,5.966074380678513,nan,5.966074380678513,5.966074380678513,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3282,7 +3282,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 36.0,meson_phi_1680,meson,vector,,10.713801838206614,nan,10.713801838206614,10.713801838206614,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 36.0,meson_d_star_zero,charmed_meson,meson,1-,0.18619779846007242,nan,0.18619779846007242,0.18619779846007242,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 36.0,meson_d_star_plus,charmed_meson,meson,1-,0.3434373518624915,nan,0.3434373518624915,0.3434373518624915,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-36.0,meson_ds_star,charmed_meson,meson,1-,11.058592308140765,nan,11.058592308140765,11.058592308140765,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+36.0,meson_ds_star,charmed_meson,meson,1-,7.372395117840323,nan,7.372395117840323,7.372395117840323,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 36.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.663436619062526,nan,18.663436619062526,18.663436619062526,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 36.0,rho_1700,rho_like,meson,1-,5.628281204634379,nan,5.628281204634379,5.628281204634379,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 36.0,nucleon_1720,nucleon_like,baryon,3/2+,5.628281204634379,nan,5.628281204634379,5.628281204634379,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3372,7 +3372,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 37.0,meson_phi_1680,meson,vector,,4.646444205118525,nan,4.646444205118525,4.646444205118525,total,1,1,1,pass,,0,even,"[1, 2]",even,2,0.998801
 37.0,meson_d_star_zero,charmed_meson,meson,1-,15.54644384178521,nan,15.54644384178521,15.54644384178521,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.998801
 37.0,meson_d_star_plus,charmed_meson,meson,1-,18.775732480970692,nan,18.775732480970692,18.775732480970692,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.998801
-37.0,meson_ds_star,charmed_meson,meson,1-,57.13932736606728,nan,57.13932736606728,57.13932736606728,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.998801
+37.0,meson_ds_star,charmed_meson,meson,1-,38.09288618047427,nan,38.09288618047427,38.09288618047427,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.998801
 37.0,xi_c_plus,charmed_baryon,baryon,1/2+,37.09573174817073,nan,37.09573174817073,37.09573174817073,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.998801
 37.0,rho_1700,rho_like,meson,1-,3.5878665442426683,nan,3.5878665442426683,3.5878665442426683,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.998801
 37.0,nucleon_1720,nucleon_like,baryon,3/2+,3.5878665442426683,nan,3.5878665442426683,3.5878665442426683,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.998801
@@ -3462,7 +3462,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 38.0,meson_phi_1680,meson,vector,,34.302801413239955,nan,34.302801413239955,34.302801413239955,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 38.0,meson_d_star_zero,charmed_meson,meson,1-,23.40280177657327,nan,23.40280177657327,23.40280177657327,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 38.0,meson_d_star_plus,charmed_meson,meson,1-,27.96336194946553,nan,27.96336194946553,27.96336194946553,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-38.0,meson_ds_star,charmed_meson,meson,1-,59.708401699159815,nan,59.708401699159815,59.708401699159815,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+38.0,meson_ds_star,charmed_meson,meson,1-,39.8056024596265,nan,39.8056024596265,39.8056024596265,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 38.0,xi_c_plus,charmed_baryon,baryon,1/2+,9.643362682265492,nan,9.643362682265492,9.643362682265492,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 38.0,rho_1700,rho_like,meson,1-,19.781681138366377,nan,19.781681138366377,19.781681138366377,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 38.0,nucleon_1720,nucleon_like,baryon,3/2+,19.781681138366377,nan,19.781681138366377,19.781681138366377,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3552,7 +3552,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 39.0,meson_phi_1680,meson,vector,,25.515698514810058,nan,25.515698514810058,25.515698514810058,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 39.0,meson_d_star_zero,charmed_meson,meson,1-,14.615698878143373,nan,14.615698878143373,14.615698878143373,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 39.0,meson_d_star_plus,charmed_meson,meson,1-,17.418838541646473,nan,17.418838541646473,17.418838541646473,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-39.0,meson_ds_star,charmed_meson,meson,1-,33.34709476129053,nan,33.34709476129053,33.34709476129053,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+39.0,meson_ds_star,charmed_meson,meson,1-,22.231397248573522,nan,22.231397248573522,22.231397248573522,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 39.0,xi_c_plus,charmed_baryon,baryon,1/2+,0.9011607255535637,nan,0.9011607255535637,0.9011607255535637,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 39.0,rho_1700,rho_like,meson,1-,14.509419329011616,nan,14.509419329011616,14.509419329011616,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 39.0,nucleon_1720,nucleon_like,baryon,3/2+,14.509419329011616,nan,14.509419329011616,14.509419329011616,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3642,7 +3642,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 40.0,meson_phi_1680,meson,vector,,12.54355595954814,nan,12.54355595954814,12.54355595954814,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 40.0,meson_d_star_zero,charmed_meson,meson,1-,1.6435563228814556,nan,1.6435563228814556,1.6435563228814556,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 40.0,meson_d_star_plus,charmed_meson,meson,1-,1.8522675791093095,nan,1.8522675791093095,1.8522675791093095,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-40.0,meson_ds_star,charmed_meson,meson,1-,5.569330310066968,nan,5.569330310066968,5.569330310066968,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+40.0,meson_ds_star,charmed_meson,meson,1-,3.712886997140867,nan,3.712886997140867,3.712886997140867,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 40.0,xi_c_plus,charmed_baryon,baryon,1/2+,16.467731688090726,nan,16.467731688090726,16.467731688090726,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 40.0,rho_1700,rho_like,meson,1-,6.726133692077329,nan,6.726133692077329,6.726133692077329,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 40.0,nucleon_1720,nucleon_like,baryon,3/2+,6.726133692077329,nan,6.726133692077329,6.726133692077329,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3732,7 +3732,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 41.0,meson_phi_1680,meson,vector,,31.40463675951212,nan,31.40463675951212,31.40463675951212,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 41.0,meson_d_star_zero,charmed_meson,meson,1-,20.504637122845434,nan,20.504637122845434,20.504637122845434,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 41.0,meson_d_star_plus,charmed_meson,meson,1-,24.48556438817744,nan,24.48556438817744,24.48556438817744,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-41.0,meson_ds_star,charmed_meson,meson,1-,51.01390831760918,nan,51.01390831760918,51.01390831760918,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+41.0,meson_ds_star,charmed_meson,meson,1-,34.009273345381786,nan,34.009273345381786,34.009273345381786,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 41.0,xi_c_plus,charmed_baryon,baryon,1/2+,6.165565120977405,nan,6.165565120977405,6.165565120977405,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 41.0,rho_1700,rho_like,meson,1-,18.04278232294436,nan,18.04278232294436,18.04278232294436,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 41.0,nucleon_1720,nucleon_like,baryon,3/2+,18.04278232294436,nan,18.04278232294436,18.04278232294436,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -3822,7 +3822,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 42.0,meson_phi_1680,meson,vector,,40.72010872632971,nan,40.72010872632971,40.72010872632971,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,0.999983
 42.0,meson_d_star_zero,charmed_meson,meson,1-,29.820109089663024,nan,29.820109089663024,29.820109089663024,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999983
 42.0,meson_d_star_plus,charmed_meson,meson,1-,35.66413067383478,nan,35.66413067383478,35.66413067383478,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999983
-42.0,meson_ds_star,charmed_meson,meson,1-,78.96032235496774,nan,78.96032235496774,78.96032235496774,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999983
+42.0,meson_ds_star,charmed_meson,meson,1-,52.64021665798555,nan,52.64021665798555,52.64021665798555,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999983
 42.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.344131406634737,nan,17.344131406634737,17.344131406634737,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999983
 42.0,rho_1700,rho_like,meson,1-,23.632065577558684,nan,23.632065577558684,23.632065577558684,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999983
 42.0,nucleon_1720,nucleon_like,baryon,3/2+,23.632065577558684,nan,23.632065577558684,23.632065577558684,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999983
@@ -3912,7 +3912,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 43.0,meson_phi_1680,meson,vector,,12.108534507382181,nan,12.108534507382181,12.108534507382181,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 43.0,meson_d_star_zero,charmed_meson,meson,1-,1.2085348707154966,nan,1.2085348707154966,1.2085348707154966,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 43.0,meson_d_star_plus,charmed_meson,meson,1-,1.3302418399903302,nan,1.3302418399903302,1.3302418399903302,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-43.0,meson_ds_star,charmed_meson,meson,1-,6.8743945795605645,nan,6.8743945795605645,6.8743945795605645,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+43.0,meson_ds_star,charmed_meson,meson,1-,4.5829298724713565,nan,4.5829298724713565,4.5829298724713565,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 43.0,xi_c_plus,charmed_baryon,baryon,1/2+,16.989757427209707,nan,16.989757427209707,16.989757427209707,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 43.0,rho_1700,rho_like,meson,1-,6.465120817297581,nan,6.465120817297581,6.465120817297581,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 43.0,nucleon_1720,nucleon_like,baryon,3/2+,6.465120817297581,nan,6.465120817297581,6.465120817297581,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4002,7 +4002,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 44.0,meson_phi_1680,meson,vector,,17.904763527174552,nan,17.904763527174552,17.904763527174552,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 44.0,meson_d_star_zero,charmed_meson,meson,1-,7.004763890507866,nan,7.004763890507866,7.004763890507866,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 44.0,meson_d_star_plus,charmed_meson,meson,1-,8.285716617371342,nan,8.285716617371342,8.285716617371342,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-44.0,meson_ds_star,charmed_meson,meson,1-,10.514291320570857,nan,10.514291320570857,10.514291320570857,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+44.0,meson_ds_star,charmed_meson,meson,1-,7.009527780698141,nan,7.009527780698141,7.009527780698141,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 44.0,xi_c_plus,charmed_baryon,baryon,1/2+,10.034282649828693,nan,10.034282649828693,10.034282649828693,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 44.0,rho_1700,rho_like,meson,1-,9.942858275542834,nan,9.942858275542834,9.942858275542834,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 44.0,nucleon_1720,nucleon_like,baryon,3/2+,9.942858275542834,nan,9.942858275542834,9.942858275542834,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4092,7 +4092,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 45.0,meson_phi_1680,meson,vector,,8.92088882030371,nan,8.92088882030371,8.92088882030371,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 45.0,meson_d_star_zero,charmed_meson,meson,1-,1.9791108163629743,nan,1.9791108163629743,1.9791108163629743,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 45.0,meson_d_star_plus,charmed_meson,meson,1-,2.49493295900267,nan,2.49493295900267,2.49493295900267,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-45.0,meson_ds_star,charmed_meson,meson,1-,16.4373310032669,nan,16.4373310032669,16.4373310032669,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+45.0,meson_ds_star,charmed_meson,meson,1-,10.9582210341186,nan,10.9582210341186,10.9582210341186,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 45.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.814932226202707,nan,20.814932226202707,20.814932226202707,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 45.0,rho_1700,rho_like,meson,1-,4.552533379549335,nan,4.552533379549335,4.552533379549335,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 45.0,nucleon_1720,nucleon_like,baryon,3/2+,4.552533379549335,nan,4.552533379549335,4.552533379549335,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4182,7 +4182,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 46.0,meson_phi_1680,meson,vector,,40.912961757234605,nan,40.912961757234605,40.912961757234605,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,0.999989
 46.0,meson_d_star_zero,charmed_meson,meson,1-,30.012962120567924,nan,30.012962120567924,30.012962120567924,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999989
 46.0,meson_d_star_plus,charmed_meson,meson,1-,35.89555430937783,nan,35.89555430937783,35.89555430937783,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999989
-46.0,meson_ds_star,charmed_meson,meson,1-,79.53888140911184,nan,79.53888140911184,79.53888140911184,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999989
+46.0,meson_ds_star,charmed_meson,meson,1-,53.02592270693847,nan,53.02592270693847,53.02592270693847,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999989
 46.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.575555042177793,nan,17.575555042177793,17.575555042177793,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999989
 46.0,rho_1700,rho_like,meson,1-,23.747777397644448,nan,23.747777397644448,23.747777397644448,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999989
 46.0,nucleon_1720,nucleon_like,baryon,3/2+,23.747777397644448,nan,23.747777397644448,23.747777397644448,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999989
@@ -4272,7 +4272,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 47.0,meson_phi_1680,meson,vector,,7.95937350168755,nan,7.95937350168755,7.95937350168755,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 47.0,meson_d_star_zero,charmed_meson,meson,1-,2.9406261349791354,nan,2.9406261349791354,2.9406261349791354,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 47.0,meson_d_star_plus,charmed_meson,meson,1-,3.648751333649941,nan,3.648751333649941,3.648751333649941,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-47.0,meson_ds_star,charmed_meson,meson,1-,19.32187676681234,nan,19.32187676681234,19.32187676681234,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+47.0,meson_ds_star,charmed_meson,meson,1-,12.881251607249904,nan,12.881251607249904,12.881251607249904,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 47.0,xi_c_plus,charmed_baryon,baryon,1/2+,21.968750600849976,nan,21.968750600849976,21.968750600849976,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 47.0,rho_1700,rho_like,meson,1-,3.9756241806875154,nan,3.9756241806875154,3.9756241806875154,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 47.0,nucleon_1720,nucleon_like,baryon,3/2+,3.9756241806875154,nan,3.9756241806875154,3.9756241806875154,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4362,7 +4362,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 48.0,meson_phi_1680,meson,vector,,21.87178477760718,nan,21.87178477760718,21.87178477760718,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 48.0,meson_d_star_zero,charmed_meson,meson,1-,10.971785140940494,nan,10.971785140940494,10.971785140940494,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 48.0,meson_d_star_plus,charmed_meson,meson,1-,13.046142086154328,nan,13.046142086154328,13.046142086154328,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-48.0,meson_ds_star,charmed_meson,meson,1-,22.41535427846457,nan,22.41535427846457,22.41535427846457,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+48.0,meson_ds_star,charmed_meson,meson,1-,14.94357001709533,nan,14.94357001709533,14.94357001709533,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 48.0,xi_c_plus,charmed_baryon,baryon,1/2+,5.273857181045709,nan,5.273857181045709,5.273857181045709,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 48.0,rho_1700,rho_like,meson,1-,12.32307105753858,nan,12.32307105753858,12.32307105753858,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 48.0,nucleon_1720,nucleon_like,baryon,3/2+,12.32307105753858,nan,12.32307105753858,12.32307105753858,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4542,7 +4542,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 50.0,meson_phi_1680,meson,vector,,15.605583908480542,nan,15.605583908480542,15.605583908480542,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 50.0,meson_d_star_zero,charmed_meson,meson,1-,4.705584271813856,nan,4.705584271813856,4.705584271813856,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 50.0,meson_d_star_plus,charmed_meson,meson,1-,5.526701093331967,nan,5.526701093331967,5.526701093331967,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-50.0,meson_ds_star,charmed_meson,meson,1-,3.616752924324704,nan,3.616752924324704,3.616752924324704,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+50.0,meson_ds_star,charmed_meson,meson,1-,2.411168696588751,nan,2.411168696588751,2.411168696588751,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 50.0,xi_c_plus,charmed_baryon,baryon,1/2+,12.793298173868068,nan,12.793298173868068,12.793298173868068,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 50.0,rho_1700,rho_like,meson,1-,8.563350485932991,nan,8.563350485932991,8.563350485932991,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 50.0,nucleon_1720,nucleon_like,baryon,3/2+,8.563350485932991,nan,8.563350485932991,8.563350485932991,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4632,7 +4632,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 51.0,meson_phi_1680,meson,vector,,9.151600043279998,nan,9.151600043279998,9.151600043279998,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 51.0,meson_d_star_zero,charmed_meson,meson,1-,1.7483995933866867,nan,1.7483995933866867,1.7483995933866867,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 51.0,meson_d_star_plus,charmed_meson,meson,1-,2.2180794932768144,nan,2.2180794932768144,2.2180794932768144,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-51.0,meson_ds_star,charmed_meson,meson,1-,15.74519738048028,nan,15.74519738048028,15.74519738048028,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+51.0,meson_ds_star,charmed_meson,meson,1-,10.496798603546772,nan,10.496798603546772,10.496798603546772,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 51.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.53807876047685,nan,20.53807876047685,20.53807876047685,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 51.0,rho_1700,rho_like,meson,1-,4.690960115180797,nan,4.690960115180797,4.690960115180797,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 51.0,nucleon_1720,nucleon_like,baryon,3/2+,4.690960115180797,nan,4.690960115180797,4.690960115180797,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4722,7 +4722,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 52.0,meson_phi_1680,meson,vector,,24.553854966538168,nan,24.553854966538168,24.553854966538168,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 52.0,meson_d_star_zero,charmed_meson,meson,1-,13.653855329871485,nan,13.653855329871485,13.653855329871485,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 52.0,meson_d_star_plus,charmed_meson,meson,1-,16.264626291414956,nan,16.264626291414956,16.264626291414956,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-52.0,meson_ds_star,charmed_meson,meson,1-,30.461564308843556,nan,30.461564308843556,30.461564308843556,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+52.0,meson_ds_star,charmed_meson,meson,1-,20.307710216152643,nan,20.307710216152643,20.307710216152643,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 52.0,xi_c_plus,charmed_baryon,baryon,1/2+,2.0553729757850814,nan,2.0553729757850814,2.0553729757850814,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 52.0,rho_1700,rho_like,meson,1-,13.932313192353735,nan,13.932313192353735,13.932313192353735,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 52.0,nucleon_1720,nucleon_like,baryon,3/2+,13.932313192353735,nan,13.932313192353735,13.932313192353735,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4812,7 +4812,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 53.0,meson_phi_1680,meson,vector,,38.48450641551645,nan,38.48450641551645,38.48450641551645,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 53.0,meson_d_star_zero,charmed_meson,meson,1-,27.584506778849764,nan,27.584506778849764,27.584506778849764,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 53.0,meson_d_star_plus,charmed_meson,meson,1-,32.981407918743685,nan,32.981407918743685,32.981407918743685,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-53.0,meson_ds_star,charmed_meson,meson,1-,72.25351586964838,nan,72.25351586964838,72.25351586964838,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+53.0,meson_ds_star,charmed_meson,meson,1-,48.169012185399176,nan,48.169012185399176,48.169012185399176,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 53.0,xi_c_plus,charmed_baryon,baryon,1/2+,14.661408651543647,nan,14.661408651543647,14.661408651543647,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 53.0,rho_1700,rho_like,meson,1-,22.29070417318591,nan,22.29070417318591,22.29070417318591,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 53.0,nucleon_1720,nucleon_like,baryon,3/2+,22.29070417318591,nan,22.29070417318591,22.29070417318591,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -4902,7 +4902,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 54.0,meson_phi_1680,meson,vector,,41.423831860872276,nan,41.423831860872276,41.423831860872276,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,0.999996
 54.0,meson_d_star_zero,charmed_meson,meson,1-,30.523832224205588,nan,30.523832224205588,30.523832224205588,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999996
 54.0,meson_d_star_plus,charmed_meson,meson,1-,36.50859842965607,nan,36.50859842965607,36.50859842965607,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999996
-54.0,meson_ds_star,charmed_meson,meson,1-,81.07149161785082,nan,81.07149161785082,81.07149161785082,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999996
+54.0,meson_ds_star,charmed_meson,meson,1-,54.047662880155805,nan,54.047662880155805,54.047662880155805,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999996
 54.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.188599162456033,nan,18.188599162456033,18.188599162456033,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999996
 54.0,rho_1700,rho_like,meson,1-,24.05429946391401,nan,24.05429946391401,24.05429946391401,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999996
 54.0,nucleon_1720,nucleon_like,baryon,3/2+,24.05429946391401,nan,24.05429946391401,24.05429946391401,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999996
@@ -4992,7 +4992,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 55.0,meson_phi_1680,meson,vector,,38.930446903985114,nan,38.930446903985114,38.930446903985114,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 55.0,meson_d_star_zero,charmed_meson,meson,1-,28.03044726731843,nan,28.03044726731843,28.03044726731843,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 55.0,meson_d_star_plus,charmed_meson,meson,1-,33.51653650133856,nan,33.51653650133856,33.51653650133856,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-55.0,meson_ds_star,charmed_meson,meson,1-,73.59133724586628,nan,73.59133724586628,73.59133724586628,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+55.0,meson_ds_star,charmed_meson,meson,1-,49.060893132607134,nan,49.060893132607134,49.060893132607134,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 55.0,xi_c_plus,charmed_baryon,baryon,1/2+,15.19653723413852,nan,15.19653723413852,15.19653723413852,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 55.0,rho_1700,rho_like,meson,1-,22.558268469834633,nan,22.558268469834633,22.558268469834633,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 55.0,nucleon_1720,nucleon_like,baryon,3/2+,22.558268469834633,nan,22.558268469834633,22.558268469834633,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -5082,7 +5082,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 56.0,meson_phi_1680,meson,vector,,7.911274859624178,nan,7.911274859624178,7.911274859624178,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 56.0,meson_d_star_zero,charmed_meson,meson,1-,2.988724777042508,nan,2.988724777042508,2.988724777042508,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 56.0,meson_d_star_plus,charmed_meson,meson,1-,3.706469703741199,nan,3.706469703741199,3.706469703741199,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-56.0,meson_ds_star,charmed_meson,meson,1-,19.46617268338273,nan,19.46617268338273,19.46617268338273,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+56.0,meson_ds_star,charmed_meson,meson,1-,12.977448888170075,nan,12.977448888170075,12.977448888170075,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 56.0,xi_c_plus,charmed_baryon,baryon,1/2+,22.026468970941234,nan,22.026468970941234,22.026468970941234,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 56.0,rho_1700,rho_like,meson,1-,3.9467649950647026,nan,3.9467649950647026,3.9467649950647026,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 56.0,nucleon_1720,nucleon_like,baryon,3/2+,3.9467649950647026,nan,3.9467649950647026,3.9467649950647026,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -5172,7 +5172,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 57.0,meson_phi_1680,meson,vector,,12.495838967805367,nan,12.495838967805367,12.495838967805367,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 57.0,meson_d_star_zero,charmed_meson,meson,1-,1.5958393311386827,nan,1.5958393311386827,1.5958393311386827,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 57.0,meson_d_star_plus,charmed_meson,meson,1-,1.795007189399718,nan,1.795007189399718,1.795007189399718,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-57.0,meson_ds_star,charmed_meson,meson,1-,5.71248127575189,nan,5.71248127575189,5.71248127575189,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+57.0,meson_ds_star,charmed_meson,meson,1-,3.80832097744528,nan,3.80832097744528,3.80832097744528,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 57.0,xi_c_plus,charmed_baryon,baryon,1/2+,16.524992077800317,nan,16.524992077800317,16.524992077800317,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 57.0,rho_1700,rho_like,meson,1-,6.6975034966499285,nan,6.6975034966499285,6.6975034966499285,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 57.0,nucleon_1720,nucleon_like,baryon,3/2+,6.6975034966499285,nan,6.6975034966499285,6.6975034966499285,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -5262,7 +5262,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 58.0,meson_phi_1680,meson,vector,,32.922101509263285,nan,32.922101509263285,32.922101509263285,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 58.0,meson_d_star_zero,charmed_meson,meson,1-,22.0221018725966,nan,22.0221018725966,22.0221018725966,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 58.0,meson_d_star_plus,charmed_meson,meson,1-,26.30652207573912,nan,26.30652207573912,26.30652207573912,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-58.0,meson_ds_star,charmed_meson,meson,1-,55.56630226336976,nan,55.56630226336976,55.56630226336976,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+58.0,meson_ds_star,charmed_meson,meson,1-,37.04420274371981,nan,37.04420274371981,37.04420274371981,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 58.0,xi_c_plus,charmed_baryon,baryon,1/2+,7.986522808539085,nan,7.986522808539085,7.986522808539085,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 58.0,rho_1700,rho_like,meson,1-,18.953261184934775,nan,18.953261184934775,18.953261184934775,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 58.0,nucleon_1720,nucleon_like,baryon,3/2+,18.953261184934775,nan,18.953261184934775,18.953261184934775,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -5352,7 +5352,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 59.0,meson_phi_1680,meson,vector,,11.01365476987818,nan,11.01365476987818,11.01365476987818,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 59.0,meson_d_star_zero,charmed_meson,meson,1-,0.1136551332114935,nan,0.1136551332114935,0.1136551332114935,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 59.0,meson_d_star_plus,charmed_meson,meson,1-,0.016386163744564176,nan,0.016386163744564176,0.016386163744564176,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-59.0,meson_ds_star,charmed_meson,meson,1-,10.159033573096648,nan,10.159033573096648,10.159033573096648,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+59.0,meson_ds_star,charmed_meson,meson,1-,6.7726892744873854,nan,6.7726892744873854,6.7726892744873854,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 59.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.303613103455472,nan,18.303613103455472,18.303613103455472,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 59.0,rho_1700,rho_like,meson,1-,5.808192966036142,nan,5.808192966036142,5.808192966036142,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 59.0,nucleon_1720,nucleon_like,baryon,3/2+,5.808192966036142,nan,5.808192966036142,5.808192966036142,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -5442,7 +5442,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 60.0,meson_phi_1680,meson,vector,,24.00585802480474,nan,24.00585802480474,24.00585802480474,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 60.0,meson_d_star_zero,charmed_meson,meson,1-,13.105858388138056,nan,13.105858388138056,13.105858388138056,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 60.0,meson_d_star_plus,charmed_meson,meson,1-,15.607029965718816,nan,15.607029965718816,15.607029965718816,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-60.0,meson_ds_star,charmed_meson,meson,1-,28.81757359324265,nan,28.81757359324265,28.81757359324265,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+60.0,meson_ds_star,charmed_meson,meson,1-,19.211716369218916,nan,19.211716369218916,19.211716369218916,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 60.0,xi_c_plus,charmed_baryon,baryon,1/2+,2.71296930148122,nan,2.71296930148122,2.71296930148122,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 60.0,rho_1700,rho_like,meson,1-,13.603515022929702,nan,13.603515022929702,13.603515022929702,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 60.0,nucleon_1720,nucleon_like,baryon,3/2+,13.603515022929702,nan,13.603515022929702,13.603515022929702,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -5532,7 +5532,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 61.0,meson_phi_1680,meson,vector,,1.701680688943974,nan,1.701680688943974,1.701680688943974,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 61.0,meson_d_star_zero,charmed_meson,meson,1-,12.601680325610658,nan,12.601680325610658,12.601680325610658,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 61.0,meson_d_star_plus,charmed_meson,meson,1-,15.242016285119337,nan,15.242016285119337,15.242016285119337,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-61.0,meson_ds_star,charmed_meson,meson,1-,48.30503740649627,nan,48.30503740649627,48.30503740649627,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+61.0,meson_ds_star,charmed_meson,meson,1-,32.20335934444272,nan,32.20335934444272,32.20335934444272,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 61.0,xi_c_plus,charmed_baryon,baryon,1/2+,33.56201555231937,nan,33.56201555231937,33.56201555231937,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 61.0,rho_1700,rho_like,meson,1-,1.8210084109798306,nan,1.8210084109798306,1.8210084109798306,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 61.0,nucleon_1720,nucleon_like,baryon,3/2+,1.8210084109798306,nan,1.8210084109798306,1.8210084109798306,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -5622,7 +5622,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 62.0,meson_phi_1680,meson,vector,,3.5886966253767767,nan,3.5886966253767767,3.5886966253767767,total,1,1,1,pass,,0,even,"[1, 2]",even,2,0.999969
 62.0,meson_d_star_zero,charmed_meson,meson,1-,14.488696262043462,nan,14.488696262043462,14.488696262043462,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999969
 62.0,meson_d_star_plus,charmed_meson,meson,1-,17.506435393742574,nan,17.506435393742574,17.506435393742574,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999969
-62.0,meson_ds_star,charmed_meson,meson,1-,53.966084838391524,nan,53.966084838391524,53.966084838391524,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999969
+62.0,meson_ds_star,charmed_meson,meson,1-,35.97739109150727,nan,35.97739109150727,35.97739109150727,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999969
 62.0,xi_c_plus,charmed_baryon,baryon,1/2+,35.82643466094261,nan,35.82643466094261,35.82643466094261,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.999969
 62.0,rho_1700,rho_like,meson,1-,2.953217987935639,nan,2.953217987935639,2.953217987935639,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.999969
 62.0,nucleon_1720,nucleon_like,baryon,3/2+,2.953217987935639,nan,2.953217987935639,2.953217987935639,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.999969
@@ -5712,7 +5712,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 63.0,meson_phi_1680,meson,vector,,22.31694829743506,nan,22.31694829743506,22.31694829743506,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 63.0,meson_d_star_zero,charmed_meson,meson,1-,11.416948660768377,nan,11.416948660768377,11.416948660768377,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 63.0,meson_d_star_plus,charmed_meson,meson,1-,13.580338306386478,nan,13.580338306386478,13.580338306386478,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-63.0,meson_ds_star,charmed_meson,meson,1-,23.750844748915522,nan,23.750844748915522,23.750844748915522,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+63.0,meson_ds_star,charmed_meson,meson,1-,15.83389702707353,nan,15.83389702707353,15.83389702707353,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 63.0,xi_c_plus,charmed_baryon,baryon,1/2+,4.739660960813557,nan,4.739660960813557,4.739660960813557,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 63.0,rho_1700,rho_like,meson,1-,12.590169172996617,nan,12.590169172996617,12.590169172996617,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 63.0,nucleon_1720,nucleon_like,baryon,3/2+,12.590169172996617,nan,12.590169172996617,12.590169172996617,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -5802,7 +5802,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 64.0,meson_phi_1680,meson,vector,,12.455869039137704,nan,12.455869039137704,12.455869039137704,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 64.0,meson_d_star_zero,charmed_meson,meson,1-,1.5558694024710191,nan,1.5558694024710191,1.5558694024710191,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 64.0,meson_d_star_plus,charmed_meson,meson,1-,1.7470432753182812,nan,1.7470432753182812,1.7470432753182812,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-64.0,meson_ds_star,charmed_meson,meson,1-,5.832391053760896,nan,5.832391053760896,5.832391053760896,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+64.0,meson_ds_star,charmed_meson,meson,1-,3.8882608321159453,nan,3.8882608321159453,3.8882608321159453,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 64.0,xi_c_plus,charmed_baryon,baryon,1/2+,16.572955991881756,nan,16.572955991881756,16.572955991881756,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 64.0,rho_1700,rho_like,meson,1-,6.673521539129571,nan,6.673521539129571,6.673521539129571,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 64.0,nucleon_1720,nucleon_like,baryon,3/2+,6.673521539129571,nan,6.673521539129571,6.673521539129571,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -5892,7 +5892,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 65.0,meson_phi_1680,meson,vector,,1.044557505181422,nan,1.044557505181422,1.044557505181422,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 65.0,meson_d_star_zero,charmed_meson,meson,1-,9.855442131485264,nan,9.855442131485264,9.855442131485264,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 65.0,meson_d_star_plus,charmed_meson,meson,1-,11.946530474138768,nan,11.946530474138768,11.946530474138768,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-65.0,meson_ds_star,charmed_meson,meson,1-,40.066323373367666,nan,40.066323373367666,40.066323373367666,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+65.0,meson_ds_star,charmed_meson,meson,1-,26.710883139274458,nan,26.710883139274458,26.710883139274458,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 65.0,xi_c_plus,charmed_baryon,baryon,1/2+,30.266529741338804,nan,30.266529741338804,30.266529741338804,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 65.0,rho_1700,rho_like,meson,1-,0.17326547253468796,nan,0.17326547253468796,0.17326547253468796,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 65.0,nucleon_1720,nucleon_like,baryon,3/2+,0.17326547253468796,nan,0.17326547253468796,0.17326547253468796,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -5982,7 +5982,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 66.0,meson_phi_1680,meson,vector,,8.744624755179174,nan,8.744624755179174,8.744624755179174,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 66.0,meson_d_star_zero,charmed_meson,meson,1-,2.1553748814875116,nan,2.1553748814875116,2.1553748814875116,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 66.0,meson_d_star_plus,charmed_meson,meson,1-,2.706449835742002,nan,2.706449835742002,2.706449835742002,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-66.0,meson_ds_star,charmed_meson,meson,1-,16.966123163387703,nan,16.966123163387703,16.966123163387703,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+66.0,meson_ds_star,charmed_meson,meson,1-,11.310749152616738,nan,11.310749152616738,11.310749152616738,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 66.0,xi_c_plus,charmed_baryon,baryon,1/2+,21.02644910294204,nan,21.02644910294204,21.02644910294204,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 66.0,rho_1700,rho_like,meson,1-,4.4467749390644995,nan,4.4467749390644995,4.4467749390644995,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 66.0,nucleon_1720,nucleon_like,baryon,3/2+,4.4467749390644995,nan,4.4467749390644995,4.4467749390644995,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -6072,7 +6072,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 67.0,meson_phi_1680,meson,vector,,18.237069239097693,nan,18.237069239097693,18.237069239097693,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 67.0,meson_d_star_zero,charmed_meson,meson,1-,7.337069602431006,nan,7.337069602431006,7.337069602431006,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 67.0,meson_d_star_plus,charmed_meson,meson,1-,8.684483469020664,nan,8.684483469020664,8.684483469020664,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-67.0,meson_ds_star,charmed_meson,meson,1-,11.51120838987914,nan,11.51120838987914,11.51120838987914,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+67.0,meson_ds_star,charmed_meson,meson,1-,7.674139182390707,nan,7.674139182390707,7.674139182390707,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 67.0,xi_c_plus,charmed_baryon,baryon,1/2+,9.635515798179371,nan,9.635515798179371,9.635515798179371,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 67.0,rho_1700,rho_like,meson,1-,10.142241705355163,nan,10.142241705355163,10.142241705355163,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 67.0,nucleon_1720,nucleon_like,baryon,3/2+,10.142241705355163,nan,10.142241705355163,10.142241705355163,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -6162,7 +6162,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 68.0,meson_phi_1680,meson,vector,,36.91993160066895,nan,36.91993160066895,36.91993160066895,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 68.0,meson_d_star_zero,charmed_meson,meson,1-,26.019931964002268,nan,26.019931964002268,26.019931964002268,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 68.0,meson_d_star_plus,charmed_meson,meson,1-,31.103918153443285,nan,31.103918153443285,31.103918153443285,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-68.0,meson_ds_star,charmed_meson,meson,1-,67.55979173802083,nan,67.55979173802083,67.55979173802083,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+68.0,meson_ds_star,charmed_meson,meson,1-,45.03986266000916,nan,45.03986266000916,45.03986266000916,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 68.0,xi_c_plus,charmed_baryon,baryon,1/2+,12.78391888624325,nan,12.78391888624325,12.78391888624325,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 68.0,rho_1700,rho_like,meson,1-,21.351959271760816,nan,21.351959271760816,21.351959271760816,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 68.0,nucleon_1720,nucleon_like,baryon,3/2+,21.351959271760816,nan,21.351959271760816,21.351959271760816,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -6252,7 +6252,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 69.0,meson_phi_1680,meson,vector,,32.96726753675775,nan,32.96726753675775,32.96726753675775,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 69.0,meson_d_star_zero,charmed_meson,meson,1-,22.067267900091064,nan,22.067267900091064,22.067267900091064,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 69.0,meson_d_star_plus,charmed_meson,meson,1-,26.36072130837115,nan,26.36072130837115,26.36072130837115,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-69.0,meson_ds_star,charmed_meson,meson,1-,55.70180033681995,nan,55.70180033681995,55.70180033681995,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+69.0,meson_ds_star,charmed_meson,meson,1-,37.13453479569767,nan,37.13453479569767,37.13453479569767,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 69.0,xi_c_plus,charmed_baryon,baryon,1/2+,8.040722041171115,nan,8.040722041171115,8.040722041171115,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 69.0,rho_1700,rho_like,meson,1-,18.98036080179278,nan,18.98036080179278,18.98036080179278,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 69.0,nucleon_1720,nucleon_like,baryon,3/2+,18.98036080179278,nan,18.98036080179278,18.98036080179278,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -6342,7 +6342,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 70.0,meson_phi_1680,meson,vector,,11.333855224204832,nan,11.333855224204832,11.333855224204832,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 70.0,meson_d_star_zero,charmed_meson,meson,1-,0.4338555875381466,nan,0.4338555875381466,0.4338555875381466,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 70.0,meson_d_star_plus,charmed_meson,meson,1-,0.40062670637494435,nan,0.40062670637494435,0.40062670637494435,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-70.0,meson_ds_star,charmed_meson,meson,1-,9.198432274156772,nan,9.198432274156772,9.198432274156772,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+70.0,meson_ds_star,charmed_meson,meson,1-,6.1322883871807745,nan,6.1322883871807745,6.1322883871807745,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 70.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.919372560825092,nan,17.919372560825092,17.919372560825092,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 70.0,rho_1700,rho_like,meson,1-,6.000313241193737,nan,6.000313241193737,6.000313241193737,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 70.0,nucleon_1720,nucleon_like,baryon,3/2+,6.000313241193737,nan,6.000313241193737,6.000313241193737,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -6432,7 +6432,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 71.0,meson_phi_1680,meson,vector,,7.97690108176997,nan,7.97690108176997,7.97690108176997,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 71.0,meson_d_star_zero,charmed_meson,meson,1-,2.923098554896715,nan,2.923098554896715,2.923098554896715,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 71.0,meson_d_star_plus,charmed_meson,meson,1-,3.6277182376912576,nan,3.6277182376912576,3.6277182376912576,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-71.0,meson_ds_star,charmed_meson,meson,1-,19.269294030070597,nan,19.269294030070597,19.269294030070597,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+71.0,meson_ds_star,charmed_meson,meson,1-,12.84619644825357,nan,12.84619644825357,12.84619644825357,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 71.0,xi_c_plus,charmed_baryon,baryon,1/2+,21.947717504891294,nan,21.947717504891294,21.947717504891294,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 71.0,rho_1700,rho_like,meson,1-,3.986140728877188,nan,3.986140728877188,3.986140728877188,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 71.0,nucleon_1720,nucleon_like,baryon,3/2+,3.986140728877188,nan,3.986140728877188,3.986140728877188,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -6522,7 +6522,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 72.0,meson_phi_1680,meson,vector,,8.854712798509578,nan,8.854712798509578,8.854712798509578,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 72.0,meson_d_star_zero,charmed_meson,meson,1-,2.045286838157108,nan,2.045286838157108,2.045286838157108,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 72.0,meson_d_star_plus,charmed_meson,meson,1-,2.5743441846262227,nan,2.5743441846262227,2.5743441846262227,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-72.0,meson_ds_star,charmed_meson,meson,1-,16.6358590554141,nan,16.6358590554141,16.6358590554141,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+72.0,meson_ds_star,charmed_meson,meson,1-,11.090573073295133,nan,11.090573073295133,11.090573073295133,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 72.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.89434345182626,nan,20.89434345182626,20.89434345182626,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 72.0,rho_1700,rho_like,meson,1-,4.512827765943446,nan,4.512827765943446,4.512827765943446,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 72.0,nucleon_1720,nucleon_like,baryon,3/2+,4.512827765943446,nan,4.512827765943446,4.512827765943446,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -6612,7 +6612,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 73.0,meson_phi_1680,meson,vector,,7.301462403617921,nan,7.301462403617921,7.301462403617921,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 73.0,meson_d_star_zero,charmed_meson,meson,1-,3.598537233048764,nan,3.598537233048764,3.598537233048764,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 73.0,meson_d_star_plus,charmed_meson,meson,1-,4.438244646070206,nan,4.438244646070206,4.438244646070206,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-73.0,meson_ds_star,charmed_meson,meson,1-,21.29560992943902,nan,21.29560992943902,21.29560992943902,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+73.0,meson_ds_star,charmed_meson,meson,1-,14.197073759528426,nan,14.197073759528426,14.197073759528426,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 73.0,xi_c_plus,charmed_baryon,baryon,1/2+,22.758243913270242,nan,22.758243913270242,22.758243913270242,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 73.0,rho_1700,rho_like,meson,1-,3.5808775165824493,nan,3.5808775165824493,3.5808775165824493,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 73.0,nucleon_1720,nucleon_like,baryon,3/2+,3.5808775165824493,nan,3.5808775165824493,3.5808775165824493,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -6792,7 +6792,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 75.0,meson_phi_1680,meson,vector,,7.812857600904751,nan,7.812857600904751,7.812857600904751,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 75.0,meson_d_star_zero,charmed_meson,meson,1-,3.087142035761935,nan,3.087142035761935,3.087142035761935,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 75.0,meson_d_star_plus,charmed_meson,meson,1-,3.824570413417173,nan,3.824570413417173,3.824570413417173,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-75.0,meson_ds_star,charmed_meson,meson,1-,19.761424439857564,nan,19.761424439857564,19.761424439857564,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+75.0,meson_ds_star,charmed_meson,meson,1-,13.174283399047777,nan,13.174283399047777,13.174283399047777,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 75.0,xi_c_plus,charmed_baryon,baryon,1/2+,22.14456968061721,nan,22.14456968061721,22.14456968061721,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 75.0,rho_1700,rho_like,meson,1-,3.8877146390457087,nan,3.8877146390457087,3.8877146390457087,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 75.0,nucleon_1720,nucleon_like,baryon,3/2+,3.8877146390457087,nan,3.8877146390457087,3.8877146390457087,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -6882,7 +6882,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 76.0,meson_phi_1680,meson,vector,,5.203903995203199,nan,5.203903995203199,5.203903995203199,total,1,1,1,pass,,0,even,"[1, 2]",even,2,0.942214
 76.0,meson_d_star_zero,charmed_meson,meson,1-,16.103903631869883,nan,16.103903631869883,16.103903631869883,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.942214
 76.0,meson_d_star_plus,charmed_meson,meson,1-,19.444684224612622,nan,19.444684224612622,19.444684224612622,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.942214
-76.0,meson_ds_star,charmed_meson,meson,1-,58.811706624829355,nan,58.811706624829355,58.811706624829355,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.942214
+76.0,meson_ds_star,charmed_meson,meson,1-,39.20780572347963,nan,39.20780572347963,39.20780572347963,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.942214
 76.0,xi_c_plus,charmed_baryon,baryon,1/2+,37.76468349181266,nan,37.76468349181266,37.76468349181266,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.942214
 76.0,rho_1700,rho_like,meson,1-,3.9223424227531516,nan,3.9223424227531516,3.9223424227531516,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.942214
 76.0,nucleon_1720,nucleon_like,baryon,3/2+,3.9223424227531516,nan,3.9223424227531516,3.9223424227531516,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.942214
@@ -6972,7 +6972,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 77.0,meson_phi_1680,meson,vector,,8.375825179472498,nan,8.375825179472498,8.375825179472498,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 77.0,meson_d_star_zero,charmed_meson,meson,1-,2.5241744571941864,nan,2.5241744571941864,2.5241744571941864,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 77.0,meson_d_star_plus,charmed_meson,meson,1-,3.1490093236396155,nan,3.1490093236396155,3.1490093236396155,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-77.0,meson_ds_star,charmed_meson,meson,1-,18.072521816747823,nan,18.072521816747823,18.072521816747823,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+77.0,meson_ds_star,charmed_meson,meson,1-,12.04834827944345,nan,12.04834827944345,12.04834827944345,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 77.0,xi_c_plus,charmed_baryon,baryon,1/2+,21.469008590839653,nan,21.469008590839653,21.469008590839653,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 77.0,rho_1700,rho_like,meson,1-,4.225495190690098,nan,4.225495190690098,4.225495190690098,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 77.0,nucleon_1720,nucleon_like,baryon,3/2+,4.225495190690098,nan,4.225495190690098,4.225495190690098,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7062,7 +7062,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 78.0,meson_phi_1680,meson,vector,,9.137856645738113,nan,9.137856645738113,9.137856645738113,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 78.0,meson_d_star_zero,charmed_meson,meson,1-,1.7621429909285724,nan,1.7621429909285724,1.7621429909285724,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 78.0,meson_d_star_plus,charmed_meson,meson,1-,2.2345715702171303,nan,2.2345715702171303,2.2345715702171303,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-78.0,meson_ds_star,charmed_meson,meson,1-,15.786427570357258,nan,15.786427570357258,15.786427570357258,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+78.0,meson_ds_star,charmed_meson,meson,1-,10.524285397714317,nan,10.524285397714317,10.524285397714317,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 78.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.554570837417167,nan,20.554570837417167,20.554570837417167,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 78.0,rho_1700,rho_like,meson,1-,4.682714076545718,nan,4.682714076545718,4.682714076545718,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 78.0,nucleon_1720,nucleon_like,baryon,3/2+,4.682714076545718,nan,4.682714076545718,4.682714076545718,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7152,7 +7152,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 79.0,meson_phi_1680,meson,vector,,12.408363480721214,nan,12.408363480721214,12.408363480721214,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 79.0,meson_d_star_zero,charmed_meson,meson,1-,1.508363844054529,nan,1.508363844054529,1.508363844054529,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 79.0,meson_d_star_plus,charmed_meson,meson,1-,1.6900366055985374,nan,1.6900366055985374,1.6900366055985374,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-79.0,meson_ds_star,charmed_meson,meson,1-,5.974907719509256,nan,5.974907719509256,5.974907719509256,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+79.0,meson_ds_star,charmed_meson,meson,1-,3.9832719457818886,nan,3.9832719457818886,3.9832719457818886,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 79.0,xi_c_plus,charmed_baryon,baryon,1/2+,16.6299626616015,nan,16.6299626616015,16.6299626616015,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 79.0,rho_1700,rho_like,meson,1-,6.645018203699633,nan,6.645018203699633,6.645018203699633,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 79.0,nucleon_1720,nucleon_like,baryon,3/2+,6.645018203699633,nan,6.645018203699633,6.645018203699633,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7242,7 +7242,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 80.0,meson_phi_1680,meson,vector,,36.53669785011008,nan,36.53669785011008,36.53669785011008,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 80.0,meson_d_star_zero,charmed_meson,meson,1-,25.636698213443392,nan,25.636698213443392,25.636698213443392,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 80.0,meson_d_star_plus,charmed_meson,meson,1-,30.644037655838503,nan,30.644037655838503,30.644037655838503,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-80.0,meson_ds_star,charmed_meson,meson,1-,66.41009056299094,nan,66.41009056299094,66.41009056299094,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+80.0,meson_ds_star,charmed_meson,meson,1-,44.273395184440325,nan,44.273395184440325,44.273395184440325,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 80.0,xi_c_plus,charmed_baryon,baryon,1/2+,12.324038388638467,nan,12.324038388638467,12.324038388638467,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 80.0,rho_1700,rho_like,meson,1-,21.12201901835962,nan,21.12201901835962,21.12201901835962,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 80.0,nucleon_1720,nucleon_like,baryon,3/2+,21.12201901835962,nan,21.12201901835962,21.12201901835962,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7332,7 +7332,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 81.0,meson_phi_1680,meson,vector,,25.860584243313866,nan,25.860584243313866,25.860584243313866,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 81.0,meson_d_star_zero,charmed_meson,meson,1-,14.960584606647183,nan,14.960584606647183,14.960584606647183,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 81.0,meson_d_star_plus,charmed_meson,meson,1-,17.832701413091957,nan,17.832701413091957,17.832701413091957,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-81.0,meson_ds_star,charmed_meson,meson,1-,34.38175187782482,nan,34.38175187782482,34.38175187782482,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+81.0,meson_ds_star,charmed_meson,meson,1-,22.92116868258876,nan,22.92116868258876,22.92116868258876,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 81.0,xi_c_plus,charmed_baryon,baryon,1/2+,0.487297854108078,nan,0.487297854108078,0.487297854108078,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 81.0,rho_1700,rho_like,meson,1-,14.716350768872989,nan,14.716350768872989,14.716350768872989,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 81.0,nucleon_1720,nucleon_like,baryon,3/2+,14.716350768872989,nan,14.716350768872989,14.716350768872989,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7422,7 +7422,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 82.0,meson_phi_1680,meson,vector,,9.51643924645203,nan,9.51643924645203,9.51643924645203,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 82.0,meson_d_star_zero,charmed_meson,meson,1-,1.383560390214655,nan,1.383560390214655,1.383560390214655,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 82.0,meson_d_star_plus,charmed_meson,meson,1-,1.7802724523890903,nan,1.7802724523890903,1.7802724523890903,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-82.0,meson_ds_star,charmed_meson,meson,1-,14.650679843932018,nan,14.650679843932018,14.650679843932018,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+82.0,meson_ds_star,charmed_meson,meson,1-,9.767120221525321,nan,9.767120221525321,9.767120221525321,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 82.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.100271719589127,nan,20.100271719589127,20.100271719589127,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 82.0,rho_1700,rho_like,meson,1-,4.909863640002729,nan,4.909863640002729,4.909863640002729,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 82.0,nucleon_1720,nucleon_like,baryon,3/2+,4.909863640002729,nan,4.909863640002729,4.909863640002729,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7512,7 +7512,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 83.0,meson_phi_1680,meson,vector,,9.273792923873572,nan,9.273792923873572,9.273792923873572,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 83.0,meson_d_star_zero,charmed_meson,meson,1-,1.6262067127931144,nan,1.6262067127931144,1.6262067127931144,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 83.0,meson_d_star_plus,charmed_meson,meson,1-,2.071448037542071,nan,2.071448037542071,2.071448037542071,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-83.0,meson_ds_star,charmed_meson,meson,1-,15.378618763138137,nan,15.378618763138137,15.378618763138137,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+83.0,meson_ds_star,charmed_meson,meson,1-,10.252412850505818,nan,10.252412850505818,10.252412850505818,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 83.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.39144730474211,nan,20.39144730474211,20.39144730474211,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 83.0,rho_1700,rho_like,meson,1-,4.764275844514483,nan,4.764275844514483,4.764275844514483,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 83.0,nucleon_1720,nucleon_like,baryon,3/2+,4.764275844514483,nan,4.764275844514483,4.764275844514483,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7602,7 +7602,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 84.0,meson_phi_1680,meson,vector,,8.474701818843275,nan,8.474701818843275,8.474701818843275,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 84.0,meson_d_star_zero,charmed_meson,meson,1-,2.4252978178234104,nan,2.4252978178234104,2.4252978178234104,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 84.0,meson_d_star_plus,charmed_meson,meson,1-,3.0303573571856974,nan,3.0303573571856974,3.0303573571856974,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-84.0,meson_ds_star,charmed_meson,meson,1-,17.77589191841082,nan,17.77589191841082,17.77589191841082,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+84.0,meson_ds_star,charmed_meson,meson,1-,11.850595007293675,nan,11.850595007293675,11.850595007293675,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 84.0,xi_c_plus,charmed_baryon,baryon,1/2+,21.350356624385732,nan,21.350356624385732,21.350356624385732,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 84.0,rho_1700,rho_like,meson,1-,4.284821175103577,nan,4.284821175103577,4.284821175103577,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 84.0,nucleon_1720,nucleon_like,baryon,3/2+,4.284821175103577,nan,4.284821175103577,4.284821175103577,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7692,7 +7692,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 85.0,meson_phi_1680,meson,vector,,38.85838678272045,nan,38.85838678272045,38.85838678272045,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 85.0,meson_d_star_zero,charmed_meson,meson,1-,27.958387146053767,nan,27.958387146053767,27.958387146053767,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 85.0,meson_d_star_plus,charmed_meson,meson,1-,33.430064356397445,nan,33.430064356397445,33.430064356397445,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-85.0,meson_ds_star,charmed_meson,meson,1-,73.37515689648433,nan,73.37515689648433,73.37515689648433,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+85.0,meson_ds_star,charmed_meson,meson,1-,48.91677289488182,nan,48.91677289488182,48.91677289488182,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 85.0,xi_c_plus,charmed_baryon,baryon,1/2+,15.110065089197406,nan,15.110065089197406,15.110065089197406,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 85.0,rho_1700,rho_like,meson,1-,22.515032396499358,nan,22.515032396499358,22.515032396499358,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 85.0,nucleon_1720,nucleon_like,baryon,3/2+,22.515032396499358,nan,22.515032396499358,22.515032396499358,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7782,7 +7782,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 86.0,meson_phi_1680,meson,vector,,5.474136108195461,nan,5.474136108195461,5.474136108195461,total,1,1,1,pass,,0,even,"[1, 2]",even,2,0.90731
 86.0,meson_d_star_zero,charmed_meson,meson,1-,16.374135744862148,nan,16.374135744862148,16.374135744862148,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.90731
 86.0,meson_d_star_plus,charmed_meson,meson,1-,19.768962758041482,nan,19.768962758041482,19.768962758041482,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.90731
-86.0,meson_ds_star,charmed_meson,meson,1-,59.62240290975972,nan,59.62240290975972,59.62240290975972,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.90731
+86.0,meson_ds_star,charmed_meson,meson,1-,39.74826993144868,nan,39.74826993144868,39.74826993144868,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.90731
 86.0,xi_c_plus,charmed_baryon,baryon,1/2+,38.088962025241514,nan,38.088962025241514,38.088962025241514,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.90731
 86.0,rho_1700,rho_like,meson,1-,4.084481692710366,nan,4.084481692710366,4.084481692710366,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,0.90731
 86.0,nucleon_1720,nucleon_like,baryon,3/2+,4.084481692710366,nan,4.084481692710366,4.084481692710366,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,0.90731
@@ -7872,7 +7872,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 87.0,meson_phi_1680,meson,vector,,8.106719969776004,nan,8.106719969776004,8.106719969776004,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 87.0,meson_d_star_zero,charmed_meson,meson,1-,2.793279666890682,nan,2.793279666890682,2.793279666890682,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 87.0,meson_d_star_plus,charmed_meson,meson,1-,3.4719355731225687,nan,3.4719355731225687,3.4719355731225687,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-87.0,meson_ds_star,charmed_meson,meson,1-,18.87983739201627,nan,18.87983739201627,18.87983739201627,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+87.0,meson_ds_star,charmed_meson,meson,1-,12.586558680896095,nan,12.586558680896095,12.586558680896095,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 87.0,xi_c_plus,charmed_baryon,baryon,1/2+,21.791934840322604,nan,21.791934840322604,21.791934840322604,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 87.0,rho_1700,rho_like,meson,1-,4.064032062719359,nan,4.064032062719359,4.064032062719359,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 87.0,nucleon_1720,nucleon_like,baryon,3/2+,4.064032062719359,nan,4.064032062719359,4.064032062719359,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -7962,7 +7962,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 88.0,meson_phi_1680,meson,vector,,7.313576565880782,nan,7.313576565880782,7.313576565880782,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 88.0,meson_d_star_zero,charmed_meson,meson,1-,3.586423070785904,nan,3.586423070785904,3.586423070785904,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 88.0,meson_d_star_plus,charmed_meson,meson,1-,4.423707651451688,nan,4.423707651451688,4.423707651451688,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-88.0,meson_ds_star,charmed_meson,meson,1-,21.259267445073274,nan,21.259267445073274,21.259267445073274,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+88.0,meson_ds_star,charmed_meson,meson,1-,14.172845435810316,nan,14.172845435810316,14.172845435810316,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 88.0,xi_c_plus,charmed_baryon,baryon,1/2+,22.743706918651725,nan,22.743706918651725,22.743706918651725,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 88.0,rho_1700,rho_like,meson,1-,3.5881460140370787,nan,3.5881460140370787,3.5881460140370787,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 88.0,nucleon_1720,nucleon_like,baryon,3/2+,3.5881460140370787,nan,3.5881460140370787,3.5881460140370787,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -8052,7 +8052,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 89.0,meson_phi_1680,meson,vector,,43.33813975939535,nan,43.33813975939535,43.33813975939535,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,0.998786
 89.0,meson_d_star_zero,charmed_meson,meson,1-,32.43814012272866,nan,32.43814012272866,32.43814012272866,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.998786
 89.0,meson_d_star_plus,charmed_meson,meson,1-,38.8057678925693,nan,38.8057678925693,38.8057678925693,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.998786
-89.0,meson_ds_star,charmed_meson,meson,1-,86.81441493055851,nan,86.81441493055851,86.81441493055851,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.998786
+89.0,meson_ds_star,charmed_meson,meson,1-,57.876278549581436,nan,57.876278549581436,57.876278549581436,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.998786
 89.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.48576862536926,nan,20.48576862536926,20.48576862536926,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.998786
 89.0,rho_1700,rho_like,meson,1-,25.202884218342316,nan,25.202884218342316,25.202884218342316,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.998786
 89.0,nucleon_1720,nucleon_like,baryon,3/2+,25.202884218342316,nan,25.202884218342316,25.202884218342316,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.998786
@@ -8142,7 +8142,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 90.0,meson_phi_1680,meson,vector,,8.937306389423126,nan,8.937306389423126,8.937306389423126,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 90.0,meson_d_star_zero,charmed_meson,meson,1-,1.962693247243559,nan,1.962693247243559,1.962693247243559,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 90.0,meson_d_star_plus,charmed_meson,meson,1-,2.4752318761907124,nan,2.4752318761907124,2.4752318761907124,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-90.0,meson_ds_star,charmed_meson,meson,1-,16.38807829919217,nan,16.38807829919217,16.38807829919217,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+90.0,meson_ds_star,charmed_meson,meson,1-,10.925385896974275,nan,10.925385896974275,10.925385896974275,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 90.0,xi_c_plus,charmed_baryon,baryon,1/2+,20.795231143390748,nan,20.795231143390748,20.795231143390748,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 90.0,rho_1700,rho_like,meson,1-,4.562383921152324,nan,4.562383921152324,4.562383921152324,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 90.0,nucleon_1720,nucleon_like,baryon,3/2+,4.562383921152324,nan,4.562383921152324,4.562383921152324,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -8232,7 +8232,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 91.0,meson_phi_1680,meson,vector,,29.348396454720124,nan,29.348396454720124,29.348396454720124,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 91.0,meson_d_star_zero,charmed_meson,meson,1-,18.448396818053435,nan,18.448396818053435,18.448396818053435,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 91.0,meson_d_star_plus,charmed_meson,meson,1-,22.018076038876966,nan,22.018076038876966,22.018076038876966,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-91.0,meson_ds_star,charmed_meson,meson,1-,44.845187814481214,nan,44.845187814481214,44.845187814481214,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+91.0,meson_ds_star,charmed_meson,meson,1-,29.89679287288047,nan,29.89679287288047,29.89679287288047,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 91.0,xi_c_plus,charmed_baryon,baryon,1/2+,3.6980767716769307,nan,3.6980767716769307,3.6980767716769307,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 91.0,rho_1700,rho_like,meson,1-,16.80903812361924,nan,16.80903812361924,16.80903812361924,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 91.0,nucleon_1720,nucleon_like,baryon,3/2+,16.80903812361924,nan,16.80903812361924,16.80903812361924,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -8322,7 +8322,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 92.0,meson_phi_1680,meson,vector,,0.15372111987596118,nan,0.15372111987596118,0.15372111987596118,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 92.0,meson_d_star_zero,charmed_meson,meson,1-,11.053720756542647,nan,11.053720756542647,11.053720756542647,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 92.0,meson_d_star_plus,charmed_meson,meson,1-,13.3844648146214,nan,13.3844648146214,13.3844648146214,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-92.0,meson_ds_star,charmed_meson,meson,1-,43.66115900888411,nan,43.66115900888411,43.66115900888411,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+92.0,meson_ds_star,charmed_meson,meson,1-,29.10744030950399,nan,29.10744030950399,29.10744030950399,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 92.0,xi_c_plus,charmed_baryon,baryon,1/2+,31.704464081821435,nan,31.704464081821435,31.704464081821435,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 92.0,rho_1700,rho_like,meson,1-,0.8922326571553466,nan,0.8922326571553466,0.8922326571553466,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 92.0,nucleon_1720,nucleon_like,baryon,3/2+,0.8922326571553466,nan,0.8922326571553466,0.8922326571553466,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -8412,7 +8412,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 93.0,meson_phi_1680,meson,vector,,7.743078934564042,nan,7.743078934564042,7.743078934564042,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 93.0,meson_d_star_zero,charmed_meson,meson,1-,3.1569207021026435,nan,3.1569207021026435,3.1569207021026435,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 93.0,meson_d_star_plus,charmed_meson,meson,1-,3.9083048124677946,nan,3.9083048124677946,3.9083048124677946,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-93.0,meson_ds_star,charmed_meson,meson,1-,19.970760424923956,nan,19.970760424923956,19.970760424923956,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+93.0,meson_ds_star,charmed_meson,meson,1-,13.313840727077284,nan,13.313840727077284,13.313840727077284,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 93.0,xi_c_plus,charmed_baryon,baryon,1/2+,22.22830407966783,nan,22.22830407966783,22.22830407966783,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 93.0,rho_1700,rho_like,meson,1-,3.845847438683054,nan,3.845847438683054,3.845847438683054,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 93.0,nucleon_1720,nucleon_like,baryon,3/2+,3.845847438683054,nan,3.845847438683054,3.845847438683054,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -8502,7 +8502,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 94.0,meson_phi_1680,meson,vector,,7.024859697171345,nan,7.024859697171345,7.024859697171345,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 94.0,meson_d_star_zero,charmed_meson,meson,1-,3.8751399394953405,nan,3.8751399394953405,3.8751399394953405,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 94.0,meson_d_star_plus,charmed_meson,meson,1-,4.770167891593276,nan,4.770167891593276,4.770167891593276,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-94.0,meson_ds_star,charmed_meson,meson,1-,22.125417993458214,nan,22.125417993458214,22.125417993458214,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+94.0,meson_ds_star,charmed_meson,meson,1-,14.750279153981399,nan,14.750279153981399,14.750279153981399,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 94.0,xi_c_plus,charmed_baryon,baryon,1/2+,23.090167158793314,nan,23.090167158793314,23.090167158793314,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 94.0,rho_1700,rho_like,meson,1-,3.414915890501682,nan,3.414915890501682,3.414915890501682,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 94.0,nucleon_1720,nucleon_like,baryon,3/2+,3.414915890501682,nan,3.414915890501682,3.414915890501682,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -8592,7 +8592,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 95.0,meson_phi_1680,meson,vector,,12.771926870602446,nan,12.771926870602446,12.771926870602446,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 95.0,meson_d_star_zero,charmed_meson,meson,1-,1.8719272339357604,nan,1.8719272339357604,1.8719272339357604,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 95.0,meson_d_star_plus,charmed_meson,meson,1-,2.126312670547508,nan,2.126312670547508,2.126312670547508,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-95.0,meson_ds_star,charmed_meson,meson,1-,4.884217622578232,nan,4.884217622578232,4.884217622578232,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+95.0,meson_ds_star,charmed_meson,meson,1-,3.2561451902569836,nan,3.2561451902569836,3.2561451902569836,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 95.0,xi_c_plus,charmed_baryon,baryon,1/2+,16.19368659665253,nan,16.19368659665253,16.19368659665253,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 95.0,rho_1700,rho_like,meson,1-,6.8631562405368784,nan,6.8631562405368784,6.8631562405368784,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 95.0,nucleon_1720,nucleon_like,baryon,3/2+,6.8631562405368784,nan,6.8631562405368784,6.8631562405368784,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -8682,7 +8682,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 96.0,meson_phi_1680,meson,vector,,11.298459931384675,nan,11.298459931384675,11.298459931384675,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 96.0,meson_d_star_zero,charmed_meson,meson,1-,0.39846029471799027,nan,0.39846029471799027,0.39846029471799027,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 96.0,meson_d_star_plus,charmed_meson,meson,1-,0.3581523552739191,nan,0.3581523552739191,0.3581523552739191,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-96.0,meson_ds_star,charmed_meson,meson,1-,9.304618145538184,nan,9.304618145538184,9.304618145538184,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+96.0,meson_ds_star,charmed_meson,meson,1-,6.2030789704614016,nan,6.2030789704614016,6.2030789704614016,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 96.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.961846911926116,nan,17.961846911926116,17.961846911926116,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 96.0,rho_1700,rho_like,meson,1-,5.979076065218481,nan,5.979076065218481,5.979076065218481,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 96.0,nucleon_1720,nucleon_like,baryon,3/2+,5.979076065218481,nan,5.979076065218481,5.979076065218481,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -8772,7 +8772,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 97.0,meson_phi_1680,meson,vector,,16.19976238300792,nan,16.19976238300792,16.19976238300792,total,1,1,1,pass,,0,even,"[1, 2]",even,2,1.0
 97.0,meson_d_star_zero,charmed_meson,meson,1-,5.299762746341234,nan,5.299762746341234,5.299762746341234,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 97.0,meson_d_star_plus,charmed_meson,meson,1-,6.239715258011393,nan,6.239715258011393,6.239715258011393,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
-97.0,meson_ds_star,charmed_meson,meson,1-,5.399288229071154,nan,5.399288229071154,5.399288229071154,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
+97.0,meson_ds_star,charmed_meson,meson,1-,3.599525606031611,nan,3.599525606031611,3.599525606031611,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 97.0,xi_c_plus,charmed_baryon,baryon,1/2+,12.080284009188643,nan,12.080284009188643,12.080284009188643,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
 97.0,rho_1700,rho_like,meson,1-,8.919857575402846,nan,8.919857575402846,8.919857575402846,total,1,1,1,pass,,0,even,"[1, 2, 4]",even,2,1.0
 97.0,nucleon_1720,nucleon_like,baryon,3/2+,8.919857575402846,nan,8.919857575402846,8.919857575402846,total,1,1,1,reject,parity_mismatch|k_mismatch,1,odd,"[1, 3, 5]",even,2,1.0
@@ -8862,7 +8862,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 98.0,meson_phi_1680,meson,vector,,33.72155993161467,nan,33.72155993161467,33.72155993161467,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 98.0,meson_d_star_zero,charmed_meson,meson,1-,22.821560294947986,nan,22.821560294947986,22.821560294947986,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 98.0,meson_d_star_plus,charmed_meson,meson,1-,27.265872176165118,nan,27.265872176165118,27.265872176165118,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-98.0,meson_ds_star,charmed_meson,meson,1-,57.96467737053225,nan,57.96467737053225,57.96467737053225,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+98.0,meson_ds_star,charmed_meson,meson,1-,38.64311953512536,nan,38.64311953512536,38.64311953512536,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 98.0,xi_c_plus,charmed_baryon,baryon,1/2+,8.945872908965082,nan,8.945872908965082,8.945872908965082,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 98.0,rho_1700,rho_like,meson,1-,19.432936244741274,nan,19.432936244741274,19.432936244741274,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 98.0,nucleon_1720,nucleon_like,baryon,3/2+,19.432936244741274,nan,19.432936244741274,19.432936244741274,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -8952,7 +8952,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 99.0,meson_phi_1680,meson,vector,,18.887178777760706,nan,18.887178777760706,18.887178777760706,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 99.0,meson_d_star_zero,charmed_meson,meson,1-,7.987179141094022,nan,7.987179141094022,7.987179141094022,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 99.0,meson_d_star_plus,charmed_meson,meson,1-,9.464614910215408,nan,9.464614910215408,9.464614910215408,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-99.0,meson_ds_star,charmed_meson,meson,1-,13.461536875846294,nan,13.461536875846294,13.461536875846294,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+99.0,meson_ds_star,charmed_meson,meson,1-,8.974358216376107,nan,8.974358216376107,8.974358216376107,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 99.0,xi_c_plus,charmed_baryon,baryon,1/2+,8.855384356984628,nan,8.855384356984628,8.855384356984628,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 99.0,rho_1700,rho_like,meson,1-,10.53230743375385,nan,10.53230743375385,10.53230743375385,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 99.0,nucleon_1720,nucleon_like,baryon,3/2+,10.53230743375385,nan,10.53230743375385,10.53230743375385,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9042,7 +9042,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 100.0,meson_phi_1680,meson,vector,,10.174763644841217,nan,10.174763644841217,10.174763644841217,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 100.0,meson_d_star_zero,charmed_meson,meson,1-,0.7252359918254678,nan,0.7252359918254678,0.7252359918254678,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 100.0,meson_d_star_plus,charmed_meson,meson,1-,0.9902831795886605,nan,0.9902831795886605,0.9902831795886605,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-100.0,meson_ds_star,charmed_meson,meson,1-,12.675706780429323,nan,12.675706780429323,12.675706780429323,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+100.0,meson_ds_star,charmed_meson,meson,1-,8.450471468635236,nan,8.450471468635236,8.450471468635236,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 100.0,xi_c_plus,charmed_baryon,baryon,1/2+,19.310282446788698,nan,19.310282446788698,19.310282446788698,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 100.0,rho_1700,rho_like,meson,1-,5.304858284302837,nan,5.304858284302837,5.304858284302837,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 100.0,nucleon_1720,nucleon_like,baryon,3/2+,5.304858284302837,nan,5.304858284302837,5.304858284302837,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9132,7 +9132,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 101.0,meson_phi_1680,meson,vector,,9.66648675178378,nan,9.66648675178378,9.66648675178378,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 101.0,meson_d_star_zero,charmed_meson,meson,1-,1.233512884882906,nan,1.233512884882906,1.233512884882906,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 101.0,meson_d_star_plus,charmed_meson,meson,1-,1.6002154471913714,nan,1.6002154471913714,1.6002154471913714,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-101.0,meson_ds_star,charmed_meson,meson,1-,14.200537357946269,nan,14.200537357946269,14.200537357946269,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+101.0,meson_ds_star,charmed_meson,meson,1-,9.46702522086499,nan,9.46702522086499,9.46702522086499,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 101.0,xi_c_plus,charmed_baryon,baryon,1/2+,19.920214714391406,nan,19.920214714391406,19.920214714391406,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 101.0,rho_1700,rho_like,meson,1-,4.999892144402159,nan,4.999892144402159,4.999892144402159,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 101.0,nucleon_1720,nucleon_like,baryon,3/2+,4.999892144402159,nan,4.999892144402159,4.999892144402159,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9222,7 +9222,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 102.0,meson_phi_1680,meson,vector,,8.759698176676727,nan,8.759698176676727,8.759698176676727,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 102.0,meson_d_star_zero,charmed_meson,meson,1-,2.1403014599899586,nan,2.1403014599899586,2.1403014599899586,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 102.0,meson_d_star_plus,charmed_meson,meson,1-,2.688361730065526,nan,2.688361730065526,2.688361730065526,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-102.0,meson_ds_star,charmed_meson,meson,1-,16.92090290190973,nan,16.92090290190973,16.92090290190973,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+102.0,meson_ds_star,charmed_meson,meson,1-,11.280602310626525,nan,11.280602310626525,11.280602310626525,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 102.0,xi_c_plus,charmed_baryon,baryon,1/2+,21.008360997265562,nan,21.008360997265562,21.008360997265562,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 102.0,rho_1700,rho_like,meson,1-,4.455818992083619,nan,4.455818992083619,4.455818992083619,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 102.0,nucleon_1720,nucleon_like,baryon,3/2+,4.455818992083619,nan,4.455818992083619,4.455818992083619,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9312,7 +9312,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 103.0,meson_phi_1680,meson,vector,,13.111165382294484,nan,13.111165382294484,13.111165382294484,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 103.0,meson_d_star_zero,charmed_meson,meson,1-,2.211165745627799,nan,2.211165745627799,2.211165745627799,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 103.0,meson_d_star_plus,charmed_meson,meson,1-,2.5333988818640463,nan,2.5333988818640463,2.5333988818640463,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-103.0,meson_ds_star,charmed_meson,meson,1-,3.8665021553498122,nan,3.8665021553498122,3.8665021553498122,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+103.0,meson_ds_star,charmed_meson,meson,1-,2.577668189488806,nan,2.577668189488806,2.577668189488806,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 103.0,xi_c_plus,charmed_baryon,baryon,1/2+,15.78660038533599,nan,15.78660038533599,15.78660038533599,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 103.0,rho_1700,rho_like,meson,1-,7.06669935026601,nan,7.06669935026601,7.06669935026601,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 103.0,nucleon_1720,nucleon_like,baryon,3/2+,7.06669935026601,nan,7.06669935026601,7.06669935026601,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9402,7 +9402,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 104.0,meson_phi_1680,meson,vector,,12.09700815509973,nan,12.09700815509973,12.09700815509973,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 104.0,meson_d_star_zero,charmed_meson,meson,1-,1.1970085184330432,nan,1.1970085184330432,1.1970085184330432,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 104.0,meson_d_star_plus,charmed_meson,meson,1-,1.316410217343597,nan,1.316410217343597,1.316410217343597,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-104.0,meson_ds_star,charmed_meson,meson,1-,6.9089736341026535,nan,6.9089736341026535,6.9089736341026535,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+104.0,meson_ds_star,charmed_meson,meson,1-,4.60598257626784,nan,4.60598257626784,4.60598257626784,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 104.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.00358904985644,nan,17.00358904985644,17.00358904985644,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 104.0,rho_1700,rho_like,meson,1-,6.458205005835898,nan,6.458205005835898,6.458205005835898,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 104.0,nucleon_1720,nucleon_like,baryon,3/2+,6.458205005835898,nan,6.458205005835898,6.458205005835898,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9492,7 +9492,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 105.0,meson_phi_1680,meson,vector,,41.53350507654984,nan,41.53350507654984,41.53350507654984,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,0.999715
 105.0,meson_d_star_zero,charmed_meson,meson,1-,30.63350543988315,nan,30.63350543988315,30.63350543988315,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999715
 105.0,meson_d_star_plus,charmed_meson,meson,1-,36.64020628759176,nan,36.64020628759176,36.64020628759176,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999715
-105.0,meson_ds_star,charmed_meson,meson,1-,81.40051124294887,nan,81.40051124294887,81.40051124294887,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999715
+105.0,meson_ds_star,charmed_meson,meson,1-,54.26700930419938,nan,54.26700930419938,54.26700930419938,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999715
 105.0,xi_c_plus,charmed_baryon,baryon,1/2+,18.32020702039172,nan,18.32020702039172,18.32020702039172,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999715
 105.0,rho_1700,rho_like,meson,1-,24.120103394197933,nan,24.120103394197933,24.120103394197933,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,0.999715
 105.0,nucleon_1720,nucleon_like,baryon,3/2+,24.120103394197933,nan,24.120103394197933,24.120103394197933,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,0.999715
@@ -9582,7 +9582,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 106.0,meson_phi_1680,meson,vector,,12.042510341582998,nan,12.042510341582998,12.042510341582998,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 106.0,meson_d_star_zero,charmed_meson,meson,1-,1.1425107049163123,nan,1.1425107049163123,1.1425107049163123,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 106.0,meson_d_star_plus,charmed_meson,meson,1-,1.2510128415595025,nan,1.2510128415595025,1.2510128415595025,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-106.0,meson_ds_star,charmed_meson,meson,1-,7.072467063753284,nan,7.072467063753284,7.072467063753284,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+106.0,meson_ds_star,charmed_meson,meson,1-,4.714978199668114,nan,4.714978199668114,4.714978199668114,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 106.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.068986425640535,nan,17.068986425640535,17.068986425640535,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 106.0,rho_1700,rho_like,meson,1-,6.425506317289877,nan,6.425506317289877,6.425506317289877,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 106.0,nucleon_1720,nucleon_like,baryon,3/2+,6.425506317289877,nan,6.425506317289877,6.425506317289877,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9672,7 +9672,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 107.0,meson_phi_1680,meson,vector,,11.358254217058196,nan,11.358254217058196,11.358254217058196,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 107.0,meson_d_star_zero,charmed_meson,meson,1-,0.4582545803915102,nan,0.4582545803915102,0.4582545803915102,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 107.0,meson_d_star_plus,charmed_meson,meson,1-,0.4299054976037887,nan,0.4299054976037887,0.4299054976037887,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-107.0,meson_ds_star,charmed_meson,meson,1-,9.12523530047648,nan,9.12523530047648,9.12523530047648,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+107.0,meson_ds_star,charmed_meson,meson,1-,6.0834904031006465,nan,6.0834904031006465,6.0834904031006465,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 107.0,xi_c_plus,charmed_baryon,baryon,1/2+,17.89009376959625,nan,17.89009376959625,17.89009376959625,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 107.0,rho_1700,rho_like,meson,1-,6.014952637100947,nan,6.014952637100947,6.014952637100947,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 107.0,nucleon_1720,nucleon_like,baryon,3/2+,6.014952637100947,nan,6.014952637100947,6.014952637100947,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9762,7 +9762,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 108.0,meson_phi_1680,meson,vector,,35.25568029514399,nan,35.25568029514399,35.25568029514399,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 108.0,meson_d_star_zero,charmed_meson,meson,1-,24.355680658477308,nan,24.355680658477308,24.355680658477308,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 108.0,meson_d_star_plus,charmed_meson,meson,1-,29.106816600127342,nan,29.106816600127342,29.106816600127342,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-108.0,meson_ds_star,charmed_meson,meson,1-,62.56703815429617,nan,62.56703815429617,62.56703815429617,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+108.0,meson_ds_star,charmed_meson,meson,1-,41.71136015990931,nan,41.71136015990931,41.71136015990931,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 108.0,xi_c_plus,charmed_baryon,baryon,1/2+,10.786817332927304,nan,10.786817332927304,10.786817332927304,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 108.0,rho_1700,rho_like,meson,1-,20.35340847513183,nan,20.35340847513183,20.35340847513183,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 108.0,nucleon_1720,nucleon_like,baryon,3/2+,20.35340847513183,nan,20.35340847513183,20.35340847513183,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
@@ -9852,7 +9852,7 @@ run_id,target_name,family,type,jpc,d_total,d_spacing,d_mass,score_used,score_mod
 109.0,meson_phi_1680,meson,vector,,26.430249843658338,nan,26.430249843658338,26.430249843658338,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2]",odd,1,1.0
 109.0,meson_d_star_zero,charmed_meson,meson,1-,15.530250206991651,nan,15.530250206991651,15.530250206991651,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 109.0,meson_d_star_plus,charmed_meson,meson,1-,18.516300128947996,nan,18.516300128947996,18.516300128947996,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
-109.0,meson_ds_star,charmed_meson,meson,1-,36.09074856492512,nan,36.09074856492512,36.09074856492512,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
+109.0,meson_ds_star,charmed_meson,meson,1-,24.060499845299994,nan,24.060499845299994,24.060499845299994,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 109.0,xi_c_plus,charmed_baryon,baryon,1/2+,0.19630086174796013,nan,0.19630086174796013,0.19630086174796013,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
 109.0,rho_1700,rho_like,meson,1-,15.058150133636994,nan,15.058150133636994,15.058150133636994,total,1,1,1,reject,parity_mismatch,1,even,"[1, 2, 4]",odd,1,1.0
 109.0,nucleon_1720,nucleon_like,baryon,3/2+,15.058150133636994,nan,15.058150133636994,15.058150133636994,total,1,1,1,pass,,0,odd,"[1, 3, 5]",odd,1,1.0
