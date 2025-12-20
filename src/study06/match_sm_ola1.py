@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
+import statistics
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -101,6 +103,49 @@ def _evaluate_harmonic_policy(
     return ("pass", "", preferred_parity, allowed_k, k_used, dominant_parity, sector_conf)
 
 
+def _fill_harmonic_fields(rows: List[Dict], hbar_sim: Optional[float]) -> int:
+    filled = 0
+    k_tol = 0.07
+    for row in rows:
+        k_used = _to_int(row.get("k_used"))
+        dominant_parity = row.get("dominant_parity")
+        sector_conf = _to_float(row.get("sector_confidence"))
+        if k_used is not None and dominant_parity and sector_conf is not None:
+            continue
+
+        omega_raw = _to_float(row.get("omega_ref") or row.get("omega_ref_interp"))
+        if omega_raw is None:
+            continue
+        energies = extract_levels(row.get("band_energies_gev", "[]"))
+        energies = [e for e in energies if np.isfinite(e)]
+        if not energies or not hbar_sim:
+            continue
+        omega_band = statistics.median(energies) / float(hbar_sim)
+        if omega_band <= 0:
+            continue
+        ratio = omega_raw / omega_band
+        k_scores = {}
+        score_sum = 0.0
+        for k in range(1, 6):
+            score = math.exp(-((ratio - k) ** 2) / (2 * (k_tol**2)))
+            k_scores[k] = score
+            score_sum += score
+        k_used = max(k_scores, key=lambda k: k_scores[k])
+        dominant_parity = "odd" if k_used % 2 == 1 else "even"
+        sector_conf = (k_scores[k_used] / score_sum) if score_sum > 0 else 0.0
+        omega_eff = omega_raw / float(k_used)
+        mass_sim_used = hbar_sim * omega_eff if hbar_sim is not None else None
+
+        row["k_used"] = k_used
+        row["dominant_parity"] = dominant_parity
+        row["sector_confidence"] = f"{sector_conf:.6g}"
+        row["omega_eff"] = f"{omega_eff:.12g}"
+        if mass_sim_used is not None:
+            row["mass_sim_used_gev"] = f"{mass_sim_used:.12g}"
+        filled += 1
+    return filled
+
+
 def main():
     parser = argparse.ArgumentParser(description="Match spectra against SM catalog (Ola1).")
     parser.add_argument("--proxies-csv", type=Path, required=True)
@@ -123,6 +168,11 @@ def main():
         "--use-mass-sim",
         action="store_true",
         help="Usar mass_sim_gev/omega_ref en lugar de band_energies_gev para el matching. Útil en fase 2/3.",
+    )
+    parser.add_argument(
+        "--update-proxies",
+        action="store_true",
+        help="Escribir k_used/parity/sector_confidence/mass_sim_used_gev en el proxies CSV.",
     )
     args = parser.parse_args()
 
@@ -150,6 +200,10 @@ def main():
                     break
                 except Exception:
                     hbar_sim = None
+
+    filled = _fill_harmonic_fields(rows, hbar_sim)
+    if filled:
+        print(f"[match_sm_ola1] harmonic fields filled in {filled} rows")
 
     for row in rows:
         mass_sim = None
@@ -262,6 +316,14 @@ def main():
         args.digest.mkdir(parents=True, exist_ok=True)
         digest_best = args.digest / best_path.name
         digest_best.write_text(best_path.read_text())
+
+    if args.update_proxies:
+        fieldnames = sorted({k for r in rows for k in r.keys()})
+        with args.proxies_csv.open("w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows)
+        print(f"[match_sm_ola1] proxies updated -> {args.proxies_csv}")
 
 
 def _in_window(val: float, window):
