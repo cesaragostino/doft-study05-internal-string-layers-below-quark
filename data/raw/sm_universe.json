@@ -726,7 +726,7 @@
       }
     },
     {
-      "name": "meson_ds_star-DOF",
+      "name": "meson_ds_star_2090_DOF",
       "family": "charmed_meson",
       "type": "meson",
       "jpc": "1-",
