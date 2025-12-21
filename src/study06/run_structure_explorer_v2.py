@@ -14,6 +14,7 @@ import random
 import time
 import uuid
 import platform
+import csv
 from datetime import datetime, timezone
 from itertools import permutations
 from pathlib import Path
@@ -51,6 +52,36 @@ def _extract_blocks(raw: Any) -> List[Dict[str, Any]]:
         if isinstance(results, dict) and isinstance(results.get("blocks"), list):
             return results["blocks"]
     return []
+
+
+def _norm_run_id(val: Any) -> str:
+    try:
+        f = float(val)
+        return str(int(f))
+    except Exception:
+        return str(val)
+
+
+def _load_dof_grade_a(path: Path) -> set[str]:
+    if not path.exists():
+        return set()
+    grade_a: set[str] = set()
+    with path.open() as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            rid = _norm_run_id(row.get("run_id"))
+            dna_grade = str(row.get("dna_grade", "")).upper()
+            if dna_grade:
+                if dna_grade == "A":
+                    grade_a.add(rid)
+                continue
+            try:
+                d_total = float(row.get("d_total"))
+            except Exception:
+                d_total = None
+            if d_total is not None and d_total < 0.5:
+                grade_a.add(rid)
+    return grade_a
 
 
 def _is_finite(val: Any) -> bool:
@@ -269,7 +300,7 @@ def _best_score(metrics: Dict[str, Any]) -> float:
     mem = metrics.get("memory_score_k10")
     if not _is_finite(r) or not _is_finite(pv):
         return -1e9
-    mem_val = float(mem) if _is_finite(mem) else 0.0
+    mem_val = float(mem) if _is_finite(mem) and float(mem) > 0 else 0.0
     return float(r) - 3.0 * float(pv) + 0.2 * mem_val
 
 
@@ -282,6 +313,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     inputs = cfg.get("inputs", {})
     blocks_path = Path(inputs.get("blocks_json", "data/processed/ola1/simple_blocks.json"))
     templates_path = Path(inputs.get("templates_json", "data/raw/compound_templates.json"))
+    dna_path = Path(inputs.get("dof_dna_catalog_csv", "data/processed/ola1/dof_dna_catalog.csv"))
     config_hash = f"sha256:{hashlib.sha256(config_path.read_bytes()).hexdigest()}"
     wave1_input_file_hash = f"sha256:{hashlib.sha256(blocks_path.read_bytes()).hexdigest()}"
 
@@ -289,6 +321,11 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     blocks = _extract_blocks(raw_blocks)
     if not blocks:
         raise RuntimeError(f"No blocks found in {blocks_path}")
+    grade_a_ids = _load_dof_grade_a(dna_path)
+    if grade_a_ids:
+        blocks = [b for b in blocks if _norm_run_id(b.get("origin_run_id")) in grade_a_ids]
+    if not blocks:
+        raise RuntimeError("No Grade A DOF blocks found for Structure Explorer.")
     block_map = {b.get("block_id"): b for b in blocks if b.get("block_id")}
 
     templates_list = _load_json(templates_path)
@@ -316,6 +353,8 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     r_min = float(tagging.get("R_mean_lastW_min", 0.85))
     pv_max = float(tagging.get("phase_var_lastW_max", 0.02))
     mem_min = float(tagging.get("memory_score_k10_min", 0.0))
+    r_final_min = tagging.get("R_final_min")
+    quality_lock_min = tagging.get("quality_lock_min")
 
     search_policy = cfg.get("search_policy", {})
     phase1_fraction = float(search_policy.get("phase1_fraction", 0.7))
@@ -729,9 +768,28 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
 
         r_mean = metrics.get("R_mean_lastW")
         pv_last = metrics.get("phase_var_lastW")
+        r_final = metrics.get("R_final")
+        quality_lock = metrics.get("QualityLock")
         memory_score = metrics.get("memory_score_k10")
+        memory_score_pos = float(memory_score) if _is_finite(memory_score) and float(memory_score) > 0 else None
         viable = bool(_is_finite(r_mean) and _is_finite(pv_last) and r_mean > r_min and pv_last < pv_max)
-        memory_good = bool(_is_finite(memory_score) and float(memory_score) >= mem_min)
+        r_final_ok = None
+        quality_lock_ok = None
+        if r_final_min is not None:
+            try:
+                r_final_min_val = float(r_final_min)
+            except Exception:
+                r_final_min_val = None
+            if r_final_min_val is not None:
+                r_final_ok = bool(_is_finite(r_final) and float(r_final) > r_final_min_val)
+        if quality_lock_min is not None:
+            try:
+                quality_lock_min_val = float(quality_lock_min)
+            except Exception:
+                quality_lock_min_val = None
+            if quality_lock_min_val is not None:
+                quality_lock_ok = bool(_is_finite(quality_lock) and float(quality_lock) > quality_lock_min_val)
+        memory_good = bool(memory_score_pos is not None and memory_score_pos >= mem_min)
         reasons: List[str] = []
         if not _is_finite(r_mean):
             reasons.append("missing_R_mean")
@@ -741,14 +799,36 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             reasons.append("missing_phase_var")
         elif pv_last >= pv_max:
             reasons.append("high_phase_variance")
-        if not memory_good:
+        if r_final_min is not None:
+            if not _is_finite(r_final):
+                reasons.append("missing_R_final")
+            elif r_final_ok is False:
+                reasons.append("low_R_final")
+        if quality_lock_min is not None:
+            if not _is_finite(quality_lock):
+                reasons.append("missing_quality_lock")
+            elif quality_lock_ok is False:
+                reasons.append("low_quality_lock")
+        if not _is_finite(memory_score):
+            reasons.append("memory_missing")
+        elif float(memory_score) <= 0:
+            reasons.append("memory_non_positive")
+        elif not memory_good:
             reasons.append("memory_low")
 
         tags = {
             "viable": viable,
             "memory_good": memory_good,
+            "R_final_ok": r_final_ok,
+            "quality_lock_ok": quality_lock_ok,
             "viability_mode": tagging.get("viability_mode", "hard_viable_soft_memory"),
-            "thresholds": {"R_mean_lastW_min": r_min, "phase_var_lastW_max": pv_max, "memory_score_k10_min": mem_min},
+            "thresholds": {
+                "R_mean_lastW_min": r_min,
+                "phase_var_lastW_max": pv_max,
+                "memory_score_k10_min": mem_min,
+                "R_final_min": r_final_min,
+                "quality_lock_min": quality_lock_min,
+            },
         }
 
         record = build_record(
