@@ -1451,7 +1451,7 @@
       "name": "lambda_c_2765",
       "family": "charmed_baryon",
       "type": "baryon",
-      "jpc": "?",
+      "jpc": "1/2-",
       "sm_mass_gev": 2.766,
       "masses_gev": [2.766],
       "widths_gev": [0.05],
@@ -1460,7 +1460,7 @@
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "any",
-          "allowed_k": [1, 2, 3, 4, 5]
+          "allowed_k": [1]
         }
       }
     },
@@ -1472,7 +1472,7 @@
       "sm_mass_gev": 2.856,
       "masses_gev": [2.856],
       "widths_gev": [0.068],
-      "tolerances": {"mass_abs": 0.01, "width_abs": 0.03, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.03, "spacing_rel": 0.2},
       "comment": "NUEVO - Lambda_c(2860), D-wave state",
       "doft": {
         "postulate_lock_mode": {
