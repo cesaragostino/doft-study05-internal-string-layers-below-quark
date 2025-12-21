@@ -580,7 +580,7 @@
       "comment": "NUEVO - Ds1(2536) estado P-wave, capturará el DOF en ~2.166 GeV"
     },
     {
-      "name": "meson_ds_star_2166_catch",
+      "name": "meson_ds_star_2180_DOF",
       "family": "charmed_meson",
       "type": "meson",
       "jpc": "?-",
@@ -594,7 +594,7 @@
           "allowed_k": [1, 2, 4]
         }
       },
-      "comment": "TRAMPA - Estado no confirmado en PDG. Captura DOF rebelde en ~2.166 GeV para análisis"
+      "comment": "Estado candidato observado en DOFT. Requiere confirmación experimental."
     },
     {
       "name": "omega_baryon",
@@ -724,6 +724,23 @@
           "allowed_k": [1, 2, 4]
         }
       }
+    },
+    {
+      "name": "meson_ds_star-DOF",
+      "family": "charmed_meson",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 2.1122,
+      "masses_gev": [2.090, 2.1122],
+      "widths_gev": [0.0019],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.002, "spacing_rel": 0.025},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      },
+      "comment": "Incluye masa DOFT observada (2.090) además de PDG (2.112). Desplazamiento -22 MeV posiblemente por efectos de ancho resonante."
     },
     {
       "name": "xi_c_plus",
