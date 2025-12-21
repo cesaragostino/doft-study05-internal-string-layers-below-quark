@@ -38,9 +38,14 @@ MEM_EPS = 1e-12
 
 
 def _lock_entropy_norm_from_weights(weights: Dict[str, float]) -> float:
-    q = max(float(weights.get("Q", 0.0)), 0.0)
-    s1 = max(float(weights.get("S1", 0.0)), 0.0)
-    s2 = max(float(weights.get("S2", 0.0)), 0.0)
+    def _to_float(val):
+        try:
+            return float(val)
+        except Exception:
+            return 0.0
+    q = max(_to_float(weights.get("Q", 0.0)), 0.0)
+    s1 = max(_to_float(weights.get("S1", 0.0)), 0.0)
+    s2 = max(_to_float(weights.get("S2", 0.0)), 0.0)
     s = q + s1 + s2
     if s <= CHAOS_EPS:
         p = [1 / 3, 1 / 3, 1 / 3]
@@ -191,7 +196,12 @@ def simulate_ola2(
     QualityLock = None
     entropy_quality = None
     if lock_quality:
-        Q_vals = [float(lq.get("Q", 0.0)) for lq in lock_quality]
+        def _to_float(val):
+            try:
+                return float(val)
+            except Exception:
+                return 0.0
+        Q_vals = [_to_float(lq.get("Q", 0.0)) for lq in lock_quality]
         if Q_vals:
             QualityLock = float(np.clip(np.mean(Q_vals), 0.0, 1.0))
         h_vals = [_lock_entropy_norm_from_weights(lq) for lq in lock_quality]

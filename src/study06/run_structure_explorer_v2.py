@@ -77,9 +77,14 @@ def _pick_mass(block: Dict[str, Any]) -> float:
 
 
 def _lock_entropy(lock_q: Dict[str, Any]) -> float:
-    q = max(float(lock_q.get("Q", 0.0)), 0.0)
-    s1 = max(float(lock_q.get("S1", 0.0)), 0.0)
-    s2 = max(float(lock_q.get("S2", 0.0)), 0.0)
+    def _to_float(val):
+        try:
+            return float(val)
+        except Exception:
+            return 0.0
+    q = max(_to_float(lock_q.get("Q", 0.0)), 0.0)
+    s1 = max(_to_float(lock_q.get("S1", 0.0)), 0.0)
+    s2 = max(_to_float(lock_q.get("S2", 0.0)), 0.0)
     s = q + s1 + s2
     if s <= 1e-12:
         return math.log(3) / math.log(3)
