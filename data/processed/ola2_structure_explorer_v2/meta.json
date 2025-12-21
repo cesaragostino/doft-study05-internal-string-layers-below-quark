@@ -1,11 +1,11 @@
 {
   "schema_version": "ola2_structure_explorer_v2_meta",
-  "run_id": "990d52c6-4929-4bf3-bef0-d0df97f87aa4",
-  "started_utc": "2025-12-21T02:16:17Z",
-  "ended_utc": "2025-12-21T02:16:28Z",
+  "run_id": "671039df-c8b8-46cb-a72b-b3e20d919b43",
+  "started_utc": "2025-12-21T05:55:08Z",
+  "ended_utc": "2025-12-21T05:55:22Z",
   "inputs": {
     "wave1_blocks_file": "data/processed/ola1/simple_blocks.json",
-    "wave1_input_file_hash": "sha256:c4913ce2916b93c4af710d3e77b3e021def0b4789ec994d474277346818a8c4a",
+    "wave1_input_file_hash": "sha256:75f4315751032f7a2a54b36cb5eb614be52f52544482b67d1b988b23bb3f9ed7",
     "templates_file": "data/raw/compound_templates.json",
     "config_file": "data/raw/structure_explorer_v2.json",
     "config_hash": "sha256:f34cada81ec48afac1e4d02a74c7ec218c077a211a83452b40a5c86f9f9f986c"
