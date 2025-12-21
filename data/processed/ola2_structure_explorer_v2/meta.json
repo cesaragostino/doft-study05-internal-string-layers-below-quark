@@ -1,0 +1,21 @@
+{
+  "schema_version": "ola2_structure_explorer_v2_meta",
+  "run_id": "137b0655-afce-45c3-a8d1-ce59254cc327",
+  "started_utc": "2025-12-21T00:27:49Z",
+  "ended_utc": "2025-12-21T00:28:01Z",
+  "inputs": {
+    "wave1_blocks_file": "data/processed/ola1/simple_blocks.json",
+    "wave1_input_file_hash": "sha256:f59b88657ee88a22e02a5d810cfcc2d22fb4c40affff6d85e9dd3958c43f6eb6",
+    "templates_file": "data/raw/compound_templates.json",
+    "config_file": "data/raw/structure_explorer_v2.json",
+    "config_hash": "sha256:f34cada81ec48afac1e4d02a74c7ec218c077a211a83452b40a5c86f9f9f986c"
+  },
+  "engine": {
+    "simulate_ola2_source": "ola2_reloaded_sim.py",
+    "uses_simulate_ola2_unmodified": true
+  },
+  "environment": {
+    "python_version": "3.13.9",
+    "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
+  }
+}

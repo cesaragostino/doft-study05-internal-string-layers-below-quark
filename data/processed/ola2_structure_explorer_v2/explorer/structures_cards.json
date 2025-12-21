@@ -1,0 +1,5849 @@
+[
+  {
+    "structure_id": "300160a35d6a02447ff41b9bfba717070648f76e2e65d3bd6458ee66705ae0c1",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0031",
+      "unknown_block_0031"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.03815501084399225,
+      "kappa_global": 0.13468468239729703,
+      "tau_field": 5.9249291745175325,
+      "sigma0": 0.11739612406131855,
+      "sigma_tc": 34.50613313325333,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9999988851988378,
+      "Z_final_abs": 0.09208503413456794,
+      "R_mean_lastW": 0.9999894067363991,
+      "phase_var_lastW": 4.453796260277288e-05,
+      "edge_phase_diff_mean_lastW": 0.006919692574064129,
+      "edge_phase_diff_std_lastW": 0.006071616723775809,
+      "PE_tick_norm": 0.7813713950279265,
+      "QualityLock": 0.9984996975056002,
+      "entropy_quality": 0.9888451842926002,
+      "memory_score_k10": 0.9804938619704389,
+      "E_local_final": -0.0763100121155447,
+      "E_local_mean_lastW": -0.07630364751834541,
+      "E_local_min_lastW": -0.0763100121155447,
+      "E_local_max_lastW": -0.07624686649133275,
+      "H_block_mean": 0.0111548157073999
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9999988851988378,
+      "Z_final_abs": 0.09208503413456794,
+      "edge_phase_diff_mean_lastW": 0.006919692574064129,
+      "edge_phase_diff_std_lastW": 0.006071616723775809
+    }
+  },
+  {
+    "structure_id": "eaa3bbb1cb328fa48ba77172ec8bb95781983d328fb9838aa7cab1f203ea6005",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "meson_ds_block_0001",
+      "delta_1920_block_0001"
+    ],
+    "assignment_particle_names": [
+      "meson_ds",
+      "delta_1920"
+    ],
+    "assignment_families": [
+      "charmed_meson",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.12426387401310426,
+      "kappa_global": 0.11687290695410707,
+      "tau_field": 13.379064436591994,
+      "sigma0": 0.14125996512293254,
+      "sigma_tc": 13.283970952349753,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9999710382007609,
+      "Z_final_abs": 0.3580290625678942,
+      "R_mean_lastW": 0.9999709847253021,
+      "phase_var_lastW": 2.568820265221121e-09,
+      "edge_phase_diff_mean_lastW": 0.015235509552925918,
+      "edge_phase_diff_std_lastW": 5.068353051259473e-05,
+      "PE_tick_norm": 0.7705145220731905,
+      "QualityLock": 0.9997451768801033,
+      "entropy_quality": 0.9977879556872632,
+      "memory_score_k10": 0.9757448853748608,
+      "E_local_final": -0.24849904943834103,
+      "E_local_mean_lastW": -0.24849893143704355,
+      "E_local_min_lastW": -0.24849950511753163,
+      "E_local_max_lastW": -0.24849852683749846,
+      "H_block_mean": 0.002212044312736846
+    },
+    "seed_stability": 1.0,
+    "n_trials": 11,
+    "n_viable": 11,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9999710382007609,
+      "Z_final_abs": 0.3580290625678942,
+      "edge_phase_diff_mean_lastW": 0.015235509552925918,
+      "edge_phase_diff_std_lastW": 5.068353051259473e-05
+    }
+  },
+  {
+    "structure_id": "7384be795658a5e109f0bbe2a9abd19b759e7244243a469e6b8350e19169cef6",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0005",
+      "delta_1950_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.15192917359931257,
+      "kappa_global": 0.19144690787930255,
+      "tau_field": 23.862403108748595,
+      "sigma0": 0.09861127063266273,
+      "sigma_tc": 25.49595617350286,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9987167592630937,
+      "Z_final_abs": 0.44819368525906267,
+      "R_mean_lastW": 0.99865844895054,
+      "phase_var_lastW": 4.916735663657057e-06,
+      "edge_phase_diff_mean_lastW": 0.10358521439791275,
+      "edge_phase_diff_std_lastW": 0.002217371340947893,
+      "PE_tick_norm": 0.8124926554226074,
+      "QualityLock": 0.9998072904331086,
+      "entropy_quality": 0.9982371329633816,
+      "memory_score_k10": 0.9673497005239013,
+      "E_local_final": -0.30223176983976946,
+      "E_local_mean_lastW": -0.3022209030362893,
+      "E_local_min_lastW": -0.3023312223415043,
+      "E_local_max_lastW": -0.3020867367563584,
+      "H_block_mean": 0.0017628670366183802
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9987167592630937,
+      "Z_final_abs": 0.44819368525906267,
+      "edge_phase_diff_mean_lastW": 0.10358521439791275,
+      "edge_phase_diff_std_lastW": 0.002217371340947893
+    }
+  },
+  {
+    "structure_id": "4e5c9e5c1b2b2e94782e38efc1956995656065c3d6094a2506e3ef4470fdc07a",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0004",
+      "unknown_block_0034",
+      "unknown_block_0042"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.38342433933584696,
+      "kappa_global": 0.27776889346642275,
+      "tau_field": 30.239292783995694,
+      "sigma0": 0.02393351399393291,
+      "sigma_tc": 57.76747741226529,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9990810644233818,
+      "Z_final_abs": 0.942539040689195,
+      "R_mean_lastW": 0.999081936504218,
+      "phase_var_lastW": 3.1395358467468044e-05,
+      "edge_phase_diff_mean_lastW": 0.062359376480909154,
+      "edge_phase_diff_std_lastW": 0.0402612058306245,
+      "PE_tick_norm": 0.8543032147465907,
+      "QualityLock": 0.999412567727518,
+      "entropy_quality": 0.9953347020018022,
+      "memory_score_k10": 0.9639180753878298,
+      "E_local_final": -1.1463596441799517,
+      "E_local_mean_lastW": -1.1465779368122146,
+      "E_local_min_lastW": -1.1471528011596634,
+      "E_local_max_lastW": -1.1459115695856914,
+      "H_block_mean": 0.0046652979981978045
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9990810644233818,
+      "Z_final_abs": 0.942539040689195,
+      "edge_phase_diff_mean_lastW": 0.062359376480909154,
+      "edge_phase_diff_std_lastW": 0.0402612058306245
+    }
+  },
+  {
+    "structure_id": "550a372f0f32f3e463ad77985cb180e6bca0be4bc77db94671186fef4b64840a",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0034",
+      "meson_d_star_plus_block_0002"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "meson_d_star_plus"
+    ],
+    "assignment_families": [
+      "unknown",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.23540212619930273,
+      "kappa_global": 0.0263647032137734,
+      "tau_field": 15.34482618270479,
+      "sigma0": 0.10762572726887326,
+      "sigma_tc": 25.851276387801917,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9991923872334587,
+      "Z_final_abs": 0.5125764842622607,
+      "R_mean_lastW": 0.9991943259922952,
+      "phase_var_lastW": 2.4141173129109395e-06,
+      "edge_phase_diff_mean_lastW": 0.08027356290447045,
+      "edge_phase_diff_std_lastW": 0.0015537430009209823,
+      "PE_tick_norm": 0.8193844222610464,
+      "QualityLock": 0.9989419912675646,
+      "entropy_quality": 0.9921802981845829,
+      "memory_score_k10": 0.9601603013123898,
+      "E_local_final": -0.4692525010047012,
+      "E_local_mean_lastW": -0.469288177721752,
+      "E_local_min_lastW": -0.46942039322661233,
+      "E_local_max_lastW": -0.4691822436279905,
+      "H_block_mean": 0.007819701815417175
+    },
+    "seed_stability": 0.9090909090909091,
+    "n_trials": 11,
+    "n_viable": 10,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9991923872334587,
+      "Z_final_abs": 0.5125764842622607,
+      "edge_phase_diff_mean_lastW": 0.08027356290447045,
+      "edge_phase_diff_std_lastW": 0.0015537430009209823
+    }
+  },
+  {
+    "structure_id": "b8f0e6ff8fce735d4c367ee2a2dda426e7db48bf28ded886324ceab5f9a87e4d",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0007",
+      "delta_1950_block_0009"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1721770274646745,
+      "kappa_global": 0.08991390971023525,
+      "tau_field": 78.71531308480716,
+      "sigma0": 0.19035534646708863,
+      "sigma_tc": 46.21612790163066,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9988856922283568,
+      "Z_final_abs": 0.08553021858159164,
+      "R_mean_lastW": 0.9980853973453412,
+      "phase_var_lastW": 0.0006732052897543971,
+      "edge_phase_diff_mean_lastW": 0.12103449641525259,
+      "edge_phase_diff_std_lastW": 0.02594619990970541,
+      "PE_tick_norm": 0.8137834675646324,
+      "QualityLock": 0.9995506710917079,
+      "entropy_quality": 0.9963492485930692,
+      "memory_score_k10": 0.9748527492101625,
+      "E_local_final": -0.34155162118380433,
+      "E_local_mean_lastW": -0.34158584449243057,
+      "E_local_min_lastW": -0.34340377777446085,
+      "E_local_max_lastW": -0.33915816688266226,
+      "H_block_mean": 0.0036507514069307784
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9988856922283568,
+      "Z_final_abs": 0.08553021858159164,
+      "edge_phase_diff_mean_lastW": 0.12103449641525259,
+      "edge_phase_diff_std_lastW": 0.02594619990970541
+    }
+  },
+  {
+    "structure_id": "9a4a018ff3678ec4add98bff270fbc702f8d8927825e8dd4c3cd9e270f52dfe2",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0046",
+      "unknown_block_0034"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.11856122265062924,
+      "kappa_global": 0.13355950799613714,
+      "tau_field": 44.4348735121315,
+      "sigma0": 0.2921837538302691,
+      "sigma_tc": 32.2712082229651,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9999352476639771,
+      "Z_final_abs": 0.3888334905004136,
+      "R_mean_lastW": 0.9999639479753173,
+      "phase_var_lastW": 0.00010578093016237154,
+      "edge_phase_diff_mean_lastW": 0.013514425374427218,
+      "edge_phase_diff_std_lastW": 0.010284985666609922,
+      "PE_tick_norm": 0.8486064313557004,
+      "QualityLock": 0.49994889571999224,
+      "entropy_quality": 0.9971173240101052,
+      "memory_score_k10": 0.9524066867884616,
+      "E_local_final": -0.23706632504165703,
+      "E_local_mean_lastW": -0.23708695137982433,
+      "E_local_min_lastW": -0.2371224117165103,
+      "E_local_max_lastW": -0.23695430491725056,
+      "H_block_mean": 0.0028826759898948175
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9999352476639771,
+      "Z_final_abs": 0.3888334905004136,
+      "edge_phase_diff_mean_lastW": 0.013514425374427218,
+      "edge_phase_diff_std_lastW": 0.010284985666609922
+    }
+  },
+  {
+    "structure_id": "21be85f6c7f0db63664f69df518adbc208755b954c96a19a32b5fa596609863e",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1930_block_0001",
+      "delta_1920_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1930",
+      "delta_1920"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1815584885159125,
+      "kappa_global": 0.1849833711987724,
+      "tau_field": 9.986197617856927,
+      "sigma0": 0.02500184716865225,
+      "sigma_tc": 58.5107262255485,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9995545446338702,
+      "Z_final_abs": 0.5917161629746387,
+      "R_mean_lastW": 0.9996333178319153,
+      "phase_var_lastW": 3.533336449002633e-05,
+      "edge_phase_diff_mean_lastW": 0.0538359660751496,
+      "edge_phase_diff_std_lastW": 0.005944187454145968,
+      "PE_tick_norm": 0.8231566346644034,
+      "QualityLock": 0.5000983775413574,
+      "entropy_quality": 0.9586179086658208,
+      "memory_score_k10": 0.9508929603281698,
+      "E_local_final": -0.3626871089265449,
+      "E_local_mean_lastW": -0.3625996779136872,
+      "E_local_min_lastW": -0.36281994102734694,
+      "E_local_max_lastW": -0.36241144925791136,
+      "H_block_mean": 0.04138209133417923
+    },
+    "seed_stability": 0.5454545454545454,
+    "n_trials": 11,
+    "n_viable": 6,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9995545446338702,
+      "Z_final_abs": 0.5917161629746387,
+      "edge_phase_diff_mean_lastW": 0.0538359660751496,
+      "edge_phase_diff_std_lastW": 0.005944187454145968
+    }
+  },
+  {
+    "structure_id": "7f1237c06e8fbfa1c6875476055ac6638b83b4e69e276acd645ddabcc52ec3e5",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0018",
+      "unknown_block_0025"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.15084668697324272,
+      "kappa_global": 0.2178195249935572,
+      "tau_field": 37.65686262737175,
+      "sigma0": 0.08506718832495276,
+      "sigma_tc": 19.492208815359753,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9973710785477832,
+      "Z_final_abs": 0.1387446311788914,
+      "R_mean_lastW": 0.9973711375608462,
+      "phase_var_lastW": 7.783279498515581e-07,
+      "edge_phase_diff_mean_lastW": 0.14504945218527182,
+      "edge_phase_diff_std_lastW": 0.0008822289667946514,
+      "PE_tick_norm": 0.8229924459496795,
+      "QualityLock": 0.9997189579956915,
+      "entropy_quality": 0.997626569129182,
+      "memory_score_k10": 0.9607291530618208,
+      "E_local_final": -0.29853734596115916,
+      "E_local_mean_lastW": -0.2985233402254246,
+      "E_local_min_lastW": -0.29857038072078623,
+      "E_local_max_lastW": -0.2984461433988635,
+      "H_block_mean": 0.002373430870818022
+    },
+    "seed_stability": 1.0,
+    "n_trials": 11,
+    "n_viable": 11,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9973710785477832,
+      "Z_final_abs": 0.1387446311788914,
+      "edge_phase_diff_mean_lastW": 0.14504945218527182,
+      "edge_phase_diff_std_lastW": 0.0008822289667946514
+    }
+  },
+  {
+    "structure_id": "c67ba81759674e1c30cd6437f1a95db3529678a23872d6cdf2c85f0775f26232",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0008",
+      "unknown_block_0057"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1537597685748207,
+      "kappa_global": 0.183468343695176,
+      "tau_field": 15.34126965322304,
+      "sigma0": 0.04857462780785021,
+      "sigma_tc": 18.62789485458219,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.991572631616758,
+      "Z_final_abs": 0.954970973169084,
+      "R_mean_lastW": 0.9915676372725415,
+      "phase_var_lastW": 5.009651453779803e-08,
+      "edge_phase_diff_mean_lastW": 0.2599112773450713,
+      "edge_phase_diff_std_lastW": 0.00022382250677221456,
+      "PE_tick_norm": 0.8122616477938971,
+      "QualityLock": 0.9994690164787476,
+      "entropy_quality": 0.9956755048851533,
+      "memory_score_k10": 0.9751608358751108,
+      "E_local_final": -0.2971987718410822,
+      "E_local_mean_lastW": -0.29718814956036393,
+      "E_local_min_lastW": -0.2972121014560165,
+      "E_local_max_lastW": -0.2971438002408704,
+      "H_block_mean": 0.004324495114846656
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.991572631616758,
+      "Z_final_abs": 0.954970973169084,
+      "edge_phase_diff_mean_lastW": 0.2599112773450713,
+      "edge_phase_diff_std_lastW": 0.00022382250677221456
+    }
+  },
+  {
+    "structure_id": "a8c0bd26118229ad5038199292010c1fe50b50e54aacee3ff787a7716ca853b9",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0006",
+      "unknown_block_0042"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.18904198529119087,
+      "kappa_global": 0.18944606425964022,
+      "tau_field": 11.947026851638043,
+      "sigma0": 0.12427934000477886,
+      "sigma_tc": 30.56484630183884,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9938091522191687,
+      "Z_final_abs": 0.9810769992978589,
+      "R_mean_lastW": 0.9934774694722067,
+      "phase_var_lastW": 2.69037380488304e-05,
+      "edge_phase_diff_mean_lastW": 0.2284956896024184,
+      "edge_phase_diff_std_lastW": 0.005186881341310056,
+      "PE_tick_norm": 0.8247648315083821,
+      "QualityLock": 0.9993797001906701,
+      "entropy_quality": 0.9950599247286186,
+      "memory_score_k10": 0.9647470142687152,
+      "E_local_final": -0.36826898294720845,
+      "E_local_mean_lastW": -0.3682569710135168,
+      "E_local_min_lastW": -0.36911526001315037,
+      "E_local_max_lastW": -0.3675315998944646,
+      "H_block_mean": 0.0049400752713813665
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9938091522191687,
+      "Z_final_abs": 0.9810769992978589,
+      "edge_phase_diff_mean_lastW": 0.2284956896024184,
+      "edge_phase_diff_std_lastW": 0.005186881341310056
+    }
+  },
+  {
+    "structure_id": "a74b1123257e589a30e6f1ec1e36c56c71cdc309539a6b18f1a9d55b1bd9e0ef",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0005",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1085374960421694,
+      "kappa_global": 0.07270378976956614,
+      "tau_field": 18.116998493005262,
+      "sigma0": 0.014510131451824605,
+      "sigma_tc": 43.863077047656546,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9960867374663309,
+      "Z_final_abs": 0.3025985534717863,
+      "R_mean_lastW": 0.9961516829081069,
+      "phase_var_lastW": 7.497123225725066e-06,
+      "edge_phase_diff_mean_lastW": 0.17549594085783723,
+      "edge_phase_diff_std_lastW": 0.0027380875124299927,
+      "PE_tick_norm": 0.7948802472848779,
+      "QualityLock": 0.9997346231855553,
+      "entropy_quality": 0.9976480624808239,
+      "memory_score_k10": 0.9469513886885418,
+      "E_local_final": -0.21380131130944643,
+      "E_local_mean_lastW": -0.21373286757987917,
+      "E_local_min_lastW": -0.21392268781095253,
+      "E_local_max_lastW": -0.21354242029861345,
+      "H_block_mean": 0.002351937519176037
+    },
+    "seed_stability": 1.0,
+    "n_trials": 11,
+    "n_viable": 11,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9960867374663309,
+      "Z_final_abs": 0.3025985534717863,
+      "edge_phase_diff_mean_lastW": 0.17549594085783723,
+      "edge_phase_diff_std_lastW": 0.0027380875124299927
+    }
+  },
+  {
+    "structure_id": "1fdd54e7bc53f0c671889cadff7091b131a4620daf5be0bfbaf3be526f8f0700",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1930_block_0004",
+      "delta_1950_block_0003",
+      "delta_1930_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1930",
+      "delta_1950",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0,
+      1.0,
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.14554258318395172,
+      "kappa_global": 0.15912659583336836,
+      "tau_field": 5.530504771996767,
+      "sigma0": 0.28091894198875644,
+      "sigma_tc": 16.741581631032226,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9905471373375946,
+      "Z_final_abs": 0.8350367092630925,
+      "R_mean_lastW": 0.9905308890088419,
+      "phase_var_lastW": 7.166957435582728e-07,
+      "edge_phase_diff_mean_lastW": 0.19637446957193655,
+      "edge_phase_diff_std_lastW": 0.13559868542726805,
+      "PE_tick_norm": 0.7949290491458683,
+      "QualityLock": 0.6665657270095081,
+      "entropy_quality": 0.970984172365733,
+      "memory_score_k10": 0.9700583689010835,
+      "E_local_final": -0.4263631073084369,
+      "E_local_mean_lastW": -0.4263383951646896,
+      "E_local_min_lastW": -0.4264525424692741,
+      "E_local_max_lastW": -0.42626811479213905,
+      "H_block_mean": 0.02901582763426705
+    },
+    "seed_stability": 1.0,
+    "n_trials": 11,
+    "n_viable": 11,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9905471373375946,
+      "Z_final_abs": 0.8350367092630925,
+      "edge_phase_diff_mean_lastW": 0.19637446957193655,
+      "edge_phase_diff_std_lastW": 0.13559868542726805
+    }
+  },
+  {
+    "structure_id": "6c73b5112d55dedd52305c71939d3b29e095c138716eeb23f736b7b77e69f521",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "meson_d_star_plus_block_0001",
+      "delta_1950_block_0003"
+    ],
+    "assignment_particle_names": [
+      "meson_d_star_plus",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "charmed_meson",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.27103515605694395,
+      "kappa_global": 0.3262169242211391,
+      "tau_field": 22.744311229333654,
+      "sigma0": 0.22286899578566693,
+      "sigma_tc": 20.93625071073631,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9893713615782151,
+      "Z_final_abs": 0.9832069118718462,
+      "R_mean_lastW": 0.9894004393222445,
+      "phase_var_lastW": 2.500778753795642e-06,
+      "edge_phase_diff_mean_lastW": 0.2914519310921236,
+      "edge_phase_diff_std_lastW": 0.0015813850744823797,
+      "PE_tick_norm": 0.8530124026045655,
+      "QualityLock": 0.9996824598695717,
+      "entropy_quality": 0.9972267359342821,
+      "memory_score_k10": 0.9708245937147343,
+      "E_local_final": -0.5190337801846554,
+      "E_local_mean_lastW": -0.5192222234990662,
+      "E_local_min_lastW": -0.5196773249489899,
+      "E_local_max_lastW": -0.5187161547473238,
+      "H_block_mean": 0.002773264065717907
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9893713615782151,
+      "Z_final_abs": 0.9832069118718462,
+      "edge_phase_diff_mean_lastW": 0.2914519310921236,
+      "edge_phase_diff_std_lastW": 0.0015813850744823797
+    }
+  },
+  {
+    "structure_id": "92e2931571a5e258b1c9a3210bb1e8a3840a97e50f07a1f054aa7ab323aa6506",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0009",
+      "delta_1950_block_0007"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.140488857971014,
+      "kappa_global": 0.38553862414208845,
+      "tau_field": 15.519147821203944,
+      "sigma0": 0.1612428079655615,
+      "sigma_tc": 71.2821021808021,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9995405795462496,
+      "Z_final_abs": 0.9342554338486064,
+      "R_mean_lastW": 0.9985284976294176,
+      "phase_var_lastW": 0.0021180038150815554,
+      "edge_phase_diff_mean_lastW": 0.09828000147900724,
+      "edge_phase_diff_std_lastW": 0.04602177544469091,
+      "PE_tick_norm": 0.8819677381490618,
+      "QualityLock": 0.9995506710917079,
+      "entropy_quality": 0.9963492485930692,
+      "memory_score_k10": 0.9472352537642675,
+      "E_local_final": -0.2775284504409946,
+      "E_local_mean_lastW": -0.2792742896034122,
+      "E_local_min_lastW": -0.2809496765340789,
+      "E_local_max_lastW": -0.27594857529781824,
+      "H_block_mean": 0.0036507514069307784
+    },
+    "seed_stability": 0.9090909090909091,
+    "n_trials": 11,
+    "n_viable": 10,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9995405795462496,
+      "Z_final_abs": 0.9342554338486064,
+      "edge_phase_diff_mean_lastW": 0.09828000147900724,
+      "edge_phase_diff_std_lastW": 0.04602177544469091
+    }
+  },
+  {
+    "structure_id": "8fc836f91ef41a0deb66401cc1730fc6a5d270557852f6a6c0335381729530b7",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0006",
+      "delta_1950_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.0637116899682179,
+      "kappa_global": 0.06649441888459244,
+      "tau_field": 58.49640078180736,
+      "sigma0": 0.03005153920844599,
+      "sigma_tc": 22.12671684792072,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9893460159566423,
+      "Z_final_abs": 0.13158641701102894,
+      "R_mean_lastW": 0.9892936239601899,
+      "phase_var_lastW": 4.2297184483549493e-07,
+      "edge_phase_diff_mean_lastW": 0.29292296180063315,
+      "edge_phase_diff_std_lastW": 0.0006503628562852394,
+      "PE_tick_norm": 0.7227064896782608,
+      "QualityLock": 0.9997414166272105,
+      "entropy_quality": 0.9977429162977013,
+      "memory_score_k10": 0.9607048360215802,
+      "E_local_final": -0.12202782676456564,
+      "E_local_mean_lastW": -0.1219951018567675,
+      "E_local_min_lastW": -0.12203132251574891,
+      "E_local_max_lastW": -0.1219548891078077,
+      "H_block_mean": 0.0022570837022987313
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9893460159566423,
+      "Z_final_abs": 0.13158641701102894,
+      "edge_phase_diff_mean_lastW": 0.29292296180063315,
+      "edge_phase_diff_std_lastW": 0.0006503628562852394
+    }
+  },
+  {
+    "structure_id": "c93cbbdbea5d2538500306c96c56df89cc52c85be6d6225ad7ad2dc80be71d2f",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0042",
+      "delta_1950_block_0003"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.19178979945125457,
+      "kappa_global": 0.19747060988833492,
+      "tau_field": 6.074907713509464,
+      "sigma0": 0.02629899043495152,
+      "sigma_tc": 97.05766255670457,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9903587970025404,
+      "Z_final_abs": 0.9815719285608453,
+      "R_mean_lastW": 0.9916765426874342,
+      "phase_var_lastW": 0.0002503789336075003,
+      "edge_phase_diff_mean_lastW": 0.2577425288644619,
+      "edge_phase_diff_std_lastW": 0.015823366696360804,
+      "PE_tick_norm": 0.8513336967536167,
+      "QualityLock": 0.99939494751076,
+      "entropy_quality": 0.9951484092747422,
+      "memory_score_k10": 0.9495490028534034,
+      "E_local_final": -0.3715733006883035,
+      "E_local_mean_lastW": -0.371063403929172,
+      "E_local_min_lastW": -0.3738920458498577,
+      "E_local_max_lastW": -0.3676945782474951,
+      "H_block_mean": 0.004851590725257796
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9903587970025404,
+      "Z_final_abs": 0.9815719285608453,
+      "edge_phase_diff_mean_lastW": 0.2577425288644619,
+      "edge_phase_diff_std_lastW": 0.015823366696360804
+    }
+  },
+  {
+    "structure_id": "c92e0aad30bd85116576e37d5ba6419f09cf2bacd2b6d220f786f3e8b9ce8d1a",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1930_block_0004",
+      "delta_1910_block_0002",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "delta_1930",
+      "delta_1910",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5,
+      1.0,
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.011736151720462063,
+      "kappa_global": 0.22343931937186873,
+      "tau_field": 5.302503012399444,
+      "sigma0": 0.061327017812571785,
+      "sigma_tc": 23.12842030529264,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9837045053002446,
+      "Z_final_abs": 0.8051690815003896,
+      "R_mean_lastW": 0.9837741998802711,
+      "phase_var_lastW": 1.3873017379704068e-06,
+      "edge_phase_diff_mean_lastW": 0.2561571937077133,
+      "edge_phase_diff_std_lastW": 0.17926830689392034,
+      "PE_tick_norm": 0.728539789907094,
+      "QualityLock": 0.6667879735074295,
+      "entropy_quality": 0.9933078326050842,
+      "memory_score_k10": 0.985292410053831,
+      "E_local_final": -0.03364269950236586,
+      "E_local_mean_lastW": -0.03365391653883742,
+      "E_local_min_lastW": -0.033666098642412164,
+      "E_local_max_lastW": -0.033636422265724664,
+      "H_block_mean": 0.006692167394915895
+    },
+    "seed_stability": 0.6363636363636364,
+    "n_trials": 11,
+    "n_viable": 7,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9837045053002446,
+      "Z_final_abs": 0.8051690815003896,
+      "edge_phase_diff_mean_lastW": 0.2561571937077133,
+      "edge_phase_diff_std_lastW": 0.17926830689392034
+    }
+  },
+  {
+    "structure_id": "15d30030d9b26e4a66756fb4fb4003475a4c2e3d41e779416cc8649ecda5d59f",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1920_block_0001",
+      "delta_1950_block_0007"
+    ],
+    "assignment_particle_names": [
+      "delta_1920",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.20029530135503626,
+      "kappa_global": 0.2591964813112081,
+      "tau_field": 9.90239260062784,
+      "sigma0": 0.055389807308275786,
+      "sigma_tc": 184.74456565168651,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.99455284941729,
+      "Z_final_abs": 0.8189097580366981,
+      "R_mean_lastW": 0.9949829475111829,
+      "phase_var_lastW": 0.0013925379582078329,
+      "edge_phase_diff_mean_lastW": 0.1969306211847936,
+      "edge_phase_diff_std_lastW": 0.03731672491266929,
+      "PE_tick_norm": 0.8321994688451518,
+      "QualityLock": 0.9998408927080775,
+      "entropy_quality": 0.9985239257797639,
+      "memory_score_k10": 0.94287163647522,
+      "E_local_final": -0.3920303194438061,
+      "E_local_mean_lastW": -0.3923412650831176,
+      "E_local_min_lastW": -0.39780158717738456,
+      "E_local_max_lastW": -0.3872286587374426,
+      "H_block_mean": 0.0014760742202360603
+    },
+    "seed_stability": 0.9090909090909091,
+    "n_trials": 11,
+    "n_viable": 10,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.99455284941729,
+      "Z_final_abs": 0.8189097580366981,
+      "edge_phase_diff_mean_lastW": 0.1969306211847936,
+      "edge_phase_diff_std_lastW": 0.03731672491266929
+    }
+  },
+  {
+    "structure_id": "1b0c7a7f9a70f3965d86f1a7ad4b4aa9023125b7bb261d6a4130fb54a575d312",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1910_block_0001",
+      "delta_1910_block_0002",
+      "delta_1950_block_0009"
+    ],
+    "assignment_particle_names": [
+      "delta_1910",
+      "delta_1910",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0,
+      2.0,
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.27204950074300793,
+      "kappa_global": 0.15036626307721743,
+      "tau_field": 9.606023134031744,
+      "sigma0": 0.3707402717768163,
+      "sigma_tc": 24.556673642944958,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9923532492957686,
+      "Z_final_abs": 0.5089162286616812,
+      "R_mean_lastW": 0.9926434242004559,
+      "phase_var_lastW": 3.797299376296446e-05,
+      "edge_phase_diff_mean_lastW": 0.17867007277175445,
+      "edge_phase_diff_std_lastW": 0.11089705751455073,
+      "PE_tick_norm": 0.84394424873631,
+      "QualityLock": 0.6665185248806985,
+      "entropy_quality": 0.9914612594240845,
+      "memory_score_k10": 0.9289612326426411,
+      "E_local_final": -0.8003517725862171,
+      "E_local_mean_lastW": -0.8001884873403234,
+      "E_local_min_lastW": -0.8017798992480746,
+      "E_local_max_lastW": -0.7980661677319145,
+      "H_block_mean": 0.008538740575915563
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9923532492957686,
+      "Z_final_abs": 0.5089162286616812,
+      "edge_phase_diff_mean_lastW": 0.17867007277175445,
+      "edge_phase_diff_std_lastW": 0.11089705751455073
+    }
+  },
+  {
+    "structure_id": "3623767602e1fc984e9819731e83f3ce15219a216ac2b6c5bc0d8c4de7a45ede",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1930_block_0004",
+      "delta_1930_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1930",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.13369161527917062,
+      "kappa_global": 0.18839165946341363,
+      "tau_field": 55.50622510110394,
+      "sigma0": 0.20163082941551647,
+      "sigma_tc": 26.63207734053098,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9999744497999922,
+      "Z_final_abs": 0.08959865913994354,
+      "R_mean_lastW": 0.9999925538095438,
+      "phase_var_lastW": 3.5980322924099656e-05,
+      "edge_phase_diff_mean_lastW": 0.0058775926444639024,
+      "edge_phase_diff_std_lastW": 0.005002365364829241,
+      "PE_tick_norm": 0.8581042434332896,
+      "QualityLock": 0.4999925433326582,
+      "entropy_quality": 0.9577345033591687,
+      "memory_score_k10": 0.1799271482259489,
+      "E_local_final": -0.2673623927803627,
+      "E_local_mean_lastW": -0.2673762564730818,
+      "E_local_min_lastW": -0.26738322984884855,
+      "E_local_max_lastW": -0.26733845251019633,
+      "H_block_mean": 0.0422654966408314
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9999744497999922,
+      "Z_final_abs": 0.08959865913994354,
+      "edge_phase_diff_mean_lastW": 0.0058775926444639024,
+      "edge_phase_diff_std_lastW": 0.005002365364829241
+    }
+  },
+  {
+    "structure_id": "522ed3b651eed47b57e3485548a1d691fcb94b1ea127a5bb8db074d714e477ea",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "meson_d_star_plus_block_0001",
+      "unknown_block_0054"
+    ],
+    "assignment_particle_names": [
+      "meson_d_star_plus",
+      "unknown"
+    ],
+    "assignment_families": [
+      "charmed_meson",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3665554088774706,
+      "kappa_global": 0.3734303362460732,
+      "tau_field": 27.916266309395176,
+      "sigma0": 0.18403402157221552,
+      "sigma_tc": 48.29252659561844,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9608287950455485,
+      "Z_final_abs": 0.12580793821036385,
+      "R_mean_lastW": 0.9632740633416683,
+      "phase_var_lastW": 0.0010257019760029303,
+      "edge_phase_diff_mean_lastW": 0.5427926641368828,
+      "edge_phase_diff_std_lastW": 0.03202658233410069,
+      "PE_tick_norm": 0.8632214039495205,
+      "QualityLock": 0.9996994635926736,
+      "entropy_quality": 0.9973666303915005,
+      "memory_score_k10": 0.009901844041489194,
+      "E_local_final": -0.6299983528185736,
+      "E_local_mean_lastW": -0.6282258522657901,
+      "E_local_min_lastW": -0.6490999524414383,
+      "E_local_max_lastW": -0.5957323476544405,
+      "H_block_mean": 0.0026333696084994817
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9608287950455485,
+      "Z_final_abs": 0.12580793821036385,
+      "edge_phase_diff_mean_lastW": 0.5427926641368828,
+      "edge_phase_diff_std_lastW": 0.03202658233410069
+    }
+  },
+  {
+    "structure_id": "eb07fb0605e98596ed2de80e9a4613b6c83ace15c05915bc5434deb444a40411",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "meson_ds_block_0001",
+      "delta_1910_block_0002"
+    ],
+    "assignment_particle_names": [
+      "meson_ds",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "charmed_meson",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2263778783043053,
+      "kappa_global": 0.2085520140384256,
+      "tau_field": 13.258410235529187,
+      "sigma0": 0.2891532629294294,
+      "sigma_tc": 47.93071430860587,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.996063279935815,
+      "Z_final_abs": 0.36340157733331396,
+      "R_mean_lastW": 0.9990375124935003,
+      "phase_var_lastW": 0.0022603563813964095,
+      "edge_phase_diff_mean_lastW": 0.07607858217092592,
+      "edge_phase_diff_std_lastW": 0.04375766348623089,
+      "PE_tick_norm": 0.8804136772759317,
+      "QualityLock": 0.5003374543781186,
+      "entropy_quality": 0.991364573772728,
+      "memory_score_k10": 0.326785842209815,
+      "E_local_final": -0.44588976551808757,
+      "E_local_mean_lastW": -0.45136959542102434,
+      "E_local_min_lastW": -0.45275240344088297,
+      "E_local_max_lastW": -0.44588976551808757,
+      "H_block_mean": 0.008635426227271939
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.996063279935815,
+      "Z_final_abs": 0.36340157733331396,
+      "edge_phase_diff_mean_lastW": 0.07607858217092592,
+      "edge_phase_diff_std_lastW": 0.04375766348623089
+    }
+  },
+  {
+    "structure_id": "ce62e4d756850cb1bcee49131907e86f66a1a82f71f864efe50b5f614ce24ca8",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0007",
+      "unknown_block_0039",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0,
+      2.0,
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.11109480489801757,
+      "kappa_global": 0.286531841399813,
+      "tau_field": 60.691659258743,
+      "sigma0": 0.14932188103687802,
+      "sigma_tc": 57.888315441823764,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.8702013456921407,
+      "Z_final_abs": 0.16259194335568636,
+      "R_mean_lastW": 0.8747957338040024,
+      "phase_var_lastW": 0.001342046593563611,
+      "edge_phase_diff_mean_lastW": 0.8217142123329154,
+      "edge_phase_diff_std_lastW": 0.3178084328343427,
+      "PE_tick_norm": 0.7843966362967787,
+      "QualityLock": 0.9996259061044368,
+      "entropy_quality": 0.9968266451464002,
+      "memory_score_k10": 0.971499436157388,
+      "E_local_final": -0.23047233305222892,
+      "E_local_mean_lastW": -0.22923884993442978,
+      "E_local_min_lastW": -0.2372406640374904,
+      "E_local_max_lastW": -0.21864465909719075,
+      "H_block_mean": 0.0031733548535997926
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.8702013456921407,
+      "Z_final_abs": 0.16259194335568636,
+      "edge_phase_diff_mean_lastW": 0.8217142123329154,
+      "edge_phase_diff_std_lastW": 0.3178084328343427
+    }
+  },
+  {
+    "structure_id": "7dcd57cb9470d70b98d1749657d0702db55f33dcec2b20d7ba8d0ffa951059d5",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1930_block_0004",
+      "unknown_block_0022"
+    ],
+    "assignment_particle_names": [
+      "delta_1930",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3585247427237101,
+      "kappa_global": 0.37893199736985667,
+      "tau_field": 38.32324764443517,
+      "sigma0": 0.2370610942140882,
+      "sigma_tc": 55.39509424944212,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.964723807901369,
+      "Z_final_abs": 0.8856498308806563,
+      "R_mean_lastW": 0.9616072398333506,
+      "phase_var_lastW": 0.0020844851647684438,
+      "edge_phase_diff_mean_lastW": 0.5541621797172709,
+      "edge_phase_diff_std_lastW": 0.04565616239642184,
+      "PE_tick_norm": 0.891465550226651,
+      "QualityLock": 0.9995394919260279,
+      "entropy_quality": 0.9962151838091416,
+      "memory_score_k10": -0.1486134024972563,
+      "E_local_final": -0.6172731931799247,
+      "E_local_mean_lastW": -0.6085685391924291,
+      "E_local_min_lastW": -0.6460141505314569,
+      "E_local_max_lastW": -0.5806249060912237,
+      "H_block_mean": 0.0037848161908583576
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.964723807901369,
+      "Z_final_abs": 0.8856498308806563,
+      "edge_phase_diff_mean_lastW": 0.5541621797172709,
+      "edge_phase_diff_std_lastW": 0.04565616239642184
+    }
+  },
+  {
+    "structure_id": "5eff83c2e705a5a8e5f643292f3deccc0e79e2b9abb5ecf3e9a675d95b0ea95b",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0048",
+      "unknown_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.238879904158654,
+      "kappa_global": 0.3666700868677066,
+      "tau_field": 20.69467611330055,
+      "sigma0": 0.32612415250856397,
+      "sigma_tc": 25.722835141760285,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.988065278992277,
+      "Z_final_abs": 0.09568456005263294,
+      "R_mean_lastW": 0.9881179477643272,
+      "phase_var_lastW": 2.948163408531493e-05,
+      "edge_phase_diff_mean_lastW": 0.3085709246436181,
+      "edge_phase_diff_std_lastW": 0.0054296992628795684,
+      "PE_tick_norm": 0.8617919880542092,
+      "QualityLock": 0.9988573609225248,
+      "entropy_quality": 0.9915162255597878,
+      "memory_score_k10": 0.8808676011110487,
+      "E_local_final": -0.45455421543889113,
+      "E_local_mean_lastW": -0.4550032302511581,
+      "E_local_min_lastW": -0.4567629296011172,
+      "E_local_max_lastW": -0.45139656828024505,
+      "H_block_mean": 0.008483774440212212
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.988065278992277,
+      "Z_final_abs": 0.09568456005263294,
+      "edge_phase_diff_mean_lastW": 0.3085709246436181,
+      "edge_phase_diff_std_lastW": 0.0054296992628795684
+    }
+  },
+  {
+    "structure_id": "383b35a59618a82154d0d596de51ca57b36dd970e8db5b50ffcaf613dd6c1a5d",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0042",
+      "delta_1950_block_0003"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.252416908268242,
+      "kappa_global": 0.14596457550694916,
+      "tau_field": 79.20194884006284,
+      "sigma0": 0.016879568068684927,
+      "sigma_tc": 206.96264465621118,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.991954419649187,
+      "Z_final_abs": 0.6565658819254729,
+      "R_mean_lastW": 0.9919749446091904,
+      "phase_var_lastW": 0.00011458543075645788,
+      "edge_phase_diff_mean_lastW": 0.25332294222222346,
+      "edge_phase_diff_std_lastW": 0.010704458452273889,
+      "PE_tick_norm": 0.850076024446393,
+      "QualityLock": 0.99939494751076,
+      "entropy_quality": 0.9951484092747422,
+      "memory_score_k10": 0.6345154995857811,
+      "E_local_final": -0.48893094192336756,
+      "E_local_mean_lastW": -0.48867621551457585,
+      "E_local_min_lastW": -0.4923647738339675,
+      "E_local_max_lastW": -0.4854656973101706,
+      "H_block_mean": 0.004851590725257796
+    },
+    "seed_stability": 0.36363636363636365,
+    "n_trials": 11,
+    "n_viable": 4,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.991954419649187,
+      "Z_final_abs": 0.6565658819254729,
+      "edge_phase_diff_mean_lastW": 0.25332294222222346,
+      "edge_phase_diff_std_lastW": 0.010704458452273889
+    }
+  },
+  {
+    "structure_id": "3d459e61428642d60691763599071636cbd911577cd156262c52296c907e5f9b",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0046",
+      "delta_1950_block_0009"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.15130058908050695,
+      "kappa_global": 0.18527294110968884,
+      "tau_field": 14.635340475583199,
+      "sigma0": 0.07657771719220413,
+      "sigma_tc": 87.62284561247932,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9571946207243032,
+      "Z_final_abs": 0.9464443754481948,
+      "R_mean_lastW": 0.9607434778361658,
+      "phase_var_lastW": 0.0007185939338376577,
+      "edge_phase_diff_mean_lastW": 0.5616314020238249,
+      "edge_phase_diff_std_lastW": 0.026806602429954782,
+      "PE_tick_norm": 0.7907052836647229,
+      "QualityLock": 0.4996984904703088,
+      "entropy_quality": 0.9952717765101697,
+      "memory_score_k10": 0.9654500413565971,
+      "E_local_final": -0.2546637797293418,
+      "E_local_mean_lastW": -0.25613851200228804,
+      "E_local_min_lastW": -0.26329635019132447,
+      "E_local_max_lastW": -0.24323007036859534,
+      "H_block_mean": 0.004728223489830254
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9571946207243032,
+      "Z_final_abs": 0.9464443754481948,
+      "edge_phase_diff_mean_lastW": 0.5616314020238249,
+      "edge_phase_diff_std_lastW": 0.026806602429954782
+    }
+  },
+  {
+    "structure_id": "0db61835356d8e5105dbf15f84d73aa06fb7e8b8f0dd10c8c2d3b8cca6677002",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0007",
+      "unknown_block_0032",
+      "delta_1920_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown",
+      "delta_1920"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0,
+      0.5,
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.35415282425543443,
+      "kappa_global": 0.16429870265468444,
+      "tau_field": 25.526539257151644,
+      "sigma0": 0.13780436928364379,
+      "sigma_tc": 48.7395293137664,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9732854514028848,
+      "Z_final_abs": 0.6323580885121693,
+      "R_mean_lastW": 0.973504166553608,
+      "phase_var_lastW": 0.0006399238255565098,
+      "edge_phase_diff_mean_lastW": 0.3665289012598123,
+      "edge_phase_diff_std_lastW": 0.16033945028371135,
+      "PE_tick_norm": 0.8635517368685427,
+      "QualityLock": 0.999811458786137,
+      "entropy_quality": 0.9982828518978386,
+      "memory_score_k10": 0.9680997076072775,
+      "E_local_final": -0.9827831370561696,
+      "E_local_mean_lastW": -0.9900641161621714,
+      "E_local_min_lastW": -1.0016073021019498,
+      "E_local_max_lastW": -0.9737419729781912,
+      "H_block_mean": 0.0017171481021613446
+    },
+    "seed_stability": 0.18181818181818182,
+    "n_trials": 11,
+    "n_viable": 2,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9732854514028848,
+      "Z_final_abs": 0.6323580885121693,
+      "edge_phase_diff_mean_lastW": 0.3665289012598123,
+      "edge_phase_diff_std_lastW": 0.16033945028371135
+    }
+  },
+  {
+    "structure_id": "90117d0e5c0689889af94450d7727aab8b0dd53b6976a8e997f6ac4587cf81d6",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0008",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3145283438722721,
+      "kappa_global": 0.34569946947723706,
+      "tau_field": 18.880222745607938,
+      "sigma0": 0.11870385570877189,
+      "sigma_tc": 25.49611742396997,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.998671142981624,
+      "Z_final_abs": 0.8682418680069985,
+      "R_mean_lastW": 0.9986292069350226,
+      "phase_var_lastW": 6.3136431017522715e-06,
+      "edge_phase_diff_mean_lastW": 0.1047021638548415,
+      "edge_phase_diff_std_lastW": 0.002512696380733707,
+      "PE_tick_norm": 0.859014199226971,
+      "QualityLock": 0.9996603303080196,
+      "entropy_quality": 0.9970219849572486,
+      "memory_score_k10": 0.8952578798172985,
+      "E_local_final": -0.6257812196468893,
+      "E_local_mean_lastW": -0.6256262231672454,
+      "E_local_min_lastW": -0.6260430430665559,
+      "E_local_max_lastW": -0.6251149639470053,
+      "H_block_mean": 0.0029780150427513655
+    },
+    "seed_stability": 0.9090909090909091,
+    "n_trials": 11,
+    "n_viable": 10,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.998671142981624,
+      "Z_final_abs": 0.8682418680069985,
+      "edge_phase_diff_mean_lastW": 0.1047021638548415,
+      "edge_phase_diff_std_lastW": 0.002512696380733707
+    }
+  },
+  {
+    "structure_id": "c1195be38c77ce4614e2d11a18188c83a7661d87f89f21e4648a6bdb0306fc95",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0048",
+      "delta_1910_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3114962589399815,
+      "kappa_global": 0.28386412750734247,
+      "tau_field": 74.5831700870599,
+      "sigma0": 0.006531682672453887,
+      "sigma_tc": 164.14007979526178,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9884968991418653,
+      "Z_final_abs": 0.03735976905121177,
+      "R_mean_lastW": 0.9886239500971188,
+      "phase_var_lastW": 3.310392548480346e-05,
+      "edge_phase_diff_mean_lastW": 0.30190830297903093,
+      "edge_phase_diff_std_lastW": 0.0057536010884317885,
+      "PE_tick_norm": 0.8493917421715631,
+      "QualityLock": 0.9992089672272924,
+      "entropy_quality": 0.9939054516741805,
+      "memory_score_k10": 0.7224401835020408,
+      "E_local_final": -0.5938674739286,
+      "E_local_mean_lastW": -0.5948623300257605,
+      "E_local_min_lastW": -0.5970548059646973,
+      "E_local_max_lastW": -0.5931351975206427,
+      "H_block_mean": 0.006094548325819427
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9884968991418653,
+      "Z_final_abs": 0.03735976905121177,
+      "edge_phase_diff_mean_lastW": 0.30190830297903093,
+      "edge_phase_diff_std_lastW": 0.0057536010884317885
+    }
+  },
+  {
+    "structure_id": "ac6cb047a0e62cd1fe08bf6d3989bfae4514dd6b605e050ff37ef281270fccb4",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0066",
+      "unknown_block_0041"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.19571982764958157,
+      "kappa_global": 0.10686523785743204,
+      "tau_field": 22.356217075020794,
+      "sigma0": 0.1959408629639665,
+      "sigma_tc": 68.66666613270739,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.8773060347310624,
+      "Z_final_abs": 0.020784662389047297,
+      "R_mean_lastW": 0.8776787774612688,
+      "phase_var_lastW": 0.0030196326362828215,
+      "edge_phase_diff_mean_lastW": 0.9982163053769512,
+      "edge_phase_diff_std_lastW": 0.05495118412084331,
+      "PE_tick_norm": 0.8500036061486171,
+      "QualityLock": 0.9994753895194803,
+      "entropy_quality": 0.9956348932357472,
+      "memory_score_k10": 0.761811942106167,
+      "E_local_final": -0.2344737149430399,
+      "E_local_mean_lastW": -0.21075795389586682,
+      "E_local_min_lastW": -0.2416227636060088,
+      "E_local_max_lastW": -0.17732654311540322,
+      "H_block_mean": 0.004365106764252848
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.8773060347310624,
+      "Z_final_abs": 0.020784662389047297,
+      "edge_phase_diff_mean_lastW": 0.9982163053769512,
+      "edge_phase_diff_std_lastW": 0.05495118412084331
+    }
+  },
+  {
+    "structure_id": "f6169241b002ead877606bb6494b6e44ed4f7acdefda78a2ba18d54bfa16cc85",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0029",
+      "lambda_c_2860_block_0003"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "lambda_c_2860"
+    ],
+    "assignment_families": [
+      "unknown",
+      "charmed_baryon"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.22720679093335516,
+      "kappa_global": 0.08940824738137054,
+      "tau_field": 16.587011878047456,
+      "sigma0": 0.07473901502415138,
+      "sigma_tc": 57.304819278590145,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9690029581629611,
+      "Z_final_abs": 0.030766146275398518,
+      "R_mean_lastW": 0.9671125521437964,
+      "phase_var_lastW": 0.0002592049302878893,
+      "edge_phase_diff_mean_lastW": 0.5141022653345644,
+      "edge_phase_diff_std_lastW": 0.016099842554754665,
+      "PE_tick_norm": 0.8530595012148345,
+      "QualityLock": 0.9994476125034852,
+      "entropy_quality": 0.9955942008654907,
+      "memory_score_k10": 0.9091468785650574,
+      "E_local_final": -0.39839910419172914,
+      "E_local_mean_lastW": -0.3959213179280149,
+      "E_local_min_lastW": -0.4049225419790246,
+      "E_local_max_lastW": -0.3867667412671863,
+      "H_block_mean": 0.0044057991345093795
+    },
+    "seed_stability": 0.45454545454545453,
+    "n_trials": 11,
+    "n_viable": 5,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9690029581629611,
+      "Z_final_abs": 0.030766146275398518,
+      "edge_phase_diff_mean_lastW": 0.5141022653345644,
+      "edge_phase_diff_std_lastW": 0.016099842554754665
+    }
+  },
+  {
+    "structure_id": "53135d65b543394db5a3dadd4145d60a5807308ca139c0ed351befb91c565e04",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0039",
+      "unknown_block_0037",
+      "delta_1950_block_0008"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0,
+      0.5,
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.11469825610255435,
+      "kappa_global": 0.1869256763461587,
+      "tau_field": 9.794659193340209,
+      "sigma0": 0.13121342646761258,
+      "sigma_tc": 78.73952701304474,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.8662556508523859,
+      "Z_final_abs": 0.8618368444453252,
+      "R_mean_lastW": 0.8641066961603954,
+      "phase_var_lastW": 0.0032806600428992674,
+      "edge_phase_diff_mean_lastW": 0.8093083407448385,
+      "edge_phase_diff_std_lastW": 0.43669869488744123,
+      "PE_tick_norm": 0.8308115521763203,
+      "QualityLock": 0.9996274425409651,
+      "entropy_quality": 0.9968232315091233,
+      "memory_score_k10": 0.9498733459911427,
+      "E_local_final": -0.21301546168255187,
+      "E_local_mean_lastW": -0.21889401954241147,
+      "E_local_min_lastW": -0.24672929313518122,
+      "E_local_max_lastW": -0.2065783047396286,
+      "H_block_mean": 0.003176768490876634
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.8662556508523859,
+      "Z_final_abs": 0.8618368444453252,
+      "edge_phase_diff_mean_lastW": 0.8093083407448385,
+      "edge_phase_diff_std_lastW": 0.43669869488744123
+    }
+  },
+  {
+    "structure_id": "59f6cfa11f82f4d08a608f509325df44eb155077e88a7cff6cb1945a34548298",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0001",
+      "delta_1920_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1920"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.16602016240616901,
+      "kappa_global": 0.0018756183148448625,
+      "tau_field": 58.58643520116446,
+      "sigma0": 0.015040906930815768,
+      "sigma_tc": 64.97602893065522,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9892973207640277,
+      "Z_final_abs": 0.09833936635705119,
+      "R_mean_lastW": 0.988980468522864,
+      "phase_var_lastW": 6.342744421207281e-05,
+      "edge_phase_diff_mean_lastW": 0.29707857175740743,
+      "edge_phase_diff_std_lastW": 0.007964134869028324,
+      "PE_tick_norm": 0.7795723677506188,
+      "QualityLock": 0.9998344004925388,
+      "entropy_quality": 0.9984736261328826,
+      "memory_score_k10": 0.9350374894462141,
+      "E_local_final": -0.3178675455793953,
+      "E_local_mean_lastW": -0.31748703641338294,
+      "E_local_min_lastW": -0.31894312319690626,
+      "E_local_max_lastW": -0.31606517124556266,
+      "H_block_mean": 0.001526373867117453
+    },
+    "seed_stability": 0.9090909090909091,
+    "n_trials": 11,
+    "n_viable": 10,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9892973207640277,
+      "Z_final_abs": 0.09833936635705119,
+      "edge_phase_diff_mean_lastW": 0.29707857175740743,
+      "edge_phase_diff_std_lastW": 0.007964134869028324
+    }
+  },
+  {
+    "structure_id": "324af58c870e1cd2ad8b85d5b62ba511d3be0a27a7bc6c7d006f0c2cd0fcb484",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0006",
+      "unknown_block_0057",
+      "delta_1910_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.33201517213383824,
+      "kappa_global": 0.04913923846872903,
+      "tau_field": 15.731019318990526,
+      "sigma0": 0.16021137398220914,
+      "sigma_tc": 26.70834509656663,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9733900112822126,
+      "Z_final_abs": 0.5528325845344526,
+      "R_mean_lastW": 0.9733352504159974,
+      "phase_var_lastW": 1.3544951315538473e-05,
+      "edge_phase_diff_mean_lastW": 0.36523474348306023,
+      "edge_phase_diff_std_lastW": 0.16635304162887246,
+      "PE_tick_norm": 0.8693618043252126,
+      "QualityLock": 0.9993903996907351,
+      "entropy_quality": 0.9952195686822851,
+      "memory_score_k10": 0.8543753220165085,
+      "E_local_final": -0.9167793223486626,
+      "E_local_mean_lastW": -0.917668329682083,
+      "E_local_min_lastW": -0.9195875834798475,
+      "E_local_max_lastW": -0.91603883485036,
+      "H_block_mean": 0.004780431317714847
+    },
+    "seed_stability": 0.2727272727272727,
+    "n_trials": 11,
+    "n_viable": 3,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9733900112822126,
+      "Z_final_abs": 0.5528325845344526,
+      "edge_phase_diff_mean_lastW": 0.36523474348306023,
+      "edge_phase_diff_std_lastW": 0.16635304162887246
+    }
+  },
+  {
+    "structure_id": "c6f704a41ddb77d73e7420b8cd75a9c7461c6206bdeabe1948d1abc24fc35875",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0007",
+      "unknown_block_0004"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.031563971820453784,
+      "kappa_global": 0.2149064459366764,
+      "tau_field": 7.397985520634586,
+      "sigma0": 0.22050881596475033,
+      "sigma_tc": 87.2715660317357,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.926108911421571,
+      "Z_final_abs": 0.9070595173129491,
+      "R_mean_lastW": 0.9081438641665308,
+      "phase_var_lastW": 0.017558944590749977,
+      "edge_phase_diff_mean_lastW": 0.8543105903360143,
+      "edge_phase_diff_std_lastW": 0.13251016787684625,
+      "PE_tick_norm": 0.7948131630969606,
+      "QualityLock": 0.9995930928831998,
+      "entropy_quality": 0.9966804934269381,
+      "memory_score_k10": 0.9043360457522888,
+      "E_local_final": -0.05094699780905469,
+      "E_local_mean_lastW": -0.04115735837123278,
+      "E_local_min_lastW": -0.051920527277174625,
+      "E_local_max_lastW": -0.03185743854416393,
+      "H_block_mean": 0.0033195065730619263
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.926108911421571,
+      "Z_final_abs": 0.9070595173129491,
+      "edge_phase_diff_mean_lastW": 0.8543105903360143,
+      "edge_phase_diff_std_lastW": 0.13251016787684625
+    }
+  },
+  {
+    "structure_id": "fcf4be53df106e1e383d39e4820720b781bad04b136a617b0078d49bbc4e4e3e",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "meson_d_star_plus_block_0001",
+      "delta_1950_block_0005"
+    ],
+    "assignment_particle_names": [
+      "meson_d_star_plus",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "charmed_meson",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2819283027214776,
+      "kappa_global": 0.15425799493221964,
+      "tau_field": 19.699686496308395,
+      "sigma0": 0.07565084434233402,
+      "sigma_tc": 41.77457732120086,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9762711645903384,
+      "Z_final_abs": 0.9639457283466194,
+      "R_mean_lastW": 0.9765256435992828,
+      "phase_var_lastW": 4.3537546399476486e-05,
+      "edge_phase_diff_mean_lastW": 0.4341559146317849,
+      "edge_phase_diff_std_lastW": 0.006598298750395929,
+      "PE_tick_norm": 0.8541785697687719,
+      "QualityLock": 0.99973308635538,
+      "entropy_quality": 0.9976324680538389,
+      "memory_score_k10": 0.8585731824578702,
+      "E_local_final": -0.5103032617404255,
+      "E_local_mean_lastW": -0.5116157196875248,
+      "E_local_min_lastW": -0.5150797679013018,
+      "E_local_max_lastW": -0.5090531554466038,
+      "H_block_mean": 0.002367531946161126
+    },
+    "seed_stability": 0.5454545454545454,
+    "n_trials": 11,
+    "n_viable": 6,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9762711645903384,
+      "Z_final_abs": 0.9639457283466194,
+      "edge_phase_diff_mean_lastW": 0.4341559146317849,
+      "edge_phase_diff_std_lastW": 0.006598298750395929
+    }
+  },
+  {
+    "structure_id": "57eada13f97d522cbdcd1dfca3d3ff9bf7f12854b5bb8ccd7b226676b6b812b6",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1910_block_0001",
+      "delta_1920_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1910",
+      "delta_1920"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2917338432044846,
+      "kappa_global": 0.13114317959382554,
+      "tau_field": 67.88534079854463,
+      "sigma0": 0.2862119874855584,
+      "sigma_tc": 30.964713107654706,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9994208064025345,
+      "Z_final_abs": 0.06456078365994578,
+      "R_mean_lastW": 0.9992248462276002,
+      "phase_var_lastW": 0.00022488850741725027,
+      "edge_phase_diff_mean_lastW": 0.07731286993495701,
+      "edge_phase_diff_std_lastW": 0.014996283120068461,
+      "PE_tick_norm": 0.8532363728726959,
+      "QualityLock": 0.9995419477125598,
+      "entropy_quality": 0.9964059677588679,
+      "memory_score_k10": 0.09479119851243512,
+      "E_local_final": -0.5825910709965977,
+      "E_local_mean_lastW": -0.5816525337879977,
+      "E_local_min_lastW": -0.582614034669765,
+      "E_local_max_lastW": -0.5793099401234661,
+      "H_block_mean": 0.003594032241132063
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9994208064025345,
+      "Z_final_abs": 0.06456078365994578,
+      "edge_phase_diff_mean_lastW": 0.07731286993495701,
+      "edge_phase_diff_std_lastW": 0.014996283120068461
+    }
+  },
+  {
+    "structure_id": "dbef6eb30e22e5329bfc5383bbeeeae64335baf1d5e54a5fd8b079fd55ae6493",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0034",
+      "unknown_block_0039"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.13044527840916975,
+      "kappa_global": 0.09575527901987224,
+      "tau_field": 7.192289620429603,
+      "sigma0": 0.07961266682584793,
+      "sigma_tc": 45.63486172566245,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9742738757284234,
+      "Z_final_abs": 0.9666673006444736,
+      "R_mean_lastW": 0.972816872061899,
+      "phase_var_lastW": 5.948086516538043e-05,
+      "edge_phase_diff_mean_lastW": 0.4673318530378722,
+      "edge_phase_diff_std_lastW": 0.007712383883429328,
+      "PE_tick_norm": 0.8405057940710279,
+      "QualityLock": 0.9995977680174329,
+      "entropy_quality": 0.9966542980382178,
+      "memory_score_k10": 0.9720651270663376,
+      "E_local_final": -0.23382896639406084,
+      "E_local_mean_lastW": -0.23267412619621855,
+      "E_local_min_lastW": -0.2343537136177631,
+      "E_local_max_lastW": -0.229686763160594,
+      "H_block_mean": 0.0033457019617822133
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9742738757284234,
+      "Z_final_abs": 0.9666673006444736,
+      "edge_phase_diff_mean_lastW": 0.4673318530378722,
+      "edge_phase_diff_std_lastW": 0.007712383883429328
+    }
+  },
+  {
+    "structure_id": "ee7ce0f79f1d04f347392ee120ad61c886b998bc3221fe8e6557e8a4d9157cb3",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0009",
+      "unknown_block_0018"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.38455085611970985,
+      "kappa_global": 0.05082781842940082,
+      "tau_field": 52.72032712232144,
+      "sigma0": 0.019460841452140443,
+      "sigma_tc": 46.82194435472774,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9716380414841285,
+      "Z_final_abs": 0.8313587849303246,
+      "R_mean_lastW": 0.9716266467691023,
+      "phase_var_lastW": 6.57587533517358e-06,
+      "edge_phase_diff_mean_lastW": 0.4775583398183926,
+      "edge_phase_diff_std_lastW": 0.0025643469607628333,
+      "PE_tick_norm": 0.8524998639178233,
+      "QualityLock": 0.999439587062968,
+      "entropy_quality": 0.9955398534604561,
+      "memory_score_k10": 0.9729854851563855,
+      "E_local_final": -0.6834603791445669,
+      "E_local_mean_lastW": -0.6829396038627766,
+      "E_local_min_lastW": -0.685237340744928,
+      "E_local_max_lastW": -0.6808341642188604,
+      "H_block_mean": 0.004460146539543819
+    },
+    "seed_stability": 0.45454545454545453,
+    "n_trials": 11,
+    "n_viable": 5,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9716380414841285,
+      "Z_final_abs": 0.8313587849303246,
+      "edge_phase_diff_mean_lastW": 0.4775583398183926,
+      "edge_phase_diff_std_lastW": 0.0025643469607628333
+    }
+  },
+  {
+    "structure_id": "b5b7443741adc433d93d7adfd27f662efa5ba18e476c246e71c6020ff541f81b",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0048",
+      "delta_1910_block_0002"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2552807638736194,
+      "kappa_global": 0.33594477025046193,
+      "tau_field": 24.324246026180212,
+      "sigma0": 0.13799438583216747,
+      "sigma_tc": 17.814457379839986,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9839872672431391,
+      "Z_final_abs": 0.12384653509508173,
+      "R_mean_lastW": 0.9839732550351658,
+      "phase_var_lastW": 2.879487631334753e-07,
+      "edge_phase_diff_mean_lastW": 0.3585493292730817,
+      "edge_phase_diff_std_lastW": 0.0005366085753447063,
+      "PE_tick_norm": 0.83658012040651,
+      "QualityLock": 0.5001268644664327,
+      "entropy_quality": 0.9898440629577546,
+      "memory_score_k10": 0.7337462869615874,
+      "E_local_final": -0.4781908387288597,
+      "E_local_mean_lastW": -0.47809340270916384,
+      "E_local_min_lastW": -0.47828101885973584,
+      "E_local_max_lastW": -0.4778723586424922,
+      "H_block_mean": 0.010155937042245398
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9839872672431391,
+      "Z_final_abs": 0.12384653509508173,
+      "edge_phase_diff_mean_lastW": 0.3585493292730817,
+      "edge_phase_diff_std_lastW": 0.0005366085753447063
+    }
+  },
+  {
+    "structure_id": "a58fa624c3dfdb223b0785ce065fc6cf58236c91068dcda08db12accb5cc7c51",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0001",
+      "unknown_block_0037"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.34997550253571486,
+      "kappa_global": 0.24362633859676955,
+      "tau_field": 12.872450415439717,
+      "sigma0": 0.19451472302917006,
+      "sigma_tc": 53.19641134487371,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9775610123669978,
+      "Z_final_abs": 0.9729189114416706,
+      "R_mean_lastW": 0.9822836800712722,
+      "phase_var_lastW": 0.0007711217998829287,
+      "edge_phase_diff_mean_lastW": 0.3760173725283494,
+      "edge_phase_diff_std_lastW": 0.027769079925034044,
+      "PE_tick_norm": 0.8889692924574448,
+      "QualityLock": 0.999805599129991,
+      "entropy_quality": 0.9982036358861782,
+      "memory_score_k10": 0.04758396896492578,
+      "E_local_final": -0.6448078265274843,
+      "E_local_mean_lastW": -0.6512797663118693,
+      "E_local_min_lastW": -0.6620865449859938,
+      "E_local_max_lastW": -0.6392741215768311,
+      "H_block_mean": 0.0017963641138217462
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9775610123669978,
+      "Z_final_abs": 0.9729189114416706,
+      "edge_phase_diff_mean_lastW": 0.3760173725283494,
+      "edge_phase_diff_std_lastW": 0.027769079925034044
+    }
+  },
+  {
+    "structure_id": "e4e43f6841fb25c54ee71426222313ed2502143623e7f111da56017458c1a4e6",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0001",
+      "delta_1930_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3687717521729337,
+      "kappa_global": 0.28292293458617745,
+      "tau_field": 77.0002893229836,
+      "sigma0": 0.24905365011483646,
+      "sigma_tc": 49.58263715901447,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9500049272840808,
+      "Z_final_abs": 0.016208882904904725,
+      "R_mean_lastW": 0.9603193178807077,
+      "phase_var_lastW": 0.0017389907495284306,
+      "edge_phase_diff_mean_lastW": 0.563804413003534,
+      "edge_phase_diff_std_lastW": 0.04170120801042136,
+      "PE_tick_norm": 0.8605682601001012,
+      "QualityLock": 0.49942115149546473,
+      "entropy_quality": 0.9538666893533189,
+      "memory_score_k10": 0.414533361710693,
+      "E_local_final": -0.6181249558178336,
+      "E_local_mean_lastW": -0.6238021663277769,
+      "E_local_min_lastW": -0.6498388144123866,
+      "E_local_max_lastW": -0.5937458652886916,
+      "H_block_mean": 0.046133310646681136
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9500049272840808,
+      "Z_final_abs": 0.016208882904904725,
+      "edge_phase_diff_mean_lastW": 0.563804413003534,
+      "edge_phase_diff_std_lastW": 0.04170120801042136
+    }
+  },
+  {
+    "structure_id": "253f5491bb6cb9dd5419760db52b6568cb948f9120b9872e4135090d7b304704",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0063",
+      "unknown_block_0022"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.39586835938454146,
+      "kappa_global": 0.02479548876708848,
+      "tau_field": 5.173537830205534,
+      "sigma0": 0.07942010502139701,
+      "sigma_tc": 19.828782281775975,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9696435105089203,
+      "Z_final_abs": 0.36897973164439785,
+      "R_mean_lastW": 0.9696676667700608,
+      "phase_var_lastW": 4.607349836558973e-07,
+      "edge_phase_diff_mean_lastW": 0.493857235236527,
+      "edge_phase_diff_std_lastW": 0.0006787746191895343,
+      "PE_tick_norm": 0.875545806715338,
+      "QualityLock": 0.9987375730172052,
+      "entropy_quality": 0.990873598651941,
+      "memory_score_k10": -2.016354045204206,
+      "E_local_final": -0.6971987575662203,
+      "E_local_mean_lastW": -0.6971325457348725,
+      "E_local_min_lastW": -0.6978238662425446,
+      "E_local_max_lastW": -0.6968407949722154,
+      "H_block_mean": 0.009126401348059015
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9696435105089203,
+      "Z_final_abs": 0.36897973164439785,
+      "edge_phase_diff_mean_lastW": 0.493857235236527,
+      "edge_phase_diff_std_lastW": 0.0006787746191895343
+    }
+  },
+  {
+    "structure_id": "a8de822cf0909e2d60760a7a6c5606d8dcc5feb621706ac58838ebe01c4eebf0",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0009",
+      "unknown_block_0001",
+      "meson_ds_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown",
+      "meson_ds"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      1.0,
+      2.0,
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.30592164337723904,
+      "kappa_global": 0.10326804856213201,
+      "tau_field": 76.14742741288508,
+      "sigma0": 0.17903812388854648,
+      "sigma_tc": 162.4302001492626,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.8612542627803207,
+      "Z_final_abs": 0.029307197899449695,
+      "R_mean_lastW": 0.8918879413683711,
+      "phase_var_lastW": 0.018594246573674696,
+      "edge_phase_diff_mean_lastW": 0.71744464879921,
+      "edge_phase_diff_std_lastW": 0.39197791043897795,
+      "PE_tick_norm": 0.7825698032945277,
+      "QualityLock": 0.9991410086297888,
+      "entropy_quality": 0.9934973597777034,
+      "memory_score_k10": 0.8959350464569347,
+      "E_local_final": -0.5985277987690121,
+      "E_local_mean_lastW": -0.6688546581402688,
+      "E_local_min_lastW": -0.7503010143533309,
+      "E_local_max_lastW": -0.5379562667920781,
+      "H_block_mean": 0.006502640222296627
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.8612542627803207,
+      "Z_final_abs": 0.029307197899449695,
+      "edge_phase_diff_mean_lastW": 0.71744464879921,
+      "edge_phase_diff_std_lastW": 0.39197791043897795
+    }
+  },
+  {
+    "structure_id": "03216a2973d6a049049c7cd57af84d316f0d8ab4c07122dc5384db82be69f042",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0011",
+      "unknown_block_0043"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.27180510216561565,
+      "kappa_global": 0.325537686401443,
+      "tau_field": 8.437588414685864,
+      "sigma0": 0.29835627894954164,
+      "sigma_tc": 83.06281712314735,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9875559031870942,
+      "Z_final_abs": 0.07698140331193733,
+      "R_mean_lastW": 0.9865170376720528,
+      "phase_var_lastW": 0.011502310965071861,
+      "edge_phase_diff_mean_lastW": 0.31097023181325767,
+      "edge_phase_diff_std_lastW": 0.10724882733658145,
+      "PE_tick_norm": 0.8376469622804049,
+      "QualityLock": 0.999554256332184,
+      "entropy_quality": 0.9962280555224092,
+      "memory_score_k10": 0.5404028255114107,
+      "E_local_final": -0.5372362130281023,
+      "E_local_mean_lastW": -0.5146502042669819,
+      "E_local_min_lastW": -0.541159139057516,
+      "E_local_max_lastW": -0.46055765596240045,
+      "H_block_mean": 0.0037719444775907796
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9875559031870942,
+      "Z_final_abs": 0.07698140331193733,
+      "edge_phase_diff_mean_lastW": 0.31097023181325767,
+      "edge_phase_diff_std_lastW": 0.10724882733658145
+    }
+  },
+  {
+    "structure_id": "24e49f23d033e0971435757c4044ba525bbd46904d25355b717e69824da74407",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1930_block_0001",
+      "meson_ds_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1930",
+      "meson_ds"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2344044988245486,
+      "kappa_global": 0.07140604618764561,
+      "tau_field": 77.97687404402751,
+      "sigma0": 0.09365051817711212,
+      "sigma_tc": 167.06030118947328,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9999115699182934,
+      "Z_final_abs": 0.02803874593345012,
+      "R_mean_lastW": 0.9992997306970242,
+      "phase_var_lastW": 0.005264167466085242,
+      "edge_phase_diff_mean_lastW": 0.06343295707133585,
+      "edge_phase_diff_std_lastW": 0.039751719004843436,
+      "PE_tick_norm": 0.8696110942808497,
+      "QualityLock": 0.4999759869677759,
+      "entropy_quality": 0.9576379033961069,
+      "memory_score_k10": 0.3240371528628747,
+      "E_local_final": -0.46799180853094596,
+      "E_local_mean_lastW": -0.46750525539505067,
+      "E_local_min_lastW": -0.46880665476192473,
+      "E_local_max_lastW": -0.4615459076927754,
+      "H_block_mean": 0.04236209660389314
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9999115699182934,
+      "Z_final_abs": 0.02803874593345012,
+      "edge_phase_diff_mean_lastW": 0.06343295707133585,
+      "edge_phase_diff_std_lastW": 0.039751719004843436
+    }
+  },
+  {
+    "structure_id": "65668209fd10c9a57f6cf5522c13629cc9f283ac8c9f62c9a56ebc8b5c90e13a",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0001",
+      "unknown_block_0032"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1322352742757393,
+      "kappa_global": 0.16398784375992964,
+      "tau_field": 26.952169852508895,
+      "sigma0": 0.11352327048778844,
+      "sigma_tc": 64.02523008366106,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9677801137868199,
+      "Z_final_abs": 0.9340657401644669,
+      "R_mean_lastW": 0.9682240325215815,
+      "phase_var_lastW": 0.0006034258024306433,
+      "edge_phase_diff_mean_lastW": 0.5049509070028876,
+      "edge_phase_diff_std_lastW": 0.024564726793323863,
+      "PE_tick_norm": 0.8205357319173786,
+      "QualityLock": 0.9997769122368245,
+      "entropy_quality": 0.9979899977213881,
+      "memory_score_k10": 0.7203867949178273,
+      "E_local_final": -0.2348624077242186,
+      "E_local_mean_lastW": -0.2311533676143241,
+      "E_local_min_lastW": -0.2348624077242186,
+      "E_local_max_lastW": -0.22539085658656083,
+      "H_block_mean": 0.0020100022786119385
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9677801137868199,
+      "Z_final_abs": 0.9340657401644669,
+      "edge_phase_diff_mean_lastW": 0.5049509070028876,
+      "edge_phase_diff_std_lastW": 0.024564726793323863
+    }
+  },
+  {
+    "structure_id": "261563742a00bad0e64f696f1baf519399f54eb16699dd1d776bf887c352b32b",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0016",
+      "unknown_block_0057",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0,
+      1.0,
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.298378914178698,
+      "kappa_global": 0.2911576749483666,
+      "tau_field": 5.950468101218749,
+      "sigma0": 0.27024857812366565,
+      "sigma_tc": 55.49095923319118,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9682417449011929,
+      "Z_final_abs": 0.9650442767816803,
+      "R_mean_lastW": 0.9668613385719749,
+      "phase_var_lastW": 0.0022988823715253347,
+      "edge_phase_diff_mean_lastW": 0.41964573738369304,
+      "edge_phase_diff_std_lastW": 0.15629563629928145,
+      "PE_tick_norm": 0.8689992303037957,
+      "QualityLock": 0.9992123052438812,
+      "entropy_quality": 0.9939336168661592,
+      "memory_score_k10": 0.5072213754173039,
+      "E_local_final": -0.791264341227162,
+      "E_local_mean_lastW": -0.7875407068286795,
+      "E_local_min_lastW": -0.8250867211265194,
+      "E_local_max_lastW": -0.764827466880519,
+      "H_block_mean": 0.0060663831338407794
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9682417449011929,
+      "Z_final_abs": 0.9650442767816803,
+      "edge_phase_diff_mean_lastW": 0.41964573738369304,
+      "edge_phase_diff_std_lastW": 0.15629563629928145
+    }
+  },
+  {
+    "structure_id": "e96265243d3bc8a6008ccbe43f346822104327b583de4b5b54e588a8176138d4",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0034",
+      "delta_1910_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.22624794619240335,
+      "kappa_global": 0.2993557211405781,
+      "tau_field": 13.132847343838991,
+      "sigma0": 0.009801277158141209,
+      "sigma_tc": 13.872298506866873,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9623038213326999,
+      "Z_final_abs": 0.9297726104802183,
+      "R_mean_lastW": 0.9622962057447124,
+      "phase_var_lastW": 1.7930248299296926e-09,
+      "edge_phase_diff_mean_lastW": 0.5509492522463517,
+      "edge_phase_diff_std_lastW": 4.234412391264805e-05,
+      "PE_tick_norm": 0.3308813524171216,
+      "QualityLock": 0.9995021313458735,
+      "entropy_quality": 0.9960768380721087,
+      "memory_score_k10": 0.9548954878663586,
+      "E_local_final": -0.38555049547156317,
+      "E_local_mean_lastW": -0.3855374998732989,
+      "E_local_min_lastW": -0.38555063938293366,
+      "E_local_max_lastW": -0.38551924093134093,
+      "H_block_mean": 0.003923161927891345
+    },
+    "seed_stability": 0.36363636363636365,
+    "n_trials": 11,
+    "n_viable": 4,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9623038213326999,
+      "Z_final_abs": 0.9297726104802183,
+      "edge_phase_diff_mean_lastW": 0.5509492522463517,
+      "edge_phase_diff_std_lastW": 4.234412391264805e-05
+    }
+  },
+  {
+    "structure_id": "eaec7d55e7ae699aca8c7b05abce2919462595ee93e17169f9fa4160757e7e7d",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0042",
+      "delta_1950_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.24472209592086933,
+      "kappa_global": 0.038006059290277144,
+      "tau_field": 6.924865895404025,
+      "sigma0": 0.25556128340476203,
+      "sigma_tc": 54.139124673119476,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9861831976070871,
+      "Z_final_abs": 0.9279884825682414,
+      "R_mean_lastW": 0.9893519011720333,
+      "phase_var_lastW": 0.005936746237278124,
+      "edge_phase_diff_mean_lastW": 0.28183661752881334,
+      "edge_phase_diff_std_lastW": 0.07705028382347545,
+      "PE_tick_norm": 0.8314629598902793,
+      "QualityLock": 0.9994395170948526,
+      "entropy_quality": 0.9954962997397054,
+      "memory_score_k10": 0.42012079181321493,
+      "E_local_final": -0.45847389360859286,
+      "E_local_mean_lastW": -0.4685108625726027,
+      "E_local_min_lastW": -0.4857804729499125,
+      "E_local_max_lastW": -0.4564144989815422,
+      "H_block_mean": 0.0045037002602945995
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9861831976070871,
+      "Z_final_abs": 0.9279884825682414,
+      "edge_phase_diff_mean_lastW": 0.28183661752881334,
+      "edge_phase_diff_std_lastW": 0.07705028382347545
+    }
+  },
+  {
+    "structure_id": "bba96820ec0a63e63e46f1790a33efbb608f717290ca2e5f57dc951514b77e86",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0008",
+      "delta_1920_block_0001",
+      "delta_1920_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1920",
+      "delta_1920"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0,
+      1.0,
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.19251571211457544,
+      "kappa_global": 0.2688223285661241,
+      "tau_field": 52.14254526383081,
+      "sigma0": 0.3556628583512935,
+      "sigma_tc": 38.977829056646854,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9796989456135081,
+      "Z_final_abs": 0.08596870145814145,
+      "R_mean_lastW": 0.9797055531899476,
+      "phase_var_lastW": 0.0009903220262278297,
+      "edge_phase_diff_mean_lastW": 0.29818125586070515,
+      "edge_phase_diff_std_lastW": 0.18299081392416727,
+      "PE_tick_norm": 0.8582288884111082,
+      "QualityLock": 0.9997999654957074,
+      "entropy_quality": 0.9981929138282596,
+      "memory_score_k10": 0.8969285322598584,
+      "E_local_final": -0.5465696281056752,
+      "E_local_mean_lastW": -0.546382673223833,
+      "E_local_min_lastW": -0.5519716693588554,
+      "E_local_max_lastW": -0.541322959054581,
+      "H_block_mean": 0.0018070861717404453
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9796989456135081,
+      "Z_final_abs": 0.08596870145814145,
+      "edge_phase_diff_mean_lastW": 0.29818125586070515,
+      "edge_phase_diff_std_lastW": 0.18299081392416727
+    }
+  },
+  {
+    "structure_id": "64c535bc63b02ae98f2eb7946c57bb450f194be9e1e9cf2efc58594d869bde3c",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1930_block_0004",
+      "unknown_block_0016"
+    ],
+    "assignment_particle_names": [
+      "delta_1930",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.32154508709191143,
+      "kappa_global": 0.25330394686234914,
+      "tau_field": 5.072592920285086,
+      "sigma0": 0.047784097956076514,
+      "sigma_tc": 63.90812693521647,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.960990670558534,
+      "Z_final_abs": 0.9565971586539662,
+      "R_mean_lastW": 0.9586499853737136,
+      "phase_var_lastW": 0.00017490034954485196,
+      "edge_phase_diff_mean_lastW": 0.5770055394536087,
+      "edge_phase_diff_std_lastW": 0.01322498958581261,
+      "PE_tick_norm": 0.8779174195067257,
+      "QualityLock": 0.9991818221769504,
+      "entropy_quality": 0.9937463301994978,
+      "memory_score_k10": 0.17110902134934214,
+      "E_local_final": -0.5411659942757362,
+      "E_local_mean_lastW": -0.5389724888711054,
+      "E_local_min_lastW": -0.5456158035241314,
+      "E_local_max_lastW": -0.528488777625203,
+      "H_block_mean": 0.006253669800502239
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.960990670558534,
+      "Z_final_abs": 0.9565971586539662,
+      "edge_phase_diff_mean_lastW": 0.5770055394536087,
+      "edge_phase_diff_std_lastW": 0.01322498958581261
+    }
+  },
+  {
+    "structure_id": "e511699b07744c95d32fd4ac97565ebdc7c2917dca7debf7cd4149e188142e9c",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0009",
+      "unknown_block_0042"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.34223229429866975,
+      "kappa_global": 0.28819409927971545,
+      "tau_field": 20.12937671921287,
+      "sigma0": 0.28121991887289854,
+      "sigma_tc": 34.98709901533473,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9953146966512881,
+      "Z_final_abs": 0.9619535601385392,
+      "R_mean_lastW": 0.9950820606789685,
+      "phase_var_lastW": 0.0001830114462709142,
+      "edge_phase_diff_mean_lastW": 0.1979732509180508,
+      "edge_phase_diff_std_lastW": 0.013528172318200053,
+      "PE_tick_norm": 0.8855308377921628,
+      "QualityLock": 0.9991824624396288,
+      "entropy_quality": 0.9936159573771052,
+      "memory_score_k10": 0.7953890864978563,
+      "E_local_final": -0.6725794856781879,
+      "E_local_mean_lastW": -0.670891742655412,
+      "E_local_min_lastW": -0.6741728032995233,
+      "E_local_max_lastW": -0.666615577330692,
+      "H_block_mean": 0.006384042622894806
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9953146966512881,
+      "Z_final_abs": 0.9619535601385392,
+      "edge_phase_diff_mean_lastW": 0.1979732509180508,
+      "edge_phase_diff_std_lastW": 0.013528172318200053
+    }
+  },
+  {
+    "structure_id": "2132829730a679cfe5ee7f7fd04a9fa917007cfbcb0e662f11d14b7c1ad72ab4",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0057",
+      "delta_1930_block_0001",
+      "delta_1950_block_0007"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1930",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0,
+      1.0,
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.18130792384970412,
+      "kappa_global": 0.20517819313494823,
+      "tau_field": 5.858207320948564,
+      "sigma0": 0.09788465545243401,
+      "sigma_tc": 111.44100818166743,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9700711041570043,
+      "Z_final_abs": 0.9160097848630814,
+      "R_mean_lastW": 0.9718390084837122,
+      "phase_var_lastW": 0.0026121961933436686,
+      "edge_phase_diff_mean_lastW": 0.38152917601490516,
+      "edge_phase_diff_std_lastW": 0.15703438316980958,
+      "PE_tick_norm": 0.7992931399486309,
+      "QualityLock": 0.6664722256564143,
+      "entropy_quality": 0.9703519790588991,
+      "memory_score_k10": 0.9776619013672705,
+      "E_local_final": -0.5075475831062145,
+      "E_local_mean_lastW": -0.5111580590807894,
+      "E_local_min_lastW": -0.5239190635135729,
+      "E_local_max_lastW": -0.4990246970509662,
+      "H_block_mean": 0.02964802094110085
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9700711041570043,
+      "Z_final_abs": 0.9160097848630814,
+      "edge_phase_diff_mean_lastW": 0.38152917601490516,
+      "edge_phase_diff_std_lastW": 0.15703438316980958
+    }
+  },
+  {
+    "structure_id": "393f5f92b981d63e82dc9da5a7315ca3983ceb544c9bcab92527bb05404d4bba",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0041",
+      "unknown_block_0066",
+      "unknown_block_0029"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      2.0,
+      2.0,
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.33270158498462565,
+      "kappa_global": 0.05593296002920352,
+      "tau_field": 8.17870608840511,
+      "sigma0": 0.30331464250057844,
+      "sigma_tc": 41.81125940432153,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.8789091295077361,
+      "Z_final_abs": 0.05653494781327333,
+      "R_mean_lastW": 0.8927202406676551,
+      "phase_var_lastW": 0.001038249623580916,
+      "edge_phase_diff_mean_lastW": 0.7376143743012336,
+      "edge_phase_diff_std_lastW": 0.34345557773146623,
+      "PE_tick_norm": 0.8153175428601144,
+      "QualityLock": 0.9995846460739551,
+      "entropy_quality": 0.9964914928162033,
+      "memory_score_k10": 0.500418885064692,
+      "E_local_final": -0.7475546280776415,
+      "E_local_mean_lastW": -0.7698146499304525,
+      "E_local_min_lastW": -0.788329973637197,
+      "E_local_max_lastW": -0.7475546280776415,
+      "H_block_mean": 0.0035085071837967115
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.8789091295077361,
+      "Z_final_abs": 0.05653494781327333,
+      "edge_phase_diff_mean_lastW": 0.7376143743012336,
+      "edge_phase_diff_std_lastW": 0.34345557773146623
+    }
+  },
+  {
+    "structure_id": "f20b26853a41127e14fd9b2f8b3fb9b5f80c64b25af9c64974e6d072756a57cb",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0042",
+      "unknown_block_0023",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5,
+      2.0,
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.276329832326076,
+      "kappa_global": 0.3558004959058317,
+      "tau_field": 38.62593246274925,
+      "sigma0": 0.15585212721902042,
+      "sigma_tc": 52.30474155938224,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9652971966935506,
+      "Z_final_abs": 0.9031949933913993,
+      "R_mean_lastW": 0.9626407362923436,
+      "phase_var_lastW": 0.0005880945118427231,
+      "edge_phase_diff_mean_lastW": 0.4432671504359519,
+      "edge_phase_diff_std_lastW": 0.17265638660803836,
+      "PE_tick_norm": 0.838258826257459,
+      "QualityLock": 0.9994756431921257,
+      "entropy_quality": 0.9957078766683909,
+      "memory_score_k10": 0.9400639386484431,
+      "E_local_final": -0.7471193808453437,
+      "E_local_mean_lastW": -0.7571451132413645,
+      "E_local_min_lastW": -0.770398014121754,
+      "E_local_max_lastW": -0.7471193808453437,
+      "H_block_mean": 0.004292123331609073
+    },
+    "seed_stability": 0.5454545454545454,
+    "n_trials": 11,
+    "n_viable": 6,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9652971966935506,
+      "Z_final_abs": 0.9031949933913993,
+      "edge_phase_diff_mean_lastW": 0.4432671504359519,
+      "edge_phase_diff_std_lastW": 0.17265638660803836
+    }
+  },
+  {
+    "structure_id": "1fc78efed1e2a424ae91b90cda22b6785abe9ba39394844e8dd04d85890c8f9e",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0042",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.14177563025260423,
+      "kappa_global": 0.06824480934054847,
+      "tau_field": 36.0874741310685,
+      "sigma0": 0.21904901965225115,
+      "sigma_tc": 51.53543316829075,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.8805552084237759,
+      "Z_final_abs": 0.3408372114178876,
+      "R_mean_lastW": 0.8946894148697998,
+      "phase_var_lastW": 0.0013129029238912212,
+      "edge_phase_diff_mean_lastW": 0.9254637263232383,
+      "edge_phase_diff_std_lastW": 0.03623400231676348,
+      "PE_tick_norm": 0.8471447743579942,
+      "QualityLock": 0.9993668498472993,
+      "entropy_quality": 0.9949072292571477,
+      "memory_score_k10": 0.7424310317853114,
+      "E_local_final": -0.1746009232043289,
+      "E_local_mean_lastW": -0.17151819121077647,
+      "E_local_min_lastW": -0.1866647076049167,
+      "E_local_max_lastW": -0.15454215249320347,
+      "H_block_mean": 0.005092770742852256
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.8805552084237759,
+      "Z_final_abs": 0.3408372114178876,
+      "edge_phase_diff_mean_lastW": 0.9254637263232383,
+      "edge_phase_diff_std_lastW": 0.03623400231676348
+    }
+  },
+  {
+    "structure_id": "9d9f0f348b1807b452b8b618a8a94043dc0cfd0da06c10472c7bee4d431c29c0",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0067",
+      "delta_1950_block_0003"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1186013320391754,
+      "kappa_global": 0.1894449839463576,
+      "tau_field": 18.03724085112936,
+      "sigma0": 0.2856808767283928,
+      "sigma_tc": 92.73126237861649,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9164678434451354,
+      "Z_final_abs": 0.8996870771067241,
+      "R_mean_lastW": 0.9189754870165079,
+      "phase_var_lastW": 0.011522345993630449,
+      "edge_phase_diff_mean_lastW": 0.8038940114423895,
+      "edge_phase_diff_std_lastW": 0.10734219111621697,
+      "PE_tick_norm": 0.8287610141798698,
+      "QualityLock": 0.9995230885464197,
+      "entropy_quality": 0.9960655163021004,
+      "memory_score_k10": 0.8290291020204483,
+      "E_local_final": -0.1805023648770442,
+      "E_local_mean_lastW": -0.16327468384402027,
+      "E_local_min_lastW": -0.19813713672821914,
+      "E_local_max_lastW": -0.13094062939068593,
+      "H_block_mean": 0.003934483697899607
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9164678434451354,
+      "Z_final_abs": 0.8996870771067241,
+      "edge_phase_diff_mean_lastW": 0.8038940114423895,
+      "edge_phase_diff_std_lastW": 0.10734219111621697
+    }
+  },
+  {
+    "structure_id": "39ba3620b2ef7a1bb565c56c68ae955d22850e960e7ed92561af8cdcfddd5cfd",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0009",
+      "delta_1920_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1920"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3592413313405294,
+      "kappa_global": 0.07828000895249797,
+      "tau_field": 40.411481812008894,
+      "sigma0": 0.10900833136663778,
+      "sigma_tc": 31.91997148746311,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9987536366889539,
+      "Z_final_abs": 0.1322934345434986,
+      "R_mean_lastW": 0.9988914968258383,
+      "phase_var_lastW": 2.514563459509518e-05,
+      "edge_phase_diff_mean_lastW": 0.09404539865463449,
+      "edge_phase_diff_std_lastW": 0.005014542311626773,
+      "PE_tick_norm": 0.873379881865154,
+      "QualityLock": 0.9995773458373152,
+      "entropy_quality": 0.9965932837702823,
+      "memory_score_k10": 0.8747282269215195,
+      "E_local_final": -0.7149853285427724,
+      "E_local_mean_lastW": -0.7153234211240607,
+      "E_local_min_lastW": -0.7159341960932616,
+      "E_local_max_lastW": -0.7147269272989089,
+      "H_block_mean": 0.00340671622971766
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9987536366889539,
+      "Z_final_abs": 0.1322934345434986,
+      "edge_phase_diff_mean_lastW": 0.09404539865463449,
+      "edge_phase_diff_std_lastW": 0.005014542311626773
+    }
+  },
+  {
+    "structure_id": "b25f423c6acf256f429e738c4b41bafc39756cd414d9e6e0026d971e278b29d2",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0042",
+      "delta_1930_block_0004",
+      "delta_1950_block_0009"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1930",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0,
+      2.0,
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.29129422583971915,
+      "kappa_global": 0.058030048500771314,
+      "tau_field": 5.232860712205667,
+      "sigma0": 0.28658746350586917,
+      "sigma_tc": 10.49613214958137,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9801781026715071,
+      "Z_final_abs": 0.9010597506184667,
+      "R_mean_lastW": 0.9801792843422075,
+      "phase_var_lastW": 2.0994122391455732e-10,
+      "edge_phase_diff_mean_lastW": 0.3130785702665169,
+      "edge_phase_diff_std_lastW": 0.1466337896399376,
+      "PE_tick_norm": 0.8301581889727865,
+      "QualityLock": 0.9993402746385147,
+      "entropy_quality": 0.9947443550326277,
+      "memory_score_k10": 0.9744377891413527,
+      "E_local_final": -0.8148540117764569,
+      "E_local_mean_lastW": -0.8148561593666461,
+      "E_local_min_lastW": -0.8148642598684659,
+      "E_local_max_lastW": -0.8148503027104829,
+      "H_block_mean": 0.005255644967372297
+    },
+    "seed_stability": 0.6363636363636364,
+    "n_trials": 11,
+    "n_viable": 7,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9801781026715071,
+      "Z_final_abs": 0.9010597506184667,
+      "edge_phase_diff_mean_lastW": 0.3130785702665169,
+      "edge_phase_diff_std_lastW": 0.1466337896399376
+    }
+  },
+  {
+    "structure_id": "362191fc66973cdf58a7011c4297eb1cd6c313b29ccd738076cf1093fea3a78d",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0005",
+      "meson_ds_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "meson_ds"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.24194748418059303,
+      "kappa_global": 0.05387317614167223,
+      "tau_field": 16.42706027290084,
+      "sigma0": 0.14622111260944018,
+      "sigma_tc": 119.1724722488878,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.998000536634032,
+      "Z_final_abs": 0.2980364966813562,
+      "R_mean_lastW": 0.9972526653700932,
+      "phase_var_lastW": 0.005265754147040485,
+      "edge_phase_diff_mean_lastW": 0.13223913878569782,
+      "edge_phase_diff_std_lastW": 0.06715686475093474,
+      "PE_tick_norm": 0.8640067147653834,
+      "QualityLock": 0.9997180668206731,
+      "entropy_quality": 0.9975514625177623,
+      "memory_score_k10": 0.8483995576928818,
+      "E_local_final": -0.4823055416398108,
+      "E_local_mean_lastW": -0.478467459749781,
+      "E_local_min_lastW": -0.4837980710825943,
+      "E_local_max_lastW": -0.46229396324817656,
+      "H_block_mean": 0.0024485374822377733
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.998000536634032,
+      "Z_final_abs": 0.2980364966813562,
+      "edge_phase_diff_mean_lastW": 0.13223913878569782,
+      "edge_phase_diff_std_lastW": 0.06715686475093474
+    }
+  },
+  {
+    "structure_id": "9eaeece404dc765ea57289e4caa441c734102b9fbd8b0db39509d585885979a6",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0057",
+      "delta_1910_block_0002"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2471143392037791,
+      "kappa_global": 0.1693256749430712,
+      "tau_field": 38.67685095622988,
+      "sigma0": 0.19853923453083408,
+      "sigma_tc": 13.494719356327444,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9580326013816373,
+      "Z_final_abs": 0.2403177773449894,
+      "R_mean_lastW": 0.9582572805684718,
+      "phase_var_lastW": 8.995943177087955e-07,
+      "edge_phase_diff_mean_lastW": 0.579905481553493,
+      "edge_phase_diff_std_lastW": 0.0009484694606094577,
+      "PE_tick_norm": 0.7434768741444526,
+      "QualityLock": 0.5001626969137289,
+      "entropy_quality": 0.9901146936636945,
+      "memory_score_k10": 0.9286782017898791,
+      "E_local_final": -0.4130254589621105,
+      "E_local_mean_lastW": -0.41347108972072455,
+      "E_local_min_lastW": -0.4138405889560475,
+      "E_local_max_lastW": -0.4130254589621105,
+      "H_block_mean": 0.009885306336305494
+    },
+    "seed_stability": 0.45454545454545453,
+    "n_trials": 11,
+    "n_viable": 5,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9580326013816373,
+      "Z_final_abs": 0.2403177773449894,
+      "edge_phase_diff_mean_lastW": 0.579905481553493,
+      "edge_phase_diff_std_lastW": 0.0009484694606094577
+    }
+  },
+  {
+    "structure_id": "df0af7ec1d51880699dd4daf87917ed80d373cb5bec232e286404bf347f1cbed",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0016",
+      "unknown_block_0018"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.11861659952214947,
+      "kappa_global": 0.11874303131392781,
+      "tau_field": 63.13643698668197,
+      "sigma0": 0.03360520781161197,
+      "sigma_tc": 22.99118875625701,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9900646638755415,
+      "Z_final_abs": 0.06853400648966539,
+      "R_mean_lastW": 0.9899711084553303,
+      "phase_var_lastW": 8.139559963593799e-07,
+      "edge_phase_diff_mean_lastW": 0.28348684017720416,
+      "edge_phase_diff_std_lastW": 0.0009021950988336059,
+      "PE_tick_norm": 0.7518154404727234,
+      "QualityLock": 0.9991498976113025,
+      "entropy_quality": 0.9935763051963238,
+      "memory_score_k10": 0.939717809441087,
+      "E_local_final": -0.2278506250503039,
+      "E_local_mean_lastW": -0.2277646835978125,
+      "E_local_min_lastW": -0.22786217827328403,
+      "E_local_max_lastW": -0.22766935164762803,
+      "H_block_mean": 0.00642369480367623
+    },
+    "seed_stability": 0.8181818181818182,
+    "n_trials": 11,
+    "n_viable": 9,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9900646638755415,
+      "Z_final_abs": 0.06853400648966539,
+      "edge_phase_diff_mean_lastW": 0.28348684017720416,
+      "edge_phase_diff_std_lastW": 0.0009021950988336059
+    }
+  },
+  {
+    "structure_id": "8ad941c9e7eef2ffa7b4b9b99d6f0075f64046a0aa5ebf0e7a61cc2cbc197f2b",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0024",
+      "unknown_block_0042"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2956903814119233,
+      "kappa_global": 0.10852147060291217,
+      "tau_field": 10.844815631534662,
+      "sigma0": 0.47432672773572737,
+      "sigma_tc": 21.634879072890918,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9891381958442834,
+      "Z_final_abs": 0.7994518238827075,
+      "R_mean_lastW": 0.9887615638067346,
+      "phase_var_lastW": 3.119721133286137e-05,
+      "edge_phase_diff_mean_lastW": 0.3000757163657468,
+      "edge_phase_diff_std_lastW": 0.005585446386177328,
+      "PE_tick_norm": 0.8401432200496111,
+      "QualityLock": 0.9992777922899893,
+      "entropy_quality": 0.9942161573639713,
+      "memory_score_k10": 0.3915945398057594,
+      "E_local_final": -0.5660344495482041,
+      "E_local_mean_lastW": -0.5648650329694181,
+      "E_local_min_lastW": -0.5669482031385649,
+      "E_local_max_lastW": -0.5635995310623558,
+      "H_block_mean": 0.005783842636028666
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9891381958442834,
+      "Z_final_abs": 0.7994518238827075,
+      "edge_phase_diff_mean_lastW": 0.3000757163657468,
+      "edge_phase_diff_std_lastW": 0.005585446386177328
+    }
+  },
+  {
+    "structure_id": "59ceffe26b93447354ce84545df860e8964fd25047d455b4c302a4121c84f903",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0042",
+      "delta_1950_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.17548939696911078,
+      "kappa_global": 0.09188503512634705,
+      "tau_field": 19.3151918505994,
+      "sigma0": 0.13606001316148517,
+      "sigma_tc": 24.281928070705128,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9809906679973207,
+      "Z_final_abs": 0.8790409539943695,
+      "R_mean_lastW": 0.9807120607168522,
+      "phase_var_lastW": 1.0070705419145057e-05,
+      "edge_phase_diff_mean_lastW": 0.39343636714176566,
+      "edge_phase_diff_std_lastW": 0.0031734374767978424,
+      "PE_tick_norm": 0.8492148705137017,
+      "QualityLock": 0.9994395170948526,
+      "entropy_quality": 0.9954962997397054,
+      "memory_score_k10": 0.3554949100557415,
+      "E_local_final": -0.3246675091004106,
+      "E_local_mean_lastW": -0.32412661178560814,
+      "E_local_min_lastW": -0.32470108846141316,
+      "E_local_max_lastW": -0.32314850157616715,
+      "H_block_mean": 0.0045037002602945995
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9809906679973207,
+      "Z_final_abs": 0.8790409539943695,
+      "edge_phase_diff_mean_lastW": 0.39343636714176566,
+      "edge_phase_diff_std_lastW": 0.0031734374767978424
+    }
+  },
+  {
+    "structure_id": "2d49f0dfe2cacb0978b3ddcf39edb7e458d90d311c2022ebfdcdb6ef3ff61438",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0009",
+      "meson_d_star_plus_block_0002"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "meson_d_star_plus"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3793474200510402,
+      "kappa_global": 0.1243518047316498,
+      "tau_field": 14.397893892545753,
+      "sigma0": 0.13341232738880132,
+      "sigma_tc": 128.93236216879285,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9876882783305919,
+      "Z_final_abs": 0.9742579403255242,
+      "R_mean_lastW": 0.9803483811485612,
+      "phase_var_lastW": 0.0024606969075769746,
+      "edge_phase_diff_mean_lastW": 0.3940851568259077,
+      "edge_phase_diff_std_lastW": 0.0496054120794997,
+      "PE_tick_norm": 0.8661726396155673,
+      "QualityLock": 0.9986915860178811,
+      "entropy_quality": 0.9903347506846474,
+      "memory_score_k10": 0.8707599351423881,
+      "E_local_final": -0.7075923414885972,
+      "E_local_mean_lastW": -0.6984790265712001,
+      "E_local_min_lastW": -0.7220231760923891,
+      "E_local_max_lastW": -0.6657024005949552,
+      "H_block_mean": 0.009665249315352611
+    },
+    "seed_stability": 0.45454545454545453,
+    "n_trials": 11,
+    "n_viable": 5,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9876882783305919,
+      "Z_final_abs": 0.9742579403255242,
+      "edge_phase_diff_mean_lastW": 0.3940851568259077,
+      "edge_phase_diff_std_lastW": 0.0496054120794997
+    }
+  },
+  {
+    "structure_id": "e53f934caa06efd5d5aa4cdcd095d9339b7927e1123b0d52dd4af8e5af1ee074",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0048",
+      "meson_ds_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "meson_ds"
+    ],
+    "assignment_families": [
+      "unknown",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.24392294225167518,
+      "kappa_global": 0.024709765257754937,
+      "tau_field": 6.689135470231729,
+      "sigma0": 0.18897653814280505,
+      "sigma_tc": 113.295818367062,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9655315481648867,
+      "Z_final_abs": 0.4112099327369841,
+      "R_mean_lastW": 0.9686708950998547,
+      "phase_var_lastW": 0.011331905027375858,
+      "edge_phase_diff_mean_lastW": 0.49075796136263533,
+      "edge_phase_diff_std_lastW": 0.10645142097396285,
+      "PE_tick_norm": 0.859014199226971,
+      "QualityLock": 0.9994121963948359,
+      "entropy_quality": 0.9952874396025758,
+      "memory_score_k10": 0.9314555553457411,
+      "E_local_final": -0.44542363424910875,
+      "E_local_mean_lastW": -0.4293684703646769,
+      "E_local_min_lastW": -0.4707331963161746,
+      "E_local_max_lastW": -0.38163675138589737,
+      "H_block_mean": 0.00471256039742421
+    },
+    "seed_stability": 0.5454545454545454,
+    "n_trials": 11,
+    "n_viable": 6,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9655315481648867,
+      "Z_final_abs": 0.4112099327369841,
+      "edge_phase_diff_mean_lastW": 0.49075796136263533,
+      "edge_phase_diff_std_lastW": 0.10645142097396285
+    }
+  },
+  {
+    "structure_id": "ab9d82dcc674549d232085a649f6b3f87de0d2f292b88cdcb5359f2c59d1ed46",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0016",
+      "unknown_block_0025"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1335671738538633,
+      "kappa_global": 0.23772055874794132,
+      "tau_field": 76.0175734796369,
+      "sigma0": 0.35074750678502564,
+      "sigma_tc": 40.30573848541946,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9999973699273472,
+      "Z_final_abs": 0.0684213200138727,
+      "R_mean_lastW": 0.9998154827305157,
+      "phase_var_lastW": 0.0008501670867196567,
+      "edge_phase_diff_mean_lastW": 0.02901919343065984,
+      "edge_phase_diff_std_lastW": 0.02518314034291167,
+      "PE_tick_norm": 0.8764880036114143,
+      "QualityLock": 0.9992768057020034,
+      "entropy_quality": 0.994541773988181,
+      "memory_score_k10": 0.11680222100498405,
+      "E_local_final": -0.26709100264610963,
+      "E_local_mean_lastW": -0.26692575632668514,
+      "E_local_min_lastW": -0.26713427084993924,
+      "E_local_max_lastW": -0.2659322310719827,
+      "H_block_mean": 0.005458226011818992
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9999973699273472,
+      "Z_final_abs": 0.0684213200138727,
+      "edge_phase_diff_mean_lastW": 0.02901919343065984,
+      "edge_phase_diff_std_lastW": 0.02518314034291167
+    }
+  },
+  {
+    "structure_id": "49731f40e3d73258d09d1791fa5ff5c922b585398b2461e9339f73b15ac89c90",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0032",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.38036914153297846,
+      "kappa_global": 0.10415098792450289,
+      "tau_field": 7.202272079813974,
+      "sigma0": 0.10889682647212323,
+      "sigma_tc": 131.2404643756755,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9852958930588362,
+      "Z_final_abs": 0.9376403654839955,
+      "R_mean_lastW": 0.9848964536725584,
+      "phase_var_lastW": 0.003692356650189683,
+      "edge_phase_diff_mean_lastW": 0.34275375031788113,
+      "edge_phase_diff_std_lastW": 0.060764764873976786,
+      "PE_tick_norm": 0.8585592213301302,
+      "QualityLock": 0.9997042449892712,
+      "entropy_quality": 0.9974009272388304,
+      "memory_score_k10": -0.10374964436082279,
+      "E_local_final": -0.7192803600081206,
+      "E_local_mean_lastW": -0.7159369491330182,
+      "E_local_min_lastW": -0.7445344302869902,
+      "E_local_max_lastW": -0.6738984304188259,
+      "H_block_mean": 0.0025990727611695952
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9852958930588362,
+      "Z_final_abs": 0.9376403654839955,
+      "edge_phase_diff_mean_lastW": 0.34275375031788113,
+      "edge_phase_diff_std_lastW": 0.060764764873976786
+    }
+  },
+  {
+    "structure_id": "87853775b2ed72be4d3e9186297a867ee784dde98c60c512bfca426756cbd97a",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "meson_ds_star_2166_catch_block_0001",
+      "unknown_block_0065"
+    ],
+    "assignment_particle_names": [
+      "meson_ds_star_2166_catch",
+      "unknown"
+    ],
+    "assignment_families": [
+      "charmed_meson",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3525195448310936,
+      "kappa_global": 0.3453150979542239,
+      "tau_field": 19.544457712274266,
+      "sigma0": 0.07786152726034823,
+      "sigma_tc": 191.03544301466638,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9763330892206687,
+      "Z_final_abs": 0.04179313652471784,
+      "R_mean_lastW": 0.9868404430501337,
+      "phase_var_lastW": 0.004600578456889364,
+      "edge_phase_diff_mean_lastW": 0.3177197322400346,
+      "edge_phase_diff_std_lastW": 0.0678275641379621,
+      "PE_tick_norm": 0.9067734297609102,
+      "QualityLock": 0.998180454548835,
+      "entropy_quality": 0.9869774716173998,
+      "memory_score_k10": -0.03532196301624224,
+      "E_local_final": -0.6540441382845644,
+      "E_local_mean_lastW": -0.6694251698519499,
+      "E_local_min_lastW": -0.688517545962932,
+      "E_local_max_lastW": -0.6502136747445717,
+      "H_block_mean": 0.013022528382600155
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9763330892206687,
+      "Z_final_abs": 0.04179313652471784,
+      "edge_phase_diff_mean_lastW": 0.3177197322400346,
+      "edge_phase_diff_std_lastW": 0.0678275641379621
+    }
+  },
+  {
+    "structure_id": "5f8afcdf257c804d3e3a2b42586d00c250b84df1bfe888a6ad14979709c4f253",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0029",
+      "triton_block_0002"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "triton"
+    ],
+    "assignment_families": [
+      "unknown",
+      "nucleus"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3951104395165984,
+      "kappa_global": 0.31460834434544543,
+      "tau_field": 43.26603927453703,
+      "sigma0": 0.2576817279450996,
+      "sigma_tc": 27.127105393734503,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9637423160665407,
+      "Z_final_abs": 0.011951729015030823,
+      "R_mean_lastW": 0.9633367800546159,
+      "phase_var_lastW": 3.710508720890827e-05,
+      "edge_phase_diff_mean_lastW": 0.5432122560922608,
+      "edge_phase_diff_std_lastW": 0.0060913945208719055,
+      "PE_tick_norm": 0.8924077471227271,
+      "QualityLock": 0.9992437819205717,
+      "entropy_quality": 0.9942406531797842,
+      "memory_score_k10": -0.3021234294654034,
+      "E_local_final": -0.673938181641333,
+      "E_local_mean_lastW": -0.6765520581234904,
+      "E_local_min_lastW": -0.6814975356088165,
+      "E_local_max_lastW": -0.6718516787122345,
+      "H_block_mean": 0.00575934682021583
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9637423160665407,
+      "Z_final_abs": 0.011951729015030823,
+      "edge_phase_diff_mean_lastW": 0.5432122560922608,
+      "edge_phase_diff_std_lastW": 0.0060913945208719055
+    }
+  },
+  {
+    "structure_id": "1bc1275c1790c8aa031db3bf51017953ddb385e45ddf6f99024e055696f64f78",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1910_block_0001",
+      "meson_d_star_plus_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1910",
+      "meson_d_star_plus"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.38514859348047387,
+      "kappa_global": 0.07167003564619144,
+      "tau_field": 46.64510289111296,
+      "sigma0": 0.20606218906390056,
+      "sigma_tc": 14.187049245198601,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9637210150883906,
+      "Z_final_abs": 0.3351460773440103,
+      "R_mean_lastW": 0.9636811167969768,
+      "phase_var_lastW": 4.115186498943755e-08,
+      "edge_phase_diff_mean_lastW": 0.5406727372836059,
+      "edge_phase_diff_std_lastW": 0.00020285922456087017,
+      "PE_tick_norm": 0.8419265853007301,
+      "QualityLock": 0.9994345766736852,
+      "entropy_quality": 0.9955069680252306,
+      "memory_score_k10": 0.46710857619877,
+      "E_local_final": -0.6605424995842776,
+      "E_local_mean_lastW": -0.6604040526642512,
+      "E_local_min_lastW": -0.6605424995842776,
+      "E_local_max_lastW": -0.6601436718678018,
+      "H_block_mean": 0.004493031974769321
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9637210150883906,
+      "Z_final_abs": 0.3351460773440103,
+      "edge_phase_diff_mean_lastW": 0.5406727372836059,
+      "edge_phase_diff_std_lastW": 0.00020285922456087017
+    }
+  },
+  {
+    "structure_id": "b74518d302256cec1daa381578ca39d16a98e4ed5430cfb999976b65fea92460",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0008",
+      "delta_1910_block_0002"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.024774916330371745,
+      "kappa_global": 0.31376758234376334,
+      "tau_field": 13.009968425825848,
+      "sigma0": 0.4511255376113156,
+      "sigma_tc": 12.74226021721349,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9301562978702658,
+      "Z_final_abs": 0.6890150754122659,
+      "R_mean_lastW": 0.930442891175138,
+      "phase_var_lastW": 1.02746928369368e-06,
+      "edge_phase_diff_mean_lastW": 0.7503527251446499,
+      "edge_phase_diff_std_lastW": 0.0010136415952858681,
+      "PE_tick_norm": 0.7353727109306244,
+      "QualityLock": 0.5003584420147341,
+      "entropy_quality": 0.9914820083493657,
+      "memory_score_k10": 0.6570473170290196,
+      "E_local_final": -0.036195964186728546,
+      "E_local_mean_lastW": -0.036249085200998635,
+      "E_local_min_lastW": -0.03630944767779035,
+      "E_local_max_lastW": -0.036195964186728546,
+      "H_block_mean": 0.00851799165063429
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9301562978702658,
+      "Z_final_abs": 0.6890150754122659,
+      "edge_phase_diff_mean_lastW": 0.7503527251446499,
+      "edge_phase_diff_std_lastW": 0.0010136415952858681
+    }
+  },
+  {
+    "structure_id": "0771f5c668e5e47b75faf47867dae9889fd31974f06488d6d0fa9f0eb360ca3d",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0066",
+      "unknown_block_0031"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.26275825989956075,
+      "kappa_global": 0.0324548221420519,
+      "tau_field": 68.86975398496301,
+      "sigma0": 0.0341977344644469,
+      "sigma_tc": 196.96556124816817,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9678041418188716,
+      "Z_final_abs": 0.007372440034468538,
+      "R_mean_lastW": 0.9671101319860356,
+      "phase_var_lastW": 0.0007317560015805682,
+      "edge_phase_diff_mean_lastW": 0.513671352940736,
+      "edge_phase_diff_std_lastW": 0.027050988920565698,
+      "PE_tick_norm": 0.8416972809227413,
+      "QualityLock": 0.9988729708095648,
+      "entropy_quality": 0.9913764311061913,
+      "memory_score_k10": 0.9713389258323479,
+      "E_local_final": -0.45024081121500775,
+      "E_local_mean_lastW": -0.4577349267430194,
+      "E_local_min_lastW": -0.4706413337188507,
+      "E_local_max_lastW": -0.4463321421580324,
+      "H_block_mean": 0.008623568893808659
+    },
+    "seed_stability": 0.5454545454545454,
+    "n_trials": 11,
+    "n_viable": 6,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9678041418188716,
+      "Z_final_abs": 0.007372440034468538,
+      "edge_phase_diff_mean_lastW": 0.513671352940736,
+      "edge_phase_diff_std_lastW": 0.027050988920565698
+    }
+  },
+  {
+    "structure_id": "6dcf24fc980681a97b418a8bb512612b37b18a39865c49761e6c8d9d397a5b96",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0004",
+      "delta_1930_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2617885217656601,
+      "kappa_global": 0.11433663090826035,
+      "tau_field": 7.395636067792456,
+      "sigma0": 0.14499859378111787,
+      "sigma_tc": 38.20755679396842,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9657334767129743,
+      "Z_final_abs": 0.9410345053882825,
+      "R_mean_lastW": 0.9654767309692278,
+      "phase_var_lastW": 0.00027407517603261506,
+      "edge_phase_diff_mean_lastW": 0.5268038762569915,
+      "edge_phase_diff_std_lastW": 0.016555215976622444,
+      "PE_tick_norm": 0.8580720023308949,
+      "QualityLock": 0.4998505777164796,
+      "entropy_quality": 0.956774476312995,
+      "memory_score_k10": 0.8724451186800893,
+      "E_local_final": -0.45260691886186855,
+      "E_local_mean_lastW": -0.4526513061417722,
+      "E_local_min_lastW": -0.461280294603392,
+      "E_local_max_lastW": -0.4434218308919131,
+      "H_block_mean": 0.0432255236870051
+    },
+    "seed_stability": 0.45454545454545453,
+    "n_trials": 11,
+    "n_viable": 5,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9657334767129743,
+      "Z_final_abs": 0.9410345053882825,
+      "edge_phase_diff_mean_lastW": 0.5268038762569915,
+      "edge_phase_diff_std_lastW": 0.016555215976622444
+    }
+  },
+  {
+    "structure_id": "0b4227c40d3cec2659590a8277a7f2a805f2eff1fa01658e7ce75a062dce48d1",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0034",
+      "unknown_block_0071"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.25529508751113583,
+      "kappa_global": 0.1459343546643583,
+      "tau_field": 16.257794730760885,
+      "sigma0": 0.25205102872993274,
+      "sigma_tc": 14.001985684907055,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9424945649637974,
+      "Z_final_abs": 0.8148680823279657,
+      "R_mean_lastW": 0.9424879457744183,
+      "phase_var_lastW": 2.8705916409885115e-08,
+      "edge_phase_diff_mean_lastW": 0.6815977563789971,
+      "edge_phase_diff_std_lastW": 0.0001694282042928069,
+      "PE_tick_norm": 0.8625573132924239,
+      "QualityLock": 0.4999501441354687,
+      "entropy_quality": 0.9934034643409939,
+      "memory_score_k10": 0.42638033858049507,
+      "E_local_final": -0.39655752847326853,
+      "E_local_mean_lastW": -0.3965073105169835,
+      "E_local_min_lastW": -0.39660956195375413,
+      "E_local_max_lastW": -0.39640865039802775,
+      "H_block_mean": 0.006596535659006131
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9424945649637974,
+      "Z_final_abs": 0.8148680823279657,
+      "edge_phase_diff_mean_lastW": 0.6815977563789971,
+      "edge_phase_diff_std_lastW": 0.0001694282042928069
+    }
+  },
+  {
+    "structure_id": "2a2c2de9f0c592b6d761af21e4f6ca4ad0cd044da6667846f1e2fc273514c2cc",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0009",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1485810882718342,
+      "kappa_global": 0.06195687001984981,
+      "tau_field": 73.87899165254176,
+      "sigma0": 0.2881279313014369,
+      "sigma_tc": 29.44138409116364,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9963992700535518,
+      "Z_final_abs": 0.1001213202569207,
+      "R_mean_lastW": 0.9966176623276153,
+      "phase_var_lastW": 9.273950593430158e-05,
+      "edge_phase_diff_mean_lastW": 0.16426029380502313,
+      "edge_phase_diff_std_lastW": 0.00963013530197274,
+      "PE_tick_norm": 0.8407550840266651,
+      "QualityLock": 0.9994715116286159,
+      "entropy_quality": 0.9957098784636301,
+      "memory_score_k10": 0.02126983869262622,
+      "E_local_final": -0.2927781052676157,
+      "E_local_mean_lastW": -0.29316187850135905,
+      "E_local_min_lastW": -0.2938781682656738,
+      "E_local_max_lastW": -0.2918147608579965,
+      "H_block_mean": 0.004290121536369828
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9963992700535518,
+      "Z_final_abs": 0.1001213202569207,
+      "edge_phase_diff_mean_lastW": 0.16426029380502313,
+      "edge_phase_diff_std_lastW": 0.00963013530197274
+    }
+  },
+  {
+    "structure_id": "9aaf2027be141be2bbc39411c76cb50430a16c6509b6cca50ddd98ef5c64e5db",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0048",
+      "unknown_block_0032"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.32723089629895274,
+      "kappa_global": 0.3980515654261235,
+      "tau_field": 11.029003871320567,
+      "sigma0": 0.15459463946127786,
+      "sigma_tc": 54.622343383934066,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9543306303474531,
+      "Z_final_abs": 0.8437373779886788,
+      "R_mean_lastW": 0.9587498669432634,
+      "phase_var_lastW": 0.0012666498577853231,
+      "edge_phase_diff_mean_lastW": 0.57538073564738,
+      "edge_phase_diff_std_lastW": 0.035590024694924324,
+      "PE_tick_norm": 0.8907290412717785,
+      "QualityLock": 0.9994770987127031,
+      "entropy_quality": 0.9957838164607952,
+      "memory_score_k10": 0.8917817133005496,
+      "E_local_final": -0.5296267645581653,
+      "E_local_mean_lastW": -0.5489094376105776,
+      "E_local_min_lastW": -0.5714980001483887,
+      "E_local_max_lastW": -0.529317157641131,
+      "H_block_mean": 0.004216183539204791
+    },
+    "seed_stability": 0.09090909090909091,
+    "n_trials": 11,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9543306303474531,
+      "Z_final_abs": 0.8437373779886788,
+      "edge_phase_diff_mean_lastW": 0.57538073564738,
+      "edge_phase_diff_std_lastW": 0.035590024694924324
+    }
+  },
+  {
+    "structure_id": "56f5c5a94526369eb2a4148223064bb206ad5a499369e55fde1c5c3652ad8dd5",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0024",
+      "delta_1930_block_0004",
+      "meson_d_star_plus_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1930",
+      "meson_d_star_plus"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      2.0,
+      1.0,
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.21521885160868703,
+      "kappa_global": 0.32122004847732477,
+      "tau_field": 26.58515406859226,
+      "sigma0": 0.007037826056941177,
+      "sigma_tc": 13.032326175589343,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9561024844928059,
+      "Z_final_abs": 0.939011386251469,
+      "R_mean_lastW": 0.9557814766529036,
+      "phase_var_lastW": 1.6818267987113492e-06,
+      "edge_phase_diff_mean_lastW": 0.4689670820428996,
+      "edge_phase_diff_std_lastW": 0.2199610577148865,
+      "PE_tick_norm": 0.08666250656971244,
+      "QualityLock": 0.9995955027779629,
+      "entropy_quality": 0.9965300394635651,
+      "memory_score_k10": 0.9190505319409088,
+      "E_local_final": -0.5502016565980274,
+      "E_local_mean_lastW": -0.5494969018376,
+      "E_local_min_lastW": -0.5502016565980274,
+      "E_local_max_lastW": -0.5486150401003892,
+      "H_block_mean": 0.003469960536434944
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9561024844928059,
+      "Z_final_abs": 0.939011386251469,
+      "edge_phase_diff_mean_lastW": 0.4689670820428996,
+      "edge_phase_diff_std_lastW": 0.2199610577148865
+    }
+  },
+  {
+    "structure_id": "f72ada2e6d99b4515265bf02094300340523ce0a37b0fa2626fb5535946d603a",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0001",
+      "delta_1950_block_0009"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3476413502320206,
+      "kappa_global": 0.08335683987201362,
+      "tau_field": 6.536125427698822,
+      "sigma0": 0.12418204750481376,
+      "sigma_tc": 118.96626573025043,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9326332254429249,
+      "Z_final_abs": 0.3862228307727429,
+      "R_mean_lastW": 0.9371774447421318,
+      "phase_var_lastW": 0.01159552863625877,
+      "edge_phase_diff_mean_lastW": 0.7049094838702018,
+      "edge_phase_diff_std_lastW": 0.10768253635691709,
+      "PE_tick_norm": 0.873661412923186,
+      "QualityLock": 0.9989001197914225,
+      "entropy_quality": 0.9918420644577804,
+      "memory_score_k10": 0.4208398222716766,
+      "E_local_final": -0.510929942943566,
+      "E_local_mean_lastW": -0.5286878662868504,
+      "E_local_min_lastW": -0.5966653435759712,
+      "E_local_max_lastW": -0.3676097083842982,
+      "H_block_mean": 0.008157935542219566
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9326332254429249,
+      "Z_final_abs": 0.3862228307727429,
+      "edge_phase_diff_mean_lastW": 0.7049094838702018,
+      "edge_phase_diff_std_lastW": 0.10768253635691709
+    }
+  },
+  {
+    "structure_id": "85caa35860d5a998dbf5c578e5d56b3019db9c8a9e84d210fad2a00d7c66af06",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0001",
+      "delta_1950_block_0007"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3144959373701977,
+      "kappa_global": 0.2228969162600489,
+      "tau_field": 32.260210962799604,
+      "sigma0": 0.4089831180301656,
+      "sigma_tc": 45.10822673683051,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9999037120708376,
+      "Z_final_abs": 0.5644185194960188,
+      "R_mean_lastW": 0.9997049295314742,
+      "phase_var_lastW": 0.0023298111903827293,
+      "edge_phase_diff_mean_lastW": 0.03912501904143824,
+      "edge_phase_diff_std_lastW": 0.028812036567951737,
+      "PE_tick_norm": 0.8644939337646187,
+      "QualityLock": 0.9998077257469316,
+      "entropy_quality": 0.9982295909556694,
+      "memory_score_k10": -0.3325396148591149,
+      "E_local_final": -0.628956162582038,
+      "E_local_mean_lastW": -0.6282595324823258,
+      "E_local_min_lastW": -0.6289914100011104,
+      "E_local_max_lastW": -0.6245584544297693,
+      "H_block_mean": 0.0017704090443305715
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9999037120708376,
+      "Z_final_abs": 0.5644185194960188,
+      "edge_phase_diff_mean_lastW": 0.03912501904143824,
+      "edge_phase_diff_std_lastW": 0.028812036567951737
+    }
+  },
+  {
+    "structure_id": "7b0a1dba96cb8528c4263fce7f9e17c37479ce2f72ba6be3f62a54f4e4174087",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0071",
+      "unknown_block_0042"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.14457437508028306,
+      "kappa_global": 0.14921293085327542,
+      "tau_field": 15.161959784595902,
+      "sigma0": 0.23036104818420838,
+      "sigma_tc": 17.67938650927201,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.8664829537632263,
+      "Z_final_abs": 0.5642654174733154,
+      "R_mean_lastW": 0.8663055943991829,
+      "phase_var_lastW": 1.4467174217847352e-06,
+      "edge_phase_diff_mean_lastW": 1.0460756170274137,
+      "edge_phase_diff_std_lastW": 0.0012027956691744177,
+      "PE_tick_norm": 0.7879833523766651,
+      "QualityLock": 0.4995950771044686,
+      "entropy_quality": 0.990755267634576,
+      "memory_score_k10": 0.23840130515070812,
+      "E_local_final": -0.14530545623549043,
+      "E_local_mean_lastW": -0.14486145052039773,
+      "E_local_min_lastW": -0.14533620299769387,
+      "E_local_max_lastW": -0.14420385397287291,
+      "H_block_mean": 0.009244732365423995
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.8664829537632263,
+      "Z_final_abs": 0.5642654174733154,
+      "edge_phase_diff_mean_lastW": 1.0460756170274137,
+      "edge_phase_diff_std_lastW": 0.0012027956691744177
+    }
+  },
+  {
+    "structure_id": "44202d23c309588cda819074f586fd7cee1159dc309ff591f2b7cb0c856dd49a",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0008",
+      "unknown_block_0067"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.19811097615878764,
+      "kappa_global": 0.020442849860263825,
+      "tau_field": 40.16875866483913,
+      "sigma0": 0.15325726987223912,
+      "sigma_tc": 64.93030430190066,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9093344502137737,
+      "Z_final_abs": 0.7722545180801359,
+      "R_mean_lastW": 0.9211332459744017,
+      "phase_var_lastW": 0.0020080442738735745,
+      "edge_phase_diff_mean_lastW": 0.7984372558193741,
+      "edge_phase_diff_std_lastW": 0.04481120701201402,
+      "PE_tick_norm": 0.8353563924524025,
+      "QualityLock": 0.9994994221546922,
+      "entropy_quality": 0.9958451708980819,
+      "memory_score_k10": 0.47919256913842434,
+      "E_local_final": -0.26946224919499756,
+      "E_local_mean_lastW": -0.2776411431015024,
+      "E_local_min_lastW": -0.307938394278965,
+      "E_local_max_lastW": -0.25332568819344575,
+      "H_block_mean": 0.004154829101918154
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9093344502137737,
+      "Z_final_abs": 0.7722545180801359,
+      "edge_phase_diff_mean_lastW": 0.7984372558193741,
+      "edge_phase_diff_std_lastW": 0.04481120701201402
+    }
+  },
+  {
+    "structure_id": "7593e7e9a667cc9783ef1174d69dde0913a6a59ab34fd39b147ca07d76b7ff6a",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0057",
+      "unknown_block_0024",
+      "delta_1950_block_0007"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0,
+      0.5,
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1681482071769658,
+      "kappa_global": 0.36059109699002123,
+      "tau_field": 33.495855845351244,
+      "sigma0": 0.13893534246398379,
+      "sigma_tc": 33.54036789177218,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9684035299928389,
+      "Z_final_abs": 0.9342088819789713,
+      "R_mean_lastW": 0.9679451738642161,
+      "phase_var_lastW": 3.502873931160381e-05,
+      "edge_phase_diff_mean_lastW": 0.403960257801495,
+      "edge_phase_diff_std_lastW": 0.17524540285277077,
+      "PE_tick_norm": 0.8522941759766197,
+      "QualityLock": 0.9995217577539597,
+      "entropy_quality": 0.9960690291197842,
+      "memory_score_k10": 0.9271178197731724,
+      "E_local_final": -0.45571534890001497,
+      "E_local_mean_lastW": -0.4559475608843238,
+      "E_local_min_lastW": -0.4571382142412857,
+      "E_local_max_lastW": -0.4546101920154182,
+      "H_block_mean": 0.003930970880215713
+    },
+    "seed_stability": 0.5454545454545454,
+    "n_trials": 11,
+    "n_viable": 6,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9684035299928389,
+      "Z_final_abs": 0.9342088819789713,
+      "edge_phase_diff_mean_lastW": 0.403960257801495,
+      "edge_phase_diff_std_lastW": 0.17524540285277077
+    }
+  },
+  {
+    "structure_id": "9db906d0dabce861464c8b2be7f40693a33d5ab8a64c17bf920df9c3fb4cd6e8",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1920_block_0001",
+      "meson_d_star_plus_block_0002"
+    ],
+    "assignment_particle_names": [
+      "delta_1920",
+      "meson_d_star_plus"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.36242600085388516,
+      "kappa_global": 0.0353063369215475,
+      "tau_field": 34.907969107760636,
+      "sigma0": 0.08598497777572318,
+      "sigma_tc": 107.51957372230652,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.969540232345873,
+      "Z_final_abs": 0.6725581061965965,
+      "R_mean_lastW": 0.9667496438653996,
+      "phase_var_lastW": 0.0026388814858424197,
+      "edge_phase_diff_mean_lastW": 0.5146978580310503,
+      "edge_phase_diff_std_lastW": 0.05137004463539446,
+      "PE_tick_norm": 0.8571298054348189,
+      "QualityLock": 0.9989818076342508,
+      "entropy_quality": 0.9925094278713421,
+      "memory_score_k10": 0.8461157927207343,
+      "E_local_final": -0.653778579450936,
+      "E_local_mean_lastW": -0.6293476151036337,
+      "E_local_min_lastW": -0.653778579450936,
+      "E_local_max_lastW": -0.5843591998218484,
+      "H_block_mean": 0.0074905721286578925
+    },
+    "seed_stability": 0.36363636363636365,
+    "n_trials": 11,
+    "n_viable": 4,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.969540232345873,
+      "Z_final_abs": 0.6725581061965965,
+      "edge_phase_diff_mean_lastW": 0.5146978580310503,
+      "edge_phase_diff_std_lastW": 0.05137004463539446
+    }
+  },
+  {
+    "structure_id": "4735bf025e0be479fe8b4a109f54f9c76b4e2eda6272267cdefd8654425ba26d",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0046",
+      "unknown_block_0071",
+      "delta_1950_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0,
+      2.0,
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.14374215460425838,
+      "kappa_global": 0.3365657020048366,
+      "tau_field": 8.330683765049123,
+      "sigma0": 0.44801705306782824,
+      "sigma_tc": 62.648830732809635,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9594720673089117,
+      "Z_final_abs": 0.9293752864459565,
+      "R_mean_lastW": 0.9578572972653179,
+      "phase_var_lastW": 0.013840791442715418,
+      "edge_phase_diff_mean_lastW": 0.4628310585011022,
+      "edge_phase_diff_std_lastW": 0.20395454461553672,
+      "PE_tick_norm": 0.8729249039683133,
+      "QualityLock": 0.33334114793389663,
+      "entropy_quality": 0.9943338216146898,
+      "memory_score_k10": 0.45581661531207696,
+      "E_local_final": -0.3697338131315455,
+      "E_local_mean_lastW": -0.3687577701126607,
+      "E_local_min_lastW": -0.4078616321992966,
+      "E_local_max_lastW": -0.3268909504528668,
+      "H_block_mean": 0.005666178385310284
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9594720673089117,
+      "Z_final_abs": 0.9293752864459565,
+      "edge_phase_diff_mean_lastW": 0.4628310585011022,
+      "edge_phase_diff_std_lastW": 0.20395454461553672
+    }
+  },
+  {
+    "structure_id": "ec94c4da915f338e7151933aae9a4f80c03f268d67406151e7d323031b5a6ee1",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0071",
+      "unknown_block_0006"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.19875863904429814,
+      "kappa_global": 0.19279196153675654,
+      "tau_field": 9.510930563839263,
+      "sigma0": 0.13047311941426118,
+      "sigma_tc": 94.96981247331644,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.980201174240623,
+      "Z_final_abs": 0.6882953903785496,
+      "R_mean_lastW": 0.9839510720018755,
+      "phase_var_lastW": 0.00442088684698255,
+      "edge_phase_diff_mean_lastW": 0.35265371415832336,
+      "edge_phase_diff_std_lastW": 0.06648974993923913,
+      "PE_tick_norm": 0.8752154737963161,
+      "QualityLock": 0.4998969766368265,
+      "entropy_quality": 0.9930018841925718,
+      "memory_score_k10": 0.11085499016288913,
+      "E_local_final": -0.36662146502720083,
+      "E_local_mean_lastW": -0.3715042817208265,
+      "E_local_min_lastW": -0.3878231376491858,
+      "E_local_max_lastW": -0.34408349394271004,
+      "H_block_mean": 0.006998115807428127
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.980201174240623,
+      "Z_final_abs": 0.6882953903785496,
+      "edge_phase_diff_mean_lastW": 0.35265371415832336,
+      "edge_phase_diff_std_lastW": 0.06648974993923913
+    }
+  },
+  {
+    "structure_id": "c048ba8ea6c3b1bef8ea5128f625139f672d80b9be78445a67b0a4d3f1630dd9",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1910_block_0002",
+      "unknown_block_0048",
+      "delta_1950_block_0005"
+    ],
+    "assignment_particle_names": [
+      "delta_1910",
+      "unknown",
+      "delta_1950"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5,
+      1.0,
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.28266809442036483,
+      "kappa_global": 0.22015857320956952,
+      "tau_field": 9.580297890014116,
+      "sigma0": 0.4185358140625725,
+      "sigma_tc": 10.269640799516068,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9710406922268735,
+      "Z_final_abs": 0.41259730908025954,
+      "R_mean_lastW": 0.9710427026967892,
+      "phase_var_lastW": 3.6311106272940255e-10,
+      "edge_phase_diff_mean_lastW": 0.38567872460520364,
+      "edge_phase_diff_std_lastW": 0.16208318081256914,
+      "PE_tick_norm": 0.8301581889727864,
+      "QualityLock": 0.6666890254225631,
+      "entropy_quality": 0.9926610335111614,
+      "memory_score_k10": 0.7988130095268515,
+      "E_local_final": -0.7645005910750763,
+      "E_local_mean_lastW": -0.764505693888146,
+      "E_local_min_lastW": -0.7645210033098823,
+      "E_local_max_lastW": -0.7644980142208533,
+      "H_block_mean": 0.007338966488838531
+    },
+    "seed_stability": 0.45454545454545453,
+    "n_trials": 11,
+    "n_viable": 5,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9710406922268735,
+      "Z_final_abs": 0.41259730908025954,
+      "edge_phase_diff_mean_lastW": 0.38567872460520364,
+      "edge_phase_diff_std_lastW": 0.16208318081256914
+    }
+  },
+  {
+    "structure_id": "c82efa17f21debce241c527abeb02785baf9ef7026440e910ccbb94805bcf8a7",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0007",
+      "delta_1930_block_0004"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.05842397165810494,
+      "kappa_global": 0.196883325583666,
+      "tau_field": 16.276158144799183,
+      "sigma0": 0.002238688716317483,
+      "sigma_tc": 14.551092728918974,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9718466384222915,
+      "Z_final_abs": 0.5562282581261361,
+      "R_mean_lastW": 0.9718551943518833,
+      "phase_var_lastW": 2.913745643146829e-09,
+      "edge_phase_diff_mean_lastW": 0.4756286525097096,
+      "edge_phase_diff_std_lastW": 5.3979122289518836e-05,
+      "PE_tick_norm": 0.12362271728527956,
+      "QualityLock": 0.9997350584993783,
+      "entropy_quality": 0.9976405204731118,
+      "memory_score_k10": 0.9518032816519402,
+      "E_local_final": -0.10387486140287978,
+      "E_local_mean_lastW": -0.10387891689050141,
+      "E_local_min_lastW": -0.10388465668247969,
+      "E_local_max_lastW": -0.10387486140287978,
+      "H_block_mean": 0.002359479526888228
+    },
+    "seed_stability": 0.7272727272727273,
+    "n_trials": 11,
+    "n_viable": 8,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9718466384222915,
+      "Z_final_abs": 0.5562282581261361,
+      "edge_phase_diff_mean_lastW": 0.4756286525097096,
+      "edge_phase_diff_std_lastW": 5.3979122289518836e-05
+    }
+  },
+  {
+    "structure_id": "5d5f00a9bb510eb0fa4309f751c75ca31a3027d1eae0829f40d4abce16e0d0b6",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0041",
+      "unknown_block_0060"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.35584699126636343,
+      "kappa_global": 0.12537419491324997,
+      "tau_field": 25.51309129190762,
+      "sigma0": 0.18960545065311823,
+      "sigma_tc": 50.262319534561925,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9492877500081981,
+      "Z_final_abs": 0.019534319226951983,
+      "R_mean_lastW": 0.9519770568040252,
+      "phase_var_lastW": 0.0009714657240290815,
+      "edge_phase_diff_mean_lastW": 0.6215760558633405,
+      "edge_phase_diff_std_lastW": 0.031168344903588985,
+      "PE_tick_norm": 0.8786539284615982,
+      "QualityLock": 0.9996711610922787,
+      "entropy_quality": 0.9971241244222643,
+      "memory_score_k10": 0.8677593967331377,
+      "E_local_final": -0.5763745345115564,
+      "E_local_mean_lastW": -0.57989252746214,
+      "E_local_min_lastW": -0.6160462905620505,
+      "E_local_max_lastW": -0.5568102092707613,
+      "H_block_mean": 0.0028758755777357307
+    },
+    "seed_stability": 0.5454545454545454,
+    "n_trials": 11,
+    "n_viable": 6,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9492877500081981,
+      "Z_final_abs": 0.019534319226951983,
+      "edge_phase_diff_mean_lastW": 0.6215760558633405,
+      "edge_phase_diff_std_lastW": 0.031168344903588985
+    }
+  },
+  {
+    "structure_id": "6aae9419c409c3b2c6310b66fa922b3066f116449a6fe4160bcf242c9f44cea0",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0003",
+      "unknown_block_0071"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "unknown"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3502833967813965,
+      "kappa_global": 0.3808225586114108,
+      "tau_field": 9.891385349597222,
+      "sigma0": 0.11260313289462455,
+      "sigma_tc": 45.76362643273984,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9971343044677315,
+      "Z_final_abs": 0.8781330454412833,
+      "R_mean_lastW": 0.9967570869142792,
+      "phase_var_lastW": 0.00041613115952285324,
+      "edge_phase_diff_mean_lastW": 0.1598190200598225,
+      "edge_phase_diff_std_lastW": 0.020399293113312855,
+      "PE_tick_norm": 0.8899114893535209,
+      "QualityLock": 0.4999122239569163,
+      "entropy_quality": 0.9930903687386955,
+      "memory_score_k10": 0.7922124276654944,
+      "E_local_final": -0.6911203297520784,
+      "E_local_mean_lastW": -0.6916298540852528,
+      "E_local_min_lastW": -0.6961104286619407,
+      "E_local_max_lastW": -0.685607805996755,
+      "H_block_mean": 0.006909631261304557
+    },
+    "seed_stability": 0.6363636363636364,
+    "n_trials": 11,
+    "n_viable": 7,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9971343044677315,
+      "Z_final_abs": 0.8781330454412833,
+      "edge_phase_diff_mean_lastW": 0.1598190200598225,
+      "edge_phase_diff_std_lastW": 0.020399293113312855
+    }
+  },
+  {
+    "structure_id": "d8c5671d09466bcb33513bf31e5f00e2022682b5be42dc6006d2d81f2a758ca2",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1950_block_0008",
+      "delta_1910_block_0001"
+    ],
+    "assignment_particle_names": [
+      "delta_1950",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like"
+    ],
+    "edge_weights": [
+      2.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1257006695794804,
+      "kappa_global": 0.1653295237459621,
+      "tau_field": 73.44773620886366,
+      "sigma0": 0.32705379449664745,
+      "sigma_tc": 83.49483838950235,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9225804733733093,
+      "Z_final_abs": 0.032457186168979434,
+      "R_mean_lastW": 0.9203443195300538,
+      "phase_var_lastW": 0.011113485426238995,
+      "edge_phase_diff_mean_lastW": 0.797107463421078,
+      "edge_phase_diff_std_lastW": 0.1054205171028818,
+      "PE_tick_norm": 0.8481607115829447,
+      "QualityLock": 0.9994405447755937,
+      "entropy_quality": 0.9955433970657916,
+      "memory_score_k10": 0.8904473850488118,
+      "E_local_final": -0.16528852749756673,
+      "E_local_mean_lastW": -0.17440146140414206,
+      "E_local_min_lastW": -0.20161850332408177,
+      "E_local_max_lastW": -0.13467674388984796,
+      "H_block_mean": 0.004456602934208319
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9225804733733093,
+      "Z_final_abs": 0.032457186168979434,
+      "edge_phase_diff_mean_lastW": 0.797107463421078,
+      "edge_phase_diff_std_lastW": 0.1054205171028818
+    }
+  },
+  {
+    "structure_id": "a807e2312b7a13f34fd510ebfd3cc9b16a44010fcfbcba857be687573adece3f",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0063",
+      "unknown_block_0040",
+      "unknown_block_0023"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0,
+      2.0,
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3263248204307258,
+      "kappa_global": 0.06274779425589201,
+      "tau_field": 10.534820362198682,
+      "sigma0": 0.13549922301994444,
+      "sigma_tc": 16.698874006144067,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.8535169553916768,
+      "Z_final_abs": 0.1766083842013968,
+      "R_mean_lastW": 0.8535099497820051,
+      "phase_var_lastW": 1.0367666344286049e-07,
+      "edge_phase_diff_mean_lastW": 0.9007599763460813,
+      "edge_phase_diff_std_lastW": 0.3190550470155712,
+      "PE_tick_norm": 0.7878151053844128,
+      "QualityLock": 0.9991869033219801,
+      "entropy_quality": 0.9939715790190753,
+      "memory_score_k10": 0.9652055871264114,
+      "E_local_final": -0.6132710522343274,
+      "E_local_mean_lastW": -0.6132458743685726,
+      "E_local_min_lastW": -0.6134829108001671,
+      "E_local_max_lastW": -0.613092582392726,
+      "H_block_mean": 0.0060284209809247265
+    },
+    "seed_stability": 1.0,
+    "n_trials": 1,
+    "n_viable": 1,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.8535169553916768,
+      "Z_final_abs": 0.1766083842013968,
+      "edge_phase_diff_mean_lastW": 0.9007599763460813,
+      "edge_phase_diff_std_lastW": 0.3190550470155712
+    }
+  },
+  {
+    "structure_id": "fd5e9a5ab691932d20fc27cdfc1b8d5a5070a1f04098faaaf33cf58280cf372e",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0022",
+      "unknown_block_0045"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "unknown"
+    ],
+    "assignment_families": [
+      "unknown",
+      "unknown"
+    ],
+    "edge_weights": [
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.1581739226677487,
+      "kappa_global": 0.06766940114686192,
+      "tau_field": 13.355023710081301,
+      "sigma0": 0.19433522097025746,
+      "sigma_tc": 159.81711100317335,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9972281521615058,
+      "Z_final_abs": 0.26822359072510754,
+      "R_mean_lastW": 0.9702004606512948,
+      "phase_var_lastW": 0.017266361956787442,
+      "edge_phase_diff_mean_lastW": 0.4718409767001333,
+      "edge_phase_diff_std_lastW": 0.13140152950703216,
+      "PE_tick_norm": 0.8425872511387744,
+      "QualityLock": 0.9994808112073762,
+      "entropy_quality": 0.9957575360359595,
+      "memory_score_k10": 0.9601216399884199,
+      "E_local_final": -0.29574782409376554,
+      "E_local_mean_lastW": -0.2791910850076059,
+      "E_local_min_lastW": -0.3097643326177873,
+      "E_local_max_lastW": -0.24086415094319444,
+      "H_block_mean": 0.004242463964040441
+    },
+    "seed_stability": 0.36363636363636365,
+    "n_trials": 11,
+    "n_viable": 4,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9972281521615058,
+      "Z_final_abs": 0.26822359072510754,
+      "edge_phase_diff_mean_lastW": 0.4718409767001333,
+      "edge_phase_diff_std_lastW": 0.13140152950703216
+    }
+  },
+  {
+    "structure_id": "559dad196f1325cf6b886222087c7a94dddd0b3f592a60d78ba9fd0474f10ced",
+    "template_name": "baryon_triangle",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "delta_1910_block_0001",
+      "delta_1920_block_0001",
+      "meson_d_star_plus_block_0002"
+    ],
+    "assignment_particle_names": [
+      "delta_1910",
+      "delta_1920",
+      "meson_d_star_plus"
+    ],
+    "assignment_families": [
+      "delta_like",
+      "delta_like",
+      "charmed_meson"
+    ],
+    "edge_weights": [
+      1.0,
+      0.5,
+      1.0
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.39177953359087314,
+      "kappa_global": 0.1688236762192193,
+      "tau_field": 50.65032181560653,
+      "sigma0": 0.10052127107770968,
+      "sigma_tc": 19.12091890780991,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9308532440873852,
+      "Z_final_abs": 0.14736881360476947,
+      "R_mean_lastW": 0.9308698408014704,
+      "phase_var_lastW": 4.6862419551876935e-07,
+      "edge_phase_diff_mean_lastW": 0.5340762206885211,
+      "edge_phase_diff_std_lastW": 0.37017552643088136,
+      "PE_tick_norm": 0.8368294103621474,
+      "QualityLock": 0.9990599810799788,
+      "entropy_quality": 0.993020943434481,
+      "memory_score_k10": 0.8190549702177786,
+      "E_local_final": -0.9600984040809598,
+      "E_local_mean_lastW": -0.9604330829531141,
+      "E_local_min_lastW": -0.9617689240757951,
+      "E_local_max_lastW": -0.9596667063074282,
+      "H_block_mean": 0.00697905656551899
+    },
+    "seed_stability": 0.36363636363636365,
+    "n_trials": 11,
+    "n_viable": 4,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9308532440873852,
+      "Z_final_abs": 0.14736881360476947,
+      "edge_phase_diff_mean_lastW": 0.5340762206885211,
+      "edge_phase_diff_std_lastW": 0.37017552643088136
+    }
+  },
+  {
+    "structure_id": "0fcef9ea19193b7bfd7964d6ebae3ffe497eb261e4545c8054f1ba7f93963dee",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "unknown_block_0032",
+      "delta_1930_block_0001"
+    ],
+    "assignment_particle_names": [
+      "unknown",
+      "delta_1930"
+    ],
+    "assignment_families": [
+      "unknown",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.3393989014369952,
+      "kappa_global": 0.22395369288417968,
+      "tau_field": 11.737514374446082,
+      "sigma0": 0.023025330142753944,
+      "sigma_tc": 98.1423469050876,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9871015671886378,
+      "Z_final_abs": 0.9528993866197322,
+      "R_mean_lastW": 0.9871353098285516,
+      "phase_var_lastW": 7.269842178981321e-05,
+      "edge_phase_diff_mean_lastW": 0.3210403053057462,
+      "edge_phase_diff_std_lastW": 0.00852633695028605,
+      "PE_tick_norm": 0.8412423030259005,
+      "QualityLock": 0.500040889285643,
+      "entropy_quality": 0.9581342802543262,
+      "memory_score_k10": 0.8583503631914572,
+      "E_local_final": -0.6446541808975045,
+      "E_local_mean_lastW": -0.6439537099220101,
+      "E_local_min_lastW": -0.6481604375694356,
+      "E_local_max_lastW": -0.6408692100047476,
+      "H_block_mean": 0.04186571974567372
+    },
+    "seed_stability": 0.6363636363636364,
+    "n_trials": 11,
+    "n_viable": 7,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9871015671886378,
+      "Z_final_abs": 0.9528993866197322,
+      "edge_phase_diff_mean_lastW": 0.3210403053057462,
+      "edge_phase_diff_std_lastW": 0.00852633695028605
+    }
+  },
+  {
+    "structure_id": "890d008cfd71a23c60ed9efa4a7252ed20b8ee4d48e051381ad2aba201cbdf7a",
+    "template_name": "meson_dimer",
+    "target": "baryon_explore",
+    "assignment_block_ids": [
+      "meson_d_star_plus_block_0001",
+      "delta_1910_block_0002"
+    ],
+    "assignment_particle_names": [
+      "meson_d_star_plus",
+      "delta_1910"
+    ],
+    "assignment_families": [
+      "charmed_meson",
+      "delta_like"
+    ],
+    "edge_weights": [
+      0.5
+    ],
+    "engine_params": {
+      "dt": 1.0,
+      "T_ticks": 120,
+      "W": 20,
+      "K_local": 0.2734348110533234,
+      "kappa_global": 0.16581254275712082,
+      "tau_field": 17.465683088188374,
+      "sigma0": 0.07434541292526958,
+      "sigma_tc": 27.55907625821495,
+      "sigma_theta_init": 0.5
+    },
+    "best_metrics": {
+      "R_final": 0.9513977296757141,
+      "Z_final_abs": 0.8696521800049586,
+      "R_mean_lastW": 0.9512806326481462,
+      "phase_var_lastW": 5.039526403470929e-06,
+      "edge_phase_diff_mean_lastW": 0.6268625097066419,
+      "edge_phase_diff_std_lastW": 0.0022448889512559256,
+      "PE_tick_norm": 0.8426394778188173,
+      "QualityLock": 0.5003524739128256,
+      "entropy_quality": 0.9914455793088047,
+      "memory_score_k10": 0.930232912122347,
+      "E_local_final": -0.443147573988696,
+      "E_local_mean_lastW": -0.44282250886836394,
+      "E_local_min_lastW": -0.444111056580261,
+      "E_local_max_lastW": -0.4413759251672707,
+      "H_block_mean": 0.008554420691195292
+    },
+    "seed_stability": 0.45454545454545453,
+    "n_trials": 11,
+    "n_viable": 5,
+    "export_class": "CONFIRMED_VIABLE",
+    "lock_snapshot": {
+      "R_final": 0.9513977296757141,
+      "Z_final_abs": 0.8696521800049586,
+      "edge_phase_diff_mean_lastW": 0.6268625097066419,
+      "edge_phase_diff_std_lastW": 0.0022448889512559256
+    }
+  }
+]
