@@ -730,8 +730,8 @@
       "family": "charmed_meson",
       "type": "meson",
       "jpc": "1-",
-      "sm_mass_gev": 2.1122,
-      "masses_gev": [2.090, 2.1122],
+      "sm_mass_gev": 2.090,
+      "masses_gev": [2.090],
       "widths_gev": [0.0019],
       "tolerances": {"mass_abs": 0.025, "width_abs": 0.002, "spacing_rel": 0.025},
       "doft": {
