@@ -1,11 +1,6 @@
 {
-  "name": "sm_universe_v5_parity_corrected",
-  "version_notes": "Correcciones: (1) Paridad basada en P físico del JPC, (2) Tolerancias ajustadas según dispersión observada",
+  "name": "sm_universe_complete_v4_modified",
   "energy_window_gev": [0.05, 10.0],
-  "parity_convention": {
-    "rule": "P=- en JPC → preferred_parity=even, allowed_k=[1,2,4]; P=+ en JPC → preferred_parity=odd, allowed_k=[1,3,5]",
-    "note": "Convención consistente con la fase del oscilador DOF"
-  },
   "particles": [
     {
       "name": "electron",
@@ -21,8 +16,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "muon",
@@ -38,8 +32,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "pion",
@@ -55,8 +48,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "eta",
@@ -72,8 +64,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "rho",
@@ -89,8 +80,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "omega_782",
@@ -106,8 +96,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "proton",
@@ -123,8 +112,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "neutron",
@@ -140,8 +128,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "eta_prime",
@@ -157,8 +144,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "phi",
@@ -174,8 +160,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "lambda",
@@ -191,8 +176,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "sigma",
@@ -208,8 +192,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "delta_1232",
@@ -225,8 +208,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "delta_1600",
@@ -242,8 +224,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "delta_1620",
@@ -256,11 +237,10 @@
       "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=- → even (CORREGIDO v5)"
+      }
     },
     {
       "name": "delta_1700",
@@ -273,11 +253,10 @@
       "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=- → even (CORREGIDO v5)"
+      }
     },
     {
       "name": "delta_1900",
@@ -293,8 +272,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "delta_1910",
@@ -310,8 +288,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "delta_1920",
@@ -327,8 +304,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "delta_1930",
@@ -341,11 +317,10 @@
       "tolerances": {"mass_abs": 0.04, "width_abs": 0.12, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=- → even (CORREGIDO v5)"
+      }
     },
     {
       "name": "delta_1950",
@@ -361,8 +336,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "tau",
@@ -378,8 +352,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "deuteron",
@@ -392,11 +365,10 @@
       "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.3},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "triton",
@@ -406,14 +378,13 @@
       "sm_mass_gev": 2.80892113298,
       "masses_gev": [2.80892113298],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.25},
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.25},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd, tolerancia ampliada por dispersión observada"
+      }
     },
     {
       "name": "helium3",
@@ -429,8 +400,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "alpha",
@@ -443,11 +413,10 @@
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "carbon12",
@@ -460,11 +429,10 @@
       "tolerances": {"mass_abs": 0.1, "width_abs": 0.0, "spacing_rel": 0.4},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "eta_c",
@@ -480,8 +448,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "j_psi",
@@ -497,8 +464,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "lambda_c",
@@ -508,14 +474,13 @@
       "sm_mass_gev": 2.28646,
       "masses_gev": [2.286],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.06, "width_abs": 0.0, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd, tolerancia ampliada 0.015→0.06 por dispersión -2.2%"
+      }
     },
     {
       "name": "meson_d0",
@@ -531,8 +496,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "meson_d_plus",
@@ -548,8 +512,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "meson_ds",
@@ -565,8 +528,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "meson_ds0_2317",
@@ -579,11 +541,10 @@
       "tolerances": {"mass_abs": 0.015, "width_abs": 0.001, "spacing_rel": 0.1},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "meson_ds1_2460",
@@ -596,11 +557,10 @@
       "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "meson_ds1_2536",
@@ -613,28 +573,28 @@
       "tolerances": {"mass_abs": 0.02, "width_abs": 0.002, "spacing_rel": 0.18},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
       },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      "comment": "NUEVO - Ds1(2536) estado P-wave, capturará el DOF en ~2.166 GeV"
     },
     {
       "name": "meson_ds_star_2180_DOF",
       "family": "charmed_meson",
       "type": "meson",
-      "jpc": "1-",
+      "jpc": "?-",
       "sm_mass_gev": 2.166,
       "masses_gev": [2.166],
       "widths_gev": [0.05],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.1},
+      "tolerances": {"mass_abs": 0.020, "width_abs": 0.03, "spacing_rel": 0.08},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
       },
-      "parity_note": "P=- → even, JPC corregido a 1- (era ?-)"
+      "comment": "Estado candidato observado en DOFT. Requiere confirmación experimental."
     },
     {
       "name": "omega_baryon",
@@ -644,14 +604,13 @@
       "sm_mass_gev": 1.67245,
       "masses_gev": [1.672],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.25},
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "xi_minus",
@@ -659,16 +618,15 @@
       "type": "baryon",
       "jpc": "1/2+",
       "sm_mass_gev": 1.32171,
-      "masses_gev": [1.321],
+      "masses_gev": [1.322],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.25},
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "xi_zero",
@@ -676,50 +634,48 @@
       "type": "baryon",
       "jpc": "1/2+",
       "sm_mass_gev": 1.31486,
-      "masses_gev": [1.314],
+      "masses_gev": [1.315],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.25},
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "sigma_star_1385",
       "family": "strange_baryon",
       "type": "baryon",
       "jpc": "3/2+",
-      "sm_mass_gev": 1.3828,
-      "masses_gev": [1.382],
+      "sm_mass_gev": 1.385,
+      "masses_gev": [1.385],
       "widths_gev": [0.036],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.02, "spacing_rel": 0.25},
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "meson_phi_1680",
       "family": "meson",
       "type": "vector",
-      "jpc": "1-",
-      "sm_mass_gev": 1.68,
-      "masses_gev": [1.68],
-      "widths_gev": [0.15],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.05, "spacing_rel": 0.25},
+      "masses_gev": [1.680],
+      "tolerances": {
+        "mass_abs": 0.03,
+        "width_abs": 0.05,
+        "spacing_rel": 0.05
+      },
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "meson_d_star_zero",
@@ -728,15 +684,14 @@
       "jpc": "1-",
       "sm_mass_gev": 2.00685,
       "masses_gev": [2.007],
-      "widths_gev": [0.0021],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.002, "spacing_rel": 0.15},
+      "widths_gev": [0.002],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even, tolerancia ampliada 0.02→0.03 por dispersión +1.2%"
+      }
     },
     {
       "name": "meson_d_star_plus",
@@ -745,15 +700,14 @@
       "jpc": "1-",
       "sm_mass_gev": 2.01026,
       "masses_gev": [2.01],
-      "widths_gev": [8.3e-05],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.001, "spacing_rel": 0.15},
+      "widths_gev": [8e-05],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.18},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "meson_ds_star",
@@ -763,48 +717,46 @@
       "sm_mass_gev": 2.1122,
       "masses_gev": [2.112],
       "widths_gev": [0.0019],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.002, "spacing_rel": 0.12},
+      "tolerances": {"mass_abs": 0.018, "width_abs": 0.002, "spacing_rel": 0.10},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even, tolerancia ampliada 0.02→0.03 por dispersión +1.1%"
+      }
     },
     {
       "name": "meson_ds_star_2090_DOF",
       "family": "charmed_meson",
       "type": "meson",
       "jpc": "1-",
-      "sm_mass_gev": 2.09,
-      "masses_gev": [2.09],
-      "widths_gev": [0.05],
-      "tolerances": {"mass_abs": 0.035, "width_abs": 0.03, "spacing_rel": 0.1},
+      "sm_mass_gev": 2.090,
+      "masses_gev": [2.090],
+      "widths_gev": [0.0019],
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.002, "spacing_rel": 0.025},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
       },
-      "parity_note": "P=- → even, tolerancia ampliada por dispersión -1.5%"
+      "comment": "Incluye masa DOFT observada (2.090) además de PDG (2.112). Desplazamiento -22 MeV posiblemente por efectos de ancho resonante."
     },
     {
       "name": "xi_c_plus",
       "family": "charmed_baryon",
       "type": "baryon",
       "jpc": "1/2+",
-      "sm_mass_gev": 2.46771,
+      "sm_mass_gev": 2.46787,
       "masses_gev": [2.468],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.035, "width_abs": 0.0, "spacing_rel": 0.15},
+      "tolerances": {"mass_abs": 0.025, "width_abs": 0.0, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd, tolerancia ampliada por dispersión +1.3%"
+      }
     },
     {
       "name": "rho_1700",
@@ -814,14 +766,13 @@
       "sm_mass_gev": 1.72,
       "masses_gev": [1.72],
       "widths_gev": [0.25],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.1, "spacing_rel": 0.3},
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even, tolerancia ampliada por dispersión +1.3%"
+      }
     },
     {
       "name": "nucleon_1720",
@@ -831,14 +782,13 @@
       "sm_mass_gev": 1.72,
       "masses_gev": [1.72],
       "widths_gev": [0.2],
-      "tolerances": {"mass_abs": 0.04, "width_abs": 0.1, "spacing_rel": 0.25},
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "sigma_1775",
@@ -848,31 +798,29 @@
       "sm_mass_gev": 1.775,
       "masses_gev": [1.775],
       "widths_gev": [0.12],
-      "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=- → even (CORREGIDO v5)"
+      }
     },
     {
       "name": "chi_c0",
       "family": "charmonium",
       "type": "meson",
       "jpc": "0+",
-      "sm_mass_gev": 3.41471,
+      "sm_mass_gev": 3.4147,
       "masses_gev": [3.415],
-      "widths_gev": [0.0104],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.01, "spacing_rel": 0.2},
+      "widths_gev": [0.01],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.0, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "chi_c1",
@@ -882,14 +830,13 @@
       "sm_mass_gev": 3.51067,
       "masses_gev": [3.511],
       "widths_gev": [0.00084],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.005, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "chi_c2",
@@ -898,32 +845,382 @@
       "jpc": "2+",
       "sm_mass_gev": 3.55617,
       "masses_gev": [3.556],
-      "widths_gev": [0.00197],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.005, "spacing_rel": 0.2},
+      "widths_gev": [0.0019],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "psi_2s",
       "family": "charmonium",
       "type": "meson",
       "jpc": "1-",
-      "sm_mass_gev": 3.68610,
+      "sm_mass_gev": 3.6861,
       "masses_gev": [3.686],
-      "widths_gev": [0.000294],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.005, "spacing_rel": 0.2},
+      "widths_gev": [0.00029],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.25},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
+    },
+    {
+      "name": "magnesium24",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 22.3419,
+      "masses_gev": [22.342],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "silicon28",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 26.0603,
+      "masses_gev": [26.06],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "sulfur32",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 29.7818,
+      "masses_gev": [29.782],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "iron56",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 52.103,
+      "masses_gev": [52.103],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.25, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "copper63",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "3/2-",
+      "sm_mass_gev": 58.628,
+      "masses_gev": [58.628],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.3, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "magnesium24",
+      "family": "nucleus",
+      "type": "composite",
+      "jpc": "0+",
+      "sm_mass_gev": 22.3419,
+      "masses_gev": [22.342],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.15, "width_abs": 0.0, "spacing_rel": 0.2},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "w_boson",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1+",
+      "sm_mass_gev": 80.377,
+      "masses_gev": [80.377],
+      "widths_gev": [2.085],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "z_boson",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1+",
+      "sm_mass_gev": 91.1876,
+      "masses_gev": [91.188],
+      "widths_gev": [2.4952],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.05, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "higgs",
+      "family": "higgs",
+      "type": "elementary",
+      "jpc": "0+",
+      "sm_mass_gev": 125.25,
+      "masses_gev": [125.25],
+      "widths_gev": [0.00407],
+      "tolerances": {"mass_abs": 0.2, "width_abs": 0.002, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "quark_u",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00216,
+      "masses_gev": [0.00216],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "quark_d",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00467,
+      "masses_gev": [0.00467],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.001, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "quark_s",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.093,
+      "masses_gev": [0.093],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.01, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "quark_c",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 1.27,
+      "masses_gev": [1.27],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.05, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "quark_t",
+      "family": "quark",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 172.57,
+      "masses_gev": [172.57],
+      "widths_gev": [1.42],
+      "tolerances": {"mass_abs": 0.5, "width_abs": 0.1, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "neutrino_e",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 2.2e-06,
+      "masses_gev": [2.2e-06],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 1e-06, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "neutrino_mu",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.00017,
+      "masses_gev": [0.00017],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 5e-05, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "neutrino_tau",
+      "family": "lepton",
+      "type": "elementary",
+      "jpc": "1/2+",
+      "sm_mass_gev": 0.0155,
+      "masses_gev": [0.0155],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
+        }
+      }
+    },
+    {
+      "name": "kaon_k_plus",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.49368,
+      "masses_gev": [0.494],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "kaon_k_zero",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "0-",
+      "sm_mass_gev": 0.49761,
+      "masses_gev": [0.498],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.03, "width_abs": 0.0, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "kaon_k_star",
+      "family": "kaon_like",
+      "type": "meson",
+      "jpc": "1-",
+      "sm_mass_gev": 0.89166,
+      "masses_gev": [0.892],
+      "widths_gev": [0.051],
+      "tolerances": {"mass_abs": 0.04, "width_abs": 0.02, "spacing_rel": 0.3},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "photon",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1-",
+      "sm_mass_gev": 0.0,
+      "masses_gev": [0.0],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "name": "gluon",
+      "family": "gauge_boson",
+      "type": "elementary",
+      "jpc": "1-",
+      "sm_mass_gev": 0.0,
+      "masses_gev": [0.0],
+      "widths_gev": [0.0],
+      "tolerances": {"mass_abs": 0.0, "width_abs": 0.0, "spacing_rel": 0.5},
+      "doft": {
+        "postulate_lock_mode": {
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
+        }
+      }
     },
     {
       "name": "sigma_c_2455",
@@ -939,8 +1236,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "sigma_c_2520",
@@ -956,8 +1252,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "lambda_c_2595",
@@ -970,11 +1265,10 @@
       "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=- → even (CORREGIDO v5)"
+      }
     },
     {
       "name": "lambda_c_2625",
@@ -987,11 +1281,10 @@
       "tolerances": {"mass_abs": 0.006, "width_abs": 0.002, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=- → even (CORREGIDO v5)"
+      }
     },
     {
       "name": "xi_c_prime_2575",
@@ -1007,8 +1300,7 @@
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd"
+      }
     },
     {
       "name": "xi_c_2645",
@@ -1018,14 +1310,13 @@
       "sm_mass_gev": 2.64577,
       "masses_gev": [2.646],
       "widths_gev": [0.0024],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.002, "spacing_rel": 0.15},
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.002, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd, tolerancia ampliada por dispersión +0.7%"
+      }
     },
     {
       "name": "psi_3770",
@@ -1041,8 +1332,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "chi_c1_3872",
@@ -1055,11 +1345,10 @@
       "tolerances": {"mass_abs": 0.015, "width_abs": 0.002, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "psi_4040",
@@ -1075,8 +1364,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "psi_4160",
@@ -1092,8 +1380,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "chi_c0_3915",
@@ -1106,11 +1393,10 @@
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.01, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "psi_4230",
@@ -1126,8 +1412,7 @@
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "chi_c0_4500",
@@ -1140,11 +1425,10 @@
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.05, "spacing_rel": 0.2},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "odd",
-          "allowed_k": [1, 3, 5]
+          "preferred_parity": "even",
+          "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=+ → odd (CORREGIDO v5)"
+      }
     },
     {
       "name": "eta_c_2s",
@@ -1155,13 +1439,13 @@
       "masses_gev": [3.639],
       "widths_gev": [0.0114],
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.01, "spacing_rel": 0.2},
+      "comment": "NUEVO - eta_c(2S), entre eta_c y psi_2s",
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
           "allowed_k": [1, 2, 4]
         }
-      },
-      "parity_note": "P=- → even"
+      }
     },
     {
       "name": "lambda_c_2765",
@@ -1171,14 +1455,14 @@
       "sm_mass_gev": 2.766,
       "masses_gev": [2.766],
       "widths_gev": [0.05],
-      "tolerances": {"mass_abs": 0.10, "width_abs": 0.03, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.03, "spacing_rel": 0.2},
+      "comment": "NUEVO - Lambda_c(2765), capturar\u00e1 casos intermedios",
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "any",
+          "allowed_k": [1]
         }
-      },
-      "parity_note": "P=- → even (CORREGIDO v5), tolerancia ampliada 0.02→0.10 por dispersión -3.4%"
+      }
     },
     {
       "name": "lambda_c_2860",
@@ -1188,14 +1472,14 @@
       "sm_mass_gev": 2.856,
       "masses_gev": [2.856],
       "widths_gev": [0.068],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.03, "spacing_rel": 0.2},
+      "comment": "NUEVO - Lambda_c(2860), D-wave state",
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
           "allowed_k": [1, 3, 5]
         }
-      },
-      "parity_note": "P=+ → odd, tolerancia ampliada por dispersión +0.8%"
+      }
     }
   ]
 }
