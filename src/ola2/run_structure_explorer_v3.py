@@ -16,6 +16,7 @@ import platform
 import csv
 from datetime import datetime, timezone
 from itertools import permutations
+from fractions import Fraction
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
@@ -129,6 +130,49 @@ def _log_uniform(rng: random.Random, low: float, high: float) -> float:
     log_low = math.log(low)
     log_high = math.log(high)
     return float(math.exp(log_low + (log_high - log_low) * rng.random()))
+
+
+def _rationalize_ratio(ratio: float, max_den: int, epsilon_rel: float) -> Optional[str]:
+    try:
+        if not math.isfinite(ratio) or ratio == 0:
+            return None
+        frac = Fraction(ratio).limit_denominator(max_den)
+        approx = frac.numerator / frac.denominator
+        residual_rel = abs(ratio - approx) / abs(ratio)
+        if residual_rel <= epsilon_rel:
+            return f"{frac.numerator}/{frac.denominator}"
+    except Exception:
+        return None
+    return None
+
+
+def _ls_hash(
+    node_omega_mean: List[float],
+    edges: List[List[int]],
+    max_den: int,
+    epsilon_rel: float,
+) -> Optional[str]:
+    if not node_omega_mean or not edges:
+        return None
+    pairs: List[Tuple[Tuple[int, int], str]] = []
+    for e in edges:
+        if len(e) < 2:
+            continue
+        i, j = int(e[0]), int(e[1])
+        if i < 0 or j < 0 or i >= len(node_omega_mean) or j >= len(node_omega_mean):
+            continue
+        denom = node_omega_mean[j]
+        if denom == 0:
+            continue
+        ratio = node_omega_mean[i] / denom
+        ratio_pq = _rationalize_ratio(ratio, max_den, epsilon_rel)
+        if ratio_pq:
+            pairs.append(((min(i, j), max(i, j)), ratio_pq))
+    if not pairs:
+        return None
+    pairs.sort()
+    payload = json.dumps(pairs, sort_keys=True)
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def _pick_omega(block: Dict[str, Any]) -> float:
@@ -350,6 +394,7 @@ def _best_score(metrics: Dict[str, Any]) -> float:
 
 def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[int]) -> None:
     started_utc = _utc_now()
+    started_ts = time.time()
     cfg = _load_json(config_path)
     rng = random.Random(seed)
     run_id = cfg.get("run_id") or str(uuid.uuid4())
@@ -463,8 +508,20 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     phase_var_vals: List[float] = []
     quality_lock_vals: List[float] = []
     memory_score_vals: List[float] = []
+    entropy_quality_vals: List[float] = []
+    omega_eff_vals: List[float] = []
+    delta_omega_raw_vals: List[float] = []
+    coupling_alpha_vals: List[float] = []
+    coupling_beta_vals: List[float] = []
+    marco_polo_rows: List[Dict[str, Any]] = []
     zombie_counts: Dict[str, int] = {}
     zombie_attempts_header_written = False
+    tag_label_counts: Dict[str, int] = {}
+    phase_unique_structures: Dict[str, set[str]] = {"phase1": set(), "phase2": set()}
+    ls_attempts_with_ls = 0
+    ls_hash_counts: Dict[str, int] = {}
+    ls_max_den = int(cfg.get("ls_view", {}).get("max_den", 31))
+    ls_epsilon_rel = float(cfg.get("ls_view", {}).get("epsilon_rel", 1e-3))
 
     def update_taxonomy_counts(tags: Dict[str, Any], reasons: List[str]) -> None:
         viability_state = "INVALID" if "invalid_candidate_missing_identity" in reasons else "BOUNDED"
@@ -475,6 +532,8 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         taxonomy_grade_counts[grade] = taxonomy_grade_counts.get(grade, 0) + 1
         for reason in reasons:
             taxonomy_reason_counts[reason] = taxonomy_reason_counts.get(reason, 0) + 1
+        for label in tags.get("labels") or []:
+            tag_label_counts[label] = tag_label_counts.get(label, 0) + 1
 
     def write_term_progress(best_struct: Optional[Dict[str, Any]]) -> None:
         nonlocal term_index, term_start, term_attempts_count, term_template_counts, term_viable
@@ -785,6 +844,9 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 "coupling_alpha": alpha,
                 "coupling_beta": beta,
             }
+            delta_omega_raw_vals.append(delta_omega_raw)
+            coupling_alpha_vals.append(alpha)
+            coupling_beta_vals.append(beta)
         lock_quality = [b.get("lock_quality") or {} for b in assignment]
         sim_template = dict(template)
         if edge_weights is not None:
@@ -819,7 +881,9 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         pv_last = metrics.get("phase_var_lastW")
         r_final = metrics.get("R_final")
         quality_lock = metrics.get("QualityLock")
+        entropy_quality = metrics.get("entropy_quality")
         memory_score = metrics.get("memory_score_k10")
+        omega_eff_val = metrics.get("omega_eff")
         memory_score_pos = float(memory_score) if _is_finite(memory_score) and float(memory_score) > 0 else None
         memory_sign = "NA"
         if _is_finite(memory_score):
@@ -875,8 +939,12 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             phase_var_vals.append(float(pv_last))
         if _is_finite(quality_lock):
             quality_lock_vals.append(float(quality_lock))
+        if _is_finite(entropy_quality):
+            entropy_quality_vals.append(float(entropy_quality))
         if _is_finite(memory_score):
             memory_score_vals.append(float(memory_score))
+        if _is_finite(omega_eff_val):
+            omega_eff_vals.append(float(omega_eff_val))
         if zombie and _is_finite(memory_score):
             write_zombie_attempt(attempt_id, structure_id, float(memory_score))
 
@@ -897,6 +965,13 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 "quality_lock_min": quality_lock_min,
             },
         }
+
+        node_omega_mean = metrics.get("node_omega_mean_lastW")
+        if isinstance(node_omega_mean, list):
+            ls_hash = _ls_hash(node_omega_mean, edges, ls_max_den, ls_epsilon_rel)
+            if ls_hash:
+                ls_attempts_with_ls += 1
+                ls_hash_counts[ls_hash] = ls_hash_counts.get(ls_hash, 0) + 1
 
         record = build_record(
             target_name,
@@ -941,6 +1016,21 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             assignment,
             zombie,
         )
+
+        phase_unique_structures.setdefault(phase, set()).add(structure_id)
+        if coupling_mode.get("mode") == "adaptive_alpha" and viable and derived:
+            marco_polo_rows.append(
+                {
+                    "structure_id": structure_id,
+                    "template_name": template_name,
+                    "grade": "A",
+                    "coupling_alpha": derived.get("coupling_alpha"),
+                    "coupling_beta": derived.get("coupling_beta"),
+                    "delta_omega_raw": derived.get("delta_omega_raw"),
+                    "R_mean_lastW": r_mean,
+                    "memory_score_k10": memory_score,
+                }
+            )
 
         unique_structures.add(structure_id)
         per_template_counts[template_name] = per_template_counts.get(template_name, 0) + 1
@@ -1202,6 +1292,9 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             requested_families_by_target[target.get("name", "unknown")] = sorted({str(f) for f in families})
         present_families = sorted({str(b.get("family")) for b in blocks if b.get("family")})
 
+        finished_utc = _utc_now()
+        duration_seconds = time.time() - started_ts
+        attempts_size_mb = attempts_path.stat().st_size / (1024 * 1024) if attempts_path.exists() else 0.0
         report_path.write_text(
             _render_report(
                 structure_stats,
@@ -1214,14 +1307,42 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 taxonomy_attractor_counts,
                 taxonomy_grade_counts,
                 taxonomy_reason_counts,
+                tag_label_counts,
                 r_mean_vals,
                 phase_var_vals,
                 quality_lock_vals,
                 memory_score_vals,
+                entropy_quality_vals,
+                omega_eff_vals,
+                delta_omega_raw_vals,
+                coupling_alpha_vals,
+                coupling_beta_vals,
+                marco_polo_rows,
                 requested_families_by_target,
                 present_families,
                 per_phase_counts,
                 per_phase_viable,
+                phase_unique_structures,
+                targets,
+                templates_list,
+                cfg,
+                config_path,
+                config_hash,
+                templates_path,
+                templates_hash,
+                blocks_mode,
+                blocks_path,
+                species_catalog_path,
+                run_id,
+                started_utc,
+                finished_utc,
+                duration_seconds,
+                attempts_path,
+                attempts_size_mb,
+                ls_max_den,
+                ls_epsilon_rel,
+                ls_attempts_with_ls,
+                ls_hash_counts,
             )
         )
 
@@ -1268,35 +1389,64 @@ def _render_report(
     taxonomy_attractor_counts: Optional[Dict[str, int]] = None,
     taxonomy_grade_counts: Optional[Dict[str, int]] = None,
     taxonomy_reason_counts: Optional[Dict[str, int]] = None,
+    tag_label_counts: Optional[Dict[str, int]] = None,
     r_mean_vals: Optional[List[float]] = None,
     phase_var_vals: Optional[List[float]] = None,
     quality_lock_vals: Optional[List[float]] = None,
     memory_score_vals: Optional[List[float]] = None,
+    entropy_quality_vals: Optional[List[float]] = None,
+    omega_eff_vals: Optional[List[float]] = None,
+    delta_omega_raw_vals: Optional[List[float]] = None,
+    coupling_alpha_vals: Optional[List[float]] = None,
+    coupling_beta_vals: Optional[List[float]] = None,
+    marco_polo_rows: Optional[List[Dict[str, Any]]] = None,
     requested_families_by_target: Optional[Dict[str, List[str]]] = None,
     present_families: Optional[List[str]] = None,
     per_phase_counts: Optional[Dict[str, int]] = None,
     per_phase_viable: Optional[Dict[str, int]] = None,
+    phase_unique_structures: Optional[Dict[str, set[str]]] = None,
+    targets: Optional[List[Dict[str, Any]]] = None,
+    templates_list: Optional[List[Dict[str, Any]]] = None,
+    cfg: Optional[Dict[str, Any]] = None,
+    config_path: Optional[Path] = None,
+    config_hash: Optional[str] = None,
+    templates_path: Optional[Path] = None,
+    templates_hash: Optional[str] = None,
+    blocks_mode: Optional[str] = None,
+    blocks_path: Optional[Path] = None,
+    species_catalog_path: Optional[Path] = None,
+    run_id: Optional[str] = None,
+    started_utc: Optional[str] = None,
+    finished_utc: Optional[str] = None,
+    duration_seconds: Optional[float] = None,
+    attempts_path: Optional[Path] = None,
+    attempts_size_mb: Optional[float] = None,
+    ls_max_den: Optional[int] = None,
+    ls_epsilon_rel: Optional[float] = None,
+    ls_attempts_with_ls: Optional[int] = None,
+    ls_hash_counts: Optional[Dict[str, int]] = None,
 ) -> str:
-    def _histogram(values: Optional[List[float]], bins: int = 10) -> List[Tuple[str, int]]:
+    def _count_bins(values: Optional[List[float]], bins: List[Tuple[str, float, Optional[float]]]) -> List[Tuple[str, int]]:
         if not values:
-            return []
-        vmin = min(values)
-        vmax = max(values)
-        if vmin == vmax:
-            return [(f"{vmin:.6g}-{vmax:.6g}", len(values))]
-        step = (vmax - vmin) / bins
-        counts = [0 for _ in range(bins)]
+            return [(label, 0) for label, _, _ in bins]
+        counts = [0 for _ in bins]
         for v in values:
-            idx = int((v - vmin) / step)
-            if idx >= bins:
-                idx = bins - 1
-            counts[idx] += 1
-        labels = []
-        for i, c in enumerate(counts):
-            lo = vmin + step * i
-            hi = vmin + step * (i + 1)
-            labels.append((f"{lo:.6g}-{hi:.6g}", c))
-        return labels
+            try:
+                fv = float(v)
+            except Exception:
+                continue
+            for idx, (_, lo, hi) in enumerate(bins):
+                if fv >= lo and (hi is None or fv < hi):
+                    counts[idx] += 1
+                    break
+        return [(bins[i][0], counts[i]) for i in range(len(bins))]
+
+    entropy_quality_vals = entropy_quality_vals or []
+    omega_eff_vals = omega_eff_vals or []
+    delta_omega_raw_vals = delta_omega_raw_vals or []
+    coupling_alpha_vals = coupling_alpha_vals or []
+    coupling_beta_vals = coupling_beta_vals or []
+    marco_polo_rows = marco_polo_rows or []
 
     lines = ["# Ola2 Structure Explorer Report", ""]
     total_attempts = sum(per_template_counts.values()) if per_template_counts else 0
@@ -1304,109 +1454,248 @@ def _render_report(
     total_rejected = total_attempts - total_viable
     viable_rate = (total_viable / total_attempts) if total_attempts else 0.0
     unique_structures = len(structure_stats)
-    lines.append("## Overview")
-    lines.append(f"- total_attempts: {total_attempts}")
-    lines.append(f"- total_viable: {total_viable}")
-    lines.append(f"- total_rejected: {total_rejected}")
-    lines.append(f"- viable_rate: {viable_rate:.2%}")
-    lines.append(f"- unique_structures: {unique_structures}")
+    lines.append("## Run Header")
+    lines.append(f"- run_id: {run_id}")
+    lines.append(f"- started_utc: {started_utc}")
+    lines.append(f"- finished_utc: {finished_utc}")
+    if duration_seconds is not None:
+        lines.append(f"- duration_seconds: {duration_seconds:.2f}")
+    if attempts_path:
+        lines.append(f"- attempts_path: {attempts_path}")
+    if attempts_size_mb is not None:
+        lines.append(f"- attempts_size_mb: {attempts_size_mb:.2f}")
+    if config_path:
+        lines.append(f"- config_path: {config_path}")
+    if config_hash:
+        lines.append(f"- config_sha256: {config_hash}")
+    if templates_path:
+        lines.append(f"- templates_path: {templates_path}")
+    if templates_hash:
+        lines.append(f"- templates_sha256: {templates_hash}")
+    if blocks_mode:
+        lines.append(f"- inputs.blocks_mode: {blocks_mode}")
+    if blocks_mode == "species_as_blocks" and species_catalog_path:
+        lines.append(f"- inputs.species_catalog_jsonl: {species_catalog_path}")
+    elif blocks_path:
+        lines.append(f"- inputs.blocks_json: {blocks_path}")
     lines.append("")
 
-    if per_template_counts:
-        lines.append("## By Template")
-        lines.append("| template | attempts | viable | rate |")
-        lines.append("| --- | --- | --- | --- |")
-        for name, cnt in sorted(per_template_counts.items(), key=lambda x: x[0]):
-            v = per_template_viable.get(name, 0) if per_template_viable else 0
-            rate = (v / cnt) if cnt else 0.0
-            lines.append(f"| {name} | {cnt} | {v} | {rate:.2%} |")
-        lines.append("")
+    lines.append("## Targets Used")
+    lines.append("| target_name | templates | allowed_block_families | budget_evals |")
+    lines.append("| --- | --- | --- | --- |")
+    for target in targets or []:
+        t_name = target.get("name", "")
+        t_templates = target.get("templates") or []
+        t_fams = target.get("allowed_block_families") or []
+        budget = target.get("budget_evals", 0)
+        lines.append(f"| {t_name} | {t_templates} | {t_fams} | {budget} |")
+    lines.append("")
 
-    if per_target_counts:
-        lines.append("## By Target")
-        lines.append("| target | attempts | viable | rate |")
-        lines.append("| --- | --- | --- | --- |")
-        for name, cnt in sorted(per_target_counts.items(), key=lambda x: x[0]):
-            v = per_target_viable.get(name, 0) if per_target_viable else 0
-            rate = (v / cnt) if cnt else 0.0
-            lines.append(f"| {name} | {cnt} | {v} | {rate:.2%} |")
+    lines.append("## Templates Used")
+    template_cfg = (cfg or {}).get("templates", {})
+    edge_policy = template_cfg.get("edge_weight_policy")
+    edge_levels = template_cfg.get("edge_weight_levels")
+    used_template_names = []
+    for target in targets or []:
+        for tname in target.get("templates") or []:
+            if tname not in used_template_names:
+                used_template_names.append(tname)
+    lines.append("| template_name | nodes | edges | notes |")
+    lines.append("| --- | --- | --- | --- |")
+    template_map = {t.get("name"): t for t in (templates_list or [])}
+    for tname in used_template_names:
+        tmpl = template_map.get(tname, {})
+        nodes = tmpl.get("nodes")
+        edges = tmpl.get("edges") or []
+        notes = tmpl.get("type") or ""
+        lines.append(f"| {tname} | {nodes} | {len(edges)} | {notes} |")
+    if edge_policy or edge_levels:
         lines.append("")
+        lines.append(f"- edge_weight_policy: {edge_policy}")
+        lines.append(f"- edge_weight_levels: {edge_levels}")
+    lines.append("")
 
-    if per_phase_counts:
-        lines.append("## Phase Breakdown")
-        lines.append("| phase | attempts | viable | rate |")
-        lines.append("| --- | --- | --- | --- |")
-        for name, cnt in sorted(per_phase_counts.items(), key=lambda x: x[0]):
-            v = per_phase_viable.get(name, 0) if per_phase_viable else 0
-            rate = (v / cnt) if cnt else 0.0
-            lines.append(f"| {name} | {cnt} | {v} | {rate:.2%} |")
-        lines.append("")
-
-    if taxonomy_viability_counts or taxonomy_attractor_counts or taxonomy_grade_counts:
-        lines.append("## Taxonomy Counts")
-        if taxonomy_viability_counts:
-            lines.append("### Viability State")
-            for name, cnt in sorted(taxonomy_viability_counts.items(), key=lambda x: x[0]):
-                lines.append(f"- {name}: {cnt}")
-        if taxonomy_attractor_counts:
-            lines.append("### Attractor Class")
-            for name, cnt in sorted(taxonomy_attractor_counts.items(), key=lambda x: x[0]):
-                lines.append(f"- {name}: {cnt}")
-        if taxonomy_grade_counts:
-            lines.append("### Grade")
-            for name, cnt in sorted(taxonomy_grade_counts.items(), key=lambda x: x[0]):
-                lines.append(f"- {name}: {cnt}")
-        lines.append("")
-
+    lines.append("## Universe Summary")
+    lines.append(f"- total_attempts: {total_attempts}")
+    lines.append(f"- unique_structures: {unique_structures}")
+    lines.append(f"- viable_attempts: {total_viable} ({viable_rate:.2%})")
+    lines.append(f"- rejected_attempts: {total_rejected} ({(total_rejected/total_attempts):.2%} )" if total_attempts else "- rejected_attempts: 0 (0.00%)")
+    best_struct = None
+    if structure_stats:
+        best_struct = max(structure_stats.values(), key=lambda s: _best_score(s.get("best_metrics") or {}))
+    if best_struct:
+        bm = best_struct.get("best_metrics") or {}
+        lines.append(
+            f"- best_attempt: structure_id={best_struct.get('structure_id')} template={best_struct.get('template_name')} target={best_struct.get('target')}"
+        )
+        lines.append(
+            f"  R_mean_lastW={bm.get('R_mean_lastW')} phase_var_lastW={bm.get('phase_var_lastW')} "
+            f"memory_score_k10={bm.get('memory_score_k10')} QualityLock={bm.get('QualityLock')} "
+            f"entropy_quality={bm.get('entropy_quality')} omega_eff={bm.get('omega_eff')}"
+        )
     if taxonomy_reason_counts:
-        lines.append("## Threshold Reasons")
-        for name, cnt in sorted(taxonomy_reason_counts.items(), key=lambda x: (-x[1], x[0])):
-            lines.append(f"- {name}: {cnt}")
+        top_reasons = sorted(taxonomy_reason_counts.items(), key=lambda x: (-x[1], x[0]))[:5]
+        lines.append(f"- top_reasons: {top_reasons}")
+    lines.append("")
+
+    lines.append("## Phase Breakdown")
+    lines.append("| phase | attempts | viable_rate | unique |")
+    lines.append("| --- | --- | --- | --- |")
+    for name, cnt in sorted((per_phase_counts or {}).items(), key=lambda x: x[0]):
+        v = per_phase_viable.get(name, 0) if per_phase_viable else 0
+        rate = (v / cnt) if cnt else 0.0
+        unique = len((phase_unique_structures or {}).get(name, set()))
+        lines.append(f"| {name} | {cnt} | {rate:.2%} | {unique} |")
+    lines.append("")
+    if cfg:
+        phase2 = (cfg.get("search_policy") or {}).get("phase2") or {}
+        lines.append(f"- seed_repeats_per_structure: {phase2.get('seed_repeats_per_structure')}")
+        lines.append(f"- param_neighbor_bins: {phase2.get('param_neighbor_bins')}")
+        lines.append(f"- promising_rule: {phase2.get('promising_rule')}")
         lines.append("")
 
-    lines.append("## Metric Histograms")
+    lines.append("## Taxonomy & Tags")
+    if taxonomy_attractor_counts:
+        lines.append("### Attractor Class")
+        lines.append("| attractor_class | count | pct |")
+        lines.append("| --- | --- | --- |")
+        for name, cnt in sorted(taxonomy_attractor_counts.items(), key=lambda x: x[0]):
+            pct = cnt / total_attempts if total_attempts else 0.0
+            lines.append(f"| {name} | {cnt} | {pct:.2%} |")
+    if taxonomy_grade_counts:
+        lines.append("")
+        lines.append("### Grade")
+        lines.append("| grade | count | pct |")
+        lines.append("| --- | --- | --- |")
+        for name, cnt in sorted(taxonomy_grade_counts.items(), key=lambda x: x[0]):
+            pct = cnt / total_attempts if total_attempts else 0.0
+            lines.append(f"| {name} | {cnt} | {pct:.2%} |")
+    if tag_label_counts:
+        lines.append("")
+        lines.append("### Tags")
+        lines.append("| tag | count | pct |")
+        lines.append("| --- | --- | --- |")
+        for name, cnt in sorted(tag_label_counts.items(), key=lambda x: (-x[1], x[0])):
+            pct = cnt / total_attempts if total_attempts else 0.0
+            lines.append(f"| {name} | {cnt} | {pct:.2%} |")
+    lines.append("")
+    lines.append("ZOMBIE rule: memory_score_k10 <= 0")
+    lines.append("")
+
+    lines.append("## Histograms")
+    hist_bins = {
+        "R_mean_lastW": [("0-0.5", 0.0, 0.5), ("0.5-0.7", 0.5, 0.7), ("0.7-0.85", 0.7, 0.85), ("0.85-0.9", 0.85, 0.9), ("0.9-0.95", 0.9, 0.95), ("0.95-0.98", 0.95, 0.98), ("0.98-1.0", 0.98, 1.0), ("1.0+", 1.0, None)],
+        "phase_var_lastW": [("0-1e-6", 0.0, 1e-6), ("1e-6-1e-4", 1e-6, 1e-4), ("1e-4-1e-3", 1e-4, 1e-3), ("1e-3-1e-2", 1e-3, 1e-2), ("1e-2-1e-1", 1e-2, 1e-1), ("1e-1+", 1e-1, None)],
+        "memory_score_k10": [("[-inf,-10)", -math.inf, -10.0), ("[-10,-1)", -10.0, -1.0), ("[-1,0)", -1.0, 0.0), ("[0,0.5)", 0.0, 0.5), ("[0.5,0.8)", 0.5, 0.8), ("[0.8,1.0)", 0.8, 1.0), ("[1.0,inf)", 1.0, None)],
+        "omega_eff": [("0-0.5", 0.0, 0.5), ("0.5-1", 0.5, 1.0), ("1-2", 1.0, 2.0), ("2-5", 2.0, 5.0), ("5-10", 5.0, 10.0), ("10-20", 10.0, 20.0), ("20+", 20.0, None)],
+        "entropy_quality": [("0-0.2", 0.0, 0.2), ("0.2-0.4", 0.2, 0.4), ("0.4-0.6", 0.4, 0.6), ("0.6-0.8", 0.6, 0.8), ("0.8-0.9", 0.8, 0.9), ("0.9-1.0", 0.9, 1.0), ("1.0+", 1.0, None)],
+    }
     for title, values in (
         ("R_mean_lastW", r_mean_vals),
         ("phase_var_lastW", phase_var_vals),
-        ("QualityLock", quality_lock_vals),
         ("memory_score_k10", memory_score_vals),
+        ("omega_eff", omega_eff_vals),
+        ("entropy_quality", entropy_quality_vals),
     ):
-        hist = _histogram(values)
         lines.append(f"### {title}")
-        if not hist:
-            lines.append("- (no data)")
-        else:
-            for label, count in hist:
-                lines.append(f"- {label}: {count}")
+        for label, count in _count_bins(values, hist_bins[title]):
+            lines.append(f"- {label}: {count}")
         lines.append("")
 
-    if requested_families_by_target is not None or present_families is not None:
-        lines.append("## Families Audit")
-        if requested_families_by_target:
-            lines.append("### Requested (by target)")
-            for target_name, families in sorted(requested_families_by_target.items(), key=lambda x: x[0]):
-                if families:
-                    lines.append(f"- {target_name}: {', '.join(families)}")
-                else:
-                    lines.append(f"- {target_name}: (any)")
-        if present_families is not None:
-            lines.append("### Present (blocks input)")
-            if present_families:
-                lines.append(f"- {', '.join(present_families)}")
-            else:
-                lines.append("- (none)")
-        lines.append("")
+    if coupling_mode := (cfg or {}).get("coupling_mode"):
+        if coupling_mode.get("mode") == "adaptive_alpha":
+            lines.append("## MarcoPolo (adaptive_alpha)")
+            lines.append(f"- omega_floor: {coupling_mode.get('omega_floor')}")
+            for title, values, bins in (
+                ("delta_omega_raw", delta_omega_raw_vals, [("0-0.01", 0.0, 0.01), ("0.01-0.05", 0.01, 0.05), ("0.05-0.1", 0.05, 0.1), ("0.1-0.5", 0.1, 0.5), ("0.5+", 0.5, None)]),
+                ("coupling_alpha", coupling_alpha_vals, [("0-0.5", 0.0, 0.5), ("0.5-1", 0.5, 1.0), ("1-2", 1.0, 2.0), ("2-5", 2.0, 5.0), ("5-10", 5.0, 10.0), ("10+", 10.0, None)]),
+                ("coupling_beta", coupling_beta_vals, [("0-0.2", 0.0, 0.2), ("0.2-0.5", 0.2, 0.5), ("0.5-1", 0.5, 1.0), ("1-2", 1.0, 2.0), ("2-5", 2.0, 5.0), ("5+", 5.0, None)]),
+            ):
+                lines.append(f"### {title}")
+                for label, count in _count_bins(values, bins):
+                    lines.append(f"- {label}: {count}")
+            lines.append("")
+            lines.append("| structure_id | template | grade | alpha | beta | delta_omega_raw | R_mean | memory |")
+            lines.append("| --- | --- | --- | --- | --- | --- | --- | --- |")
+            top_rows = sorted(marco_polo_rows, key=lambda r: (r.get("R_mean_lastW") or 0), reverse=True)[:20]
+            for row in top_rows:
+                lines.append(
+                    f"| {row.get('structure_id')} | {row.get('template_name')} | {row.get('grade')} | "
+                    f"{row.get('coupling_alpha')} | {row.get('coupling_beta')} | {row.get('delta_omega_raw')} | "
+                    f"{row.get('R_mean_lastW')} | {row.get('memory_score_k10')} |"
+                )
+            lines.append("")
+
+    lines.append("## LS View Settings")
+    lines.append(f"- max_den: {ls_max_den}")
+    lines.append(f"- epsilon_rel: {ls_epsilon_rel}")
+    lines.append(f"- attempts_with_LS: {ls_attempts_with_ls}")
+    if ls_hash_counts:
+        lines.append("### Top LS Hashes")
+        for ls_hash, cnt in sorted(ls_hash_counts.items(), key=lambda x: (-x[1], x[0]))[:10]:
+            lines.append(f"- {ls_hash}: {cnt}")
+    lines.append("")
+
+    lines.append("## Template Stats")
+    lines.append("| template_name | nodes | attempts | unique | viable_rate | best_R | best_memory |")
+    lines.append("| --- | --- | --- | --- | --- | --- | --- |")
+    for tname in used_template_names:
+        tmpl = template_map.get(tname, {})
+        nodes = tmpl.get("nodes")
+        attempts = per_template_counts.get(tname, 0) if per_template_counts else 0
+        viable = per_template_viable.get(tname, 0) if per_template_viable else 0
+        unique = len([s for s in structure_stats.values() if s.get("template_name") == tname])
+        rate = (viable / attempts) if attempts else 0.0
+        best = None
+        for s in structure_stats.values():
+            if s.get("template_name") == tname:
+                if best is None or _best_score(s.get("best_metrics") or {}) > _best_score(best.get("best_metrics") or {}):
+                    best = s
+        bm = (best or {}).get("best_metrics") or {}
+        lines.append(f"| {tname} | {nodes} | {attempts} | {unique} | {rate:.2%} | {bm.get('R_mean_lastW')} | {bm.get('memory_score_k10')} |")
+    lines.append("")
+
+    lines.append("## Target Stats")
+    lines.append("| target_name | templates | attempts | unique | viable_rate | notes |")
+    lines.append("| --- | --- | --- | --- | --- | --- |")
+    for target in targets or []:
+        tname = target.get("name", "")
+        templates = target.get("templates") or []
+        attempts = per_target_counts.get(tname, 0) if per_target_counts else 0
+        viable = per_target_viable.get(tname, 0) if per_target_viable else 0
+        rate = (viable / attempts) if attempts else 0.0
+        unique = len([s for s in structure_stats.values() if s.get("target") == tname])
+        notes = ""
+        if target.get("allowed_block_families"):
+            notes = "includes " + ",".join(target.get("allowed_block_families"))
+        lines.append(f"| {tname} | {templates} | {attempts} | {unique} | {rate:.2%} | {notes} |")
+    lines.append("")
 
     lines.append("## Species Catalog (Top 20 by seed_stability)")
-    lines.append("| species_id | seed_stability | trials | viable | R_mean_lastW | phase_var_lastW | memory_score_k10 |")
-    lines.append("| --- | --- | --- | --- | --- | --- | --- |")
+    lines.append("| species_id | template | trials | seed_stability | omega_eff | memory | entropy_quality | QualityLock | zombie_rate |")
+    lines.append("| --- | --- | --- | --- | --- | --- | --- | --- | --- |")
     for row in species_catalog[:20]:
         bm = row.get("best_metrics") or {}
         lines.append(
-            f"| {row.get('species_id')} | {row.get('seed_stability'):.3f} | {row.get('n_trials')} | {row.get('n_viable')} | "
-            f"{bm.get('R_mean_lastW')} | {bm.get('phase_var_lastW')} | {bm.get('memory_score_k10')} |"
+            f"| {row.get('species_id')} | {row.get('template_name')} | {row.get('n_trials')} | "
+            f"{row.get('seed_stability'):.3f} | {bm.get('omega_eff')} | {bm.get('memory_score_k10')} | "
+            f"{bm.get('entropy_quality')} | {bm.get('QualityLock')} | {row.get('zombie_rate')} |"
         )
     lines.append("")
+
+    lines.append("## Config Snapshot")
+    if cfg is not None:
+        lines.append("```json")
+        lines.append(json.dumps(cfg, indent=2))
+        lines.append("```")
+    lines.append("")
+    lines.append("## Templates Snapshot")
+    if templates_list is not None:
+        lines.append("```json")
+        lines.append(json.dumps(templates_list, indent=2))
+        lines.append("```")
+    lines.append("")
+
     return "\n".join(lines)
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run Structure Explorer v2 (Ola2).")
