@@ -430,6 +430,53 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     templates_list = _load_json(templates_path)
     templates = {t["name"]: t for t in templates_list}
 
+    def _validate_config() -> None:
+        errors: List[str] = []
+        warnings: List[str] = []
+
+        if not templates_list or not isinstance(templates_list, list):
+            errors.append(f"templates_json must be a list of templates: {templates_path}")
+
+        cfg_targets = cfg.get("targets", [])
+        if not cfg_targets:
+            errors.append("No targets configured.")
+
+        template_names = {t.get("name") for t in templates_list if isinstance(t, dict)}
+        requested_templates: List[str] = []
+        for target in cfg_targets:
+            for tname in target.get("templates", []):
+                requested_templates.append(tname)
+                if tname not in template_names:
+                    errors.append(f"Target template not found: {tname}")
+
+        if blocks_mode == "species_as_blocks":
+            if not species_catalog_path.exists():
+                errors.append(f"species_catalog_jsonl missing: {species_catalog_path}")
+        else:
+            if not blocks_path.exists():
+                errors.append(f"blocks_json missing: {blocks_path}")
+            if not dna_path.exists():
+                warnings.append(f"dof_dna_catalog_csv missing: {dna_path} (Grade A filter skipped)")
+
+        variation_cfg = cfg.get("engine_variation", {})
+        if variation_cfg.get("enabled", False):
+            bins = variation_cfg.get("bins", {})
+            required_bins = ["K_local_edges", "kappa_edges", "tau_field_edges", "sigma0_edges", "sigma_tc_edges"]
+            missing_bins = [b for b in required_bins if b not in bins]
+            if missing_bins:
+                warnings.append(f"engine_variation bins missing: {missing_bins} (defaults used)")
+
+        if errors or warnings:
+            print("[explorer_v3] config preflight:")
+            for msg in errors:
+                print(f"!! ERROR: {msg}")
+            for msg in warnings:
+                print(f"!! WARN: {msg}")
+            if errors:
+                raise RuntimeError("Config preflight failed; see errors above.")
+
+    _validate_config()
+
     engine_defaults = cfg.get("engine_defaults", {})
     defaults = {
         "dt": float(engine_defaults.get("dt", 1.0)),

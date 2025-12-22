@@ -8,18 +8,23 @@
   },
   "targets": [
     {
-      "name": "global_blind_search_all_templates",
+      "name": "global_blind_search_up_to_one_compound",
       "templates": [
         "singlet",
-        "meson_dimer",
-        "baryon_triangle",
+        "dimer",
+        "trimer_chain",
+        "trimer_triangle",
+        "tetramer_chain",
+        "square_ring",
         "alpha_tetrahedron",
+        "pentagon_ring",
+        "hexamer_chain",
         "atomic_nucleus_heavy",
         "diatomic_heavy_12"
       ],
       "allowed_block_families": [],
       "budget_evals": 500000,
-      "notes": "Búsqueda agnóstica: todos los templates disponibles, incluyendo compuesto mínimo 2 átomos."
+      "notes": "Búsqueda agnóstica desde 1 nodo hasta 1 compuesto (diatómico)."
     }
   ],
   "engine_defaults": {
@@ -38,8 +43,10 @@
     "mode": "bin_sample",
     "bins": {
       "K_local_edges": [0.2, 0.4, 0.6, 0.8],
+      "kappa_edges": [0.1, 0.2, 0.3, 0.4, 0.6],
       "tau_field_edges": [40, 80, 120, 160, 240],
-      "sigma0_edges": [0.1, 0.3, 0.5]
+      "sigma0_edges": [0.1, 0.3, 0.5],
+      "sigma_tc_edges": [20, 40, 60, 80, 120]
     }
   },
   "coupling_mode": {
