@@ -405,6 +405,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     species_catalog_path = Path(inputs.get("species_catalog_jsonl", "species_catalog.jsonl"))
     templates_path = Path(inputs.get("templates_json", "data/raw/compound_templates.json"))
     dna_path = Path(inputs.get("dof_dna_catalog_csv", "data/processed/ola1/dof_dna_catalog.csv"))
+    hbar_path = Path(inputs.get("hbar_sim_json", "data/processed/ola1/hbar_sim_calibration.json"))
     config_hash = f"sha256:{hashlib.sha256(config_path.read_bytes()).hexdigest()}"
     wave1_input_file_hash = f"sha256:{hashlib.sha256(blocks_path.read_bytes()).hexdigest()}"
     templates_hash = f"sha256:{hashlib.sha256(templates_path.read_bytes()).hexdigest()}"
@@ -590,6 +591,9 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 "best_metrics": None,
                 "best_params": None,
                 "best_param_bin_id": None,
+                "omega_eff_stats": {"n": 0, "sum": 0.0, "sumsq": 0.0, "min": None, "max": None},
+                "memory_stats": {"n": 0, "sum": 0.0, "sumsq": 0.0, "min": None, "max": None},
+                "r_mean_stats": {"n": 0, "sum": 0.0, "sumsq": 0.0, "min": None, "max": None},
                 "assignment_block_ids": [b.get("block_id") for b in blocks_used],
                 "assignment_particle_names": [b.get("particle_name") for b in blocks_used],
                 "assignment_families": [b.get("family") for b in blocks_used],
@@ -599,6 +603,21 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         entry["n_trials"] += 1
         if viable:
             entry["n_viable"] += 1
+        for key, stats_key in (
+            ("omega_eff", "omega_eff_stats"),
+            ("memory_score_k10", "memory_stats"),
+            ("R_mean_lastW", "r_mean_stats"),
+        ):
+            val = metrics.get(key)
+            if _is_finite(val):
+                stats = entry.get(stats_key, {"n": 0, "sum": 0.0, "sumsq": 0.0, "min": None, "max": None})
+                fval = float(val)
+                stats["n"] += 1
+                stats["sum"] += fval
+                stats["sumsq"] += fval * fval
+                stats["min"] = fval if stats["min"] is None else min(stats["min"], fval)
+                stats["max"] = fval if stats["max"] is None else max(stats["max"], fval)
+                entry[stats_key] = stats
         if entry.get("best_metrics") is None or _best_score(metrics) > _best_score(entry["best_metrics"]):
             entry["best_metrics"] = metrics
             entry["best_params"] = engine_params
@@ -1296,11 +1315,27 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         finished_utc = _utc_now()
         duration_seconds = time.time() - started_ts
         attempts_size_mb = attempts_path.stat().st_size / (1024 * 1024) if attempts_path.exists() else 0.0
-        report_path.write_text(
-            _render_report(
-                structure_stats,
-                species_catalog,
-                per_template_counts,
+        species_catalog_size_mb = (
+            species_catalog_path.stat().st_size / (1024 * 1024) if species_catalog_path.exists() else 0.0
+        )
+        angel_ids: List[str] = []
+        if angel_species_path.exists():
+            angel_ids = [line.strip() for line in angel_species_path.read_text().splitlines() if line.strip()]
+        hbar_sim_used = None
+        hbar_units = None
+        if hbar_path.exists():
+            try:
+                hbar_data = json.loads(hbar_path.read_text())
+                hbar_sim_used = hbar_data.get("hbar_sim")
+                hbar_units = hbar_data.get("units")
+            except Exception:
+                hbar_sim_used = None
+                hbar_units = None
+
+        report_text = _render_report(
+            structure_stats,
+            species_catalog,
+            per_template_counts,
                 per_template_viable,
                 per_target_counts,
                 per_target_viable,
@@ -1340,12 +1375,76 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 duration_seconds,
                 attempts_path,
                 attempts_size_mb,
+                species_catalog_size_mb,
+                None,
+                code_hash,
+                angel_ids,
+                report_path,
+                hbar_sim_used,
+                hbar_units,
                 ls_max_den,
                 ls_epsilon_rel,
                 ls_attempts_with_ls,
                 ls_hash_counts,
-            )
         )
+        report_path.write_text(report_text)
+        report_size_mb = report_path.stat().st_size / (1024 * 1024) if report_path.exists() else 0.0
+        report_text = _render_report(
+            structure_stats,
+            species_catalog,
+            per_template_counts,
+            per_template_viable,
+            per_target_counts,
+            per_target_viable,
+            taxonomy_viability_counts,
+            taxonomy_attractor_counts,
+            taxonomy_grade_counts,
+            taxonomy_reason_counts,
+            tag_label_counts,
+            r_mean_vals,
+            phase_var_vals,
+            quality_lock_vals,
+            memory_score_vals,
+            entropy_quality_vals,
+            omega_eff_vals,
+            delta_omega_raw_vals,
+            coupling_alpha_vals,
+            coupling_beta_vals,
+            marco_polo_rows,
+            requested_families_by_target,
+            present_families,
+            per_phase_counts,
+            per_phase_viable,
+            phase_unique_structures,
+            targets,
+            templates_list,
+            cfg,
+            config_path,
+            config_hash,
+            templates_path,
+            templates_hash,
+            blocks_mode,
+            blocks_path,
+            species_catalog_path,
+            run_id,
+            started_utc,
+            finished_utc,
+            duration_seconds,
+            attempts_path,
+            attempts_size_mb,
+            species_catalog_size_mb,
+            report_size_mb,
+            code_hash,
+            angel_ids,
+            report_path,
+            hbar_sim_used,
+            hbar_units,
+            ls_max_den,
+                ls_epsilon_rel,
+                ls_attempts_with_ls,
+                ls_hash_counts,
+        )
+        report_path.write_text(report_text)
 
 
 def _build_species_catalog(
@@ -1422,6 +1521,13 @@ def _render_report(
     duration_seconds: Optional[float] = None,
     attempts_path: Optional[Path] = None,
     attempts_size_mb: Optional[float] = None,
+    species_catalog_size_mb: Optional[float] = None,
+    report_size_mb: Optional[float] = None,
+    code_hash: Optional[str] = None,
+    angel_ids: Optional[List[str]] = None,
+    report_path: Optional[Path] = None,
+    hbar_sim_used: Optional[float] = None,
+    hbar_units: Optional[str] = None,
     ls_max_den: Optional[int] = None,
     ls_epsilon_rel: Optional[float] = None,
     ls_attempts_with_ls: Optional[int] = None,
@@ -1461,10 +1567,20 @@ def _render_report(
     lines.append(f"- finished_utc: {finished_utc}")
     if duration_seconds is not None:
         lines.append(f"- duration_seconds: {duration_seconds:.2f}")
+    if code_hash:
+        lines.append(f"- code_version: {code_hash}")
     if attempts_path:
         lines.append(f"- attempts_path: {attempts_path}")
     if attempts_size_mb is not None:
         lines.append(f"- attempts_size_mb: {attempts_size_mb:.2f}")
+    if species_catalog_path:
+        lines.append(f"- species_catalog_path: {species_catalog_path}")
+    if species_catalog_size_mb is not None:
+        lines.append(f"- species_catalog_size_mb: {species_catalog_size_mb:.2f}")
+    if report_path:
+        lines.append(f"- report_path: {report_path}")
+    if report_size_mb is not None:
+        lines.append(f"- report_size_mb: {report_size_mb:.2f}")
     if config_path:
         lines.append(f"- config_path: {config_path}")
     if config_hash:
@@ -1479,6 +1595,11 @@ def _render_report(
         lines.append(f"- inputs.species_catalog_jsonl: {species_catalog_path}")
     elif blocks_path:
         lines.append(f"- inputs.blocks_json: {blocks_path}")
+    if hbar_sim_used is not None:
+        lines.append(f"- observer.hbar_sim_used: {hbar_sim_used}")
+        if hbar_units:
+            lines.append(f"- observer.mass_est_units: {hbar_units}")
+        lines.append("- observer.mass_est_method: mass_est = hbar_sim_used * omega_eff")
     lines.append("")
 
     lines.append("## Targets Used")
@@ -1537,6 +1658,87 @@ def _render_report(
     if taxonomy_reason_counts:
         top_reasons = sorted(taxonomy_reason_counts.items(), key=lambda x: (-x[1], x[0]))[:5]
         lines.append(f"- top_reasons: {top_reasons}")
+    lines.append("")
+
+    lines.append("## DOF Mass Preview (observer-only, no SM)")
+    lines.append("- mass_index := omega_eff  (adimensional)")
+    if hbar_sim_used is not None:
+        lines.append(f"- mass_est := hbar_sim_used * omega_eff  (units: {hbar_units or 'GeV'})")
+        lines.append(f"- hbar_sim_used: {hbar_sim_used}")
+    else:
+        lines.append("- mass_est := N/A (hbar_sim_used not available)")
+    lines.append("")
+    lines.append("### Top Species by Stability (with DOF mass)")
+    lines.append(
+        "| rank | species_id | template | n_trials | seed_stability | omega_eff (mass_index) | mass_est | "
+        "R_mean_lastW | phase_var_lastW | memory_score_k10 | QualityLock | entropy_quality |"
+    )
+    lines.append("| ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |")
+    for idx, row in enumerate(sorted(species_catalog, key=lambda r: (r.get("seed_stability", 0), r.get("n_trials", 0), (r.get("best_metrics") or {}).get("QualityLock", 0)), reverse=True)[:20], start=1):
+        bm = row.get("best_metrics") or {}
+        omega_eff = bm.get("omega_eff")
+        mass_est = (hbar_sim_used * omega_eff) if (_is_finite(hbar_sim_used) and _is_finite(omega_eff)) else None
+        lines.append(
+            f"| {idx} | {row.get('species_id')} | {row.get('template_name')} | {row.get('n_trials')} | "
+            f"{row.get('seed_stability'):.3f} | {omega_eff} | {mass_est} | {bm.get('R_mean_lastW')} | "
+            f"{bm.get('phase_var_lastW')} | {bm.get('memory_score_k10')} | {bm.get('QualityLock')} | {bm.get('entropy_quality')} |"
+        )
+    lines.append("")
+
+    lines.append("### DOF Mass Summary by Species (no SM)")
+    if hbar_sim_used is None:
+        lines.append("| species_id | template | mass_index_mean | mass_index_min | mass_index_max | mass_index_std | omega_eff_mean | memory_mean | R_mean | n |")
+        lines.append("| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |")
+    else:
+        lines.append("| species_id | template | mass_est_mean | mass_est_min | mass_est_max | mass_est_std | omega_eff_mean | memory_mean | R_mean | n |")
+        lines.append("| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |")
+    for row in species_catalog:
+        omega_stats = row.get("omega_eff_stats") or {}
+        mem_stats = row.get("memory_stats") or {}
+        r_stats = row.get("r_mean_stats") or {}
+        n = omega_stats.get("n", 0)
+        if n == 0:
+            continue
+        omega_mean = omega_stats.get("sum", 0.0) / max(n, 1)
+        omega_var = omega_stats.get("sumsq", 0.0) / max(n, 1) - omega_mean * omega_mean
+        omega_std = math.sqrt(max(omega_var, 0.0))
+        mem_mean = mem_stats.get("sum", 0.0) / max(mem_stats.get("n", 1), 1)
+        r_mean = r_stats.get("sum", 0.0) / max(r_stats.get("n", 1), 1)
+        if hbar_sim_used is None:
+            lines.append(
+                f"| {row.get('species_id')} | {row.get('template_name')} | {omega_mean} | {omega_stats.get('min')} | "
+                f"{omega_stats.get('max')} | {omega_std} | {omega_mean} | {mem_mean} | {r_mean} | {n} |"
+            )
+        else:
+            mass_mean = hbar_sim_used * omega_mean
+            mass_min = hbar_sim_used * omega_stats.get("min") if omega_stats.get("min") is not None else None
+            mass_max = hbar_sim_used * omega_stats.get("max") if omega_stats.get("max") is not None else None
+            mass_std = hbar_sim_used * omega_std
+            lines.append(
+                f"| {row.get('species_id')} | {row.get('template_name')} | {mass_mean} | {mass_min} | "
+                f"{mass_max} | {mass_std} | {omega_mean} | {mem_mean} | {r_mean} | {n} |"
+            )
+    lines.append("")
+
+    lines.append("### Mass Bands (counts)")
+    mass_vals = []
+    if hbar_sim_used is not None:
+        mass_vals = [hbar_sim_used * v for v in omega_eff_vals if _is_finite(v)]
+    else:
+        mass_vals = [v for v in omega_eff_vals if _is_finite(v)]
+    mass_bins = [
+        ("[0,0.5)", 0.0, 0.5),
+        ("[0.5,1.0)", 0.5, 1.0),
+        ("[1.0,2.0)", 1.0, 2.0),
+        ("[2.0,4.0)", 2.0, 4.0),
+        ("[4.0,8.0)", 4.0, 8.0),
+        ("[8.0,16.0)", 8.0, 16.0),
+        ("[16.0,+)", 16.0, None),
+    ]
+    for label, count in _count_bins(mass_vals, mass_bins):
+        lines.append(f"- {label}: {count}")
+    lines.append("")
+    lines.append("mass_est es un observer scalar (hbar_sim_used) aplicado a ω_eff para orientar exploración. No interviene en búsqueda, tags ni viabilidad.")
     lines.append("")
 
     lines.append("## Phase Breakdown")
@@ -1683,6 +1885,36 @@ def _render_report(
             f"{bm.get('entropy_quality')} | {bm.get('QualityLock')} | {row.get('zombie_rate')} |"
         )
     lines.append("")
+
+    lines.append("## Top Species (Detailed)")
+    lines.append("| species_id | assignment | edge_weights | seed_stability | n_trials | n_viable | best_params | best_metrics |")
+    lines.append("| --- | --- | --- | --- | --- | --- | --- | --- |")
+    for row in species_catalog[:10]:
+        assignment = json.dumps(row.get("assignment"), separators=(",", ":"))
+        edge_weights = json.dumps(row.get("edge_weights"), separators=(",", ":"))
+        best_params = json.dumps(row.get("best_params"), separators=(",", ":"))
+        best_metrics = json.dumps(row.get("best_metrics"), separators=(",", ":"))
+        lines.append(
+            f"| {row.get('species_id')} | `{assignment}` | `{edge_weights}` | {row.get('seed_stability'):.3f} | "
+            f"{row.get('n_trials')} | {row.get('n_viable')} | `{best_params}` | `{best_metrics}` |"
+        )
+    lines.append("")
+
+    if angel_ids is not None:
+        lines.append("## Angels")
+        lines.append(f"- count: {len(angel_ids)}")
+        if angel_ids:
+            lines.append("- top_ids:")
+            species_map = {row.get("species_id"): row for row in species_catalog}
+            for sid in angel_ids[:10]:
+                row = species_map.get(sid, {})
+                bm = row.get("best_metrics") or {}
+                lines.append(
+                    f"  - {sid} seed_stability={row.get('seed_stability')} "
+                    f"omega_eff={bm.get('omega_eff')} memory={bm.get('memory_score_k10')} "
+                    f"entropy={bm.get('entropy_quality')} QualityLock={bm.get('QualityLock')}"
+                )
+        lines.append("")
 
     lines.append("## Config Snapshot")
     if cfg is not None:

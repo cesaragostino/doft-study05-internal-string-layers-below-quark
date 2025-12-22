@@ -3,55 +3,39 @@
     "name": "singlet",
     "type": "elementary",
     "nodes": 1,
-    "edges": [],
-    "allowed_block_families": [
-      "lepton",
-      "gauge_boson",
-      "nucleus",
-      "match_any",
-      "quark_like"
-    ]
+    "edges": []
   },
   {
     "name": "meson_dimer",
     "type": "meson_complex",
     "nodes": 2,
-    "edges": [
-      [0, 1]
-    ],
-    "allowed_block_families": [
-      "pion_like",
-      "rho_like",
-      "kaon_like",
-      "quark_like"
-    ]
+    "edges": [[0, 1]]
   },
   {
     "name": "baryon_triangle",
     "type": "baryon",
     "nodes": 3,
-    "edges": [
-      [0, 1],
-      [1, 2],
-      [2, 0]
-    ],
-    "allowed_block_families": [
-      "quark_like",
-      "pion_like",
-      "rho_like"
-    ]
+    "edges": [[0, 1], [1, 2], [2, 0]]
   },
   {
-    "name": "nucleus_cluster",
+    "name": "alpha_tetrahedron",
     "type": "nucleus",
     "nodes": 4,
     "edges": [
-        [0, 1], [1, 2], [2, 0], [0, 3], [1, 3], [2, 3]
+      [0, 1], [0, 2], [0, 3],
+      [1, 2], [1, 3], [2, 3]
     ],
-    "allowed_block_families": [
-      "nucleus",
-      "baryon",
-      "pion_like"
-    ]
+    "notes": "Geometría fundamental del núcleo de Helio (4 nodos)."
+  },
+  {
+    "name": "atomic_nucleus_heavy",
+    "type": "atom_core",
+    "nodes": 6,
+    "edges": [
+      [0, 1], [1, 2], [2, 0],
+      [3, 4], [4, 5], [5, 3],
+      [0, 3], [1, 4], [2, 5]
+    ],
+    "notes": "Estructura de 6 nodos (Prisma Triangular) para búsqueda de núcleos pesados."
   }
 ]

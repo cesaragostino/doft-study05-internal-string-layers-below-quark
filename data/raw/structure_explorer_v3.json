@@ -3,78 +3,25 @@
   "inputs": {
     "blocks_json": "data/processed/ola1/simple_blocks.json",
     "templates_json": "data/raw/compound_templates_v3.json",
-    "dof_dna_catalog_csv": "data/processed/ola1/dof_dna_catalog.csv",
     "species_catalog_jsonl": "data/processed/ola2-v3/species_catalog.jsonl",
     "blocks_mode": "ola1_blocks"
   },
   "targets": [
     {
-      "name": "meson_explore__any",
-      "templates": [
-        "meson_dimer"
-      ],
+      "name": "atomic_search_all",
+      "templates": ["alpha_tetrahedron", "atomic_nucleus_heavy"],
       "allowed_block_families": [],
-      "budget_evals": 15000
-    },
-    {
-      "name": "meson_explore__delta_like",
-      "templates": [
-        "meson_dimer"
-      ],
-      "allowed_block_families": [
-        "delta_like"
-      ],
-      "budget_evals": 8000
-    },
-    {
-      "name": "meson_explore__charmed_meson",
-      "templates": [
-        "meson_dimer"
-      ],
-      "allowed_block_families": [
-        "charmed_meson"
-      ],
-      "budget_evals": 8000
-    },
-    {
-      "name": "baryon_explore__any",
-      "templates": [
-        "baryon_triangle"
-      ],
-      "allowed_block_families": [],
-      "budget_evals": 15000
-    },
-    {
-      "name": "baryon_explore__delta_like",
-      "templates": [
-        "baryon_triangle"
-      ],
-      "allowed_block_families": [
-        "delta_like"
-      ],
-      "budget_evals": 8000
-    },
-    {
-      "name": "baryon_explore__mixed",
-      "templates": [
-        "baryon_triangle"
-      ],
-      "allowed_block_families": [
-        "delta_like",
-        "charmed_meson",
-        "unknown"
-      ],
-      "budget_evals": 8000
+      "budget_evals": 200000
     }
   ],
   "engine_defaults": {
     "dt": 1,
-    "T_ticks": 120,
+    "T_ticks": 200,
     "W": 20,
-    "K_local": 0.15,
-    "kappa_global": 0.25,
-    "tau_field": 20,
-    "sigma0": 0.30,
+    "K_local": 0.45,
+    "kappa_global": 0.3,
+    "tau_field": 120,
+    "sigma0": 0.3,
     "sigma_tc": 60,
     "sigma_theta_init": 0.5
   },
@@ -82,67 +29,32 @@
     "enabled": true,
     "mode": "bin_sample",
     "bins": {
-      "K_local_edges": [0.00, 0.10, 0.20, 0.40],
-      "kappa_edges": [0.00, 0.10, 0.20, 0.40],
-      "tau_field_edges": [5, 10, 20, 40, 80],
-      "sigma0_edges": [0.00, 0.10, 0.20, 0.30, 0.50],
-      "sigma_tc_edges": [10, 30, 60, 120, 240]
+      "K_local_edges": [0.2, 0.4, 0.6, 0.8],
+      "tau_field_edges": [40, 80, 120, 160, 240],
+      "sigma0_edges": [0.1, 0.3, 0.5]
     }
   },
-  "coupling_mode": {
-    "mode": "absolute",
-    "alpha_range": [0.2, 20.0],
-    "beta_range": [0.05, 5.0],
-    "omega_floor": 1e-12,
-    "sample": "log_uniform"
-  },
-  "templates": {
-    "weighted_edges": true,
-    "edge_weight_levels": [0.5, 1.0, 2.0],
-    "edge_weight_policy": "sample_discrete"
-  },
+  "coupling_mode": { "mode": "absolute" },
   "tagging": {
-    "R_mean_lastW_min": 0.85,
-    "phase_var_lastW_max": 0.02,
+    "R_mean_lastW_min": 0.8,
+    "phase_var_lastW_max": 0.05,
     "memory_score_k10_min": 0.0,
-    "R_final_min": 0.90,
-    "quality_lock_min": 0.80,
+    "quality_lock_min": 0.75,
     "viability_mode": "hard_viable_soft_memory"
   },
   "search_policy": {
-    "phase1_fraction": 0.70,
-    "phase2_fraction": 0.30,
+    "phase1_fraction": 0.4,
+    "phase2_fraction": 0.6,
     "phase1": {
       "prefer_novel_structures": true,
-      "template_balance": "round_robin",
-      "max_repeats_per_structure": 1
+      "template_balance": "round_robin"
     },
     "phase2": {
-      "promising_rule": {
-        "min_R_mean_lastW": 0.80,
-        "max_phase_var_lastW": 0.03,
-        "min_memory_score_k10": 0.0
-      },
-      "seed_repeats_per_structure": 10,
-      "param_neighbor_bins": 2
+      "seed_repeats_per_structure": 15,
+      "param_neighbor_bins": 3
     },
     "priority_scoring": {
-      "score": "R_mean_lastW - 3.0*phase_var_lastW + 0.2*memory_score_k10"
+      "score": "R_mean_lastW + 0.6*memory_score_k10 - 1.5*phase_var_lastW"
     }
-  },
-  "canonicalization": {
-    "enabled": true,
-    "method": "template_automorphisms_lexmin",
-    "block_key": "block_id"
-  },
-  "progress": {
-    "term_attempts": 500,
-    "term_seconds": 10
-  },
-  "outputs": {
-    "attempts_jsonl": "attempts.jsonl",
-    "species_catalog_jsonl": "species_catalog.jsonl",
-    "report_md": "report.md",
-    "views_enabled": true
   }
 }
