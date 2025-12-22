@@ -12,7 +12,7 @@ from typing import Dict, List, Optional
 
 import numpy as np
 
-from study06.sm_matching import compute_match_stats, extract_levels, load_universe
+from ola1.sm_matching import compute_match_stats, extract_levels, load_universe
 
 
 def _to_float(value) -> Optional[float]:

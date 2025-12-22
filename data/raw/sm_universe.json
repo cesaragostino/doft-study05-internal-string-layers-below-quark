@@ -250,10 +250,10 @@
       "family": "delta_like",
       "type": "baryon",
       "jpc": "1/2-",
-      "sm_mass_gev": 1.62,
-      "masses_gev": [1.62],
+      "sm_mass_gev": 1.642,
+      "masses_gev": [1.642],
       "widths_gev": [0.15],
-      "tolerances": {"mass_abs": 0.08, "width_abs": 0.25, "spacing_rel": 0.35},
+      "tolerances": {"mass_abs": 0.008, "width_abs": 0.25, "spacing_rel": 0.35},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
@@ -506,9 +506,9 @@
       "type": "baryon",
       "jpc": "1/2+",
       "sm_mass_gev": 2.28646,
-      "masses_gev": [2.286],
+      "masses_gev": [2.28646],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.06, "width_abs": 0.0, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.012, "width_abs": 0.0, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
@@ -573,10 +573,10 @@
       "family": "charmed_meson",
       "type": "meson",
       "jpc": "0+",
-      "sm_mass_gev": 2.3177,
-      "masses_gev": [2.318],
+      "sm_mass_gev": 2.317,
+      "masses_gev": [2.317],
       "widths_gev": [0.0001],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.001, "spacing_rel": 0.1},
+      "tolerances": {"mass_abs": 0.004, "width_abs": 0.001, "spacing_rel": 0.1},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
@@ -593,7 +593,7 @@
       "sm_mass_gev": 2.4595,
       "masses_gev": [2.46],
       "widths_gev": [0.0001],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.001, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.001, "spacing_rel": 0.1},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
@@ -627,11 +627,11 @@
       "sm_mass_gev": 2.166,
       "masses_gev": [2.166],
       "widths_gev": [0.05],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.03, "spacing_rel": 0.1},
+      "tolerances": {"mass_abs": 0.01, "width_abs": 0.03, "spacing_rel": 0.1},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
       },
       "parity_note": "P=- → even, JPC corregido a 1- (era ?-)"
@@ -732,8 +732,8 @@
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.002, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
       },
       "parity_note": "P=- → even, tolerancia ampliada 0.02→0.03 por dispersión +1.2%"
@@ -749,8 +749,8 @@
       "tolerances": {"mass_abs": 0.02, "width_abs": 0.001, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
       },
       "parity_note": "P=- → even"
@@ -766,8 +766,8 @@
       "tolerances": {"mass_abs": 0.03, "width_abs": 0.002, "spacing_rel": 0.12},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
       },
       "parity_note": "P=- → even, tolerancia ampliada 0.02→0.03 por dispersión +1.1%"
@@ -783,8 +783,8 @@
       "tolerances": {"mass_abs": 0.035, "width_abs": 0.03, "spacing_rel": 0.1},
       "doft": {
         "postulate_lock_mode": {
-          "preferred_parity": "even",
-          "allowed_k": [1, 2, 4]
+          "preferred_parity": "odd",
+          "allowed_k": [1, 3, 5]
         }
       },
       "parity_note": "P=- → even, tolerancia ampliada por dispersión -1.5%"
@@ -795,9 +795,9 @@
       "type": "baryon",
       "jpc": "1/2+",
       "sm_mass_gev": 2.46771,
-      "masses_gev": [2.468],
+      "masses_gev": [2.46771],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.035, "width_abs": 0.0, "spacing_rel": 0.15},
+      "tolerances": {"mass_abs": 0.012, "width_abs": 0.0, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
@@ -882,7 +882,7 @@
       "sm_mass_gev": 3.51067,
       "masses_gev": [3.511],
       "widths_gev": [0.00084],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.005, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.005, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
@@ -1052,7 +1052,7 @@
       "sm_mass_gev": 3.87169,
       "masses_gev": [3.872],
       "widths_gev": [0.00117],
-      "tolerances": {"mass_abs": 0.015, "width_abs": 0.002, "spacing_rel": 0.2},
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.005, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",

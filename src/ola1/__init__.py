@@ -1,4 +1,4 @@
-"""Utilities for Study05 – DOFT internal layers simulator (v0.1)."""
+"""Ola1 pipeline and sweep modules for DOFT."""
 
 from . import analysis, config, couplings, families, layers, plots, simulation, state_space, sweep
 

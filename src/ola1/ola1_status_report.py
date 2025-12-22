@@ -756,90 +756,6 @@ def main():
         block_lines.append("Sin bloques aceptados o no se encontraron runs para mapear entropy_chaos.")
         block_lines.append("")
 
-    if dna_rows:
-        lines.append("## DNA Catalog (DOF Individuals)")
-
-        def _fmt_dna(v):
-            if isinstance(v, str):
-                return v
-            try:
-                f = float(v)
-                return f"{f:.17g}"
-            except Exception:
-                return str(v) if v is not None else ""
-
-        def _fmt_run_id(val):
-            try:
-                return str(int(float(val)))
-            except Exception:
-                return str(val) if val is not None else ""
-
-        def _emit_grade(title: str, rows: List[Dict]):
-            lines.append(title)
-            lines.append("| run_id | d_total | dna_grade | R_S1_Q | R_S2_S1 | dominant_parity | lock_Q0_S1_0_1-1_ratio | band_count | rho_lock | lock_quality_Q | participation_entropy |")
-            lines.append("|--------|---------|-----------|--------|---------|-----------------|------------------------|-----------|---------|---------------|-----------------------|")
-            for r in rows:
-                lines.append(
-                    f"| {_fmt_run_id(r.get('run_id'))} | {_fmt_dna(r.get('d_total'))} | {r.get('dna_grade')} | {_fmt_dna(r.get('R_S1_Q'))} | "
-                    f"{_fmt_dna(r.get('R_S2_S1'))} | {r.get('dominant_parity')} | {_fmt_dna(r.get('lock_Q0_S1_0_1-1_ratio'))} | "
-                    f"{_fmt_dna(r.get('band_count'))} | {_fmt_dna(r.get('rho_lock'))} | {_fmt_dna(r.get('lock_quality_Q'))} | "
-                    f"{_fmt_dna(r.get('participation_entropy'))} |"
-                )
-
-        def _dof_val(r):
-            try:
-                return float(r.get("d_total"))
-            except Exception:
-                return None
-
-        grade_a = [r for r in dna_rows if (v := _dof_val(r)) is not None and v < 0.5]
-        grade_b = [r for r in dna_rows if (v := _dof_val(r)) is not None and 0.5 <= v < 1.5]
-        grade_c = [r for r in dna_rows if _dof_val(r) is None or _dof_val(r) >= 1.5]
-
-        _emit_grade("### DOF Grade A (Excellent): d_total < 0.5", grade_a)
-        lines.append("")
-        _emit_grade("### DOF Grade B (Acceptable): 0.5 <= d_total < 1.5", grade_b)
-        lines.append("")
-        _emit_grade("### DOF Grade C (Noise/Ghosts): d_total >= 1.5", grade_c)
-        lines.append("")
-        lines.append("### DNA Pareto (R1/R2 agrupados a 2 decimales)")
-        lines.append("| R_S1_Q_2dp | R_S2_S1_2dp | n | grade_A | grade_B | grade_C |")
-        lines.append("|-----------|------------|---|---------|---------|---------|")
-
-        def _round_2(val):
-            try:
-                return f"{float(val):.2f}"
-            except Exception:
-                return ""
-
-        def _grade_from_d_total(val):
-            try:
-                f = float(val)
-            except Exception:
-                return "C"
-            if f < 0.5:
-                return "A"
-            if f < 1.5:
-                return "B"
-            return "C"
-
-        group_counts: Dict[tuple, Dict[str, int]] = {}
-        for r in dna_rows:
-            r1 = _round_2(r.get("R_S1_Q"))
-            r2 = _round_2(r.get("R_S2_S1"))
-            if not r1 or not r2:
-                continue
-            key = (r1, r2)
-            bucket = group_counts.setdefault(key, {"n": 0, "A": 0, "B": 0, "C": 0})
-            bucket["n"] += 1
-            bucket[_grade_from_d_total(r.get("d_total"))] += 1
-
-        for (r1, r2), counts in sorted(group_counts.items(), key=lambda kv: (-kv[1]["n"], kv[0][0], kv[0][1])):
-            lines.append(
-                f"| {r1} | {r2} | {counts['n']} | {counts['A']} | {counts['B']} | {counts['C']} |"
-            )
-        lines.append("")
-
     lines.append("## Semáforo de salud")
     lines.append(f"- Runs totales: {runs_total}")
     lines.append(f"- Runs aceptados: {runs_valid} ({success_rate:.1f}%)")
@@ -1119,40 +1035,6 @@ def main():
             )
     lines.append("")
 
-    # Proxies de masa/lock (M_spec/M1/M2/M3)
-    lines.append("## Proxies de masa/lock (unidades internas)")
-    proxy_rows = []
-    for b in blocks:
-        rid = _to_int(b.get("origin_run_id"))
-        pname = b.get("particle_name")
-        fam = b.get("family")
-        omega_ref = b.get("omega_ref")
-        m_spec = b.get("M_spec")
-        m1 = b.get("M1")
-        m2 = b.get("M2")
-        m3 = b.get("M3")
-        proxy_rows.append((rid if rid is not None else -1, pname, fam, omega_ref, m_spec, m1, m2, m3))
-    if proxy_rows:
-        proxy_rows_sorted = sorted(proxy_rows, key=lambda x: (str(x[1]), x[0]))
-        lines.append("| run | particle | family | omega_ref | M_spec | M1 | M2 | M3 |")
-        lines.append("|-----|----------|--------|-----------|--------|----|----|----|")
-        def _fmt(val):
-            try:
-                xv = float(val)
-                if math.isfinite(xv):
-                    return f"{xv:.3e}"
-            except Exception:
-                return "n/d"
-            return "n/d"
-        for r in proxy_rows_sorted[:100]:
-            rid, pname, fam, omega_ref, m_spec, m1, m2, m3 = r
-            lines.append(
-                f"| {rid} | {pname} | {fam} | {_fmt(omega_ref)} | {_fmt(m_spec)} | {_fmt(m1)} | {_fmt(m2)} | {_fmt(m3)} |"
-            )
-    else:
-        lines.append("- No hay proxies de masa disponibles.")
-    lines.append("")
-
     # Tabla de energía calibrada por bloque (si hay mass_gev o internal_energy)
     def _load_calibration(proc_dir: Path) -> float | None:
         candidates = [
@@ -1205,20 +1087,6 @@ def main():
             )
         )
 
-    lines.append("## Energía calibrada por bloque")
-    if energy_rows:
-        energy_rows_sorted = sorted(energy_rows, key=lambda x: (x[1], x[0]))
-        lines.append("| run | best_target | family | E_internal | m_DOFT (GeV) | m_SM (GeV) | rel_error |")
-        lines.append("|-----|-------------|--------|------------|--------------|-----------:|----------:|")
-        for row in energy_rows_sorted[:100]:
-            rid, pname, fam, e_val, m_doft, m_sm, rel_err = row
-            lines.append(
-                f"| {rid} | {pname} | {fam} | {e_val:.3e} | {m_doft:.4f} | {m_sm:.4f} | {rel_err:+.3f} |"
-            )
-    else:
-        lines.append("- No se pudo construir la tabla (falta internal_energy, mass_gev o sm_mass_gev).")
-    lines.append("")
-
     # OLD (deprecated): F_m-based mass error vs SM.
     # Disabled to keep reports focused on the calibrated hbar_sim method.
     # lines.append("## Error de masa vs SM")
@@ -1249,6 +1117,138 @@ def main():
     else:
         lines.append("Sin desviaciones mass_sim calculadas (no hay mass_sim_used_gev).")
     lines.append("")
+
+    # Proxies de masa/lock (M_spec/M1/M2/M3)
+    lines.append("## Proxies de masa/lock (unidades internas)")
+    proxy_rows = []
+    for b in blocks:
+        rid = _to_int(b.get("origin_run_id"))
+        pname = b.get("particle_name")
+        fam = b.get("family")
+        omega_ref = b.get("omega_ref")
+        m_spec = b.get("M_spec")
+        m1 = b.get("M1")
+        m2 = b.get("M2")
+        m3 = b.get("M3")
+        proxy_rows.append((rid if rid is not None else -1, pname, fam, omega_ref, m_spec, m1, m2, m3))
+    if proxy_rows:
+        proxy_rows_sorted = sorted(proxy_rows, key=lambda x: (str(x[1]), x[0]))
+        lines.append("| run | particle | family | omega_ref | M_spec | M1 | M2 | M3 |")
+        lines.append("|-----|----------|--------|-----------|--------|----|----|----|")
+        def _fmt(val):
+            try:
+                xv = float(val)
+                if math.isfinite(xv):
+                    return f"{xv:.3e}"
+            except Exception:
+                return "n/d"
+            return "n/d"
+        for r in proxy_rows_sorted[:100]:
+            rid, pname, fam, omega_ref, m_spec, m1, m2, m3 = r
+            lines.append(
+                f"| {rid} | {pname} | {fam} | {_fmt(omega_ref)} | {_fmt(m_spec)} | {_fmt(m1)} | {_fmt(m2)} | {_fmt(m3)} |"
+            )
+    else:
+        lines.append("- No hay proxies de masa disponibles.")
+    lines.append("")
+
+    lines.append("## Energía calibrada por bloque")
+    if energy_rows:
+        energy_rows_sorted = sorted(energy_rows, key=lambda x: (x[1], x[0]))
+        lines.append("| run | best_target | family | E_internal | m_DOFT (GeV) | m_SM (GeV) | rel_error |")
+        lines.append("|-----|-------------|--------|------------|--------------|-----------:|----------:|")
+        for row in energy_rows_sorted[:100]:
+            rid, pname, fam, e_val, m_doft, m_sm, rel_err = row
+            lines.append(
+                f"| {rid} | {pname} | {fam} | {e_val:.3e} | {m_doft:.4f} | {m_sm:.4f} | {rel_err:+.3f} |"
+            )
+    else:
+        lines.append("- No se pudo construir la tabla (falta internal_energy, mass_gev o sm_mass_gev).")
+    lines.append("")
+
+    if dna_rows:
+        lines.append("## DNA Catalog (DOF Individuals)")
+
+        def _fmt_dna(v):
+            if isinstance(v, str):
+                return v
+            try:
+                f = float(v)
+                return f"{f:.17g}"
+            except Exception:
+                return str(v) if v is not None else ""
+
+        def _fmt_run_id(val):
+            try:
+                return str(int(float(val)))
+            except Exception:
+                return str(val) if val is not None else ""
+
+        def _emit_grade(title: str, rows: List[Dict]):
+            lines.append(title)
+            lines.append("| run_id | d_total | dna_grade | R_S1_Q | R_S2_S1 | dominant_parity | lock_Q0_S1_0_1-1_ratio | band_count | rho_lock | lock_quality_Q | participation_entropy |")
+            lines.append("|--------|---------|-----------|--------|---------|-----------------|------------------------|-----------|---------|---------------|-----------------------|")
+            for r in rows:
+                lines.append(
+                    f"| {_fmt_run_id(r.get('run_id'))} | {_fmt_dna(r.get('d_total'))} | {r.get('dna_grade')} | {_fmt_dna(r.get('R_S1_Q'))} | "
+                    f"{_fmt_dna(r.get('R_S2_S1'))} | {r.get('dominant_parity')} | {_fmt_dna(r.get('lock_Q0_S1_0_1-1_ratio'))} | "
+                    f"{_fmt_dna(r.get('band_count'))} | {_fmt_dna(r.get('rho_lock'))} | {_fmt_dna(r.get('lock_quality_Q'))} | "
+                    f"{_fmt_dna(r.get('participation_entropy'))} |"
+                )
+
+        def _dof_val(r):
+            try:
+                return float(r.get("d_total"))
+            except Exception:
+                return None
+
+        grade_a = [r for r in dna_rows if (v := _dof_val(r)) is not None and v < 0.5]
+        grade_b = [r for r in dna_rows if (v := _dof_val(r)) is not None and 0.5 <= v < 1.5]
+        grade_c = [r for r in dna_rows if _dof_val(r) is None or _dof_val(r) >= 1.5]
+
+        _emit_grade("### DOF Grade A (Excellent): d_total < 0.5", grade_a)
+        lines.append("")
+        _emit_grade("### DOF Grade B (Acceptable): 0.5 <= d_total < 1.5", grade_b)
+        lines.append("")
+        _emit_grade("### DOF Grade C (Noise/Ghosts): d_total >= 1.5", grade_c)
+        lines.append("")
+        lines.append("### DNA Pareto (R1/R2 agrupados a 2 decimales)")
+        lines.append("| R_S1_Q_2dp | R_S2_S1_2dp | n | grade_A | grade_B | grade_C |")
+        lines.append("|-----------|------------|---|---------|---------|---------|")
+
+        def _round_2(val):
+            try:
+                return f"{float(val):.2f}"
+            except Exception:
+                return ""
+
+        def _grade_from_d_total(val):
+            try:
+                f = float(val)
+            except Exception:
+                return "C"
+            if f < 0.5:
+                return "A"
+            if f < 1.5:
+                return "B"
+            return "C"
+
+        group_counts: Dict[tuple, Dict[str, int]] = {}
+        for r in dna_rows:
+            r1 = _round_2(r.get("R_S1_Q"))
+            r2 = _round_2(r.get("R_S2_S1"))
+            if not r1 or not r2:
+                continue
+            key = (r1, r2)
+            bucket = group_counts.setdefault(key, {"n": 0, "A": 0, "B": 0, "C": 0})
+            bucket["n"] += 1
+            bucket[_grade_from_d_total(r.get("d_total"))] += 1
+
+        for (r1, r2), counts in sorted(group_counts.items(), key=lambda kv: (-kv[1]["n"], kv[0][0], kv[0][1])):
+            lines.append(
+                f"| {r1} | {r2} | {counts['n']} | {counts['A']} | {counts['B']} | {counts['C']} |"
+            )
+        lines.append("")
 
     lines.append("## Masa por frecuencia (mass_sim_used_gev)")
     if mass_sim_rows:

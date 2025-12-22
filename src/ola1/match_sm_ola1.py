@@ -12,7 +12,7 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 
-from study06.sm_matching import compute_match_stats, extract_levels, load_universe
+from ola1.sm_matching import compute_match_stats, extract_levels, load_universe
 
 
 def parse_proxies_csv(path: Path) -> List[Dict]:

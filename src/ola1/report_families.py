@@ -9,7 +9,7 @@ from typing import Dict, List
 
 import numpy as np
 
-from study05 import plots
+from ola1 import plots
 
 
 def load_summary(path: Path) -> Dict:

@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Tuple
 
 import numpy as np
 
-from study06.sm_matching import load_universe
+from ola1.sm_matching import load_universe
 
 
 def _to_float(val: Any) -> float | None:

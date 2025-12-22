@@ -11,7 +11,7 @@ from typing import Dict, List, Optional, Set, Tuple
 
 import numpy as np
 
-from study06.sm_matching import load_universe
+from ola1.sm_matching import load_universe
 
 
 DEFAULT_SELECTION = {

@@ -12,8 +12,8 @@ from typing import Dict, List, Optional
 
 import numpy as np
 
-from study05 import analysis, plots
-from study05.config import (
+from ola1 import analysis, plots
+from ola1.config import (
     DEFAULT_BAND_MAX,
     DEFAULT_BAND_MIN,
     DEFAULT_MAX_COMPLEXITY,
@@ -27,7 +27,7 @@ try:
     import yaml
 except ImportError:
     yaml = None
-from study05.families import (
+from ola1.families import (
     FamilyDistance,
     FamilyFingerprint,
     FamilyPriors,
@@ -37,9 +37,9 @@ from study05.families import (
     load_family_spec,
     make_priors_for_family,
 )
-from study05.simulation import SimulationParams, pick_peaks, simulate
-from study05.layers import Layer
-from study05.sweep import SimulationConfig, generate_configuration
+from ola1.simulation import SimulationParams, pick_peaks, simulate
+from ola1.layers import Layer
+from ola1.sweep import SimulationConfig, generate_configuration
 
 DEFAULT_RAW_DIR = Path("data/raw")
 DEFAULT_PROCESSED_DIR = Path("data/processed")

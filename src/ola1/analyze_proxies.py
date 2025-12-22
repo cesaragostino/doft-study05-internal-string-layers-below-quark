@@ -10,7 +10,7 @@ from typing import Dict, List
 
 import numpy as np
 
-from study05.families import FamilySpec, build_fingerprint, compute_family_distance
+from ola1.families import FamilySpec, build_fingerprint, compute_family_distance
 
 
 def _resolve_output_dir(output: Path, case: str) -> Path:
