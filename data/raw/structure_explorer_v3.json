@@ -8,10 +8,18 @@
   },
   "targets": [
     {
-      "name": "atomic_search_all",
-      "templates": ["alpha_tetrahedron", "atomic_nucleus_heavy"],
+      "name": "global_blind_search_all_templates",
+      "templates": [
+        "singlet",
+        "meson_dimer",
+        "baryon_triangle",
+        "alpha_tetrahedron",
+        "atomic_nucleus_heavy"
+      ],
       "allowed_block_families": [],
-      "budget_evals": 200000
+      "allowed_particle_names": null,
+      "allowed_species": null,
+      "budget_evals": 500000
     }
   ],
   "engine_defaults": {
@@ -34,9 +42,11 @@
       "sigma0_edges": [0.1, 0.3, 0.5]
     }
   },
-  "coupling_mode": { "mode": "absolute" },
+  "coupling_mode": {
+    "mode": "absolute"
+  },
   "tagging": {
-    "R_mean_lastW_min": 0.8,
+    "R_mean_lastW_min": 0.80,
     "phase_var_lastW_max": 0.05,
     "memory_score_k10_min": 0.0,
     "quality_lock_min": 0.75,
