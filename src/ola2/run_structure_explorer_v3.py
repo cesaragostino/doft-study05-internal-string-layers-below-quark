@@ -366,6 +366,9 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     attempts_path = output_dir / outputs.get("attempts_jsonl", "attempts.jsonl")
     species_catalog_path = output_dir / outputs.get("species_catalog_jsonl", "species_catalog.jsonl")
     report_path = output_dir / outputs.get("report_md", "report.md")
+    zombie_attempts_path = output_dir / "zombie_attempts.tsv"
+    angel_species_path = output_dir / "angel_species_ids.txt"
+    zombie_species_path = output_dir / "zombie_species.tsv"
 
     progress_cfg = cfg.get("progress", {})
     term_attempts = int(progress_cfg.get("term_attempts", 500))
@@ -403,6 +406,8 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     phase_var_vals: List[float] = []
     quality_lock_vals: List[float] = []
     memory_score_vals: List[float] = []
+    zombie_counts: Dict[str, int] = {}
+    zombie_attempts_header_written = False
 
     def update_taxonomy_counts(tags: Dict[str, Any], reasons: List[str]) -> None:
         viability_state = "INVALID" if "invalid_candidate_missing_identity" in reasons else "BOUNDED"
@@ -452,6 +457,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         block_key_used: str,
         block_key_used_per_node: List[str],
         blocks_used: List[Dict[str, Any]],
+        zombie: bool,
     ) -> None:
         entry = structure_stats.get(
             structure_id,
@@ -482,6 +488,16 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             entry["best_params"] = engine_params
             entry["best_param_bin_id"] = param_bin_id
         structure_stats[structure_id] = entry
+        if zombie:
+            zombie_counts[structure_id] = zombie_counts.get(structure_id, 0) + 1
+
+    def write_zombie_attempt(attempt_id: int, structure_id: str, memory_score: float) -> None:
+        nonlocal zombie_attempts_header_written
+        if not zombie_attempts_header_written:
+            zombie_attempts_path.write_text("attempt_id\tspecies_id\tmemory_score_k10\n")
+            zombie_attempts_header_written = True
+        with zombie_attempts_path.open("a") as f:
+            f.write(f"{attempt_id}\t{structure_id}\t{memory_score}\n")
 
     def build_record(
         target_name: str,
@@ -636,6 +652,9 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             tags = {
                 "viable": False,
                 "memory_good": False,
+                "memory_sign": "NA",
+                "zombie": False,
+                "labels": [],
                 "viability_mode": tagging.get("viability_mode", "hard_viable_soft_memory"),
                 "thresholds": {
                     "R_mean_lastW_min": r_min,
@@ -722,6 +741,10 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         quality_lock = metrics.get("QualityLock")
         memory_score = metrics.get("memory_score_k10")
         memory_score_pos = float(memory_score) if _is_finite(memory_score) and float(memory_score) > 0 else None
+        memory_sign = "NA"
+        if _is_finite(memory_score):
+            memory_sign = "POS" if float(memory_score) > 0 else "NEG"
+        zombie = bool(_is_finite(memory_score) and float(memory_score) <= 0)
         viable = bool(_is_finite(r_mean) and _is_finite(pv_last) and r_mean > r_min and pv_last < pv_max)
         r_final_ok = None
         quality_lock_ok = None
@@ -774,10 +797,15 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             quality_lock_vals.append(float(quality_lock))
         if _is_finite(memory_score):
             memory_score_vals.append(float(memory_score))
+        if zombie and _is_finite(memory_score):
+            write_zombie_attempt(attempt_id, structure_id, float(memory_score))
 
         tags = {
             "viable": viable,
             "memory_good": memory_good,
+            "memory_sign": memory_sign,
+            "zombie": zombie,
+            "labels": ["ZOMBIE"] if zombie else [],
             "R_final_ok": r_final_ok,
             "quality_lock_ok": quality_lock_ok,
             "viability_mode": tagging.get("viability_mode", "hard_viable_soft_memory"),
@@ -830,6 +858,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             block_key_used,
             block_key_used_per_node,
             assignment,
+            zombie,
         )
 
         unique_structures.add(structure_id)
@@ -1054,10 +1083,31 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         best_struct = max(structure_stats.values(), key=lambda s: _best_score(s.get("best_metrics") or {}))
     write_term_progress(best_struct)
 
-    species_catalog = _build_species_catalog(structure_stats)
+    species_catalog = _build_species_catalog(structure_stats, zombie_counts)
     with species_catalog_path.open("w") as f:
         for row in species_catalog:
             f.write(json.dumps(row) + "\n")
+
+    if zombie_counts:
+        with zombie_species_path.open("w") as f:
+            f.write("species_id\tzombie_rate\n")
+            for row in species_catalog:
+                z_rate = row.get("zombie_rate")
+                if z_rate is None:
+                    continue
+                f.write(f"{row.get('species_id')}\t{z_rate}\n")
+
+    with angel_species_path.open("w") as f:
+        for row in species_catalog:
+            best_metrics = row.get("best_metrics") or {}
+            memory_score = best_metrics.get("memory_score_k10")
+            if (
+                row.get("seed_stability") == 1.0
+                and row.get("n_viable") == row.get("n_trials")
+                and _is_finite(memory_score)
+                and float(memory_score) > 0.9
+            ):
+                f.write(f"{row.get('species_id')}\n")
 
     requested_families_by_target: Dict[str, List[str]] = {}
     for target in targets:
@@ -1089,12 +1139,17 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     )
 
 
-def _build_species_catalog(structure_stats: Dict[str, Dict[str, Any]]) -> List[Dict[str, Any]]:
+def _build_species_catalog(
+    structure_stats: Dict[str, Dict[str, Any]],
+    zombie_counts: Dict[str, int],
+) -> List[Dict[str, Any]]:
     species: List[Dict[str, Any]] = []
     for sid, stats in structure_stats.items():
         trials = stats.get("n_trials", 0)
         n_viable = stats.get("n_viable", 0)
         stability = n_viable / max(trials, 1)
+        zombie_count = zombie_counts.get(sid, 0)
+        zombie_rate = zombie_count / max(trials, 1)
         species.append(
             {
                 "species_id": sid,
@@ -1105,6 +1160,8 @@ def _build_species_catalog(structure_stats: Dict[str, Dict[str, Any]]) -> List[D
                 "n_trials": trials,
                 "n_viable": n_viable,
                 "seed_stability": stability,
+                "zombie_rate": zombie_rate,
+                "tags": ["ZOMBIE_TAINTED"] if zombie_rate > 0 else [],
                 "best_metrics": stats.get("best_metrics"),
                 "best_params": stats.get("best_params"),
             }
