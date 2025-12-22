@@ -3,7 +3,9 @@
   "inputs": {
     "blocks_json": "data/processed/ola1/simple_blocks.json",
     "templates_json": "data/raw/compound_templates_v3.json",
-    "dof_dna_catalog_csv": "data/processed/ola1/dof_dna_catalog.csv"
+    "dof_dna_catalog_csv": "data/processed/ola1/dof_dna_catalog.csv",
+    "species_catalog_jsonl": "data/processed/ola2-v3/species_catalog.jsonl",
+    "blocks_mode": "ola1_blocks"
   },
   "targets": [
     {
@@ -87,6 +89,13 @@
       "sigma_tc_edges": [10, 30, 60, 120, 240]
     }
   },
+  "coupling_mode": {
+    "mode": "absolute",
+    "alpha_range": [0.2, 20.0],
+    "beta_range": [0.05, 5.0],
+    "omega_floor": 1e-12,
+    "sample": "log_uniform"
+  },
   "templates": {
     "weighted_edges": true,
     "edge_weight_levels": [0.5, 1.0, 2.0],
@@ -133,6 +142,7 @@
   "outputs": {
     "attempts_jsonl": "attempts.jsonl",
     "species_catalog_jsonl": "species_catalog.jsonl",
-    "report_md": "report.md"
+    "report_md": "report.md",
+    "views_enabled": true
   }
 }

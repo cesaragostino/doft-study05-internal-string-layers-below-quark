@@ -50,6 +50,42 @@ def _extract_blocks(raw: Any) -> List[Dict[str, Any]]:
     return []
 
 
+def _load_species_blocks(path: Path) -> List[Dict[str, Any]]:
+    blocks: List[Dict[str, Any]] = []
+    if not path.exists():
+        return blocks
+    with path.open() as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            row = json.loads(line)
+            species_id = row.get("species_id") or row.get("structure_id")
+            best_metrics = row.get("best_metrics") or {}
+            omega_eff = best_metrics.get("omega_eff")
+            if not _is_finite(omega_eff):
+                continue
+            entropy_quality = best_metrics.get("entropy_quality")
+            quality_lock = best_metrics.get("QualityLock")
+            q_val = entropy_quality if _is_finite(entropy_quality) else quality_lock
+            lock_quality = {"Q": float(q_val)} if _is_finite(q_val) else {}
+            block = {
+                "block_id": str(species_id),
+                "particle_name": str(species_id),
+                "family": "species",
+                "omega_eff": float(omega_eff),
+                "omega_ref": float(omega_eff),
+                "mass_sim_gev": float(omega_eff),
+                "lock_quality": lock_quality,
+                "memory_score_k10": best_metrics.get("memory_score_k10"),
+                "seed_stability": row.get("seed_stability"),
+                "n_trials": row.get("n_trials"),
+                "n_viable": row.get("n_viable"),
+            }
+            blocks.append(block)
+    return blocks
+
+
 def _norm_run_id(val: Any) -> str:
     try:
         f = float(val)
@@ -87,8 +123,16 @@ def _is_finite(val: Any) -> bool:
         return False
 
 
+def _log_uniform(rng: random.Random, low: float, high: float) -> float:
+    if low <= 0 or high <= 0:
+        return float(low)
+    log_low = math.log(low)
+    log_high = math.log(high)
+    return float(math.exp(log_low + (log_high - log_low) * rng.random()))
+
+
 def _pick_omega(block: Dict[str, Any]) -> float:
-    for key in ("omega_ref", "M_spec", "f_ref", "mass_sim_gev"):
+    for key in ("omega_eff", "omega_ref", "M_spec", "f_ref", "mass_sim_gev"):
         val = block.get(key)
         if _is_finite(val):
             return float(val)
@@ -96,7 +140,7 @@ def _pick_omega(block: Dict[str, Any]) -> float:
 
 
 def _pick_mass(block: Dict[str, Any]) -> float:
-    for key in ("mass_sim_gev", "omega_ref", "M_spec", "f_ref"):
+    for key in ("mass_sim_gev", "omega_eff", "omega_ref", "M_spec", "f_ref"):
         val = block.get(key)
         if _is_finite(val):
             return float(val)
@@ -123,6 +167,7 @@ def _sample_blocks(
     pool: List[Dict[str, Any]],
     families: Sequence[str],
     allowed_particle_names: Optional[Sequence[str]],
+    allowed_block_ids: Optional[Sequence[str]],
     k: int,
     rng: random.Random,
 ) -> List[Dict[str, Any]]:
@@ -134,6 +179,9 @@ def _sample_blocks(
         filtered = [b for b in pool if (not fam_lower or str(b.get("family", "")).lower() in fam_lower)]
     if allowed_names is not None:
         filtered = [b for b in filtered if str(b.get("particle_name", "")).lower() in allowed_names]
+    if allowed_block_ids is not None:
+        allowed_ids = {str(v) for v in allowed_block_ids}
+        filtered = [b for b in filtered if str(b.get("block_id")) in allowed_ids]
     if len(filtered) < k:
         return []
     weights = []
@@ -307,7 +355,9 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     run_id = cfg.get("run_id") or str(uuid.uuid4())
 
     inputs = cfg.get("inputs", {})
+    blocks_mode = inputs.get("blocks_mode", "ola1_blocks")
     blocks_path = Path(inputs.get("blocks_json", "data/processed/ola1/simple_blocks.json"))
+    species_catalog_path = Path(inputs.get("species_catalog_jsonl", "species_catalog.jsonl"))
     templates_path = Path(inputs.get("templates_json", "data/raw/compound_templates.json"))
     dna_path = Path(inputs.get("dof_dna_catalog_csv", "data/processed/ola1/dof_dna_catalog.csv"))
     config_hash = f"sha256:{hashlib.sha256(config_path.read_bytes()).hexdigest()}"
@@ -315,15 +365,20 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     templates_hash = f"sha256:{hashlib.sha256(templates_path.read_bytes()).hexdigest()}"
     code_hash = f"sha256:{hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}"
 
-    raw_blocks = _load_blocks_wave1(blocks_path)
-    blocks = _extract_blocks(raw_blocks)
-    if not blocks:
-        raise RuntimeError(f"No blocks found in {blocks_path}")
-    grade_a_ids = _load_dof_grade_a(dna_path)
-    if grade_a_ids:
-        blocks = [b for b in blocks if _norm_run_id(b.get("origin_run_id")) in grade_a_ids]
-    if not blocks:
-        raise RuntimeError("No Grade A DOF blocks found for Structure Explorer.")
+    if blocks_mode == "species_as_blocks":
+        blocks = _load_species_blocks(species_catalog_path)
+        if not blocks:
+            raise RuntimeError(f"No species blocks found in {species_catalog_path}")
+    else:
+        raw_blocks = _load_blocks_wave1(blocks_path)
+        blocks = _extract_blocks(raw_blocks)
+        if not blocks:
+            raise RuntimeError(f"No blocks found in {blocks_path}")
+        grade_a_ids = _load_dof_grade_a(dna_path)
+        if grade_a_ids:
+            blocks = [b for b in blocks if _norm_run_id(b.get("origin_run_id")) in grade_a_ids]
+        if not blocks:
+            raise RuntimeError("No Grade A DOF blocks found for Structure Explorer.")
     block_map = {b.get("block_id"): b for b in blocks if b.get("block_id")}
 
     templates_list = _load_json(templates_path)
@@ -342,6 +397,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         "sigma_theta_init": float(engine_defaults.get("sigma_theta_init", 0.5)),
     }
     variation_cfg = cfg.get("engine_variation", {})
+    coupling_mode = cfg.get("coupling_mode", {})
 
     templates_cfg = cfg.get("templates", {})
     edge_weight_policy = templates_cfg.get("edge_weight_policy", "fixed_template")
@@ -369,6 +425,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     zombie_attempts_path = output_dir / "zombie_attempts.tsv"
     angel_species_path = output_dir / "angel_species_ids.txt"
     zombie_species_path = output_dir / "zombie_species.tsv"
+    views_enabled = bool(outputs.get("views_enabled", True))
 
     progress_cfg = cfg.get("progress", {})
     term_attempts = int(progress_cfg.get("term_attempts", 500))
@@ -493,6 +550,8 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
 
     def write_zombie_attempt(attempt_id: int, structure_id: str, memory_score: float) -> None:
         nonlocal zombie_attempts_header_written
+        if not views_enabled:
+            return
         if not zombie_attempts_header_written:
             zombie_attempts_path.write_text("attempt_id\tspecies_id\tmemory_score_k10\n")
             zombie_attempts_header_written = True
@@ -516,6 +575,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         param_bin_id: str,
         engine_params: Dict[str, Any],
         metrics: Dict[str, Any],
+        derived: Dict[str, Any],
         tags: Dict[str, Any],
         reasons: List[str],
         edge_weights: Optional[List[float]],
@@ -569,6 +629,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             "parameter_bin_id": param_bin_id,
             "engine_params": engine_params,
             "metrics": metrics,
+            "derived": derived,
             "taxonomy": {
                 "viability_state": viability_state,
                 "attractor_class": attractor_class,
@@ -681,6 +742,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 param_bin_id="invalid",
                 engine_params=defaults,
                 metrics={},
+                derived={},
                 tags=tags,
                 reasons=reasons,
                 edge_weights=edge_weights,
@@ -705,6 +767,24 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
 
         masses = np.array([_pick_mass(b) for b in assignment], dtype=float)
         omegas = np.array([_pick_omega(b) for b in assignment], dtype=float)
+        derived: Dict[str, Any] = {}
+        if coupling_mode.get("mode") == "adaptive_alpha":
+            delta_omega_raw = float(np.std(omegas))
+            omega_floor = float(coupling_mode.get("omega_floor", 1e-12))
+            delta_omega_eff = max(delta_omega_raw, omega_floor)
+            alpha_range = coupling_mode.get("alpha_range", [0.2, 20.0])
+            beta_range = coupling_mode.get("beta_range", [0.05, 5.0])
+            alpha = _log_uniform(rng, float(alpha_range[0]), float(alpha_range[1]))
+            beta = _log_uniform(rng, float(beta_range[0]), float(beta_range[1]))
+            params["K_local"] = alpha * delta_omega_eff
+            params["kappa_global"] = beta * delta_omega_eff
+            derived = {
+                "delta_omega_raw": delta_omega_raw,
+                "delta_omega_eff": delta_omega_eff,
+                "omega_floor": omega_floor,
+                "coupling_alpha": alpha,
+                "coupling_beta": beta,
+            }
         lock_quality = [b.get("lock_quality") or {} for b in assignment]
         sim_template = dict(template)
         if edge_weights is not None:
@@ -835,6 +915,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             param_bin_id=param_bin_id,
             engine_params=params,
             metrics=metrics,
+            derived=derived,
             tags=tags,
             reasons=reasons,
             edge_weights=edge_weights,
@@ -882,6 +963,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         template_names = target.get("templates", [])
         families = target.get("allowed_block_families", [])
         allowed_particle_names = target.get("allowed_particle_names")
+        allowed_species = target.get("allowed_species")
         budget_evals = int(target.get("budget_evals", 0))
         if budget_evals <= 0:
             continue
@@ -905,12 +987,15 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             if tmpl is None:
                 continue
             nodes = int(tmpl.get("nodes", 0))
-            assignment = _sample_blocks(blocks, families, allowed_particle_names, nodes, rng)
+            assignment = _sample_blocks(blocks, families, allowed_particle_names, allowed_species, nodes, rng)
             if len(assignment) != nodes:
                 reasons = ["not_enough_blocks"]
                 tags = {
                     "viable": False,
                     "memory_good": False,
+                    "memory_sign": "NA",
+                    "zombie": False,
+                    "labels": [],
                     "viability_mode": tagging.get("viability_mode", "hard_viable_soft_memory"),
                     "thresholds": {
                         "R_mean_lastW_min": r_min,
@@ -937,6 +1022,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                     param_bin_id="invalid",
                     engine_params=defaults,
                     metrics={},
+                    derived={},
                     tags=tags,
                     reasons=reasons,
                     edge_weights=None,
@@ -973,7 +1059,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                     structure_id = _hash_text(serial)
                     if seen_structures.get(structure_id, 0) < max_repeats_per_structure:
                         break
-                    assignment = _sample_blocks(blocks, families, allowed_particle_names, nodes, rng)
+                    assignment = _sample_blocks(blocks, families, allowed_particle_names, allowed_species, nodes, rng)
                     if len(assignment) != nodes:
                         break
                     tries += 1
@@ -1083,60 +1169,61 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         best_struct = max(structure_stats.values(), key=lambda s: _best_score(s.get("best_metrics") or {}))
     write_term_progress(best_struct)
 
-    species_catalog = _build_species_catalog(structure_stats, zombie_counts)
-    with species_catalog_path.open("w") as f:
-        for row in species_catalog:
-            f.write(json.dumps(row) + "\n")
-
-    if zombie_counts:
-        with zombie_species_path.open("w") as f:
-            f.write("species_id\tzombie_rate\n")
+    if views_enabled:
+        species_catalog = _build_species_catalog(structure_stats, zombie_counts)
+        with species_catalog_path.open("w") as f:
             for row in species_catalog:
-                z_rate = row.get("zombie_rate")
-                if z_rate is None:
-                    continue
-                f.write(f"{row.get('species_id')}\t{z_rate}\n")
+                f.write(json.dumps(row) + "\n")
 
-    with angel_species_path.open("w") as f:
-        for row in species_catalog:
-            best_metrics = row.get("best_metrics") or {}
-            memory_score = best_metrics.get("memory_score_k10")
-            if (
-                row.get("seed_stability") == 1.0
-                and row.get("n_viable") == row.get("n_trials")
-                and _is_finite(memory_score)
-                and float(memory_score) > 0.9
-            ):
-                f.write(f"{row.get('species_id')}\n")
+        if zombie_counts:
+            with zombie_species_path.open("w") as f:
+                f.write("species_id\tzombie_rate\n")
+                for row in species_catalog:
+                    z_rate = row.get("zombie_rate")
+                    if z_rate is None:
+                        continue
+                    f.write(f"{row.get('species_id')}\t{z_rate}\n")
 
-    requested_families_by_target: Dict[str, List[str]] = {}
-    for target in targets:
-        families = target.get("allowed_block_families") or []
-        requested_families_by_target[target.get("name", "unknown")] = sorted({str(f) for f in families})
-    present_families = sorted({str(b.get("family")) for b in blocks if b.get("family")})
+        with angel_species_path.open("w") as f:
+            for row in species_catalog:
+                best_metrics = row.get("best_metrics") or {}
+                memory_score = best_metrics.get("memory_score_k10")
+                if (
+                    row.get("seed_stability") == 1.0
+                    and row.get("n_viable") == row.get("n_trials")
+                    and _is_finite(memory_score)
+                    and float(memory_score) > 0.9
+                ):
+                    f.write(f"{row.get('species_id')}\n")
 
-    report_path.write_text(
-        _render_report(
-            structure_stats,
-            species_catalog,
-            per_template_counts,
-            per_template_viable,
-            per_target_counts,
-            per_target_viable,
-            taxonomy_viability_counts,
-            taxonomy_attractor_counts,
-            taxonomy_grade_counts,
-            taxonomy_reason_counts,
-            r_mean_vals,
-            phase_var_vals,
-            quality_lock_vals,
-            memory_score_vals,
-            requested_families_by_target,
-            present_families,
-            per_phase_counts,
-            per_phase_viable,
+        requested_families_by_target: Dict[str, List[str]] = {}
+        for target in targets:
+            families = target.get("allowed_block_families") or []
+            requested_families_by_target[target.get("name", "unknown")] = sorted({str(f) for f in families})
+        present_families = sorted({str(b.get("family")) for b in blocks if b.get("family")})
+
+        report_path.write_text(
+            _render_report(
+                structure_stats,
+                species_catalog,
+                per_template_counts,
+                per_template_viable,
+                per_target_counts,
+                per_target_viable,
+                taxonomy_viability_counts,
+                taxonomy_attractor_counts,
+                taxonomy_grade_counts,
+                taxonomy_reason_counts,
+                r_mean_vals,
+                phase_var_vals,
+                quality_lock_vals,
+                memory_score_vals,
+                requested_families_by_target,
+                present_families,
+                per_phase_counts,
+                per_phase_viable,
+            )
         )
-    )
 
 
 def _build_species_catalog(
