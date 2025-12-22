@@ -159,28 +159,40 @@ def simulate_ola2(
     phase_var_lastW = float("nan")
     edge_phase_diff_mean_lastW = float("nan")
     edge_phase_diff_std_lastW = float("nan")
+    node_omega_mean_lastW: List[float] = []
+    node_omega_std_lastW: List[float] = []
+    omega_eff = float("nan")
     skipped_edges = 0
-    if R_series.size >= window_W and edges:
+    if R_series.size >= window_W:
         thetas_window = np.stack(theta_history[-window_W:], axis=0)
-        delta_vars = []
-        delta_samples = []
-        for e in edges:
-            if len(e) < 2:
-                skipped_edges += 1
-                continue
-            i, j = int(e[0]), int(e[1])
-            if i < 0 or j < 0 or i >= N or j >= N:
-                skipped_edges += 1
-                continue
-            dtheta = _wrap_angle(thetas_window[:, i] - thetas_window[:, j])
-            delta_vars.append(np.var(dtheta))
-            delta_samples.append(np.abs(dtheta))
-        if delta_vars:
-            phase_var_lastW = float(np.mean(delta_vars))
-        if delta_samples:
-            stacked = np.concatenate(delta_samples, axis=0)
-            edge_phase_diff_mean_lastW = float(np.mean(stacked))
-            edge_phase_diff_std_lastW = float(np.std(stacked))
+        if edges:
+            delta_vars = []
+            delta_samples = []
+            for e in edges:
+                if len(e) < 2:
+                    skipped_edges += 1
+                    continue
+                i, j = int(e[0]), int(e[1])
+                if i < 0 or j < 0 or i >= N or j >= N:
+                    skipped_edges += 1
+                    continue
+                dtheta = _wrap_angle(thetas_window[:, i] - thetas_window[:, j])
+                delta_vars.append(np.var(dtheta))
+                delta_samples.append(np.abs(dtheta))
+            if delta_vars:
+                phase_var_lastW = float(np.mean(delta_vars))
+            if delta_samples:
+                stacked = np.concatenate(delta_samples, axis=0)
+                edge_phase_diff_mean_lastW = float(np.mean(stacked))
+                edge_phase_diff_std_lastW = float(np.std(stacked))
+        if thetas_window.shape[0] >= 2:
+            unwrapped = np.unwrap(thetas_window, axis=0)
+            omega_series = np.diff(unwrapped, axis=0) / dt
+            omega_mean = np.mean(omega_series, axis=0)
+            omega_std = np.std(omega_series, axis=0)
+            node_omega_mean_lastW = [float(v) for v in omega_mean]
+            node_omega_std_lastW = [float(v) for v in omega_std]
+            omega_eff = float(math.sqrt(np.mean(np.square(omega_mean))))
     if skipped_edges:
         print(f"[ola2_sim] skipped {skipped_edges} invalid edges (N={N})")
 
@@ -267,6 +279,10 @@ def simulate_ola2(
             "phase_var_lastW": phase_var_lastW,
             "edge_phase_diff_mean_lastW": edge_phase_diff_mean_lastW,
             "edge_phase_diff_std_lastW": edge_phase_diff_std_lastW,
+            "node_omega_mean_lastW": node_omega_mean_lastW,
+            "node_omega_std_lastW": node_omega_std_lastW,
+            "omega_eff": omega_eff,
+            "omega_eff_method": "rms",
             "PE_tick_norm": PE_tick_norm,
             "QualityLock": QualityLock,
             "entropy_quality": entropy_quality,

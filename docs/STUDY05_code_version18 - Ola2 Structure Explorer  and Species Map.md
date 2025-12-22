@@ -436,3 +436,102 @@ for attempt in range(budget):
 - Species identity defined by resonant geometry (LS) + memory.
 - A **real** “stability islands” map = MemoryScore vs LS(p/q) (not a proxy).
 - Ability to later scale to ħ_eff / gap / rydberg as post-sweep probes, without touching the base engine.
+
+
+## ADDENDUM ASI NOMAS... Masa emergente
+Agregar ω̄ por nodo (lastW)
+
+La simulación debe exponer por nodo la fase θ_i(t) (o directamente ω_i(t) si ya la tiene).
+
+Calcular unwrap de θ_i(t) (evita wrap a ±π).
+
+Calcular ω_i(t) = (θ_i(t) - θ_i(t-1)) / dt.
+
+En la ventana final lastW guardar:
+
+node_omega_mean_lastW[i] = mean(ω_i(t))
+
+node_omega_std_lastW[i] = std(ω_i(t))
+
+Definir ω_eff del cluster (método elegido: RMS)
+
+Con los promedios por nodo:
+
+𝜔
+eff
+=
+1
+𝑁
+∑
+𝑖
+(
+𝜔
+ˉ
+𝑖
+)
+2
+ω
+eff
+	​
+
+=
+N
+1
+	​
+
+i
+∑
+	​
+
+(
+ω
+ˉ
+i
+	​
+
+)
+2
+	​
+
+
+Guardar en el attempt:
+
+omega_eff
+
+omega_eff_method = "rms"
+
+No usar energías/PE para ω_eff (por ahora)
+
+ω_eff sale solo de dinámica de fase (Kuramoto + memoria).
+
+Energías/PE quedan como métricas auxiliares.
+
+Persistencia mínima en attempts.jsonl (sin traces gigantes)
+En cada record guardar:
+
+node_omega_mean_lastW (lista floats, largo N)
+
+node_omega_std_lastW (lista floats, largo N)
+
+omega_eff (float)
+
+omega_eff_method (string)
+
+Compatibilidad con Lock Signature (LS)
+
+LS(p/q) se calcula después con ratios por arista:
+r_ij = node_omega_mean_lastW[i] / node_omega_mean_lastW[j]
+
+Esto conecta directo con el resto del pipeline (species_id, mapa, etc.).
+
+Masa emergente (solo observador, opcional en esta etapa)
+
+Si se quiere preview: mass_emergent_gev = hbar_ola1 * omega_eff
+
+Guardarlo en labels_observer o emergents, nunca afecta proposal.
+
+Chequeo rápido anti-bug
+
+Verificar que omega_eff no sea ~0 por wraps (si pasa, faltó unwrap).
+
+Verificar que node_omega_std_lastW sea razonable (no NaN/inf) y que omega_eff sea estable para seeds cuando el lock es estable.

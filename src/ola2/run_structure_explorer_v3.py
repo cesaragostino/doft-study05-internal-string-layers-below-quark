@@ -395,6 +395,24 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     per_phase_viable: Dict[str, int] = {"phase1": 0, "phase2": 0}
 
     structure_stats: Dict[str, Dict[str, Any]] = {}
+    taxonomy_viability_counts: Dict[str, int] = {}
+    taxonomy_attractor_counts: Dict[str, int] = {}
+    taxonomy_grade_counts: Dict[str, int] = {}
+    taxonomy_reason_counts: Dict[str, int] = {}
+    r_mean_vals: List[float] = []
+    phase_var_vals: List[float] = []
+    quality_lock_vals: List[float] = []
+    memory_score_vals: List[float] = []
+
+    def update_taxonomy_counts(tags: Dict[str, Any], reasons: List[str]) -> None:
+        viability_state = "INVALID" if "invalid_candidate_missing_identity" in reasons else "BOUNDED"
+        attractor_class = "COHERENT_LOCKED" if tags.get("viable") else "DRIFT_BOUNDED"
+        grade = "A" if tags.get("viable") else "C"
+        taxonomy_viability_counts[viability_state] = taxonomy_viability_counts.get(viability_state, 0) + 1
+        taxonomy_attractor_counts[attractor_class] = taxonomy_attractor_counts.get(attractor_class, 0) + 1
+        taxonomy_grade_counts[grade] = taxonomy_grade_counts.get(grade, 0) + 1
+        for reason in reasons:
+            taxonomy_reason_counts[reason] = taxonomy_reason_counts.get(reason, 0) + 1
 
     def write_term_progress(best_struct: Optional[Dict[str, Any]]) -> None:
         nonlocal term_index, term_start, term_attempts_count, term_template_counts, term_viable
@@ -650,6 +668,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 template_edges=edges,
                 phase=phase,
             )
+            update_taxonomy_counts(tags, reasons)
             with attempts_path.open("a") as f:
                 f.write(json.dumps(record) + "\n")
             per_template_counts[template_name] = per_template_counts.get(template_name, 0) + 1
@@ -747,6 +766,15 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         elif not memory_good:
             reasons.append("memory_low")
 
+        if _is_finite(r_mean):
+            r_mean_vals.append(float(r_mean))
+        if _is_finite(pv_last):
+            phase_var_vals.append(float(pv_last))
+        if _is_finite(quality_lock):
+            quality_lock_vals.append(float(quality_lock))
+        if _is_finite(memory_score):
+            memory_score_vals.append(float(memory_score))
+
         tags = {
             "viable": viable,
             "memory_good": memory_good,
@@ -785,6 +813,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             template_edges=edges,
             phase=phase,
         )
+        update_taxonomy_counts(tags, reasons)
         with attempts_path.open("a") as f:
             f.write(json.dumps(record) + "\n")
 
@@ -1030,6 +1059,12 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         for row in species_catalog:
             f.write(json.dumps(row) + "\n")
 
+    requested_families_by_target: Dict[str, List[str]] = {}
+    for target in targets:
+        families = target.get("allowed_block_families") or []
+        requested_families_by_target[target.get("name", "unknown")] = sorted({str(f) for f in families})
+    present_families = sorted({str(b.get("family")) for b in blocks if b.get("family")})
+
     report_path.write_text(
         _render_report(
             structure_stats,
@@ -1038,6 +1073,18 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             per_template_viable,
             per_target_counts,
             per_target_viable,
+            taxonomy_viability_counts,
+            taxonomy_attractor_counts,
+            taxonomy_grade_counts,
+            taxonomy_reason_counts,
+            r_mean_vals,
+            phase_var_vals,
+            quality_lock_vals,
+            memory_score_vals,
+            requested_families_by_target,
+            present_families,
+            per_phase_counts,
+            per_phase_viable,
         )
     )
 
@@ -1073,15 +1120,50 @@ def _render_report(
     per_template_viable: Optional[Dict[str, int]] = None,
     per_target_counts: Optional[Dict[str, int]] = None,
     per_target_viable: Optional[Dict[str, int]] = None,
+    taxonomy_viability_counts: Optional[Dict[str, int]] = None,
+    taxonomy_attractor_counts: Optional[Dict[str, int]] = None,
+    taxonomy_grade_counts: Optional[Dict[str, int]] = None,
+    taxonomy_reason_counts: Optional[Dict[str, int]] = None,
+    r_mean_vals: Optional[List[float]] = None,
+    phase_var_vals: Optional[List[float]] = None,
+    quality_lock_vals: Optional[List[float]] = None,
+    memory_score_vals: Optional[List[float]] = None,
+    requested_families_by_target: Optional[Dict[str, List[str]]] = None,
+    present_families: Optional[List[str]] = None,
+    per_phase_counts: Optional[Dict[str, int]] = None,
+    per_phase_viable: Optional[Dict[str, int]] = None,
 ) -> str:
+    def _histogram(values: Optional[List[float]], bins: int = 10) -> List[Tuple[str, int]]:
+        if not values:
+            return []
+        vmin = min(values)
+        vmax = max(values)
+        if vmin == vmax:
+            return [(f"{vmin:.6g}-{vmax:.6g}", len(values))]
+        step = (vmax - vmin) / bins
+        counts = [0 for _ in range(bins)]
+        for v in values:
+            idx = int((v - vmin) / step)
+            if idx >= bins:
+                idx = bins - 1
+            counts[idx] += 1
+        labels = []
+        for i, c in enumerate(counts):
+            lo = vmin + step * i
+            hi = vmin + step * (i + 1)
+            labels.append((f"{lo:.6g}-{hi:.6g}", c))
+        return labels
+
     lines = ["# Ola2 Structure Explorer Report", ""]
     total_attempts = sum(per_template_counts.values()) if per_template_counts else 0
     total_viable = sum(per_template_viable.values()) if per_template_viable else 0
+    total_rejected = total_attempts - total_viable
     viable_rate = (total_viable / total_attempts) if total_attempts else 0.0
     unique_structures = len(structure_stats)
     lines.append("## Overview")
     lines.append(f"- total_attempts: {total_attempts}")
     lines.append(f"- total_viable: {total_viable}")
+    lines.append(f"- total_rejected: {total_rejected}")
     lines.append(f"- viable_rate: {viable_rate:.2%}")
     lines.append(f"- unique_structures: {unique_structures}")
     lines.append("")
@@ -1104,6 +1186,71 @@ def _render_report(
             v = per_target_viable.get(name, 0) if per_target_viable else 0
             rate = (v / cnt) if cnt else 0.0
             lines.append(f"| {name} | {cnt} | {v} | {rate:.2%} |")
+        lines.append("")
+
+    if per_phase_counts:
+        lines.append("## Phase Breakdown")
+        lines.append("| phase | attempts | viable | rate |")
+        lines.append("| --- | --- | --- | --- |")
+        for name, cnt in sorted(per_phase_counts.items(), key=lambda x: x[0]):
+            v = per_phase_viable.get(name, 0) if per_phase_viable else 0
+            rate = (v / cnt) if cnt else 0.0
+            lines.append(f"| {name} | {cnt} | {v} | {rate:.2%} |")
+        lines.append("")
+
+    if taxonomy_viability_counts or taxonomy_attractor_counts or taxonomy_grade_counts:
+        lines.append("## Taxonomy Counts")
+        if taxonomy_viability_counts:
+            lines.append("### Viability State")
+            for name, cnt in sorted(taxonomy_viability_counts.items(), key=lambda x: x[0]):
+                lines.append(f"- {name}: {cnt}")
+        if taxonomy_attractor_counts:
+            lines.append("### Attractor Class")
+            for name, cnt in sorted(taxonomy_attractor_counts.items(), key=lambda x: x[0]):
+                lines.append(f"- {name}: {cnt}")
+        if taxonomy_grade_counts:
+            lines.append("### Grade")
+            for name, cnt in sorted(taxonomy_grade_counts.items(), key=lambda x: x[0]):
+                lines.append(f"- {name}: {cnt}")
+        lines.append("")
+
+    if taxonomy_reason_counts:
+        lines.append("## Threshold Reasons")
+        for name, cnt in sorted(taxonomy_reason_counts.items(), key=lambda x: (-x[1], x[0])):
+            lines.append(f"- {name}: {cnt}")
+        lines.append("")
+
+    lines.append("## Metric Histograms")
+    for title, values in (
+        ("R_mean_lastW", r_mean_vals),
+        ("phase_var_lastW", phase_var_vals),
+        ("QualityLock", quality_lock_vals),
+        ("memory_score_k10", memory_score_vals),
+    ):
+        hist = _histogram(values)
+        lines.append(f"### {title}")
+        if not hist:
+            lines.append("- (no data)")
+        else:
+            for label, count in hist:
+                lines.append(f"- {label}: {count}")
+        lines.append("")
+
+    if requested_families_by_target is not None or present_families is not None:
+        lines.append("## Families Audit")
+        if requested_families_by_target:
+            lines.append("### Requested (by target)")
+            for target_name, families in sorted(requested_families_by_target.items(), key=lambda x: x[0]):
+                if families:
+                    lines.append(f"- {target_name}: {', '.join(families)}")
+                else:
+                    lines.append(f"- {target_name}: (any)")
+        if present_families is not None:
+            lines.append("### Present (blocks input)")
+            if present_families:
+                lines.append(f"- {', '.join(present_families)}")
+            else:
+                lines.append("- (none)")
         lines.append("")
 
     lines.append("## Species Catalog (Top 20 by seed_stability)")
