@@ -797,7 +797,7 @@
       "sm_mass_gev": 2.46771,
       "masses_gev": [2.468],
       "widths_gev": [0.0],
-      "tolerances": {"mass_abs": 0.035, "width_abs": 0.0, "spacing_rel": 0.15},
+      "tolerances": {"mass_abs": 0.02, "width_abs": 0.0, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
@@ -814,7 +814,7 @@
       "sm_mass_gev": 1.72,
       "masses_gev": [1.72],
       "widths_gev": [0.25],
-      "tolerances": {"mass_abs": 0.025, "width_abs": 0.1, "spacing_rel": 0.3},
+      "tolerances": {"mass_abs": 0.015, "width_abs": 0.1, "spacing_rel": 0.3},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "even",
@@ -1018,7 +1018,7 @@
       "sm_mass_gev": 2.64577,
       "masses_gev": [2.646],
       "widths_gev": [0.0024],
-      "tolerances": {"mass_abs": 0.02, "width_abs": 0.002, "spacing_rel": 0.15},
+      "tolerances": {"mass_abs": 0.005, "width_abs": 0.002, "spacing_rel": 0.15},
       "doft": {
         "postulate_lock_mode": {
           "preferred_parity": "odd",
