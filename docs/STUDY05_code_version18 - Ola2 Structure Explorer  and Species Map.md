@@ -1,8 +1,8 @@
-# DOFT – Wave2 Structure Explorer & Species Map  
-**SPEC v1.0 (functional closure + implementation guide)**  
+# DOFT – Ola2 Structure Explorer & Species Map  
+**SPEC v1.1 (functional closure + implementation guide)**  
 Date: 2025-12-21 (America/Argentina/Buenos_Aires)
 
-> **Objective:** generate and catalog *resonant species* in DOFT (structure + oscillators + memory), without guiding the search using the SM.  
+> **Goal:** Generate and catalog *resonant species* in DOFT (structure + oscillators + memory), without guiding the search with the Standard Model (SM).  
 > The SM appears only as an **observer** for later tagging.  
 > **Nothing is discarded:** everything is classified (taxonomy) and reported.
 
@@ -15,42 +15,42 @@ Date: 2025-12-21 (America/Argentina/Buenos_Aires)
 **A0. Nothing is discarded.**  
 Every attempt is persisted. “viable / nonviable / …” is a **tag** (taxonomy), not an ontological filter.
 
-**A1. The SM does not guide the search.**  
-Do not use `particle_name`, `d_total`, `allowed_particle_names`, or anything SM-related to propose structures/params.  
-The SM only lives in `labels_observer` (post).
+**A1. SM does not guide the search.**  
+`particle_name`, `d_total`, `allowed_particle_names`, or any SM data must **not** be used to propose structures/params.  
+SM only lives in `labels_observer` (post).
 
-**A2. Hard parameters = the only real things.**  
-Real in DOFT = **structure (graph + weights)** + **engine parameters** + **memory** + **dynamics**.  
+**A2. Hard parameters = the only “real” objects.**  
+What is real in DOFT = **structure (graph + weights)** + **engine parameters** + **memory** + **dynamics**.  
 “Mass”, “gap”, “levels”, etc. are **emergent**: observer readout functions over DOFT invariants.
 
 **A3. Wave1 is frozen.**  
-Wave1 sweep and post-processing are not modified in this version. Wave2 fixes the purism.
+Wave1 sweep and post-processing are not modified in this version. Wave2 fixes the “purism”.
 
 ---
 
 ### 1.2 What Wave1 vs Wave2 produce (to avoid confusion)
 
 - **Wave1** produces *blocks* (DOFs) and their descriptors (peaks, omega_ref, etc.).  
-  There is no structure (nodes/edges), therefore there is **no geometric Lock Signature** of a cluster in Wave1.
+  There is no structure (nodes/edges), therefore **no geometric Lock Signature** of a cluster exists in Wave1.
 
 - **Wave2** produces *clusters* (structure + collective dynamics).  
-  Here we do have:
+  Here the following do exist:
   - `memory_score_k10` of the cluster
-  - `Lock Signature LS(p/q)` as the resonant geometry of the cluster
+  - `Lock Signature LS(p/q)` as resonant geometry of the cluster
   - lock stability (width) measured via seeds/neighbors
 
-> Consequence: the **MemoryScore vs LS(p/q)** map is **Wave2-only**. Not touching Wave1 does not reduce quality; it avoids inventing an LS that does not exist there.
+> Consequence: the **MemoryScore vs LS(p/q)** map is **Wave2-only**. Not touching Wave1 does not reduce quality; it avoids inventing an LS that does not really exist there.
 
 ---
 
 ## 2) DOFT invariants and emergent observables
 
-### 2.1 DOFT invariants (minimum)
+### 2.1 DOFT invariants (minimum set)
 
 - **Structure**: template + graph + edge_weights + block assignment per node.
 - **Hard parameters**: `engine_params` (couplings, dt, W, ticks, taus/memory, noise, etc.).
 - **Dynamics**: phases/velocities (or whatever the engine uses internally).
-- **Internal observables** (already existing in your engine):  
+- **Internal observables** (already present in your engine):  
   `R_final`, `R_mean_lastW`, `phase_var_lastW`, `edge_phase_diff_mean_lastW`, `edge_phase_diff_std_lastW`,  
   `QualityLock`, `entropy_quality`, `memory_score_k10`, energies (if applicable).
 
@@ -75,7 +75,7 @@ This allows you to:
 
 ### 3.1 Inputs
 
-- `ola1_blocks.json` (block pool)
+- `ola1_blocks.json` (pool of blocks)
 - `compound_templates.json` (structure templates)
 - `structure_explorer_config.json` (exploration config)
 - (optional) `origin_tags` for human traceability (does not affect proposal)
@@ -102,22 +102,72 @@ This allows you to:
 - samples edge_weights if applicable
 - produces canonical `structure_id`
 
-**Forbidden:** using SM (`d_total`, names, etc.) in proposal.
+**Forbidden:** using SM (`d_total`, names, etc.) in the proposal.
 
-#### 3.3.2 Parameter proposer (`engine_params`)
-- samples parameters according to ranges + sweep strategy (phase1/phase2 if you want)
-- produces `engine_params`
+#### 3.3.2 Parameter proposer (engine_params)
+
+##### 3.3.2.X Adaptive coupling (MarcoPolo): dimensionless α/β
+**Motivation:** locking depends primarily on the frequency dispersion between nodes (Δω), more than on the absolute scale. To avoid per-wave *manual tuning*, coupling is parameterized in a **relative/dimensionless** way.
+
+**Definitions per attempt (structure already instantiated):**
+- `omega0_i`: base frequency per node (Wave3: `omega0_i = omega_eff` of the super-block).
+- `delta_omega_raw = std_i(omega0_i)`  (**store this as-is** in the record)
+- `delta_omega_eff = max(delta_omega_raw, omega_floor)`  (only for mapping α→K and to avoid division by zero)
+
+**Dimensionless parameters:**
+- `coupling_alpha = K_local / delta_omega_eff`
+- `coupling_beta  = kappa_global / delta_omega_eff`
+
+**Sampling (key):**
+- `alpha ~ log_uniform(alpha_min, alpha_max)` with `alpha_range = [0.2, 20.0]`
+- `beta  ~ log_uniform(beta_min,  beta_max)` with `beta_range  = [0.05, 5.0]`
+- `K_local      = alpha * delta_omega_eff`
+- `kappa_global = beta  * delta_omega_eff`
+
+**Recommended persistence (clean contract):**
+- `engine_params`: executed values (`K_local`, `kappa_global`, etc.)
+- `derived`: `delta_omega_raw`, `delta_omega_eff`, `omega_floor`, `coupling_alpha`, `coupling_beta`
+- `taxonomy`: tags/classes only (keep it clean)
+
+**Note on eps/floor:**
+- Default: `omega_floor = 1e-12` (equivalent to eps).
+- If `omega_floor` is increased for numerical reasons, it must **not** replace `delta_omega_raw`; it only affects `delta_omega_eff`.
 
 ---
 
 ### 3.4 Simulation and metrics
+
+#### 3.4.X ω_eff (effective frequency) – pure DOFT
+**Goal:** enable emergent observables (e.g., mass via ħ) and reinforce LS(p/q) construction from **phase dynamics**, without using energies as the primary source.
+
+**Source (engine):** per-node phase θ_i(t). Compute via *unwrap* and discrete derivative:
+- ω_i(t) = (unwrap(θ_i(t)) − unwrap(θ_i(t−1))) / dt
+
+**Summary in the last window `lastW`:**
+- `node_omega_mean_lastW[i] = mean_{t∈lastW}(ω_i(t))`
+- `node_omega_std_lastW[i]  = std_{t∈lastW}(ω_i(t))`
+
+**Chosen definition (precise / tied to DOF):**
+- `omega_eff = sqrt( mean_i( node_omega_mean_lastW[i]^2 ) )`  (RMS)
+- `omega_eff_method = "rms"`
+
+**Minimum per-attempt persistence:**
+- `node_omega_mean_lastW` (list[float], length N)
+- `node_omega_std_lastW`  (list[float], length N)
+- `omega_eff` (float)
+- `omega_eff_method` (string)
+
+**Notes:**
+- `node_omega_mean_lastW` can be negative; `omega_eff` (RMS) guarantees `omega_eff ≥ 0`.
+- For Wave3 (species-as-blocks), the super-block’s `omega0` is taken as the species’ `omega_eff`.
+
 `simulate_ola2(structure, engine_params, seed) -> metrics + (optional traces)`
 
-**Minimum required metrics** (already exist or equivalents):
+**Minimum required metrics** (already exist or have equivalents):
 - coherence: `R_final`, `R_mean_lastW`, `phase_var_lastW`
-- lock/proxy: `edge_phase_diff_mean_lastW`, `edge_phase_diff_std_lastW`, `QualityLock`, `entropy_quality`
+- lock/proxies: `edge_phase_diff_mean_lastW`, `edge_phase_diff_std_lastW`, `QualityLock`, `entropy_quality`
 - memory: `memory_score_k10`
-- energy: (if present) `PE_tick_norm`, `E_local_*`
+- energy: (if available) `PE_tick_norm`, `E_local_*`
 
 ---
 
@@ -134,7 +184,7 @@ This allows you to:
 - r_ij = ω̄_i / ω̄_j
 - rationalization: p/q with q<=max_den and relative error < epsilon_rel
 
-**Per edge store:**
+**Per edge, store:**
 - `ratio_raw`
 - `ratio_pq` (string "p/q" or null if it does not quantize)
 - `residual_rel`
@@ -149,21 +199,24 @@ Then:
 - sort edges by (min(u), max(v))
 - `LS_hash = sha256( canonical_edge_list_of_ratio_pq + primes + residual_bucket )`
 
-> It is recommended to “bucket” the residual (e.g. 1e-4, 1e-3, 1e-2) to avoid numerical noise creating distinct species unintentionally.
+> It is recommended to “bucket” the residual (e.g., 1e-4, 1e-3, 1e-2) to avoid numerical noise creating unintended distinct species.
 
 ---
 
 ### 3.6 Taxonomy (classification without filtering)
 
-Each attempt receives:
-- `viability_state`: `INVALID` | `DIVERGENT` | `BOUNDED`
-- `attractor_class` (minimum):
-  - `COHERENT_LOCKED`
-  - `COHERENT_QUASI`
-  - `DRIFT_BOUNDED`
-  - optional: `CHAOTIC_BOUNDED` (if you add a temporal metric)
+#### 3.6.X Sanity tag: ZOMBIE (negative memory)
 
-**Rule:** never delete; only tag.
+**Simple rule (v1):**
+- If `memory_score_k10 < 0` ⇒ add tag `ZOMBIE`.
+
+**Axiom:** `ZOMBIE` neither deletes nor alters the existence of the attempt; it only tags it. It must not, by itself, change `viable_state` or `export_class`.
+
+**Optional artifacts (human navigation, without bloating Mongo):**
+- `zombies.tsv` (TSV): `attempt_id	species_id	memory_score_k10`
+- `zombie_species.tsv` (TSV): `species_id	zombie_rate` where `zombie_rate = zombie_count / n_trials`
+
+**Recommended use:** find “the bad within the good” and detect *tainted* species (with `zombie_rate > 0`) without filtering anything out.
 
 ---
 
@@ -171,7 +224,7 @@ Each attempt receives:
 
 **Configurable in the explorer config** (important):
 
-- `N_seed` (for seed-based stability, recommended 15–20; safe default 12)
+- `N_seed` (for per-seed stability, recommended 15–20; safe default 12)
 - `N_seed_probe` (for neighborhood probes, recommended 10–15; safe default 5)
 - `param_neighbor_rel = 0.05` (±5% by default)
 - `params_sensitive = [...]` (list of parameters to “move”)
@@ -185,7 +238,7 @@ For nominal (structure, engine_params):
 #### 3.7.2 LS_stability_param
 Neighborhood: for each sensitive parameter p:
 - test p*(1-δ), p, p*(1+δ) with δ = `param_neighbor_rel`
-- total points: `N_param = 1 + 2*len(params_sensitive)` (no cross combinations)
+- total points: `N_param = 1 + 2*len(params_sensitive)` (no cross-combinatorics)
 
 At each point:
 - run `N_seed_probe` seeds
@@ -201,7 +254,7 @@ Then:
 ### 3.8 Species catalog (DNA / DOFT mitosis)
 
 #### 3.8.1 memory_bin (explicit bins)
-Because `memory_score_k10` can be negative, default bins:
+Since `memory_score_k10` can be negative, default bins:
 
 `[-inf, -0.5, 0.0, 0.5, 0.8, 0.9, 0.95, 0.98, +inf]`
 
@@ -214,7 +267,7 @@ Store:
 
 > Interpretation: “same species” = same resonant geometry + same memory context (binned).
 
-#### 3.8.3 DOFT Grade (explicit)
+#### 3.8.3 DOFT grade (explicit)
 - **Grade A**:
   - `attractor_class == COHERENT_LOCKED`
   - `R_mean_lastW >= 0.95`
@@ -235,20 +288,20 @@ Store:
 
 ### 3.9 Report and Species Map
 
-#### 3.9.1 Minimum report (`report.md`)
-1) Overview + provenance (hashes, code_version, run_id)  
-2) **Top species** table (by grade and frequency)  
-3) **Top structures** table (for debugging)  
+#### 3.9.1 Minimal report (report.md)
+1) Overview + provenance (hashes, code_version, run_id)
+2) Table of **top species** (by grade and frequency)
+3) Table of **top structures** (for debugging)
 4) **MemoryScore vs LS(p/q) map**
 
 #### 3.9.2 2D map (final definition)
-- Y axis: `memory_bin_label`
-- X axis:
+- Y-axis: `memory_bin_label`
+- X-axis:
   - **Dimers:** `p/q` (single edge) or "irr"
   - **Triangles+**: `LS_class` = top-K `LS_hash` by frequency + "other"
 
 Values:
-- recommended: **species count** per cell (real islands)
+- recommended: **species count** per cell (real “islands”)
 - alternative: attempt count
 
 It is recommended to add extra columns in tables:
@@ -257,17 +310,26 @@ It is recommended to add extra columns in tables:
 ---
 
 ### 3.10 DOFT gap (probe mode, post-sweep)
-Not run during massive exploration.
 
-For a candidate species (A/B):
-- fix base structure+params
-- sweep σ (noise) or K (coupling) on a log grid
-- at each point: run `N_seed_gap` (e.g. 12) and measure `LS_stability_seed`
-- define:
-  - σ_crit: first σ where `LS_stability_seed < 0.5`
-  - K_crit: analogous
+> *(Unchanged from previous spec; defined as a probe over noise/coupling where LS_stability_seed drops below a critical value. Implementation details remain as in v1.0.)*
 
-This is later used in Wave3/Wave4 (superconductivity) as the “DOFT gap”.
+### 3.11 Layered iteration (“onion”): species_as_blocks (Ola2 → Ola3/4)
+**Idea:** a stable species (wide lock, high `seed_stability`) can be coarse-grained as a *super-oscillator* for the next level. You keep **a single explorer**; only the engine and templates change per wave.
+
+**Minimum super-block contract (derived from `species_catalog.jsonl`):**
+- `omega0 = best_metrics.omega_eff` (RMS)
+- `omega_jitter = mean(best_metrics.node_omega_std_lastW)`
+- `memory0 = best_metrics.memory_score_k10`
+- `order0 = best_metrics.entropy_quality` (canonical)  
+  (or `QualityLock`, but choose one and derive the other)
+
+**Input mode (config):**
+- `inputs.blocks_mode: "species_as_blocks"`
+- `targets[].allowed_species: [...]` as a DOFT-ID restriction (not SM) for controlled / synthesis experiments.
+
+**Risk to avoid:** double-counting memory. Explicitly define how `memory_local` (of the super-block) combines with `memory_global` (of the engine) in each wave.
+
+**Practical goal:** use Ola2 to generate a catalog of “stable blocks” and then reuse the same pipeline (explorer + event sourcing + map) for Ola3/Ola4, changing only configuration and the engine backend.
 
 ---
 
@@ -278,12 +340,26 @@ This is later used in Wave3/Wave4 (superconductivity) as the “DOFT gap”.
 - `run_structure_explorer.py` (main)
 - `propose_structure.py`
 - `propose_params.py`
-- `simulate_wrapper.py` (calls your `simulate_ola2` and adds LS)
+- `simulate_wrapper.py` (calls your simulate_ola2 and adds LS)
 - `taxonomy.py`
 - `species_catalog.py`
 - `report_builder.py`
 
-### 4.2 `attempts.jsonl` schema (minimum)
+### 4.2 attempts.jsonl schema (minimum)
+
+
+**Additional recommended fields (v1.1):**
+- `best_metrics.node_omega_mean_lastW`: list[float]
+- `best_metrics.node_omega_std_lastW`:  list[float]
+- `best_metrics.omega_eff`: float
+- `best_metrics.omega_eff_method`: "rms"
+- `derived.delta_omega_raw`: float (if adaptive coupling is active)
+- `derived.delta_omega_eff`: float
+- `derived.omega_floor`: float
+- `derived.coupling_alpha`: float
+- `derived.coupling_beta`: float
+- `tags`: may include `ZOMBIE`.
+
 
 ```json
 {
@@ -362,6 +438,13 @@ This is later used in Wave3/Wave4 (superconductivity) as the “DOFT gap”.
 
 ### 4.3 Explorer config (includes N_seed/N_seed_probe)
 
+
+**New knobs (v1.1):**
+- `coupling_mode.mode = "adaptive_alpha"` with ranges `alpha_range`, `beta_range`, `omega_floor`.
+- `inputs.blocks_mode = "species_as_blocks"` + `allowed_species`.
+- `tagging.ZOMBIE_rule`: `memory_score_k10 < 0`.
+
+
 ```json
 {
   "schema_version": "structure_explorer_config_v1",
@@ -392,7 +475,7 @@ This is later used in Wave3/Wave4 (superconductivity) as the “DOFT gap”.
 }
 ```
 
-> **Note:** N_seed and N_seed_probe are adjusted via config (15–20 / 10–15) without changing code.
+> **Note:** N_seed and N_seed_probe are tuned via config to experiment with (15–20 / 10–15) without touching code.
 
 ---
 
@@ -418,120 +501,21 @@ for attempt in range(budget):
 
 ---
 
-### 4.5 Performance / cost (practical)
+### 4.5 Performance / cost (practical notes)
 - `N_seed` and `N_seed_probe` are the main multipliers.
 - Operational recommendation:
   - start with `N_seed=12`, `N_seed_probe=5`
-  - if it’s stable, raise to `15/10`, then `20/15`
-- Stability can be run only on:
+  - if it behaves well, bump to `15/10`, then `20/15`
+- Stability can be computed only for:
   - attempts with `COHERENT_LOCKED`
   - or in phase2 (as you already do)
 
 ---
 
-## 5) Closing: what this SPEC guarantees
+## 5) Closure: what this SPEC guarantees
 
 - DOFT purity in the search (SM does not contaminate it).
 - Full auditability (event sourcing).
 - Species identity defined by resonant geometry (LS) + memory.
-- A **real** “stability islands” map = MemoryScore vs LS(p/q) (not a proxy).
-- Ability to later scale to ħ_eff / gap / rydberg as post-sweep probes, without touching the base engine.
-
-
-## ADDENDUM ASI NOMAS... Masa emergente
-Agregar ω̄ por nodo (lastW)
-
-La simulación debe exponer por nodo la fase θ_i(t) (o directamente ω_i(t) si ya la tiene).
-
-Calcular unwrap de θ_i(t) (evita wrap a ±π).
-
-Calcular ω_i(t) = (θ_i(t) - θ_i(t-1)) / dt.
-
-En la ventana final lastW guardar:
-
-node_omega_mean_lastW[i] = mean(ω_i(t))
-
-node_omega_std_lastW[i] = std(ω_i(t))
-
-Definir ω_eff del cluster (método elegido: RMS)
-
-Con los promedios por nodo:
-
-𝜔
-eff
-=
-1
-𝑁
-∑
-𝑖
-(
-𝜔
-ˉ
-𝑖
-)
-2
-ω
-eff
-	​
-
-=
-N
-1
-	​
-
-i
-∑
-	​
-
-(
-ω
-ˉ
-i
-	​
-
-)
-2
-	​
-
-
-Guardar en el attempt:
-
-omega_eff
-
-omega_eff_method = "rms"
-
-No usar energías/PE para ω_eff (por ahora)
-
-ω_eff sale solo de dinámica de fase (Kuramoto + memoria).
-
-Energías/PE quedan como métricas auxiliares.
-
-Persistencia mínima en attempts.jsonl (sin traces gigantes)
-En cada record guardar:
-
-node_omega_mean_lastW (lista floats, largo N)
-
-node_omega_std_lastW (lista floats, largo N)
-
-omega_eff (float)
-
-omega_eff_method (string)
-
-Compatibilidad con Lock Signature (LS)
-
-LS(p/q) se calcula después con ratios por arista:
-r_ij = node_omega_mean_lastW[i] / node_omega_mean_lastW[j]
-
-Esto conecta directo con el resto del pipeline (species_id, mapa, etc.).
-
-Masa emergente (solo observador, opcional en esta etapa)
-
-Si se quiere preview: mass_emergent_gev = hbar_ola1 * omega_eff
-
-Guardarlo en labels_observer o emergents, nunca afecta proposal.
-
-Chequeo rápido anti-bug
-
-Verificar que omega_eff no sea ~0 por wraps (si pasa, faltó unwrap).
-
-Verificar que node_omega_std_lastW sea razonable (no NaN/inf) y que omega_eff sea estable para seeds cuando el lock es estable.
+- A **real** “islands of stability” map = MemoryScore vs LS(p/q) (not a proxy).
+- Ability to later scale to ħ_eff / gap / Rydberg as post-sweep probes, without touching the base engine.
