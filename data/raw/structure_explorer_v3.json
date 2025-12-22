@@ -14,12 +14,12 @@
         "meson_dimer",
         "baryon_triangle",
         "alpha_tetrahedron",
-        "atomic_nucleus_heavy"
+        "atomic_nucleus_heavy",
+        "diatomic_heavy_12"
       ],
       "allowed_block_families": [],
-      "allowed_particle_names": null,
-      "allowed_species": null,
-      "budget_evals": 500000
+      "budget_evals": 500000,
+      "notes": "Búsqueda agnóstica: todos los templates disponibles, incluyendo compuesto mínimo 2 átomos."
     }
   ],
   "engine_defaults": {

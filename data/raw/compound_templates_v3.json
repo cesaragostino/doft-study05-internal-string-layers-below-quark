@@ -37,5 +37,22 @@
       [0, 3], [1, 4], [2, 5]
     ],
     "notes": "Estructura de 6 nodos (Prisma Triangular) para búsqueda de núcleos pesados."
+  },
+  {
+    "name": "diatomic_heavy_12",
+    "type": "compound_2atom",
+    "nodes": 12,
+    "edges": [
+      [0, 1], [1, 2], [2, 0],
+      [3, 4], [4, 5], [5, 3],
+      [0, 3], [1, 4], [2, 5],
+
+      [6, 7], [7, 8], [8, 6],
+      [9, 10], [10, 11], [11, 9],
+      [6, 9], [7, 10], [8, 11],
+
+      [2, 8]
+    ],
+    "notes": "Compuesto mínimo: dos atomic_nucleus_heavy (0-5 y 6-11) con un enlace 2-8."
   }
 ]
