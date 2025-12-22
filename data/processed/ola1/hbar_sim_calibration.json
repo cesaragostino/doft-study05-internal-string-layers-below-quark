@@ -1,15 +1,15 @@
 {
-  "hbar_sim": 0.319860961894239,
+  "hbar_sim": 0.31971744874336383,
   "units": "GeV per rad/time_unit",
-  "n_used": 74,
+  "n_used": 76,
   "n_rejected": 49,
-  "omega0": 6.034946041375378,
+  "omega0": 6.035001011082724,
   "cluster_tol_rel": 0.1,
   "fallback_reason": null,
   "h_i_percentiles": {
-    "p10": 0.30844425147157173,
-    "p50": 0.3198677476578047,
-    "p90": 0.33165726959371256
+    "p10": 0.3084663420818008,
+    "p50": 0.3197892053188014,
+    "p90": 0.3314327254330879
   },
   "mode": "auto",
   "seed_particle": null,
