@@ -392,7 +392,7 @@ def _best_score(metrics: Dict[str, Any]) -> float:
     return float(r) - 3.0 * float(pv) + 0.2 * mem_val
 
 
-def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[int]) -> None:
+def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[int], resume: bool = False) -> None:
     started_utc = _utc_now()
     started_ts = time.time()
     cfg = _load_json(config_path)
@@ -519,6 +519,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     angel_species_path = output_dir / "angel_species_ids.txt"
     zombie_species_path = output_dir / "zombie_species.tsv"
     views_enabled = bool(outputs.get("views_enabled", True))
+    stop_file = Path(cfg.get("stop_file", "")) if cfg.get("stop_file") else None
 
     progress_cfg = cfg.get("progress", {})
     term_attempts = int(progress_cfg.get("term_attempts", 500))
@@ -570,6 +571,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     ls_hash_counts: Dict[str, int] = {}
     ls_max_den = int(cfg.get("ls_view", {}).get("max_den", 31))
     ls_epsilon_rel = float(cfg.get("ls_view", {}).get("epsilon_rel", 1e-3))
+    stop_requested = False
 
     def update_taxonomy_counts(tags: Dict[str, Any], reasons: List[str]) -> None:
         viability_state = "INVALID" if "invalid_candidate_missing_identity" in reasons else "BOUNDED"
@@ -582,6 +584,16 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             taxonomy_reason_counts[reason] = taxonomy_reason_counts.get(reason, 0) + 1
         for label in tags.get("labels") or []:
             tag_label_counts[label] = tag_label_counts.get(label, 0) + 1
+
+    def _should_stop() -> bool:
+        nonlocal stop_requested
+        if stop_requested:
+            return True
+        if stop_file and stop_file.exists():
+            stop_requested = True
+            print(f"[explorer_v3] stop_file detected: {stop_file}")
+            return True
+        return False
 
     def write_term_progress(best_struct: Optional[Dict[str, Any]]) -> None:
         nonlocal term_index, term_start, term_attempts_count, term_template_counts, term_viable
@@ -682,6 +694,112 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             zombie_attempts_header_written = True
         with zombie_attempts_path.open("a") as f:
             f.write(f"{attempt_id}\t{structure_id}\t{memory_score}\n")
+
+    def _ingest_attempt(attempt: Dict[str, Any]) -> None:
+        nonlocal attempt_id, run_id, total_attempts, total_viable
+        target_info = attempt.get("target") or {}
+        structure = attempt.get("structure") or {}
+        metrics = attempt.get("metrics") or {}
+        tags = attempt.get("tags") or {}
+        reasons = attempt.get("reasons") or []
+        template_name = structure.get("template_name") or "unknown"
+        target_name = target_info.get("name") or "unknown"
+        phase = target_info.get("phase") or "phase1"
+        structure_id = structure.get("structure_id") or f"unknown_{attempt_id}"
+        assignment_block_ids = (structure.get("assignment") or {}).get("block_ids") or []
+        assignment_keys = assignment_block_ids or (structure.get("assignment") or {}).get("block_keys") or []
+        edge_weights = structure.get("edge_weight_pattern")
+        block_key_used = structure.get("block_key_used") or "block_id"
+        block_key_used_per_node = structure.get("block_key_used_per_node") or []
+        engine_params = attempt.get("engine_params") or defaults
+        param_bin_id = attempt.get("parameter_bin_id") or "unknown"
+        viable = bool(tags.get("viable"))
+        zombie = bool(tags.get("zombie"))
+
+        update_taxonomy_counts(tags, reasons)
+        update_structure_stats(
+            structure_id,
+            template_name,
+            target_name,
+            assignment_keys,
+            edge_weights,
+            metrics,
+            engine_params,
+            param_bin_id,
+            viable,
+            block_key_used,
+            block_key_used_per_node,
+            [],
+            zombie,
+        )
+        unique_structures.add(structure_id)
+        per_template_counts[template_name] = per_template_counts.get(template_name, 0) + 1
+        per_target_counts[target_name] = per_target_counts.get(target_name, 0) + 1
+        per_phase_counts[phase] = per_phase_counts.get(phase, 0) + 1
+        if viable:
+            total_viable += 1
+            per_template_viable[template_name] = per_template_viable.get(template_name, 0) + 1
+            per_target_viable[target_name] = per_target_viable.get(target_name, 0) + 1
+            per_phase_viable[phase] = per_phase_viable.get(phase, 0) + 1
+        total_attempts += 1
+
+        r_mean = metrics.get("R_mean_lastW")
+        pv_last = metrics.get("phase_var_lastW")
+        quality_lock = metrics.get("QualityLock")
+        entropy_quality = metrics.get("entropy_quality")
+        memory_score = metrics.get("memory_score_k10")
+        omega_eff_val = metrics.get("omega_eff")
+        if _is_finite(r_mean):
+            r_mean_vals.append(float(r_mean))
+        if _is_finite(pv_last):
+            phase_var_vals.append(float(pv_last))
+        if _is_finite(quality_lock):
+            quality_lock_vals.append(float(quality_lock))
+        if _is_finite(entropy_quality):
+            entropy_quality_vals.append(float(entropy_quality))
+        if _is_finite(memory_score):
+            memory_score_vals.append(float(memory_score))
+        if _is_finite(omega_eff_val):
+            omega_eff_vals.append(float(omega_eff_val))
+        node_omega_mean = metrics.get("node_omega_mean_lastW")
+        if isinstance(node_omega_mean, list):
+            ls_hash = _ls_hash(node_omega_mean, structure.get("edges") or [], ls_max_den, ls_epsilon_rel)
+            if ls_hash:
+                nonlocal_ls["count"] += 1
+                ls_hash_counts[ls_hash] = ls_hash_counts.get(ls_hash, 0) + 1
+        phase_unique_structures.setdefault(phase, set()).add(structure_id)
+
+    nonlocal_ls = {"count": 0}
+    resume_active = resume and attempts_path.exists()
+    per_target_attempt_index: Dict[str, int] = {}
+    if resume_active:
+        existing_run_ids = set()
+        last_attempt_id = -1
+        with attempts_path.open() as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                attempt = json.loads(line)
+                rid = attempt.get("run_id")
+                if rid:
+                    existing_run_ids.add(rid)
+                attempt_id_val = attempt.get("attempt_id")
+                if isinstance(attempt_id_val, int):
+                    last_attempt_id = max(last_attempt_id, attempt_id_val)
+                tinfo = attempt.get("target") or {}
+                tname = tinfo.get("name")
+                t_idx = tinfo.get("attempt_index")
+                if tname is not None and isinstance(t_idx, int):
+                    per_target_attempt_index[tname] = max(per_target_attempt_index.get(tname, -1), t_idx)
+                _ingest_attempt(attempt)
+        if existing_run_ids:
+            if len(existing_run_ids) > 1:
+                print(f"[explorer_v3] resume warning: multiple run_id detected: {sorted(existing_run_ids)}")
+            run_id = sorted(existing_run_ids)[-1]
+        attempt_id = last_attempt_id + 1
+        ls_attempts_with_ls = nonlocal_ls["count"]
+        zombie_attempts_header_written = zombie_attempts_path.exists()
 
     def build_record(
         target_name: str,
@@ -1128,13 +1246,22 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         phase1_budget = int(budget_evals * phase1_fraction)
         phase2_budget = budget_evals - phase1_budget
 
-        target_attempt_index = 0
+        if resume_active:
+            target_attempt_index = per_target_attempt_index.get(target_name, -1) + 1
+        else:
+            target_attempt_index = 0
         template_cycle = list(template_names)
         template_cursor = 0
         seen_structures: Dict[str, int] = {}
+        if resume_active:
+            for sid, stats in structure_stats.items():
+                if stats.get("target") == target_name:
+                    seen_structures[sid] = int(stats.get("n_trials", 0))
 
         # Phase 1
         for _ in range(phase1_budget):
+            if _should_stop():
+                break
             if template_balance == "round_robin" and template_cycle:
                 tmpl_name = template_cycle[template_cursor % len(template_cycle)]
                 template_cursor += 1
@@ -1244,6 +1371,8 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 best_struct = max(structure_stats.values(), key=lambda s: _best_score(s.get("best_metrics") or {}))
             if term_attempts_count >= term_attempts or (time.time() - term_start) >= term_seconds:
                 write_term_progress(best_struct)
+        if stop_requested:
+            break
 
         # Phase 2 - refine promising structures
         if phase2_budget > 0:
@@ -1268,6 +1397,8 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
 
             phase2_attempts = 0
             for stats in promising:
+                if _should_stop():
+                    break
                 if phase2_attempts >= phase2_budget:
                     break
                 blocks_used = []
@@ -1299,6 +1430,8 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                 if neighbor_bins_count > 0 and base_bins:
                     neighbor_bins = {k: neighbor_bins_count for k in base_bins}
                 for _ in range(seed_repeats):
+                    if _should_stop():
+                        break
                     if phase2_attempts >= phase2_budget:
                         break
                     evaluate_candidate(
@@ -1319,6 +1452,8 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                         best_struct = max(structure_stats.values(), key=lambda s: _best_score(s.get("best_metrics") or {}))
                     if term_attempts_count >= term_attempts or (time.time() - term_start) >= term_seconds:
                         write_term_progress(best_struct)
+            if stop_requested:
+                break
 
     # Final term flush
     best_struct = None

@@ -4,93 +4,494 @@
     "type": "elementary",
     "nodes": 1,
     "edges": [],
-    "notes": "1 nodo."
+    "notes": "1 nodo aislado."
   },
   {
     "name": "dimer",
     "type": "molecule",
     "nodes": 2,
     "edges": [[0, 1]],
-    "notes": "2 nodos (cadena)."
+    "notes": "2 nodos conectados."
   },
   {
     "name": "trimer_chain",
     "type": "molecule",
     "nodes": 3,
     "edges": [[0, 1], [1, 2]],
-    "notes": "3 nodos (cadena)."
+    "notes": "3 nodos en cadena lineal."
   },
   {
     "name": "trimer_triangle",
     "type": "molecule",
     "nodes": 3,
     "edges": [[0, 1], [1, 2], [2, 0]],
-    "notes": "3 nodos (anillo/triángulo)."
+    "notes": "3 nodos en ciclo cerrado (K3)."
   },
   {
     "name": "tetramer_chain",
     "type": "molecule",
     "nodes": 4,
     "edges": [[0, 1], [1, 2], [2, 3]],
-    "notes": "4 nodos (cadena)."
+    "notes": "4 nodos en cadena lineal."
   },
   {
     "name": "square_ring",
     "type": "molecule",
     "nodes": 4,
     "edges": [[0, 1], [1, 2], [2, 3], [3, 0]],
-    "notes": "4 nodos (anillo/cuadrado)."
+    "notes": "4 nodos en ciclo cerrado (C4)."
   },
   {
-    "name": "alpha_tetrahedron",
+    "name": "tetrahedron_k4",
     "type": "nucleus",
     "nodes": 4,
     "edges": [
       [0, 1], [0, 2], [0, 3],
       [1, 2], [1, 3], [2, 3]
     ],
-    "notes": "K4 (tetraedro completo)."
+    "notes": "Grafo completo K4 (tetraedro)."
+  },
+  {
+    "name": "star_4",
+    "type": "molecule",
+    "nodes": 4,
+    "edges": [[0, 1], [0, 2], [0, 3]],
+    "notes": "Hub central con 3 hojas (estrella S3)."
   },
   {
     "name": "pentagon_ring",
     "type": "molecule",
     "nodes": 5,
     "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0]],
-    "notes": "5 nodos (anillo)."
+    "notes": "5 nodos en ciclo cerrado (C5)."
+  },
+  {
+    "name": "pentamer_chain",
+    "type": "molecule",
+    "nodes": 5,
+    "edges": [[0, 1], [1, 2], [2, 3], [3, 4]],
+    "notes": "5 nodos en cadena lineal."
+  },
+  {
+    "name": "star_5",
+    "type": "molecule",
+    "nodes": 5,
+    "edges": [[0, 1], [0, 2], [0, 3], [0, 4]],
+    "notes": "Hub central con 4 hojas (estrella S4)."
+  },
+  {
+    "name": "bowtie",
+    "type": "molecule",
+    "nodes": 5,
+    "edges": [[0, 1], [1, 2], [2, 0], [2, 3], [3, 4], [4, 2]],
+    "notes": "Dos triángulos compartiendo un vértice."
+  },
+  {
+    "name": "hexagon_ring",
+    "type": "molecule",
+    "nodes": 6,
+    "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0]],
+    "notes": "6 nodos en ciclo cerrado (C6)."
   },
   {
     "name": "hexamer_chain",
     "type": "molecule",
     "nodes": 6,
     "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]],
-    "notes": "6 nodos (cadena)."
+    "notes": "6 nodos en cadena lineal."
   },
   {
-    "name": "atomic_nucleus_heavy",
-    "type": "atom_core",
+    "name": "prism_triangular",
+    "type": "nucleus",
     "nodes": 6,
     "edges": [
       [0, 1], [1, 2], [2, 0],
       [3, 4], [4, 5], [5, 3],
       [0, 3], [1, 4], [2, 5]
     ],
-    "notes": "Prisma triangular (6 nodos): dos triángulos + 3 puentes."
+    "notes": "Prisma triangular: dos triángulos + 3 puentes verticales."
   },
   {
-    "name": "diatomic_heavy_12",
-    "type": "compound_2atom",
+    "name": "octahedron",
+    "type": "nucleus",
+    "nodes": 6,
+    "edges": [
+      [0, 1], [0, 2], [0, 3], [0, 4],
+      [5, 1], [5, 2], [5, 3], [5, 4],
+      [1, 2], [2, 3], [3, 4], [4, 1]
+    ],
+    "notes": "Octaedro: 2 polos + anillo ecuatorial de 4."
+  },
+  {
+    "name": "star_6",
+    "type": "molecule",
+    "nodes": 6,
+    "edges": [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5]],
+    "notes": "Hub central con 5 hojas (estrella S5)."
+  },
+  {
+    "name": "bipartite_3_3",
+    "type": "layered",
+    "nodes": 6,
+    "edges": [
+      [0, 3], [0, 4], [0, 5],
+      [1, 3], [1, 4], [1, 5],
+      [2, 3], [2, 4], [2, 5]
+    ],
+    "notes": "Grafo bipartito completo K3,3 (dos capas de 3)."
+  },
+  {
+    "name": "hexagon_with_center",
+    "type": "molecule",
+    "nodes": 7,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0],
+      [6, 0], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5]
+    ],
+    "notes": "Hexágono con hub central (wheel W6)."
+  },
+  {
+    "name": "heptamer_chain",
+    "type": "molecule",
+    "nodes": 7,
+    "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6]],
+    "notes": "7 nodos en cadena lineal."
+  },
+  {
+    "name": "cube",
+    "type": "nucleus",
+    "nodes": 8,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 0],
+      [4, 5], [5, 6], [6, 7], [7, 4],
+      [0, 4], [1, 5], [2, 6], [3, 7]
+    ],
+    "notes": "Cubo: dos cuadrados + 4 puentes verticales."
+  },
+  {
+    "name": "bilayer_square_4_4",
+    "type": "layered",
+    "nodes": 8,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 0],
+      [4, 5], [5, 6], [6, 7], [7, 4],
+      [0, 4], [1, 5], [2, 6], [3, 7]
+    ],
+    "notes": "Alias de cube: dos capas cuadradas conectadas 1:1."
+  },
+  {
+    "name": "bipartite_2_4",
+    "type": "layered",
+    "nodes": 6,
+    "edges": [
+      [0, 2], [0, 3], [0, 4], [0, 5],
+      [1, 2], [1, 3], [1, 4], [1, 5]
+    ],
+    "notes": "Grafo bipartito K2,4 (capa de 2 + capa de 4)."
+  },
+  {
+    "name": "bipartite_4_4",
+    "type": "layered",
+    "nodes": 8,
+    "edges": [
+      [0, 4], [0, 5], [0, 6], [0, 7],
+      [1, 4], [1, 5], [1, 6], [1, 7],
+      [2, 4], [2, 5], [2, 6], [2, 7],
+      [3, 4], [3, 5], [3, 6], [3, 7]
+    ],
+    "notes": "Grafo bipartito completo K4,4 (dos capas de 4)."
+  },
+  {
+    "name": "octamer_chain",
+    "type": "molecule",
+    "nodes": 8,
+    "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]],
+    "notes": "8 nodos en cadena lineal."
+  },
+  {
+    "name": "ladder_4",
+    "type": "layered",
+    "nodes": 8,
+    "edges": [
+      [0, 1], [1, 2], [2, 3],
+      [4, 5], [5, 6], [6, 7],
+      [0, 4], [1, 5], [2, 6], [3, 7]
+    ],
+    "notes": "Escalera: dos cadenas de 4 con puentes."
+  },
+  {
+    "name": "prism_square",
+    "type": "nucleus",
+    "nodes": 8,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 0],
+      [4, 5], [5, 6], [6, 7], [7, 4],
+      [0, 4], [1, 5], [2, 6], [3, 7]
+    ],
+    "notes": "Prisma cuadrado (alias cube con otra interpretación)."
+  },
+  {
+    "name": "nonamer_chain",
+    "type": "molecule",
+    "nodes": 9,
+    "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8]],
+    "notes": "9 nodos en cadena lineal."
+  },
+  {
+    "name": "grid_3x3",
+    "type": "layered",
+    "nodes": 9,
+    "edges": [
+      [0, 1], [1, 2],
+      [3, 4], [4, 5],
+      [6, 7], [7, 8],
+      [0, 3], [3, 6],
+      [1, 4], [4, 7],
+      [2, 5], [5, 8]
+    ],
+    "notes": "Grilla plana 3x3."
+  },
+  {
+    "name": "bipartite_3_6",
+    "type": "layered",
+    "nodes": 9,
+    "edges": [
+      [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8],
+      [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [1, 8],
+      [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8]
+    ],
+    "notes": "Grafo bipartito K3,6 (capa de 3 + capa de 6)."
+  },
+  {
+    "name": "decamer_chain",
+    "type": "molecule",
+    "nodes": 10,
+    "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9]],
+    "notes": "10 nodos en cadena lineal."
+  },
+  {
+    "name": "decagon_ring",
+    "type": "molecule",
+    "nodes": 10,
+    "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 0]],
+    "notes": "10 nodos en ciclo cerrado (C10)."
+  },
+  {
+    "name": "ladder_5",
+    "type": "layered",
+    "nodes": 10,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 4],
+      [5, 6], [6, 7], [7, 8], [8, 9],
+      [0, 5], [1, 6], [2, 7], [3, 8], [4, 9]
+    ],
+    "notes": "Escalera: dos cadenas de 5 con puentes."
+  },
+  {
+    "name": "petersen",
+    "type": "exotic",
+    "nodes": 10,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 4], [4, 0],
+      [5, 6], [6, 7], [7, 8], [8, 9], [9, 5],
+      [0, 5], [1, 7], [2, 9], [3, 6], [4, 8]
+    ],
+    "notes": "Grafo de Petersen: pentágono exterior + estrella interior."
+  },
+  {
+    "name": "bilayer_hex_3_3",
+    "type": "layered",
+    "nodes": 6,
+    "edges": [
+      [0, 1], [1, 2], [2, 0],
+      [3, 4], [4, 5], [5, 3],
+      [0, 3], [1, 4], [2, 5]
+    ],
+    "notes": "Dos triángulos apilados con puentes 1:1 (prism alias)."
+  },
+  {
+    "name": "bilayer_hex_6_6",
+    "type": "layered",
+    "nodes": 12,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0],
+      [6, 7], [7, 8], [8, 9], [9, 10], [10, 11], [11, 6],
+      [0, 6], [1, 7], [2, 8], [3, 9], [4, 10], [5, 11]
+    ],
+    "notes": "Dos hexágonos apilados con puentes 1:1."
+  },
+  {
+    "name": "diatomic_prism_12",
+    "type": "compound",
     "nodes": 12,
     "edges": [
       [0, 1], [1, 2], [2, 0],
       [3, 4], [4, 5], [5, 3],
       [0, 3], [1, 4], [2, 5],
-
       [6, 7], [7, 8], [8, 6],
       [9, 10], [10, 11], [11, 9],
       [6, 9], [7, 10], [8, 11],
-
       [2, 8]
     ],
-    "notes": "Compuesto mínimo: dos atomic_nucleus_heavy (0-5 y 6-11) con 1 enlace inter-átomo 2-8."
+    "notes": "Dos prismas triangulares con 1 enlace inter-unidad."
+  },
+  {
+    "name": "dodecamer_chain",
+    "type": "molecule",
+    "nodes": 12,
+    "edges": [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 10], [10, 11]],
+    "notes": "12 nodos en cadena lineal."
+  },
+  {
+    "name": "icosahedron",
+    "type": "nucleus",
+    "nodes": 12,
+    "edges": [
+      [0, 1], [0, 2], [0, 3], [0, 4], [0, 5],
+      [11, 6], [11, 7], [11, 8], [11, 9], [11, 10],
+      [1, 2], [2, 3], [3, 4], [4, 5], [5, 1],
+      [6, 7], [7, 8], [8, 9], [9, 10], [10, 6],
+      [1, 6], [2, 7], [3, 8], [4, 9], [5, 10],
+      [1, 10], [2, 6], [3, 7], [4, 8], [5, 9]
+    ],
+    "notes": "Icosaedro: 12 vértices, 30 aristas."
+  },
+  {
+    "name": "cuboctahedron",
+    "type": "nucleus",
+    "nodes": 12,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 0],
+      [4, 5], [5, 6], [6, 7], [7, 4],
+      [8, 9], [9, 10], [10, 11], [11, 8],
+      [0, 4], [0, 8], [1, 5], [1, 9],
+      [2, 6], [2, 10], [3, 7], [3, 11],
+      [4, 8], [5, 9], [6, 10], [7, 11]
+    ],
+    "notes": "Cuboctaedro: 12 vértices, 24 aristas."
+  },
+  {
+    "name": "grid_3x4",
+    "type": "layered",
+    "nodes": 12,
+    "edges": [
+      [0, 1], [1, 2], [2, 3],
+      [4, 5], [5, 6], [6, 7],
+      [8, 9], [9, 10], [10, 11],
+      [0, 4], [4, 8],
+      [1, 5], [5, 9],
+      [2, 6], [6, 10],
+      [3, 7], [7, 11]
+    ],
+    "notes": "Grilla plana 3x4."
+  },
+  {
+    "name": "bipartite_4_8",
+    "type": "layered",
+    "nodes": 12,
+    "edges": [
+      [0, 4], [0, 5], [0, 6], [0, 7], [0, 8], [0, 9], [0, 10], [0, 11],
+      [1, 4], [1, 5], [1, 6], [1, 7], [1, 8], [1, 9], [1, 10], [1, 11],
+      [2, 4], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10], [2, 11],
+      [3, 4], [3, 5], [3, 6], [3, 7], [3, 8], [3, 9], [3, 10], [3, 11]
+    ],
+    "notes": "Grafo bipartito K4,8 (capa de 4 + capa de 8)."
+  },
+  {
+    "name": "trilayer_4_4_4",
+    "type": "layered",
+    "nodes": 12,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 0],
+      [4, 5], [5, 6], [6, 7], [7, 4],
+      [8, 9], [9, 10], [10, 11], [11, 8],
+      [0, 4], [1, 5], [2, 6], [3, 7],
+      [4, 8], [5, 9], [6, 10], [7, 11]
+    ],
+    "notes": "Tres capas cuadradas apiladas."
+  },
+  {
+    "name": "honeycomb_7",
+    "type": "layered",
+    "nodes": 7,
+    "edges": [
+      [0, 1], [0, 2], [0, 3],
+      [1, 4], [2, 5], [3, 6],
+      [4, 5], [5, 6], [6, 4]
+    ],
+    "notes": "Centro con 3 brazos terminando en triángulo."
+  },
+  {
+    "name": "bipartite_1_n",
+    "type": "star",
+    "nodes": 7,
+    "edges": [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6]],
+    "notes": "Estrella K1,6 (hub con 6 hojas)."
+  },
+  {
+    "name": "wheel_5",
+    "type": "molecule",
+    "nodes": 6,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 4], [4, 0],
+      [5, 0], [5, 1], [5, 2], [5, 3], [5, 4]
+    ],
+    "notes": "Rueda W5: pentágono + hub central."
+  },
+  {
+    "name": "double_triangle",
+    "type": "molecule",
+    "nodes": 4,
+    "edges": [[0, 1], [1, 2], [2, 0], [0, 3], [1, 3]],
+    "notes": "Triángulo con un nodo extra conectado a 2 vértices."
+  },
+  {
+    "name": "complete_k5",
+    "type": "nucleus",
+    "nodes": 5,
+    "edges": [
+      [0, 1], [0, 2], [0, 3], [0, 4],
+      [1, 2], [1, 3], [1, 4],
+      [2, 3], [2, 4],
+      [3, 4]
+    ],
+    "notes": "Grafo completo K5."
+  },
+  {
+    "name": "complete_k6",
+    "type": "nucleus",
+    "nodes": 6,
+    "edges": [
+      [0, 1], [0, 2], [0, 3], [0, 4], [0, 5],
+      [1, 2], [1, 3], [1, 4], [1, 5],
+      [2, 3], [2, 4], [2, 5],
+      [3, 4], [3, 5],
+      [4, 5]
+    ],
+    "notes": "Grafo completo K6."
+  },
+  {
+    "name": "moebius_kantor",
+    "type": "exotic",
+    "nodes": 8,
+    "edges": [
+      [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 0],
+      [0, 4], [1, 5], [2, 6], [3, 7]
+    ],
+    "notes": "Grafo de Möbius-Kantor: octágono + diagonales alternas."
+  },
+  {
+    "name": "truncated_tetrahedron",
+    "type": "nucleus",
+    "nodes": 12,
+    "edges": [
+      [0, 1], [1, 2], [2, 0],
+      [3, 4], [4, 5], [5, 3],
+      [6, 7], [7, 8], [8, 6],
+      [9, 10], [10, 11], [11, 9],
+      [0, 3], [1, 6], [2, 9],
+      [4, 7], [5, 10], [8, 11]
+    ],
+    "notes": "Tetraedro truncado: 4 triángulos conectados por hexágonos."
   }
 ]
