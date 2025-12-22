@@ -710,6 +710,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         fixed_edge_weights: Optional[List[float]] = None,
     ) -> None:
         nonlocal attempt_id, term_attempts_count, total_attempts, total_viable, term_viable
+        nonlocal ls_attempts_with_ls, ls_hash_counts
 
         nodes = int(template.get("nodes", 0))
         if nodes <= 0:
