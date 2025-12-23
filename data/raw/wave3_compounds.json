@@ -1,0 +1,185 @@
+{
+  "schema_version": "ola3_compounds_v2_alpha_cluster",
+  "description": "Ola3 synthesis - Testing alpha-cluster hypothesis for C12 formation",
+  "blocks_input": "data/processed/ola2/species_catalog.jsonl",
+  "compounds_input": "data/results/ola3/ola3_harvest.jsonl",
+  "templates_json": "data/raw/wave3_templates.json",
+  
+  "engine": {
+    "dt": 1.0,
+    "T_ticks": 200,
+    "window_W": 20,
+    "sigma0": 0.30,
+    "sigma_tc": 60.0,
+    "sigma_theta_init": 0.5,
+    "K_local": 0.45,
+    "kappa_global": 0.25,
+    "tau_field": 100.0,
+    "gamma": 0.007,
+    "gamma_max": 0.02,
+    "mass_min": 0.01
+  },
+  
+  "viability_thresholds": {
+    "R_mean_lastW_min": 0.80,
+    "phase_var_lastW_max": 0.05,
+    "QualityLock_min": 0.70,
+    "memory_score_k10_min": 0.0,
+    "PE_tick_norm_min": 0.70
+  },
+  
+  "targets": [
+    {
+      "name": "Dimer_Synthesis",
+      "description": "Simple bonding between two species (baseline)",
+      "templates": ["dimer"],
+      "allowed_block_families": ["species"],
+      "runs_per_target": 1000,
+      "expected_mass_gev": {
+        "min": 0.5,
+        "max": 1.2,
+        "optimal": 0.8
+      },
+      "notes": "Baseline - already tested, re-run with memory fix"
+    },
+    {
+      "name": "Trimer_H3_Synthesis",
+      "description": "Three-body cluster - H3 ion analog",
+      "templates": ["trimer_triangle"],
+      "allowed_block_families": ["species"],
+      "runs_per_target": 2000,
+      "expected_mass_gev": {
+        "min": 0.8,
+        "max": 1.5,
+        "optimal": 1.17
+      },
+      "notes": "Cooper pair triad - re-run with memory fix"
+    },
+    {
+      "name": "Tetrahedron_He4_Synthesis",
+      "description": "Alpha particle analog - maximally stable 4-body cluster",
+      "templates": ["tetrahedron_k4"],
+      "allowed_block_families": ["species"],
+      "runs_per_target": 2000,
+      "expected_mass_gev": {
+        "min": 1.2,
+        "max": 2.0,
+        "optimal": 1.59
+      },
+      "physical_motivation": "He4 alpha particle - building block for cluster structures",
+      "notes": "CRITICAL: Save successful compounds for use in cluster experiments"
+    },
+    {
+      "name": "Icosahedron_C12_Flat",
+      "description": "Carbon-12 via direct 12-species assembly (baseline)",
+      "templates": ["icosahedron"],
+      "allowed_block_families": ["species"],
+      "runs_per_target": 5000,
+      "expected_mass_gev": {
+        "min": 3.5,
+        "max": 5.5,
+        "optimal": 4.77
+      },
+      "expected_success_rate": "~0.22% (observed baseline)",
+      "notes": "Baseline for comparison with cluster-alpha approach"
+    },
+    {
+      "name": "Be8_AlphaCluster",
+      "description": "Beryllium-8 via 2 alpha particles (unstable intermediate)",
+      "templates": ["be8_alpha_cluster"],
+      "allowed_block_families": ["compound_tetrahedron_he4"],
+      "runs_per_target": 2000,
+      "expected_mass_gev": {
+        "min": 2.8,
+        "max": 4.2,
+        "optimal": 3.5
+      },
+      "hypothesis": {
+        "success_rate": "20-30% (forms but unstable)",
+        "QualityLock": "< 0.85 (should be unstable like real Be8)",
+        "phase_var": "> 0.005 (high variance)",
+        "lifetime_analog": "Low memory_score (short-lived correlation)"
+      },
+      "physics_test": "QualityLock < 0.85 → confirms Be8 instability",
+      "notes": "CRITICAL: This should be UNSTABLE to validate cluster hypothesis"
+    },
+    {
+      "name": "C12_AlphaCluster_Triangle",
+      "description": "Carbon-12 via 3 alpha particles in triangular config (Hoyle state)",
+      "templates": ["c12_alpha_cluster_triangle"],
+      "allowed_block_families": ["compound_tetrahedron_he4"],
+      "runs_per_target": 3000,
+      "expected_mass_gev": {
+        "min": 4.0,
+        "max": 6.0,
+        "optimal": 5.0
+      },
+      "hypothesis": {
+        "success_rate": "> 0.22% (easier than flat C12)",
+        "ratio_vs_flat": "5-50x easier (based on N_eff = 3 vs 12)",
+        "geometry": "Triangular arrangement of 3 alpha clusters",
+        "QualityLock": "0.85-0.95 (stable but not maximal)",
+        "hoyle_signature": "Look for excited state resonance"
+      },
+      "physics_test": "success(triangle) >> success(flat) → cluster favored",
+      "triple_alpha_analog": {
+        "step1": "2α → Be8 (unstable)",
+        "step2": "Be8 + α → C12* (this target)",
+        "hoyle_energy": "~7.65 MeV in real physics"
+      },
+      "notes": "KEY EXPERIMENT: If this succeeds more than flat → cluster structure is necessary"
+    },
+    {
+      "name": "C12_AlphaCluster_Linear",
+      "description": "Carbon-12 via 3 alpha particles in linear config (control)",
+      "templates": ["c12_alpha_cluster_linear"],
+      "allowed_block_families": ["compound_tetrahedron_he4"],
+      "runs_per_target": 2000,
+      "expected_mass_gev": {
+        "min": 4.0,
+        "max": 6.0,
+        "optimal": 5.0
+      },
+      "hypothesis": {
+        "success_rate": "< triangle (less stable)",
+        "QualityLock": "< triangle",
+        "notes": "Control - linear should be less stable than triangle"
+      },
+      "physics_test": "triangle > linear → confirms triangular geometry is optimal",
+      "notes": "Control experiment to validate triangle is not accidental"
+    }
+  ],
+  
+  "experimental_design": {
+    "phase1_baseline": {
+      "targets": ["Dimer_Synthesis", "Trimer_H3_Synthesis", "Tetrahedron_He4_Synthesis", "Icosahedron_C12_Flat"],
+      "goal": "Re-run with memory fix, establish baselines",
+      "priority": "HIGH"
+    },
+    "phase2_cluster": {
+      "targets": ["Be8_AlphaCluster", "C12_AlphaCluster_Triangle", "C12_AlphaCluster_Linear"],
+      "goal": "Test alpha-cluster hypothesis",
+      "priority": "CRITICAL",
+      "depends_on": "Phase 1 (need He4 compounds as input)"
+    },
+    "success_criteria": {
+      "H1_be8_unstable": "QualityLock(Be8) < 0.85",
+      "H2_cluster_easier": "success(C12_triangle) > success(C12_flat)",
+      "H3_triangle_optimal": "success(C12_triangle) > success(C12_linear)",
+      "H4_quantitative": "success(C12_triangle) / success(C12_flat) > 5"
+    }
+  },
+  
+  "output_paths": {
+    "csv_results": "data/results/ola3/ola3_alpha_cluster_results.csv",
+    "harvest_jsonl": "data/results/ola3/ola3_alpha_cluster_harvest.jsonl",
+    "harvest_rejections": "data/results/ola3/ola3_alpha_cluster_rejections.jsonl"
+  },
+  
+  "notes": {
+    "physics_motivation": "Testing if DOFT reproduces alpha-cluster structure of C12",
+    "key_prediction": "C12 via 3 alphas should be 5-50x easier than flat 12-species",
+    "hoyle_state": "If cluster forms, look for excited state ~7% above ground",
+    "computational_discovery": "If cluster is favored → rediscovered alpha-clustering computationally"
+  }
+}

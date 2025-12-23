@@ -1,0 +1,114 @@
+{
+  "schema_version": "ola3_compounds_v1",
+  "description": "Ola3 synthesis configuration - building nuclear-like compounds from Ola2 species",
+  "blocks_input": "data/processed/ola2/species_catalog.jsonl",
+  "templates_json": "data/raw/wave3_templates.json",
+  
+  "engine": {
+    "dt": 1.0,
+    "T_ticks": 200,
+    "window_W": 20,
+    "sigma0": 0.30,
+    "sigma_tc": 60.0,
+    "sigma_theta_init": 0.5,
+    "K_local": 0.45,
+    "kappa_global": 0.25,
+    "tau_field": 100.0,
+    "gamma": 0.007,
+    "gamma_max": 0.02,
+    "mass_min": 0.01,
+    "memory_var_threshold": 1e-10
+  },
+  
+  "viability_thresholds": {
+    "R_mean_lastW_min": 0.80,
+    "phase_var_lastW_max": 0.05,
+    "QualityLock_min": 0.70,
+    "memory_score_k10_min": 0.0,
+    "PE_tick_norm_min": 0.70
+  },
+  
+  "targets": [
+    {
+      "name": "Dimer_Synthesis",
+      "description": "Simple bonding between two species",
+      "templates": ["dimer"],
+      "allowed_block_families": ["species"],
+      "runs_per_target": 1000,
+      "expected_mass_gev": {
+        "min": 3.5,
+        "max": 5.5,
+        "optimal": 4.5
+      },
+      "notes": "Proof of concept - basic bonding mechanism"
+    },
+    {
+      "name": "Trimer_H3_Synthesis",
+      "description": "Three-body cluster - H3 ion analog",
+      "templates": ["trimer_triangle"],
+      "allowed_block_families": ["species"],
+      "runs_per_target": 2000,
+      "expected_mass_gev": {
+        "min": 5.0,
+        "max": 8.0,
+        "optimal": 6.5
+      },
+      "physical_motivation": "H3+ ion structure or Cooper pair triad for superconductivity",
+      "key_metrics": [
+        "High phase coherence (low phase_var_lastW)",
+        "Strong memory (memory_score_k10 > 0.5)",
+        "High QualityLock (> 0.85)"
+      ],
+      "notes": "Critical for superconductivity connection - look for BEC signatures"
+    },
+    {
+      "name": "Tetrahedron_He4_Synthesis",
+      "description": "Alpha particle analog - maximally stable 4-body cluster",
+      "templates": ["tetrahedron_k4"],
+      "allowed_block_families": ["species"],
+      "runs_per_target": 2000,
+      "expected_mass_gev": {
+        "min": 7.0,
+        "max": 10.5,
+        "optimal": 8.8
+      },
+      "physical_motivation": "He4 alpha particle - most stable light nucleus",
+      "key_metrics": [
+        "Highest QualityLock among all structures (> 0.95)",
+        "Largest binding energy (negative mass_defect)",
+        "Minimal phase variance (< 0.01)"
+      ],
+      "notes": "Building block for C12 via triple-alpha process"
+    },
+    {
+      "name": "Icosahedron_C12_Synthesis",
+      "description": "Carbon-12 analog via icosahedral geometry",
+      "templates": ["icosahedron"],
+      "allowed_block_families": ["species"],
+      "runs_per_target": 5000,
+      "expected_mass_gev": {
+        "min": 10.0,
+        "max": 14.0,
+        "optimal": 11.2
+      },
+      "physical_motivation": "C12 nucleus - triple-alpha process endpoint",
+      "hoyle_state_analog": {
+        "description": "Look for resonance ~7% above ground state",
+        "signature": "Enhanced phase coherence at specific parameter values"
+      },
+      "key_metrics": [
+        "Evidence of sub-clustering (3 alpha-like groups)",
+        "Resonant behavior in parameter space",
+        "High symmetry (icosahedral)",
+        "Moderate QualityLock (0.75-0.90)"
+      ],
+      "notes": "Most ambitious - may require multiple runs to find resonances"
+    }
+  ],
+  
+  "output_paths": {
+    "csv_results": "data/results/ola3/ola3_compounds_results.csv",
+    "harvest_jsonl": "data/results/ola3/ola3_harvest.jsonl",
+    "harvest_rejections": "data/results/ola3/ola3_rejections.jsonl"
+  }
+}
