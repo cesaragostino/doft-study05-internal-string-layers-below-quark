@@ -74,19 +74,32 @@ def read_matches(path: Path) -> List[Dict]:
     return rows
 
 
-def read_dof_catalog(path: Path) -> Dict[str, float | None]:
+def read_dof_catalog(path: Path) -> Dict[str, Dict[str, object]]:
     if not path.exists():
         return {}
-    rows: Dict[str, float | None] = {}
+    rows: Dict[str, Dict[str, object]] = {}
     with path.open() as f:
         reader = csv.DictReader(f)
         for row in reader:
             rid = _norm_run_id(row.get("run_id"))
-            try:
-                d_total = float(row.get("d_total"))
-            except Exception:
-                d_total = None
-            rows[rid] = d_total
+            dof_grade = str(row.get("dof_grade") or row.get("dna_grade") or "").upper()
+            if not dof_grade:
+                try:
+                    d_total = float(row.get("d_total"))
+                except Exception:
+                    d_total = None
+                if d_total is None or not np.isfinite(d_total):
+                    dof_grade = ""
+                elif d_total < 0.5:
+                    dof_grade = "A"
+                elif d_total < 1.5:
+                    dof_grade = "B"
+                else:
+                    dof_grade = "C"
+            rows[rid] = {
+                "dof_grade": dof_grade if dof_grade else None,
+                "sm_d_total": row.get("sm_d_total"),
+            }
     return rows
 
 
@@ -277,11 +290,12 @@ def main():
             lock_q = None
         structure_tier = proxy_row.get("structure_tier", "none") if proxy_row else "none"
         reasons: List[str] = []
-        dof_d_total = dof_by_run.get(run_id)
+        dof_record = dof_by_run.get(run_id, {})
+        dof_grade = str(dof_record.get("dof_grade") or "").upper()
         if dof_by_run:
-            if dof_d_total is not None and np.isfinite(dof_d_total) and dof_d_total >= 0.5:
+            if dof_grade and dof_grade != "A":
                 reasons.append("dof_grade_not_a")
-            elif dof_d_total is None:
+            elif not dof_grade:
                 reasons.append("dof_missing")
 
         # Physical filters (no d_total here)
@@ -413,14 +427,7 @@ def main():
         d_spacing_clean = _nan_to_none((match or {}).get("d_spacing"))
         d_mass_clean = _nan_to_none((match or {}).get("d_mass"))
         d_total_clean = _nan_to_none((match or {}).get("d_total"))
-        dna_grade = "unknown"
-        if dof_d_total is not None and np.isfinite(dof_d_total):
-            if dof_d_total < 0.5:
-                dna_grade = "A"
-            elif dof_d_total < 1.5:
-                dna_grade = "B"
-            else:
-                dna_grade = "C"
+        dna_grade = dof_grade if dof_grade else "unknown"
         block = {
             "block_id": block_id,
             "origin_run_id": proxy_row.get("run_id"),

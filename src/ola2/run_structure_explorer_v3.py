@@ -14,6 +14,7 @@ import time
 import uuid
 import platform
 import csv
+from collections import Counter
 from datetime import datetime, timezone
 from itertools import permutations
 from fractions import Fraction
@@ -95,26 +96,21 @@ def _norm_run_id(val: Any) -> str:
         return str(val)
 
 
-def _load_dof_grade_a(path: Path) -> set[str]:
+def _load_dna_map(path: Path) -> Dict[str, Dict[str, str]]:
     if not path.exists():
-        return set()
-    grade_a: set[str] = set()
+        return {}
+    out: Dict[str, Dict[str, str]] = {}
     with path.open() as f:
         reader = csv.DictReader(f)
         for row in reader:
             rid = _norm_run_id(row.get("run_id"))
-            dna_grade = str(row.get("dna_grade", "")).upper()
-            if dna_grade:
-                if dna_grade == "A":
-                    grade_a.add(rid)
-                continue
-            try:
-                d_total = float(row.get("d_total"))
-            except Exception:
-                d_total = None
-            if d_total is not None and d_total < 0.5:
-                grade_a.add(rid)
-    return grade_a
+            dof_grade = str(row.get("dof_grade", "") or row.get("dna_grade", "")).upper()
+            out[rid] = {
+                "dof_grade": dof_grade if dof_grade else "",
+                "dof_family_id": str(row.get("dof_family_id", "") or ""),
+                "dof_family_friendly": str(row.get("dof_family_friendly", "") or ""),
+            }
+    return out
 
 
 def _is_finite(val: Any) -> bool:
@@ -214,6 +210,7 @@ def _sample_blocks(
     allowed_block_ids: Optional[Sequence[str]],
     k: int,
     rng: random.Random,
+    weighting_mode: str = "uniform",
 ) -> List[Dict[str, Any]]:
     fam_lower = {f.lower() for f in families} if families else set()
     allowed_names = {n.lower() for n in allowed_particle_names} if allowed_particle_names else None
@@ -228,14 +225,26 @@ def _sample_blocks(
         filtered = [b for b in filtered if str(b.get("block_id")) in allowed_ids]
     if len(filtered) < k:
         return []
+    mode = str(weighting_mode or "uniform").lower()
     weights = []
     for b in filtered:
-        d = b.get("match_score", {}).get("d_total")
-        try:
-            d = float(d)
-        except Exception:
-            d = math.inf
-        w = 1.0 / (1.0 + d) if math.isfinite(d) else 0.1
+        if mode == "sm_distance":
+            d = b.get("match_score", {}).get("d_total")
+            try:
+                d = float(d)
+            except Exception:
+                d = math.inf
+            w = 1.0 / (1.0 + d) if math.isfinite(d) else 0.1
+        elif mode == "dof_grade_boost":
+            dof_grade = str(b.get("dof_grade", "")).upper()
+            if dof_grade == "A":
+                w = 1.0
+            elif dof_grade == "B":
+                w = 0.7
+            else:
+                w = 0.1
+        else:
+            w = 1.0
         weights.append(max(w, 1e-3))
     return rng.choices(filtered, weights=weights, k=k)
 
@@ -406,11 +415,22 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
     templates_path = Path(inputs.get("templates_json", "data/raw/compound_templates.json"))
     dna_path = Path(inputs.get("dof_dna_catalog_csv", "data/processed/ola1/dof_dna_catalog.csv"))
     hbar_path = Path(inputs.get("hbar_sim_json", "data/processed/ola1/hbar_sim_calibration.json"))
+    block_selection = cfg.get("block_selection", {})
+    allowed_dof_grades = block_selection.get("allowed_dof_grades") or ["A"]
+    allowed_dof_families = block_selection.get("allowed_dof_families") or []
+    family_key = block_selection.get("family_key", "dof_family_id")
+    weighting_mode = block_selection.get("weighting_mode", "uniform")
     config_hash = f"sha256:{hashlib.sha256(config_path.read_bytes()).hexdigest()}"
     wave1_input_file_hash = f"sha256:{hashlib.sha256(blocks_path.read_bytes()).hexdigest()}"
     templates_hash = f"sha256:{hashlib.sha256(templates_path.read_bytes()).hexdigest()}"
     code_hash = f"sha256:{hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}"
 
+    allowed_grades_set = {str(g).upper() for g in allowed_dof_grades if str(g).strip()}
+    allowed_families_set = {str(f) for f in allowed_dof_families if str(f).strip()}
+
+    dropped_missing_dna = 0
+    dropped_not_allowed_grade = 0
+    dropped_not_allowed_family = 0
     if blocks_mode == "species_as_blocks":
         blocks = _load_species_blocks(species_catalog_path)
         if not blocks:
@@ -420,12 +440,59 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         blocks = _extract_blocks(raw_blocks)
         if not blocks:
             raise RuntimeError(f"No blocks found in {blocks_path}")
-        grade_a_ids = _load_dof_grade_a(dna_path)
-        if grade_a_ids:
-            blocks = [b for b in blocks if _norm_run_id(b.get("origin_run_id")) in grade_a_ids]
+        dna_map = _load_dna_map(dna_path)
+        filtered_blocks = []
+        for b in blocks:
+            origin = b.get("origin_run_id")
+            if origin is None or origin == "":
+                dropped_missing_dna += 1
+                continue
+            rid = _norm_run_id(origin)
+            dna_row = dna_map.get(rid)
+            if not dna_row:
+                dropped_missing_dna += 1
+                continue
+            dof_grade = str(dna_row.get("dof_grade", "")).upper()
+            b["dof_grade"] = dof_grade
+            b["dof_family_id"] = dna_row.get("dof_family_id", "")
+            b["dof_family_friendly"] = dna_row.get("dof_family_friendly", "")
+            if allowed_grades_set and dof_grade not in allowed_grades_set:
+                dropped_not_allowed_grade += 1
+                continue
+            if allowed_families_set:
+                family_val = str(b.get(family_key, "") or "")
+                if family_val not in allowed_families_set:
+                    dropped_not_allowed_family += 1
+                    continue
+            filtered_blocks.append(b)
+        blocks = filtered_blocks
+        if dropped_missing_dna or dropped_not_allowed_grade or dropped_not_allowed_family:
+            print(
+                "[explorer_v3] WARNING: blocks dropped before sampling "
+                f"(missing_dna={dropped_missing_dna}, not_allowed_grade={dropped_not_allowed_grade}, "
+                f"not_allowed_family={dropped_not_allowed_family})"
+            )
         if not blocks:
-            raise RuntimeError("No Grade A DOF blocks found for Structure Explorer.")
+            raise RuntimeError("No DOF blocks found for Structure Explorer.")
     block_map = {b.get("block_id"): b for b in blocks if b.get("block_id")}
+    dof_grade_counts: Dict[str, int] = {}
+    dof_family_top: List[Tuple[str, int, str]] = []
+    if blocks_mode != "species_as_blocks":
+        grade_counter: Counter[str] = Counter()
+        family_counter: Counter[str] = Counter()
+        family_friendly: Dict[str, str] = {}
+        for b in blocks:
+            grade = str(b.get("dof_grade", "")).upper() or "UNKNOWN"
+            grade_counter[grade] += 1
+            family_id = str(b.get("dof_family_id", "") or "")
+            if family_id:
+                family_counter[family_id] += 1
+                if family_id not in family_friendly:
+                    family_friendly[family_id] = str(b.get("dof_family_friendly", "") or "")
+        dof_grade_counts = dict(grade_counter)
+        dof_family_top = [
+            (fid, cnt, family_friendly.get(fid, "")) for fid, cnt in family_counter.most_common(10)
+        ]
 
     templates_list = _load_json(templates_path)
     templates = {t["name"]: t for t in templates_list}
@@ -456,7 +523,7 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             if not blocks_path.exists():
                 errors.append(f"blocks_json missing: {blocks_path}")
             if not dna_path.exists():
-                warnings.append(f"dof_dna_catalog_csv missing: {dna_path} (Grade A filter skipped)")
+                errors.append(f"dof_dna_catalog_csv missing: {dna_path} (required for DOF filtering)")
 
         variation_cfg = cfg.get("engine_variation", {})
         if variation_cfg.get("enabled", False):
@@ -1271,7 +1338,15 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
             if tmpl is None:
                 continue
             nodes = int(tmpl.get("nodes", 0))
-            assignment = _sample_blocks(blocks, families, allowed_particle_names, allowed_species, nodes, rng)
+            assignment = _sample_blocks(
+                blocks,
+                families,
+                allowed_particle_names,
+                allowed_species,
+                nodes,
+                rng,
+                weighting_mode=weighting_mode,
+            )
             if len(assignment) != nodes:
                 reasons = ["not_enough_blocks"]
                 tags = {
@@ -1343,7 +1418,15 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
                     structure_id = _hash_text(serial)
                     if seen_structures.get(structure_id, 0) < max_repeats_per_structure:
                         break
-                    assignment = _sample_blocks(blocks, families, allowed_particle_names, allowed_species, nodes, rng)
+                    assignment = _sample_blocks(
+                        blocks,
+                        families,
+                        allowed_particle_names,
+                        allowed_species,
+                        nodes,
+                        rng,
+                        weighting_mode=weighting_mode,
+                    )
                     if len(assignment) != nodes:
                         break
                     tries += 1
@@ -1517,6 +1600,11 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         report_text = _render_report(
             structure_stats,
             species_catalog,
+            dof_grade_counts,
+            dof_family_top,
+            dropped_missing_dna,
+            dropped_not_allowed_grade,
+            dropped_not_allowed_family,
             per_template_counts,
                 per_template_viable,
                 per_target_counts,
@@ -1574,6 +1662,11 @@ def run_structure_explorer(config_path: Path, output_dir: Path, seed: Optional[i
         report_text = _render_report(
             structure_stats,
             species_catalog,
+            dof_grade_counts,
+            dof_family_top,
+            dropped_missing_dna,
+            dropped_not_allowed_grade,
+            dropped_not_allowed_family,
             per_template_counts,
             per_template_viable,
             per_target_counts,
@@ -1663,6 +1756,11 @@ def _build_species_catalog(
 def _render_report(
     structure_stats: Dict[str, Dict[str, Any]],
     species_catalog: List[Dict[str, Any]],
+    dof_grade_counts: Optional[Dict[str, int]] = None,
+    dof_family_top: Optional[List[Tuple[str, int, str]]] = None,
+    dropped_missing_dna: int = 0,
+    dropped_not_allowed_grade: int = 0,
+    dropped_not_allowed_family: int = 0,
     per_template_counts: Optional[Dict[str, int]] = None,
     per_template_viable: Optional[Dict[str, int]] = None,
     per_target_counts: Optional[Dict[str, int]] = None,
@@ -1738,6 +1836,28 @@ def _render_report(
     marco_polo_rows = marco_polo_rows or []
 
     lines = ["# Ola2 Structure Explorer Report", ""]
+    if dof_grade_counts or dof_family_top or dropped_missing_dna or dropped_not_allowed_grade or dropped_not_allowed_family:
+        lines.append("## DOF Pool Summary")
+        lines.append(
+            f"- dropped_missing_dna: {dropped_missing_dna} "
+            f"(origin_run_id missing o sin match en DNA map)"
+        )
+        lines.append(f"- dropped_not_allowed_grade: {dropped_not_allowed_grade}")
+        lines.append(f"- dropped_not_allowed_family: {dropped_not_allowed_family}")
+        if dof_grade_counts:
+            lines.append("### Blocks por dof_grade")
+            lines.append("| dof_grade | count |")
+            lines.append("| --- | ---: |")
+            for grade, count in sorted(dof_grade_counts.items(), key=lambda x: (-x[1], x[0])):
+                lines.append(f"| {grade} | {count} |")
+        if dof_family_top:
+            lines.append("")
+            lines.append("### Top dof_family_id")
+            lines.append("| dof_family_id | count | friendly |")
+            lines.append("| --- | ---: | --- |")
+            for fid, count, friendly in dof_family_top:
+                lines.append(f"| {fid} | {count} | {friendly} |")
+        lines.append("")
     total_attempts = sum(per_template_counts.values()) if per_template_counts else 0
     total_viable = sum(per_template_viable.values()) if per_template_viable else 0
     total_rejected = total_attempts - total_viable

@@ -285,6 +285,10 @@ def load_dof_catalog(path: Path) -> List[Dict]:
                 row["d_total"] = float(row.get("d_total", "nan"))
             except Exception:
                 pass
+            try:
+                row["sm_d_total"] = float(row.get("sm_d_total", "nan"))
+            except Exception:
+                pass
             rows.append(row)
     return rows
 
@@ -1184,33 +1188,74 @@ def main():
             except Exception:
                 return str(val) if val is not None else ""
 
+        def _is_finite(val) -> bool:
+            try:
+                return math.isfinite(float(val))
+            except Exception:
+                return False
+
+        def _grade_of(r: Dict) -> str:
+            dof_grade = str(r.get("dof_grade") or r.get("dna_grade") or "").upper()
+            if dof_grade in {"A", "B", "C"}:
+                return dof_grade
+            try:
+                f = float(r.get("d_total"))
+            except Exception:
+                return "C"
+            if f < 0.5:
+                return "A"
+            if f < 1.5:
+                return "B"
+            return "C"
+
+        has_sm_trace = any(
+            (str(r.get("sm_best_name") or "") != "") or _is_finite(r.get("sm_d_total")) for r in dna_rows
+        )
+
+        base_cols = [
+            "run_id",
+            "dof_grade",
+            "dof_family_id",
+            "dof_family_friendly",
+            "R_S1_Q",
+            "R_S2_S1",
+            "dominant_parity",
+            "band_count",
+            "rho_lock",
+            "lock_quality_Q",
+            "participation_entropy",
+        ]
+        sm_cols = ["sm_best_name", "sm_d_total", "sm_jpc"] if has_sm_trace else []
+        table_cols = base_cols + sm_cols
+
+        def _cell(col: str, row: Dict) -> str:
+            if col == "run_id":
+                return _fmt_run_id(row.get("run_id"))
+            if col == "dof_grade":
+                return _grade_of(row)
+            if col in {"dof_family_id", "dof_family_friendly", "dominant_parity", "sm_best_name", "sm_jpc"}:
+                return str(row.get(col) or "")
+            return _fmt_dna(row.get(col))
+
         def _emit_grade(title: str, rows: List[Dict]):
             lines.append(title)
-            lines.append("| run_id | d_total | dna_grade | R_S1_Q | R_S2_S1 | dominant_parity | lock_Q0_S1_0_1-1_ratio | band_count | rho_lock | lock_quality_Q | participation_entropy |")
-            lines.append("|--------|---------|-----------|--------|---------|-----------------|------------------------|-----------|---------|---------------|-----------------------|")
+            header = "| " + " | ".join(table_cols) + " |"
+            sep = "| " + " | ".join(["-" * len(c) for c in table_cols]) + " |"
+            lines.append(header)
+            lines.append(sep)
             for r in rows:
-                lines.append(
-                    f"| {_fmt_run_id(r.get('run_id'))} | {_fmt_dna(r.get('d_total'))} | {r.get('dna_grade')} | {_fmt_dna(r.get('R_S1_Q'))} | "
-                    f"{_fmt_dna(r.get('R_S2_S1'))} | {r.get('dominant_parity')} | {_fmt_dna(r.get('lock_Q0_S1_0_1-1_ratio'))} | "
-                    f"{_fmt_dna(r.get('band_count'))} | {_fmt_dna(r.get('rho_lock'))} | {_fmt_dna(r.get('lock_quality_Q'))} | "
-                    f"{_fmt_dna(r.get('participation_entropy'))} |"
-                )
+                line = "| " + " | ".join(_cell(c, r) for c in table_cols) + " |"
+                lines.append(line)
 
-        def _dof_val(r):
-            try:
-                return float(r.get("d_total"))
-            except Exception:
-                return None
+        grade_a = [r for r in dna_rows if _grade_of(r) == "A"]
+        grade_b = [r for r in dna_rows if _grade_of(r) == "B"]
+        grade_c = [r for r in dna_rows if _grade_of(r) == "C"]
 
-        grade_a = [r for r in dna_rows if (v := _dof_val(r)) is not None and v < 0.5]
-        grade_b = [r for r in dna_rows if (v := _dof_val(r)) is not None and 0.5 <= v < 1.5]
-        grade_c = [r for r in dna_rows if _dof_val(r) is None or _dof_val(r) >= 1.5]
-
-        _emit_grade("### DOF Grade A (Excellent): d_total < 0.5", grade_a)
+        _emit_grade("### DOF Grade A (Excellent)", grade_a)
         lines.append("")
-        _emit_grade("### DOF Grade B (Acceptable): 0.5 <= d_total < 1.5", grade_b)
+        _emit_grade("### DOF Grade B (Acceptable)", grade_b)
         lines.append("")
-        _emit_grade("### DOF Grade C (Noise/Ghosts): d_total >= 1.5", grade_c)
+        _emit_grade("### DOF Grade C (Noise/Ghosts)", grade_c)
         lines.append("")
         lines.append("### DNA Pareto (R1/R2 agrupados a 2 decimales)")
         lines.append("| R_S1_Q_2dp | R_S2_S1_2dp | n | grade_A | grade_B | grade_C |")
@@ -1222,17 +1267,6 @@ def main():
             except Exception:
                 return ""
 
-        def _grade_from_d_total(val):
-            try:
-                f = float(val)
-            except Exception:
-                return "C"
-            if f < 0.5:
-                return "A"
-            if f < 1.5:
-                return "B"
-            return "C"
-
         group_counts: Dict[tuple, Dict[str, int]] = {}
         for r in dna_rows:
             r1 = _round_2(r.get("R_S1_Q"))
@@ -1242,7 +1276,7 @@ def main():
             key = (r1, r2)
             bucket = group_counts.setdefault(key, {"n": 0, "A": 0, "B": 0, "C": 0})
             bucket["n"] += 1
-            bucket[_grade_from_d_total(r.get("d_total"))] += 1
+            bucket[_grade_of(r)] += 1
 
         for (r1, r2), counts in sorted(group_counts.items(), key=lambda kv: (-kv[1]["n"], kv[0][0], kv[0][1])):
             lines.append(

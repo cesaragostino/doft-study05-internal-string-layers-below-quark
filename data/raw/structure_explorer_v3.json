@@ -4,7 +4,14 @@
     "blocks_json": "data/processed/ola1/simple_blocks.json",
     "templates_json": "data/raw/compound_templates_v3.json",
     "species_catalog_jsonl": "data/processed/ola2-v4/species_catalog.jsonl",
-    "blocks_mode": "ola1_blocks"
+    "blocks_mode": "ola1_blocks",
+    "dof_dna_catalog_csv": "data/processed/ola1/dof_dna_catalog.csv"
+  },
+  "block_selection": {
+    "allowed_dof_grades": ["A"],
+    "allowed_dof_families": [],
+    "family_key": "dof_family_id",
+    "weighting_mode": "uniform"
   },
   "targets": [
     {

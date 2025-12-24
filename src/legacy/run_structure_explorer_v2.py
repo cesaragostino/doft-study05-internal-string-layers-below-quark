@@ -70,6 +70,11 @@ def _load_dof_grade_a(path: Path) -> set[str]:
         reader = csv.DictReader(f)
         for row in reader:
             rid = _norm_run_id(row.get("run_id"))
+            dof_grade = str(row.get("dof_grade", "")).upper()
+            if dof_grade:
+                if dof_grade == "A":
+                    grade_a.add(rid)
+                continue
             dna_grade = str(row.get("dna_grade", "")).upper()
             if dna_grade:
                 if dna_grade == "A":

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 import statistics
@@ -25,14 +26,90 @@ def _to_float(value) -> Optional[float]:
     return None
 
 
-def _grade_from_d_total(d_total: Optional[float]) -> str:
-    if d_total is None or not np.isfinite(d_total):
+R1_EDGES = [0, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 10.0]
+S2S1_EDGES = [-1.0, 0.90, 1.05, 1.20, 10.0]
+BAND_COUNT_EDGES = [-1, 10, 15, 20, 25, 31]
+RHO_LOCK_EDGES = [0, 0.2, 0.3, 0.4, 0.5, 1.0]
+
+BAND_LABELS = ["lowBands", "midBands", "hiBands", "vhiBands", "maxBands"]
+
+
+def _is_missing(value: Optional[float]) -> bool:
+    return value is None or not np.isfinite(value)
+
+
+def _grade_from_dof(lock_quality_q: Optional[float], participation_entropy: Optional[float], rho_lock: Optional[float]) -> str:
+    if _is_missing(lock_quality_q) or _is_missing(participation_entropy):
         return "C"
-    if d_total < 0.5:
-        return "A"
-    if d_total < 1.5:
-        return "B"
-    return "C"
+    if lock_quality_q < 0.995 or participation_entropy > 0.03:
+        return "C"
+    if lock_quality_q >= 0.998 and participation_entropy <= 0.01 and rho_lock is not None and np.isfinite(rho_lock):
+        if rho_lock >= 0.16:
+            return "A"
+    return "B"
+
+
+def _bin_index(value: Optional[float], edges: List[float]) -> str:
+    if value is None or not np.isfinite(value):
+        return "na"
+    v = float(value)
+    if v < edges[0] or v > edges[-1]:
+        return "oob"
+    for idx, (lo, hi) in enumerate(zip(edges[:-1], edges[1:])):
+        if idx == len(edges) - 2:
+            if lo <= v <= hi:
+                return str(idx)
+        else:
+            if lo <= v < hi:
+                return str(idx)
+    return "oob"
+
+
+def _label_from_bin(bin_idx: str, labels: List[str]) -> str:
+    try:
+        idx = int(bin_idx)
+    except Exception:
+        return "unknown"
+    if 0 <= idx < len(labels):
+        return labels[idx]
+    return "unknown"
+
+
+def _s1q_label(bin_idx: str) -> str:
+    try:
+        idx = int(bin_idx)
+    except Exception:
+        return "S1Q_binNA"
+    return f"S1Q_bin{idx}"
+
+
+def _family_id(r1_bin: str, s2s1_bin: str, band_bin: str, rho_bin: str, dof_grade: str) -> str:
+    fp = f"r1={r1_bin}|r2={s2s1_bin}|bc={band_bin}|rho={rho_bin}|grade={dof_grade}"
+    digest = hashlib.sha1(fp.encode("ascii")).hexdigest()[:4].upper()
+    return f"F{digest}"
+
+
+def _family_friendly(
+    dof_grade: str,
+    lock_quality_q: Optional[float],
+    participation_entropy: Optional[float],
+    band_bin: str,
+    r1_bin: str,
+    s2s1_bin: str,
+) -> str:
+    if dof_grade == "C":
+        return "REJECTED"
+    lock_label = "LOCKED" if lock_quality_q is not None and np.isfinite(lock_quality_q) and lock_quality_q >= 0.998 else "SOFT_LOCK"
+    ent_label = (
+        "lowEnt"
+        if participation_entropy is not None
+        and np.isfinite(participation_entropy)
+        and participation_entropy <= 0.01
+        else "midEnt"
+    )
+    band_label = _label_from_bin(band_bin, BAND_LABELS)
+    r1_label = _s1q_label(r1_bin)
+    return f"{lock_label}_{ent_label}_{band_label}_{r1_label}_S2S1_bin{s2s1_bin}"
 
 
 def _fill_harmonic_fields(rows: List[Dict], hbar_sim: Optional[float]) -> int:
@@ -91,6 +168,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=Path("data/processed/ola1/dof_dna_catalog.csv"))
     parser.add_argument("--hbar-sim", type=Path, default=None)
     parser.add_argument("--use-mass-sim", action="store_true", help="Ignored for DNA; kept for compatibility.")
+    parser.add_argument("--with-sm-trace", action="store_true", help="Include SM trace columns for audit.")
     parser.add_argument("--update-proxies", action="store_true")
     parser.add_argument("--cluster-radii", action="store_true")
     args = parser.parse_args()
@@ -111,30 +189,59 @@ def main() -> None:
     if filled:
         print(f"[dof_dna] harmonic fields filled in {filled} rows")
 
-    universe = load_universe(args.sm_universe)
-    catalog = universe.get("particles", [])
-
     dna_rows: List[Dict[str, object]] = []
     if args.use_mass_sim:
         print("[dof_dna] --use-mass-sim ignored: DNA catalog uses raw band_energies_gev only.")
 
+    catalog = []
+    if args.with_sm_trace:
+        universe = load_universe(args.sm_universe)
+        catalog = universe.get("particles", [])
+
     for row in rows:
         levels_full = extract_levels(row.get("band_energies_gev", "[]"))
 
-        best_raw = float("inf")
-        for particle in catalog:
-            levels = [e for e in levels_full if _in_window(e, particle.get("energy_window", [0.0, 10.0]))]
-            res = compute_match_stats(levels, particle.get("masses_gev", []), particle.get("tolerances", {}))
-            if np.isfinite(res["d_total"]) and res["d_total"] < best_raw:
-                best_raw = res["d_total"]
-        d_total = best_raw if np.isfinite(best_raw) else None
-        dna_grade = _grade_from_d_total(d_total)
         r1 = _to_float(row.get("R_S1_Q"))
         r2 = _to_float(row.get("R_S2_S1"))
+        band_count = _to_float(row.get("band_count"))
+        rho_lock = _to_float(row.get("rho_lock"))
+        lock_quality_q = _to_float(row.get("lock_quality_Q"))
+        participation_entropy = _to_float(row.get("participation_entropy"))
+        dof_grade = _grade_from_dof(lock_quality_q, participation_entropy, rho_lock)
+        r1_bin = _bin_index(r1, R1_EDGES)
+        s2s1_bin = _bin_index(r2, S2S1_EDGES)
+        band_bin = _bin_index(band_count, BAND_COUNT_EDGES)
+        rho_bin = _bin_index(rho_lock, RHO_LOCK_EDGES)
+        dof_family_id = _family_id(r1_bin, s2s1_bin, band_bin, rho_bin, dof_grade)
+        dof_family_friendly = _family_friendly(
+            dof_grade,
+            lock_quality_q,
+            participation_entropy,
+            band_bin,
+            r1_bin,
+            s2s1_bin,
+        )
+
+        sm_best_name = ""
+        sm_d_total = None
+        sm_jpc = ""
+        if args.with_sm_trace:
+            best_raw = float("inf")
+            for particle in catalog:
+                levels = [e for e in levels_full if _in_window(e, particle.get("energy_window", [0.0, 10.0]))]
+                res = compute_match_stats(levels, particle.get("masses_gev", []), particle.get("tolerances", {}))
+                if np.isfinite(res["d_total"]) and res["d_total"] < best_raw:
+                    best_raw = res["d_total"]
+                    sm_best_name = str(particle.get("name", ""))
+                    sm_jpc = str(particle.get("jpc", "") or "")
+            sm_d_total = best_raw if np.isfinite(best_raw) else None
         cluster_id = _cluster_id(r1, r2) if args.cluster_radii else ""
         dna_rows.append(
             {
                 "run_id": row.get("run_id"),
+                "dof_grade": dof_grade,
+                "dof_family_id": dof_family_id,
+                "dof_family_friendly": dof_family_friendly,
                 "R_S1_Q": row.get("R_S1_Q"),
                 "R_S2_S1": row.get("R_S2_S1"),
                 "dominant_parity": row.get("dominant_parity"),
@@ -143,11 +250,13 @@ def main() -> None:
                 "rho_lock": row.get("rho_lock"),
                 "lock_quality_Q": row.get("lock_quality_Q"),
                 "participation_entropy": row.get("participation_entropy"),
-                "d_total": d_total,
-                "dna_grade": dna_grade,
                 "dna_cluster_id": cluster_id,
             }
         )
+        if args.with_sm_trace:
+            dna_rows[-1]["sm_best_name"] = sm_best_name
+            dna_rows[-1]["sm_d_total"] = sm_d_total
+            dna_rows[-1]["sm_jpc"] = sm_jpc
 
     if args.cluster_radii:
         counts: Dict[str, int] = {}
@@ -157,10 +266,13 @@ def main() -> None:
         for r in dna_rows:
             r["dna_cluster_size"] = counts.get(r.get("dna_cluster_id") or "", 0)
 
-    dna_rows.sort(key=lambda r: (r.get("d_total") is None, r.get("d_total")))
+    dna_rows.sort(key=lambda r: (r.get("run_id") is None, r.get("run_id")))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
         "run_id",
+        "dof_grade",
+        "dof_family_id",
+        "dof_family_friendly",
         "R_S1_Q",
         "R_S2_S1",
         "dominant_parity",
@@ -169,12 +281,12 @@ def main() -> None:
         "rho_lock",
         "lock_quality_Q",
         "participation_entropy",
-        "d_total",
-        "dna_grade",
-        "dna_cluster_id",
     ]
     if args.cluster_radii:
+        fieldnames.append("dna_cluster_id")
         fieldnames.append("dna_cluster_size")
+    if args.with_sm_trace:
+        fieldnames.extend(["sm_best_name", "sm_d_total", "sm_jpc"])
     with args.output.open("w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
