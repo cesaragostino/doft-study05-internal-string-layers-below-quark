@@ -1,3 +1,4 @@
 data/processed/**/*.jsonl
+*.jsonl
 .DS_Store
 **/.DS_Store
