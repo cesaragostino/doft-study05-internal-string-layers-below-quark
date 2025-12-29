@@ -1,0 +1,12 @@
+run_id,dof_grade,dof_family_id,dof_family_friendly,R_S1_Q,R_S2_S1,dominant_parity,lock_Q0_S1_0_1-1_ratio,band_count,rho_lock,lock_quality_Q,participation_entropy,dna_cluster_id
+0,C,FCEA4,REJECTED,,,,,0,,,,
+1,C,FCEA4,REJECTED,,,,,0,,,,
+10,C,FCEA4,REJECTED,,,,,0,,,,
+2,C,FCEA4,REJECTED,,,,,0,,,,
+3,C,FCEA4,REJECTED,,,,,0,,,,
+4,C,FCEA4,REJECTED,,,,,0,,,,
+5,C,FCEA4,REJECTED,,,,,0,,,,
+6,C,FCEA4,REJECTED,,,,,0,,,,
+7,C,FCEA4,REJECTED,,,,,0,,,,
+8,C,FCEA4,REJECTED,,,,,0,,,,
+9,C,FCEA4,REJECTED,,,,,0,,,,

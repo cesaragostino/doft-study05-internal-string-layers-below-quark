@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional
 
 import numpy as np
 
@@ -44,6 +44,7 @@ def generate_configuration(
     k_scale_q: float | None = None,
     k_scale_internal: float | None = None,
     priors=None,
+    attempt_recorder: Callable[[Dict[str, object]], None] | None = None,
 ) -> tuple[Optional[SimulationConfig], Dict[str, int]]:
     """Generate a configuration satisfying the complexity constraint.
 
@@ -54,7 +55,7 @@ def generate_configuration(
     case_name = case
     meta = {"last_complexity": None, "last_memory_terms": None, "last_n_modes": None}
 
-    for _ in range(attempts):
+    for attempt_idx in range(attempts):
         ratio_overrides = None
         if priors:
             ratio_overrides = {
@@ -173,7 +174,27 @@ def generate_configuration(
         complexity = compute_complexity(modes, inter)
         memory_terms = count_memory_terms(inter)
         meta.update({"last_complexity": complexity, "last_memory_terms": memory_terms, "last_n_modes": len(modes)})
-        if max_complexity > 0 and complexity > max_complexity:
+        accepted = not (max_complexity > 0 and complexity > max_complexity)
+        if attempt_recorder is not None:
+            attempt_recorder(
+                {
+                    "attempt_index": attempt_idx,
+                    "case_name": case_name,
+                    "n_q": n_q,
+                    "n_s1": n_s1,
+                    "n_s2": n_s2,
+                    "n_s3": n_s3,
+                    "n_modes": len(modes),
+                    "complexity": complexity,
+                    "memory_terms": memory_terms,
+                    "R_S1_Q": R_S1_Q,
+                    "R_S2_S1": R_S2_S1,
+                    "R_S3_S2": R_S3_S2,
+                    "f_Q": f_Q,
+                    "accepted": accepted,
+                }
+            )
+        if not accepted:
             continue
 
         return SimulationConfig(

@@ -1,0 +1,29 @@
+{
+  "seed": 42,
+  "max_complexity": 35,
+  "engine_config_path": "data/raw/engine_core3.json",
+  "engine_config_hash": "3132f00906d498180c56dcc24eb039275ffe8458415743005722528de6cf9784",
+  "run_session_id": "12488f0adc074d1e9c1eb3754fd87ed1",
+  "session_tag": "20251228_205724",
+  "inputs": [
+    {
+      "case_name": "Ola1_3-2-5",
+      "f_Q_base": 1.0,
+      "f_Q_Hz": 3.9356701031340635e+23,
+      "f_S1_Hz": 3.2235410850117144e+24,
+      "f_S2_Hz": 1.7756454107837165e+25,
+      "f_S3_Hz": null,
+      "R_S1_Q": 8.190577463402574,
+      "R_S2_S1": 5.508369100799793,
+      "R_S3_S2": null,
+      "N": {
+        "Q": 3,
+        "S1": 2,
+        "S2": 5,
+        "S3": 0
+      },
+      "memory_terms": 4,
+      "complexity": 14
+    }
+  ]
+}

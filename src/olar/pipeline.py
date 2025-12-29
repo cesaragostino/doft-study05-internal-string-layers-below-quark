@@ -1,0 +1,212 @@
+"""Ola-recursive pipeline runner (V1)."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Optional
+
+
+def _load_json(path: Path) -> Any:
+    return json.loads(path.read_text())
+
+
+def _resolve_path(path_str: str, output_root: Optional[Path]) -> Path:
+    path = Path(path_str)
+    if path.is_absolute():
+        return path
+    if output_root is not None:
+        return output_root / path
+    return path
+
+
+def _run_step(step_id: str, cmd: List[str]) -> None:
+    print(f"[olar_pipeline] step={step_id} status=running", flush=True)
+    print(f"[olar_pipeline] step={step_id} cmd={' '.join(cmd)}", flush=True)
+    subprocess.run(cmd, check=True)
+    print(f"[olar_pipeline] step={step_id} status=done", flush=True)
+
+
+def _build_ola1_export_cmd(config_path: Path) -> List[str]:
+    cfg = _load_json(config_path)
+    proxies_csv = cfg.get("proxies_csv")
+    output_csv = cfg.get("output_csv")
+    if not proxies_csv or not output_csv:
+        raise RuntimeError("ola1_export_dna config requires proxies_csv and output_csv")
+    cmd = [sys.executable, "-m", "ola1.ola1_dof_dna_catalog", "--proxies-csv", str(proxies_csv), "--output", str(output_csv)]
+    sm_universe = cfg.get("sm_universe")
+    if sm_universe:
+        cmd.extend(["--sm-universe", str(sm_universe)])
+    hbar_sim = cfg.get("hbar_sim")
+    if hbar_sim:
+        cmd.extend(["--hbar-sim", str(hbar_sim)])
+    if cfg.get("with_sm_trace"):
+        cmd.append("--with-sm-trace")
+    if cfg.get("update_proxies"):
+        cmd.append("--update-proxies")
+    if cfg.get("cluster_radii"):
+        cmd.append("--cluster-radii")
+    return cmd
+
+
+def _build_core_promotion_cmd(config_path: Path) -> List[str]:
+    cfg = _load_json(config_path)
+    ola_from = cfg.get("ola_from")
+    ola_to = cfg.get("ola_to")
+    if ola_from is None or ola_to is None:
+        raise RuntimeError("core_promotion config requires ola_from and ola_to")
+    cmd = [
+        sys.executable,
+        "-m",
+        "core.promotion.blocks_from_ola",
+        "--ola-from",
+        str(int(ola_from)),
+        "--ola-to",
+        str(int(ola_to)),
+    ]
+    if cfg.get("run_inputs"):
+        cmd.extend(["--run-inputs", str(cfg.get("run_inputs"))])
+    if cfg.get("entities_jsonl"):
+        cmd.extend(["--entities", str(cfg.get("entities_jsonl"))])
+    if cfg.get("genome_layer_csv"):
+        cmd.extend(["--genome", str(cfg.get("genome_layer_csv"))])
+    if cfg.get("blocks_prev_json"):
+        cmd.extend(["--blocks-prev", str(cfg.get("blocks_prev_json"))])
+    if cfg.get("output_blocks_json"):
+        cmd.extend(["--output", str(cfg.get("output_blocks_json"))])
+    if cfg.get("dna_output_csv"):
+        cmd.extend(["--dna-output", str(cfg.get("dna_output_csv"))])
+    return cmd
+
+
+def _build_ola1_export_block_id_cmd(config_path: Path) -> List[str]:
+    cfg = _load_json(config_path)
+    blocks_json = cfg.get("blocks_json")
+    dna_csv = cfg.get("dna_csv")
+    output_csv = cfg.get("output_csv")
+    if not blocks_json or not dna_csv or not output_csv:
+        raise RuntimeError("ola1_export_dna_block_id config requires blocks_json, dna_csv, output_csv")
+    cmd = [
+        sys.executable,
+        "-m",
+        "ola1.ola1_export_dna_block_id",
+        "--blocks-json",
+        str(blocks_json),
+        "--dna-csv",
+        str(dna_csv),
+        "--output",
+        str(output_csv),
+    ]
+    if cfg.get("allow_missing_dna"):
+        cmd.append("--allow-missing-dna")
+    return cmd
+
+
+def _iter_cfg_paths(cfg: Dict[str, Any], keys: Iterable[str]) -> Iterable[str]:
+    for key in keys:
+        val = cfg.get(key)
+        if isinstance(val, str) and val:
+            yield val
+
+
+def _collect_step_inputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
+    if step_type in ("olar_explorer", "olar_sweep", "core_catalog_build", "core_taxonomy"):
+        inputs = cfg.get("inputs", {})
+        if isinstance(inputs, dict):
+            return [str(v) for v in inputs.values() if isinstance(v, str)]
+    if step_type == "ola1_export_dna":
+        return list(_iter_cfg_paths(cfg, ("proxies_csv", "sm_universe")))
+    if step_type == "ola1_export_dna_block_id":
+        return list(_iter_cfg_paths(cfg, ("blocks_json", "dna_csv")))
+    if step_type == "core_promote_blocks":
+        return list(
+            _iter_cfg_paths(
+                cfg,
+                ("run_inputs", "entities_jsonl", "genome_layer_csv", "blocks_prev_json"),
+            )
+        )
+    return []
+
+
+def _collect_step_outputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
+    if step_type in ("olar_explorer", "olar_sweep", "core_catalog_build", "core_taxonomy"):
+        outputs = cfg.get("outputs", {})
+        if isinstance(outputs, dict):
+            optional_keys = {str(k) for k in (cfg.get("optional_outputs") or [])}
+            return [
+                str(v)
+                for k, v in outputs.items()
+                if isinstance(v, str) and str(k) not in optional_keys
+            ]
+    if step_type == "ola1_export_dna":
+        return list(_iter_cfg_paths(cfg, ("output_csv",)))
+    if step_type == "ola1_export_dna_block_id":
+        return list(_iter_cfg_paths(cfg, ("output_csv",)))
+    if step_type == "core_promote_blocks":
+        return list(_iter_cfg_paths(cfg, ("output_blocks_json", "dna_output_csv")))
+    return []
+
+
+def _validate_paths(paths: Iterable[str], output_root: Optional[Path], label: str, step_id: str) -> None:
+    missing = []
+    for path_str in paths:
+        path = _resolve_path(path_str, output_root)
+        if not path.exists():
+            missing.append(str(path))
+    if missing:
+        raise RuntimeError(f"[olar_pipeline] step={step_id} missing {label}: {missing}")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="olar pipeline (V1).")
+    parser.add_argument("--sequence", required=True, help="Path to run_sequence.json.")
+    parser.add_argument("--output-root", required=False, help="Override output root.")
+    args = parser.parse_args()
+
+    sequence_path = Path(args.sequence)
+    cfg = _load_json(sequence_path)
+    output_root = Path(args.output_root) if args.output_root else None
+
+    steps = cfg.get("steps", [])
+    for step in steps:
+        if not step.get("enabled", True):
+            continue
+        step_id = step.get("id", "unknown")
+        step_type = step.get("type")
+        config_path = _resolve_path(step.get("config", ""), output_root)
+        if not config_path.exists():
+            raise RuntimeError(f"Config not found for step {step_id}: {config_path}")
+
+        step_cfg = _load_json(config_path)
+        input_paths = _collect_step_inputs(step_type, step_cfg)
+        if input_paths:
+            _validate_paths(input_paths, output_root, "inputs", step_id)
+
+        if step_type == "olar_explorer":
+            cmd = [sys.executable, "-m", "olar.explorer", "--config", str(config_path)]
+        elif step_type == "olar_sweep":
+            cmd = [sys.executable, "-m", "olar.sweep", "--config", str(config_path)]
+        elif step_type == "core_catalog_build":
+            cmd = [sys.executable, "-m", "core.catalog.builder", "--config", str(config_path)]
+        elif step_type == "core_taxonomy":
+            cmd = [sys.executable, "-m", "core.taxonomy.builder", "--config", str(config_path)]
+        elif step_type == "ola1_export_dna":
+            cmd = _build_ola1_export_cmd(config_path)
+        elif step_type == "ola1_export_dna_block_id":
+            cmd = _build_ola1_export_block_id_cmd(config_path)
+        elif step_type == "core_promote_blocks":
+            cmd = _build_core_promotion_cmd(config_path)
+        else:
+            raise RuntimeError(f"Unknown step type: {step_type}")
+
+        _run_step(step_id, cmd)
+        output_paths = _collect_step_outputs(step_type, step_cfg)
+        if output_paths:
+            _validate_paths(output_paths, output_root, "outputs", step_id)
+
+
+if __name__ == "__main__":
+    main()

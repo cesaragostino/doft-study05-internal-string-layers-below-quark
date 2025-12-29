@@ -180,7 +180,7 @@ Append-only:
 
 ```
 attempts.jsonl
-entities_candidates.jsonl (optional)
+entities_candidates.jsonl
 ```
 
 ---

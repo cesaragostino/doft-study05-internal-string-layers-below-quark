@@ -48,6 +48,20 @@ def main() -> None:
     parser.add_argument("--max-blocks-per-particle", type=int, default=10000)
     parser.add_argument("--harmonic-mode-config", type=Path, default=None)
     parser.add_argument("--hbar-sim-output", type=Path, default=None)
+    parser.add_argument(
+        "--runs-full-jsonl",
+        type=Path,
+        default=None,
+        help="runs_full.jsonl path (from run_sweep).",
+    )
+    parser.add_argument(
+        "--blocks-canonical-output",
+        type=Path,
+        default=None,
+        help="simple_blocks_canonical.json output path.",
+    )
+    parser.add_argument("--skip-canonical", action="store_true")
+    parser.add_argument("--skip-validate", action="store_true")
     parser.add_argument("--skip-analyze", action="store_true")
     parser.add_argument("--skip-dna", action="store_true")
     parser.add_argument("--skip-report", action="store_true")
@@ -59,6 +73,7 @@ def main() -> None:
     proxies_csv = processed_dir / f"{args.case}_all_runs_proxies.csv"
     zoo_matches_csv = processed_dir / "zoo_matches.csv"
     simple_blocks_json = processed_dir / "simple_blocks.json"
+    simple_blocks_canonical = args.blocks_canonical_output or (processed_dir / "simple_blocks_canonical.json")
     selection_log = args.selection_log or (processed_dir / "ola1_blocks_selection.csv")
     hbar_out = args.hbar_sim_output or (processed_dir / "hbar_sim_calibration.json")
     report_path = processed_dir / f"{args.case}_ola1_report.md"
@@ -223,6 +238,45 @@ def main() -> None:
             ]
         ),
     )
+
+    if not args.skip_canonical:
+        runs_full = args.runs_full_jsonl or (processed_dir / "global" / "runs_full.jsonl")
+        _run_step(
+            "ola1_export_dna_block_id (canonical)",
+            _with_pythonpath(
+                [
+                    sys.executable,
+                    "-m",
+                    "ola1.ola1_export_dna_block_id",
+                    "--blocks-json",
+                    str(simple_blocks_json),
+                    "--dna-csv",
+                    str(dna_catalog),
+                    "--output",
+                    str(processed_dir / "dof_dna_catalog_by_block_id.csv"),
+                    "--runs-full-jsonl",
+                    str(runs_full),
+                    "--blocks-output",
+                    str(simple_blocks_canonical),
+                ]
+            ),
+        )
+        if not args.skip_validate:
+            _run_step(
+                "validate_outputs",
+                _with_pythonpath(
+                    [
+                        sys.executable,
+                        "scripts/validate_outputs.py",
+                        "--blocks-json",
+                        str(simple_blocks_canonical),
+                        "--dna-csv",
+                        str(processed_dir / "dof_dna_catalog_by_block_id.csv"),
+                        "--runs-full-jsonl",
+                        str(runs_full),
+                    ]
+                ),
+            )
 
     if not args.skip_report:
         _run_step(

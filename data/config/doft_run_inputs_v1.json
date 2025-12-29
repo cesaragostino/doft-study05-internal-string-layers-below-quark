@@ -1,0 +1,26 @@
+{
+  "schema_version": "doft_run_inputs_v1",
+  "inputs": {
+    "ola1": {
+      "simple_blocks_json": "data/processed/ola1/simple_blocks.json",
+      "dof_dna_catalog_csv": "data/processed/ola1/dof_dna_catalog.csv",
+      "provenance_json": "data/processed/ola1/provenance_ola1_export.json"
+    },
+    "sm_audit_optional": {
+      "enabled": true,
+      "sm_universe_json": "data/raw/sm_universe.json",
+      "hbar_sim_calibration_json": "data/raw/hbar_sim_calibration.json"
+    }
+  },
+  "outputs": {
+    "root": "data/processed",
+    "by_ola": {
+      "ola2": "data/processed/ola2",
+      "ola3": "data/processed/ola3"
+    }
+  },
+  "identity": {
+    "block_id_key": "block_id",
+    "require_dna_for_blocks": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "core_catalog_build_v1",
+  "ola": 2,
+  "inputs": {
+    "attempts_jsonl": "data/processed/ola2/raw/attempts.jsonl",
+    "evaluations_jsonl": "data/processed/ola2/raw/evaluations.jsonl",
+    "templates_json": "data/config/ola2/ola2_templates.json"
+  },
+  "outputs": {
+    "catalog_dir": "data/processed/ola2/catalog",
+    "entities_jsonl": "data/processed/ola2/catalog/entities.jsonl",
+    "genome_layer_csv": "data/processed/ola2/catalog/genome_layers_ola2.csv",
+    "rollups_json": "data/processed/ola2/catalog/rollups.json"
+  }
+}

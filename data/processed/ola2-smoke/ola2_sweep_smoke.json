@@ -1,0 +1,89 @@
+{
+  "schema_version": "olar_sweep_config_v1",
+  "ola": 2,
+  "inputs": {
+    "attempts_jsonl": "data/processed/ola2-smoke/ola2-smoke/attempts.jsonl",
+    "entities_candidates_jsonl": "data/processed/ola2-smoke/ola2-smoke/entities_candidates.jsonl"
+  },
+  "candidate_source": {
+    "mode": "attempts",
+    "filter": {
+      "require_candidate": true,
+      "top_k_by": "priority_score",
+      "top_k": 10
+    }
+  },
+  "seed_policy": {
+    "mode": "deterministic",
+    "salt": "sweep_v1",
+    "seeds": 4,
+    "min_seeds_required": 2
+  },
+  "neighborhood": {
+    "mode": "param_bin_neighbors",
+    "max_neighbor_bins": 1
+  },
+  "budgets": {
+    "max_evals_per_entity": 10,
+    "early_stop": {
+      "enabled": true,
+      "after_seeds": 4,
+      "fail_if_R_mean_below": 0.4
+    }
+  },
+  "engine_defaults": {
+    "dt": 1.0,
+    "T_ticks": 200,
+    "W": 20,
+    "K_local": 0.45,
+    "kappa_global": 0.3,
+    "tau_field": 120.0,
+    "sigma0": 0.3,
+    "sigma_tc": 60.0,
+    "sigma_theta_init": 0.5
+  },
+  "engine_variation": {
+    "enabled": true,
+    "mode": "bin_sample",
+    "bins": {
+      "K_local_edges": [
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ],
+      "kappa_edges": [
+        0.1,
+        0.2,
+        0.4,
+        0.6
+      ],
+      "tau_field_edges": [
+        40,
+        80,
+        120,
+        160,
+        240
+      ],
+      "sigma0_edges": [
+        0.1,
+        0.3,
+        0.5
+      ],
+      "sigma_tc_edges": [
+        40,
+        60,
+        90,
+        120
+      ]
+    }
+  },
+  "olar_inputs": {
+    "path": ""
+  },
+  "outputs": {
+    "raw_dir": "data/processed/ola2-smoke/raw",
+    "evaluations_jsonl": "data/processed/ola2-smoke/ola2-sweep-smoke/evaluations.jsonl",
+    "report_md": "data/processed/ola2-smoke/ola2-sweep-smoke/sweep_report.md"
+  }
+}

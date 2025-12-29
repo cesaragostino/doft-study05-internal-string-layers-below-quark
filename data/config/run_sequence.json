@@ -1,0 +1,37 @@
+{
+  "schema_version": "doft_run_sequence_v1",
+  "run_name": "doft_v1_ola2_minimal",
+  "output_root": "data/processed",
+  "steps": [
+    {
+      "id": "ola1_export_dna",
+      "type": "ola1_export_dna",
+      "config": "data/config/ola1/ola1_export_dna.json",
+      "enabled": true
+    },
+    {
+      "id": "ola2_explorer",
+      "type": "olar_explorer",
+      "config": "data/config/ola2/ola2_explorer.json",
+      "enabled": true
+    },
+    {
+      "id": "ola2_sweep",
+      "type": "olar_sweep",
+      "config": "data/config/ola2/ola2_sweep.json",
+      "enabled": true
+    },
+    {
+      "id": "ola2_catalog_build",
+      "type": "core_catalog_build",
+      "config": "data/config/ola2/ola2_catalog_build.json",
+      "enabled": true
+    },
+    {
+      "id": "ola2_taxonomy",
+      "type": "core_taxonomy",
+      "config": "data/config/ola2/ola2_taxonomy.json",
+      "enabled": true
+    }
+  ]
+}

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import hashlib
 import math
 from datetime import datetime, timezone
 from pathlib import Path
@@ -38,6 +39,7 @@ from ola1.families import (
     make_priors_for_family,
 )
 from ola1.simulation import SimulationParams, pick_peaks, simulate
+from core.io.schema_validation import validate_theta_internal
 from ola1.layers import Layer
 from ola1.sweep import SimulationConfig, generate_configuration
 
@@ -174,6 +176,8 @@ def _serialize_theta(config: SimulationConfig) -> Dict:
         }
         for m in config.modes
     ]
+    if not modes:
+        raise RuntimeError("theta_internal missing modes in run_sweep serialization")
     intra = [
         {
             "i": {"layer": c.i[0].name, "index": c.i[1]},
@@ -203,10 +207,24 @@ def _serialize_theta(config: SimulationConfig) -> Dict:
             }
         )
     return {
+        "schema_version": "theta_internal_v1",
         "modes": modes,
         "intra_couplings": intra,
         "inter_couplings": inter,
     }
+
+
+def _hash_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _hash_file(path: Path) -> str:
+    data = path.read_bytes()
+    return hashlib.sha256(data).hexdigest()
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _ensure_dirs(raw_dir: Path, processed_dir: Path) -> None:
@@ -459,6 +477,37 @@ def run_sweep(
     sim_params = SimulationParams(**sim_params_cfg) if sim_params_cfg else SimulationParams()
 
     partial_dir = processed_case_dir / "partial"
+    all_attempts_path = processed_case_dir / "all_attempts.jsonl"
+    attempt_id_counter = 0
+    if all_attempts_path.exists():
+        with all_attempts_path.open() as af:
+            attempt_id_counter = sum(1 for _ in af)
+    runs_full_path = processed_case_dir / "runs_full.jsonl"
+    runs_rejected_path = processed_case_dir / "runs_rejected.jsonl"
+    existing_full_run_ids: set[int] = set()
+    existing_rejected_run_ids: set[int] = set()
+    if runs_full_path.exists():
+        for line in runs_full_path.read_text().splitlines():
+            if not line.strip():
+                continue
+            try:
+                rec = json.loads(line)
+            except Exception:
+                continue
+            rid = rec.get("run_id")
+            if isinstance(rid, (int, float)):
+                existing_full_run_ids.add(int(rid))
+    if runs_rejected_path.exists():
+        for line in runs_rejected_path.read_text().splitlines():
+            if not line.strip():
+                continue
+            try:
+                rec = json.loads(line)
+            except Exception:
+                continue
+            rid = rec.get("run_id")
+            if isinstance(rid, (int, float)):
+                existing_rejected_run_ids.add(int(rid))
     partial_runs_path = None
     if partial_flush_every and partial_flush_every > 0:
         partial_dir.mkdir(parents=True, exist_ok=True)
@@ -492,6 +541,32 @@ def run_sweep(
 
     saved_since_print = 0
     partial_buffer: List[Dict] = []
+
+    code_hash = _hash_file(Path(__file__))
+    config_hash = ""
+    if engine_config_hash:
+        config_hash = str(engine_config_hash)
+    elif engine_config_path and Path(engine_config_path).exists():
+        config_hash = _hash_file(Path(engine_config_path))
+    inputs_payload = {
+        "case": case,
+        "seed": seed,
+        "runs": runs,
+        "n_q": n_q,
+        "n_s1": n_s1,
+        "n_s2": n_s2,
+        "n_s3": n_s3,
+        "max_complexity": max_complexity,
+        "attempts": attempts,
+        "memory_cfg": memory_cfg,
+        "adaptive_cfg": adaptive_cfg,
+        "sim_params_cfg": sim_params_cfg,
+        "layer_state_config": layer_state_config,
+        "engine_config_path": engine_config_path,
+        "engine_config_hash": engine_config_hash,
+        "family_spec": family_spec.name if family_spec else None,
+    }
+    inputs_hash = _hash_text(json.dumps(inputs_payload, sort_keys=True))
 
     start_run_idx = 0
     if resume and partial_runs_path and partial_runs_path.exists():
@@ -555,6 +630,32 @@ def run_sweep(
                 saved_since_print += len(partial_buffer)
                 partial_buffer = []
 
+    def _append_full(record: Dict) -> None:
+        rid = record.get("run_id")
+        if isinstance(rid, (int, float)):
+            rid = int(rid)
+        if isinstance(rid, int) and rid in existing_full_run_ids:
+            return
+        with runs_full_path.open("a") as rf:
+            rf.write(json.dumps(record) + "\n")
+        if isinstance(rid, int):
+            existing_full_run_ids.add(rid)
+
+    def _append_rejected(record: Dict) -> None:
+        rid = record.get("run_id")
+        if isinstance(rid, (int, float)):
+            rid = int(rid)
+        if isinstance(rid, int) and rid in existing_rejected_run_ids:
+            return
+        with runs_rejected_path.open("a") as rf:
+            rf.write(json.dumps(record) + "\n")
+        if isinstance(rid, int):
+            existing_rejected_run_ids.add(rid)
+
+    def _append_attempt(record: Dict) -> None:
+        with all_attempts_path.open("a") as af:
+            af.write(json.dumps(record) + "\n")
+
     def _log_run_status(run_idx: int, status: str, e_internal: float | None = None):
         try:
             if e_internal is None or not math.isfinite(float(e_internal)):
@@ -609,6 +710,35 @@ def run_sweep(
             saved_since_print = 0
         else:
             print(f"[run_sweep] run {run_idx + 1}/{runs}", flush=True)
+        def _record_attempt(attempt_data: Dict[str, object]) -> None:
+            nonlocal attempt_id_counter
+            attempt_id_counter += 1
+            n_modes = int(attempt_data.get("n_modes") or 0)
+            record = {
+                "schema_version": "ola1_attempt_v1",
+                "run_id": run_idx,
+                "attempt_id": attempt_id_counter,
+                "N": n_modes,
+                "template_name": str(attempt_data.get("case_name") or ""),
+                "params": {
+                    "n_q": attempt_data.get("n_q"),
+                    "n_s1": attempt_data.get("n_s1"),
+                    "n_s2": attempt_data.get("n_s2"),
+                    "n_s3": attempt_data.get("n_s3"),
+                    "R_S1_Q": attempt_data.get("R_S1_Q"),
+                    "R_S2_S1": attempt_data.get("R_S2_S1"),
+                    "R_S3_S2": attempt_data.get("R_S3_S2"),
+                    "f_Q": attempt_data.get("f_Q"),
+                },
+                "metrics_raw": {
+                    "complexity": attempt_data.get("complexity"),
+                    "memory_terms": attempt_data.get("memory_terms"),
+                    "n_modes": n_modes,
+                },
+                "viable": bool(attempt_data.get("accepted")),
+            }
+            _append_attempt(record)
+
         config, gen_meta = generate_configuration(
             case=case,
             rng=rng,
@@ -619,6 +749,7 @@ def run_sweep(
             max_complexity=max_complexity,
             attempts=attempts,
             priors=family_priors,
+            attempt_recorder=_record_attempt,
         )
         if config is None:
             rejected += 1
@@ -635,6 +766,27 @@ def run_sweep(
                     "n_modes_last": gen_meta.get("last_n_modes"),
                     "n_memory_terms_last": gen_meta.get("last_memory_terms"),
                     "complexity_estimated": gen_meta.get("last_complexity"),
+                }
+            )
+            _append_rejected(
+                {
+                    "schema_version": "ola1_run_v1",
+                    "run_id": run_idx,
+                    "timestamp_utc": _utc_now(),
+                    "seed": seed,
+                    "status": "rejected",
+                    "theta_internal": None,
+                    "provenance": {
+                        "config_hash": config_hash,
+                        "code_hash": code_hash,
+                        "inputs_hash": inputs_hash,
+                    },
+                    "metrics": {
+                        "R_mean_lastW": None,
+                        "phase_var_lastW": None,
+                        "QualityLock": None,
+                    },
+                    "viable": False,
                 }
             )
             _append_partial(run_outputs[-1])
@@ -682,6 +834,29 @@ def run_sweep(
                     "b_trace": [],
                     "t_trace": [],
                     "dt_used": None,
+                }
+            )
+            theta_internal = _serialize_theta(config)
+            validate_theta_internal(theta_internal)
+            _append_full(
+                {
+                    "schema_version": "ola1_run_v1",
+                    "run_id": run_idx,
+                    "timestamp_utc": _utc_now(),
+                    "seed": seed,
+                    "status": "unstable",
+                    "theta_internal": theta_internal,
+                    "provenance": {
+                        "config_hash": config_hash,
+                        "code_hash": code_hash,
+                        "inputs_hash": inputs_hash,
+                    },
+                    "metrics": {
+                        "R_mean_lastW": None,
+                        "phase_var_lastW": None,
+                        "QualityLock": None,
+                    },
+                    "viable": False,
                 }
             )
             _append_partial(run_outputs[-1])
@@ -1248,6 +1423,31 @@ def run_sweep(
             "adaptive_lock": sim_result.get("adaptive_lock"),
         }
         run_outputs.append(run_record)
+        theta_internal = run_record.get("theta_internal")
+        if not isinstance(theta_internal, dict):
+            raise RuntimeError(f"Missing theta_internal for run_id={run_idx}")
+        validate_theta_internal(theta_internal)
+        _append_full(
+            {
+                "schema_version": "ola1_run_v1",
+                "run_id": run_idx,
+                "timestamp_utc": _utc_now(),
+                "seed": seed,
+                "status": "ok",
+                "theta_internal": theta_internal,
+                "provenance": {
+                    "config_hash": config_hash,
+                    "code_hash": code_hash,
+                    "inputs_hash": inputs_hash,
+                },
+                "metrics": {
+                    "R_mean_lastW": run_record.get("R_mean_lastW"),
+                    "phase_var_lastW": run_record.get("phase_var_lastW"),
+                    "QualityLock": run_record.get("lock_quality_Q"),
+                },
+                "viable": bool(run_record.get("accepted_for_spacing")),
+            }
+        )
         flush_now = ((run_idx + 1) % partial_flush_every == 0) or (run_idx + 1 == runs)
         _append_partial(run_record, flush_now=flush_now)
         _log_run_status(run_idx, "ok", e_internal)

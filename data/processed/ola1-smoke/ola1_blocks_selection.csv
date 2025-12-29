@@ -1,0 +1,12 @@
+run_id,accepted,reasons,band_count,lock_quality_Q,structure_tier,d_total_best,selection_config_path,selection_config_hash
+10,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+8,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+1,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+0,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+6,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+4,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+9,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+3,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+5,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+7,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677
+2,0,dof_grade_not_a;missing_match;unknown_particle,,,,,data/raw/wave1_selection.json,b1272041db1364831db88d72b114cca8f67e70416c3ea4326f99e5d53e1ea677

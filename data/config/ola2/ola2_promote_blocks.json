@@ -1,0 +1,10 @@
+{
+  "schema_version": "core_promotion_blocks_v1",
+  "ola_from": 2,
+  "ola_to": 3,
+  "run_inputs": "data/config/doft_run_inputs_v4.json",
+  "entities_jsonl": "data/processed/ola2/catalog/entities.jsonl",
+  "genome_layer_csv": "data/processed/ola2/catalog/genome_layers_ola2_taxonomy.csv",
+  "output_blocks_json": "data/processed/ola2/promoted/simple_blocks.json",
+  "dna_output_csv": "data/processed/ola2/promoted/dof_dna_catalog.csv"
+}
