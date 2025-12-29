@@ -161,6 +161,28 @@ def _cluster_id(r1: Optional[float], r2: Optional[float]) -> str:
     return f"R1_{r1!r}_R2_{r2!r}"
 
 
+def _omega_ref_proxy(row: Dict[str, object]) -> float:
+    omega_ref_interp = _to_float(row.get("omega_ref_interp"))
+    if omega_ref_interp is not None:
+        return omega_ref_interp
+    omega_ref = _to_float(row.get("omega_ref"))
+    if omega_ref is not None:
+        return omega_ref
+    raise RuntimeError(f"omega_ref_proxy missing or non-finite for run_id={row.get('run_id')}")
+
+
+def _genes_min(row: Dict[str, object], omega_ref_proxy: float) -> str:
+    payload = {
+        "omega_ref_proxy": omega_ref_proxy,
+        "rho_lock": _to_float(row.get("rho_lock")),
+        "lock_quality_S1": _to_float(row.get("lock_quality_S1")),
+        "participation_entropy": _to_float(row.get("participation_entropy")),
+        "omega_eff": _to_float(row.get("omega_eff")),
+        "structure_tier": str(row.get("structure_tier") or ""),
+    }
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate DOF DNA catalog from proxies.")
     parser.add_argument("--proxies-csv", type=Path, required=True)
@@ -199,6 +221,9 @@ def main() -> None:
         catalog = universe.get("particles", [])
 
     for row in rows:
+        run_id = row.get("run_id")
+        if run_id in (None, ""):
+            raise RuntimeError("DNA catalog row missing run_id")
         levels_full = extract_levels(row.get("band_energies_gev", "[]"))
 
         r1 = _to_float(row.get("R_S1_Q"))
@@ -236,12 +261,16 @@ def main() -> None:
                     sm_jpc = str(particle.get("jpc", "") or "")
             sm_d_total = best_raw if np.isfinite(best_raw) else None
         cluster_id = _cluster_id(r1, r2) if args.cluster_radii else ""
+        omega_ref_proxy = _omega_ref_proxy(row)
+        genes_min = _genes_min(row, omega_ref_proxy)
         dna_rows.append(
             {
-                "run_id": row.get("run_id"),
+                "run_id": run_id,
                 "dof_grade": dof_grade,
                 "dof_family_id": dof_family_id,
                 "dof_family_friendly": dof_family_friendly,
+                "omega_ref_proxy": omega_ref_proxy,
+                "genes_min": genes_min,
                 "R_S1_Q": row.get("R_S1_Q"),
                 "R_S2_S1": row.get("R_S2_S1"),
                 "dominant_parity": row.get("dominant_parity"),
@@ -273,6 +302,8 @@ def main() -> None:
         "dof_grade",
         "dof_family_id",
         "dof_family_friendly",
+        "omega_ref_proxy",
+        "genes_min",
         "R_S1_Q",
         "R_S2_S1",
         "dominant_parity",

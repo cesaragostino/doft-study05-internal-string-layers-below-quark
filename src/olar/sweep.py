@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import heapq
 import json
+import math
 import platform
 import uuid
 from pathlib import Path
@@ -43,6 +44,29 @@ def _resolve_input_path(path_str: str) -> Path:
 def _seed_from_entity(entity_id: str, idx: int, salt: str) -> int:
     return int(hash_text(f"{entity_id}|{idx}|{salt}")[:8], 16) & 0xFFFFFFFF
 
+
+def _sanitize_numbers(obj: Any) -> Tuple[Any, bool]:
+    if isinstance(obj, float):
+        if math.isfinite(obj):
+            return obj, False
+        return None, True
+    if isinstance(obj, list):
+        sanitized = []
+        invalid = False
+        for item in obj:
+            val, bad = _sanitize_numbers(item)
+            sanitized.append(val)
+            invalid = invalid or bad
+        return sanitized, invalid
+    if isinstance(obj, dict):
+        sanitized: Dict[str, Any] = {}
+        invalid = False
+        for key, value in obj.items():
+            val, bad = _sanitize_numbers(value)
+            sanitized[key] = val
+            invalid = invalid or bad
+        return sanitized, invalid
+    return obj, False
 
 
 
@@ -138,11 +162,18 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="olar sweep (V1).")
     parser.add_argument("--config", required=True, help="Path to sweep config JSON.")
     parser.add_argument("--output-dir", required=False, help="Override output dir.")
+    parser.add_argument(
+        "--stop-file",
+        required=False,
+        help="Optional stop file path for graceful shutdown (checked between evals).",
+    )
     args = parser.parse_args()
 
     config_path = Path(args.config)
     cfg = _load_json(config_path)
     output_dir = Path(args.output_dir) if args.output_dir else None
+    stop_file = args.stop_file or cfg.get("stop_file")
+    stop_path = Path(stop_file) if stop_file else None
 
     inputs = cfg.get("inputs", {})
     entities_path = Path(inputs.get("entities_candidates_jsonl", "data/processed/ola2/raw/entities_candidates.jsonl"))
@@ -226,11 +257,14 @@ def main() -> None:
     evals_written_total = 0
     entities_processed = 0
     sweep_run_id = str(uuid.uuid4())
+    stop_requested = False
     neighborhood = cfg.get("neighborhood", {}) or {}
     neighborhood_mode = str(neighborhood.get("mode", "param_bin_neighbors"))
     max_neighbor_bins = int(neighborhood.get("max_neighbor_bins", 0))
 
     for cand_idx, entity in enumerate(entities):
+        if stop_requested:
+            break
         eid = str(entity.get("entity_id", ""))
         if not eid:
             continue
@@ -279,6 +313,7 @@ def main() -> None:
             bin_ids = [base_bin_id]
         evals_for_entity = 0
         stop_entity = False
+        early_cut = False
         for param_bin_id in bin_ids:
             engine_params = resolve_engine_params(
                 engine_defaults,
@@ -286,6 +321,14 @@ def main() -> None:
                 param_bin_id,
             )
             for idx, seed in enumerate(seed_list):
+                if stop_path and stop_path.exists():
+                    print("[olar_sweep] stop-file detected; stopping after current evals.")
+                    try:
+                        stop_path.unlink()
+                    except OSError:
+                        pass
+                    stop_requested = True
+                    break
                 payload = {
                     "entity_id": eid,
                     "seed": int(seed),
@@ -314,6 +357,7 @@ def main() -> None:
                     for k, v in metrics_raw_full.items()
                     if v is None or isinstance(v, (str, int, float, bool))
                 }
+                metrics_raw, numeric_invalid = _sanitize_numbers(metrics_raw)
                 early_cut = False
                 if early_enabled and idx + 1 >= early_after:
                     r_mean = metrics_raw.get("R_network_S1_mean_lastW")
@@ -322,6 +366,12 @@ def main() -> None:
                         metrics_raw["early_stop_threshold"] = float(early_threshold)
                         metrics_raw["early_stop_after_seeds"] = early_after
                         early_cut = True
+                tags_raw = {"seed_index": idx}
+                reasons_raw: List[str] = []
+                if numeric_invalid:
+                    tags_raw["numeric_valid"] = False
+                    tags_raw["candidate"] = False
+                    reasons_raw.append("numeric_invalid_nan_or_inf")
                 evaluation = {
                     "schema_version": "olar_evaluation_v1",
                     "run_session_id": sweep_run_id,
@@ -334,8 +384,8 @@ def main() -> None:
                     "engine_params_bin_id": param_bin_id,
                     "engine_params": engine_params,
                     "metrics_raw": metrics_raw,
-                    "tags_raw": {"seed_index": idx},
-                    "reasons_raw": [],
+                    "tags_raw": tags_raw,
+                    "reasons_raw": reasons_raw,
                     "provenance": {
                         "config_hash": config_hash,
                         "code_hash": code_hash,
@@ -347,17 +397,29 @@ def main() -> None:
                 eval_rows.append(evaluation)
                 evals_for_entity += 1
                 if flush_every and len(eval_rows) >= flush_every:
-                    evals_written_total += append_jsonl(evaluations_path, eval_rows, validate=validate_evaluation)
+                    evals_written_total += append_jsonl(
+                        evaluations_path,
+                        eval_rows,
+                        validate=validate_evaluation,
+                        allow_nan=False,
+                    )
                     eval_rows.clear()
                 if early_cut:
                     break
                 if max_evals_per_entity and evals_for_entity >= max_evals_per_entity:
                     stop_entity = True
                     break
-            if stop_entity or early_cut:
+            if stop_requested or stop_entity or early_cut:
                 break
+        if stop_requested:
+            break
 
-    written = append_jsonl(evaluations_path, eval_rows, validate=validate_evaluation)
+    written = append_jsonl(
+        evaluations_path,
+        eval_rows,
+        validate=validate_evaluation,
+        allow_nan=False,
+    )
     evals_written_total += written
     eval_size = evaluations_path.stat().st_size if evaluations_path.exists() else eval_offset
     write_resume_index(evaluations_path.with_suffix(".resume.json"), eval_size, {"ids": len(seen_eval_ids)})

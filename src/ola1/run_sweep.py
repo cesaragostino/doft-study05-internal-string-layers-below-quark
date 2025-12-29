@@ -6,10 +6,15 @@ import argparse
 import json
 import hashlib
 import math
+import os
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 import uuid
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional, Tuple
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from multiprocessing import get_context
+import signal
 
 import numpy as np
 
@@ -227,6 +232,760 @@ def _utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _u32_from_hash(text: str) -> int:
+    return int(hashlib.sha256(text.encode("utf-8")).hexdigest()[:8], 16)
+
+
+def _attempt_id(salt: str, run_id: int, attempt_idx: int) -> str:
+    return hashlib.sha256(f"{salt}:{run_id}:{attempt_idx}".encode("utf-8")).hexdigest()[:16]
+
+
+_RUN_CTX: Dict[str, object] = {}
+
+
+def _init_run_ctx(ctx: Dict[str, object]) -> None:
+    global _RUN_CTX
+    _RUN_CTX = dict(ctx)
+
+
+def _run_one(run_idx: int) -> Dict[str, object]:
+    ctx = _RUN_CTX
+    seed_salt = str(ctx["seed_salt"])
+    run_seed = _u32_from_hash(f"{seed_salt}:{run_idx}")
+    rng = np.random.default_rng(run_seed)
+    seed_policy = {"mode": "per_run_deterministic", "salt": seed_salt, "seed_u32": run_seed}
+    warnings: List[str] = []
+    attempts: List[Dict[str, object]] = []
+
+    def _record_attempt(attempt_data: Dict[str, object]) -> None:
+        attempt_idx = int(attempt_data.get("attempt_index") or 0)
+        seed_attempt = _u32_from_hash(f"{seed_salt}:{run_idx}:{attempt_idx}")
+        n_modes = int(attempt_data.get("n_modes") or 0)
+        attempts.append(
+            {
+                "schema_version": "ola1_attempt_v1",
+                "run_id": run_idx,
+                "attempt_id": _attempt_id(seed_salt, run_idx, attempt_idx),
+                "seed_u32": seed_attempt,
+                "N": n_modes,
+                "template_name": str(attempt_data.get("case_name") or ""),
+                "params": {
+                    "n_q": attempt_data.get("n_q"),
+                    "n_s1": attempt_data.get("n_s1"),
+                    "n_s2": attempt_data.get("n_s2"),
+                    "n_s3": attempt_data.get("n_s3"),
+                    "R_S1_Q": attempt_data.get("R_S1_Q"),
+                    "R_S2_S1": attempt_data.get("R_S2_S1"),
+                    "R_S3_S2": attempt_data.get("R_S3_S2"),
+                    "f_Q": attempt_data.get("f_Q"),
+                },
+                "metrics_raw": {
+                    "complexity": attempt_data.get("complexity"),
+                    "memory_terms": attempt_data.get("memory_terms"),
+                    "n_modes": n_modes,
+                },
+                "viable": bool(attempt_data.get("accepted")),
+            }
+        )
+
+    try:
+        config, gen_meta = generate_configuration(
+            case=str(ctx["case"]),
+            rng=rng,
+            n_q=int(ctx["n_q"]),
+            n_s1=int(ctx["n_s1"]),
+            n_s2=int(ctx["n_s2"]),
+            n_s3=int(ctx["n_s3"]),
+            max_complexity=int(ctx["max_complexity"]),
+            attempts=int(ctx["attempts"]),
+            priors=ctx.get("family_priors"),
+            attempt_recorder=_record_attempt,
+        )
+        if config is None:
+            run_record = {
+                "run_session_id": ctx["run_session_id"],
+                "engine_config_path": ctx.get("engine_config_path"),
+                "engine_config_hash": ctx.get("engine_config_hash"),
+                "run_id": run_idx,
+                "status": "rejected",
+                "reason": "complexity_exceeded",
+                "max_complexity": int(ctx["max_complexity"]),
+                "complexity_last": gen_meta.get("last_complexity"),
+                "n_modes_last": gen_meta.get("last_n_modes"),
+                "n_memory_terms_last": gen_meta.get("last_memory_terms"),
+                "complexity_estimated": gen_meta.get("last_complexity"),
+                "warnings": warnings,
+            }
+            return {
+                "run_idx": run_idx,
+                "status": "rejected",
+                "run_record": run_record,
+                "run_input": None,
+                "theta_internal": None,
+                "seed_policy": seed_policy,
+                "attempts": attempts,
+                "emit_rejected": True,
+                "metrics": {"R_mean_lastW": None, "phase_var_lastW": None, "QualityLock": None},
+                "viable": False,
+                "e_internal": None,
+                "warnings": warnings,
+                "error": None,
+            }
+
+        run_input = _serialize_run_config(config)
+        sim_params = ctx["sim_params"]
+        memory_cfg = ctx.get("memory_cfg")
+        adaptive_cfg = ctx.get("adaptive_cfg")
+        debug_dir = ctx.get("debug_dir")
+        debug_indices = ctx.get("debug_indices") or set()
+        debug_enabled = run_idx in debug_indices
+
+        try:
+            sim_result = simulate(
+                modes=config.modes,
+                intra_couplings=config.intra_layer_couplings,
+                inter_couplings=config.inter_layer_couplings,
+                sim_params=sim_params,
+                rng=rng,
+                debug=debug_enabled,
+                memory_cfg=memory_cfg,
+                adaptive_cfg=adaptive_cfg,
+            )
+        except FloatingPointError:
+            run_record = {
+                "run_session_id": ctx["run_session_id"],
+                "engine_config_path": ctx.get("engine_config_path"),
+                "engine_config_hash": ctx.get("engine_config_hash"),
+                "run_id": run_idx,
+                "status": "unstable",
+                "n_modes": len(config.modes),
+                "n_memory_terms": None,
+                "memory_taus": [],
+                "memory_amps": [],
+                "memory_enabled_effective": False,
+                "memory_abort_stage": "simulate_fpe",
+                "complexity": config.complexity,
+                "energy_scale": None,
+                "energies_gev": [],
+                "band_energies_gev": [],
+                "band_spacing_gev": [],
+                "band_count": 0,
+                "accepted_for_spacing": False,
+                "band_weights": [],
+                "layers_order": [],
+                "b_trace": [],
+                "t_trace": [],
+                "dt_used": None,
+                "warnings": warnings,
+            }
+            theta_internal = _serialize_theta(config)
+            validate_theta_internal(theta_internal)
+            return {
+                "run_idx": run_idx,
+                "status": "unstable",
+                "run_record": run_record,
+                "run_input": run_input,
+                "theta_internal": theta_internal,
+                "seed_policy": seed_policy,
+                "attempts": attempts,
+                "emit_rejected": False,
+                "metrics": {"R_mean_lastW": None, "phase_var_lastW": None, "QualityLock": None},
+                "viable": False,
+                "e_internal": None,
+                "warnings": warnings,
+                "error": None,
+            }
+
+        spectrum = sim_result["spectrum"]
+        delta_omega = spectrum.get("delta_omega")
+        delta_f = spectrum.get("delta_f")
+        power_total = spectrum.get("power_total")
+        per_mode = spectrum.get("per_mode")
+        q_indices = [i for i, m in enumerate(config.modes) if m.layer == Layer.Q]
+        if per_mode is not None and len(q_indices) > 0:
+            try:
+                mag_q = np.sum(per_mode[:, q_indices], axis=1)
+            except Exception:
+                mag_q = power_total
+        else:
+            mag_q = power_total
+        (
+            f_ref,
+            omega_ref_interp,
+            fft_k_peak,
+            fft_peak_delta,
+            fft_mag_km1,
+            fft_mag_k,
+            fft_mag_kp1,
+        ) = _select_peak_and_interp(
+            mag_q,
+            delta_f,
+            omega_max_cutoff=OMEGA_MAX_CUTOFF,
+            frac_of_max=ctx["peak_selector_frac"],
+            snr_min=ctx["peak_selector_snr_min"],
+        )
+        peak_selector_mode = "default"
+        omega_peaks, weights_peaks, peak_powers = pick_peaks(
+            spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
+        )
+        peaks_raw_count = len(omega_peaks)
+        energies_gev, scale = _rescale_energies(omega_peaks, target=TARGET_ENERGY_GEV)
+    
+        band_min = float(ctx["band_min"])
+        band_max = float(ctx["band_max"])
+        band_mask = (energies_gev >= band_min) & (energies_gev <= band_max)
+        band_energies = energies_gev[band_mask]
+        peaks_kept_count = int(band_energies.size)
+    
+        band_weights = [w for keep, w in zip(band_mask, weights_peaks) if keep]
+        band_powers = [p for keep, p in zip(band_mask, peak_powers) if keep]
+        bands_all = []
+        for e, pwr, w in zip(band_energies.tolist(), band_powers, band_weights):
+            bands_all.append({"energy": e, "power": pwr, "weights": w})
+        band_dominant_layers = []
+        for w in band_weights:
+            if not w:
+                band_dominant_layers.append(None)
+                continue
+            layer_max = max(w.items(), key=lambda kv: kv[1])
+            band_dominant_layers.append({"layer": layer_max[0], "weight": layer_max[1]})
+    
+        structural_energies = []
+        structural_dom_layers: List[str] = []
+        structural_flags: List[str] = []
+        power_capture = 0.0
+        if band_energies.size > 0 and band_powers:
+            max_power = max(band_powers)
+            rel_floor = 0.03 * max_power
+            candidates = [(e, pwr) for e, pwr in zip(band_energies.tolist(), band_powers) if pwr >= rel_floor]
+            delta_min = 0.03
+            candidates.sort(key=lambda x: x[0])
+            clusters = []
+            for e, pwr in candidates:
+                if not clusters or abs(e - clusters[-1][-1][0]) >= delta_min:
+                    clusters.append([(e, pwr)])
+                else:
+                    clusters[-1].append((e, pwr))
+            structural_candidates = []
+            for cl in clusters:
+                cl.sort(key=lambda x: x[1], reverse=True)
+                structural_candidates.append(cl[0])
+            structural_candidates.sort(key=lambda x: x[1], reverse=True)
+            cap = sim_params.structural_peak_cap
+            if len(structural_candidates) > cap:
+                structural_flags.append("structural_band_cap_hit")
+            selected = structural_candidates[: min(len(structural_candidates), cap)]
+            structural_energies = [e for e, _ in selected]
+            power_capture = sum(p for _, p in structural_candidates[: min(len(structural_candidates), cap)]) / max(
+                sum(band_powers), 1e-12
+            )
+            if power_capture < 0.5:
+                structural_flags.append("structural_subset_low_capture")
+            for e, _ in selected:
+                try:
+                    idx = band_energies.tolist().index(e)
+                except ValueError:
+                    structural_dom_layers.append(None)
+                    continue
+                dom = band_dominant_layers[idx] if idx < len(band_dominant_layers) else None
+                structural_dom_layers.append(dom["layer"] if dom else None)
+        structural_complex = (
+            "structural_band_cap_hit" in structural_flags or "structural_subset_low_capture" in structural_flags
+        )
+        if structural_complex and ctx["peak_selector_frac_struct"] < ctx["peak_selector_frac"]:
+            (
+                f_ref,
+                omega_ref_interp,
+                fft_k_peak,
+                fft_peak_delta,
+                fft_mag_km1,
+                fft_mag_k,
+                fft_mag_kp1,
+            ) = _select_peak_and_interp(
+                mag_q,
+                delta_f,
+                omega_max_cutoff=OMEGA_MAX_CUTOFF,
+                frac_of_max=ctx["peak_selector_frac_struct"],
+                snr_min=ctx["peak_selector_snr_min"],
+            )
+            peak_selector_mode = "structural_low_frac"
+        band_dom_counts_total: Dict[str, int] = {}
+        for item in band_dominant_layers:
+            if item and item.get("layer"):
+                band_dom_counts_total[item["layer"]] = band_dom_counts_total.get(item["layer"], 0) + 1
+        band_dom_counts_struct: Dict[str, int] = {}
+        for layer in structural_dom_layers:
+            if layer:
+                band_dom_counts_struct[layer] = band_dom_counts_struct.get(layer, 0) + 1
+        s2_band_fraction = (
+            sum(1 for item in band_dominant_layers if item and item["layer"] == "S2") / band_energies.size
+            if band_energies.size > 0
+            else 0.0
+        )
+        s2_band_fraction_struct = (
+            sum(1 for item in structural_dom_layers if item == "S2") / len(structural_dom_layers)
+            if structural_dom_layers
+            else 0.0
+        )
+        has_s2_dominant = s2_band_fraction > 0.0
+        s3_band_fraction = (
+            sum(1 for item in band_dominant_layers if item and item["layer"] == "S3") / band_energies.size
+            if band_energies.size > 0
+            else 0.0
+        )
+        if band_energies.size > sim_params.max_peaks:
+            structural_flags.append("band_overflow")
+    
+        accepted_band = band_energies.size >= 3
+        spacings = analysis.compute_spacings(band_energies[band_energies > 1e-4]) if accepted_band else np.array([])
+    
+        layer_order = [layer for layer, idx in sorted(sim_result["layer_to_idx"].items(), key=lambda kv: kv[1])]
+    
+        family_match = False
+        family_distance: Optional[FamilyDistance] = None
+        family_fp = ctx.get("family_fp")
+        if family_fp and accepted_band:
+            family_distance = compute_family_distance(
+                sim_levels=band_energies.tolist(),
+                sim_widths=None,
+                fingerprint=family_fp,
+                use_widths=False,
+            )
+            family_match = family_distance.is_match
+    
+        layer_summaries: Dict[str, Dict] = {}
+        for layer in layer_order:
+            lname = layer.name
+            thresholds = DEFAULT_LAYER_THRESHOLDS.get(lname, DEFAULT_LAYER_THRESHOLDS.get("S2", {}))
+            layer_summaries[lname] = _layer_summary(
+                layer_name=lname,
+                energies=energies_gev,
+                weights=weights_peaks,
+                band_mask=band_mask,
+                band_max=band_max,
+                thresholds=thresholds,
+            )
+    
+        s2_state = layer_summaries.get("S2", {}).get("state", "absent")
+        s3_state = layer_summaries.get("S3", {}).get("state", "absent")
+        has_s3_dominant = s3_state == "structural_dominant"
+    
+        lock_quality_Q = layer_summaries.get("Q", {}).get("band_fraction", float("nan"))
+        lock_quality_S1 = layer_summaries.get("S1", {}).get("band_fraction", float("nan"))
+        lock_quality_S2 = layer_summaries.get("S2", {}).get("band_fraction", float("nan"))
+        lock_quality_S3 = layer_summaries.get("S3", {}).get("band_fraction", float("nan"))
+    
+        lock_thresholds = ctx.get("lock_thresholds", {})
+        T_Q_rel_min = lock_thresholds.get("T_Q_rel_min", lock_thresholds.get("T_Q", 0.5))
+        T_S1_rel_min = lock_thresholds.get("T_S1_rel_min", lock_thresholds.get("T_S1", 0.1))
+        T_S2_rel_min = lock_thresholds.get("T_S2_rel_min", lock_thresholds.get("T_S2", 0.1))
+    
+        def _finite(x: float) -> float:
+            return float(x) if np.isfinite(x) else 0.0
+    
+        lock_Q_f = _finite(lock_quality_Q)
+        lock_S1_f = _finite(lock_quality_S1)
+        lock_S2_f = _finite(lock_quality_S2)
+        lock_S3_f = _finite(lock_quality_S3)
+        structural_mass = lock_Q_f + lock_S1_f + lock_S2_f + lock_S3_f
+    
+        if structural_mass <= 0:
+            structure_tier = "none"
+            q_rel = s1_rel = s2_rel = 0.0
+        else:
+            q_rel = lock_Q_f / structural_mass
+            s1_rel = lock_S1_f / structural_mass
+            s2_rel = lock_S2_f / structural_mass
+            if q_rel < T_Q_rel_min:
+                structure_tier = "none"
+            elif s1_rel < T_S1_rel_min and s2_rel < T_S2_rel_min:
+                structure_tier = "level1"
+            elif s1_rel >= T_S1_rel_min and s2_rel < T_S2_rel_min:
+                structure_tier = "level2"
+            else:
+                structure_tier = "level3"
+    
+        s2_state_cfg = ctx.get("s2_state_cfg", {})
+        s2_band_fraction_weight = layer_summaries.get("S2", {}).get("band_fraction", 0.0)
+        none_max = s2_state_cfg.get("none_max_fraction", 1e-3)
+        latent_max = s2_state_cfg.get("latent_max_fraction", 0.15)
+        if s2_band_fraction_weight < none_max:
+            s2_state_label = "none"
+        elif s2_band_fraction_weight <= latent_max:
+            s2_state_label = "latent"
+        else:
+            s2_state_label = "structural"
+    
+        debug_trace_path = None
+        if debug_enabled and "debug_traces" in sim_result and debug_dir:
+            debug_trace_path = Path(debug_dir) / f"run_{run_idx:04d}_traces.npz"
+            dbg = sim_result["debug_traces"]
+            inputs_arr = dbg.get("inputs")
+            tau_eff_obj = np.array(dbg.get("tau_eff", []), dtype=object)
+            z_arr = dbg.get("z")
+            np.savez_compressed(debug_trace_path, inputs=inputs_arr, tau_eff=tau_eff_obj, z=z_arr)
+    
+        mem_taus_flat = [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0]
+        mem_amps_flat = [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0]
+        mem_terms_by_layer: Dict[str, int] = {}
+        for ic in config.inter_layer_couplings:
+            total_terms = sum(len(k.taus0) for k in ic.links.values())
+            mem_terms_by_layer[ic.deep_layer.name] = mem_terms_by_layer.get(ic.deep_layer.name, 0) + total_terms
+        memory_enabled_effective = bool(mem_taus_flat)
+        expected_mem_terms = 0
+        if memory_cfg and memory_cfg.get("modes_per_layer"):
+            try:
+                expected_mem_terms = sum(int(v) for v in memory_cfg.get("modes_per_layer", {}).values())
+            except Exception:
+                expected_mem_terms = 0
+        mem_terms_mismatch = (mem_terms_by_layer and sum(mem_terms_by_layer.values()) != config.memory_terms)
+        if mem_terms_mismatch:
+            warnings.append(
+                f"n_memory_terms({config.memory_terms}) != sum(mem_terms_by_layer)({sum(mem_terms_by_layer.values())})"
+            )
+        mem_issue = (
+            memory_cfg
+            and memory_cfg.get("enabled", False)
+            and expected_mem_terms > 0
+            and not mem_taus_flat
+        )
+        if mem_issue:
+            warnings.append(
+                "memory.enabled=True and modes_per_layer>0 but no memory terms instantiated (complexity cap or generation bug)"
+            )
+            run_record = {
+                "run_session_id": ctx["run_session_id"],
+                "engine_config_path": ctx.get("engine_config_path"),
+                "engine_config_hash": ctx.get("engine_config_hash"),
+                "run_id": run_idx,
+                "status": "rejected",
+                "reason": "memory_not_applied",
+                "max_complexity": ctx["max_complexity"],
+                "complexity": config.complexity,
+                "n_modes": len(config.modes),
+                "expected_memory_terms": expected_mem_terms,
+                "n_memory_terms": config.memory_terms,
+                "memory_taus": mem_taus_flat,
+                "memory_amps": mem_amps_flat,
+                "memory_enabled_effective": False,
+                "entropy_status": "skipped" if not ctx.get("compute_entropy") else "not_implemented",
+                "entropy_reason": "compute_entropy_disabled" if not ctx.get("compute_entropy") else "not_implemented",
+                "entropy_chaos": None,
+                "lyapunov_local": None,
+                "lyapunov_mean": None,
+                "phase_compactness": None,
+                "phase_occupancy": None,
+                "entropy_flags": None,
+                "warnings": warnings,
+            }
+            return {
+                "run_idx": run_idx,
+                "status": "rejected",
+                "run_record": run_record,
+                "run_input": run_input,
+                "theta_internal": None,
+                "seed_policy": seed_policy,
+                "attempts": attempts,
+                "emit_rejected": False,
+                "metrics": {"R_mean_lastW": None, "phase_var_lastW": None, "QualityLock": None},
+                "viable": False,
+                "e_internal": None,
+                "warnings": warnings,
+                "error": None,
+            }
+    
+        layer_energy_fraction = {
+            "Q": lock_quality_Q,
+            "S1": lock_quality_S1,
+            "S2": lock_quality_S2,
+        }
+        try:
+            vals = [v for v in layer_energy_fraction.values() if v is not None and v > 0]
+            if vals:
+                p = np.array(vals, dtype=float)
+                p = p / max(np.sum(p), 1e-12)
+                participation_entropy = float(-np.sum(p * np.log(np.clip(p, 1e-12, 1))))
+                min_layer_fraction = float(np.min(p))
+            else:
+                participation_entropy = None
+                min_layer_fraction = None
+        except Exception:
+            participation_entropy = None
+            min_layer_fraction = None
+    
+        s2_state_lock = s2_state_label
+        if s2_band_fraction_struct < none_max:
+            s2_state_bands = "none"
+        elif s2_band_fraction_struct <= latent_max:
+            s2_state_bands = "latent"
+        else:
+            s2_state_bands = "structural"
+    
+        entropy_chaos = None
+        entropy_status = "skipped"
+        entropy_reason = "compute_entropy_disabled"
+        if ctx.get("compute_entropy"):
+            block_entropies: List[float] = []
+            q_values: List[float] = []
+            block_tiers: List[str] = []
+            min_layer_fraction_thr = float(s2_state_cfg.get("min_layer_fraction", 0.05))
+            for w in band_weights:
+                if not isinstance(w, dict):
+                    continue
+                block_entropies.append(_lock_entropy_norm_from_weights(w))
+                q_values.append(float(w.get("Q", 0.0)))
+                block_tiers.append(_block_tier_from_weights(w, min_fraction=min_layer_fraction_thr))
+    
+            lock_s1_series: List[float] = []
+            energies_series = sim_result.get("energies_series")
+            if energies_series is not None and np.size(energies_series) > 0:
+                for vec in energies_series:
+                    e_q = float(vec[0]) if len(vec) > 0 else 0.0
+                    e_s1 = float(vec[1]) if len(vec) > 1 else 0.0
+                    e_s2 = float(vec[2]) if len(vec) > 2 else 0.0
+                    total = e_q + e_s1 + e_s2
+                    if total > CHAOS_EPS:
+                        lock_s1_series.append(e_s1 / total)
+                    else:
+                        lock_s1_series.append(1.0 / 3.0)
+            chaos_mode = "dynamic" if len(lock_s1_series) >= 6 else "ensemble"
+            PE_tick_norm = _permutation_entropy(lock_s1_series, m=5, tau=1) if chaos_mode == "dynamic" else None
+            fraction_structured = (
+                float(sum(1 for t in block_tiers if t != "none")) / len(block_tiers) if block_tiers else None
+            )
+            entropy_chaos = {
+                "eps": CHAOS_EPS,
+                "mean_H_lock_norm": float(np.mean(block_entropies)) if block_entropies else None,
+                "std_H_lock_norm": float(np.std(block_entropies)) if block_entropies else None,
+                "p90_H_lock_norm": float(np.percentile(block_entropies, 90)) if block_entropies else None,
+                "fraction_structured": fraction_structured,
+                "mean_Q": float(np.mean(q_values)) if q_values else None,
+                "std_Q": float(np.std(q_values)) if q_values else None,
+                "mixture_entropy_blocks_norm": _mixture_entropy_norm(block_entropies) if block_entropies else None,
+                "structure_mix_norm": _structure_mix_entropy_norm(block_tiers) if block_tiers else None,
+                "chaos_mode": chaos_mode,
+                "PE_tick_norm": PE_tick_norm,
+                "has_ticks": bool(lock_s1_series),
+                "T_ticks": len(lock_s1_series) if chaos_mode == "dynamic" else None,
+                "lock_S1_series": lock_s1_series if lock_s1_series else None,
+                "notes": "PE sobre lock_quality_S1 por tick (fracción S1 global); sin serie → sólo métricas instantáneas/ensemble.",
+            }
+            entropy_status = "ok"
+            entropy_reason = None
+    
+        e_internal = sim_result.get("E_internal")
+    
+        H_layers = participation_entropy
+        H_layers_max = math.log(3.0)
+        band_count_run = int(band_energies.size)
+        omega_peaks_raw = omega_peaks.tolist() if omega_peaks is not None else []
+        omega_ref = omega_ref_interp if omega_ref_interp is not None else (float(min(omega_peaks_raw)) if omega_peaks_raw else None)
+    
+        V_layers = float(math.exp(H_layers)) if H_layers is not None else None
+        V_lock = (V_layers * band_count_run) if (V_layers is not None) else None
+    
+        D_stat = None
+        if H_layers is not None and H_layers_max > 0:
+            D_stat = 1.0 - (H_layers / H_layers_max)
+            D_stat = max(0.0, min(1.0, D_stat))
+    
+        D_dyn = None
+        rho_lock = None
+        if entropy_chaos:
+            mh = entropy_chaos.get("mean_H_lock_norm")
+            pe = entropy_chaos.get("PE_tick_norm")
+            if mh is not None and pe is not None:
+                try:
+                    D_dyn_val = (1.0 - float(mh)) * (1.0 - float(pe))
+                    D_dyn = max(0.0, min(1.0, D_dyn_val))
+                except Exception:
+                    D_dyn = None
+        if D_stat is not None and D_dyn is not None:
+            rho_lock = D_stat * D_dyn
+    
+        M_spec = omega_ref
+        M1 = None
+        M2 = None
+        M3 = None
+    
+        if V_lock is not None and D_stat is not None:
+            M1 = V_lock * D_stat
+        if omega_ref is not None and V_lock is not None and D_stat is not None:
+            M2 = omega_ref * V_lock * D_stat
+        if omega_ref is not None and V_lock is not None and rho_lock is not None:
+            M3 = omega_ref * V_lock * rho_lock
+        mass_sim_gev = None
+        hbar_sim_live = ctx.get("hbar_sim_live")
+        if hbar_sim_live is not None and omega_ref is not None:
+            try:
+                mass_sim_gev = hbar_sim_live * omega_ref
+            except Exception:
+                mass_sim_gev = None
+    
+        run_record = {
+            "run_session_id": ctx["run_session_id"],
+            "engine_config_path": ctx.get("engine_config_path"),
+            "engine_config_hash": ctx.get("engine_config_hash"),
+            "run_id": run_idx,
+            "status": "ok",
+            "n_modes": len(config.modes),
+            "n_memory_terms": config.memory_terms,
+            "expected_memory_terms": expected_mem_terms,
+            "memory_terms_by_layer": mem_terms_by_layer,
+            "memory_terms_mismatch": mem_terms_mismatch,
+            "memory_enabled_effective": memory_enabled_effective,
+            "max_complexity": ctx["max_complexity"],
+            "complexity": config.complexity,
+            "energy_scale": scale,
+            "peaks_raw_count": peaks_raw_count,
+            "peaks_kept_count": peaks_kept_count,
+            "energies_gev": energies_gev.tolist(),
+            "band_energies_gev": band_energies.tolist(),
+            "band_spacing_gev": spacings.tolist(),
+            "spacing_mean": float(np.mean(spacings)) if spacings.size else float("nan"),
+            "spacing_std": float(np.std(spacings)) if spacings.size else float("nan"),
+            "spacing_min": float(np.min(spacings)) if spacings.size else float("nan"),
+            "spacing_max": float(np.max(spacings)) if spacings.size else float("nan"),
+            "band_count": int(band_energies.size),
+            "band_structural_energies_gev": structural_energies,
+            "band_count_structural": len(structural_energies),
+            "band_structural_cap_hit": "structural_band_cap_hit" in structural_flags,
+            "peak_cap": sim_params.structural_peak_cap,
+            "peak_cap_hit": "structural_band_cap_hit" in structural_flags,
+            "bands_all_json": json.dumps(bands_all),
+            "bands_structural_json": json.dumps([{"energy": e} for e in structural_energies]),
+            "band_power_capture": power_capture,
+            "band_flags": structural_flags,
+            "band_dom_counts_total": band_dom_counts_total,
+            "band_dom_counts_structural": band_dom_counts_struct,
+            "accepted_for_spacing": accepted_band,
+            "family_match": family_match,
+            "family_distance": family_distance.__dict__ if family_distance else None,
+            "band_weights": band_weights,
+            "band_dominant_layers": band_dominant_layers,
+            "s2_band_fraction_total": s2_band_fraction,
+            "has_s2_dominant": has_s2_dominant,
+            "s2_band_fraction": s2_band_fraction,
+            "s3_band_fraction": s3_band_fraction,
+            "has_s3_dominant": has_s3_dominant,
+            "s2_state": s2_state_label,
+            "s2_state_lock": s2_state_lock,
+            "s2_state_bands": s2_state_bands,
+            "s3_state": s3_state,
+            "s2_total_fraction": layer_summaries.get("S2", {}).get("total_fraction"),
+            "s3_total_fraction": layer_summaries.get("S3", {}).get("total_fraction"),
+            "s2_band_compactness": layer_summaries.get("S2", {}).get("band_compactness"),
+            "s3_band_compactness": layer_summaries.get("S3", {}).get("band_compactness"),
+            "s2_outband_fraction": layer_summaries.get("S2", {}).get("outband_fraction"),
+            "s3_outband_fraction": layer_summaries.get("S3", {}).get("outband_fraction"),
+            "s2_highfreq_fraction": layer_summaries.get("S2", {}).get("highfreq_fraction"),
+            "s3_highfreq_fraction": layer_summaries.get("S3", {}).get("highfreq_fraction"),
+            "lock_quality_Q": lock_quality_Q,
+            "lock_quality_S1": lock_quality_S1,
+            "lock_quality_S2": lock_quality_S2,
+            "layer_energy_fraction": layer_energy_fraction,
+            "participation_entropy": participation_entropy,
+            "min_layer_fraction": min_layer_fraction,
+            "structure_tier": structure_tier,
+            "layers_order": [l.name for l in layer_order],
+            "b_trace": sim_result["b_series"].tolist(),
+            "t_trace": sim_result["times"].tolist(),
+            "dt_used": sim_result.get("dt_used"),
+            "E_internal": e_internal,
+            "omega_peaks": omega_peaks_raw,
+            "f_ref": f_ref,
+            "omega_ref": omega_ref,
+            "omega_ref_interp": omega_ref_interp,
+            "delta_omega": delta_omega,
+            "delta_f": delta_f,
+            "dt_sample_fft": sim_result.get("dt_used") * sim_params.sample_stride if sim_result.get("dt_used") else None,
+            "n_samples_fft": spectrum.get("n_samples"),
+            "n_samples_fft_padded": spectrum.get("n_padded"),
+            "T_obs_fft": spectrum.get("T_obs"),
+            "fft_peak_index": fft_k_peak,
+            "fft_peak_delta": fft_peak_delta,
+            "fft_peak_mag_km1": fft_mag_km1,
+            "fft_peak_mag_k": fft_mag_k,
+            "fft_peak_mag_kp1": fft_mag_kp1,
+            "V_layers": V_layers,
+            "V_lock": V_lock,
+            "D_stat": D_stat,
+            "D_dyn": D_dyn,
+            "rho_lock": rho_lock,
+            "M_spec": M_spec,
+            "M1": M1,
+            "M2": M2,
+            "M3": M3,
+            "mass_sim_gev": mass_sim_gev,
+            "entropy_status": entropy_status,
+            "entropy_reason": entropy_reason,
+            "lyapunov_local": None,
+            "lyapunov_mean": None,
+            "phase_compactness": None,
+            "phase_occupancy": None,
+            "entropy_flags": None,
+            "entropy_chaos": entropy_chaos,
+            "R_S1_Q": config.R_S1_Q,
+            "R_S2_S1": config.R_S2_S1,
+            "R_S3_S2": config.R_S3_S2,
+            "g_couplings": [ic.g0 for ic in config.inter_layer_couplings],
+            "memory_taus": mem_taus_flat,
+            "memory_amps": mem_amps_flat,
+            "theta_internal": _serialize_theta(config),
+            "debug_trace_path": str(debug_trace_path) if debug_trace_path else None,
+            "adaptive_lock": sim_result.get("adaptive_lock"),
+            "warnings": warnings,
+        }
+        theta_internal = run_record.get("theta_internal")
+        validate_theta_internal(theta_internal)
+        return {
+            "run_idx": run_idx,
+            "status": "ok",
+            "run_record": run_record,
+            "run_input": run_input,
+            "theta_internal": theta_internal,
+            "seed_policy": seed_policy,
+            "attempts": attempts,
+            "emit_rejected": False,
+            "metrics": {
+                "R_mean_lastW": run_record.get("R_mean_lastW"),
+                "phase_var_lastW": run_record.get("phase_var_lastW"),
+                "QualityLock": run_record.get("lock_quality_Q"),
+            },
+            "viable": bool(run_record.get("accepted_for_spacing")),
+            "e_internal": e_internal,
+            "warnings": warnings,
+            "error": None,
+        }
+    except Exception as exc:
+        error = f"Exception: {type(exc).__name__}: {exc}"
+        run_record = {
+            "run_session_id": ctx.get("run_session_id"),
+            "engine_config_path": ctx.get("engine_config_path"),
+            "engine_config_hash": ctx.get("engine_config_hash"),
+            "run_id": run_idx,
+            "status": "rejected",
+            "reason": "exception",
+            "error": error,
+            "warnings": warnings,
+        }
+        return {
+            "run_idx": run_idx,
+            "status": "rejected",
+            "run_record": run_record,
+            "run_input": None,
+            "theta_internal": None,
+            "seed_policy": seed_policy,
+            "attempts": attempts,
+            "emit_rejected": True,
+            "metrics": {"R_mean_lastW": None, "phase_var_lastW": None, "QualityLock": None},
+            "viable": False,
+            "e_internal": None,
+            "warnings": warnings,
+            "error": error,
+        }
+
+
 def _ensure_dirs(raw_dir: Path, processed_dir: Path) -> None:
     raw_dir.mkdir(parents=True, exist_ok=True)
     processed_dir.mkdir(parents=True, exist_ok=True)
@@ -418,6 +1177,7 @@ def run_sweep(
     case: str,
     runs: int,
     seed: Optional[int],
+    seed_salt: Optional[str],
     max_complexity: int,
     n_q: int,
     n_s1: int,
@@ -444,11 +1204,11 @@ def run_sweep(
     resume: bool = False,
     stop_file: Optional[str] = None,
     compute_entropy: bool = False,
+    workers: int = 1,
 ):
     peak_selector_frac = 0.20
     peak_selector_frac_struct = 0.08
     peak_selector_snr_min = 5.0
-    rng = np.random.default_rng(seed)
     run_session_id = uuid.uuid4().hex
     session_tag = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     flatten = output_root is not None
@@ -478,10 +1238,6 @@ def run_sweep(
 
     partial_dir = processed_case_dir / "partial"
     all_attempts_path = processed_case_dir / "all_attempts.jsonl"
-    attempt_id_counter = 0
-    if all_attempts_path.exists():
-        with all_attempts_path.open() as af:
-            attempt_id_counter = sum(1 for _ in af)
     runs_full_path = processed_case_dir / "runs_full.jsonl"
     runs_rejected_path = processed_case_dir / "runs_rejected.jsonl"
     existing_full_run_ids: set[int] = set()
@@ -508,12 +1264,20 @@ def run_sweep(
             rid = rec.get("run_id")
             if isinstance(rid, (int, float)):
                 existing_rejected_run_ids.add(int(rid))
+    seen_run_ids = existing_full_run_ids | existing_rejected_run_ids
     partial_runs_path = None
     if partial_flush_every and partial_flush_every > 0:
         partial_dir.mkdir(parents=True, exist_ok=True)
         partial_runs_path = partial_dir / "runs_partial.jsonl"
         if partial_runs_path.exists() and not resume:
             partial_runs_path.unlink()  # start fresh for this sweep
+    # Create output files early so users can see progress immediately.
+    for out_path in (runs_full_path, runs_rejected_path, all_attempts_path):
+        if not out_path.exists():
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.touch()
+    if partial_runs_path and not partial_runs_path.exists():
+        partial_runs_path.touch()
 
     layer_state_config = layer_state_config or {}
     lock_thresholds = layer_state_config.get("lock_thresholds", {})
@@ -548,9 +1312,19 @@ def run_sweep(
         config_hash = str(engine_config_hash)
     elif engine_config_path and Path(engine_config_path).exists():
         config_hash = _hash_file(Path(engine_config_path))
+    seed_salt = seed_salt or "ola1_sweep_v1"
+    if seed is not None:
+        seed_salt = f"{seed_salt}:{seed}"
+    seed_policy_base = {"mode": "per_run_deterministic", "salt": seed_salt}
+    cpu_max = os.cpu_count() or 1
+    if workers is None:
+        workers = cpu_max
+    if workers < 1 or workers > cpu_max:
+        raise ValueError(f"--workers must be in [1, {cpu_max}]")
     inputs_payload = {
         "case": case,
         "seed": seed,
+        "seed_salt": seed_salt,
         "runs": runs,
         "n_q": n_q,
         "n_s1": n_s1,
@@ -628,6 +1402,7 @@ def run_sweep(
                     for rec in partial_buffer:
                         pf.write(json.dumps(rec) + "\n")
                 saved_since_print += len(partial_buffer)
+                print(f"[run_sweep] flushed_partial={len(partial_buffer)}", flush=True)
                 partial_buffer = []
 
     def _append_full(record: Dict) -> None:
@@ -696,8 +1471,11 @@ def run_sweep(
             flush=True,
         )
 
+    pending_run_ids: List[int] = []
     for run_idx in range(start_run_idx, runs):
-        current_mass_proxies = {"M1": None, "M2": None, "M3": None, "omega_ref": None, "mass_sim_gev": None}
+        if run_idx in seen_run_ids:
+            print(f"[run_sweep] skip run {run_idx + 1}/{runs} (already completed)", flush=True)
+            continue
         if stop_file and Path(stop_file).exists():
             print(f"[run_sweep] stop-file detected at run {run_idx}/{runs}. Stopping gracefully.", flush=True)
             try:
@@ -705,753 +1483,254 @@ def run_sweep(
             except Exception:
                 pass
             break
-        if saved_since_print:
-            print(f"[run_sweep] run {run_idx + 1}/{runs} (partial_saved={saved_since_print})", flush=True)
-            saved_since_print = 0
-        else:
-            print(f"[run_sweep] run {run_idx + 1}/{runs}", flush=True)
-        def _record_attempt(attempt_data: Dict[str, object]) -> None:
-            nonlocal attempt_id_counter
-            attempt_id_counter += 1
-            n_modes = int(attempt_data.get("n_modes") or 0)
-            record = {
-                "schema_version": "ola1_attempt_v1",
-                "run_id": run_idx,
-                "attempt_id": attempt_id_counter,
-                "N": n_modes,
-                "template_name": str(attempt_data.get("case_name") or ""),
-                "params": {
-                    "n_q": attempt_data.get("n_q"),
-                    "n_s1": attempt_data.get("n_s1"),
-                    "n_s2": attempt_data.get("n_s2"),
-                    "n_s3": attempt_data.get("n_s3"),
-                    "R_S1_Q": attempt_data.get("R_S1_Q"),
-                    "R_S2_S1": attempt_data.get("R_S2_S1"),
-                    "R_S3_S2": attempt_data.get("R_S3_S2"),
-                    "f_Q": attempt_data.get("f_Q"),
-                },
-                "metrics_raw": {
-                    "complexity": attempt_data.get("complexity"),
-                    "memory_terms": attempt_data.get("memory_terms"),
-                    "n_modes": n_modes,
-                },
-                "viable": bool(attempt_data.get("accepted")),
-            }
-            _append_attempt(record)
+        pending_run_ids.append(run_idx)
 
-        config, gen_meta = generate_configuration(
-            case=case,
-            rng=rng,
-            n_q=n_q,
-            n_s1=n_s1,
-            n_s2=n_s2,
-            n_s3=n_s3,
-            max_complexity=max_complexity,
-            attempts=attempts,
-            priors=family_priors,
-            attempt_recorder=_record_attempt,
-        )
-        if config is None:
-            rejected += 1
-            run_outputs.append(
-                {
-                    "run_session_id": run_session_id,
-                    "engine_config_path": engine_config_path,
-                    "engine_config_hash": engine_config_hash,
-                    "run_id": run_idx,
-                    "status": "rejected",
-                    "reason": "complexity_exceeded",
-                    "max_complexity": max_complexity,
-                    "complexity_last": gen_meta.get("last_complexity"),
-                    "n_modes_last": gen_meta.get("last_n_modes"),
-                    "n_memory_terms_last": gen_meta.get("last_memory_terms"),
-                    "complexity_estimated": gen_meta.get("last_complexity"),
-                }
-            )
-            _append_rejected(
-                {
-                    "schema_version": "ola1_run_v1",
-                    "run_id": run_idx,
-                    "timestamp_utc": _utc_now(),
-                    "seed": seed,
-                    "status": "rejected",
-                    "theta_internal": None,
-                    "provenance": {
-                        "config_hash": config_hash,
-                        "code_hash": code_hash,
-                        "inputs_hash": inputs_hash,
-                    },
-                    "metrics": {
-                        "R_mean_lastW": None,
-                        "phase_var_lastW": None,
-                        "QualityLock": None,
-                    },
-                    "viable": False,
-                }
-            )
-            _append_partial(run_outputs[-1])
-            _log_run_status(run_idx, "rejected", None)
-            continue
+    ctx = {
+        "case": case,
+        "n_q": n_q,
+        "n_s1": n_s1,
+        "n_s2": n_s2,
+        "n_s3": n_s3,
+        "max_complexity": max_complexity,
+        "attempts": attempts,
+        "family_priors": family_priors,
+        "family_fp": family_fp,
+        "sim_params": sim_params,
+        "memory_cfg": memory_cfg,
+        "adaptive_cfg": adaptive_cfg,
+        "debug_dir": str(debug_dir) if debug_dir else None,
+        "debug_indices": debug_indices,
+        "peak_selector_frac": peak_selector_frac,
+        "peak_selector_frac_struct": peak_selector_frac_struct,
+        "peak_selector_snr_min": peak_selector_snr_min,
+        "band_min": band_min,
+        "band_max": band_max,
+        "lock_thresholds": lock_thresholds,
+        "s2_state_cfg": s2_state_cfg,
+        "compute_entropy": compute_entropy,
+        "hbar_sim_live": hbar_sim_live,
+        "engine_config_path": engine_config_path,
+        "engine_config_hash": engine_config_hash,
+        "run_session_id": run_session_id,
+        "config_hash": config_hash,
+        "code_hash": code_hash,
+        "inputs_hash": inputs_hash,
+        "seed_salt": seed_salt,
+    }
+    _init_run_ctx(ctx)
 
-        run_inputs.append(_serialize_run_config(config))
+    total_pending = len(pending_run_ids)
+    processed_count = 0
+    t_start = time.time()
+    print(
+        f"[run_sweep] pending_runs={total_pending} workers={workers}",
+        flush=True,
+    )
 
-        debug_enabled = run_idx in debug_indices
-        try:
-            sim_result = simulate(
-                modes=config.modes,
-                intra_couplings=config.intra_layer_couplings,
-                inter_couplings=config.inter_layer_couplings,
-                sim_params=sim_params,
-                rng=rng,
-                debug=debug_enabled,
-                memory_cfg=memory_cfg,
-                adaptive_cfg=adaptive_cfg,
-            )
-        except FloatingPointError:
+    def _process_result(result: Dict[str, object]) -> None:
+        nonlocal accepted_runs_for_spacing, family_match_total, family_match_with_s2, family_match_without_s2
+        nonlocal family_off_with_s2, example_run, rejected, unstable, current_mass_proxies
+        nonlocal processed_count
+
+        run_idx = int(result["run_idx"])
+        for attempt in result.get("attempts", []):
+            _append_attempt(attempt)
+        run_record = result["run_record"]
+        run_outputs.append(run_record)
+        run_input = result.get("run_input")
+        if run_input is not None:
+            run_inputs.append(run_input)
+        status = result["status"]
+        if status == "ok":
+            band_counts.append(int(run_record.get("band_count", 0)))
+            if run_record.get("accepted_for_spacing"):
+                spacing_vals = np.array(run_record.get("band_spacing_gev", []))
+                if spacing_vals.size:
+                    spacings_all.append(spacing_vals)
+                    accepted_runs_for_spacing += 1
+                if example_run is None:
+                    example_run = {
+                        "energies": np.array(run_record.get("band_energies_gev", [])),
+                        "weights": run_record.get("band_weights", []),
+                    }
+            if run_record.get("family_match"):
+                family_match_total += 1
+                if run_record.get("has_s2_dominant"):
+                    family_match_with_s2 += 1
+                else:
+                    family_match_without_s2 += 1
+            elif run_record.get("has_s2_dominant"):
+                family_off_with_s2 += 1
+        elif status == "unstable":
             unstable += 1
-            run_outputs.append(
-                {
-                    "run_session_id": run_session_id,
-                    "engine_config_path": engine_config_path,
-                    "engine_config_hash": engine_config_hash,
-                    "run_id": run_idx,
-                    "status": "unstable",
-                    "n_modes": len(config.modes),
-                    "n_memory_terms": None,
-                    "memory_taus": [],
-                    "memory_amps": [],
-                    "memory_enabled_effective": False,
-                    "memory_abort_stage": "simulate_fpe",
-                    "complexity": config.complexity,
-                    "energy_scale": None,
-                    "energies_gev": [],
-                    "band_energies_gev": [],
-                    "band_spacing_gev": [],
-                    "band_count": 0,
-                    "accepted_for_spacing": False,
-                    "band_weights": [],
-                    "layers_order": [],
-                    "b_trace": [],
-                    "t_trace": [],
-                    "dt_used": None,
-                }
-            )
-            theta_internal = _serialize_theta(config)
-            validate_theta_internal(theta_internal)
+        elif status == "rejected":
+            rejected += 1
+
+        metrics = result.get("metrics") or {"R_mean_lastW": None, "phase_var_lastW": None, "QualityLock": None}
+        warnings = result.get("warnings") or []
+        error = result.get("error")
+        if status == "rejected":
+            if result.get("emit_rejected"):
+                _append_rejected(
+                    {
+                        "schema_version": "ola1_run_v1",
+                        "run_id": run_idx,
+                        "timestamp_utc": _utc_now(),
+                        "seed": seed,
+                        "seed_policy": result.get("seed_policy"),
+                        "status": "rejected",
+                        "theta_internal": None,
+                        "provenance": {
+                            "config_hash": config_hash,
+                            "code_hash": code_hash,
+                            "inputs_hash": inputs_hash,
+                        },
+                        "metrics": metrics,
+                        "warnings": warnings,
+                        "error": error,
+                        "viable": False,
+                    }
+                )
+        else:
             _append_full(
                 {
                     "schema_version": "ola1_run_v1",
                     "run_id": run_idx,
                     "timestamp_utc": _utc_now(),
                     "seed": seed,
-                    "status": "unstable",
-                    "theta_internal": theta_internal,
+                    "seed_policy": result.get("seed_policy"),
+                    "status": status,
+                    "theta_internal": result.get("theta_internal"),
                     "provenance": {
                         "config_hash": config_hash,
                         "code_hash": code_hash,
                         "inputs_hash": inputs_hash,
                     },
-                    "metrics": {
-                        "R_mean_lastW": None,
-                        "phase_var_lastW": None,
-                        "QualityLock": None,
-                    },
-                    "viable": False,
+                    "metrics": metrics,
+                    "warnings": warnings,
+                    "viable": bool(result.get("viable")),
                 }
             )
-            _append_partial(run_outputs[-1])
-            _log_run_status(run_idx, "unstable", None)
-            continue
-        spectrum = sim_result["spectrum"]
-        delta_omega = spectrum.get("delta_omega")
-        delta_f = spectrum.get("delta_f")
-        power_total = spectrum.get("power_total")
-        per_mode = spectrum.get("per_mode")
-        # identity channel: Q layer if available
-        q_indices = [i for i, m in enumerate(config.modes) if m.layer == Layer.Q]
-        if per_mode is not None and len(q_indices) > 0:
-            try:
-                mag_q = np.sum(per_mode[:, q_indices], axis=1)
-            except Exception:
-                mag_q = power_total
+
+        if partial_flush_every and partial_flush_every > 0:
+            flush_now = ((run_idx + 1) % partial_flush_every == 0) or (run_idx + 1 == runs)
         else:
-            mag_q = power_total
-        f_ref, omega_ref_interp, fft_k_peak, fft_peak_delta, fft_mag_km1, fft_mag_k, fft_mag_kp1 = _select_peak_and_interp(
-            mag_q,
-            delta_f,
-            omega_max_cutoff=OMEGA_MAX_CUTOFF,
-            frac_of_max=peak_selector_frac,
-            snr_min=peak_selector_snr_min,
-        )
-        peak_selector_mode = "default"
-        omega_peaks, weights_peaks, peak_powers = pick_peaks(
-            spectrum=spectrum, modes=config.modes, layer_to_idx=sim_result["layer_to_idx"], sim_params=sim_params
-        )
-        peaks_raw_count = len(omega_peaks)
-        energies_gev, scale = _rescale_energies(omega_peaks, target=TARGET_ENERGY_GEV)
+            flush_now = False
+        _append_partial(run_record, flush_now=flush_now)
 
-        band_mask = (energies_gev >= band_min) & (energies_gev <= band_max)
-        band_energies = energies_gev[band_mask]
-        peaks_kept_count = int(band_energies.size)
-        band_counts.append(int(band_energies.size))
-
-        band_weights = [w for keep, w in zip(band_mask, weights_peaks) if keep]
-        band_powers = [p for keep, p in zip(band_mask, peak_powers) if keep]
-        bands_all = []
-        for e, pwr, w in zip(band_energies.tolist(), band_powers, band_weights):
-            bands_all.append({"energy": e, "power": pwr, "weights": w})
-        band_dominant_layers = []
-        for w in band_weights:
-            if not w:
-                band_dominant_layers.append(None)
-                continue
-            layer_max = max(w.items(), key=lambda kv: kv[1])
-            band_dominant_layers.append({"layer": layer_max[0], "weight": layer_max[1]})
-
-        # structural subset: filter by relative power, cluster by proximity, take top-N
-        structural_energies = []
-        structural_dom_layers: List[str] = []
-        structural_flags: List[str] = []
-        power_capture = 0.0
-        if band_energies.size > 0 and band_powers:
-            max_power = max(band_powers)
-            rel_floor = 0.03 * max_power
-            candidates = [(e, pwr) for e, pwr in zip(band_energies.tolist(), band_powers) if pwr >= rel_floor]
-            delta_min = 0.03
-            candidates.sort(key=lambda x: x[0])
-            clusters = []
-            for e, pwr in candidates:
-                if not clusters or abs(e - clusters[-1][-1][0]) >= delta_min:
-                    clusters.append([(e, pwr)])
-                else:
-                    clusters[-1].append((e, pwr))
-            structural_candidates = []
-            for cl in clusters:
-                cl.sort(key=lambda x: x[1], reverse=True)
-                structural_candidates.append(cl[0])
-            structural_candidates.sort(key=lambda x: x[1], reverse=True)
-            cap = sim_params.structural_peak_cap
-            if len(structural_candidates) > cap:
-                structural_flags.append("structural_band_cap_hit")
-            selected = structural_candidates[: min(len(structural_candidates), cap)]
-            structural_energies = [e for e, _ in selected]
-            power_capture = sum(p for _, p in structural_candidates[: min(len(structural_candidates), cap)]) / max(
-                sum(band_powers), 1e-12
-            )
-            if power_capture < 0.5:
-                structural_flags.append("structural_subset_low_capture")
-            # dominant layer for structural peaks
-            for e, _ in selected:
-                try:
-                    idx = band_energies.tolist().index(e)
-                except ValueError:
-                    structural_dom_layers.append(None)
-                    continue
-                dom = band_dominant_layers[idx] if idx < len(band_dominant_layers) else None
-                structural_dom_layers.append(dom["layer"] if dom else None)
-        structural_complex = (
-            "structural_band_cap_hit" in structural_flags or "structural_subset_low_capture" in structural_flags
-        )
-        if structural_complex and peak_selector_frac_struct < peak_selector_frac:
-            (
-                f_ref,
-                omega_ref_interp,
-                fft_k_peak,
-                fft_peak_delta,
-                fft_mag_km1,
-                fft_mag_k,
-                fft_mag_kp1,
-            ) = _select_peak_and_interp(
-                mag_q,
-                delta_f,
-                omega_max_cutoff=OMEGA_MAX_CUTOFF,
-                frac_of_max=peak_selector_frac_struct,
-                snr_min=peak_selector_snr_min,
-            )
-            peak_selector_mode = "structural_low_frac"
-        band_dom_counts_total: Dict[str, int] = {}
-        for item in band_dominant_layers:
-            if item and item.get("layer"):
-                band_dom_counts_total[item["layer"]] = band_dom_counts_total.get(item["layer"], 0) + 1
-        band_dom_counts_struct: Dict[str, int] = {}
-        for layer in structural_dom_layers:
-            if layer:
-                band_dom_counts_struct[layer] = band_dom_counts_struct.get(layer, 0) + 1
-        s2_band_fraction = (
-            sum(1 for item in band_dominant_layers if item and item["layer"] == "S2") / band_energies.size
-            if band_energies.size > 0
-            else 0.0
-        )
-        s2_band_fraction_struct = (
-            sum(1 for item in structural_dom_layers if item == "S2") / len(structural_dom_layers)
-            if structural_dom_layers
-            else 0.0
-        )
-        has_s2_dominant = s2_band_fraction > 0.0
-        s3_band_fraction = (
-            sum(1 for item in band_dominant_layers if item and item["layer"] == "S3") / band_energies.size
-            if band_energies.size > 0
-            else 0.0
-        )
-        # flag overflow but don't reject
-        if band_energies.size > sim_params.max_peaks:
-            structural_flags.append("band_overflow")
-
-        accepted_band = band_energies.size >= 3
-        spacings = analysis.compute_spacings(band_energies[band_energies > 1e-4]) if accepted_band else np.array([])
-        if accepted_band:
-            spacings_all.append(spacings)
-            accepted_runs_for_spacing += 1
-            if example_run is None:
-                example_run = {"energies": band_energies.copy(), "weights": band_weights}
-
-        layer_order = [layer for layer, idx in sorted(sim_result["layer_to_idx"].items(), key=lambda kv: kv[1])]
-
-        family_match = False
-        family_distance: Optional[FamilyDistance] = None
-        if family_fp and accepted_band:
-            family_distance = compute_family_distance(
-                sim_levels=band_energies.tolist(),
-                sim_widths=None,
-                fingerprint=family_fp,
-                use_widths=False,
-            )
-            family_match = family_distance.is_match
-            if family_match:
-                family_match_total += 1
-                if has_s2_dominant:
-                    family_match_with_s2 += 1
-                else:
-                    family_match_without_s2 += 1
-            elif has_s2_dominant:
-                family_off_with_s2 += 1
-
-        # Layer summaries (S2/S3 focus)
-        layer_summaries: Dict[str, Dict] = {}
-        for layer in layer_order:
-            lname = layer.name
-            thresholds = DEFAULT_LAYER_THRESHOLDS.get(lname, DEFAULT_LAYER_THRESHOLDS.get("S2", {}))
-            layer_summaries[lname] = _layer_summary(
-                layer_name=lname,
-                energies=energies_gev,
-                weights=weights_peaks,
-                band_mask=band_mask,
-                band_max=band_max,
-                thresholds=thresholds,
-            )
-
-        s2_state = layer_summaries.get("S2", {}).get("state", "absent")
-        s3_state = layer_summaries.get("S3", {}).get("state", "absent")
-        has_s3_dominant = s3_state == "structural_dominant"
-
-        # lock_quality based on band fraction
-        lock_quality_Q = layer_summaries.get("Q", {}).get("band_fraction", float("nan"))
-        lock_quality_S1 = layer_summaries.get("S1", {}).get("band_fraction", float("nan"))
-        lock_quality_S2 = layer_summaries.get("S2", {}).get("band_fraction", float("nan"))
-        lock_quality_S3 = layer_summaries.get("S3", {}).get("band_fraction", float("nan"))
-
-        # Relative thresholds (defaults can be overridden via YAML)
-        T_Q_rel_min = lock_thresholds.get("T_Q_rel_min", lock_thresholds.get("T_Q", 0.5))
-        T_S1_rel_min = lock_thresholds.get("T_S1_rel_min", lock_thresholds.get("T_S1", 0.1))
-        T_S2_rel_min = lock_thresholds.get("T_S2_rel_min", lock_thresholds.get("T_S2", 0.1))
-
-        def _finite(x: float) -> float:
-            return float(x) if np.isfinite(x) else 0.0
-
-        lock_Q_f = _finite(lock_quality_Q)
-        lock_S1_f = _finite(lock_quality_S1)
-        lock_S2_f = _finite(lock_quality_S2)
-        lock_S3_f = _finite(lock_quality_S3)
-        structural_mass = lock_Q_f + lock_S1_f + lock_S2_f + lock_S3_f
-
-        if structural_mass <= 0:
-            structure_tier = "none"
-            q_rel = s1_rel = s2_rel = 0.0
-        else:
-            q_rel = lock_Q_f / structural_mass
-            s1_rel = lock_S1_f / structural_mass
-            s2_rel = lock_S2_f / structural_mass
-            if q_rel < T_Q_rel_min:
-                structure_tier = "none"
-            elif s1_rel < T_S1_rel_min and s2_rel < T_S2_rel_min:
-                structure_tier = "level1"
-            elif s1_rel >= T_S1_rel_min and s2_rel < T_S2_rel_min:
-                structure_tier = "level2"
-            else:
-                structure_tier = "level3"
-
-        s2_band_fraction_weight = layer_summaries.get("S2", {}).get("band_fraction", 0.0)
-        none_max = s2_state_cfg.get("none_max_fraction", 1e-3)
-        latent_max = s2_state_cfg.get("latent_max_fraction", 0.15)
-        if s2_band_fraction_weight < none_max:
-            s2_state_label = "none"
-        elif s2_band_fraction_weight <= latent_max:
-            s2_state_label = "latent"
-        else:
-            s2_state_label = "structural"
-
-        debug_trace_path = None
-        if debug_enabled and "debug_traces" in sim_result:
-            debug_trace_path = debug_dir / f"run_{run_idx:04d}_traces.npz"
-            dbg = sim_result["debug_traces"]
-            inputs_arr = dbg.get("inputs")
-            tau_eff_obj = np.array(dbg.get("tau_eff", []), dtype=object)
-            z_arr = dbg.get("z")
-            np.savez_compressed(debug_trace_path, inputs=inputs_arr, tau_eff=tau_eff_obj, z=z_arr)
-
-        mem_taus_flat = [tau for ic in config.inter_layer_couplings for k in ic.links.values() for tau in k.taus0]
-        mem_amps_flat = [amp for ic in config.inter_layer_couplings for k in ic.links.values() for amp in k.amps0]
-        mem_terms_by_layer: Dict[str, int] = {}
-        for ic in config.inter_layer_couplings:
-            total_terms = sum(len(k.taus0) for k in ic.links.values())
-            mem_terms_by_layer[ic.deep_layer.name] = mem_terms_by_layer.get(ic.deep_layer.name, 0) + total_terms
-        memory_enabled_effective = bool(mem_taus_flat)
-        expected_mem_terms = 0
-        if memory_cfg and memory_cfg.get("modes_per_layer"):
-            try:
-                expected_mem_terms = sum(int(v) for v in memory_cfg.get("modes_per_layer", {}).values())
-            except Exception:
-                expected_mem_terms = 0
-        mem_terms_mismatch = (mem_terms_by_layer and sum(mem_terms_by_layer.values()) != config.memory_terms)
-        if mem_terms_mismatch:
+        current_mass_proxies = {
+            "M1": run_record.get("M1"),
+            "M2": run_record.get("M2"),
+            "M3": run_record.get("M3"),
+            "omega_ref": run_record.get("omega_ref"),
+            "mass_sim_gev": run_record.get("mass_sim_gev"),
+        }
+        _log_run_status(run_idx, status, result.get("e_internal"))
+        processed_count += 1
+        if processed_count % 10 == 0 or processed_count == total_pending:
+            elapsed_min = max((time.time() - t_start) / 60.0, 1e-9)
+            throughput = processed_count / elapsed_min
             print(
-                f"[run_sweep] WARNING: n_memory_terms({config.memory_terms}) != sum(mem_terms_by_layer)({sum(mem_terms_by_layer.values())}) for run {run_idx}",
+                "[run_sweep] progress "
+                f"processed={processed_count}/{total_pending} "
+                f"ok={max(processed_count - unstable - rejected, 0)} "
+                f"unstable={unstable} rejected={rejected} "
+                f"throughput={throughput:.2f} runs/min",
                 flush=True,
             )
-        mem_issue = (
-            memory_cfg
-            and memory_cfg.get("enabled", False)
-            and expected_mem_terms > 0
-            and not mem_taus_flat
-        )
-        if mem_issue:
-            msg = (
-                f"[run_sweep] ERROR: memory.enabled=True and modes_per_layer>0 but no memory terms were instantiated (run {run_idx}); "
-                "possible complexity cap or generation bug. Marking run as rejected."
-            )
-            print(msg, flush=True)
-            rejected += 1
-            run_outputs.append(
-                {
-                    "run_session_id": run_session_id,
-                    "engine_config_path": engine_config_path,
-                    "engine_config_hash": engine_config_hash,
-                    "run_id": run_idx,
-                    "status": "rejected",
-                    "reason": "memory_not_applied",
-                    "max_complexity": max_complexity,
-                    "complexity": config.complexity,
-                    "n_modes": len(config.modes),
-                    "expected_memory_terms": expected_mem_terms,
-                    "n_memory_terms": config.memory_terms,
-                    "memory_taus": mem_taus_flat,
-                    "memory_amps": mem_amps_flat,
-                    "memory_enabled_effective": False,
-                    "entropy_status": "skipped",
-                    "entropy_reason": "compute_entropy_disabled" if not compute_entropy else "not_implemented",
-                    "entropy_chaos": None,
-                    "lyapunov_local": None,
-                    "lyapunov_mean": None,
-                    "phase_compactness": None,
-                    "phase_occupancy": None,
-                    "entropy_flags": None,
-                }
-            )
-            _append_partial(run_outputs[-1])
-            continue
-        # derive auxiliary metrics for interpretability
-        layer_energy_fraction = {
-            "Q": lock_quality_Q,
-            "S1": lock_quality_S1,
-            "S2": lock_quality_S2,
-        }
-        try:
-            import math as _math
 
-            vals = [v for v in layer_energy_fraction.values() if v is not None and v > 0]
-            if vals:
-                p = np.array(vals, dtype=float)
-                p = p / max(np.sum(p), 1e-12)
-                participation_entropy = float(-np.sum(p * np.log(np.clip(p, 1e-12, 1))))
-                min_layer_fraction = float(np.min(p))
-            else:
-                participation_entropy = None
-                min_layer_fraction = None
-        except Exception:
-            participation_entropy = None
-            min_layer_fraction = None
+    if workers and workers > 1:
+        ordered_ids = list(pending_run_ids)
+        next_pos = 0
+        result_buffer: Dict[int, Dict[str, object]] = {}
+        stop_requested = False
+        force_stop = False
+        last_heartbeat = time.time()
+        heartbeat_interval = 10.0
 
-        s2_state_lock = s2_state_label
-        # band-based state
-        if s2_band_fraction_struct < none_max:
-            s2_state_bands = "none"
-        elif s2_band_fraction_struct <= latent_max:
-            s2_state_bands = "latent"
-        else:
-            s2_state_bands = "structural"
+        def _handle_sigint(_signum, _frame):
+            nonlocal stop_requested, force_stop
+            stop_requested = True
+            force_stop = True
+            print("[run_sweep] SIGINT received; stopping after current results.", flush=True)
 
-        # Entropy/caos
-        entropy_chaos = None
-        if compute_entropy:
-            block_entropies: List[float] = []
-            q_values: List[float] = []
-            block_tiers: List[str] = []
-            min_layer_fraction_thr = float(s2_state_cfg.get("min_layer_fraction", 0.05))
-            for w in band_weights:
-                if not isinstance(w, dict):
-                    continue
-                block_entropies.append(_lock_entropy_norm_from_weights(w))
-                q_values.append(float(w.get("Q", 0.0)))
-                block_tiers.append(_block_tier_from_weights(w, min_fraction=min_layer_fraction_thr))
-
-            # Global structural chaos: PE on lock_quality_S1 per tick (fraction of S1 energy)
-            lock_s1_series: List[float] = []
-            energies_series = sim_result.get("energies_series")
-            if energies_series is not None and np.size(energies_series) > 0:
-                for vec in energies_series:
-                    e_q = float(vec[0]) if len(vec) > 0 else 0.0
-                    e_s1 = float(vec[1]) if len(vec) > 1 else 0.0
-                    e_s2 = float(vec[2]) if len(vec) > 2 else 0.0
-                    total = e_q + e_s1 + e_s2
-                    if total > CHAOS_EPS:
-                        lock_s1_series.append(e_s1 / total)
-                    else:
-                        lock_s1_series.append(1.0 / 3.0)
-            chaos_mode = "dynamic" if len(lock_s1_series) >= 6 else "ensemble"  # m=5,tau=1 ⇒ need ≥6
-            PE_tick_norm = _permutation_entropy(lock_s1_series, m=5, tau=1) if chaos_mode == "dynamic" else None
-            fraction_structured = (
-                float(sum(1 for t in block_tiers if t != "none")) / len(block_tiers) if block_tiers else None
-            )
-            entropy_chaos = {
-                "eps": CHAOS_EPS,
-                "mean_H_lock_norm": float(np.mean(block_entropies)) if block_entropies else None,
-                "std_H_lock_norm": float(np.std(block_entropies)) if block_entropies else None,
-                "p90_H_lock_norm": float(np.percentile(block_entropies, 90)) if block_entropies else None,
-                "fraction_structured": fraction_structured,
-                "mean_Q": float(np.mean(q_values)) if q_values else None,
-                "std_Q": float(np.std(q_values)) if q_values else None,
-                "mixture_entropy_blocks_norm": _mixture_entropy_norm(block_entropies) if block_entropies else None,
-                "structure_mix_norm": _structure_mix_entropy_norm(block_tiers) if block_tiers else None,
-                "chaos_mode": chaos_mode,
-                "PE_tick_norm": PE_tick_norm,
-                "has_ticks": bool(lock_s1_series),
-                "T_ticks": len(lock_s1_series) if chaos_mode == "dynamic" else None,
-                "lock_S1_series": lock_s1_series if lock_s1_series else None,
-                "notes": "PE sobre lock_quality_S1 por tick (fracción S1 global); sin serie → sólo métricas instantáneas/ensemble.",
-            }
-            entropy_status = "ok"
-            entropy_reason = None
-        else:
-            entropy_status = "skipped"
-            entropy_reason = "compute_entropy_disabled"
-            entropy_chaos = None
-
-        e_internal = sim_result.get("E_internal")
-
-        # --- Lock mass/energy proxies (all in internal units) ---
-        # Inputs
-        H_layers = participation_entropy
-        H_layers_max = math.log(3.0)
-        band_count_run = int(band_energies.size)
-        omega_peaks_raw = omega_peaks.tolist() if omega_peaks is not None else []
-        omega_ref = omega_ref_interp if omega_ref_interp is not None else (float(min(omega_peaks_raw)) if omega_peaks_raw else None)
-
-        # Layer volume proxy
-        V_layers = float(math.exp(H_layers)) if H_layers is not None else None
-        V_lock = (V_layers * band_count_run) if (V_layers is not None) else None
-
-        # Static density
-        D_stat = None
-        if H_layers is not None and H_layers_max > 0:
-            D_stat = 1.0 - (H_layers / H_layers_max)
-            D_stat = max(0.0, min(1.0, D_stat))
-
-        # Dynamic density from entropy_chaos over lock_S1_series
-        D_dyn = None
-        rho_lock = None
-        if entropy_chaos:
-            mh = entropy_chaos.get("mean_H_lock_norm")
-            pe = entropy_chaos.get("PE_tick_norm")
-            if mh is not None and pe is not None:
-                try:
-                    D_dyn_val = (1.0 - float(mh)) * (1.0 - float(pe))
-                    D_dyn = max(0.0, min(1.0, D_dyn_val))
-                except Exception:
-                    D_dyn = None
-        if D_stat is not None and D_dyn is not None:
-            rho_lock = D_stat * D_dyn
-
-        # Mass proxies
-        M_spec = omega_ref
-        M1 = None
-        M2 = None
-        M3 = None
-
-        if V_lock is not None and D_stat is not None:
-            M1 = V_lock * D_stat
-        if omega_ref is not None and V_lock is not None and D_stat is not None:
-            M2 = omega_ref * V_lock * D_stat
-        if omega_ref is not None and V_lock is not None and rho_lock is not None:
-            M3 = omega_ref * V_lock * rho_lock
-        mass_sim_gev = None
-        if hbar_sim_live is not None and omega_ref is not None:
+        previous_handler = signal.signal(signal.SIGINT, _handle_sigint)
+        with ProcessPoolExecutor(
+            max_workers=workers,
+            mp_context=get_context("spawn"),
+            initializer=_init_run_ctx,
+            initargs=(ctx,),
+        ) as executor:
+            future_to_idx = {executor.submit(_run_one, run_idx): run_idx for run_idx in ordered_ids}
             try:
-                mass_sim_gev = hbar_sim_live * omega_ref
-            except Exception:
-                mass_sim_gev = None
+                for future in as_completed(future_to_idx):
+                    if stop_requested:
+                        break
+                    if stop_file and Path(stop_file).exists():
+                        stop_requested = True
+                        print("[run_sweep] stop-file detected; stopping after current results.", flush=True)
+                        try:
+                            Path(stop_file).unlink()
+                        except Exception:
+                            pass
+                        break
+                    now = time.time()
+                    if now - last_heartbeat >= heartbeat_interval and next_pos < len(ordered_ids):
+                        waiting_for = ordered_ids[next_pos]
+                        completed = len(result_buffer)
+                        total = len(ordered_ids)
+                        print(
+                            f"[run_sweep] heartbeat waiting_for_run={waiting_for} "
+                            f"completed_buffer={completed}/{total}",
+                            flush=True,
+                        )
+                        last_heartbeat = now
+                    idx = future_to_idx[future]
+                    result_buffer[idx] = future.result()
+                    while next_pos < len(ordered_ids) and ordered_ids[next_pos] in result_buffer:
+                        _process_result(result_buffer.pop(ordered_ids[next_pos]))
+                        next_pos += 1
+            except KeyboardInterrupt:
+                stop_requested = True
+                print("[run_sweep] KeyboardInterrupt; stopping after current results.", flush=True)
+            finally:
+                if stop_requested:
+                    for fut in future_to_idx:
+                        if not fut.done():
+                            fut.cancel()
+                    if force_stop:
+                        for proc in executor._processes.values():
+                            proc.terminate()
+                try:
+                    executor.shutdown(cancel_futures=True)
+                except KeyboardInterrupt:
+                    print("[run_sweep] KeyboardInterrupt during shutdown; exiting.", flush=True)
+                signal.signal(signal.SIGINT, previous_handler)
 
-        # snapshot for console logging
-        current_mass_proxies["M1"] = M1
-        current_mass_proxies["M2"] = M2
-        current_mass_proxies["M3"] = M3
-        current_mass_proxies["omega_ref"] = omega_ref
-        current_mass_proxies["mass_sim_gev"] = mass_sim_gev
-
-        run_record = {
-            "run_session_id": run_session_id,
-            "engine_config_path": engine_config_path,
-            "engine_config_hash": engine_config_hash,
-            "run_id": run_idx,
-            "status": "ok",
-            "n_modes": len(config.modes),
-            "n_memory_terms": config.memory_terms,
-            "expected_memory_terms": expected_mem_terms,
-            "memory_terms_by_layer": mem_terms_by_layer,
-            "memory_terms_mismatch": mem_terms_mismatch,
-            "memory_enabled_effective": memory_enabled_effective,
-            "max_complexity": max_complexity,
-            "complexity": config.complexity,
-            "energy_scale": scale,
-            "peaks_raw_count": peaks_raw_count,
-            "peaks_kept_count": peaks_kept_count,
-            "energies_gev": energies_gev.tolist(),
-            "band_energies_gev": band_energies.tolist(),
-            "band_spacing_gev": spacings.tolist(),
-            "spacing_mean": float(np.mean(spacings)) if spacings.size else float("nan"),
-            "spacing_std": float(np.std(spacings)) if spacings.size else float("nan"),
-            "spacing_min": float(np.min(spacings)) if spacings.size else float("nan"),
-            "spacing_max": float(np.max(spacings)) if spacings.size else float("nan"),
-            "band_count": int(band_energies.size),
-            "band_structural_energies_gev": structural_energies,
-            "band_count_structural": len(structural_energies),
-            "band_structural_cap_hit": "structural_band_cap_hit" in structural_flags,
-            "peak_cap": sim_params.structural_peak_cap,
-            "peak_cap_hit": "structural_band_cap_hit" in structural_flags,
-            "peaks_raw_count": peaks_raw_count,
-            "peaks_kept_count": peaks_kept_count,
-            "bands_all_json": json.dumps(bands_all),
-            "bands_structural_json": json.dumps([{"energy": e} for e in structural_energies]),
-            "band_power_capture": power_capture,
-            "band_flags": structural_flags,
-            "band_dom_counts_total": band_dom_counts_total,
-            "band_dom_counts_structural": band_dom_counts_struct,
-            "accepted_for_spacing": accepted_band,
-            "family_match": family_match,
-            "family_distance": family_distance.__dict__ if family_distance else None,
-            "band_weights": band_weights,
-            "band_dominant_layers": band_dominant_layers,
-            "s2_band_fraction_total": s2_band_fraction,
-            "has_s2_dominant": has_s2_dominant,
-            "s2_band_fraction": s2_band_fraction,
-            "s3_band_fraction": s3_band_fraction,
-            "has_s3_dominant": has_s3_dominant,
-            "s2_state": s2_state_label,
-            "s2_state_lock": s2_state_lock,
-            "s2_state_bands": s2_state_bands,
-            "s3_state": s3_state,
-            "s2_total_fraction": layer_summaries.get("S2", {}).get("total_fraction"),
-            "s3_total_fraction": layer_summaries.get("S3", {}).get("total_fraction"),
-            "s2_band_compactness": layer_summaries.get("S2", {}).get("band_compactness"),
-            "s3_band_compactness": layer_summaries.get("S3", {}).get("band_compactness"),
-            "s2_outband_fraction": layer_summaries.get("S2", {}).get("outband_fraction"),
-            "s3_outband_fraction": layer_summaries.get("S3", {}).get("outband_fraction"),
-            "s2_highfreq_fraction": layer_summaries.get("S2", {}).get("highfreq_fraction"),
-            "s3_highfreq_fraction": layer_summaries.get("S3", {}).get("highfreq_fraction"),
-            "lock_quality_Q": lock_quality_Q,
-            "lock_quality_S1": lock_quality_S1,
-            "lock_quality_S2": lock_quality_S2,
-            "layer_energy_fraction": layer_energy_fraction,
-            "participation_entropy": participation_entropy,
-            "min_layer_fraction": min_layer_fraction,
-            "structure_tier": structure_tier,
-            "layers_order": [l.name for l in layer_order],
-            "b_trace": sim_result["b_series"].tolist(),
-            "t_trace": sim_result["times"].tolist(),
-            "dt_used": sim_result.get("dt_used"),
-            "E_internal": e_internal,
-            "omega_peaks": omega_peaks_raw,
-            "f_ref": f_ref,
-            "omega_ref": omega_ref,
-            "omega_ref_interp": omega_ref_interp,
-            "delta_omega": delta_omega,
-            "delta_f": delta_f,
-            "dt_sample_fft": sim_result.get("dt_used") * sim_params.sample_stride if sim_result.get("dt_used") else None,
-            "n_samples_fft": spectrum.get("n_samples"),
-            "n_samples_fft_padded": spectrum.get("n_padded"),
-            "T_obs_fft": spectrum.get("T_obs"),
-            "fft_peak_index": fft_k_peak,
-            "fft_peak_delta": fft_peak_delta,
-            "fft_peak_mag_km1": fft_mag_km1,
-            "fft_peak_mag_k": fft_mag_k,
-            "fft_peak_mag_kp1": fft_mag_kp1,
-            "V_layers": V_layers,
-            "V_lock": V_lock,
-            "D_stat": D_stat,
-            "D_dyn": D_dyn,
-            "rho_lock": rho_lock,
-            "M_spec": M_spec,
-            "M1": M1,
-            "M2": M2,
-            "M3": M3,
-            "mass_sim_gev": mass_sim_gev,
-            "entropy_status": entropy_status,
-            "entropy_reason": entropy_reason,
-            "lyapunov_local": None,
-            "lyapunov_mean": None,
-            "phase_compactness": None,
-            "phase_occupancy": None,
-            "entropy_flags": None,
-            "entropy_chaos": entropy_chaos,
-            "R_S1_Q": config.R_S1_Q,
-            "R_S2_S1": config.R_S2_S1,
-            "R_S3_S2": config.R_S3_S2,
-            "g_couplings": [ic.g0 for ic in config.inter_layer_couplings],
-            "memory_taus": mem_taus_flat,
-            "memory_amps": mem_amps_flat,
-            "theta_internal": _serialize_theta(config),
-            "debug_trace_path": str(debug_trace_path) if debug_trace_path else None,
-            "adaptive_lock": sim_result.get("adaptive_lock"),
-        }
-        run_outputs.append(run_record)
-        theta_internal = run_record.get("theta_internal")
-        if not isinstance(theta_internal, dict):
-            raise RuntimeError(f"Missing theta_internal for run_id={run_idx}")
-        validate_theta_internal(theta_internal)
-        _append_full(
-            {
-                "schema_version": "ola1_run_v1",
-                "run_id": run_idx,
-                "timestamp_utc": _utc_now(),
-                "seed": seed,
-                "status": "ok",
-                "theta_internal": theta_internal,
-                "provenance": {
-                    "config_hash": config_hash,
-                    "code_hash": code_hash,
-                    "inputs_hash": inputs_hash,
-                },
-                "metrics": {
-                    "R_mean_lastW": run_record.get("R_mean_lastW"),
-                    "phase_var_lastW": run_record.get("phase_var_lastW"),
-                    "QualityLock": run_record.get("lock_quality_Q"),
-                },
-                "viable": bool(run_record.get("accepted_for_spacing")),
-            }
-        )
-        flush_now = ((run_idx + 1) % partial_flush_every == 0) or (run_idx + 1 == runs)
-        _append_partial(run_record, flush_now=flush_now)
-        _log_run_status(run_idx, "ok", e_internal)
-
+            # Drain any completed futures in buffer order after stop.
+            if stop_requested:
+                for fut, idx in future_to_idx.items():
+                    if fut.done() and idx not in result_buffer:
+                        try:
+                            result_buffer[idx] = fut.result()
+                        except Exception:
+                            continue
+                while next_pos < len(ordered_ids) and ordered_ids[next_pos] in result_buffer:
+                    _process_result(result_buffer.pop(ordered_ids[next_pos]))
+                    next_pos += 1
+    else:
+        try:
+            for run_idx in pending_run_ids:
+                if stop_file and Path(stop_file).exists():
+                    print("[run_sweep] stop-file detected; stopping gracefully.", flush=True)
+                    try:
+                        Path(stop_file).unlink()
+                    except Exception:
+                        pass
+                    break
+                _process_result(_run_one(run_idx))
+        except KeyboardInterrupt:
+            print("[run_sweep] KeyboardInterrupt; stopping.", flush=True)
     all_spacings = np.concatenate(spacings_all) if spacings_all else np.array([])
     spacing_stats = analysis.summarise_spacings(all_spacings)
     d_totals = [r["family_distance"]["d_total"] for r in run_outputs if r.get("family_distance")]
@@ -1497,6 +1776,7 @@ def run_sweep(
 
     raw_payload = {
         "seed": seed,
+        "seed_salt": seed_salt,
         "max_complexity": max_complexity,
         "engine_config_path": engine_config_path,
         "engine_config_hash": engine_config_hash,
@@ -1559,6 +1839,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
         help="Number of run attempts (some may be rejected by complexity).",
     )
     parser.add_argument("--seed", type=int, default=None, help="Random seed.")
+    parser.add_argument(
+        "--seed-salt",
+        type=str,
+        default="ola1_sweep_v1",
+        help="Seed salt for per-run deterministic seeding (versioned).",
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=os.cpu_count() or 1,
+        help="Worker processes for multicore (default os.cpu_count).",
+    )
     parser.add_argument(
         "--max-complexity",
         type=int,
@@ -1793,37 +2085,43 @@ def main():
         print(json.dumps(msg, indent=2))
         return
 
-    summary, raw_path, processed_path = run_sweep(
-        case=args.case,
-        runs=args.runs,
-        seed=args.seed,
-        max_complexity=args.max_complexity,
-        n_q=args.n_q,
-        n_s1=args.n_s1,
-        n_s2=args.n_s2,
-        n_s3=args.n_s3,
-        band_min=args.band_min,
-        band_max=args.band_max,
-        attempts=args.attempts,
-        save_plots=not args.no_plots,
-        family_spec=family_spec,
-        family_fp=family_fp,
-        family_priors=family_priors,
-        raw_dir=raw_dir,
-        processed_dir=processed_dir,
-        output_root=args.output_root,
-        layer_state_config=layer_cfg,
-        sim_params_cfg=sim_params_cfg,
-        debug_traces=args.debug_traces,
-        memory_cfg=memory_cfg,
-        adaptive_cfg=adaptive_cfg,
-        partial_flush_every=args.partial_flush_every,
-        engine_config_path=engine_cfg_path,
-        engine_config_hash=engine_cfg_hash,
-        resume=args.resume,
-        stop_file=args.stop_file,
-        compute_entropy=args.compute_entropy,
-    )
+    try:
+        summary, raw_path, processed_path = run_sweep(
+            case=args.case,
+            runs=args.runs,
+            seed=args.seed,
+            seed_salt=args.seed_salt,
+            max_complexity=args.max_complexity,
+            n_q=args.n_q,
+            n_s1=args.n_s1,
+            n_s2=args.n_s2,
+            n_s3=args.n_s3,
+            band_min=args.band_min,
+            band_max=args.band_max,
+            attempts=args.attempts,
+            save_plots=not args.no_plots,
+            family_spec=family_spec,
+            family_fp=family_fp,
+            family_priors=family_priors,
+            raw_dir=raw_dir,
+            processed_dir=processed_dir,
+            output_root=args.output_root,
+            layer_state_config=layer_cfg,
+            sim_params_cfg=sim_params_cfg,
+            debug_traces=args.debug_traces,
+            memory_cfg=memory_cfg,
+            adaptive_cfg=adaptive_cfg,
+            partial_flush_every=args.partial_flush_every,
+            engine_config_path=engine_cfg_path,
+            engine_config_hash=engine_cfg_hash,
+            resume=args.resume,
+            stop_file=args.stop_file,
+            compute_entropy=args.compute_entropy,
+            workers=args.workers,
+        )
+    except KeyboardInterrupt:
+        print("[run_sweep] Interrupted; partial results preserved.", flush=True)
+        return
     print(
         json.dumps(
             {"summary": summary, "raw_path": str(raw_path), "processed_path": str(processed_path)}, indent=2

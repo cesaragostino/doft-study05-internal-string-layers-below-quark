@@ -11,6 +11,7 @@ def append_jsonl(
     path: Path,
     rows: Iterable[Dict[str, Any]],
     validate: Optional[Callable[[Dict[str, Any]], None]] = None,
+    allow_nan: bool = True,
 ) -> int:
     """Append rows to JSONL file and return count written (fail fast on validation)."""
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -19,7 +20,7 @@ def append_jsonl(
         for row in rows:
             if validate is not None:
                 validate(row)
-            f.write(json.dumps(row) + "\n")
+            f.write(json.dumps(row, allow_nan=allow_nan) + "\n")
             count += 1
     return count
 

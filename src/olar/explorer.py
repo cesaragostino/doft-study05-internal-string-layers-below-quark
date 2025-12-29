@@ -171,11 +171,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="olar explorer (V1).")
     parser.add_argument("--config", required=True, help="Path to explorer config JSON.")
     parser.add_argument("--output-dir", required=False, help="Override output dir.")
+    parser.add_argument("--stop-file", required=False, help="Stop-file path for graceful shutdown.")
     args = parser.parse_args()
 
     config_path = Path(args.config)
     cfg = _load_json(config_path)
     output_dir = Path(args.output_dir) if args.output_dir else None
+    stop_file = args.stop_file or cfg.get("stop_file")
+    stop_path = Path(stop_file) if stop_file else None
 
     inputs = cfg.get("inputs", {})
     blocks_path = Path(inputs.get("blocks_json", "data/processed/ola1/simple_blocks.json"))
@@ -293,7 +296,10 @@ def main() -> None:
     log_every = int(progress_cfg.get("log_every_terms", 10) or 10)
     if log_every <= 0:
         log_every = 10
+    stop_requested = False
     for target_idx, target in enumerate(targets):
+        if stop_requested:
+            break
         target_name = target.get("name", "unknown")
         template_names = target.get("templates", [])
         budget = int(target.get("budget_evals", 0))
@@ -304,6 +310,14 @@ def main() -> None:
             continue
         new_evals = 0
         for local_idx in range(budget):
+            if stop_path and stop_path.exists():
+                print("[olar_explorer] stop-file detected; stopping after current batch.", flush=True)
+                try:
+                    stop_path.unlink()
+                except OSError:
+                    pass
+                stop_requested = True
+                break
             if (local_idx + 1) % log_every == 0:
                 print(".", end="", flush=True)
             tmpl_name = rng.choice(template_names) if template_names else None
