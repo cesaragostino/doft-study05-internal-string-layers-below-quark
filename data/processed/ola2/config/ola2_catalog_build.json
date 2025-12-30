@@ -11,7 +11,8 @@
     "entities_jsonl": "data/processed/ola2/catalog/entities.jsonl",
     "genome_layer_csv": "data/processed/ola2/catalog/genome_layers_ola2.csv",
     "rollups_json": "data/processed/ola2/catalog/rollups.json",
-    "report_md": "data/processed/ola2/sweep_report.md"
+    "explorer_report_md": "data/processed/ola2/explorer_report.md",
+    "sweep_report_md": "data/processed/ola2/sweep_report.md"
   },
   "schema_version": "core_catalog_build_v1"
 }
