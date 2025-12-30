@@ -18,6 +18,14 @@
 
 ## Viable Candidates
 
+Resumen por template:
+
+| Template | Total | Viables | Rate |
+|---|---:|---:|---:|
+| bipartite_3_6 | 18 | 11 | 61.1% MUY ALTO |
+| decagon_ring | 4 | 2 | 50.0% MUY ALTO |
+| ladder_5 | 7 | 4 | 57.1% MUY ALTO |
+
 ### Viable #1: ladder_5 (N=10)
 
 Entity ID: dea9bfd28d8d7f30993c11d18274756295f903d14a5263a39f4dbae5484aad8b

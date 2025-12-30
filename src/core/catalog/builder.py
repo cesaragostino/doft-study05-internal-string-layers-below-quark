@@ -209,7 +209,30 @@ def _append_viable_report(
     if not viable_rows:
         return
 
-    section_lines = ["## Viable Candidates", ""]
+    template_stats: Dict[str, Dict[str, int]] = {}
+    for eid, candidate in entities_candidates.items():
+        template_name = candidate.get("template_name") or "unknown"
+        stats = template_stats.setdefault(template_name, {"total": 0, "viables": 0})
+        stats["total"] += 1
+        if sweep_evals_by_entity_id.get(eid):
+            stats["viables"] += 1
+
+    summary_lines = [
+        "Resumen por template:",
+        "",
+        "| Template | Total | Viables | Rate |",
+        "|---|---:|---:|---:|",
+    ]
+    for template_name in sorted(template_stats):
+        stats = template_stats[template_name]
+        total = stats["total"]
+        viables = stats["viables"]
+        rate = (viables / total * 100.0) if total else 0.0
+        note = " MUY ALTO" if rate >= 50.0 and total > 0 else ""
+        summary_lines.append(f"| {template_name} | {total} | {viables} | {rate:.1f}%{note} |")
+    summary_lines.append("")
+
+    section_lines = ["## Viable Candidates", "", *summary_lines]
     for idx, (eid, candidate, evals) in enumerate(viable_rows, start=1):
         template_name = candidate.get("template_name") or "unknown"
         nodes = _node_count(candidate)
