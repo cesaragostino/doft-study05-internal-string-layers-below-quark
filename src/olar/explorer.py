@@ -505,6 +505,11 @@ def main() -> None:
 
     attempts_written = append_jsonl(attempts_path, attempts_rows, validate=validate_attempt)
     entities_written = append_jsonl(entities_path, entities_rows, validate=validate_entity_candidate)
+    total_attempts = sum(1 for _ in iter_jsonl(attempts_path)) if attempts_path.exists() else 0
+    total_entities = sum(1 for _ in iter_jsonl(entities_path)) if entities_path.exists() else 0
+    total_candidates = sum(
+        1 for row in iter_jsonl(entities_path) if (row.get("tags_raw") or {}).get("candidate") is True
+    )
     attempts_size = attempts_path.stat().st_size if attempts_path.exists() else attempts_offset
     entities_size = entities_path.stat().st_size if entities_path.exists() else entities_offset
     write_resume_index(attempts_path.with_suffix(".resume.json"), attempts_size, {"ids": len(seen_eval_ids)})
@@ -514,12 +519,14 @@ def main() -> None:
         f"attempts_written={attempts_written} entities_written={entities_written} "
         f"entities_written_candidate_true={entities_candidates_written} dropped_non_candidate={dropped_non_candidate} "
         f"dropped_missing_dna={dropped_missing_dna} dropped_not_allowed_grade={dropped_not_allowed_grade} "
-        f"dropped_not_allowed_family={dropped_not_allowed_family}"
+        f"dropped_not_allowed_family={dropped_not_allowed_family} "
+        f"total_attempts={total_attempts} total_entities={total_entities} total_candidates={total_candidates}"
     )
     if report_path is not None:
         candidate_rate = (
             float(attempts_candidates_written) / float(attempts_written) if attempts_written else 0.0
         )
+        total_candidate_rate = (float(total_candidates) / float(total_entities)) if total_entities else 0.0
         report_lines = [
             "# Explorer Report",
             "",
@@ -530,6 +537,12 @@ def main() -> None:
             f"- entities_written: {entities_written}",
             f"- entities_written_candidate_true: {entities_candidates_written}",
             f"- dropped_non_candidate: {dropped_non_candidate}",
+            "",
+            "## Totals (on disk)",
+            f"- total_attempts: {total_attempts}",
+            f"- total_entities: {total_entities}",
+            f"- total_candidates: {total_candidates}",
+            f"- total_candidate_rate: {total_candidate_rate:.6g}",
             "",
             "## Filters",
             f"- dropped_missing_dna: {dropped_missing_dna}",
