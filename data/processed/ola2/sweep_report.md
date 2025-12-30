@@ -1,7 +1,3 @@
-
-
-# Sweep Report
-
 # Sweep Report
 
 ## Promoted Candidates

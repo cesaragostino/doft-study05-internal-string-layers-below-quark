@@ -642,11 +642,7 @@ def build_catalog(config_path: Path, output_dir: Optional[Path] = None) -> None:
     if sweep_report_out is not None:
         sweep_sections = ["# Sweep Report", ""]
         sweep_sections.extend(_candidate_section("Promoted", promoted_rows, entities_candidates, family_by_id))
-        _write_sections(
-            sweep_report_out,
-            sweep_sections,
-            ["## Promoted Candidates", "## Viable Candidates"],
-        )
+        _write_report(sweep_report_out, sweep_sections)
 
     if explorer_report_out is not None:
         attempts_total = sum(1 for _ in iter_jsonl(attempts_path)) if attempts_path.exists() else 0
