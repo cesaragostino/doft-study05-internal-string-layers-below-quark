@@ -5,6 +5,8 @@
   "ola_from": 2,
   "ola_to": 3,
   "output_blocks_json": "data/processed/ola2/promoted/simple_blocks.json",
-  "run_inputs": "data/processed/ola2/config/doft_run_inputs_v4.json",
-  "schema_version": "core_promotion_blocks_v1"
+  "blocks_prev_json": "data/processed/ola1/simple_blocks_canonical.json",
+  "blocks_prev_block_id_key": "block_id",
+  "require_node_theta_internal": true,
+  "schema_version": "core_promotion_blocks_v2"
 }

@@ -80,9 +80,9 @@
     "report_md"
   ],
   "outputs": {
-    "evaluations_jsonl": "data/processed/ola2/raw/evaluations.jsonl",
-    "raw_dir": "data/processed/ola2/raw",
-    "report_md": "data/processed/ola2/sweep_report.md"
+    "evaluations_jsonl": "data/processed/ola2/sweep_shards/shard_05/raw/evaluations.jsonl",
+    "raw_dir": "data/processed/ola2/sweep_shards/shard_05/raw",
+    "report_md": "data/processed/ola2/sweep_shards/shard_05/sweep_report.md"
   },
   "schema_version": "olar_sweep_config_v1",
   "seed_policy": {
@@ -90,5 +90,14 @@
     "mode": "deterministic",
     "salt": "sweep_v1",
     "seeds": 6
+  },
+  "candidate_shard": {
+    "enabled": true,
+    "shard_count": 8,
+    "shard_id": 5,
+    "hash": "sha256_hex8"
+  },
+  "output_policy": {
+    "reset_outputs": true
   }
 }

@@ -1,15 +1,17 @@
 {
   "inputs": {
-    "attempts_jsonl": "data/processed/ola2/raw/attempts.jsonl",
-    "evaluations_jsonl": "data/processed/ola2/raw/evaluations.jsonl",
-    "templates_json": "data/processed/ola2/config/ola2_templates.json"
+    "attempts_jsonl": "../raw/attempts.jsonl",
+    "entities_candidates_jsonl": "../raw/entities_candidates.jsonl",
+    "evaluations_jsonl": "../sweep_merged/evaluations.jsonl",
+    "templates_json": "ola2_templates.json"
   },
   "ola": 2,
   "outputs": {
     "catalog_dir": "data/processed/ola2/catalog",
     "entities_jsonl": "data/processed/ola2/catalog/entities.jsonl",
     "genome_layer_csv": "data/processed/ola2/catalog/genome_layers_ola2.csv",
-    "rollups_json": "data/processed/ola2/catalog/rollups.json"
+    "rollups_json": "data/processed/ola2/catalog/rollups.json",
+    "report_md": "data/processed/ola2/report.md"
   },
   "schema_version": "core_catalog_build_v1"
 }

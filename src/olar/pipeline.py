@@ -7,7 +7,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
 def _load_json(path: Path) -> Any:
@@ -75,6 +75,10 @@ def _build_core_promotion_cmd(config_path: Path) -> List[str]:
         cmd.extend(["--genome", str(cfg.get("genome_layer_csv"))])
     if cfg.get("blocks_prev_json"):
         cmd.extend(["--blocks-prev", str(cfg.get("blocks_prev_json"))])
+    if cfg.get("blocks_prev_block_id_key"):
+        cmd.extend(["--blocks-prev-id-key", str(cfg.get("blocks_prev_block_id_key"))])
+    if cfg.get("require_node_theta_internal"):
+        cmd.append("--require-node-theta-internal")
     if cfg.get("output_blocks_json"):
         cmd.extend(["--output", str(cfg.get("output_blocks_json"))])
     if cfg.get("dna_output_csv"):
@@ -105,6 +109,46 @@ def _build_ola1_export_block_id_cmd(config_path: Path) -> List[str]:
     return cmd
 
 
+def _load_sweep_shards_config(config_path: Path) -> Dict[str, Any]:
+    cfg = _load_json(config_path)
+    configs = cfg.get("configs")
+    if not isinstance(configs, list) or not configs:
+        raise RuntimeError("olar_sweep_shards config requires configs list.")
+    max_parallel = cfg.get("max_parallel", 0)
+    try:
+        max_parallel = int(max_parallel)
+    except Exception:
+        max_parallel = 0
+    return {"configs": [str(c) for c in configs], "max_parallel": max_parallel}
+
+
+def _run_sweep_shards(config_path: Path) -> None:
+    cfg = _load_sweep_shards_config(config_path)
+    configs = [str(Path(c)) for c in cfg["configs"]]
+    max_parallel = int(cfg["max_parallel"] or 0)
+    if max_parallel <= 0 or max_parallel > len(configs):
+        max_parallel = len(configs)
+    procs: List[Tuple[str, subprocess.Popen]] = []
+    idx = 0
+    failures: List[Tuple[str, int]] = []
+
+    while idx < len(configs) or procs:
+        while idx < len(configs) and len(procs) < max_parallel:
+            cfg_path = configs[idx]
+            cmd = [sys.executable, "-m", "olar.sweep", "--config", cfg_path]
+            print(f"[olar_pipeline] step=olar_sweep_shards spawn cmd={' '.join(cmd)}", flush=True)
+            procs.append((cfg_path, subprocess.Popen(cmd)))
+            idx += 1
+        cfg_path, proc = procs.pop(0)
+        ret = proc.wait()
+        if ret != 0:
+            failures.append((cfg_path, ret))
+
+    if failures:
+        sample = ", ".join([f"{p} (code={c})" for p, c in failures[:5]])
+        raise RuntimeError(f"olar_sweep_shards failures: {sample}")
+
+
 def _iter_cfg_paths(cfg: Dict[str, Any], keys: Iterable[str]) -> Iterable[str]:
     for key in keys:
         val = cfg.get(key)
@@ -128,6 +172,10 @@ def _collect_step_inputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
                 ("run_inputs", "entities_jsonl", "genome_layer_csv", "blocks_prev_json"),
             )
         )
+    if step_type == "olar_sweep_shards":
+        configs = cfg.get("configs", [])
+        if isinstance(configs, list):
+            return [str(c) for c in configs if isinstance(c, str)]
     return []
 
 
@@ -147,6 +195,8 @@ def _collect_step_outputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
         return list(_iter_cfg_paths(cfg, ("output_csv",)))
     if step_type == "core_promote_blocks":
         return list(_iter_cfg_paths(cfg, ("output_blocks_json", "dna_output_csv")))
+    if step_type == "olar_sweep_shards":
+        return []
     return []
 
 
@@ -199,6 +249,12 @@ def main() -> None:
             cmd = _build_ola1_export_block_id_cmd(config_path)
         elif step_type == "core_promote_blocks":
             cmd = _build_core_promotion_cmd(config_path)
+        elif step_type == "olar_sweep_shards":
+            _run_sweep_shards(config_path)
+            output_paths = _collect_step_outputs(step_type, step_cfg)
+            if output_paths:
+                _validate_paths(output_paths, output_root, "outputs", step_id)
+            continue
         else:
             raise RuntimeError(f"Unknown step type: {step_type}")
 

@@ -8,28 +8,28 @@
       "enabled": true
     },
     {
-      "id": "ola2_sweep",
-      "type": "olar_sweep",
-      "config": "data/processed/ola2/config/ola2_sweep.json",
+      "id": "ola2_sweep_shards",
+      "type": "olar_sweep_shards",
+      "config": "data/processed/ola2/config/ola2_sweep_shards.json",
       "enabled": true
     },
     {
       "id": "ola2_catalog_build",
       "type": "core_catalog_build",
       "config": "data/processed/ola2/config/ola2_catalog_build.json",
-      "enabled": true
+      "enabled": false
     },
     {
       "id": "ola2_taxonomy",
       "type": "core_taxonomy",
       "config": "data/processed/ola2/config/ola2_taxonomy.json",
-      "enabled": true
+      "enabled": false
     },
     {
       "id": "ola2_promote_blocks",
       "type": "core_promote_blocks",
       "config": "data/processed/ola2/config/ola2_promote_blocks.json",
-      "enabled": true
+      "enabled": false
     }
   ]
 }

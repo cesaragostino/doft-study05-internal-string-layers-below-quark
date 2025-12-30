@@ -41,8 +41,25 @@ def _resolve_input_path(path_str: str) -> Path:
     return path
 
 
-def _seed_from_entity(entity_id: str, idx: int, salt: str) -> int:
-    return int(hash_text(f"{entity_id}|{idx}|{salt}")[:8], 16) & 0xFFFFFFFF
+def _reset_outputs_if_needed(cfg: Dict[str, Any], evaluations_path: Path) -> None:
+    policy = cfg.get("output_policy", {}) or {}
+    if not policy.get("reset_outputs", False):
+        return
+    resume_path = evaluations_path.with_suffix(".resume.json")
+    removed = []
+    for path in (evaluations_path, resume_path):
+        if path.exists():
+            path.unlink()
+            removed.append(str(path))
+    if removed:
+        print(f"[olar_sweep] reset_outputs removed={removed}")
+
+
+def _seed_from_entity(entity_id: str, idx: int, salt: str, bin_id: Optional[str] = None) -> int:
+    payload = f"{entity_id}|{idx}|{salt}"
+    if bin_id:
+        payload = f"{payload}|{bin_id}"
+    return int(hash_text(payload)[:8], 16) & 0xFFFFFFFF
 
 
 def _sanitize_numbers(obj: Any) -> Tuple[Any, bool]:
@@ -73,12 +90,24 @@ def _sanitize_numbers(obj: Any) -> Tuple[Any, bool]:
 def _select_candidates(
     cfg: Dict[str, Any],
     entities_path: Path,
-) -> Tuple[List[Dict[str, Any]], int]:
+) -> Tuple[List[Dict[str, Any]], int, int]:
     mode = (cfg.get("candidate_source") or {}).get("mode", "attempts")
     if mode != "attempts":
         candidates = [row for row in iter_jsonl(entities_path) if row.get("entity_id")]
-        return candidates, 0
+        return candidates, 0, 0
     filter_cfg = (cfg.get("candidate_source") or {}).get("filter", {})
+    shard_cfg = cfg.get("candidate_shard", {}) or {}
+    shard_enabled = bool(shard_cfg.get("enabled", False))
+    shard_count = int(shard_cfg.get("shard_count", 0) or 0)
+    shard_id = int(shard_cfg.get("shard_id", 0) or 0)
+    shard_hash = str(shard_cfg.get("hash", "sha256_hex8"))
+    if shard_enabled:
+        if shard_count <= 0:
+            raise RuntimeError("candidate_shard enabled but shard_count <= 0")
+        if shard_id < 0 or shard_id >= shard_count:
+            raise RuntimeError("candidate_shard shard_id out of range")
+        if shard_hash != "sha256_hex8":
+            raise RuntimeError(f"candidate_shard unsupported hash: {shard_hash}")
     require_candidate = bool(filter_cfg.get("require_candidate", True))
     require_quality_lock_ok = bool(filter_cfg.get("require_quality_lock_ok", False))
     require_memory_non_negative = bool(filter_cfg.get("require_memory_non_negative", False))
@@ -89,6 +118,7 @@ def _select_candidates(
     top_k = int(filter_cfg.get("top_k", 0))
 
     skipped_by_filter = 0
+    skipped_by_shard = 0
     filtered: List[Tuple[float, str, Dict[str, Any]]] = []
     heap: List[Tuple[Tuple[float, str], Dict[str, Any]]] = []
 
@@ -97,6 +127,11 @@ def _select_candidates(
         if not eid:
             continue
         eid = str(eid)
+        if shard_enabled:
+            shard_val = int(hash_text(eid)[:8], 16) % shard_count
+            if shard_val != shard_id:
+                skipped_by_shard += 1
+                continue
         tags = row.get("tags_raw") or {}
         metrics = row.get("metrics_summary") or {}
         if require_candidate and not tags.get("candidate"):
@@ -152,10 +187,10 @@ def _select_candidates(
 
     if top_k:
         selected = sorted(heap, key=lambda it: (-it[0][0], it[0][1]))
-        return [row for _, row in selected], skipped_by_filter
+        return [row for _, row in selected], skipped_by_filter, skipped_by_shard
 
     filtered.sort(key=lambda it: (-it[0], it[1]))
-    return [row for _, _, row in filtered], skipped_by_filter
+    return [row for _, _, row in filtered], skipped_by_filter, skipped_by_shard
 
 
 def main() -> None:
@@ -189,7 +224,9 @@ def main() -> None:
 
     if not entities_path.exists():
         raise RuntimeError(f"No entities found in {entities_path}")
-    entities, entities_skipped_by_filter = _select_candidates(cfg, entities_path)
+
+    _reset_outputs_if_needed(cfg, evaluations_path)
+    entities, entities_skipped_by_filter, entities_skipped_by_shard = _select_candidates(cfg, entities_path)
     blocks = load_simple_blocks(blocks_path)
     block_id_key = "block_id"
     dna_map = load_dna_catalog(dna_path, id_key=block_id_key)
@@ -240,6 +277,7 @@ def main() -> None:
 
     progress_cfg = cfg.get("progress", {})
     flush_every = int(progress_cfg.get("flush_every_evals", 0) or 0)
+    log_every_evals = int(progress_cfg.get("log_every_evals", 0) or 0)
     if flush_every <= 0:
         flush_every = 500
     budgets = cfg.get("budgets", {}) or {}
@@ -253,8 +291,11 @@ def main() -> None:
     seen_eval_ids, eval_offset = scan_jsonl_ids(evaluations_path, lambda r: r.get("eval_id"))
     existing_eval_ids = len(seen_eval_ids)
     print(f"[olar_sweep] WARNING: dedupe skip [0 / {existing_eval_ids}] (this_run / total_existing)")
+    if entities_skipped_by_shard:
+        print(f"[olar_sweep] skipped_by_shard={entities_skipped_by_shard}")
     evals_deduped = 0
     evals_written_total = 0
+    evals_seen_total = 0
     entities_processed = 0
     sweep_run_id = str(uuid.uuid4())
     stop_requested = False
@@ -262,12 +303,14 @@ def main() -> None:
     neighborhood_mode = str(neighborhood.get("mode", "param_bin_neighbors"))
     max_neighbor_bins = int(neighborhood.get("max_neighbor_bins", 0))
 
+    total_entities = len(entities)
     for cand_idx, entity in enumerate(entities):
         if stop_requested:
             break
         eid = str(entity.get("entity_id", ""))
         if not eid:
             continue
+        print(f"[olar_sweep] start_entity={eid} index={cand_idx + 1}/{total_entities}", flush=True)
         entities_processed += 1
         base_bin_id = entity.get("engine_params_bin_id")
         if not base_bin_id:
@@ -290,18 +333,14 @@ def main() -> None:
             raise RuntimeError(f"Entity {eid} missing canonical_node_order for sweep.")
         if not isinstance(parent_ids, list):
             raise RuntimeError(f"Entity {eid} missing parent_ids for sweep.")
-        if seed_mode == "deterministic":
-            seed_list = [_seed_from_entity(eid, i, seed_salt) for i in range(seeds)]
-        else:
-            seed_list = [int(hash_text(f"{eid}|{i}|{seed_salt}")[:8], 16) for i in range(seeds)]
-        if len(seed_list) < min_seeds_required:
+        if len(range(seeds)) < min_seeds_required:
             continue
         if min_seeds_required:
             print(
                 "[olar_sweep] min_seeds_required"
                 f" entity_id={eid}"
                 f" required={min_seeds_required}"
-                f" planned={len(seed_list)}"
+                f" planned={seeds}"
             )
         try:
             hydrated_entity = build_hydrated_entity(entity, blocks_by_id, dna_map, block_id_key=block_id_key)
@@ -315,6 +354,13 @@ def main() -> None:
         stop_entity = False
         early_cut = False
         for param_bin_id in bin_ids:
+            if seed_mode == "deterministic":
+                seed_list = [_seed_from_entity(eid, i, seed_salt, param_bin_id) for i in range(seeds)]
+            else:
+                seed_list = [
+                    int(hash_text(f"{eid}|{i}|{seed_salt}|{param_bin_id}")[:8], 16)
+                    for i in range(seeds)
+                ]
             engine_params = resolve_engine_params(
                 engine_defaults,
                 engine_variation.get("bins") or {},
@@ -396,6 +442,16 @@ def main() -> None:
                 validate_evaluation(evaluation)
                 eval_rows.append(evaluation)
                 evals_for_entity += 1
+                evals_seen_total += 1
+                if log_every_evals and evals_seen_total % log_every_evals == 0:
+                    print(
+                        "[olar_sweep] progress"
+                        f" evals_seen={evals_seen_total}"
+                        f" evals_written={evals_written_total}"
+                        f" entities_processed={entities_processed}"
+                        f" entity_index={cand_idx + 1}/{total_entities}",
+                        flush=True,
+                    )
                 if flush_every and len(eval_rows) >= flush_every:
                     evals_written_total += append_jsonl(
                         evaluations_path,
@@ -413,6 +469,12 @@ def main() -> None:
                 break
         if stop_requested:
             break
+        print(
+            "[olar_sweep] entity_done"
+            f" entity_id={eid}"
+            f" evals_for_entity={evals_for_entity}",
+            flush=True,
+        )
 
     written = append_jsonl(
         evaluations_path,

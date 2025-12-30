@@ -79,10 +79,15 @@
   "optional_outputs": [
     "report_md"
   ],
+  "progress": {
+    "flush_every_evals": 1,
+    "log_every_evals": 1,
+    "log_every_terms": 1
+  },
   "outputs": {
-    "evaluations_jsonl": "data/processed/ola2/raw/evaluations.jsonl",
-    "raw_dir": "data/processed/ola2/raw",
-    "report_md": "data/processed/ola2/sweep_report.md"
+    "evaluations_jsonl": "data/processed/ola2/sweep_shards/shard_00/raw/evaluations.jsonl",
+    "raw_dir": "data/processed/ola2/sweep_shards/shard_00/raw",
+    "report_md": "data/processed/ola2/sweep_shards/shard_00/sweep_report.md"
   },
   "schema_version": "olar_sweep_config_v1",
   "seed_policy": {
@@ -90,5 +95,14 @@
     "mode": "deterministic",
     "salt": "sweep_v1",
     "seeds": 6
+  },
+  "candidate_shard": {
+    "enabled": true,
+    "shard_count": 8,
+    "shard_id": 0,
+    "hash": "sha256_hex8"
+  },
+  "output_policy": {
+    "reset_outputs": true
   }
 }

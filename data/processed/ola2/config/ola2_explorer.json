@@ -92,7 +92,7 @@
   },
   "targets": [
     {
-      "budget_evals": 200000,
+      "budget_evals": 20000,
       "name": "global_blind_search_full_topology",
       "notes": "Minimal mixed-topology search.",
       "templates": [

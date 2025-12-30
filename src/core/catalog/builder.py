@@ -113,6 +113,20 @@ def _mean_std(values: List[float]) -> Tuple[Optional[float], Optional[float]]:
     return mean, var**0.5
 
 
+def _format_mean_std(mean: Optional[float], std: Optional[float]) -> str:
+    if mean is None:
+        return "n/a"
+    if std is None:
+        return f"{mean:.3f}"
+    return f"{mean:.3f} ± {std:.3f}"
+
+
+def _format_scalar(val: Optional[float]) -> str:
+    if val is None:
+        return "n/a"
+    return f"{val:.3f}"
+
+
 def _collect_metric(evals: List[Dict[str, Any]], key: str) -> List[float]:
     values: List[float] = []
     for row in evals:
@@ -146,6 +160,121 @@ def _node_count(row: Dict[str, Any]) -> int:
     if isinstance(block_ids, list):
         return len(block_ids)
     return 0
+
+
+def _edge_count(row: Dict[str, Any]) -> int:
+    edges = row.get("edges")
+    if isinstance(edges, list):
+        return len(edges)
+    return 0
+
+
+def _density(edges: int, nodes: int) -> Optional[float]:
+    if nodes < 2:
+        return None
+    max_edges = nodes * (nodes - 1) / 2
+    if max_edges <= 0:
+        return None
+    return edges / max_edges
+
+
+def _load_family_ids(path: Path) -> Dict[str, str]:
+    if not path.exists():
+        return {}
+    family_by_id: Dict[str, str] = {}
+    with path.open() as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            eid = row.get("entity_id")
+            if not eid:
+                continue
+            family = row.get("confirmed_family_id") or row.get("taxonomy_family_id") or ""
+            family_by_id[str(eid)] = family
+    return family_by_id
+
+
+def _append_viable_report(
+    report_path: Path,
+    entities_candidates: Dict[str, Dict[str, Any]],
+    sweep_evals_by_entity_id: Dict[str, List[Dict[str, Any]]],
+    family_by_id: Dict[str, str],
+) -> None:
+    if not entities_candidates:
+        return
+    viable_rows: List[Tuple[str, Dict[str, Any], List[Dict[str, Any]]]] = []
+    for eid, candidate in entities_candidates.items():
+        evals = sweep_evals_by_entity_id.get(eid, [])
+        if evals:
+            viable_rows.append((eid, candidate, evals))
+    if not viable_rows:
+        return
+
+    section_lines = ["## Viable Candidates", ""]
+    for idx, (eid, candidate, evals) in enumerate(viable_rows, start=1):
+        template_name = candidate.get("template_name") or "unknown"
+        nodes = _node_count(candidate)
+        edges = _edge_count(candidate)
+        density = _density(edges, nodes)
+        block_ids = []
+        assignment = candidate.get("assignment") if isinstance(candidate.get("assignment"), dict) else {}
+        raw_block_ids = assignment.get("block_ids")
+        if isinstance(raw_block_ids, list):
+            block_ids = [str(bid) for bid in raw_block_ids]
+        h_mean, h_std = _mean_std(_collect_metric(evals, "H_part_norm_mean_lastW"))
+        pe_mean, pe_std = _mean_std(_collect_metric(evals, "PE_lockS1_norm"))
+        r_mean, r_std = _mean_std(_collect_metric(evals, "R_network_S1_mean_lastW"))
+        robustness = None
+        metrics_summary = candidate.get("metrics_summary")
+        if isinstance(metrics_summary, dict):
+            val = metrics_summary.get("memory_score_k10")
+            if isinstance(val, (int, float)):
+                robustness = float(val)
+        seeds_total = len(
+            {
+                int(row.get("seed"))
+                for row in evals
+                if isinstance(row.get("seed"), (int, float))
+            }
+        )
+        if not seeds_total:
+            seeds_total = len(evals)
+
+        section_lines.extend(
+            [
+                f"Viable #{idx}: {template_name} (N={nodes})",
+                f"Entity ID: {eid}",
+                f"Family ID: {family_by_id.get(eid) or 'n/a'}",
+                "",
+                "Metrics:",
+                f"   R_network:    {_format_mean_std(r_mean, r_std)}",
+                f"   PE_lock:      {_format_mean_std(pe_mean, pe_std)}",
+                f"   H_part:       {_format_mean_std(h_mean, h_std)}",
+                f"   Robustness:   {_format_scalar(robustness)}",
+                "",
+                "Topologia:",
+                f"   Nodos:    {nodes}",
+                f"   Edges:    {edges}",
+                f"   Density:  {_format_scalar(density)}" if density is not None else "   Density:  n/a",
+                "",
+                "Composicion (blocks Ola1):",
+                f"   {', '.join(block_ids) if block_ids else 'n/a'}",
+                "",
+                "Sweep:",
+                f"   Evals:  {len(evals)}",
+                f"   Seeds:  {seeds_total}",
+                "",
+            ]
+        )
+
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    if report_path.exists():
+        existing = report_path.read_text()
+        marker = "## Viable Candidates"
+        if marker in existing:
+            existing = existing.split(marker)[0].rstrip() + "\n\n"
+        report_path.write_text(existing + "\n".join(section_lines).rstrip() + "\n")
+    else:
+        report_path.write_text("\n".join(section_lines).rstrip() + "\n")
 
 
 def _rollup_key(row: Dict[str, Any]) -> Tuple[str, int]:
@@ -198,6 +327,9 @@ def build_catalog(config_path: Path, output_dir: Optional[Path] = None) -> None:
     entities_out = _resolve_output(outputs.get("entities_jsonl", "entities.jsonl"), output_dir)
     genome_out = _resolve_output(outputs.get("genome_layer_csv", "genome_layers.csv"), output_dir)
     rollups_out = _resolve_output(outputs.get("rollups_json", "rollups.json"), output_dir)
+    report_path = outputs.get("report_md")
+    report_out = _resolve_output(report_path, output_dir) if report_path else None
+    taxonomy_out = genome_out.with_name(f"{genome_out.stem}_taxonomy.csv")
 
     catalog_dir.mkdir(parents=True, exist_ok=True)
     entities_out.parent.mkdir(parents=True, exist_ok=True)
@@ -414,6 +546,9 @@ def build_catalog(config_path: Path, output_dir: Optional[Path] = None) -> None:
         "templates_hash": str(templates_path),
     }
     rollups_out.write_text(json.dumps(rollups, indent=2))
+    if report_out is not None:
+        family_by_id = _load_family_ids(taxonomy_out)
+        _append_viable_report(report_out, entities_candidates, sweep_evals_by_entity_id, family_by_id)
 
 
 def main() -> None:
