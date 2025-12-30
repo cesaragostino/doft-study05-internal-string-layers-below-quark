@@ -250,45 +250,104 @@ def _append_viable_report(
 ) -> None:
     if not entities_candidates:
         return
+    promoted_rows: List[Tuple[str, Dict[str, Any], List[Dict[str, Any]]]] = []
     viable_rows: List[Tuple[str, Dict[str, Any], List[Dict[str, Any]]]] = []
     for eid, candidate in entities_candidates.items():
         evals = sweep_evals_by_entity_id.get(eid, [])
-        if promoted_ids:
-            if eid in promoted_ids:
-                viable_rows.append((eid, candidate, evals))
-        else:
-            if evals:
-                viable_rows.append((eid, candidate, evals))
-    if not viable_rows:
+        if eid in promoted_ids:
+            promoted_rows.append((eid, candidate, evals))
+        if evals:
+            viable_rows.append((eid, candidate, evals))
+    if not promoted_rows and not viable_rows:
         return
 
-    template_stats: Dict[str, Dict[str, int]] = {}
-    for eid, candidate in entities_candidates.items():
+    section_lines: List[str] = []
+
+    def _summary_lines(title: str, rows: List[Tuple[str, Dict[str, Any], List[Dict[str, Any]]]]) -> List[str]:
+        template_stats: Dict[str, Dict[str, int]] = {}
+        for eid, candidate in entities_candidates.items():
+            template_name = candidate.get("template_name") or "unknown"
+            stats = template_stats.setdefault(template_name, {"total": 0, "count": 0})
+            stats["total"] += 1
+            if any(r[0] == eid for r in rows):
+                stats["count"] += 1
+        lines = [
+            f"Resumen por template ({title}):",
+            "",
+            f"| Template | Total | {title} | Rate |",
+            "|---|---:|---:|---:|",
+        ]
+        for template_name in sorted(template_stats):
+            stats = template_stats[template_name]
+            total = stats["total"]
+            count = stats["count"]
+            rate = (count / total * 100.0) if total else 0.0
+            lines.append(f"| {template_name} | {total} | {count} | {rate:.1f}% |")
+        lines.append("")
+        return lines
+
+    if promoted_rows:
+        section_lines.extend(["## Promoted Candidates", "", *_summary_lines("Promoted", promoted_rows)])
+    for idx, (eid, candidate, evals) in enumerate(promoted_rows, start=1):
         template_name = candidate.get("template_name") or "unknown"
-        stats = template_stats.setdefault(template_name, {"total": 0, "viables": 0})
-        stats["total"] += 1
-        if promoted_ids:
-            if eid in promoted_ids:
-                stats["viables"] += 1
-        else:
-            if sweep_evals_by_entity_id.get(eid):
-                stats["viables"] += 1
+        nodes = _node_count(candidate)
+        edges = _edge_count(candidate)
+        density = _density(edges, nodes)
+        block_ids = []
+        assignment = candidate.get("assignment") if isinstance(candidate.get("assignment"), dict) else {}
+        raw_block_ids = assignment.get("block_ids")
+        if isinstance(raw_block_ids, list):
+            block_ids = [str(bid) for bid in raw_block_ids]
+        h_mean, h_std = _mean_std(_collect_metric(evals, "H_part_norm_mean_lastW"))
+        pe_mean, pe_std = _mean_std(_collect_metric(evals, "PE_lockS1_norm"))
+        r_mean, r_std = _mean_std(_collect_metric(evals, "R_network_S1_mean_lastW"))
+        robustness = None
+        metrics_summary = candidate.get("metrics_summary")
+        if isinstance(metrics_summary, dict):
+            val = metrics_summary.get("memory_score_k10")
+            if isinstance(val, (int, float)):
+                robustness = float(val)
+        seeds_total = len(
+            {
+                int(row.get("seed"))
+                for row in evals
+                if isinstance(row.get("seed"), (int, float))
+            }
+        )
+        if not seeds_total:
+            seeds_total = len(evals)
 
-    summary_lines = [
-        "Resumen por template:",
-        "",
-        "| Template | Total | Promoted | Rate |",
-        "|---|---:|---:|---:|",
-    ]
-    for template_name in sorted(template_stats):
-        stats = template_stats[template_name]
-        total = stats["total"]
-        viables = stats["viables"]
-        rate = (viables / total * 100.0) if total else 0.0
-        summary_lines.append(f"| {template_name} | {total} | {viables} | {rate:.1f}% |")
-    summary_lines.append("")
+        section_lines.extend(
+            [
+                f"### Promoted #{idx}: {template_name} (N={nodes})",
+                "",
+                f"Entity ID: {eid}",
+                f"Family ID: {family_by_id.get(eid) or 'n/a'}",
+                "",
+                "Metrics:",
+                f"- R_network: {_format_mean_std(r_mean, r_std)}",
+                f"- PE_lock: {_format_mean_std(pe_mean, pe_std)}",
+                f"- H_part: {_format_mean_std(h_mean, h_std)}",
+                f"- Robustness: {_format_scalar(robustness)}",
+                "",
+                "Topologia:",
+                f"- Nodos: {nodes}",
+                f"- Edges: {edges}",
+                f"- Density: {_format_scalar(density)}" if density is not None else "- Density: n/a",
+                "",
+                "Composicion (blocks Ola1):",
+                f"{', '.join(block_ids) if block_ids else 'n/a'}",
+                "",
+                "Sweep:",
+                f"- Evals: {len(evals)}",
+                f"- Seeds: {seeds_total}",
+                "",
+            ]
+        )
 
-    section_lines = ["## Promoted Candidates", "", *summary_lines]
+    if viable_rows:
+        section_lines.extend(["## Viable Candidates", "", *_summary_lines("Viable", viable_rows)])
+
     for idx, (eid, candidate, evals) in enumerate(viable_rows, start=1):
         template_name = candidate.get("template_name") or "unknown"
         nodes = _node_count(candidate)
@@ -349,9 +408,9 @@ def _append_viable_report(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     if report_path.exists():
         existing = report_path.read_text()
-        marker = "## Promoted Candidates"
-        if marker in existing:
-            existing = existing.split(marker)[0].rstrip() + "\n\n"
+        for marker in ("## Promoted Candidates", "## Viable Candidates"):
+            if marker in existing:
+                existing = existing.split(marker)[0].rstrip() + "\n\n"
         report_path.write_text(existing + "\n".join(section_lines).rstrip() + "\n")
     else:
         report_path.write_text("\n".join(section_lines).rstrip() + "\n")
