@@ -193,19 +193,72 @@ def _load_family_ids(path: Path) -> Dict[str, str]:
     return family_by_id
 
 
+def _load_promoted_ids_from_csv(path: Path) -> Set[str]:
+    if not path.exists():
+        return set()
+    promoted: Set[str] = set()
+    with path.open() as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            block_id = row.get("block_id")
+            if block_id:
+                promoted.add(str(block_id))
+    return promoted
+
+
+def _load_promoted_ids_from_blocks(path: Path) -> Set[str]:
+    if not path.exists():
+        return set()
+    data = json.loads(path.read_text())
+    if isinstance(data, dict):
+        blocks = data.get("blocks")
+    else:
+        blocks = data
+    if not isinstance(blocks, list):
+        return set()
+    promoted = set()
+    for block in blocks:
+        if not isinstance(block, dict):
+            continue
+        block_id = block.get("block_id")
+        if block_id:
+            promoted.add(str(block_id))
+    return promoted
+
+
+def _load_promoted_ids(promote_cfg_path: Path) -> Set[str]:
+    if not promote_cfg_path.exists():
+        return set()
+    cfg = json.loads(promote_cfg_path.read_text())
+    dna_csv = cfg.get("dna_output_csv")
+    blocks_json = cfg.get("output_blocks_json")
+    if dna_csv:
+        promoted = _load_promoted_ids_from_csv(Path(dna_csv))
+        if promoted:
+            return promoted
+    if blocks_json:
+        return _load_promoted_ids_from_blocks(Path(blocks_json))
+    return set()
+
+
 def _append_viable_report(
     report_path: Path,
     entities_candidates: Dict[str, Dict[str, Any]],
     sweep_evals_by_entity_id: Dict[str, List[Dict[str, Any]]],
     family_by_id: Dict[str, str],
+    promoted_ids: Set[str],
 ) -> None:
     if not entities_candidates:
         return
     viable_rows: List[Tuple[str, Dict[str, Any], List[Dict[str, Any]]]] = []
     for eid, candidate in entities_candidates.items():
         evals = sweep_evals_by_entity_id.get(eid, [])
-        if evals:
-            viable_rows.append((eid, candidate, evals))
+        if promoted_ids:
+            if eid in promoted_ids:
+                viable_rows.append((eid, candidate, evals))
+        else:
+            if evals:
+                viable_rows.append((eid, candidate, evals))
     if not viable_rows:
         return
 
@@ -214,13 +267,17 @@ def _append_viable_report(
         template_name = candidate.get("template_name") or "unknown"
         stats = template_stats.setdefault(template_name, {"total": 0, "viables": 0})
         stats["total"] += 1
-        if sweep_evals_by_entity_id.get(eid):
-            stats["viables"] += 1
+        if promoted_ids:
+            if eid in promoted_ids:
+                stats["viables"] += 1
+        else:
+            if sweep_evals_by_entity_id.get(eid):
+                stats["viables"] += 1
 
     summary_lines = [
         "Resumen por template:",
         "",
-        "| Template | Total | Viables | Rate |",
+        "| Template | Total | Promoted | Rate |",
         "|---|---:|---:|---:|",
     ]
     for template_name in sorted(template_stats):
@@ -228,11 +285,10 @@ def _append_viable_report(
         total = stats["total"]
         viables = stats["viables"]
         rate = (viables / total * 100.0) if total else 0.0
-        note = " MUY ALTO" if rate >= 50.0 and total > 0 else ""
-        summary_lines.append(f"| {template_name} | {total} | {viables} | {rate:.1f}%{note} |")
+        summary_lines.append(f"| {template_name} | {total} | {viables} | {rate:.1f}% |")
     summary_lines.append("")
 
-    section_lines = ["## Viable Candidates", "", *summary_lines]
+    section_lines = ["## Promoted Candidates", "", *summary_lines]
     for idx, (eid, candidate, evals) in enumerate(viable_rows, start=1):
         template_name = candidate.get("template_name") or "unknown"
         nodes = _node_count(candidate)
@@ -293,7 +349,7 @@ def _append_viable_report(
     report_path.parent.mkdir(parents=True, exist_ok=True)
     if report_path.exists():
         existing = report_path.read_text()
-        marker = "## Viable Candidates"
+        marker = "## Promoted Candidates"
         if marker in existing:
             existing = existing.split(marker)[0].rstrip() + "\n\n"
         report_path.write_text(existing + "\n".join(section_lines).rstrip() + "\n")
@@ -353,6 +409,8 @@ def build_catalog(config_path: Path, output_dir: Optional[Path] = None) -> None:
     rollups_out = _resolve_output(outputs.get("rollups_json", "rollups.json"), output_dir)
     report_path = outputs.get("report_md")
     report_out = _resolve_output(report_path, output_dir) if report_path else None
+    promote_cfg_input = inputs.get("promote_config", "ola2_promote_blocks.json")
+    promote_cfg_path = _resolve_input(str(promote_cfg_input), base_dir)
     taxonomy_out = genome_out.with_name(f"{genome_out.stem}_taxonomy.csv")
 
     catalog_dir.mkdir(parents=True, exist_ok=True)
@@ -572,7 +630,14 @@ def build_catalog(config_path: Path, output_dir: Optional[Path] = None) -> None:
     rollups_out.write_text(json.dumps(rollups, indent=2))
     if report_out is not None:
         family_by_id = _load_family_ids(taxonomy_out)
-        _append_viable_report(report_out, entities_candidates, sweep_evals_by_entity_id, family_by_id)
+        promoted_ids = _load_promoted_ids(promote_cfg_path)
+        _append_viable_report(
+            report_out,
+            entities_candidates,
+            sweep_evals_by_entity_id,
+            family_by_id,
+            promoted_ids,
+        )
 
 
 def main() -> None:
