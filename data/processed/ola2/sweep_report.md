@@ -2,6 +2,8 @@
 
 # Sweep Report
 
+# Sweep Report
+
 ## Promoted Candidates
 
 Resumen por template (Promoted):

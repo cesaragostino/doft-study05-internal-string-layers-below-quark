@@ -350,6 +350,11 @@ def _write_sections(report_path: Path, sections: List[str], markers: List[str]) 
         report_path.write_text("\n".join(sections).rstrip() + "\n")
 
 
+def _write_report(report_path: Path, sections: List[str]) -> None:
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text("\n".join(sections).rstrip() + "\n")
+
+
 def _rollup_key(row: Dict[str, Any]) -> Tuple[str, int]:
     template_name = row.get("template_name") or "unknown"
     return str(template_name), _node_count(row)
@@ -666,11 +671,7 @@ def build_catalog(config_path: Path, output_dir: Optional[Path] = None) -> None:
             "",
         ]
         explorer_sections.extend(_candidate_section("Viable", viable_rows, entities_candidates, family_by_id))
-        _write_sections(
-            explorer_report_out,
-            explorer_sections,
-            ["## Promoted Candidates", "## Viable Candidates"],
-        )
+        _write_report(explorer_report_out, explorer_sections)
 
 
 def main() -> None:
