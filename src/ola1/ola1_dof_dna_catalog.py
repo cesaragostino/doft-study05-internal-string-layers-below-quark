@@ -162,23 +162,25 @@ def _cluster_id(r1: Optional[float], r2: Optional[float]) -> str:
 
 
 def _omega_ref_proxy(row: Dict[str, object]) -> float:
-    omega_ref_interp = _to_float(row.get("omega_ref_interp"))
-    if omega_ref_interp is not None:
-        return omega_ref_interp
     omega_ref = _to_float(row.get("omega_ref"))
     if omega_ref is not None:
         return omega_ref
-    raise RuntimeError(f"omega_ref_proxy missing or non-finite for run_id={row.get('run_id')}")
+    raise RuntimeError(f"omega_ref missing or non-finite for run_id={row.get('run_id')}")
 
 
 def _genes_min(row: Dict[str, object], omega_ref_proxy: float) -> str:
     payload = {
-        "omega_ref_proxy": omega_ref_proxy,
+        "structure_tier": str(row.get("structure_tier") or ""),
+        "s2_state": str(row.get("s2_state") or ""),
+        "D_dyn": _to_float(row.get("D_dyn")),
+        "D_stat": _to_float(row.get("D_stat")),
         "rho_lock": _to_float(row.get("rho_lock")),
-        "lock_quality_S1": _to_float(row.get("lock_quality_S1")),
         "participation_entropy": _to_float(row.get("participation_entropy")),
         "omega_eff": _to_float(row.get("omega_eff")),
-        "structure_tier": str(row.get("structure_tier") or ""),
+        "V_lock": _to_float(row.get("V_lock")),
+        "V_layers": _to_float(row.get("V_layers")),
+        "fft_peak0_freq": _to_float(row.get("fft_peak0_freq")),
+        "fft_peaks_entropy": _to_float(row.get("fft_peaks_entropy")),
     }
     return json.dumps(payload, sort_keys=True, separators=(",", ":"))
 

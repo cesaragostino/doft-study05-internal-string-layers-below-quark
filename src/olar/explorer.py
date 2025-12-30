@@ -16,6 +16,7 @@ from core.ids.plan import build_plan_payload, canonicalize_plan, engine_params_b
 from core.io.jsonl import append_jsonl, scan_jsonl_ids, write_resume_index
 from core.templates.registry import canonicalize_edges, load_templates
 from core.io.schema_validation import validate_attempt, validate_entity_candidate
+from olar.explorer_engine import compute_metrics, gate_candidate
 
 
 def _utc_now() -> str:
@@ -188,6 +189,9 @@ def main() -> None:
     outputs = cfg.get("outputs", {})
     attempts_path = _resolve_output(outputs.get("attempts_jsonl", "attempts.jsonl"), output_dir)
     entities_path = _resolve_output(outputs.get("entities_candidates_jsonl", "entities_candidates.jsonl"), output_dir)
+    report_path = None
+    if outputs.get("report_md"):
+        report_path = _resolve_output(outputs.get("report_md", "report.md"), output_dir)
 
     raw_blocks = _load_json(blocks_path)
     blocks = _extract_blocks(raw_blocks)
@@ -274,6 +278,8 @@ def main() -> None:
 
     attempts_rows: List[Dict[str, Any]] = []
     entities_rows: List[Dict[str, Any]] = []
+    output_policy = cfg.get("output_policy", {}) or {}
+    emit_non_candidates = bool(output_policy.get("emit_non_candidates", False))
 
     seen_eval_ids, attempts_offset = scan_jsonl_ids(
         attempts_path, lambda r: (r.get("ids") or {}).get("eval_id") or r.get("eval_id")
@@ -291,6 +297,9 @@ def main() -> None:
     targets = cfg.get("targets", [])
     eval_idx = 0
     attempt_id = 0
+    attempts_candidates_written = 0
+    entities_candidates_written = 0
+    dropped_non_candidate = 0
     run_id = str(uuid.uuid4())
     progress_cfg = cfg.get("progress", {})
     log_every = int(progress_cfg.get("log_every_terms", 10) or 10)
@@ -353,6 +362,11 @@ def main() -> None:
                 seeds = [rng.randint(0, 2**32 - 1) for _ in range(seeds_per_attempt)]
 
             engine_params, engine_params_bin_id = _sample_engine_params(defaults, variation_cfg, rng)
+            block_map = {str(b.get("block_id")): b for b in assignment_blocks}
+            blocks_in_order = []
+            for bid in canonical_nodes:
+                block = block_map.get(bid, {})
+                blocks_in_order.append({"block_id": block.get("block_id"), "omega_ref": block.get("omega_ref")})
             for seed in seeds:
                 eval_id = _eval_id_from_payload(
                     entity_id,
@@ -365,115 +379,126 @@ def main() -> None:
                     continue
                 seen_eval_ids.add(eval_id)
                 new_evals += 1
-                attempt = {
-                        "schema_version": "olar_attempt_v1",
-                        "run_session_id": run_id,
-                        "timestamp_utc": _utc_now(),
-                        "ola": int(cfg.get("ola", 2)),
-                        "role": "explorer",
-                        "entity_id": entity_id,
-                        "eval_id": eval_id,
-                        "target": {"name": target_name, "index": target_index, "phase": target_phase},
-                        "build_plan": build_plan,
-                        "template_name": tmpl_name,
-                        "edges": canonical_edges,
+                metrics_raw = compute_metrics(
+                    {
                         "canonical_node_order": canonical_nodes,
-                        "assignment": {"block_ids": assignment_ids, "block_key_used": "block_id"},
-                        "seed": seed,
-                        "engine_params_bin_id": engine_params_bin_id,
-                        "engine_params": engine_params,
-                        "metrics_raw": {
-                            "R_final": None,
-                            "Z_final_abs": None,
-                            "R_mean_lastW": None,
-                            "phase_var_lastW": None,
-                            "edge_phase_diff_mean_lastW": None,
-                            "edge_phase_diff_std_lastW": None,
-                            "omega_eff": None,
-                            "omega_eff_method": "",
-                            "QualityLock": None,
-                            "entropy_quality": None,
-                            "memory_score_k10": None,
-                            "PE_tick_norm": None,
-                            "H_block_mean": None,
-                        },
-                        "tags_raw": {
-                            "candidate": False,
-                            "labels": [],
-                            "thresholds_version": "",
-                        },
-                        "reasons_raw": [],
-                        "provenance": {
-                            "config_hash": config_hash,
-                            "blocks_hash": blocks_hash,
-                            "templates_hash": templates_hash,
-                            "code_hash": code_hash,
-                            "machine": machine,
-                        },
-                    }
+                        "edges": canonical_edges,
+                        "assignment": {"block_ids": canonical_nodes, "block_key_used": "block_id"},
+                        "blocks": blocks_in_order,
+                    },
+                    engine_params,
+                    seed,
+                )
+                tags_raw, reasons = gate_candidate(
+                    metrics_raw,
+                    cfg.get("tagging_thresholds", {}),
+                    str(cfg.get("tagging_thresholds", {}).get("viability_mode", "")),
+                )
+                tags_raw = dict(tags_raw)
+                tags_raw.setdefault("labels", [])
+                tags_raw.setdefault("thresholds_version", "")
+                tags_raw["emitted"] = True
+                candidate = bool(tags_raw.get("candidate"))
+                if candidate:
+                    attempts_candidates_written += 1
+                attempt = {
+                    "schema_version": "olar_attempt_v1",
+                    "run_session_id": run_id,
+                    "timestamp_utc": _utc_now(),
+                    "ola": int(cfg.get("ola", 2)),
+                    "role": "explorer",
+                    "entity_id": entity_id,
+                    "eval_id": eval_id,
+                    "target": {"name": target_name, "index": target_index, "phase": target_phase},
+                    "build_plan": build_plan,
+                    "template_name": tmpl_name,
+                    "edges": canonical_edges,
+                    "canonical_node_order": canonical_nodes,
+                    "assignment": {"block_ids": assignment_ids, "block_key_used": "block_id"},
+                    "seed": seed,
+                    "engine_params_bin_id": engine_params_bin_id,
+                    "engine_params": engine_params,
+                    "metrics_raw": metrics_raw,
+                    "tags_raw": tags_raw,
+                    "reasons_raw": reasons,
+                    "provenance": {
+                        "config_hash": config_hash,
+                        "blocks_hash": blocks_hash,
+                        "templates_hash": templates_hash,
+                        "code_hash": code_hash,
+                        "machine": machine,
+                    },
+                }
                 validate_attempt(attempt)
                 attempts_rows.append(attempt)
                 attempt_id += 1
-            if entity_id not in seen_entities:
+                if entity_id in seen_entities:
+                    continue
+                if not candidate and not emit_non_candidates:
+                    dropped_non_candidate += 1
+                    continue
                 seen_entities.add(entity_id)
                 source_eval_id = ""
                 if attempts_rows:
                     source_eval_id = attempts_rows[-1].get("eval_id") or (attempts_rows[-1].get("ids") or {}).get(
                         "eval_id", ""
                     )
-                tagging = cfg.get("tagging_thresholds", {})
                 metrics_summary = {
-                    "R_mean_lastW": None,
-                    "phase_var_lastW": None,
-                    "QualityLock": None,
-                    "memory_score_k10": None,
-                    "omega_eff": None,
+                    "R_mean_lastW": metrics_raw.get("R_mean_lastW"),
+                    "phase_var_lastW": metrics_raw.get("phase_var_lastW"),
+                    "QualityLock": metrics_raw.get("QualityLock"),
+                    "memory_score_k10": metrics_raw.get("memory_score_k10"),
+                    "omega_eff": metrics_raw.get("omega_eff"),
                 }
+                entity_tags = dict(tags_raw)
+                entity_tags["emitted"] = True
                 entity = {
-                        "schema_version": "olar_entity_candidate_v1",
-                        "run_session_id": run_id,
-                        "timestamp_utc": _utc_now(),
-                        "ola": int(cfg.get("ola", 2)),
-                        "entity_id": entity_id,
-                        "source_eval_id": source_eval_id,
-                        "build_plan": build_plan,
-                        "template_name": tmpl_name,
-                        "edges": canonical_edges,
-                        "canonical_node_order": canonical_nodes,
-                        "assignment": {"block_ids": assignment_ids, "block_key_used": "block_id"},
-                        "parent_ids": parent_ids,
-                        "seed": seeds[0] if seeds else 0,
-                        "engine_params_bin_id": engine_params_bin_id,
-                        "metrics_summary": metrics_summary,
-                        "tags_raw": {"candidate": True, "labels": [], "thresholds_version": ""},
-                        "reasons_raw": [],
-                        "provenance": {
-                            "config_hash": config_hash,
-                            "blocks_hash": blocks_hash,
-                            "templates_hash": templates_hash,
-                            "code_hash": code_hash,
-                        },
-                    }
+                    "schema_version": "olar_entity_candidate_v1",
+                    "run_session_id": run_id,
+                    "timestamp_utc": _utc_now(),
+                    "ola": int(cfg.get("ola", 2)),
+                    "entity_id": entity_id,
+                    "source_eval_id": source_eval_id,
+                    "build_plan": build_plan,
+                    "template_name": tmpl_name,
+                    "edges": canonical_edges,
+                    "canonical_node_order": canonical_nodes,
+                    "assignment": {"block_ids": assignment_ids, "block_key_used": "block_id"},
+                    "parent_ids": parent_ids,
+                    "seed": seed,
+                    "engine_params_bin_id": engine_params_bin_id,
+                    "metrics_summary": metrics_summary,
+                    "tags_raw": entity_tags,
+                    "reasons_raw": reasons,
+                    "provenance": {
+                        "config_hash": config_hash,
+                        "blocks_hash": blocks_hash,
+                        "templates_hash": templates_hash,
+                        "code_hash": code_hash,
+                    },
+                }
                 validate_entity_candidate(entity)
                 entities_rows.append(entity)
+                if candidate:
+                    entities_candidates_written += 1
                 print("", flush=True)
                 print(
                     "[explorer_cli] wrote attempt"
                     f" [{new_evals} / {budget}]"
                     f" entity={_short_id(entity_id)}"
                     f" eval={_short_id(eval_id)}"
-                    f" seed={seeds[0] if seeds else 0}"
+                    f" seed={seed}"
                     f" bin={engine_params_bin_id}"
-                    " candidate=True",
+                    f" candidate={candidate}",
                     flush=True,
                 )
                 print(
                     "[explorer_cli] wrote entity"
                     f" entity={_short_id(entity_id)}"
                     f" source_eval={_short_id(source_eval_id)}"
-                    f" seed={seeds[0] if seeds else 0}"
+                    f" seed={seed}"
                     f" bin={engine_params_bin_id}"
-                    " candidate=True",
+                    f" candidate={candidate}",
                     flush=True,
                 )
             eval_idx += 1
@@ -487,9 +512,35 @@ def main() -> None:
     print(
         "[olar_explorer] "
         f"attempts_written={attempts_written} entities_written={entities_written} "
+        f"entities_written_candidate_true={entities_candidates_written} dropped_non_candidate={dropped_non_candidate} "
         f"dropped_missing_dna={dropped_missing_dna} dropped_not_allowed_grade={dropped_not_allowed_grade} "
         f"dropped_not_allowed_family={dropped_not_allowed_family}"
     )
+    if report_path is not None:
+        candidate_rate = (
+            float(attempts_candidates_written) / float(attempts_written) if attempts_written else 0.0
+        )
+        report_lines = [
+            "# Explorer Report",
+            "",
+            "## Counts",
+            f"- attempts_written: {attempts_written}",
+            f"- attempts_candidate_true: {attempts_candidates_written}",
+            f"- candidate_rate: {candidate_rate:.6g}",
+            f"- entities_written: {entities_written}",
+            f"- entities_written_candidate_true: {entities_candidates_written}",
+            f"- dropped_non_candidate: {dropped_non_candidate}",
+            "",
+            "## Filters",
+            f"- dropped_missing_dna: {dropped_missing_dna}",
+            f"- dropped_not_allowed_grade: {dropped_not_allowed_grade}",
+            f"- dropped_not_allowed_family: {dropped_not_allowed_family}",
+            "",
+            "## Output Policy",
+            f"- emit_non_candidates: {emit_non_candidates}",
+        ]
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text("\n".join(report_lines) + "\n")
 
 
 if __name__ == "__main__":

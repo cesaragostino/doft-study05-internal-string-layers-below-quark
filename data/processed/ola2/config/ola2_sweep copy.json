@@ -17,9 +17,9 @@
   },
   "engine_defaults": {
     "K_local": 0.45,
-    "T_ticks": 200000,
-    "W": 10000,
-    "dt": 0.0025,
+    "T_ticks": 200,
+    "W": 20,
+    "dt": 1.0,
     "kappa_global": 0.3,
     "sigma0": 0.3,
     "sigma_tc": 60.0,

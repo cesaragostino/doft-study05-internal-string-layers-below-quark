@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -35,10 +34,6 @@ def _norm_id(val: Any) -> str:
     if as_float.is_integer():
         return str(int(as_float))
     return text
-
-
-def _short_hash(text: str, keep: int = 16) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:keep]
 
 
 def _load_blocks(path: Path) -> List[Dict[str, Any]]:
@@ -115,9 +110,8 @@ def main() -> None:
         block_ids.add(block_id)
         if not origin_run_id:
             raise RuntimeError(f"Missing origin_run_id for block_id={block_id}")
-        expected = f"ola1_{_short_hash(origin_run_id)}"
-        if block_id != expected:
-            raise RuntimeError(f"block_id mismatch for run_id={origin_run_id}: {block_id} != {expected}")
+        if block_id != origin_run_id:
+            raise RuntimeError(f"block_id mismatch for run_id={origin_run_id}: {block_id} != {origin_run_id}")
         run_rec = runs.get(origin_run_id)
         if not run_rec:
             raise RuntimeError(f"origin_run_id not found in runs_full.jsonl: {origin_run_id}")

@@ -240,24 +240,27 @@ def main() -> None:
     )
 
     if not args.skip_canonical:
-        runs_full = args.runs_full_jsonl or (processed_dir / "global" / "runs_full.jsonl")
+        if args.runs_full_jsonl:
+            runs_full = args.runs_full_jsonl
+        else:
+            runs_full = processed_dir / "runs_full.jsonl"
+            if not runs_full.exists():
+                runs_full = processed_dir / "global" / "runs_full.jsonl"
         _run_step(
-            "ola1_export_dna_block_id (canonical)",
+            "ola1_assemble_olar_inputs",
             _with_pythonpath(
                 [
                     sys.executable,
                     "-m",
-                    "ola1.ola1_export_dna_block_id",
-                    "--blocks-json",
-                    str(simple_blocks_json),
-                    "--dna-csv",
-                    str(dna_catalog),
-                    "--output",
-                    str(processed_dir / "dof_dna_catalog_by_block_id.csv"),
+                    "ola1.ola1_assemble_olar_inputs",
                     "--runs-full-jsonl",
                     str(runs_full),
+                    "--dna-csv",
+                    str(dna_catalog),
                     "--blocks-output",
                     str(simple_blocks_canonical),
+                    "--dna-output",
+                    str(processed_dir / "dof_dna_catalog_by_block_id.csv"),
                 ]
             ),
         )

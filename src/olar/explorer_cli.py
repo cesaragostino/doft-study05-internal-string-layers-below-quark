@@ -138,6 +138,8 @@ def main() -> None:
     entities_rows = []
     attempt_progress: Dict[str, Tuple[int, int]] = {}
     run_id = str(uuid.uuid4())
+    output_policy = runtime.get("output_policy", {}) or {}
+    emit_non_candidates = bool(output_policy.get("emit_non_candidates", False))
     progress_cfg = runtime.get("progress", {})
     flush_every = int(progress_cfg.get("flush_every_evals", 0) or 0)
     log_every = int(progress_cfg.get("log_every_terms", 0) or 0)
@@ -145,7 +147,10 @@ def main() -> None:
     evals_deduped = 0
     evals_since_flush = 0
     attempts_written_total = 0
+    attempts_candidates_written = 0
     entities_written_total = 0
+    entities_candidates_written = 0
+    dropped_non_candidate = 0
 
     def _flush_attempts() -> None:
         nonlocal attempts_written_total
@@ -254,6 +259,13 @@ def main() -> None:
                 runtime.get("tagging_thresholds", {}),
                 str(runtime.get("tagging_thresholds", {}).get("viability_mode", "")),
             )
+            tags_raw = dict(tags_raw)
+            tags_raw.setdefault("labels", [])
+            tags_raw.setdefault("thresholds_version", "")
+            tags_raw["emitted"] = True
+            candidate = bool(tags_raw.get("candidate"))
+            if candidate:
+                attempts_candidates_written += 1
 
             attempt = {
                 "schema_version": "olar_attempt_v1",
@@ -291,33 +303,39 @@ def main() -> None:
             attempt_progress[eval_id] = (new_evals, budget_evals)
             evals_since_flush += 1
 
-            if tags_raw.get("candidate") and entity_id not in seen_entities:
-                seen_entities.add(entity_id)
-                metrics_summary = {
-                    "R_mean_lastW": metrics_raw.get("R_mean_lastW"),
-                    "phase_var_lastW": metrics_raw.get("phase_var_lastW"),
-                    "QualityLock": metrics_raw.get("QualityLock"),
-                    "memory_score_k10": metrics_raw.get("memory_score_k10"),
-                    "omega_eff": metrics_raw.get("omega_eff"),
-                }
-                entity = {
-                    "schema_version": "olar_entity_candidate_v1",
-                    "run_session_id": run_id,
-                    "timestamp_utc": utc_now_iso(),
-                    "ola": int(cfg.get("ola", 2)),
-                    "entity_id": entity_id,
-                    "source_eval_id": eval_id,
-                    "build_plan": build_payload,
-                    "template_name": template.get("name", ""),
-                    "edges": canonical_edges,
-                    "canonical_node_order": canonical_node_order,
-                    "assignment": {"block_ids": canonical_nodes, "block_key_used": "block_id"},
-                    "parent_ids": canonical_nodes,
-                    "seed": seed,
-                    "engine_params_bin_id": param_bin_id,
-                    "metrics_summary": metrics_summary,
-                    "tags_raw": tags_raw,
-                    "reasons_raw": reasons,
+            if entity_id in seen_entities:
+                continue
+            if not candidate and not emit_non_candidates:
+                dropped_non_candidate += 1
+                continue
+            seen_entities.add(entity_id)
+            metrics_summary = {
+                "R_mean_lastW": metrics_raw.get("R_mean_lastW"),
+                "phase_var_lastW": metrics_raw.get("phase_var_lastW"),
+                "QualityLock": metrics_raw.get("QualityLock"),
+                "memory_score_k10": metrics_raw.get("memory_score_k10"),
+                "omega_eff": metrics_raw.get("omega_eff"),
+            }
+            entity_tags = dict(tags_raw)
+            entity_tags["emitted"] = True
+            entity = {
+                "schema_version": "olar_entity_candidate_v1",
+                "run_session_id": run_id,
+                "timestamp_utc": utc_now_iso(),
+                "ola": int(cfg.get("ola", 2)),
+                "entity_id": entity_id,
+                "source_eval_id": eval_id,
+                "build_plan": build_payload,
+                "template_name": template.get("name", ""),
+                "edges": canonical_edges,
+                "canonical_node_order": canonical_node_order,
+                "assignment": {"block_ids": canonical_nodes, "block_key_used": "block_id"},
+                "parent_ids": canonical_nodes,
+                "seed": seed,
+                "engine_params_bin_id": param_bin_id,
+                "metrics_summary": metrics_summary,
+                "tags_raw": entity_tags,
+                "reasons_raw": reasons,
                 "provenance": {
                     "config_hash": config_hash,
                     "blocks_hash": blocks_hash,
@@ -329,8 +347,10 @@ def main() -> None:
                     "machine": machine,
                 },
             }
-                validate_entity_candidate(entity)
-                entities_rows.append(entity)
+            validate_entity_candidate(entity)
+            entities_rows.append(entity)
+            if candidate:
+                entities_candidates_written += 1
 
             if flush_every and evals_since_flush >= flush_every:
                 _flush_attempts()
@@ -358,7 +378,32 @@ def main() -> None:
     print(
         f"[explorer_cli] attempts_written={attempts_written_total}"
         f" entities_written={entities_written_total}"
+        f" entities_written_candidate_true={entities_candidates_written}"
+        f" dropped_non_candidate={dropped_non_candidate}"
     )
+    report_path = outputs.get("report_md")
+    if report_path:
+        candidate_rate = (
+            float(attempts_candidates_written) / float(attempts_written_total)
+            if attempts_written_total
+            else 0.0
+        )
+        report_lines = [
+            "# Explorer Report",
+            "",
+            "## Counts",
+            f"- attempts_written: {attempts_written_total}",
+            f"- attempts_candidate_true: {attempts_candidates_written}",
+            f"- candidate_rate: {candidate_rate:.6g}",
+            f"- entities_written: {entities_written_total}",
+            f"- entities_written_candidate_true: {entities_candidates_written}",
+            f"- dropped_non_candidate: {dropped_non_candidate}",
+            "",
+            "## Output Policy",
+            f"- emit_non_candidates: {emit_non_candidates}",
+        ]
+        Path(report_path).parent.mkdir(parents=True, exist_ok=True)
+        Path(report_path).write_text("\n".join(report_lines) + "\n")
     if evals_deduped:
         print(
             "[explorer_cli] WARNING: dedupe skip"

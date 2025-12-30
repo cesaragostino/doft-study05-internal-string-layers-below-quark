@@ -92,7 +92,7 @@ def _build_ola1_export_block_id_cmd(config_path: Path) -> List[str]:
     cmd = [
         sys.executable,
         "-m",
-        "ola1.ola1_export_dna_block_id",
+        "ola1.legacy.ola1_export_dna_block_id",
         "--blocks-json",
         str(blocks_json),
         "--dna-csv",

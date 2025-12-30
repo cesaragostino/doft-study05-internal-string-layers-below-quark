@@ -1,8 +1,7 @@
 {
   "block_selection": {
     "allowed_dof_grades": [
-      "A",
-      "B"
+      "A"
     ],
     "allowed_family_ids": [],
     "block_id_key": "block_id",
@@ -11,9 +10,9 @@
   },
   "engine_defaults": {
     "K_local": 0.45,
-    "T_ticks": 200,
-    "W": 20,
-    "dt": 1.0,
+    "T_ticks": 1200,
+    "W": 200,
+    "dt": 1,
     "kappa_global": 0.3,
     "sigma0": 0.3,
     "sigma_tc": 60.0,
@@ -70,6 +69,9 @@
     "entities_candidates_jsonl": "data/processed/ola2/raw/entities_candidates.jsonl",
     "raw_dir": "data/processed/ola2/raw",
     "report_md": "data/processed/ola2/report.md"
+  },
+  "output_policy": {
+    "emit_non_candidates": false
   },
   "progress": {
     "flush_every_evals": 500,

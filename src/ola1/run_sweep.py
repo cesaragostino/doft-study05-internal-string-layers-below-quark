@@ -1575,6 +1575,7 @@ def run_sweep(
                     {
                         "schema_version": "ola1_run_v1",
                         "run_id": run_idx,
+                        "run_session_id": run_record.get("run_session_id"),
                         "timestamp_utc": _utc_now(),
                         "seed": seed,
                         "seed_policy": result.get("seed_policy"),
@@ -1596,6 +1597,7 @@ def run_sweep(
                 {
                     "schema_version": "ola1_run_v1",
                     "run_id": run_idx,
+                    "run_session_id": run_record.get("run_session_id"),
                     "timestamp_utc": _utc_now(),
                     "seed": seed,
                     "seed_policy": result.get("seed_policy"),
