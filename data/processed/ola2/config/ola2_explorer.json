@@ -68,7 +68,7 @@
     "attempts_jsonl": "data/processed/ola2/raw/attempts.jsonl",
     "entities_candidates_jsonl": "data/processed/ola2/raw/entities_candidates.jsonl",
     "raw_dir": "data/processed/ola2/raw",
-    "report_md": "data/processed/ola2/report.md"
+    "report_md": "data/processed/ola2/explorer_report.md"
   },
   "output_policy": {
     "emit_non_candidates": false

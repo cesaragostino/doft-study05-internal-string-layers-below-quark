@@ -13,7 +13,7 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 from core.ids.hashing import hash_file, hash_text, stable_dumps
 from core.ids.plan import build_plan_payload, canonicalize_plan, engine_params_bin_id, entity_id_from_plan
-from core.io.jsonl import append_jsonl, scan_jsonl_ids, write_resume_index
+from core.io.jsonl import append_jsonl, iter_jsonl, scan_jsonl_ids, write_resume_index
 from core.templates.registry import canonicalize_edges, load_templates
 from core.io.schema_validation import validate_attempt, validate_entity_candidate
 from olar.explorer_engine import compute_metrics, gate_candidate
