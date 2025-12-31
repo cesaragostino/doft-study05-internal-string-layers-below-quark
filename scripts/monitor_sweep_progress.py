@@ -81,7 +81,7 @@ def main() -> None:
     parser.add_argument(
         "--shards-root",
         default="data/processed/ola2/sweep_shards",
-        help="Root directory containing shard_XX/raw/evaluations.jsonl",
+        help="Root directory containing shard_XX/raw or worker_XX/raw evaluations.jsonl",
     )
     parser.add_argument(
         "--shard-count",
@@ -103,7 +103,11 @@ def main() -> None:
     shard_last_ts: Dict[str, float] = {}
     all_ts: list[float] = []
     shards_root = Path(args.shards_root)
-    for path in shards_root.glob("shard_*/raw/evaluations.jsonl"):
+    patterns = ["shard_*/raw/evaluations.jsonl", "worker_*/raw/evaluations.jsonl"]
+    paths = []
+    for pattern in patterns:
+        paths.extend(sorted(shards_root.glob(pattern)))
+    for path in paths:
         shard_name = path.parent.parent.name
         shard_counts[shard_name] = 0
         with path.open() as f:

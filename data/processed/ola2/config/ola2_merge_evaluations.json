@@ -1,7 +1,7 @@
 {
   "schema_version": "olar_merge_evaluations_v1",
   "inputs": [
-    "data/processed/ola2/sweep_shards/shard_*/raw/evaluations.jsonl"
+    "data/processed/ola2/sweep_workers/worker_*/raw/evaluations.jsonl"
   ],
   "output": "data/processed/ola2/sweep_merged/evaluations.jsonl",
   "stats_output": "data/processed/ola2/sweep_merged/merge_stats.json",

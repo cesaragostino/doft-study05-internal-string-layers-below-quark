@@ -8,9 +8,9 @@
       "enabled": true
     },
     {
-      "id": "ola2_sweep_shards",
-      "type": "olar_sweep_shards",
-      "config": "data/processed/ola2/config/ola2_sweep_shards.json",
+      "id": "ola2_sweep_dynamic",
+      "type": "olar_sweep_dynamic",
+      "config": "data/processed/ola2/config/ola2_sweep_dynamic.json",
       "enabled": true
     },
     {

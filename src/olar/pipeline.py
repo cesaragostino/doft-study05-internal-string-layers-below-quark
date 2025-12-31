@@ -259,6 +259,9 @@ def _collect_step_inputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
         configs = cfg.get("configs", [])
         if isinstance(configs, list):
             return [str(c) for c in configs if isinstance(c, str)]
+    if step_type == "olar_sweep_dynamic":
+        sweep_cfg = cfg.get("sweep_config")
+        return [str(sweep_cfg)] if isinstance(sweep_cfg, str) else []
     if step_type == "merge_evaluations":
         inputs = cfg.get("inputs")
         if isinstance(inputs, str):
@@ -288,6 +291,8 @@ def _collect_step_outputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
         return []
     if step_type == "merge_evaluations":
         return list(_iter_cfg_paths(cfg, ("output", "stats_output")))
+    if step_type == "olar_sweep_dynamic":
+        return list(_iter_cfg_paths(cfg, ("worker_output_root", "claim_log")))
     return []
 
 
@@ -337,6 +342,14 @@ def _reset_step_outputs(step_type: str, cfg: Dict[str, Any], output_root: Option
             val = cfg.get(key)
             if isinstance(val, str) and val:
                 _maybe_remove(_resolve_path_with_base(val, output_root, base_dir))
+        return
+    if step_type == "olar_sweep_dynamic":
+        worker_root = cfg.get("worker_output_root")
+        claim_log = cfg.get("claim_log")
+        if isinstance(worker_root, str) and worker_root:
+            _maybe_remove(_resolve_path_with_base(worker_root, output_root, base_dir))
+        if isinstance(claim_log, str) and claim_log:
+            _maybe_remove(_resolve_path_with_base(claim_log, output_root, base_dir))
         return
     if step_type == "core_catalog_build":
         outputs = cfg.get("outputs", {})
@@ -418,6 +431,7 @@ def main() -> None:
                 "olar_explorer",
                 "olar_sweep",
                 "olar_sweep_shards",
+                "olar_sweep_dynamic",
                 "merge_evaluations",
                 "core_catalog_build",
                 "core_taxonomy",
@@ -463,6 +477,8 @@ def main() -> None:
             if output_paths:
                 _validate_paths(output_paths, output_root, config_path.parent, "outputs", step_id)
             continue
+        elif step_type == "olar_sweep_dynamic":
+            cmd = [sys.executable, "-m", "olar.sweep_dynamic", "--config", str(config_path)]
         elif step_type == "merge_evaluations":
             cmd = _build_merge_evaluations_cmd(config_path)
         else:

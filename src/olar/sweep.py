@@ -92,6 +92,9 @@ def _select_candidates(
     entities_path: Path,
 ) -> Tuple[List[Dict[str, Any]], int, int]:
     mode = (cfg.get("candidate_source") or {}).get("mode", "attempts")
+    override_ids = cfg.get("_override_entity_ids")
+    if override_ids:
+        override_ids = {str(eid) for eid in override_ids}
     if mode != "attempts":
         candidates = [row for row in iter_jsonl(entities_path) if row.get("entity_id")]
         return candidates, 0, 0
@@ -101,7 +104,7 @@ def _select_candidates(
     shard_count = int(shard_cfg.get("shard_count", 0) or 0)
     shard_id = int(shard_cfg.get("shard_id", 0) or 0)
     shard_hash = str(shard_cfg.get("hash", "sha256_hex8"))
-    if shard_enabled:
+    if shard_enabled and not override_ids:
         if shard_count <= 0:
             raise RuntimeError("candidate_shard enabled but shard_count <= 0")
         if shard_id < 0 or shard_id >= shard_count:
@@ -127,6 +130,8 @@ def _select_candidates(
         if not eid:
             continue
         eid = str(eid)
+        if override_ids and eid not in override_ids:
+            continue
         if shard_enabled:
             shard_val = int(hash_text(eid)[:8], 16) % shard_count
             if shard_val != shard_id:
@@ -202,10 +207,26 @@ def main() -> None:
         required=False,
         help="Optional stop file path for graceful shutdown (checked between evals).",
     )
+    parser.add_argument(
+        "--entity-id",
+        action="append",
+        help="Restrict sweep to a specific entity_id (repeatable).",
+    )
+    parser.add_argument(
+        "--entity-ids",
+        help="Comma-separated list of entity_ids to process.",
+    )
     args = parser.parse_args()
 
     config_path = Path(args.config)
     cfg = _load_json(config_path)
+    override_ids: List[str] = []
+    if args.entity_ids:
+        override_ids.extend([part.strip() for part in args.entity_ids.split(",") if part.strip()])
+    if args.entity_id:
+        override_ids.extend([str(val) for val in args.entity_id if str(val).strip()])
+    if override_ids:
+        cfg["_override_entity_ids"] = override_ids
     output_dir = Path(args.output_dir) if args.output_dir else None
     stop_file = args.stop_file or cfg.get("stop_file")
     stop_path = Path(stop_file) if stop_file else None
