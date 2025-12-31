@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import glob
 import json
 import subprocess
 import sys
@@ -383,13 +384,10 @@ def _validate_paths(
     missing = []
     for path_str in paths:
         if "*" in path_str or "?" in path_str or "[" in path_str:
-            if Path(path_str).is_absolute():
-                matches = list(Path().glob(path_str))
-            else:
-                root = base_dir if path_str.startswith(".") else (output_root or Path())
-                matches = list(root.glob(path_str))
+            resolved = _resolve_path_with_base(path_str, output_root, base_dir)
+            matches = glob.glob(str(resolved))
             if not matches:
-                missing.append(str(_resolve_path_with_base(path_str, output_root, base_dir)))
+                missing.append(str(resolved))
             continue
         candidates = _candidate_paths(path_str, output_root, base_dir)
         if not any(cand.exists() for cand in candidates):

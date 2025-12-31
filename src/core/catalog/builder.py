@@ -31,6 +31,14 @@ def _resolve_input(path_str: str, base_dir: Path) -> Path:
     return base_dir / path
 
 
+def _has_jsonl_rows(path: Path) -> bool:
+    if not path.exists():
+        return False
+    for _ in iter_jsonl(path):
+        return True
+    return False
+
+
 def _load_entities_candidates(path: Path) -> Dict[str, Dict[str, Any]]:
     entities: Dict[str, Dict[str, Any]] = {}
     for row in iter_jsonl(path):
@@ -399,6 +407,17 @@ def build_catalog(config_path: Path, output_dir: Optional[Path] = None) -> None:
     print(f"- entities_candidates_jsonl={entities_candidates_path.resolve()}")
     print(f"- evaluations_jsonl={evaluations_path.resolve()}")
     print(f"- templates_json={templates_path.resolve()}")
+
+    has_attempts = _has_jsonl_rows(attempts_path)
+    has_entities = _has_jsonl_rows(entities_candidates_path)
+    has_evals = _has_jsonl_rows(evaluations_path)
+    if not (has_attempts or has_entities or has_evals):
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"attempts_jsonl={attempts_path} entities_candidates_jsonl={entities_candidates_path} "
+            f"evaluations_jsonl={evaluations_path}"
+        )
+        return
 
     outputs = cfg.get("outputs", {})
     catalog_dir = _resolve_output(outputs.get("catalog_dir", "catalog"), output_dir)

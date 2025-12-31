@@ -1,0 +1,34 @@
+{
+  "inputs": [
+    "data/processed/ola2/sweep_shards/shard_00/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_01/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_02/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_03/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_04/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_05/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_06/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_07/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_08/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_09/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_10/raw/evaluations.jsonl",
+    "data/processed/ola2/sweep_shards/shard_11/raw/evaluations.jsonl"
+  ],
+  "output": "data/processed/ola2/sweep_merged/evaluations.jsonl",
+  "written": 696,
+  "duplicate_eval_ids_total": 0,
+  "duplicate_eval_ids_sample": [],
+  "shard_sources": {
+    "data/processed/ola2/sweep_shards/shard_00/raw/evaluations.jsonl": 48,
+    "data/processed/ola2/sweep_shards/shard_01/raw/evaluations.jsonl": 24,
+    "data/processed/ola2/sweep_shards/shard_02/raw/evaluations.jsonl": 24,
+    "data/processed/ola2/sweep_shards/shard_03/raw/evaluations.jsonl": 72,
+    "data/processed/ola2/sweep_shards/shard_04/raw/evaluations.jsonl": 24,
+    "data/processed/ola2/sweep_shards/shard_05/raw/evaluations.jsonl": 24,
+    "data/processed/ola2/sweep_shards/shard_06/raw/evaluations.jsonl": 120,
+    "data/processed/ola2/sweep_shards/shard_07/raw/evaluations.jsonl": 48,
+    "data/processed/ola2/sweep_shards/shard_08/raw/evaluations.jsonl": 96,
+    "data/processed/ola2/sweep_shards/shard_09/raw/evaluations.jsonl": 48,
+    "data/processed/ola2/sweep_shards/shard_10/raw/evaluations.jsonl": 120,
+    "data/processed/ola2/sweep_shards/shard_11/raw/evaluations.jsonl": 48
+  }
+}

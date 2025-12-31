@@ -1,0 +1,147 @@
+{
+  "attempts_total": 20000,
+  "candidates_total": 29,
+  "sweep_attempted_total": 29,
+  "viables_total": 29,
+  "sweep_evals_total": 696,
+  "attempts_total_by_template": [
+    {
+      "template_name": "bipartite_3_6",
+      "N": 9,
+      "attempts_total": 6546
+    },
+    {
+      "template_name": "decagon_ring",
+      "N": 10,
+      "attempts_total": 6700
+    },
+    {
+      "template_name": "ladder_5",
+      "N": 10,
+      "attempts_total": 6754
+    }
+  ],
+  "candidates_total_by_template": [
+    {
+      "template_name": "bipartite_3_6",
+      "N": 9,
+      "candidates_total": 18
+    },
+    {
+      "template_name": "decagon_ring",
+      "N": 10,
+      "candidates_total": 4
+    },
+    {
+      "template_name": "ladder_5",
+      "N": 10,
+      "candidates_total": 7
+    }
+  ],
+  "sweep_evals_total_by_template": [
+    {
+      "template_name": "bipartite_3_6",
+      "N": 9,
+      "sweep_evals_total": 432
+    },
+    {
+      "template_name": "decagon_ring",
+      "N": 10,
+      "sweep_evals_total": 96
+    },
+    {
+      "template_name": "ladder_5",
+      "N": 10,
+      "sweep_evals_total": 168
+    }
+  ],
+  "sweep_passed_total_by_template": [
+    {
+      "template_name": "bipartite_3_6",
+      "N": 9,
+      "sweep_passed_total": 18
+    },
+    {
+      "template_name": "decagon_ring",
+      "N": 10,
+      "sweep_passed_total": 4
+    },
+    {
+      "template_name": "ladder_5",
+      "N": 10,
+      "sweep_passed_total": 7
+    }
+  ],
+  "by_template": [
+    {
+      "template_name": "bipartite_3_6",
+      "N": 9,
+      "attempts_total": 6546,
+      "candidates_total": 18,
+      "sweep_evals_total": 432,
+      "sweep_attempted_total": 18,
+      "viables_total": 18,
+      "candidate_rate": 0.002749770852428964,
+      "sweep_attempt_rate": 1.0,
+      "viable_rate_technical": 0.002749770852428964,
+      "viable_rate": 1.0,
+      "viable_rate_technical_ci_wilson": {
+        "center": 0.003041417062666065,
+        "low": 0.0017401051049004276,
+        "high": 0.004342729020431702
+      },
+      "viable_rate_ci_wilson": {
+        "center": 0.9120577247088126,
+        "low": 0.8241154494176252,
+        "high": 1.0
+      }
+    },
+    {
+      "template_name": "decagon_ring",
+      "N": 10,
+      "attempts_total": 6700,
+      "candidates_total": 4,
+      "sweep_evals_total": 96,
+      "sweep_attempted_total": 4,
+      "viables_total": 4,
+      "candidate_rate": 0.0005970149253731343,
+      "sweep_attempt_rate": 1.0,
+      "viable_rate_technical": 0.0005970149253731343,
+      "viable_rate": 1.0,
+      "viable_rate_technical_ci_wilson": {
+        "center": 0.0008831950921990759,
+        "low": 0.00023218741312051655,
+        "high": 0.0015342027712776352
+      },
+      "viable_rate_ci_wilson": {
+        "center": 0.7550499897980004,
+        "low": 0.5100999795960008,
+        "high": 1.0
+      }
+    },
+    {
+      "template_name": "ladder_5",
+      "N": 10,
+      "attempts_total": 6754,
+      "candidates_total": 7,
+      "sweep_evals_total": 168,
+      "sweep_attempted_total": 7,
+      "viables_total": 7,
+      "candidate_rate": 0.001036422860527095,
+      "sweep_attempt_rate": 1.0,
+      "viable_rate_technical": 0.001036422860527095,
+      "viable_rate": 1.0,
+      "viable_rate_technical_ci_wilson": {
+        "center": 0.0013200664543543015,
+        "low": 0.000502133860530599,
+        "high": 0.002137999048178004
+      },
+      "viable_rate_ci_wilson": {
+        "center": 0.8228305785123967,
+        "low": 0.6456611570247934,
+        "high": 1.0
+      }
+    }
+  ],
+  "templates_hash": "data/processed/ola2/config/ola2_templates.json"
+}

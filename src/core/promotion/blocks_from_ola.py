@@ -39,6 +39,24 @@ def _as_float(val: Any) -> Optional[float]:
     return None
 
 
+def _has_jsonl_rows(path: Path) -> bool:
+    if not path.exists():
+        return False
+    for _ in iter_jsonl(path):
+        return True
+    return False
+
+
+def _has_csv_rows(path: Path) -> bool:
+    if not path.exists():
+        return False
+    with path.open() as f:
+        reader = csv.DictReader(f)
+        for _ in reader:
+            return True
+    return False
+
+
 def _load_blocks(blocks_path: Path, key_field: str = "block_id") -> Dict[str, Dict[str, Any]]:
     data = _load_json(blocks_path)
     if not isinstance(data, list):
@@ -306,6 +324,26 @@ def main() -> None:
     print(f"- blocks_prev_json={blocks_prev_path.resolve()}")
     print(f"- output_blocks_json={output_path.resolve()}")
     print(f"- output_dna_csv={dna_output_path.resolve()}")
+
+    if not _has_jsonl_rows(entities_path):
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"entities_jsonl={entities_path}"
+        )
+        return
+    if not _has_csv_rows(genome_path):
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"genome_layers_csv={genome_path}"
+        )
+        return
+    blocks_prev_data = _load_json(blocks_prev_path)
+    if not isinstance(blocks_prev_data, list) or not blocks_prev_data:
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"blocks_prev_json={blocks_prev_path}"
+        )
+        return
 
     count = promote_blocks(
         entities_path=entities_path,

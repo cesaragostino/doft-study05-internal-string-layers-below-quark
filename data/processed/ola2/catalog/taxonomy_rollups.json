@@ -1,0 +1,138 @@
+{
+  "entities_total": 29,
+  "entities_unmeasured": 0,
+  "entities_measured": 29,
+  "entities_viable_taxonomic": 9,
+  "entities_nonviable": 20,
+  "counts_by_template_name": {
+    "bipartite_3_6": {
+      "total": 18,
+      "measured": 18,
+      "unmeasured": 0,
+      "viable_taxonomic": 5,
+      "nonviable": 13
+    },
+    "ladder_5": {
+      "total": 7,
+      "measured": 7,
+      "unmeasured": 0,
+      "viable_taxonomic": 2,
+      "nonviable": 5
+    },
+    "decagon_ring": {
+      "total": 4,
+      "measured": 4,
+      "unmeasured": 0,
+      "viable_taxonomic": 2,
+      "nonviable": 2
+    }
+  },
+  "counts_by_attractor_class": {
+    "FUNCTIONAL_LOCK": 9,
+    "INCOHERENT": 20
+  },
+  "top_confirmed_families": [
+    {
+      "confirmed_family_id": "2bad9e23d7117003",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "50506c6bc472e664",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "d69c2de1da54efcf",
+      "count": 5
+    },
+    {
+      "confirmed_family_id": "5099c48875251515",
+      "count": 3
+    },
+    {
+      "confirmed_family_id": "4ace6341b4d7c338",
+      "count": 2
+    },
+    {
+      "confirmed_family_id": "df24d6e1a1bfd14f",
+      "count": 2
+    },
+    {
+      "confirmed_family_id": "0ae98c1c2a7f7d9f",
+      "count": 1
+    },
+    {
+      "confirmed_family_id": "63069dd2a936b1ed",
+      "count": 1
+    },
+    {
+      "confirmed_family_id": "87d234393a2070c4",
+      "count": 1
+    },
+    {
+      "confirmed_family_id": "aaaf62c0cd6baa99",
+      "count": 1
+    },
+    {
+      "confirmed_family_id": "d039a1da443ddb3c",
+      "count": 1
+    }
+  ],
+  "viable_rate_taxonomic": 0.3103448275862069,
+  "measured_rate": 1.0,
+  "counts_by_kingdom": {
+    "UNKNOWN": 29
+  },
+  "by_template": [
+    {
+      "template_name": "bipartite_3_6",
+      "N": 9,
+      "total": 18,
+      "counts_by_dof_grade": {
+        "": 18
+      },
+      "counts_by_attractor_class": {
+        "FUNCTIONAL_LOCK": 5,
+        "INCOHERENT": 13
+      },
+      "attempted_sweep_total": 18,
+      "useful_total": 5,
+      "trivial_total": 0,
+      "useful_rate": 0.2777777777777778,
+      "trivial_rate": 0.0
+    },
+    {
+      "template_name": "decagon_ring",
+      "N": 10,
+      "total": 4,
+      "counts_by_dof_grade": {
+        "": 4
+      },
+      "counts_by_attractor_class": {
+        "INCOHERENT": 2,
+        "FUNCTIONAL_LOCK": 2
+      },
+      "attempted_sweep_total": 4,
+      "useful_total": 2,
+      "trivial_total": 0,
+      "useful_rate": 0.5,
+      "trivial_rate": 0.0
+    },
+    {
+      "template_name": "ladder_5",
+      "N": 10,
+      "total": 7,
+      "counts_by_dof_grade": {
+        "": 7
+      },
+      "counts_by_attractor_class": {
+        "INCOHERENT": 5,
+        "FUNCTIONAL_LOCK": 2
+      },
+      "attempted_sweep_total": 7,
+      "useful_total": 2,
+      "trivial_total": 0,
+      "useful_rate": 0.2857142857142857,
+      "trivial_rate": 0.0
+    }
+  ]
+}

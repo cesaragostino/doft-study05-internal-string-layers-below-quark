@@ -246,7 +246,8 @@ def main() -> None:
     blocks = filtered_blocks
     print(f"[olar_explorer] blocks_loaded={total_blocks} blocks_selected={len(blocks)}")
     if not blocks:
-        raise RuntimeError("No blocks left after DOF filtering.")
+        print("WARNING - STOPPED: no input data found; no processing performed. blocks_selected=0")
+        return
 
     templates = load_templates(templates_path)
     dof_grade_counts: Dict[str, int] = {}
@@ -264,9 +265,11 @@ def main() -> None:
     max_nodes = max(template_nodes) if template_nodes else 0
     print(f"[olar_explorer] template_nodes_min={min_nodes} template_nodes_max={max_nodes}")
     if min_nodes and len(blocks) < min_nodes:
-        raise RuntimeError(
-            f"Not enough blocks for templates: have={len(blocks)} min_required={min_nodes}"
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"blocks_available={len(blocks)} min_required={min_nodes}"
         )
+        return
 
     engine_defaults = cfg.get("engine_defaults", {})
     defaults = {

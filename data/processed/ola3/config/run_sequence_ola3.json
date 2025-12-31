@@ -37,6 +37,12 @@
       "type": "core_promote_blocks",
       "config": "data/processed/ola3/config/ola3_promote_blocks.json",
       "enabled": true
+    },
+    {
+      "id": "ola3_catalog_reports",
+      "type": "core_catalog_build",
+      "config": "data/processed/ola3/config/ola3_catalog_build.json",
+      "enabled": true
     }
   ]
 }

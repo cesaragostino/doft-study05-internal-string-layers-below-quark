@@ -26,6 +26,16 @@ def _resolve_output(path_str: str, output_dir: Optional[Path]) -> Path:
     return path
 
 
+def _has_csv_rows(path: Path) -> bool:
+    if not path.exists():
+        return False
+    with path.open() as f:
+        reader = csv.DictReader(f)
+        for _ in reader:
+            return True
+    return False
+
+
 def _to_float(val: Any) -> Optional[float]:
     try:
         f = float(val)
@@ -183,6 +193,12 @@ def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None
         raise RuntimeError(f"genome_layer_csv missing: {genome_path}")
     if not entities_path.exists():
         raise RuntimeError(f"entities_jsonl missing: {entities_path}")
+    if not _has_csv_rows(genome_path):
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"genome_layer_csv={genome_path}"
+        )
+        return
 
     out_genome.parent.mkdir(parents=True, exist_ok=True)
     rollups_out.parent.mkdir(parents=True, exist_ok=True)

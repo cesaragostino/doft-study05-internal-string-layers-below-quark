@@ -21,6 +21,16 @@ def _iter_inputs(paths: Iterable[str]) -> List[Path]:
     return out
 
 
+def _has_jsonl_rows(path: Path) -> bool:
+    if not path.exists():
+        return False
+    with path.open() as f:
+        for line in f:
+            if line.strip():
+                return True
+    return False
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Merge evaluations.jsonl shards with dedupe.")
     parser.add_argument("--inputs", nargs="+", required=True, help="Input evaluations.jsonl files or globs.")
@@ -32,6 +42,12 @@ def main() -> None:
     inputs = _iter_inputs(args.inputs)
     if not inputs:
         raise SystemExit("No input files found.")
+    if not any(_has_jsonl_rows(p) for p in inputs):
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"inputs_checked={len(inputs)}"
+        )
+        return
 
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
