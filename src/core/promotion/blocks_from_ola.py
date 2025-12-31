@@ -187,6 +187,9 @@ def promote_blocks(
 
         # Contract: S6 ignores any *_friendly columns from genome layers.
         dof_grade = genome_row.get("dof_grade") or ""
+        if not dof_grade:
+            # Promotion only selects viable entities; default to A when missing.
+            dof_grade = "A"
         dof_family_id = genome_row.get("confirmed_family_id") or ""
         family_friendly = dof_family_id
         if not dof_family_id:

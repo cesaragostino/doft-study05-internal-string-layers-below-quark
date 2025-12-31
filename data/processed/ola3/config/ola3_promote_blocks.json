@@ -1,0 +1,12 @@
+{
+  "dna_output_csv": "data/processed/ola3/promoted/dof_dna_catalog.csv",
+  "entities_jsonl": "data/processed/ola3/catalog/entities.jsonl",
+  "genome_layer_csv": "data/processed/ola3/catalog/genome_layers_ola3_taxonomy.csv",
+  "ola_from": 3,
+  "ola_to": 4,
+  "output_blocks_json": "data/processed/ola3/promoted/simple_blocks.json",
+  "blocks_prev_json": "data/processed/ola2/promoted/simple_blocks.json",
+  "blocks_prev_block_id_key": "block_id",
+  "require_node_theta_internal": true,
+  "schema_version": "core_promotion_blocks_v2"
+}

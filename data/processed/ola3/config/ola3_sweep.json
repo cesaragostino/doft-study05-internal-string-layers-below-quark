@@ -1,0 +1,94 @@
+{
+  "budgets": {
+    "early_stop": {
+      "after_seeds": 2,
+      "enabled": true,
+      "fail_if_R_mean_below": 0.4
+    },
+    "max_evals_per_entity": 24
+  },
+  "candidate_source": {
+    "filter": {
+      "require_candidate": true,
+      "top_k": 2000,
+      "top_k_by": "priority_score"
+    },
+    "mode": "attempts"
+  },
+  "engine_defaults": {
+    "K_local": 0.45,
+    "T_ticks": 1200,
+    "W": 200,
+    "dt": 1.0,
+    "kappa_global": 0.3,
+    "sigma0": 0.3,
+    "sigma_tc": 60.0,
+    "sigma_theta_init": 0.5,
+    "tau_field": 120.0
+  },
+  "engine_variation": {
+    "bins": {
+      "K_local_edges": [
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ],
+      "kappa_edges": [
+        0.1,
+        0.2,
+        0.4,
+        0.6
+      ],
+      "sigma0_edges": [
+        0.1,
+        0.3,
+        0.5
+      ],
+      "sigma_tc_edges": [
+        40,
+        60,
+        90,
+        120
+      ],
+      "tau_field_edges": [
+        40,
+        80,
+        120,
+        160,
+        240
+      ]
+    },
+    "enabled": true,
+    "mode": "bin_sample"
+  },
+  "inputs": {
+    "attempts_jsonl": "data/processed/ola3/raw/attempts.jsonl",
+    "blocks_json": "data/processed/ola2/promoted/simple_blocks.json",
+    "dof_dna_catalog_csv": "data/processed/ola2/promoted/dof_dna_catalog.csv",
+    "entities_candidates_jsonl": "data/processed/ola3/raw/entities_candidates.jsonl"
+  },
+  "neighborhood": {
+    "max_neighbor_bins": 3,
+    "mode": "param_bin_neighbors"
+  },
+  "ola": 3,
+  "olar_inputs": {
+    "path": ""
+  },
+  "optional_outputs": [
+    "report_md"
+  ],
+  "outputs": {
+    "evaluations_jsonl": "data/processed/ola3/raw/evaluations.jsonl",
+    "raw_dir": "data/processed/ola3/raw",
+    "report_md": "data/processed/ola3/sweep_report.md"
+  },
+  "schema_version": "olar_sweep_config_v1",
+  "seed_policy": {
+    "min_seeds_required": 4,
+    "mode": "deterministic",
+    "salt": "sweep_v1",
+    "seeds": 6
+  }
+}

@@ -7,6 +7,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+import shutil
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 
@@ -23,11 +24,62 @@ def _resolve_path(path_str: str, output_root: Optional[Path]) -> Path:
     return path
 
 
+def _resolve_path_with_base(path_str: str, output_root: Optional[Path], base_dir: Path) -> Path:
+    path = Path(path_str)
+    if path.is_absolute():
+        return path
+    if path_str.startswith("."):
+        return base_dir / path
+    if path_str.startswith(("data/", "src/", "docs/", "scripts/")):
+        return path
+    if output_root is not None:
+        return output_root / path
+    candidate = base_dir / path
+    if candidate.exists():
+        return candidate
+    return path
+
+
+def _candidate_paths(path_str: str, output_root: Optional[Path], base_dir: Path) -> List[Path]:
+    path = Path(path_str)
+    if path.is_absolute():
+        return [path]
+    candidates: List[Path] = []
+    if path_str.startswith("."):
+        candidates.append(base_dir / path)
+    if path_str.startswith(("data/", "src/", "docs/", "scripts/")):
+        candidates.append(path)
+    if output_root is not None:
+        candidates.append(output_root / path)
+    candidates.append(base_dir / path)
+    candidates.append(path)
+    seen = set()
+    unique: List[Path] = []
+    for cand in candidates:
+        key = str(cand)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(cand)
+    return unique
+
+
 def _run_step(step_id: str, cmd: List[str]) -> None:
     print(f"[olar_pipeline] step={step_id} status=running", flush=True)
     print(f"[olar_pipeline] step={step_id} cmd={' '.join(cmd)}", flush=True)
     subprocess.run(cmd, check=True)
     print(f"[olar_pipeline] step={step_id} status=done", flush=True)
+
+
+def _count_jsonl_rows(path: Path) -> int:
+    if not path.exists():
+        return 0
+    count = 0
+    with path.open() as f:
+        for line in f:
+            if line.strip():
+                count += 1
+    return count
 
 
 def _build_ola1_export_cmd(config_path: Path) -> List[str]:
@@ -109,6 +161,37 @@ def _build_ola1_export_block_id_cmd(config_path: Path) -> List[str]:
     return cmd
 
 
+def _build_merge_evaluations_cmd(config_path: Path) -> List[str]:
+    cfg = _load_json(config_path)
+    inputs = cfg.get("inputs")
+    output = cfg.get("output")
+    stats_output = cfg.get("stats_output")
+    sample_size = cfg.get("sample_size")
+    if not inputs or not output:
+        raise RuntimeError("merge_evaluations config requires inputs and output")
+    if isinstance(inputs, str):
+        inputs_list = [inputs]
+    elif isinstance(inputs, list):
+        inputs_list = [str(val) for val in inputs if isinstance(val, str)]
+    else:
+        inputs_list = []
+    if not inputs_list:
+        raise RuntimeError("merge_evaluations config requires inputs list")
+    cmd = [
+        sys.executable,
+        "scripts/merge_evaluations.py",
+        "--inputs",
+        *inputs_list,
+        "--output",
+        str(output),
+    ]
+    if stats_output:
+        cmd.extend(["--stats-output", str(stats_output)])
+    if isinstance(sample_size, int):
+        cmd.extend(["--sample-size", str(sample_size)])
+    return cmd
+
+
 def _load_sweep_shards_config(config_path: Path) -> Dict[str, Any]:
     cfg = _load_json(config_path)
     configs = cfg.get("configs")
@@ -176,6 +259,12 @@ def _collect_step_inputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
         configs = cfg.get("configs", [])
         if isinstance(configs, list):
             return [str(c) for c in configs if isinstance(c, str)]
+    if step_type == "merge_evaluations":
+        inputs = cfg.get("inputs")
+        if isinstance(inputs, str):
+            return [inputs]
+        if isinstance(inputs, list):
+            return [str(v) for v in inputs if isinstance(v, str)]
     return []
 
 
@@ -197,15 +286,101 @@ def _collect_step_outputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
         return list(_iter_cfg_paths(cfg, ("output_blocks_json", "dna_output_csv")))
     if step_type == "olar_sweep_shards":
         return []
+    if step_type == "merge_evaluations":
+        return list(_iter_cfg_paths(cfg, ("output", "stats_output")))
     return []
 
 
-def _validate_paths(paths: Iterable[str], output_root: Optional[Path], label: str, step_id: str) -> None:
+def _maybe_remove(path: Path) -> None:
+    if not path.exists():
+        return
+    if path.is_dir():
+        shutil.rmtree(path)
+    else:
+        path.unlink()
+
+
+def _reset_step_outputs(step_type: str, cfg: Dict[str, Any], output_root: Optional[Path], base_dir: Path) -> None:
+    if step_type == "olar_explorer":
+        outputs = cfg.get("outputs", {})
+        for key in ("attempts_jsonl", "entities_candidates_jsonl", "report_md"):
+            val = outputs.get(key)
+            if isinstance(val, str) and val:
+                path = _resolve_path_with_base(val, output_root, base_dir)
+                _maybe_remove(path)
+                _maybe_remove(path.with_suffix(path.suffix + ".resume.json"))
+        raw_dir = outputs.get("raw_dir")
+        if isinstance(raw_dir, str) and raw_dir:
+            _maybe_remove(_resolve_path_with_base(raw_dir, output_root, base_dir))
+        return
+    if step_type == "olar_sweep":
+        outputs = cfg.get("outputs", {})
+        for key in ("evaluations_jsonl", "report_md"):
+            val = outputs.get(key)
+            if isinstance(val, str) and val:
+                _maybe_remove(_resolve_path_with_base(val, output_root, base_dir))
+        raw_dir = outputs.get("raw_dir")
+        if isinstance(raw_dir, str) and raw_dir:
+            _maybe_remove(_resolve_path_with_base(raw_dir, output_root, base_dir))
+        return
+    if step_type == "olar_sweep_shards":
+        configs = cfg.get("configs", [])
+        if isinstance(configs, list):
+            for cfg_path in configs:
+                if not isinstance(cfg_path, str):
+                    continue
+                shard_cfg = _load_json(_resolve_path_with_base(cfg_path, output_root, base_dir))
+                _reset_step_outputs("olar_sweep", shard_cfg, output_root, base_dir)
+        return
+    if step_type == "merge_evaluations":
+        for key in ("output", "stats_output"):
+            val = cfg.get(key)
+            if isinstance(val, str) and val:
+                _maybe_remove(_resolve_path_with_base(val, output_root, base_dir))
+        return
+    if step_type == "core_catalog_build":
+        outputs = cfg.get("outputs", {})
+        for key in ("catalog_dir", "entities_jsonl", "genome_layer_csv", "rollups_json", "explorer_report_md", "sweep_report_md"):
+            val = outputs.get(key)
+            if isinstance(val, str) and val:
+                _maybe_remove(_resolve_path_with_base(val, output_root, base_dir))
+        return
+    if step_type == "core_taxonomy":
+        outputs = cfg.get("outputs", {})
+        for key in ("genome_layer_out_csv", "taxonomy_rollups_json"):
+            val = outputs.get(key)
+            if isinstance(val, str) and val:
+                _maybe_remove(_resolve_path_with_base(val, output_root, base_dir))
+        return
+    if step_type == "core_promote_blocks":
+        for key in ("output_blocks_json", "dna_output_csv"):
+            val = cfg.get(key)
+            if isinstance(val, str) and val:
+                _maybe_remove(_resolve_path_with_base(val, output_root, base_dir))
+        return
+
+
+def _validate_paths(
+    paths: Iterable[str],
+    output_root: Optional[Path],
+    base_dir: Path,
+    label: str,
+    step_id: str,
+) -> None:
     missing = []
     for path_str in paths:
-        path = _resolve_path(path_str, output_root)
-        if not path.exists():
-            missing.append(str(path))
+        if "*" in path_str or "?" in path_str or "[" in path_str:
+            if Path(path_str).is_absolute():
+                matches = list(Path().glob(path_str))
+            else:
+                root = base_dir if path_str.startswith(".") else (output_root or Path())
+                matches = list(root.glob(path_str))
+            if not matches:
+                missing.append(str(_resolve_path_with_base(path_str, output_root, base_dir)))
+            continue
+        candidates = _candidate_paths(path_str, output_root, base_dir)
+        if not any(cand.exists() for cand in candidates):
+            missing.append(str(_resolve_path_with_base(path_str, output_root, base_dir)))
     if missing:
         raise RuntimeError(f"[olar_pipeline] step={step_id} missing {label}: {missing}")
 
@@ -214,6 +389,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="olar pipeline (V1).")
     parser.add_argument("--sequence", required=True, help="Path to run_sequence.json.")
     parser.add_argument("--output-root", required=False, help="Override output root.")
+    parser.add_argument(
+        "--RESET",
+        action="store_true",
+        dest="reset_outputs",
+        help="Remove pipeline outputs before running (uppercase only).",
+    )
     args = parser.parse_args()
 
     sequence_path = Path(args.sequence)
@@ -221,6 +402,33 @@ def main() -> None:
     output_root = Path(args.output_root) if args.output_root else None
 
     steps = cfg.get("steps", [])
+    print("[olar_pipeline] step summary:", flush=True)
+    for step in steps:
+        step_id = step.get("id", "unknown")
+        step_type = step.get("type", "unknown")
+        enabled = bool(step.get("enabled", True))
+        status = "DISABLED" if not enabled else "ENABLED"
+        print(f"[olar_pipeline] {step_id} ({step_type}) -> {status}", flush=True)
+    if args.reset_outputs:
+        for step in steps:
+            if not step.get("enabled", True):
+                continue
+            step_type = step.get("type")
+            if step_type not in (
+                "olar_explorer",
+                "olar_sweep",
+                "olar_sweep_shards",
+                "merge_evaluations",
+                "core_catalog_build",
+                "core_taxonomy",
+                "core_promote_blocks",
+            ):
+                continue
+            config_path = _resolve_path(step.get("config", ""), output_root)
+            if not config_path.exists():
+                continue
+            step_cfg = _load_json(config_path)
+            _reset_step_outputs(step_type, step_cfg, output_root, config_path.parent)
     for step in steps:
         if not step.get("enabled", True):
             continue
@@ -233,7 +441,7 @@ def main() -> None:
         step_cfg = _load_json(config_path)
         input_paths = _collect_step_inputs(step_type, step_cfg)
         if input_paths:
-            _validate_paths(input_paths, output_root, "inputs", step_id)
+            _validate_paths(input_paths, output_root, config_path.parent, "inputs", step_id)
 
         if step_type == "olar_explorer":
             cmd = [sys.executable, "-m", "olar.explorer", "--config", str(config_path)]
@@ -253,15 +461,27 @@ def main() -> None:
             _run_sweep_shards(config_path)
             output_paths = _collect_step_outputs(step_type, step_cfg)
             if output_paths:
-                _validate_paths(output_paths, output_root, "outputs", step_id)
+                _validate_paths(output_paths, output_root, config_path.parent, "outputs", step_id)
             continue
+        elif step_type == "merge_evaluations":
+            cmd = _build_merge_evaluations_cmd(config_path)
         else:
             raise RuntimeError(f"Unknown step type: {step_type}")
 
         _run_step(step_id, cmd)
+        if step_type == "olar_explorer" and step.get("halt_if_no_candidates"):
+            outputs = step_cfg.get("outputs", {})
+            attempts_path = outputs.get("attempts_jsonl")
+            entities_path = outputs.get("entities_candidates_jsonl")
+            if isinstance(attempts_path, str) and isinstance(entities_path, str):
+                attempts_count = _count_jsonl_rows(_resolve_path_with_base(attempts_path, output_root, config_path.parent))
+                entities_count = _count_jsonl_rows(_resolve_path_with_base(entities_path, output_root, config_path.parent))
+                if attempts_count == 0 and entities_count == 0:
+                    print("[olar_pipeline] no explorer candidates; halting pipeline", flush=True)
+                    break
         output_paths = _collect_step_outputs(step_type, step_cfg)
         if output_paths:
-            _validate_paths(output_paths, output_root, "outputs", step_id)
+            _validate_paths(output_paths, output_root, config_path.parent, "outputs", step_id)
 
 
 if __name__ == "__main__":

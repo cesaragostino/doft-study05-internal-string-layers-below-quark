@@ -1,0 +1,81 @@
+{
+  "schema_version": "core_taxonomy_config_v1",
+  "ola": 3,
+  "taxonomy_version": "ola3_taxonomy_v1",
+  "inputs": {
+    "genome_layer_csv": "data/processed/ola3/catalog/genome_layers_ola3.csv",
+    "entities_jsonl": "data/processed/ola3/catalog/entities.jsonl"
+  },
+  "thresholds": {
+    "kingdom_order": [
+      "ZOMBIE",
+      "LOCKED",
+      "SOFT_LOCK",
+      "DRIFT",
+      "CHAOTIC"
+    ],
+    "locked_requires_min_seeds": 2,
+    "locked_min_quality_lock": 0.95,
+    "locked_min_R_mean_lastW": 0.9,
+    "locked_max_phase_var_lastW": 0.02
+  },
+  "family_bins": {
+    "use_bins_for_id": true,
+    "notes": "Bins affect only stable grouping/hash; raw metrics are always stored.",
+    "bins": {
+      "R_mean_lastW_edges": [
+        0.7,
+        0.85,
+        0.95,
+        0.985
+      ],
+      "entropy_quality_edges": [
+        0.97,
+        0.985,
+        0.995
+      ],
+      "memory_score_k10_edges": [
+        0.0,
+        0.2,
+        0.5,
+        0.8
+      ],
+      "phase_var_lastW_edges": [
+        0.0005,
+        0.005,
+        0.02,
+        0.1
+      ]
+    }
+  },
+  "taxonomy_bins": {
+    "pe_edges": [
+      0.0,
+      0.05,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      0.95,
+      1.0
+    ],
+    "h_part_edges": [
+      0.0,
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9,
+      1.0
+    ]
+  },
+  "attractor_thresholds": {
+    "min_coherence": 0.4,
+    "hypersync_r": 0.9,
+    "min_complexity": 0.05
+  },
+  "outputs": {
+    "genome_layer_out_csv": "data/processed/ola3/catalog/genome_layers_ola3_taxonomy.csv",
+    "taxonomy_rollups_json": "data/processed/ola3/catalog/taxonomy_rollups.json"
+  }
+}

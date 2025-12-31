@@ -1,0 +1,18 @@
+{
+  "inputs": {
+    "attempts_jsonl": "../raw/attempts.jsonl",
+    "entities_candidates_jsonl": "../raw/entities_candidates.jsonl",
+    "evaluations_jsonl": "../sweep_merged/evaluations.jsonl",
+    "templates_json": "ola3_templates.json"
+  },
+  "ola": 3,
+  "outputs": {
+    "catalog_dir": "data/processed/ola3/catalog",
+    "entities_jsonl": "data/processed/ola3/catalog/entities.jsonl",
+    "genome_layer_csv": "data/processed/ola3/catalog/genome_layers_ola3.csv",
+    "rollups_json": "data/processed/ola3/catalog/rollups.json",
+    "explorer_report_md": "data/processed/ola3/explorer_report.md",
+    "sweep_report_md": "data/processed/ola3/sweep_report.md"
+  },
+  "schema_version": "core_catalog_build_v1"
+}

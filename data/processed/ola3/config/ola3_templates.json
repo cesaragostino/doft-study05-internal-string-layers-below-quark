@@ -1,0 +1,23 @@
+{
+  "schema_version": "olar_templates_v1",
+  "templates": [
+    {
+      "name": "cycle_12",
+      "nodes": 12,
+      "edges": [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10],[10,11],[11,0]],
+      "notes": "12-cycle. Very light topology (E=12). Good baseline for N12."
+    },
+    {
+      "name": "ladder_6",
+      "nodes": 12,
+      "edges": [[0,1],[1,2],[2,3],[3,4],[4,5],[6,7],[7,8],[8,9],[9,10],[10,11],[0,6],[1,7],[2,8],[3,9],[4,10],[5,11]],
+      "notes": "2x6 ladder. Light/medium topology (E=16)."
+    },
+    {
+      "name": "grid_3x4",
+      "nodes": 12,
+      "edges": [[0,1],[1,2],[2,3],[4,5],[5,6],[6,7],[8,9],[9,10],[10,11],[0,4],[4,8],[1,5],[5,9],[2,6],[6,10],[3,7],[7,11]],
+      "notes": "3x4 grid. Medium topology (E=17)."
+    }
+  ]
+}

@@ -108,6 +108,7 @@ def main() -> None:
     block_id_key = str(block_selection.get("block_id_key", "block_id"))
     dna_map = load_dna_catalog(inputs["dof_dna_catalog_csv"], id_key=block_id_key)
     pool = build_block_pool(blocks, dna_map, block_selection)
+    print(f"[explorer_cli] blocks_loaded={len(blocks)} pool_filtered={len(pool)}")
     templates = load_templates(inputs["templates_json"])
 
     seed_policy = runtime.get("seed_policy", {})
@@ -124,7 +125,11 @@ def main() -> None:
         entities_path, lambda r: (r.get("ids") or {}).get("entity_id") or r.get("entity_id")
     )
     existing_eval_ids = len(seen_eval_ids)
-    print(f"[explorer_cli] WARNING: dedupe skip [0 / {existing_eval_ids}] (this_run / total_existing)")
+    if existing_eval_ids:
+        print(
+            f"[explorer_cli] WARNING: dedupe skip [0 / {existing_eval_ids}]"
+            " (this_run / total_existing)"
+        )
 
     config_hash = f"sha256:{hash_file(cfg_path)}"
     blocks_hash = f"sha256:{hash_file(inputs['blocks_json'])}"

@@ -1,0 +1,42 @@
+{
+  "schema_version": "doft_run_sequence_v1",
+  "steps": [
+    {
+      "id": "ola3_explorer",
+      "type": "olar_explorer",
+      "config": "data/processed/ola3/config/ola3_explorer.json",
+      "halt_if_no_candidates": true,
+      "enabled": true
+    },
+    {
+      "id": "ola3_sweep_shards",
+      "type": "olar_sweep_shards",
+      "config": "data/processed/ola3/config/ola3_sweep_shards.json",
+      "enabled": true
+    },
+    {
+      "id": "ola3_merge_evaluations",
+      "type": "merge_evaluations",
+      "config": "data/processed/ola3/config/ola3_merge_evaluations.json",
+      "enabled": true
+    },
+    {
+      "id": "ola3_catalog_build",
+      "type": "core_catalog_build",
+      "config": "data/processed/ola3/config/ola3_catalog_build.json",
+      "enabled": true
+    },
+    {
+      "id": "ola3_taxonomy",
+      "type": "core_taxonomy",
+      "config": "data/processed/ola3/config/ola3_taxonomy.json",
+      "enabled": true
+    },
+    {
+      "id": "ola3_promote_blocks",
+      "type": "core_promote_blocks",
+      "config": "data/processed/ola3/config/ola3_promote_blocks.json",
+      "enabled": true
+    }
+  ]
+}

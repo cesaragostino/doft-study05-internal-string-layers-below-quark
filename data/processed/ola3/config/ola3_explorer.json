@@ -1,0 +1,101 @@
+{
+  "block_selection": {
+    "allowed_dof_grades": [
+      "A"
+    ],
+    "allowed_family_ids": [],
+    "block_id_key": "block_id",
+    "denied_family_ids": [],
+    "require_dna": true
+  },
+  "engine_defaults": {
+    "K_local": 0.45,
+    "T_ticks": 2000,
+    "W": 500,
+    "dt": 0.1,
+    "kappa_global": 0.3,
+    "sigma0": 0.3,
+    "sigma_tc": 60.0,
+    "sigma_theta_init": 0.5,
+    "tau_field": 120.0
+  },
+  "engine_variation": {
+    "bins": {
+      "K_local_edges": [
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ],
+      "kappa_edges": [
+        0.1,
+        0.2,
+        0.4,
+        0.6
+      ],
+      "sigma0_edges": [
+        0.1,
+        0.3,
+        0.5
+      ],
+      "sigma_tc_edges": [
+        40,
+        60,
+        90,
+        120
+      ],
+      "tau_field_edges": [
+        40,
+        80,
+        120,
+        160,
+        240
+      ]
+    },
+    "enabled": true,
+    "mode": "bin_sample"
+  },
+  "inputs": {
+    "blocks_json": "data/processed/ola2/promoted/simple_blocks.json",
+    "dof_dna_catalog_csv": "data/processed/ola2/promoted/dof_dna_catalog.csv",
+    "templates_json": "data/processed/ola3/config/ola3_templates.json"
+  },
+  "ola": 3,
+  "optional_outputs": [
+    "report_md"
+  ],
+  "outputs": {
+    "attempts_jsonl": "data/processed/ola3/raw/attempts.jsonl",
+    "entities_candidates_jsonl": "data/processed/ola3/raw/entities_candidates.jsonl",
+    "raw_dir": "data/processed/ola3/raw",
+    "report_md": "data/processed/ola3/explorer_report.md"
+  },
+  "output_policy": {
+    "emit_non_candidates": false
+  },
+  "progress": {
+    "flush_every_evals": 500,
+    "log_every_terms": 10
+  },
+  "schema_version": "olar_explorer_config_v1",
+  "seed_policy": {
+    "mode": "deterministic",
+    "salt": "explorer_v1",
+    "seeds_per_attempt": 1
+  },
+  "tagging_thresholds": {
+    "R_mean_lastW_min": 0.8,
+    "memory_score_k10_min": 0.0,
+    "phase_var_lastW_max": 0.05,
+    "quality_lock_min": 0.75,
+    "viability_mode": "hard_viable_soft_memory"
+  },
+  "targets": [
+    {
+      "budget_evals": 20000,
+      "name": "global_blind_search_full_topology",
+      "notes": "Minimal mixed-topology search.",
+      "templates": ["cycle_12","ladder_6","grid_3x4"]
+    }
+  ]
+}

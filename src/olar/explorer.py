@@ -57,7 +57,7 @@ def _extract_blocks(raw: Any) -> List[Dict[str, Any]]:
     return []
 
 
-def _load_dna_map(path: Path) -> Dict[str, Dict[str, str]]:
+def _load_dna_map(path: Path, id_key: str) -> Dict[str, Dict[str, str]]:
     if not path.exists():
         return {}
     import csv
@@ -66,7 +66,8 @@ def _load_dna_map(path: Path) -> Dict[str, Dict[str, str]]:
     with path.open() as f:
         reader = csv.DictReader(f)
         for row in reader:
-            rid = _norm_run_id(row.get("run_id"))
+            rid = row.get(id_key) if id_key in row else row.get("run_id")
+            rid = _norm_run_id(rid)
             dof_grade = str(row.get("dof_grade", "") or row.get("dna_grade", "")).upper()
             out[rid] = {
                 "dof_grade": dof_grade if dof_grade else "",
@@ -198,19 +199,21 @@ def main() -> None:
     if not blocks:
         raise RuntimeError(f"No blocks found in {blocks_path}")
 
-    dna_map = _load_dna_map(dna_path)
     block_selection = cfg.get("block_selection", {})
     require_dna = bool(block_selection.get("require_dna", True))
     allowed_grades = {str(g).upper() for g in (block_selection.get("allowed_dof_grades") or [])}
     allowed_family_ids = {str(f) for f in (block_selection.get("allowed_family_ids") or [])}
     denied_family_ids = {str(f) for f in (block_selection.get("denied_family_ids") or [])}
+    block_id_key = str(block_selection.get("block_id_key", "block_id"))
+    dna_map = _load_dna_map(dna_path, block_id_key)
 
     dropped_missing_dna = 0
     dropped_not_allowed_grade = 0
     dropped_not_allowed_family = 0
+    total_blocks = len(blocks)
     filtered_blocks: List[Dict[str, Any]] = []
     for b in blocks:
-        origin = b.get("origin_run_id")
+        origin = b.get(block_id_key) or b.get("origin_run_id")
         if origin is None or origin == "":
             if require_dna:
                 dropped_missing_dna += 1
@@ -241,10 +244,29 @@ def main() -> None:
             continue
         filtered_blocks.append(b)
     blocks = filtered_blocks
+    print(f"[olar_explorer] blocks_loaded={total_blocks} blocks_selected={len(blocks)}")
     if not blocks:
         raise RuntimeError("No blocks left after DOF filtering.")
 
     templates = load_templates(templates_path)
+    dof_grade_counts: Dict[str, int] = {}
+    for b in blocks:
+        grade = str(b.get("dof_grade", "")).upper() or "UNKNOWN"
+        dof_grade_counts[grade] = dof_grade_counts.get(grade, 0) + 1
+    print(f"[olar_explorer] dof_grade_counts={dof_grade_counts}")
+
+    template_nodes = [
+        int(t.get("nodes", 0))
+        for t in templates.values()
+        if isinstance(t, dict) and int(t.get("nodes", 0)) > 0
+    ]
+    min_nodes = min(template_nodes) if template_nodes else 0
+    max_nodes = max(template_nodes) if template_nodes else 0
+    print(f"[olar_explorer] template_nodes_min={min_nodes} template_nodes_max={max_nodes}")
+    if min_nodes and len(blocks) < min_nodes:
+        raise RuntimeError(
+            f"Not enough blocks for templates: have={len(blocks)} min_required={min_nodes}"
+        )
 
     engine_defaults = cfg.get("engine_defaults", {})
     defaults = {
@@ -288,11 +310,12 @@ def main() -> None:
         entities_path, lambda r: (r.get("ids") or {}).get("entity_id") or r.get("entity_id")
     )
     existing_eval_ids = len(seen_eval_ids)
-    print(
-        "[explorer_cli] WARNING: dedupe skip"
-        f" [0 / {existing_eval_ids}]"
-        " (this_run / total_existing)"
-    )
+    if existing_eval_ids:
+        print(
+            "[olar_explorer] WARNING: dedupe skip"
+            f" [0 / {existing_eval_ids}]"
+            " (this_run / total_existing)"
+        )
 
     targets = cfg.get("targets", [])
     eval_idx = 0

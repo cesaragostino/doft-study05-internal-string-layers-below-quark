@@ -1,165 +1,114 @@
 # Study05 – DOFT Internal Layers Simulator
 
-Lightweight simulator of coupled oscillators with internal layers (S1, S2, optional S3) and an effective layer Q, following `docs/STUDY05_code_header_and_structures.md`.
+This repo contains the Ola1/Ola2/Ola3 pipeline for recursive DOFT exploration and sweep, plus catalog/taxonomy/promotion for moving to the next Ola.
 
 ## Layout
-- Code: `src/study05/`
-- Input draws/parameters and catalogs: `data/raw/` (e.g., `data/raw/sm_universe.json`, `data/raw/layer_states.yaml`)
-- Engine/configs: `data/raw/engine_core3.json`, `data/raw/compound_templates.json`, `data/raw/wave1_blocks.json`, `data/raw/wave2_compounds.json`
-- Processed results and plots: `data/processed/`
-- Important digests/summaries: `data/processed/digest/`
+- Code: `src/`
+  - `src/olar/` pipeline + explorer + sweep
+  - `src/core/` catalog/taxonomy/promotion
+  - `src/ola1/` Ola1 export/assembly
+- Configs: `data/processed/olaN/config/`
+- Raw outputs: `data/processed/olaN/raw/`
+- Sweep shards: `data/processed/olaN/sweep_shards/`
+- Merge output: `data/processed/olaN/sweep_merged/`
+- Catalog outputs: `data/processed/olaN/catalog/`
+- Promoted blocks: `data/processed/olaN/promoted/`
+- Reports: `data/processed/olaN/explorer_report.md`, `data/processed/olaN/sweep_report.md`
 
 ## Requirements
-- Python 3.8+ with `numpy`; `matplotlib` is optional (only needed for plots).
+- Python 3.8+ (tested with 3.13)
+- `numpy`
 
-## Full workflow (generate data)
-From the repo root:
-```bash
-PYTHONPATH=src python3 -m study05.run_sweep \
-  --case CaseA_2layers \
-  --runs 50 \
-  --seed 123 \
-  --band-min 0.0 \
-  --band-max 5.0
+All commands are run from the repo root and use:
 ```
-This:
-- Stores parameters in `data/raw/<case>/global/study05_sweep_params.json`.
-- Stores results in `data/processed/<case>/global/study05_sweep_results.json`.
-- If you omit `--no-plots`, also writes plots to `data/processed/<case>/global/`.
-
-Useful variations:
-- `--case CaseB_3layers` to include S3.
-- `--case CaseB_debug` to force a small setup biased toward S2 dominance for debugging locks/mixing.
-- Tune `--n-*` for modes per layer (defaults: Q=3, S1=3, S2=2, S3=0) and `--max-complexity` (defaults to 10 per spec).
-- Narrow the band back to `--band-max 3.0` after exploring mode density or widen for exploratory runs.
-- Runs that blow up numerically/physically are flagged as unstable (not counted in spacing stats) to reflect non-confining configurations.
-
-Family reports (write to processed by default):
-```bash
-PYTHONPATH=src python3 -m study05.report_families \
-  --case CaseB_debug \
-  --families Nucleon_like Rho_like Pion_like \
-  --output data/processed/ola1/CaseB_debug/families
-```
-Reads per-family processed JSONs (under `data/processed/<case>/<family>/`) and writes comparative CSV/JSON + basic plots.
-
-S2-friendly region analysis (post-processing only):
-```bash
-PYTHONPATH=src python3 -m study05.analyze_s2_region \
-  --case CaseB_debug \
-  --proxies-csv reports/CaseB_debug_pipeline/CaseB_debug_all_runs_proxies.csv \
-  --first-energy-max 0.8 \
-  --spacing-mean-min 0.45 \
-  --nucleon-d-spacing-min 6.0 \
-  --output reports/CaseB_debug_pipeline/s2_region
-```
-Generates a summary JSON, splits in/out CSVs, and basic plots showing where S2 is more likely in proxy space.
-
-S2 threshold scan (post-processing only):
-```bash
-PYTHONPATH=src python3 -m study05.analyze_s2_scan \
-  --proxies-csv reports/CaseB_debug_combined/CaseB_debug_all_runs_proxies.csv \
-  --output reports/CaseB_debug_combined/s2_scan \
-  --first-grid 0.6 0.7 0.8 0.9 \
-  --spacing-grid 0.40 0.45 0.50 \
-  --dspacing-grid 5.5 6.0 6.5
-```
-Produces `s2_scan_results.csv` with p(S2) and z-scores for each box.
-
-Optional: logistic boundary fit
-```bash
-PYTHONPATH=src python3 -m study05.fit_s2_logit \
-  --proxies-csv reports/CaseB_debug_combined/CaseB_debug_all_runs_proxies.csv \
-  --output reports/CaseB_debug_combined/s2_logit
+PYTHONPATH=src
 ```
 
-Ola1 (SM matching and block promotion):
-1) Sweep with extended metrics (optional output root):
-```bash
-PYTHONPATH=src python3 -m study05.run_sweep \
-  --case Core3L_Hadron \
-  --runs 2000 \
-  --seed 123 \
-  --band-min 0.1 \
-  --band-max 3.0 \
-  --layer-states data/raw/layer_states.yaml \
-  --engine-config data/raw/engine_core3.json \
-  --partial-flush-every 2 \   # guarda runs en partial/runs_partial.jsonl cada 2 corridas
-  --resume \                  # continua desde el parcial si existe
-  --stop-file /tmp/stop_sweep \# crea este archivo para frenar limpio; el script lo borra al salir
-  --no-plots
-```
-Notes: `layer_states.yaml` now uses relative thresholds (`T_Q_rel_min`, `T_S1_rel_min`, `T_S2_rel_min`) applied to the structural mass share of each layer; adjust there if you need to relax or tighten tiering.
+## Pipeline (full)
+These run the entire sequence defined in the run_sequence file, honoring the `enabled` flags inside.
 
-2) Build proxies CSV (includes lock_quality, structure_tier, s2_state, s3_state):
-```bash
-PYTHONPATH=src python3 -m study05.analyze_proxies \
-  --case Core3L_Hadron \
-  --sm-universe data/raw/sm_universe.json \
-  --output data/processed/ola1
+Ola2:
 ```
-Outputs land in `data/processed/Core3L_Hadron/combined/`.
-
-3) Match against SM catalog (pion/rho/proton):
-```bash
-PYTHONPATH=src python3 -m study06.match_sm_ola1 \
-  --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
-  --sm-universe data/raw/sm_universe.json \
-  --output data/processed/ola1 \
-  --digest data/processed/digest/ola1
-```
-Writes full match table to processed and a digest copy of `best_match_per_run.csv` under `data/processed/digest/ola1/`.
-
-4) Promote simple blocks:
-```bash
-PYTHONPATH=src python3 -m study06.promote_simple_blocks \
-  --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
-  --zoo-matches-csv data/processed/ola1/zoo_matches.csv \
-  --sm-universe data/raw/sm_universe.json \
-  --output data/processed/ola1/simple_blocks.json \
-  --digest data/processed/digest/blocks
-```
-Promoted blocks are stored in processed and copied to `data/processed/digest/blocks/simple_blocks.json` for quick inspection.
-Nota: el límite por defecto de bloques por partícula en `promote_simple_blocks` es 5000 (ajustable por flag).
-
-6) Reporte rápido de Ola1:
-```bash
-PYTHONPATH=src python3 scripts/ola1_status_report.py \
-  --case Core3L_Hadron \
-  --processed-dir data/processed/ola1 \
-  --output data/processed/ola1/Core3L_Hadron_ola1_report.md
-```
-Genera un markdown con semáforo de salud, inventario, radar de candidatos y pareto de rechazos.
-
-5) Catalog complex cores (strong S2, level3):
-```bash
-PYTHONPATH=src python3 -m study06.catalog_complex_cores \
-  --proxies-csv data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv \
-  --sm-universe data/raw/sm_universe.json \
-  --output data/processed/ola1/complex_cores.json
+PYTHONPATH=src python3 -m olar.pipeline --sequence data/processed/ola2/config/run_sequence_ola2.json
 ```
 
-Ola2 (compounds + viability):
-```bash
-# build compounds with physical stitching of blocks
-PYTHONPATH=src python3 -m study06.run_ola2_compounds \
-  --blocks-json data/processed/ola1/simple_blocks.json \
-  --wave2-config data/raw/wave2_compounds.json \
-  --sm-universe data/raw/sm_universe.json \
-  --templates-json data/raw/compound_templates.json \
-  --output-root data/processed/ola2
-
-# label viability (example for proton)
-PYTHONPATH=src python3 -m study06.label_ola2_viability \
-  --compounds-csv data/processed/ola2/compounds_proton.csv \
-  --output data/processed/ola1/ola2/viability_proton.csv \
-  --d-yes 0.25 \
-  --d-possible 0.45 \
-  --min-structure-tier level2 \
-  --allowed-s2-states latent structural
+Ola3:
+```
+PYTHONPATH=src python3 -m olar.pipeline --sequence data/processed/ola3/config/run_sequence_ola3.json
 ```
 
-Pipeline runner (uses `data/raw/sequence.json`):
-```bash
-PYTHONPATH=src python3 -m study06.run_pipeline --sequence data/raw/sequence.json
+### Reset (start from zero outputs)
+Use `--RESET` to delete all outputs generated by the pipeline for the Ola in the sequence (explorer, sweep/shards, merge, catalog, taxonomy, promote, reports).
+
 ```
+PYTHONPATH=src python3 -m olar.pipeline \
+  --sequence data/processed/ola3/config/run_sequence_ola3.json \
+  --RESET
+```
+
+## Pipeline (partial steps)
+You can run steps individually when needed.
+
+Explorer only:
+```
+PYTHONPATH=src python3 -m olar.explorer --config data/processed/ola3/config/ola3_explorer.json
+```
+
+Sweep shards only (single shard):
+```
+PYTHONPATH=src python3 -m olar.sweep --config data/processed/ola3/config/shards/ola3_sweep_shard_00.json
+```
+
+Merge shards:
+```
+PYTHONPATH=src python3 scripts/merge_evaluations.py \
+  --inputs data/processed/ola3/sweep_shards/shard_*/raw/evaluations.jsonl \
+  --output data/processed/ola3/sweep_merged/evaluations.jsonl \
+  --stats-output data/processed/ola3/sweep_merged/merge_stats.json
+```
+
+Catalog + taxonomy + promote (after merge):
+```
+PYTHONPATH=src python3 -m core.catalog.builder \
+  --config data/processed/ola3/config/ola3_catalog_build.json
+
+PYTHONPATH=src python3 -m core.taxonomy.builder \
+  --config data/processed/ola3/config/ola3_taxonomy.json
+
+PYTHONPATH=src python3 -m core.promotion.blocks_from_ola \
+  --ola-from 3 --ola-to 4 \
+  --run-inputs data/processed/ola3/config/ola3_promote_blocks.json
+```
+
+## Reports
+Explorer report and sweep report are generated by the catalog build step:
+- `data/processed/olaN/explorer_report.md`
+- `data/processed/olaN/sweep_report.md`
+
+Regenerate reports for Ola2:
+```
+PYTHONPATH=src python3 -m core.catalog.builder \
+  --config data/processed/ola2/config/ola2_catalog_build.json
+```
+
+## Tools
+Monitor sweep progress:
+```
+PYTHONPATH=src python3 scripts/monitor_sweep_progress.py \
+  --shards-root data/processed/ola3/sweep_shards
+```
+
+Merge evaluations (manual):
+```
+PYTHONPATH=src python3 scripts/merge_evaluations.py \
+  --inputs data/processed/ola3/sweep_shards/shard_*/raw/evaluations.jsonl \
+  --output data/processed/ola3/sweep_merged/evaluations.jsonl \
+  --stats-output data/processed/ola3/sweep_merged/merge_stats.json
+```
+
+## Notes
+- The pipeline prints a step summary at start showing ENABLED/DISABLED steps.
+- Explorer will stop early if there are not enough blocks for the selected templates.
+- For Ola3, inputs are the promoted outputs from Ola2:
+  - `data/processed/ola2/promoted/simple_blocks.json`
+  - `data/processed/ola2/promoted/dof_dna_catalog.csv`
