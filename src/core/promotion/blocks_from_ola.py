@@ -197,6 +197,12 @@ def promote_blocks(
             raise ValueError(f"Entity {eid} block_ids length mismatch with canonical_node_order.")
 
         nodes, omega_refs = _build_nodes(block_ids, blocks_by_id, require_node_theta_internal)
+        if not nodes:
+            raise ValueError(f"Entity {eid} missing nodes for promotion.")
+        node0_theta = nodes[0].get("theta_internal")
+        if not isinstance(node0_theta, dict):
+            raise ValueError(f"Entity {eid} missing node0 theta_internal.")
+        validate_theta_internal(node0_theta)
         omega_ref_proxy = _as_float(genome_row.get("omega_ref_proxy"))
         if omega_ref_proxy is None:
             omega_ref_proxy = sum(omega_refs) / len(omega_refs) if omega_refs else None
@@ -221,6 +227,20 @@ def promote_blocks(
         if not isinstance(genes_min, dict):
             genes_min = {}
 
+        theta_internal_network = {
+            "schema_version": "theta_internal_network_v1",
+            "template_name": entity.get("template_name"),
+            "edges": edges,
+            "canonical_node_order": canonical,
+            "nodes": nodes,
+            "assignment": assignment,
+            "parent_ids": entity.get("parent_ids") or [],
+            "provenance": {
+                "entities_hash": entities_hash,
+                "genome_hash": genome_hash,
+                "blocks_prev_hash": blocks_prev_hash,
+            },
+        }
         promoted.append(
             {
                 "schema_version": "olar_block_v1",
@@ -232,11 +252,8 @@ def promote_blocks(
                 "dof_family_id": str(dof_family_id),
                 "dof_family_friendly": str(family_friendly),
                 "genes_min": genes_min,
-                "theta_internal": {
-                    "template_name": entity.get("template_name"),
-                    "edges": edges,
-                    "nodes": nodes,
-                },
+                "theta_internal": node0_theta,
+                "theta_internal_network": theta_internal_network,
                 "provenance": {
                     "source_entity_id": eid,
                     "source_ola": ola_from,
@@ -253,6 +270,10 @@ def promote_blocks(
                     },
                 },
             }
+        )
+        print(
+            "[core_promotion] block_id="
+            f"{eid} network_nodes={len(nodes)} edges={len(edges)} theta_internal_source=node0"
         )
         dna_rows.append(
             {

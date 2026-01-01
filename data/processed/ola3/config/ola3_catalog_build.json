@@ -3,7 +3,8 @@
     "attempts_jsonl": "../raw/attempts.jsonl",
     "entities_candidates_jsonl": "../raw/entities_candidates.jsonl",
     "evaluations_jsonl": "../sweep_merged/evaluations.jsonl",
-    "templates_json": "ola3_templates.json"
+    "templates_json": "ola3_templates.json",
+    "promote_config": "ola3_promote_blocks.json"
   },
   "ola": 3,
   "outputs": {

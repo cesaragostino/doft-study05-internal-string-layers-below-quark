@@ -1,0 +1,104 @@
+{
+  "attempts_total": 1000,
+  "candidates_total": 21,
+  "sweep_attempted_total": 21,
+  "viables_total": 21,
+  "sweep_evals_total": 504,
+  "attempts_total_by_template": [
+    {
+      "template_name": "dimer_super",
+      "N": 2,
+      "attempts_total": 485
+    },
+    {
+      "template_name": "triangle_super",
+      "N": 3,
+      "attempts_total": 515
+    }
+  ],
+  "candidates_total_by_template": [
+    {
+      "template_name": "dimer_super",
+      "N": 2,
+      "candidates_total": 13
+    },
+    {
+      "template_name": "triangle_super",
+      "N": 3,
+      "candidates_total": 8
+    }
+  ],
+  "sweep_evals_total_by_template": [
+    {
+      "template_name": "dimer_super",
+      "N": 2,
+      "sweep_evals_total": 312
+    },
+    {
+      "template_name": "triangle_super",
+      "N": 3,
+      "sweep_evals_total": 192
+    }
+  ],
+  "sweep_passed_total_by_template": [
+    {
+      "template_name": "dimer_super",
+      "N": 2,
+      "sweep_passed_total": 13
+    },
+    {
+      "template_name": "triangle_super",
+      "N": 3,
+      "sweep_passed_total": 8
+    }
+  ],
+  "by_template": [
+    {
+      "template_name": "dimer_super",
+      "N": 2,
+      "attempts_total": 485,
+      "candidates_total": 13,
+      "sweep_evals_total": 312,
+      "sweep_attempted_total": 13,
+      "viables_total": 13,
+      "candidate_rate": 0.026804123711340205,
+      "sweep_attempt_rate": 1.0,
+      "viable_rate_technical": 0.026804123711340205,
+      "viable_rate": 1.0,
+      "viable_rate_technical_ci_wilson": {
+        "center": 0.03052277056617113,
+        "low": 0.01573005081901778,
+        "high": 0.04531549031332448
+      },
+      "viable_rate_ci_wilson": {
+        "center": 0.8859490784723542,
+        "low": 0.7718981569447083,
+        "high": 1.0
+      }
+    },
+    {
+      "template_name": "triangle_super",
+      "N": 3,
+      "attempts_total": 515,
+      "candidates_total": 8,
+      "sweep_evals_total": 192,
+      "sweep_attempted_total": 8,
+      "viables_total": 8,
+      "candidate_rate": 0.015533980582524271,
+      "sweep_attempt_rate": 1.0,
+      "viable_rate_technical": 0.015533980582524271,
+      "viable_rate": 1.0,
+      "viable_rate_technical_ci_wilson": {
+        "center": 0.019121057370881593,
+        "low": 0.007891767715348476,
+        "high": 0.03035034702641471
+      },
+      "viable_rate_ci_wilson": {
+        "center": 0.8377921902445615,
+        "low": 0.6755843804891231,
+        "high": 1.0
+      }
+    }
+  ],
+  "templates_hash": "data/processed/ola3/config/ola3_templates.json"
+}

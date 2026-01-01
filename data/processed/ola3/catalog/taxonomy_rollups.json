@@ -1,0 +1,87 @@
+{
+  "entities_total": 21,
+  "entities_unmeasured": 0,
+  "entities_measured": 21,
+  "entities_viable_taxonomic": 21,
+  "entities_nonviable": 0,
+  "counts_by_template_name": {
+    "dimer_super": {
+      "total": 13,
+      "measured": 13,
+      "unmeasured": 0,
+      "viable_taxonomic": 13,
+      "nonviable": 0
+    },
+    "triangle_super": {
+      "total": 8,
+      "measured": 8,
+      "unmeasured": 0,
+      "viable_taxonomic": 8,
+      "nonviable": 0
+    }
+  },
+  "counts_by_attractor_class": {
+    "FUNCTIONAL_LOCK": 21
+  },
+  "top_confirmed_families": [
+    {
+      "confirmed_family_id": "0ef8ccca41684a91",
+      "count": 10
+    },
+    {
+      "confirmed_family_id": "80b9c0bd50fdcf94",
+      "count": 7
+    },
+    {
+      "confirmed_family_id": "54e455aedf98e89a",
+      "count": 2
+    },
+    {
+      "confirmed_family_id": "0ebfbadd36ddd838",
+      "count": 1
+    },
+    {
+      "confirmed_family_id": "7cd52e032df4eda9",
+      "count": 1
+    }
+  ],
+  "viable_rate_taxonomic": 1.0,
+  "measured_rate": 1.0,
+  "counts_by_kingdom": {
+    "UNKNOWN": 21
+  },
+  "by_template": [
+    {
+      "template_name": "dimer_super",
+      "N": 2,
+      "total": 13,
+      "counts_by_dof_grade": {
+        "": 13
+      },
+      "counts_by_attractor_class": {
+        "FUNCTIONAL_LOCK": 13
+      },
+      "attempted_sweep_total": 13,
+      "useful_total": 13,
+      "trivial_total": 0,
+      "useful_rate": 1.0,
+      "trivial_rate": 0.0
+    },
+    {
+      "template_name": "triangle_super",
+      "N": 3,
+      "total": 8,
+      "counts_by_dof_grade": {
+        "": 8
+      },
+      "counts_by_attractor_class": {
+        "FUNCTIONAL_LOCK": 8
+      },
+      "attempted_sweep_total": 8,
+      "useful_total": 8,
+      "trivial_total": 0,
+      "useful_rate": 1.0,
+      "trivial_rate": 0.0
+    }
+  ]
+}

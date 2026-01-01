@@ -7,9 +7,9 @@
     "dof_dna_catalog_csv": "data/processed/ola2/promoted/dof_dna_catalog.csv"
   },
   "outputs": {
-    "evaluations_jsonl": "data/processed/ola3/raw/evaluations.jsonl",
-    "raw_dir": "data/processed/ola3/raw",
-    "report_md": "data/processed/ola3/sweep_report.md"
+    "evaluations_jsonl": "raw/evaluations.jsonl",
+    "raw_dir": "raw",
+    "report_md": "sweep_report.md"
   },
   "optional_outputs": [
     "report_md"
@@ -86,5 +86,8 @@
   "neighborhood": {
     "max_neighbor_bins": 3,
     "mode": "param_bin_neighbors"
+  },
+  "candidate_shard": {
+    "enabled": false
   }
 }

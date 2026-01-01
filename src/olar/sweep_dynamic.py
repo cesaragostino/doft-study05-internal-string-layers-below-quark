@@ -27,6 +27,10 @@ def _resolve_path(path_str: str, base_dir: Path) -> Path:
     path = Path(path_str)
     if path.is_absolute():
         return path
+    if path_str.startswith("."):
+        return base_dir / path
+    if path_str.startswith(("data/", "src/", "docs/", "scripts/")):
+        return path
     return base_dir / path
 
 
@@ -74,7 +78,10 @@ def main() -> None:
     base_cfg = _load_json(sweep_cfg_path)
     base_cfg["candidate_shard"] = {"enabled": False}
     inputs = base_cfg.get("inputs", {})
-    entities_path = Path(inputs.get("entities_candidates_jsonl", "data/processed/ola2/raw/entities_candidates.jsonl"))
+    entities_path = _resolve_path(
+        str(inputs.get("entities_candidates_jsonl", "data/processed/ola2/raw/entities_candidates.jsonl")),
+        sweep_cfg_path.parent,
+    )
     if not entities_path.exists():
         raise RuntimeError(f"No entities found in {entities_path}")
 
@@ -172,7 +179,7 @@ def main() -> None:
 
     if failures:
         sample = ", ".join(
-            [f\"{f['entity_id']}@{f['worker_id']} (code={f['exit_code']})\" for f in failures[:5]]
+            [f"{f['entity_id']}@{f['worker_id']} (code={f['exit_code']})" for f in failures[:5]]
         )
         raise RuntimeError(f"olar_sweep_dynamic failures: {sample}")
 

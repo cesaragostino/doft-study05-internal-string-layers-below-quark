@@ -10,6 +10,211 @@
     "dof_family_friendly": "87d234393a2070c4",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 6.455579899982404,
+          "mass": 1.0,
+          "gamma": 0.024120035838849866
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 6.3590008196121826,
+          "mass": 1.0,
+          "gamma": 0.017183935680195647
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.119613333820902,
+          "mass": 1.0,
+          "gamma": 0.016079911834929034
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 24.240520265022734,
+          "mass": 1.0,
+          "gamma": 1.973180057914306
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 25.426962288435014,
+          "mass": 1.0,
+          "gamma": 0.45037180796428283
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 86.15982831381412,
+          "mass": 1.0,
+          "gamma": 1.638526676842752
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 80.00026832426157,
+          "mass": 1.0,
+          "gamma": 2.5174565007856486
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 89.87825843331699,
+          "mass": 1.0,
+          "gamma": 8.254043687200062
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 80.7712723157274,
+          "mass": 1.0,
+          "gamma": 3.2104459867400004
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 80.5203785377167,
+          "mass": 1.0,
+          "gamma": 6.3506005841519
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.25897397146399453
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.12991748772096087
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 9.884134164970938
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 56.41755410879713
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 88.83074894722813
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 66.08417485371939
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 137.14603824427377
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 23.514240851405425,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [],
+              "amps0": []
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [],
+              "amps0": []
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 274.6775656595903,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.01619347966660675
+              ],
+              "amps0": [
+                0.11124828297804615
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.3674314688268903,
+                0.2968298948793591
+              ],
+              "amps0": [
+                0.6851720950029369,
+                0.5469563254614863
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "decagon_ring",
       "edges": [
         [
@@ -52,6 +257,18 @@
           7,
           8
         ]
+      ],
+      "canonical_node_order": [
+        "108",
+        "119",
+        "134",
+        "159",
+        "182",
+        "198",
+        "246",
+        "27",
+        "271",
+        "75"
       ],
       "nodes": [
         {
@@ -2172,7 +2389,39 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "198",
+          "134",
+          "75",
+          "108",
+          "119",
+          "182",
+          "159",
+          "246",
+          "271",
+          "27"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "198",
+        "134",
+        "75",
+        "108",
+        "119",
+        "182",
+        "159",
+        "246",
+        "271",
+        "27"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "53b11fc9d3008f199b119dd8f9bb5b95f1f97895818ec9e899bf6913a172a722",
@@ -2182,8 +2431,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:45Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
@@ -2201,6 +2450,221 @@
     "dof_family_friendly": "4ace6341b4d7c338",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 6.119648123463694,
+          "mass": 1.0,
+          "gamma": 0.05608007423912163
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 6.310033714341949,
+          "mass": 1.0,
+          "gamma": 0.02789339845568432
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.384284414050404,
+          "mass": 1.0,
+          "gamma": 0.0033403468007387983
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 50.196654423253406,
+          "mass": 1.0,
+          "gamma": 3.9145796781912274
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 42.93282549926619,
+          "mass": 1.0,
+          "gamma": 0.7756695724477404
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 257.75077933606525,
+          "mass": 1.0,
+          "gamma": 21.70173221149946
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 235.33852710354185,
+          "mass": 1.0,
+          "gamma": 19.87968203930318
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 250.49648372823538,
+          "mass": 1.0,
+          "gamma": 1.7826696216460018
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 266.6565383691417,
+          "mass": 1.0,
+          "gamma": 6.18583389987538
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 250.8157763262366,
+          "mass": 1.0,
+          "gamma": 5.176163402275071
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.25121783567384076
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.13164114139798544
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 17.397284925790306
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 1044.6676650840777
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 556.8816027899447
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 976.594274449544
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 1058.3339560136478
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 46.68730636875284,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.014670538486051038
+              ],
+              "amps0": [
+                0.8185808518667628
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.5406519046017577,
+                0.1517742493277214
+              ],
+              "amps0": [
+                0.3410746704580604,
+                0.6517009911811104
+              ]
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 1745.262027074259,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.07696580114792241,
+                0.03581282116576703
+              ],
+              "amps0": [
+                0.5778718239255698,
+                0.8756146472967359
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.0527245381106806
+              ],
+              "amps0": [
+                0.17171281538366706
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "bipartite_3_6",
       "edges": [
         [
@@ -2275,6 +2739,17 @@
           7,
           8
         ]
+      ],
+      "canonical_node_order": [
+        "198",
+        "207",
+        "21",
+        "233",
+        "295",
+        "34",
+        "50",
+        "90",
+        "97"
       ],
       "nodes": [
         {
@@ -4179,7 +4654,37 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "207",
+          "233",
+          "90",
+          "198",
+          "50",
+          "295",
+          "97",
+          "34",
+          "21"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "207",
+        "233",
+        "90",
+        "198",
+        "50",
+        "295",
+        "97",
+        "34",
+        "21"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "64fea02f5eadd417e2266fab14bda7b46097769bb610292ad6de1d50a0cc3a8f",
@@ -4189,8 +4694,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:46Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
@@ -4208,6 +4713,217 @@
     "dof_family_friendly": "4ace6341b4d7c338",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 6.389990930497638,
+          "mass": 1.0,
+          "gamma": 0.046516568386154505
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 6.113407409254576,
+          "mass": 1.0,
+          "gamma": 0.0407188258244811
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.160666700752823,
+          "mass": 1.0,
+          "gamma": 0.05144313218448539
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 37.55857853534954,
+          "mass": 1.0,
+          "gamma": 1.625986816600757
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 34.22957757717964,
+          "mass": 1.0,
+          "gamma": 0.32457838919375837
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 146.66855438621033,
+          "mass": 1.0,
+          "gamma": 3.9985631872016576
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 142.81292883000404,
+          "mass": 1.0,
+          "gamma": 12.97004646182837
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 146.85186169973147,
+          "mass": 1.0,
+          "gamma": 10.475293323486824
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 138.37451336370862,
+          "mass": 1.0,
+          "gamma": 12.172571918765632
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 133.1407856674114,
+          "mass": 1.0,
+          "gamma": 8.105771770110564
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.19754578719790516
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.17357965989808596
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 21.627084413530422
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 287.63899375224116
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 400.5292629796889
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 227.8125057082362
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 134.45343398773056
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 23.173295791983833,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.6095260538558384
+              ],
+              "amps0": [
+                0.4425089717242987
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.852981813353208
+              ],
+              "amps0": [
+                0.5648437224350094
+              ]
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 1038.0394316043173,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.19163565604934774
+              ],
+              "amps0": [
+                0.9070749201280554
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.14768338410797874
+              ],
+              "amps0": [
+                0.7182341659526781
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "bipartite_3_6",
       "edges": [
         [
@@ -4282,6 +4998,17 @@
           6,
           8
         ]
+      ],
+      "canonical_node_order": [
+        "131",
+        "159",
+        "192",
+        "213",
+        "223",
+        "23",
+        "234",
+        "37",
+        "87"
       ],
       "nodes": [
         {
@@ -6220,7 +6947,37 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "223",
+          "23",
+          "234",
+          "192",
+          "159",
+          "131",
+          "213",
+          "37",
+          "87"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "223",
+        "23",
+        "234",
+        "192",
+        "159",
+        "131",
+        "213",
+        "37",
+        "87"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "6d5d238525aaa1c00a08e0d65794c32375abd6279f600dd7fcc5cf719a480808",
@@ -6230,8 +6987,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:46Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
@@ -6249,6 +7006,215 @@
     "dof_family_friendly": "63069dd2a936b1ed",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 6.582609930399192,
+          "mass": 1.0,
+          "gamma": 0.05422397257006389
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 5.979865116121349,
+          "mass": 1.0,
+          "gamma": 0.014027159387220519
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.026852469512232,
+          "mass": 1.0,
+          "gamma": 0.04394455777986073
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 65.52179158639083,
+          "mass": 1.0,
+          "gamma": 0.5491261645796567
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 62.19358679856406,
+          "mass": 1.0,
+          "gamma": 0.9196302609080972
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 198.2102443944025,
+          "mass": 1.0,
+          "gamma": 9.744147448055895
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 184.6695685448956,
+          "mass": 1.0,
+          "gamma": 1.3152092314179704
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 183.73741250683432,
+          "mass": 1.0,
+          "gamma": 12.382385727801935
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 195.12545791867228,
+          "mass": 1.0,
+          "gamma": 16.37920683276612
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 204.69759945545294,
+          "mass": 1.0,
+          "gamma": 6.372333034972406
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.16767689146373416
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.10843028181529059
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 35.45482216306206
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 517.6326288332978
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 479.30368464213694
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 653.9763898677343
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 696.674373644008
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 110.74309330621222,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.10154224090879559
+              ],
+              "amps0": [
+                0.1463442674612843
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.2737157520831176,
+                0.10228153976314942
+              ],
+              "amps0": [
+                0.13871570736332844,
+                0.5968559924872979
+              ]
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 1541.2807145146987,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.04264741671102808
+              ],
+              "amps0": [
+                0.18627416435889627
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [],
+              "amps0": []
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "ladder_5",
       "edges": [
         [
@@ -6303,6 +7269,18 @@
           6,
           8
         ]
+      ],
+      "canonical_node_order": [
+        "124",
+        "185",
+        "188",
+        "234",
+        "27",
+        "291",
+        "34",
+        "82",
+        "87",
+        "91"
       ],
       "nodes": [
         {
@@ -8439,7 +9417,39 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "27",
+          "82",
+          "234",
+          "291",
+          "124",
+          "185",
+          "34",
+          "87",
+          "188",
+          "91"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "27",
+        "82",
+        "234",
+        "291",
+        "124",
+        "185",
+        "34",
+        "87",
+        "188",
+        "91"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "6e14c93b16e0975294414a1940422d85eb37b5f102e0c120bf0b10e4e0bf848c",
@@ -8449,8 +9459,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:46Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
@@ -8468,6 +9478,223 @@
     "dof_family_friendly": "5099c48875251515",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 5.985534322933436,
+          "mass": 1.0,
+          "gamma": 0.010118063621586489
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 6.546902056283344,
+          "mass": 1.0,
+          "gamma": 0.02579712730887634
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.350147505619032,
+          "mass": 1.0,
+          "gamma": 0.0033013179858419712
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 33.47135309555307,
+          "mass": 1.0,
+          "gamma": 1.1788127908211883
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 31.355656162597416,
+          "mass": 1.0,
+          "gamma": 2.360637510139282
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 92.94887376354048,
+          "mass": 1.0,
+          "gamma": 5.026772887345239
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 81.49476682348886,
+          "mass": 1.0,
+          "gamma": 0.9177265136066273
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 81.4407053959051,
+          "mass": 1.0,
+          "gamma": 6.265336215013105
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 84.97802118977688,
+          "mass": 1.0,
+          "gamma": 2.38533692977427
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 84.52147020820888,
+          "mass": 1.0,
+          "gamma": 1.900735204386214
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.27914036221471306
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.2225459241098232
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 11.188973526761037
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 84.86222283542735
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 99.97999218052043
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 62.45239764758709
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 85.09969051845405
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 9.920278080930084,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.38077425049912716
+              ],
+              "amps0": [
+                0.8338621586654023
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.4326551942713404,
+                0.6012711795994047
+              ],
+              "amps0": [
+                0.5363494323642489,
+                0.9800935629957045
+              ]
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 327.19842079873575,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.21001269833335282,
+                0.34452251870544187
+              ],
+              "amps0": [
+                0.21596191464074974,
+                0.5627813610405917
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.24183877534469952,
+                0.27862699803498675
+              ],
+              "amps0": [
+                0.7648663161833544,
+                0.8887208938798474
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "bipartite_3_6",
       "edges": [
         [
@@ -8542,6 +9769,17 @@
           7,
           8
         ]
+      ],
+      "canonical_node_order": [
+        "197",
+        "226",
+        "26",
+        "269",
+        "291",
+        "294",
+        "34",
+        "37",
+        "64"
       ],
       "nodes": [
         {
@@ -10460,7 +11698,37 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "269",
+          "37",
+          "34",
+          "226",
+          "197",
+          "64",
+          "26",
+          "294",
+          "291"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "269",
+        "37",
+        "34",
+        "226",
+        "197",
+        "64",
+        "26",
+        "294",
+        "291"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "76aaa18cb7959b1a683b6480949898d7500651760ec87ee96d770f48d9e29d04",
@@ -10470,8 +11738,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:46Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
@@ -10489,6 +11757,213 @@
     "dof_family_friendly": "5099c48875251515",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 6.337936430278826,
+          "mass": 1.0,
+          "gamma": 0.05344562070030541
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 5.998417459767569,
+          "mass": 1.0,
+          "gamma": 0.04326289334733338
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.21798619993304,
+          "mass": 1.0,
+          "gamma": 0.01661519335194372
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 21.180872664740786,
+          "mass": 1.0,
+          "gamma": 1.646118573835648
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 24.429991255030526,
+          "mass": 1.0,
+          "gamma": 0.5331718759621925
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 49.83142602911383,
+          "mass": 1.0,
+          "gamma": 3.030062359263539
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 52.55989812065355,
+          "mass": 1.0,
+          "gamma": 3.191020705398176
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 54.53259756708316,
+          "mass": 1.0,
+          "gamma": 4.3296957601326245
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 50.756641731237806,
+          "mass": 1.0,
+          "gamma": 5.3570771281305944
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 50.93812335794148,
+          "mass": 1.0,
+          "gamma": 2.962709368143531
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.24797047312317116
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.20025065078449408
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 5.7518996170681564
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 44.06393645268811
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 45.17394094766417
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 29.246162331176116
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 38.508922684145205
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 11.310217944983975,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [],
+              "amps0": []
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.587110295090566
+              ],
+              "amps0": [
+                0.23389058545897515
+              ]
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 74.600881609098,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.20725865262882437
+              ],
+              "amps0": [
+                0.5038229213283857
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.3486524373038739
+              ],
+              "amps0": [
+                0.5363603407367076
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "bipartite_3_6",
       "edges": [
         [
@@ -10563,6 +12038,17 @@
           7,
           8
         ]
+      ],
+      "canonical_node_order": [
+        "144",
+        "152",
+        "184",
+        "23",
+        "246",
+        "29",
+        "290",
+        "6",
+        "75"
       ],
       "nodes": [
         {
@@ -12447,7 +13933,37 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "246",
+          "23",
+          "75",
+          "290",
+          "184",
+          "6",
+          "29",
+          "144",
+          "152"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "246",
+        "23",
+        "75",
+        "290",
+        "184",
+        "6",
+        "29",
+        "144",
+        "152"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "b58a9ed07a8d130207303eb432fe466bc35a9eb400e3630c0e36bdcfcc4180d2",
@@ -12457,8 +13973,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:46Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
@@ -12476,6 +13992,207 @@
     "dof_family_friendly": "aaaf62c0cd6baa99",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 6.539791440115883,
+          "mass": 1.0,
+          "gamma": 0.05125974768168395
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 6.03726776766415,
+          "mass": 1.0,
+          "gamma": 0.026660720590957792
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.396826473366194,
+          "mass": 1.0,
+          "gamma": 0.017322874730032942
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 48.90552813822122,
+          "mass": 1.0,
+          "gamma": 2.5949673626087626
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 51.22019637468089,
+          "mass": 1.0,
+          "gamma": 3.887314303853659
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 462.7541076201653,
+          "mass": 1.0,
+          "gamma": 11.162539501696534
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 471.7626466448371,
+          "mass": 1.0,
+          "gamma": 41.85177662496753
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 465.34420357240293,
+          "mass": 1.0,
+          "gamma": 37.18583879336739
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 429.93497262477877,
+          "mass": 1.0,
+          "gamma": 42.43542991996283
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 478.67460476523837,
+          "mass": 1.0,
+          "gamma": 22.803013331500335
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.26663306490860417
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.2677167707745001
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 37.0648517660022
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 1944.2938373637237
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 3105.088500552596
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 3421.341043322778
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 2885.0658291527698
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 131.80207520523476,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [],
+              "amps0": []
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [],
+              "amps0": []
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 7214.343427917056,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.06450955817265819,
+                0.04582486293226297
+              ],
+              "amps0": [
+                0.8710161750155198,
+                0.8710188399494866
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [],
+              "amps0": []
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "decagon_ring",
       "edges": [
         [
@@ -12518,6 +14235,18 @@
           6,
           9
         ]
+      ],
+      "canonical_node_order": [
+        "128",
+        "18",
+        "184",
+        "185",
+        "195",
+        "213",
+        "219",
+        "271",
+        "291",
+        "294"
       ],
       "nodes": [
         {
@@ -14624,7 +16353,39 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "184",
+          "195",
+          "294",
+          "219",
+          "291",
+          "213",
+          "271",
+          "185",
+          "128",
+          "18"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "184",
+        "195",
+        "294",
+        "219",
+        "291",
+        "213",
+        "271",
+        "185",
+        "128",
+        "18"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "baeb9b47bb17e0fa34208a11001ae5f346eaabc836d4137f09349222b48d39e3",
@@ -14634,8 +16395,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:46Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
@@ -14653,6 +16414,209 @@
     "dof_family_friendly": "5099c48875251515",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 6.065676029481087,
+          "mass": 1.0,
+          "gamma": 0.059952302865784395
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 6.5757778108564615,
+          "mass": 1.0,
+          "gamma": 0.014749871214277793
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.335854832755551,
+          "mass": 1.0,
+          "gamma": 0.024329619884813615
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 57.167509858281335,
+          "mass": 1.0,
+          "gamma": 5.814040013857777
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 68.0028652897795,
+          "mass": 1.0,
+          "gamma": 2.3558072480056538
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 228.14042655635154,
+          "mass": 1.0,
+          "gamma": 12.419341640034215
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 237.29318499311938,
+          "mass": 1.0,
+          "gamma": 2.066688849261739
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 238.91033698974704,
+          "mass": 1.0,
+          "gamma": 1.2465794519021884
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 259.606146489819,
+          "mass": 1.0,
+          "gamma": 5.620252450102053
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 256.99898873460916,
+          "mass": 1.0,
+          "gamma": 5.679584064902389
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.2501709278182789
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.21527201683618222
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 52.47212220799741
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 606.6139782815246
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 545.5761640374296
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 582.5919610841805
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 904.6723922058213
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 105.76863924688318,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [],
+              "amps0": []
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [
+                0.033353187610563204
+              ],
+              "amps0": [
+                0.1407399721209027
+              ]
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 1204.702252827261,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.04629681919441487
+              ],
+              "amps0": [
+                0.3282013501331835
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [],
+              "amps0": []
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "bipartite_3_6",
       "edges": [
         [
@@ -14727,6 +16691,17 @@
           7,
           8
         ]
+      ],
+      "canonical_node_order": [
+        "138",
+        "149",
+        "16",
+        "188",
+        "207",
+        "23",
+        "231",
+        "255",
+        "294"
       ],
       "nodes": [
         {
@@ -16651,7 +18626,37 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "16",
+          "255",
+          "149",
+          "23",
+          "231",
+          "294",
+          "138",
+          "188",
+          "207"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "16",
+        "255",
+        "149",
+        "23",
+        "231",
+        "294",
+        "138",
+        "188",
+        "207"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "c3d0c542b165498d9b7ad03d99c278093cc77e646114e0d9933e02fa2a5b2c6e",
@@ -16661,8 +18666,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:46Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
@@ -16680,6 +18685,207 @@
     "dof_family_friendly": "0ae98c1c2a7f7d9f",
     "genes_min": {},
     "theta_internal": {
+      "schema_version": "theta_internal_v1",
+      "modes": [
+        {
+          "layer": "Q",
+          "index": 0,
+          "omega0": 6.539791440115883,
+          "mass": 1.0,
+          "gamma": 0.05125974768168395
+        },
+        {
+          "layer": "Q",
+          "index": 1,
+          "omega0": 6.03726776766415,
+          "mass": 1.0,
+          "gamma": 0.026660720590957792
+        },
+        {
+          "layer": "Q",
+          "index": 2,
+          "omega0": 6.396826473366194,
+          "mass": 1.0,
+          "gamma": 0.017322874730032942
+        },
+        {
+          "layer": "S1",
+          "index": 0,
+          "omega0": 48.90552813822122,
+          "mass": 1.0,
+          "gamma": 2.5949673626087626
+        },
+        {
+          "layer": "S1",
+          "index": 1,
+          "omega0": 51.22019637468089,
+          "mass": 1.0,
+          "gamma": 3.887314303853659
+        },
+        {
+          "layer": "S2",
+          "index": 0,
+          "omega0": 462.7541076201653,
+          "mass": 1.0,
+          "gamma": 11.162539501696534
+        },
+        {
+          "layer": "S2",
+          "index": 1,
+          "omega0": 471.7626466448371,
+          "mass": 1.0,
+          "gamma": 41.85177662496753
+        },
+        {
+          "layer": "S2",
+          "index": 2,
+          "omega0": 465.34420357240293,
+          "mass": 1.0,
+          "gamma": 37.18583879336739
+        },
+        {
+          "layer": "S2",
+          "index": 3,
+          "omega0": 429.93497262477877,
+          "mass": 1.0,
+          "gamma": 42.43542991996283
+        },
+        {
+          "layer": "S2",
+          "index": 4,
+          "omega0": 478.67460476523837,
+          "mass": 1.0,
+          "gamma": 22.803013331500335
+        }
+      ],
+      "intra_couplings": [
+        {
+          "i": {
+            "layer": "Q",
+            "index": 0
+          },
+          "j": {
+            "layer": "Q",
+            "index": 1
+          },
+          "k_ij0": 0.26663306490860417
+        },
+        {
+          "i": {
+            "layer": "Q",
+            "index": 1
+          },
+          "j": {
+            "layer": "Q",
+            "index": 2
+          },
+          "k_ij0": 0.2677167707745001
+        },
+        {
+          "i": {
+            "layer": "S1",
+            "index": 0
+          },
+          "j": {
+            "layer": "S1",
+            "index": 1
+          },
+          "k_ij0": 37.0648517660022
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 0
+          },
+          "j": {
+            "layer": "S2",
+            "index": 1
+          },
+          "k_ij0": 1944.2938373637237
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 1
+          },
+          "j": {
+            "layer": "S2",
+            "index": 2
+          },
+          "k_ij0": 3105.088500552596
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 2
+          },
+          "j": {
+            "layer": "S2",
+            "index": 3
+          },
+          "k_ij0": 3421.341043322778
+        },
+        {
+          "i": {
+            "layer": "S2",
+            "index": 3
+          },
+          "j": {
+            "layer": "S2",
+            "index": 4
+          },
+          "k_ij0": 2885.0658291527698
+        }
+      ],
+      "inter_couplings": [
+        {
+          "deep_layer": "S1",
+          "shallow_layer": "Q",
+          "g0": 131.80207520523476,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [],
+              "amps0": []
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [],
+              "amps0": []
+            }
+          ]
+        },
+        {
+          "deep_layer": "S2",
+          "shallow_layer": "S1",
+          "g0": 7214.343427917056,
+          "links": [
+            {
+              "i_deep": 0,
+              "j_shallow": 0,
+              "taus0": [
+                0.06450955817265819,
+                0.04582486293226297
+              ],
+              "amps0": [
+                0.8710161750155198,
+                0.8710188399494866
+              ]
+            },
+            {
+              "i_deep": 1,
+              "j_shallow": 1,
+              "taus0": [],
+              "amps0": []
+            }
+          ]
+        }
+      ]
+    },
+    "theta_internal_network": {
+      "schema_version": "theta_internal_network_v1",
       "template_name": "ladder_5",
       "edges": [
         [
@@ -16734,6 +18940,18 @@
           7,
           9
         ]
+      ],
+      "canonical_node_order": [
+        "130",
+        "162",
+        "184",
+        "23",
+        "234",
+        "285",
+        "3",
+        "36",
+        "50",
+        "75"
       ],
       "nodes": [
         {
@@ -18862,7 +21080,39 @@
             ]
           }
         }
-      ]
+      ],
+      "assignment": {
+        "block_ids": [
+          "184",
+          "50",
+          "36",
+          "75",
+          "130",
+          "162",
+          "234",
+          "3",
+          "285",
+          "23"
+        ],
+        "block_key_used": "block_id"
+      },
+      "parent_ids": [
+        "184",
+        "50",
+        "36",
+        "75",
+        "130",
+        "162",
+        "234",
+        "3",
+        "285",
+        "23"
+      ],
+      "provenance": {
+        "entities_hash": "sha256:8aca39374c9f4e18a6c4f429eb8d9e84db75afba7f5968e8c6fa999b6532cbd2",
+        "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
+        "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
+      }
     },
     "provenance": {
       "source_entity_id": "f428d8304cc841daff7915261c37f408e728360a534989b281eae9797f8d8b09",
@@ -18872,8 +21122,8 @@
         "genome_hash": "sha256:7cb61c7fe00e2e32d8671f464fbc3c640141979b1a2955e3b52581459b19d990",
         "blocks_prev_hash": "sha256:840bebb3d17f391604117ebdbd87c9d2cfb1c456e840d5ae9ac727f54c62a44e"
       },
-      "code_hash": "sha256:81c8d5a373cb149912e1b479c477e818c24c316a55a2fe7eb63755a590344ff0",
-      "timestamp_utc": "2025-12-31T19:22:31Z",
+      "code_hash": "sha256:4ad76cdb79b6f659135f238b210b973cf9f9e5525d3a9020c5275f96fb22025a",
+      "timestamp_utc": "2025-12-31T22:11:46Z",
       "machine": {
         "python": "3.13.9",
         "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"

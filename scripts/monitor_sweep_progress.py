@@ -18,6 +18,17 @@ def _load_json(path: Path) -> Dict:
     return json.loads(path.read_text())
 
 
+def _resolve_path(path_str: str, base_dir: Path) -> Path:
+    path = Path(path_str)
+    if path.is_absolute():
+        return path
+    if path_str.startswith("."):
+        return base_dir / path
+    if path_str.startswith(("data/", "src/", "docs/", "scripts/")):
+        return path
+    return base_dir / path
+
+
 def _iter_entities(path: Path):
     if not path.exists():
         return []
@@ -86,13 +97,20 @@ def main() -> None:
     parser.add_argument(
         "--shard-count",
         type=int,
-        default=8,
+        default=0,
         help="Shard count for assignment stats (hash-based).",
     )
     args = parser.parse_args()
 
-    cfg = _load_json(Path(args.sweep_config))
-    entities = _iter_entities(Path(args.entities))
+    sweep_cfg_path = Path(args.sweep_config)
+    cfg = _load_json(sweep_cfg_path)
+    entities_path = Path(args.entities)
+    if args.entities == "data/processed/ola2/raw/entities_candidates.jsonl":
+        inputs = cfg.get("inputs", {}) or {}
+        cfg_entities = inputs.get("entities_candidates_jsonl")
+        if isinstance(cfg_entities, str) and cfg_entities:
+            entities_path = _resolve_path(cfg_entities, sweep_cfg_path.parent)
+    entities = _iter_entities(entities_path)
     expected_per_entity = {
         rec["entity_id"]: _expected_evals_per_entity(cfg, rec) for rec in entities if rec.get("entity_id")
     }
@@ -107,6 +125,7 @@ def main() -> None:
     paths = []
     for pattern in patterns:
         paths.extend(sorted(shards_root.glob(pattern)))
+    is_worker_mode = any("worker_" in str(path) for path in paths)
     for path in paths:
         shard_name = path.parent.parent.name
         shard_counts[shard_name] = 0
@@ -178,17 +197,20 @@ def main() -> None:
             sid = int(hash_text(str(eid))[:8], 16) % shard_count
             shard_id_map[eid] = sid
             shard_assigned[sid] = shard_assigned.get(sid, 0) + 1
-    print("shard_assignment:")
-    for sid in range(shard_count):
-        assigned = shard_assigned.get(sid, 0)
-        done = 0
-        for eid, exp in expected_per_entity.items():
-            if shard_id_map.get(eid) != sid:
-                continue
-            if counts.get(eid, 0) >= exp and exp > 0:
-                done += 1
-        print(f"- shard_{sid:02d} done={done} of {assigned}")
-    print("")
+        print("shard_assignment:")
+        for sid in range(shard_count):
+            assigned = shard_assigned.get(sid, 0)
+            done = 0
+            for eid, exp in expected_per_entity.items():
+                if shard_id_map.get(eid) != sid:
+                    continue
+                if counts.get(eid, 0) >= exp and exp > 0:
+                    done += 1
+            print(f"- shard_{sid:02d} done={done} of {assigned}")
+        print("")
+    elif is_worker_mode:
+        print("worker_assignment: disabled (dynamic scheduling)")
+        print("")
 
     print("bottom_progress:")
     for progress, got, expected, eid in progress_rows[:5]:
@@ -202,7 +224,8 @@ def main() -> None:
 
     # Shard activity summary
     print("")
-    print("shard_activity:")
+    activity_label = "worker_activity" if is_worker_mode else "shard_activity"
+    print(f"{activity_label}:")
     for shard_name in sorted(shard_counts):
         count = shard_counts.get(shard_name, 0)
         last_ts = shard_last_ts.get(shard_name)
