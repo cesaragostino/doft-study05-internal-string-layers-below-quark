@@ -433,6 +433,7 @@ def main() -> None:
                     "timestamp_utc": _utc_now(),
                     "ola": int(cfg.get("ola", 2)),
                     "role": "explorer",
+                    "attempt_id": attempt_id,
                     "entity_id": entity_id,
                     "eval_id": eval_id,
                     "target": {"name": target_name, "index": target_index, "phase": target_phase},
@@ -445,6 +446,7 @@ def main() -> None:
                     "engine_params_bin_id": engine_params_bin_id,
                     "engine_params": engine_params,
                     "metrics_raw": metrics_raw,
+                    "is_candidate": candidate,
                     "tags_raw": tags_raw,
                     "reasons_raw": reasons,
                     "provenance": {
@@ -494,6 +496,7 @@ def main() -> None:
                     "seed": seed,
                     "engine_params_bin_id": engine_params_bin_id,
                     "metrics_summary": metrics_summary,
+                    "is_candidate": candidate,
                     "tags_raw": entity_tags,
                     "reasons_raw": reasons,
                     "provenance": {

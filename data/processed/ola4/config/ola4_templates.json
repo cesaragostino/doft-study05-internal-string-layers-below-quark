@@ -1,0 +1,16 @@
+{
+  "schema_version": "olar_templates_v1",
+  "templates": [
+    {
+      "name": "tetrahedron_super",
+      "nodes": 4,
+      "edges": [
+        [0, 1], [0, 2], [0, 3],
+        [1, 2], [1, 3],
+        [2, 3]
+      ],
+      "edge_weights_mode": "fixed_template",
+      "notes": "Particula Alfa (He4): Tetraedro K4. El unico objetivo."
+    }
+  ]
+}

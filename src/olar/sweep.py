@@ -7,6 +7,7 @@ import heapq
 import json
 import math
 import platform
+import time
 import uuid
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
@@ -84,6 +85,21 @@ def _sanitize_numbers(obj: Any) -> Tuple[Any, bool]:
             invalid = invalid or bad
         return sanitized, invalid
     return obj, False
+
+
+def _primary_metrics(metrics: Dict[str, Any]) -> Dict[str, Optional[float]]:
+    primaries = {
+        "R_network_S1_mean": metrics.get("R_network_S1_mean"),
+        "PE_lockS1_norm_mean": metrics.get("PE_lockS1_norm_mean"),
+        "H_part_norm_mean": metrics.get("H_part_norm_mean"),
+    }
+    normalized: Dict[str, Optional[float]] = {}
+    for key, val in primaries.items():
+        if isinstance(val, (int, float)) and math.isfinite(val):
+            normalized[key] = float(val)
+        else:
+            normalized[key] = None
+    return normalized
 
 
 
@@ -259,7 +275,10 @@ def main() -> None:
     seed_policy = cfg.get("seed_policy", {})
     seed_mode = str(seed_policy.get("mode", "deterministic")).lower()
     seed_salt = str(seed_policy.get("salt", "sweep_v1"))
-    seeds = int(seed_policy.get("seeds", 1))
+    seeds = seed_policy.get("seeds")
+    if seeds is None:
+        seeds = seed_policy.get("seeds_per_combination", 1)
+    seeds = int(seeds)
     min_seeds_required = int(seed_policy.get("min_seeds_required", seeds))
     engine_defaults = cfg.get("engine_defaults")
     engine_variation = cfg.get("engine_variation")
@@ -418,13 +437,25 @@ def main() -> None:
                     engine_params,
                     int(seed),
                 )
+                eval_start = time.perf_counter()
                 metrics_raw_full = diff.run()
+                runtime_sec = time.perf_counter() - eval_start
                 metrics_raw = {
                     k: v
                     for k, v in metrics_raw_full.items()
                     if v is None or isinstance(v, (str, int, float, bool))
                 }
                 metrics_raw, numeric_invalid = _sanitize_numbers(metrics_raw)
+                if "R_network_S1_mean" not in metrics_raw:
+                    metrics_raw["R_network_S1_mean"] = metrics_raw.get("R_network_S1_mean_lastW")
+                if "PE_lockS1_norm_mean" not in metrics_raw:
+                    metrics_raw["PE_lockS1_norm_mean"] = metrics_raw.get("PE_lockS1_norm")
+                if "H_part_norm_mean" not in metrics_raw:
+                    metrics_raw["H_part_norm_mean"] = metrics_raw.get("H_part_norm_mean_lastW")
+                primary = _primary_metrics(metrics_raw)
+                nan_primary_count = sum(1 for val in primary.values() if val is None)
+                is_finite_primary = nan_primary_count == 0
+                sweep_passed = is_finite_primary
                 early_cut = False
                 if early_enabled and idx + 1 >= early_after:
                     r_mean = metrics_raw.get("R_network_S1_mean_lastW")
@@ -445,12 +476,19 @@ def main() -> None:
                     "timestamp_utc": utc_now_iso(),
                     "ola": int(cfg.get("ola", 2)),
                     "role": "sweep",
+                    "status": "ok" if sweep_passed else "failed",
                     "entity_id": eid,
                     "eval_id": eval_id,
                     "seed": int(seed),
+                    "seed_index": int(idx),
+                    "seed_u32": int(seed) & 0xFFFFFFFF,
                     "engine_params_bin_id": param_bin_id,
                     "engine_params": engine_params,
                     "metrics_raw": metrics_raw,
+                    "runtime_sec": float(runtime_sec),
+                    "is_finite_primary": bool(is_finite_primary),
+                    "nan_primary_count": int(nan_primary_count),
+                    "sweep_passed": bool(sweep_passed),
                     "tags_raw": tags_raw,
                     "reasons_raw": reasons_raw,
                     "provenance": {

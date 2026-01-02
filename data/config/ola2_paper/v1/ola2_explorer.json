@@ -1,0 +1,76 @@
+{
+  "schema_version": "olar_explorer_config_v1",
+  "ola": 2,
+  "inputs": {
+    "blocks_json": "data/processed/ola1/promoted/simple_blocks.json",
+    "dof_dna_catalog_csv": "data/processed/ola1/promoted/dof_dna_catalog.csv",
+    "templates_json": "data/config/ola2_paper/ola2_templates.json"
+  },
+  "outputs": {
+    "raw_dir": "data/processed/ola2_paper/raw",
+    "attempts_jsonl": "data/processed/ola2_paper/raw/attempts.jsonl",
+    "entities_candidates_jsonl": "data/processed/ola2_paper/raw/entities_candidates.jsonl",
+    "report_md": "data/processed/ola2_paper/explorer_report.md"
+  },
+  "optional_outputs": [ "report_md" ],
+  "target_policy": {
+    "allowed_source_templates": null,
+    "require_source_candidate": false
+  },
+  "targets": [
+    {
+      "budget_evals": 5000, 
+      "name": "paper_baseline_survey",
+      "notes": "Barrido de motivos minimos N=2..5",
+      "templates": [
+        "ring_2", "ring_3", "ring_4", "ring_5",
+        "complete_4", "complete_5",
+        "ladder_4", "bipartite_2_2"
+      ]
+    }
+  ],
+  "block_selection": {
+    "block_id_key": "block_id",
+    "require_dna": true,
+    "allowed_dof_grades": ["A", "B"] 
+  },
+  "engine_defaults": {
+    "K_local": 0.3,       "//": "Fuerza media para permitir formacion inicial",
+    "T_ticks": 12000,
+    "W": 4000,
+    "dt": 0.0025,
+    "kappa_global": 0.3,
+    "sigma0": 0.3,
+    "sigma_tc": 60.0,
+    "sigma_theta_init": 0.5,
+    "tau_field": 120.0
+  },
+  "engine_variation": {
+    "bins": {
+      "K_local_edges": [ 0.2, 0.4 ],
+      "kappa_edges": [ 0.2, 0.4 ],
+      "sigma0_edges": [ 0.2, 0.4 ],
+      "tau_field_edges": [ 100, 140 ]
+    },
+    "enabled": true,
+    "mode": "bin_sample"
+  },
+  "seed_policy": {
+    "mode": "deterministic",
+    "salt": "ola2_paper_survey_v1",
+    "seeds_per_attempt": 1
+  },
+  "output_policy": {
+    "emit_non_candidates": false
+  },
+  "tagging_thresholds": {
+    "R_mean_lastW_min": 0.80,
+    "phase_var_lastW_max": 0.05,
+    "quality_lock_min": 0.70,
+    "viability_mode": "hard_viable_soft_memory"
+  },
+  "progress": {
+    "flush_every_evals": 200,
+    "log_every_terms": 10
+  }
+}

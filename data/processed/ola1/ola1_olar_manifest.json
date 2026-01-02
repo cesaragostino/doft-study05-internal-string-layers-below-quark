@@ -1,6 +1,6 @@
 {
   "schema_version": "ola1_olar_manifest_v1",
-  "timestamp_utc": "2025-12-30T00:23:03Z",
+  "timestamp_utc": "2026-01-02T01:05:09Z",
   "inputs": {
     "runs_full_jsonl": "data/processed/ola1/runs_full.jsonl",
     "dna_csv": "data/processed/ola1/dof_dna_catalog.csv"

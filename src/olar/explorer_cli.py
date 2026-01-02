@@ -156,6 +156,7 @@ def main() -> None:
     entities_written_total = 0
     entities_candidates_written = 0
     dropped_non_candidate = 0
+    attempt_id = 0
 
     def _flush_attempts() -> None:
         nonlocal attempts_written_total
@@ -278,6 +279,7 @@ def main() -> None:
                 "timestamp_utc": utc_now_iso(),
                 "ola": int(cfg.get("ola", 2)),
                 "role": "explorer",
+                "attempt_id": attempt_id,
                 "entity_id": entity_id,
                 "eval_id": eval_id,
                 "target": {"name": target.get("name", ""), "index": target_idx, "phase": target.get("phase", "phase1")},
@@ -290,6 +292,7 @@ def main() -> None:
                 "engine_params_bin_id": param_bin_id,
                 "engine_params": engine_params,
                 "metrics_raw": metrics_raw,
+                "is_candidate": candidate,
                 "tags_raw": tags_raw,
                 "reasons_raw": reasons,
                 "provenance": {
@@ -305,6 +308,7 @@ def main() -> None:
             }
             validate_attempt(attempt)
             attempts_rows.append(attempt)
+            attempt_id += 1
             attempt_progress[eval_id] = (new_evals, budget_evals)
             evals_since_flush += 1
 
@@ -339,6 +343,7 @@ def main() -> None:
                 "seed": seed,
                 "engine_params_bin_id": param_bin_id,
                 "metrics_summary": metrics_summary,
+                "is_candidate": candidate,
                 "tags_raw": entity_tags,
                 "reasons_raw": reasons,
                 "provenance": {

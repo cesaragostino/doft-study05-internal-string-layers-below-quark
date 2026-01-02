@@ -62,7 +62,15 @@ EVALUATION_REQUIRED_FIELDS = (
     "provenance",
 )
 
-EVALUATION_OPTIONAL_FIELDS: tuple[str, ...] = ()
+EVALUATION_OPTIONAL_FIELDS: tuple[str, ...] = (
+    "status",
+    "seed_index",
+    "seed_u32",
+    "runtime_sec",
+    "is_finite_primary",
+    "nan_primary_count",
+    "sweep_passed",
+)
 
 EVALUATION_REQUIRED_NESTED: Dict[str, Iterable[str]] = {}
 

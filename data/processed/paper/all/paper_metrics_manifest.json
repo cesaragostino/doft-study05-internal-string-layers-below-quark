@@ -1,0 +1,14 @@
+{
+  "olas": [
+    "2"
+  ],
+  "paper_csv": "data/processed/paper/all/paper_metrics_all.csv",
+  "plots": [
+    "rates_vs_n.png",
+    "heatmap_template_vs_n.png",
+    "scatter_R_vs_PE.png",
+    "robustness_vs_n.png",
+    "h_part_vs_n.png"
+  ],
+  "rows": 323
+}

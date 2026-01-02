@@ -107,6 +107,7 @@ def _build_ola1_export_cmd(config_path: Path) -> List[str]:
 
 def _build_core_promotion_cmd(config_path: Path) -> List[str]:
     cfg = _load_json(config_path)
+    base_dir = config_path.parent
     ola_from = cfg.get("ola_from")
     ola_to = cfg.get("ola_to")
     if ola_from is None or ola_to is None:
@@ -121,21 +122,29 @@ def _build_core_promotion_cmd(config_path: Path) -> List[str]:
         str(int(ola_to)),
     ]
     if cfg.get("run_inputs"):
-        cmd.extend(["--run-inputs", str(cfg.get("run_inputs"))])
+        run_inputs = _resolve_path_with_base(str(cfg.get("run_inputs")), None, base_dir)
+        cmd.extend(["--run-inputs", str(run_inputs)])
     if cfg.get("entities_jsonl"):
-        cmd.extend(["--entities", str(cfg.get("entities_jsonl"))])
+        entities_jsonl = _resolve_path_with_base(str(cfg.get("entities_jsonl")), None, base_dir)
+        cmd.extend(["--entities", str(entities_jsonl)])
     if cfg.get("genome_layer_csv"):
-        cmd.extend(["--genome", str(cfg.get("genome_layer_csv"))])
+        genome_layer_csv = _resolve_path_with_base(str(cfg.get("genome_layer_csv")), None, base_dir)
+        cmd.extend(["--genome", str(genome_layer_csv)])
     if cfg.get("blocks_prev_json"):
-        cmd.extend(["--blocks-prev", str(cfg.get("blocks_prev_json"))])
+        blocks_prev_json = _resolve_path_with_base(str(cfg.get("blocks_prev_json")), None, base_dir)
+        cmd.extend(["--blocks-prev", str(blocks_prev_json)])
     if cfg.get("blocks_prev_block_id_key"):
         cmd.extend(["--blocks-prev-id-key", str(cfg.get("blocks_prev_block_id_key"))])
     if cfg.get("require_node_theta_internal"):
         cmd.append("--require-node-theta-internal")
+    if cfg.get("allowed_grades"):
+        cmd.extend(["--allowed-grades", ",".join([str(g) for g in cfg.get("allowed_grades")])])
     if cfg.get("output_blocks_json"):
-        cmd.extend(["--output", str(cfg.get("output_blocks_json"))])
+        output_blocks_json = _resolve_path_with_base(str(cfg.get("output_blocks_json")), None, base_dir)
+        cmd.extend(["--output", str(output_blocks_json)])
     if cfg.get("dna_output_csv"):
-        cmd.extend(["--dna-output", str(cfg.get("dna_output_csv"))])
+        dna_output_csv = _resolve_path_with_base(str(cfg.get("dna_output_csv")), None, base_dir)
+        cmd.extend(["--dna-output", str(dna_output_csv)])
     return cmd
 
 

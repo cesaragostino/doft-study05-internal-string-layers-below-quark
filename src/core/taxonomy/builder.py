@@ -26,6 +26,13 @@ def _resolve_output(path_str: str, output_dir: Optional[Path]) -> Path:
     return path
 
 
+def _resolve_input(path_str: str, base_dir: Path) -> Path:
+    path = Path(path_str)
+    if path.is_absolute():
+        return path
+    return base_dir / path
+
+
 def _has_csv_rows(path: Path) -> bool:
     if not path.exists():
         return False
@@ -135,6 +142,32 @@ def _node_count(entity: Dict[str, Any]) -> int:
     return 0
 
 
+def _assign_dof_grade(
+    evals_total: int,
+    attractor_class: str,
+    r_mean: Optional[float],
+    pe_mean: Optional[float],
+    thresholds: Dict[str, Any],
+) -> str:
+    if evals_total <= 0:
+        return "U"
+    if attractor_class == "INCOHERENT":
+        return "F"
+    if attractor_class == "HYPER_SYNC":
+        return "C"
+    if attractor_class != "FUNCTIONAL_LOCK":
+        return "C"
+    r_a = float(thresholds.get("r_mean_a", 0.60))
+    pe_a = float(thresholds.get("pe_lock_a", 0.12))
+    r_b = float(thresholds.get("r_mean_b", 0.45))
+    pe_b = float(thresholds.get("pe_lock_b", 0.08))
+    if r_mean is not None and pe_mean is not None and r_mean >= r_a and pe_mean >= pe_a:
+        return "A"
+    if r_mean is not None and pe_mean is not None and r_mean >= r_b and pe_mean >= pe_b:
+        return "B"
+    return "C"
+
+
 def _format_metric(val: Optional[float]) -> str:
     if val is None:
         return "NA"
@@ -174,8 +207,15 @@ def _require_row_fields(row: Dict[str, Any], fields: List[str]) -> None:
 def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None:
     cfg = _load_json(config_path)
     inputs = cfg.get("inputs", {})
-    genome_path = Path(inputs.get("genome_layer_csv", "data/processed/ola2/catalog/genome_layers_ola2.csv"))
-    entities_path = Path(inputs.get("entities_jsonl", "data/processed/ola2/catalog/entities.jsonl"))
+    genome_path = _resolve_input(
+        inputs.get("genome_layer_csv", "data/processed/ola2/catalog/genome_layers_ola2.csv"),
+        config_path.parent,
+    )
+    entities_path = _resolve_input(
+        inputs.get("entities_jsonl", "data/processed/ola2/catalog/entities.jsonl"),
+        config_path.parent,
+    )
+    promote_cfg_input = inputs.get("promote_config")
 
     outputs = cfg.get("outputs", {})
     out_genome = _resolve_output(outputs.get("genome_layer_out_csv", "genome_layers_taxonomy.csv"), output_dir)
@@ -183,11 +223,25 @@ def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None
 
     thresholds = cfg.get("thresholds", {})
     attractor_thresholds = cfg.get("attractor_thresholds", {})
+    dof_grade_thresholds = cfg.get("dof_grade_thresholds", {})
     thresholds_version = str(cfg.get("thresholds_version") or cfg.get("taxonomy_version") or "")
     family_bins_cfg = (cfg.get("family_bins") or {}).get("bins", {})
     taxonomy_bins_cfg = cfg.get("taxonomy_bins") or {}
     use_bins_for_id = bool((cfg.get("family_bins") or {}).get("use_bins_for_id", False))
     taxonomy_version = cfg.get("taxonomy_version", "")
+    allowed_grades = cfg.get("allowed_grades")
+    if not isinstance(allowed_grades, list):
+        allowed_grades = None
+    if allowed_grades is None and promote_cfg_input:
+        promote_cfg_path = _resolve_input(str(promote_cfg_input), config_path.parent)
+        if promote_cfg_path.exists():
+            promote_cfg = _load_json(promote_cfg_path)
+            promote_allowed = promote_cfg.get("allowed_grades")
+            if isinstance(promote_allowed, list):
+                allowed_grades = [str(val).upper() for val in promote_allowed if str(val)]
+    if not allowed_grades:
+        allowed_grades = ["A", "B"]
+    allowed_grades = [str(val).upper() for val in allowed_grades]
 
     if not genome_path.exists():
         raise RuntimeError(f"genome_layer_csv missing: {genome_path}")
@@ -257,6 +311,8 @@ def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None
         row["thresholds_version"] = thresholds_version
         row["taxonomy_kingdom"] = kingdom
         row["taxonomy_family_id"] = family_id
+        row["locked"] = kingdom == "LOCKED"
+        row["viable_state"] = kingdom
         r_mean = _to_float_safe(row.get("R_network_S1_mean"))
         pe_mean = _to_float_safe(row.get("PE_lockS1_norm_mean"))
         if evals_total == 0 or r_mean is None or pe_mean is None:
@@ -272,8 +328,14 @@ def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None
                 row["viability_state"] = "NONVIABLE"
             else:
                 row["viability_state"] = "UNMEASURED"
-        dof_grade = row.get("dof_grade") or ""
-        row["dof_grade"] = dof_grade
+        row["dof_grade"] = _assign_dof_grade(
+            evals_total,
+            attractor_class,
+            r_mean,
+            pe_mean,
+            dof_grade_thresholds,
+        )
+        row["promoted"] = str(row["dof_grade"]).upper() in allowed_grades
 
         eid = row.get("entity_id") or ""
         entity = entity_by_id.get(str(eid)) if eid else None
@@ -345,11 +407,15 @@ def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None
                 "attempted_sweep_total": 0,
                 "useful_total": 0,
                 "trivial_total": 0,
+                "promoted_total": 0,
             },
         )
         rollup["total"] += 1
+        if row.get("promoted") in (True, "true", "True", "1", 1):
+            rollup["promoted_total"] += 1
         grade_counts = rollup["counts_by_dof_grade"]
-        grade_counts[dof_grade] = grade_counts.get(dof_grade, 0) + 1
+        grade = row.get("dof_grade") or ""
+        grade_counts[grade] = grade_counts.get(grade, 0) + 1
         attractor = attractor_class or ""
         attr_counts = rollup["counts_by_attractor_class"]
         attr_counts[attractor] = attr_counts.get(attractor, 0) + 1
@@ -360,6 +426,20 @@ def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None
             rollup["useful_total"] += 1
         if attractor_class == "HYPER_SYNC":
             rollup["trivial_total"] += 1
+
+    allowed_grades_set = {"A", "B", "C", "F", "U"}
+    invalid_grades = set()
+    for row in rows:
+        evals_total = int(_to_float_safe(row.get("sweep_evals_total")) or 0)
+        if evals_total < 0:
+            raise ValueError("taxonomy row invalid sweep_evals_total")
+        grade = row.get("dof_grade")
+        if not grade or str(grade).upper() not in allowed_grades_set:
+            invalid_grades.add(str(grade))
+        if evals_total > 0 and not row.get("attractor_class"):
+            raise ValueError("taxonomy row missing attractor_class for evaluated entity")
+    if invalid_grades:
+        raise ValueError(f"taxonomy row invalid dof_grade values: {sorted(invalid_grades)}")
 
     if rows:
         fieldnames = list(rows[0].keys())
@@ -396,6 +476,15 @@ def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None
         "entities_measured": entities_measured,
         "entities_viable_taxonomic": entities_viable_tax,
         "entities_nonviable": entities_nonviable,
+        "allowed_grades": ",".join(allowed_grades),
+        "promoted_total": sum(
+            1 for row in rows if row.get("promoted") in (True, "true", "True", "1", 1)
+        ),
+        "promoted_rate": (
+            sum(1 for row in rows if row.get("promoted") in (True, "true", "True", "1", 1)) / entities_total
+            if entities_total
+            else None
+        ),
         "counts_by_template_name": counts_by_template_name,
         "counts_by_attractor_class": counts_by_attractor_class,
         "top_confirmed_families": [
@@ -418,6 +507,9 @@ def apply_taxonomy(config_path: Path, output_dir: Optional[Path] = None) -> None
                     rollup["trivial_total"] / rollup["attempted_sweep_total"]
                     if rollup["attempted_sweep_total"]
                     else None
+                ),
+                "promoted_rate": (
+                    rollup["promoted_total"] / rollup["total"] if rollup["total"] else None
                 ),
             }
             for rollup in sorted(

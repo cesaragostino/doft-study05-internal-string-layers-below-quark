@@ -4,6 +4,9 @@
   "entities_measured": 29,
   "entities_viable_taxonomic": 9,
   "entities_nonviable": 20,
+  "allowed_grades": "A,B",
+  "promoted_total": 0,
+  "promoted_rate": 0.0,
   "counts_by_template_name": {
     "bipartite_3_6": {
       "total": 18,
@@ -88,7 +91,8 @@
       "N": 9,
       "total": 18,
       "counts_by_dof_grade": {
-        "": 18
+        "C": 5,
+        "F": 13
       },
       "counts_by_attractor_class": {
         "FUNCTIONAL_LOCK": 5,
@@ -97,15 +101,18 @@
       "attempted_sweep_total": 18,
       "useful_total": 5,
       "trivial_total": 0,
+      "promoted_total": 0,
       "useful_rate": 0.2777777777777778,
-      "trivial_rate": 0.0
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
     },
     {
       "template_name": "decagon_ring",
       "N": 10,
       "total": 4,
       "counts_by_dof_grade": {
-        "": 4
+        "F": 2,
+        "C": 2
       },
       "counts_by_attractor_class": {
         "INCOHERENT": 2,
@@ -114,15 +121,18 @@
       "attempted_sweep_total": 4,
       "useful_total": 2,
       "trivial_total": 0,
+      "promoted_total": 0,
       "useful_rate": 0.5,
-      "trivial_rate": 0.0
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
     },
     {
       "template_name": "ladder_5",
       "N": 10,
       "total": 7,
       "counts_by_dof_grade": {
-        "": 7
+        "F": 5,
+        "C": 2
       },
       "counts_by_attractor_class": {
         "INCOHERENT": 5,
@@ -131,8 +141,10 @@
       "attempted_sweep_total": 7,
       "useful_total": 2,
       "trivial_total": 0,
+      "promoted_total": 0,
       "useful_rate": 0.2857142857142857,
-      "trivial_rate": 0.0
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
     }
   ]
 }

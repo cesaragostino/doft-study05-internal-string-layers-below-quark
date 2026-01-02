@@ -1,0 +1,9 @@
+{
+  "schema_version": "olar_merge_evaluations_v1",
+  "inputs": [
+    "data/processed/ola2_paper/sweep_workers/worker_*/raw/evaluations.jsonl"
+  ],
+  "output": "data/processed/ola2_paper/sweep_merged/evaluations.jsonl",
+  "stats_output": "data/processed/ola2_paper/sweep_merged/merge_stats.json",
+  "sample_size": 50
+}

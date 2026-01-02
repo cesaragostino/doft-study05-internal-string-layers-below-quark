@@ -146,6 +146,7 @@ def promote_blocks(
     ola_from: int,
     ola_to: int,
     require_node_theta_internal: bool,
+    allowed_grades: List[str],
 ) -> int:
     entities_hash = f"sha256:{hash_file(entities_path)}"
     genome_hash = f"sha256:{hash_file(genome_path)}"
@@ -174,6 +175,7 @@ def promote_blocks(
     selected.sort(key=lambda item: item[0])
     promoted: List[Dict[str, Any]] = []
     dna_rows: List[Dict[str, str]] = []
+    allowed = {str(g).upper() for g in allowed_grades if str(g).strip()}
     for eid, entity, genome_row in selected:
         assignment = entity.get("assignment")
         if not isinstance(assignment, dict):
@@ -210,10 +212,10 @@ def promote_blocks(
             raise ValueError(f"Entity {eid} missing omega_ref_proxy.")
 
         # Contract: S6 ignores any *_friendly columns from genome layers.
-        dof_grade = genome_row.get("dof_grade") or ""
-        if not dof_grade:
-            # Promotion only selects viable entities; default to A when missing.
-            dof_grade = "A"
+        dof_grade = str(genome_row.get("dof_grade") or "U").upper()
+        if dof_grade not in allowed:
+            print(f"[core_promotion] skipped_unknown_grade entity_id={eid} dof_grade={dof_grade}")
+            continue
         dof_family_id = genome_row.get("confirmed_family_id") or ""
         family_friendly = dof_family_id
         if not dof_family_id:
@@ -317,6 +319,12 @@ def main() -> None:
     parser.add_argument("--blocks-prev", type=Path, help="Override simple_blocks.json from Ola(N-1).")
     parser.add_argument("--blocks-prev-id-key", type=str, default="block_id")
     parser.add_argument("--require-node-theta-internal", action="store_true")
+    parser.add_argument(
+        "--allowed-grades",
+        type=str,
+        default="A,B",
+        help="Comma-separated dof_grade values to promote (default: A,B).",
+    )
     parser.add_argument("--output", type=Path, help="Output blocks JSON path.")
     parser.add_argument("--dna-output", type=Path, help="Output dof_dna_catalog.csv path.")
     args = parser.parse_args()
@@ -366,6 +374,7 @@ def main() -> None:
         )
         return
 
+    allowed_grades = [g.strip().upper() for g in str(args.allowed_grades).split(",") if g.strip()]
     count = promote_blocks(
         entities_path=entities_path,
         genome_path=genome_path,
@@ -376,6 +385,7 @@ def main() -> None:
         ola_from=ola_from,
         ola_to=ola_to,
         require_node_theta_internal=bool(args.require_node_theta_internal),
+        allowed_grades=allowed_grades,
     )
     print(f"[core_promotion] promoted_blocks={count}")
 

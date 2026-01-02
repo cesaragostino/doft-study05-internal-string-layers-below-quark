@@ -1,0 +1,13 @@
+{
+  "ola_dir": "data/processed/ola2",
+  "taxonomy_csv": "data/processed/ola2/catalog/genome_layers_ola2_taxonomy.csv",
+  "paper_csv": "data/processed/paper/ola2/paper_metrics_ola2.csv",
+  "plots": [
+    "rates_vs_n.png",
+    "heatmap_template_vs_n.png",
+    "scatter_R_vs_PE.png",
+    "robustness_vs_n.png",
+    "h_part_vs_n.png"
+  ],
+  "rows": 29
+}

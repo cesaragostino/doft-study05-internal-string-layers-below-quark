@@ -7,6 +7,10 @@
   "output_blocks_json": "data/processed/ola2/promoted/simple_blocks.json",
   "blocks_prev_json": "data/processed/ola1/simple_blocks_canonical.json",
   "blocks_prev_block_id_key": "block_id",
+  "allowed_grades": [
+    "A",
+    "B"
+  ],
   "require_node_theta_internal": true,
   "schema_version": "core_promotion_blocks_v2"
 }

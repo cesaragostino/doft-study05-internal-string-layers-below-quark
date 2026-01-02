@@ -27,6 +27,10 @@ def _is_number(val: Any) -> bool:
     return isinstance(val, (int, float))
 
 
+def _is_bool(val: Any) -> bool:
+    return isinstance(val, bool)
+
+
 def _is_scalar(val: Any) -> bool:
     return val is None or isinstance(val, (str, int, float, bool))
 
@@ -140,14 +144,27 @@ def validate_evaluation(record: Dict[str, Any]) -> None:
         if _is_shallow_scalar_dict(val):
             continue
         missing.append(f"provenance.{key}.scalar_or_shallow_dict")
-    allowed_keys = set(EVALUATION_REQUIRED_FIELDS)
+    allowed_keys = set(EVALUATION_REQUIRED_FIELDS) | set(EVALUATION_OPTIONAL_FIELDS)
     extra_keys = sorted(k for k in record.keys() if k not in allowed_keys)
     if extra_keys:
         missing.append(f"unexpected_keys:{extra_keys}")
+    optional_types = {
+        "status": _is_str,
+        "seed_index": _is_number,
+        "seed_u32": _is_number,
+        "runtime_sec": _is_number,
+        "is_finite_primary": _is_bool,
+        "nan_primary_count": _is_number,
+        "sweep_passed": _is_bool,
+    }
     for opt_key in EVALUATION_OPTIONAL_FIELDS:
-        if opt_key in record:
-            val = record.get(opt_key)
-            _ensure_type(val is None or _is_str(val), opt_key, missing)
+        if opt_key not in record:
+            continue
+        val = record.get(opt_key)
+        check = optional_types.get(opt_key)
+        if check is None:
+            continue
+        _ensure_type(val is None or check(val), opt_key, missing)
     if missing:
         raise ValueError(f"Evaluation validation failed: {missing}")
 

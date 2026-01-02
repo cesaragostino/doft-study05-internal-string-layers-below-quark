@@ -4,6 +4,9 @@
   "entities_measured": 21,
   "entities_viable_taxonomic": 21,
   "entities_nonviable": 0,
+  "allowed_grades": "A,B",
+  "promoted_total": 21,
+  "promoted_rate": 1.0,
   "counts_by_template_name": {
     "dimer_super": {
       "total": 13,
@@ -56,7 +59,7 @@
       "N": 2,
       "total": 13,
       "counts_by_dof_grade": {
-        "": 13
+        "A": 13
       },
       "counts_by_attractor_class": {
         "FUNCTIONAL_LOCK": 13
@@ -64,15 +67,17 @@
       "attempted_sweep_total": 13,
       "useful_total": 13,
       "trivial_total": 0,
+      "promoted_total": 13,
       "useful_rate": 1.0,
-      "trivial_rate": 0.0
+      "trivial_rate": 0.0,
+      "promoted_rate": 1.0
     },
     {
       "template_name": "triangle_super",
       "N": 3,
       "total": 8,
       "counts_by_dof_grade": {
-        "": 8
+        "B": 8
       },
       "counts_by_attractor_class": {
         "FUNCTIONAL_LOCK": 8
@@ -80,8 +85,10 @@
       "attempted_sweep_total": 8,
       "useful_total": 8,
       "trivial_total": 0,
+      "promoted_total": 8,
       "useful_rate": 1.0,
-      "trivial_rate": 0.0
+      "trivial_rate": 0.0,
+      "promoted_rate": 1.0
     }
   ]
 }
