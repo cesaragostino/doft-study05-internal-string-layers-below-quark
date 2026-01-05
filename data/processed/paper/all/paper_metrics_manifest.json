@@ -1,6 +1,8 @@
 {
   "olas": [
-    "2"
+    "2",
+    "3",
+    "4"
   ],
   "paper_csv": "data/processed/paper/all/paper_metrics_all.csv",
   "plots": [
@@ -8,7 +10,11 @@
     "heatmap_template_vs_n.png",
     "scatter_R_vs_PE.png",
     "robustness_vs_n.png",
-    "h_part_vs_n.png"
+    "h_part_vs_n.png",
+    "coherence_decay_vs_n.png",
+    "memory_s2_vs_n.png",
+    "candidate_rate_vs_density.png",
+    "robustness_vs_density.png"
   ],
-  "rows": 323
+  "rows": 4323
 }

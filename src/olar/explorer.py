@@ -510,26 +510,29 @@ def main() -> None:
                 entities_rows.append(entity)
                 if candidate:
                     entities_candidates_written += 1
-                print("", flush=True)
-                print(
-                    "[explorer_cli] wrote attempt"
-                    f" [{new_evals} / {budget}]"
-                    f" entity={_short_id(entity_id)}"
-                    f" eval={_short_id(eval_id)}"
-                    f" seed={seed}"
-                    f" bin={engine_params_bin_id}"
-                    f" candidate={candidate}",
-                    flush=True,
-                )
-                print(
-                    "[explorer_cli] wrote entity"
-                    f" entity={_short_id(entity_id)}"
-                    f" source_eval={_short_id(source_eval_id)}"
-                    f" seed={seed}"
-                    f" bin={engine_params_bin_id}"
-                    f" candidate={candidate}",
-                    flush=True,
-                )
+                if candidate:
+                    print("", flush=True)
+                    print(
+                        "[explorer_cli] wrote attempt"
+                        f" [{new_evals} / {budget}]"
+                        f" entity={_short_id(entity_id)}"
+                        f" eval={_short_id(eval_id)}"
+                        f" seed={seed}"
+                        f" bin={engine_params_bin_id}"
+                        f" candidate={candidate}",
+                        flush=True,
+                    )
+                    print(
+                        "[explorer_cli] wrote entity"
+                        f" entity={_short_id(entity_id)}"
+                        f" source_eval={_short_id(source_eval_id)}"
+                        f" seed={seed}"
+                        f" bin={engine_params_bin_id}"
+                        f" candidate={candidate}",
+                        flush=True,
+                    )
+                else:
+                    print(".", end="", flush=True)
             eval_idx += 1
 
     attempts_written = append_jsonl(attempts_path, attempts_rows, validate=validate_attempt)

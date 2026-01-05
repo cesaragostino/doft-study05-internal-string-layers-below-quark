@@ -1,0 +1,34 @@
+{
+  "inputs": [
+    "data/processed/ola4_paper/sweep_workers/worker_00/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_01/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_02/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_03/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_04/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_05/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_06/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_07/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_08/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_09/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_10/raw/evaluations.jsonl",
+    "data/processed/ola4_paper/sweep_workers/worker_11/raw/evaluations.jsonl"
+  ],
+  "output": "data/processed/ola4_paper/sweep_merged/evaluations.jsonl",
+  "written": 1848,
+  "duplicate_eval_ids_total": 0,
+  "duplicate_eval_ids_sample": [],
+  "shard_sources": {
+    "data/processed/ola4_paper/sweep_workers/worker_00/raw/evaluations.jsonl": 152,
+    "data/processed/ola4_paper/sweep_workers/worker_01/raw/evaluations.jsonl": 152,
+    "data/processed/ola4_paper/sweep_workers/worker_02/raw/evaluations.jsonl": 148,
+    "data/processed/ola4_paper/sweep_workers/worker_03/raw/evaluations.jsonl": 152,
+    "data/processed/ola4_paper/sweep_workers/worker_04/raw/evaluations.jsonl": 156,
+    "data/processed/ola4_paper/sweep_workers/worker_05/raw/evaluations.jsonl": 152,
+    "data/processed/ola4_paper/sweep_workers/worker_06/raw/evaluations.jsonl": 152,
+    "data/processed/ola4_paper/sweep_workers/worker_07/raw/evaluations.jsonl": 156,
+    "data/processed/ola4_paper/sweep_workers/worker_08/raw/evaluations.jsonl": 156,
+    "data/processed/ola4_paper/sweep_workers/worker_09/raw/evaluations.jsonl": 156,
+    "data/processed/ola4_paper/sweep_workers/worker_10/raw/evaluations.jsonl": 160,
+    "data/processed/ola4_paper/sweep_workers/worker_11/raw/evaluations.jsonl": 156
+  }
+}

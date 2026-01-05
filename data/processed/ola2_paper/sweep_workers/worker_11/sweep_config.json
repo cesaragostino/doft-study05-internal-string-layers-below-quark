@@ -6,6 +6,7 @@
     "blocks_json": "data/processed/ola1/simple_blocks_canonical.json",
     "dof_dna_catalog_csv": "data/processed/ola1/dof_dna_catalog_by_block_id.csv"
   },
+  "block_id_key": "block_id",
   "outputs": {
     "evaluations_jsonl": "raw/evaluations.jsonl",
     "raw_dir": "raw",

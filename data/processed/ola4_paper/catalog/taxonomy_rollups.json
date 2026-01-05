@@ -1,0 +1,362 @@
+{
+  "entities_total": 1000,
+  "entities_unmeasured": 538,
+  "entities_measured": 462,
+  "entities_viable_taxonomic": 136,
+  "entities_nonviable": 326,
+  "allowed_grades": "A,B",
+  "promoted_total": 7,
+  "promoted_rate": 0.007,
+  "counts_by_template_name": {
+    "ladder_6": {
+      "total": 142,
+      "measured": 48,
+      "unmeasured": 94,
+      "viable_taxonomic": 9,
+      "nonviable": 39
+    },
+    "ring_10": {
+      "total": 90,
+      "measured": 27,
+      "unmeasured": 63,
+      "viable_taxonomic": 11,
+      "nonviable": 16
+    },
+    "ladder_5": {
+      "total": 138,
+      "measured": 66,
+      "unmeasured": 72,
+      "viable_taxonomic": 26,
+      "nonviable": 40
+    },
+    "ring_9": {
+      "total": 129,
+      "measured": 62,
+      "unmeasured": 67,
+      "viable_taxonomic": 30,
+      "nonviable": 32
+    },
+    "bipartite_6_6": {
+      "total": 109,
+      "measured": 85,
+      "unmeasured": 24,
+      "viable_taxonomic": 11,
+      "nonviable": 74
+    },
+    "bipartite_5_5": {
+      "total": 124,
+      "measured": 117,
+      "unmeasured": 7,
+      "viable_taxonomic": 38,
+      "nonviable": 79
+    },
+    "ring_12": {
+      "total": 126,
+      "measured": 22,
+      "unmeasured": 104,
+      "viable_taxonomic": 3,
+      "nonviable": 19
+    },
+    "ring_11": {
+      "total": 142,
+      "measured": 35,
+      "unmeasured": 107,
+      "viable_taxonomic": 8,
+      "nonviable": 27
+    }
+  },
+  "counts_by_attractor_class": {
+    "UNMEASURED": 538,
+    "INCOHERENT": 326,
+    "FUNCTIONAL_LOCK": 136
+  },
+  "top_confirmed_families": [
+    {
+      "confirmed_family_id": "66cd82bea78a7e00",
+      "count": 47
+    },
+    {
+      "confirmed_family_id": "7ba835185e2262b8",
+      "count": 41
+    },
+    {
+      "confirmed_family_id": "399db2f04f0e6f9d",
+      "count": 25
+    },
+    {
+      "confirmed_family_id": "f7bbe0a9e7d4423e",
+      "count": 22
+    },
+    {
+      "confirmed_family_id": "f10786713af83965",
+      "count": 17
+    },
+    {
+      "confirmed_family_id": "df6250432f62117f",
+      "count": 16
+    },
+    {
+      "confirmed_family_id": "25a8aaa0ebbc1ba0",
+      "count": 15
+    },
+    {
+      "confirmed_family_id": "416ec40bfc008dbf",
+      "count": 15
+    },
+    {
+      "confirmed_family_id": "987ae29d2e674e53",
+      "count": 14
+    },
+    {
+      "confirmed_family_id": "8d117a9389c27dff",
+      "count": 13
+    },
+    {
+      "confirmed_family_id": "e3616488f0cd37f0",
+      "count": 13
+    },
+    {
+      "confirmed_family_id": "e5132f0080656c0b",
+      "count": 12
+    },
+    {
+      "confirmed_family_id": "f62cd513d214c6cb",
+      "count": 12
+    },
+    {
+      "confirmed_family_id": "5cc8cd12c34d85c8",
+      "count": 10
+    },
+    {
+      "confirmed_family_id": "7adfb2845a4a5ff0",
+      "count": 10
+    },
+    {
+      "confirmed_family_id": "abcef019230fe1ca",
+      "count": 8
+    },
+    {
+      "confirmed_family_id": "2b4a3cb649bf32f4",
+      "count": 7
+    },
+    {
+      "confirmed_family_id": "9cf35dd3c7b87857",
+      "count": 7
+    },
+    {
+      "confirmed_family_id": "ee2cca3de99fef8e",
+      "count": 7
+    },
+    {
+      "confirmed_family_id": "0f31db37a403c1f8",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "7f9fa30715c7d658",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "8c63329e4a6071b4",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "9fa7965e84c2db67",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "04c86c39417d0cfc",
+      "count": 5
+    },
+    {
+      "confirmed_family_id": "09f5e2bfcebc47f3",
+      "count": 5
+    }
+  ],
+  "viable_rate_taxonomic": 0.2943722943722944,
+  "measured_rate": 0.462,
+  "counts_by_kingdom": {
+    "UNKNOWN": 1000
+  },
+  "by_template": [
+    {
+      "template_name": "bipartite_5_5",
+      "N": 10,
+      "total": 124,
+      "counts_by_dof_grade": {
+        "F": 79,
+        "C": 36,
+        "B": 2,
+        "U": 7
+      },
+      "counts_by_attractor_class": {
+        "INCOHERENT": 79,
+        "FUNCTIONAL_LOCK": 38,
+        "UNMEASURED": 7
+      },
+      "attempted_sweep_total": 117,
+      "useful_total": 38,
+      "trivial_total": 0,
+      "promoted_total": 2,
+      "useful_rate": 0.3247863247863248,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.016129032258064516
+    },
+    {
+      "template_name": "bipartite_6_6",
+      "N": 12,
+      "total": 109,
+      "counts_by_dof_grade": {
+        "F": 74,
+        "U": 24,
+        "C": 11
+      },
+      "counts_by_attractor_class": {
+        "INCOHERENT": 74,
+        "UNMEASURED": 24,
+        "FUNCTIONAL_LOCK": 11
+      },
+      "attempted_sweep_total": 85,
+      "useful_total": 11,
+      "trivial_total": 0,
+      "promoted_total": 0,
+      "useful_rate": 0.12941176470588237,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
+    },
+    {
+      "template_name": "ladder_5",
+      "N": 10,
+      "total": 138,
+      "counts_by_dof_grade": {
+        "U": 72,
+        "C": 26,
+        "F": 40
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 72,
+        "FUNCTIONAL_LOCK": 26,
+        "INCOHERENT": 40
+      },
+      "attempted_sweep_total": 66,
+      "useful_total": 26,
+      "trivial_total": 0,
+      "promoted_total": 0,
+      "useful_rate": 0.3939393939393939,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
+    },
+    {
+      "template_name": "ladder_6",
+      "N": 12,
+      "total": 142,
+      "counts_by_dof_grade": {
+        "U": 94,
+        "F": 39,
+        "C": 8,
+        "B": 1
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 94,
+        "INCOHERENT": 39,
+        "FUNCTIONAL_LOCK": 9
+      },
+      "attempted_sweep_total": 48,
+      "useful_total": 9,
+      "trivial_total": 0,
+      "promoted_total": 1,
+      "useful_rate": 0.1875,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.007042253521126761
+    },
+    {
+      "template_name": "ring_10",
+      "N": 10,
+      "total": 90,
+      "counts_by_dof_grade": {
+        "F": 16,
+        "U": 63,
+        "B": 3,
+        "C": 8
+      },
+      "counts_by_attractor_class": {
+        "INCOHERENT": 16,
+        "UNMEASURED": 63,
+        "FUNCTIONAL_LOCK": 11
+      },
+      "attempted_sweep_total": 27,
+      "useful_total": 11,
+      "trivial_total": 0,
+      "promoted_total": 3,
+      "useful_rate": 0.4074074074074074,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.03333333333333333
+    },
+    {
+      "template_name": "ring_11",
+      "N": 11,
+      "total": 142,
+      "counts_by_dof_grade": {
+        "U": 107,
+        "F": 27,
+        "C": 8
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 107,
+        "INCOHERENT": 27,
+        "FUNCTIONAL_LOCK": 8
+      },
+      "attempted_sweep_total": 35,
+      "useful_total": 8,
+      "trivial_total": 0,
+      "promoted_total": 0,
+      "useful_rate": 0.22857142857142856,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
+    },
+    {
+      "template_name": "ring_12",
+      "N": 12,
+      "total": 126,
+      "counts_by_dof_grade": {
+        "U": 104,
+        "F": 19,
+        "C": 3
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 104,
+        "INCOHERENT": 19,
+        "FUNCTIONAL_LOCK": 3
+      },
+      "attempted_sweep_total": 22,
+      "useful_total": 3,
+      "trivial_total": 0,
+      "promoted_total": 0,
+      "useful_rate": 0.13636363636363635,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
+    },
+    {
+      "template_name": "ring_9",
+      "N": 9,
+      "total": 129,
+      "counts_by_dof_grade": {
+        "U": 67,
+        "C": 29,
+        "F": 32,
+        "B": 1
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 67,
+        "FUNCTIONAL_LOCK": 30,
+        "INCOHERENT": 32
+      },
+      "attempted_sweep_total": 62,
+      "useful_total": 30,
+      "trivial_total": 0,
+      "promoted_total": 1,
+      "useful_rate": 0.4838709677419355,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.007751937984496124
+    }
+  ]
+}

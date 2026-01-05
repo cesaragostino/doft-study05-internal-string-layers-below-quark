@@ -1,0 +1,16 @@
+{
+  "schema_version": "core_promotion_blocks_v2",
+  "ola_from": 4,
+  "ola_to": 5,
+  "entities_jsonl": "../../../data/processed/ola4_paper/catalog/entities.jsonl",
+  "genome_layer_csv": "../../../data/processed/ola4_paper/catalog/genome_layers_ola4_paper_taxonomy.csv",
+  "output_blocks_json": "../../../data/processed/ola4_paper/promoted/simple_blocks.json",
+  "dna_output_csv": "../../../data/processed/ola4_paper/promoted/dof_dna_catalog.csv",
+  "blocks_prev_json": "../../../data/processed/ola3_paper/promoted/simple_blocks.json",
+  "blocks_prev_block_id_key": "block_id",
+  "allowed_grades": [
+    "A",
+    "B"
+  ],
+  "require_node_theta_internal": true
+}

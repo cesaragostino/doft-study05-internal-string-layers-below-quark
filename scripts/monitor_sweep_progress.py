@@ -43,7 +43,9 @@ def _iter_entities(path: Path):
             except Exception:
                 continue
             if rec.get("entity_id"):
-                rows.append(rec)
+                tags = rec.get("tags_raw") or {}
+                if tags.get("candidate") is True:
+                    rows.append(rec)
     return rows
 
 
@@ -86,8 +88,8 @@ def main() -> None:
     )
     parser.add_argument(
         "--entities",
-        default="data/processed/ola2/raw/entities_candidates.jsonl",
-        help="entities_candidates.jsonl path.",
+        default=None,
+        help="entities_candidates.jsonl path (defaults to sweep config inputs).",
     )
     parser.add_argument(
         "--shards-root",
@@ -104,12 +106,14 @@ def main() -> None:
 
     sweep_cfg_path = Path(args.sweep_config)
     cfg = _load_json(sweep_cfg_path)
-    entities_path = Path(args.entities)
-    if args.entities == "data/processed/ola2/raw/entities_candidates.jsonl":
-        inputs = cfg.get("inputs", {}) or {}
-        cfg_entities = inputs.get("entities_candidates_jsonl")
-        if isinstance(cfg_entities, str) and cfg_entities:
-            entities_path = _resolve_path(cfg_entities, sweep_cfg_path.parent)
+    inputs = cfg.get("inputs", {}) or {}
+    cfg_entities = inputs.get("entities_candidates_jsonl")
+    if args.entities:
+        entities_path = Path(args.entities)
+    elif isinstance(cfg_entities, str) and cfg_entities:
+        entities_path = _resolve_path(cfg_entities, sweep_cfg_path.parent)
+    else:
+        entities_path = Path("data/processed/ola2/raw/entities_candidates.jsonl")
     entities = _iter_entities(entities_path)
     expected_per_entity = {
         rec["entity_id"]: _expected_evals_per_entity(cfg, rec) for rec in entities if rec.get("entity_id")

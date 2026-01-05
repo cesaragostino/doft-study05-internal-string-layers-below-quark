@@ -20,14 +20,6 @@ def _load_json(path: Path) -> Any:
     return json.loads(path.read_text())
 
 
-def _resolve(path_str: Optional[str], base: Path) -> Optional[Path]:
-    if not path_str:
-        return None
-    path = Path(path_str)
-    if path.is_absolute():
-        return path
-    return base / path
-
 
 def _as_float(val: Any) -> Optional[float]:
     try:
@@ -85,20 +77,11 @@ def _load_genome_rows(genome_path: Path) -> Dict[str, Dict[str, Any]]:
 
 
 def _resolve_prev_blocks(
-    run_inputs_path: Optional[Path],
-    ola_from: int,
     blocks_prev_override: Optional[Path],
 ) -> Path:
     if blocks_prev_override is not None:
         return blocks_prev_override
-    if run_inputs_path is None:
-        raise ValueError("Missing --blocks-prev or --run-inputs.")
-    run_inputs = _load_json(run_inputs_path)
-    inputs = (run_inputs.get("inputs") or {}).get(f"ola{ola_from - 1}") or {}
-    prev_path = inputs.get("simple_blocks_json")
-    if not prev_path:
-        raise ValueError(f"simple_blocks_json not found for ola{ola_from - 1} in run inputs.")
-    return _resolve(str(prev_path), run_inputs_path.parent)  # type: ignore[arg-type]
+    raise ValueError("Missing --blocks-prev (run-inputs is no longer supported).")
 
 
 def _build_nodes(
@@ -313,7 +296,6 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Promote OlaN entities into Ola(N+1) blocks (V1).")
     parser.add_argument("--ola-from", type=int, required=True, help="Source Ola number.")
     parser.add_argument("--ola-to", type=int, required=True, help="Target Ola number.")
-    parser.add_argument("--run-inputs", type=Path, help="Path to doft_run_inputs_v4.json.")
     parser.add_argument("--entities", type=Path, help="Override entities.jsonl path.")
     parser.add_argument("--genome", type=Path, help="Override genome_layers_olaN_taxonomy.csv path.")
     parser.add_argument("--blocks-prev", type=Path, help="Override simple_blocks.json from Ola(N-1).")
@@ -330,17 +312,13 @@ def main() -> None:
     args = parser.parse_args()
 
     base_dir = Path.cwd()
-    run_inputs_path = args.run_inputs
-    if run_inputs_path is not None:
-        base_dir = run_inputs_path.parent
-
     ola_from = args.ola_from
     ola_to = args.ola_to
     entities_path = args.entities or Path(f"data/processed/ola{ola_from}/catalog/entities.jsonl")
     genome_path = args.genome or Path(
         f"data/processed/ola{ola_from}/catalog/genome_layers_ola{ola_from}_taxonomy.csv"
     )
-    blocks_prev_path = _resolve_prev_blocks(run_inputs_path, ola_from, args.blocks_prev)
+    blocks_prev_path = _resolve_prev_blocks(args.blocks_prev)
     blocks_prev_id_key = str(args.blocks_prev_id_key or "block_id")
     output_path = args.output or Path(f"data/processed/ola{ola_to}/inputs/blocks_from_ola{ola_from}.json")
     dna_output_path = args.dna_output or Path(

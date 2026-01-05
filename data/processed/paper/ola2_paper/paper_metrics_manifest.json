@@ -4,10 +4,22 @@
   "paper_csv": "data/processed/paper/ola2_paper/paper_metrics_ola2_paper.csv",
   "plots": [
     "rates_vs_n.png",
+    "candidate_rate_regression.png",
+    "candidate_rate_heatmap.png",
     "heatmap_template_vs_n.png",
     "scatter_R_vs_PE.png",
     "robustness_vs_n.png",
-    "h_part_vs_n.png"
+    "h_part_vs_n.png",
+    "coherence_decay_vs_n.png",
+    "memory_s2_vs_n.png",
+    "r_mean_lastw_vs_n.png",
+    "explorer_fail_boxplots.png",
+    "particle_enrichment_heatmap.png",
+    "particle_enrichment_by_template.csv",
+    "lineage_sankey.png",
+    "lineage_sankey_edges.csv",
+    "candidate_rate_vs_density.png",
+    "robustness_vs_density.png"
   ],
   "rows": 323
 }

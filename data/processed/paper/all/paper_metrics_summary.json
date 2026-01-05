@@ -1,8 +1,8 @@
 {
-  "candidates_total": 323,
-  "evaluated_total": 323,
-  "sweep_passed_total": 323,
-  "technical_viable_rate": 1.0,
-  "promoted_total": 323,
-  "promoted_rate": 1.0
+  "candidates_total": 4323,
+  "evaluated_total": 1187,
+  "sweep_passed_total": 1187,
+  "technical_viable_rate": 0.27457783946333564,
+  "promoted_total": 448,
+  "promoted_rate": 0.10363173721952348
 }

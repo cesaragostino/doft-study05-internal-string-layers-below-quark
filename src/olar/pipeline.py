@@ -121,9 +121,6 @@ def _build_core_promotion_cmd(config_path: Path) -> List[str]:
         "--ola-to",
         str(int(ola_to)),
     ]
-    if cfg.get("run_inputs"):
-        run_inputs = _resolve_path_with_base(str(cfg.get("run_inputs")), None, base_dir)
-        cmd.extend(["--run-inputs", str(run_inputs)])
     if cfg.get("entities_jsonl"):
         entities_jsonl = _resolve_path_with_base(str(cfg.get("entities_jsonl")), None, base_dir)
         cmd.extend(["--entities", str(entities_jsonl)])
@@ -262,7 +259,7 @@ def _collect_step_inputs(step_type: str, cfg: Dict[str, Any]) -> List[str]:
         return list(
             _iter_cfg_paths(
                 cfg,
-                ("run_inputs", "entities_jsonl", "genome_layer_csv", "blocks_prev_json"),
+                ("entities_jsonl", "genome_layer_csv", "blocks_prev_json"),
             )
         )
     if step_type == "olar_sweep_shards":

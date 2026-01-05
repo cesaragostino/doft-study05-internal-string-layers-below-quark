@@ -197,14 +197,17 @@ def main() -> None:
         written = append_jsonl(entities_path, entities_rows, validate=validate_entity_candidate)
         for row in entities_rows:
             tags = row.get("tags_raw") or {}
-            print(
-                "[explorer_cli] wrote entity"
-                f" entity={_short_id(row.get('entity_id'))}"
-                f" source_eval={_short_id(row.get('source_eval_id'))}"
-                f" seed={row.get('seed')}"
-                f" bin={row.get('engine_params_bin_id')}"
-                f" candidate={tags.get('candidate')}"
-            )
+            if tags.get("candidate"):
+                print(
+                    "[explorer_cli] wrote entity"
+                    f" entity={_short_id(row.get('entity_id'))}"
+                    f" source_eval={_short_id(row.get('source_eval_id'))}"
+                    f" seed={row.get('seed')}"
+                    f" bin={row.get('engine_params_bin_id')}"
+                    f" candidate={tags.get('candidate')}"
+                )
+            else:
+                print(".", end="", flush=True)
         entities_rows.clear()
         entities_written_total += written
 

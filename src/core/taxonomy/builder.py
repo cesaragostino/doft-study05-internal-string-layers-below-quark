@@ -30,6 +30,10 @@ def _resolve_input(path_str: str, base_dir: Path) -> Path:
     path = Path(path_str)
     if path.is_absolute():
         return path
+    if path_str.startswith("."):
+        return base_dir / path
+    if path_str.startswith(("data/", "src/", "docs/", "scripts/")):
+        return path
     return base_dir / path
 
 

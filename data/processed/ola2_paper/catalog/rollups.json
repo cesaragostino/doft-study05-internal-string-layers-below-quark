@@ -5,8 +5,8 @@
   "sweep_passed_total": 323,
   "technical_viable_rate": 1.0,
   "nan_primary_rate_global": 0.0,
-  "runtime_sec_mean_global": 111.5006781300296,
-  "runtime_sec_p95_global": 164.71863561497304,
+  "runtime_sec_mean_global": 119.20852937394625,
+  "runtime_sec_p95_global": 177.3501617457019,
   "viables_total": 323,
   "sweep_evals_total": 1292,
   "attempts_total_by_template": [

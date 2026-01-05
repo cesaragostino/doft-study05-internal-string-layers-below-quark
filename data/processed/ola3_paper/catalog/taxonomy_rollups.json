@@ -1,0 +1,364 @@
+{
+  "entities_total": 3000,
+  "entities_unmeasured": 2598,
+  "entities_measured": 402,
+  "entities_viable_taxonomic": 328,
+  "entities_nonviable": 74,
+  "allowed_grades": "A,B",
+  "promoted_total": 118,
+  "promoted_rate": 0.03933333333333333,
+  "counts_by_template_name": {
+    "ring_9": {
+      "total": 339,
+      "measured": 13,
+      "unmeasured": 326,
+      "viable_taxonomic": 5,
+      "nonviable": 8
+    },
+    "bipartite_4_4": {
+      "total": 361,
+      "measured": 53,
+      "unmeasured": 308,
+      "viable_taxonomic": 33,
+      "nonviable": 20
+    },
+    "ladder_3": {
+      "total": 377,
+      "measured": 79,
+      "unmeasured": 298,
+      "viable_taxonomic": 78,
+      "nonviable": 1
+    },
+    "ring_6": {
+      "total": 361,
+      "measured": 67,
+      "unmeasured": 294,
+      "viable_taxonomic": 64,
+      "nonviable": 3
+    },
+    "bipartite_3_3": {
+      "total": 383,
+      "measured": 99,
+      "unmeasured": 284,
+      "viable_taxonomic": 95,
+      "nonviable": 4
+    },
+    "ring_8": {
+      "total": 378,
+      "measured": 13,
+      "unmeasured": 365,
+      "viable_taxonomic": 9,
+      "nonviable": 4
+    },
+    "ring_7": {
+      "total": 411,
+      "measured": 39,
+      "unmeasured": 372,
+      "viable_taxonomic": 29,
+      "nonviable": 10
+    },
+    "bipartite_4_5": {
+      "total": 390,
+      "measured": 39,
+      "unmeasured": 351,
+      "viable_taxonomic": 15,
+      "nonviable": 24
+    }
+  },
+  "counts_by_attractor_class": {
+    "UNMEASURED": 2598,
+    "FUNCTIONAL_LOCK": 328,
+    "INCOHERENT": 74
+  },
+  "top_confirmed_families": [
+    {
+      "confirmed_family_id": "9706bd43e57aae0f",
+      "count": 40
+    },
+    {
+      "confirmed_family_id": "169904b84b6e9a62",
+      "count": 36
+    },
+    {
+      "confirmed_family_id": "e96db2b239065d32",
+      "count": 35
+    },
+    {
+      "confirmed_family_id": "3438ba1c3e51db60",
+      "count": 25
+    },
+    {
+      "confirmed_family_id": "ab12768a8b82e5ea",
+      "count": 24
+    },
+    {
+      "confirmed_family_id": "b2779210e3187fb5",
+      "count": 24
+    },
+    {
+      "confirmed_family_id": "775f59b690500c6a",
+      "count": 17
+    },
+    {
+      "confirmed_family_id": "c9b47a3d12304628",
+      "count": 17
+    },
+    {
+      "confirmed_family_id": "c5ee183bef57a5ba",
+      "count": 15
+    },
+    {
+      "confirmed_family_id": "6e4f939a74045f3f",
+      "count": 13
+    },
+    {
+      "confirmed_family_id": "633d5499d54bb110",
+      "count": 11
+    },
+    {
+      "confirmed_family_id": "f6d9895060767943",
+      "count": 10
+    },
+    {
+      "confirmed_family_id": "19858be63d28189f",
+      "count": 9
+    },
+    {
+      "confirmed_family_id": "acec0b067cfb05b0",
+      "count": 7
+    },
+    {
+      "confirmed_family_id": "3639ccfb0229fa98",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "896e05e558170d45",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "a32b359eb39ba34e",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "e546f575fa019a86",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "fcf8400f959827ef",
+      "count": 6
+    },
+    {
+      "confirmed_family_id": "101671262d1edcc1",
+      "count": 5
+    },
+    {
+      "confirmed_family_id": "64eae3aec361bb5c",
+      "count": 5
+    },
+    {
+      "confirmed_family_id": "e109a0c8c1700740",
+      "count": 5
+    },
+    {
+      "confirmed_family_id": "2796091638820439",
+      "count": 4
+    },
+    {
+      "confirmed_family_id": "398201deca51789c",
+      "count": 4
+    },
+    {
+      "confirmed_family_id": "4b0323b0fcc663d7",
+      "count": 4
+    }
+  ],
+  "viable_rate_taxonomic": 0.8159203980099502,
+  "measured_rate": 0.134,
+  "counts_by_kingdom": {
+    "UNKNOWN": 3000
+  },
+  "by_template": [
+    {
+      "template_name": "bipartite_3_3",
+      "N": 6,
+      "total": 383,
+      "counts_by_dof_grade": {
+        "U": 284,
+        "C": 52,
+        "B": 43,
+        "F": 4
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 284,
+        "FUNCTIONAL_LOCK": 95,
+        "INCOHERENT": 4
+      },
+      "attempted_sweep_total": 99,
+      "useful_total": 95,
+      "trivial_total": 0,
+      "promoted_total": 43,
+      "useful_rate": 0.9595959595959596,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.1122715404699739
+    },
+    {
+      "template_name": "bipartite_4_4",
+      "N": 8,
+      "total": 361,
+      "counts_by_dof_grade": {
+        "U": 308,
+        "C": 29,
+        "F": 20,
+        "B": 4
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 308,
+        "FUNCTIONAL_LOCK": 33,
+        "INCOHERENT": 20
+      },
+      "attempted_sweep_total": 53,
+      "useful_total": 33,
+      "trivial_total": 0,
+      "promoted_total": 4,
+      "useful_rate": 0.6226415094339622,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0110803324099723
+    },
+    {
+      "template_name": "bipartite_4_5",
+      "N": 9,
+      "total": 390,
+      "counts_by_dof_grade": {
+        "U": 351,
+        "F": 24,
+        "C": 15
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 351,
+        "INCOHERENT": 24,
+        "FUNCTIONAL_LOCK": 15
+      },
+      "attempted_sweep_total": 39,
+      "useful_total": 15,
+      "trivial_total": 0,
+      "promoted_total": 0,
+      "useful_rate": 0.38461538461538464,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
+    },
+    {
+      "template_name": "ladder_3",
+      "N": 6,
+      "total": 377,
+      "counts_by_dof_grade": {
+        "U": 298,
+        "C": 41,
+        "B": 37,
+        "F": 1
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 298,
+        "FUNCTIONAL_LOCK": 78,
+        "INCOHERENT": 1
+      },
+      "attempted_sweep_total": 79,
+      "useful_total": 78,
+      "trivial_total": 0,
+      "promoted_total": 37,
+      "useful_rate": 0.9873417721518988,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.09814323607427056
+    },
+    {
+      "template_name": "ring_6",
+      "N": 6,
+      "total": 361,
+      "counts_by_dof_grade": {
+        "U": 294,
+        "B": 27,
+        "C": 37,
+        "F": 3
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 294,
+        "FUNCTIONAL_LOCK": 64,
+        "INCOHERENT": 3
+      },
+      "attempted_sweep_total": 67,
+      "useful_total": 64,
+      "trivial_total": 0,
+      "promoted_total": 27,
+      "useful_rate": 0.9552238805970149,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.07479224376731301
+    },
+    {
+      "template_name": "ring_7",
+      "N": 7,
+      "total": 411,
+      "counts_by_dof_grade": {
+        "U": 372,
+        "F": 10,
+        "C": 23,
+        "B": 6
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 372,
+        "INCOHERENT": 10,
+        "FUNCTIONAL_LOCK": 29
+      },
+      "attempted_sweep_total": 39,
+      "useful_total": 29,
+      "trivial_total": 0,
+      "promoted_total": 6,
+      "useful_rate": 0.7435897435897436,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.014598540145985401
+    },
+    {
+      "template_name": "ring_8",
+      "N": 8,
+      "total": 378,
+      "counts_by_dof_grade": {
+        "U": 365,
+        "C": 8,
+        "F": 4,
+        "B": 1
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 365,
+        "FUNCTIONAL_LOCK": 9,
+        "INCOHERENT": 4
+      },
+      "attempted_sweep_total": 13,
+      "useful_total": 9,
+      "trivial_total": 0,
+      "promoted_total": 1,
+      "useful_rate": 0.6923076923076923,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0026455026455026454
+    },
+    {
+      "template_name": "ring_9",
+      "N": 9,
+      "total": 339,
+      "counts_by_dof_grade": {
+        "U": 326,
+        "F": 8,
+        "C": 5
+      },
+      "counts_by_attractor_class": {
+        "UNMEASURED": 326,
+        "INCOHERENT": 8,
+        "FUNCTIONAL_LOCK": 5
+      },
+      "attempted_sweep_total": 13,
+      "useful_total": 5,
+      "trivial_total": 0,
+      "promoted_total": 0,
+      "useful_rate": 0.38461538461538464,
+      "trivial_rate": 0.0,
+      "promoted_rate": 0.0
+    }
+  ]
+}
