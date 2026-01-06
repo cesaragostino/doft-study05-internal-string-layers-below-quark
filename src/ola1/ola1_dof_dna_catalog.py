@@ -161,11 +161,11 @@ def _cluster_id(r1: Optional[float], r2: Optional[float]) -> str:
     return f"R1_{r1!r}_R2_{r2!r}"
 
 
-def _omega_ref_proxy(row: Dict[str, object]) -> float:
+def _omega_ref_proxy(row: Dict[str, object]) -> Optional[float]:
     omega_ref = _to_float(row.get("omega_ref"))
     if omega_ref is not None:
         return omega_ref
-    raise RuntimeError(f"omega_ref missing or non-finite for run_id={row.get('run_id')}")
+    return None
 
 
 def _genes_min(row: Dict[str, object], omega_ref_proxy: float) -> str:
@@ -214,6 +214,8 @@ def main() -> None:
         print(f"[dof_dna] harmonic fields filled in {filled} rows")
 
     dna_rows: List[Dict[str, object]] = []
+    total_rows = len(rows)
+    skipped_missing_omega = 0
     if args.use_mass_sim:
         print("[dof_dna] --use-mass-sim ignored: DNA catalog uses raw band_energies_gev only.")
 
@@ -264,6 +266,9 @@ def main() -> None:
             sm_d_total = best_raw if np.isfinite(best_raw) else None
         cluster_id = _cluster_id(r1, r2) if args.cluster_radii else ""
         omega_ref_proxy = _omega_ref_proxy(row)
+        if omega_ref_proxy is None:
+            skipped_missing_omega += 1
+            continue
         genes_min = _genes_min(row, omega_ref_proxy)
         dna_rows.append(
             {
@@ -296,6 +301,12 @@ def main() -> None:
             counts[cid] = counts.get(cid, 0) + 1
         for r in dna_rows:
             r["dna_cluster_size"] = counts.get(r.get("dna_cluster_id") or "", 0)
+
+    if skipped_missing_omega:
+        print(
+            "[ola1_dna] WARNING: skipped rows missing omega_ref in proxies CSV. "
+            f"{skipped_missing_omega}/{total_rows}"
+        )
 
     dna_rows.sort(key=lambda r: (r.get("run_id") is None, r.get("run_id")))
     args.output.parent.mkdir(parents=True, exist_ok=True)
