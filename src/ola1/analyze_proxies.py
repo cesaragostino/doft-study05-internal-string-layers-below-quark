@@ -195,7 +195,16 @@ def analyze(case: str, sm_universe: Path, output: Path, results_path: Path | Non
     fps = {name: build_fingerprint(spec) for name, spec in specs.items()}
 
     rows: List[Dict] = []
+    total_runs = len(runs)
+    empty_runs = 0
+    missing_id_runs = 0
     for run in runs:
+        if not isinstance(run, dict) or not run:
+            empty_runs += 1
+            continue
+        if run.get("run_id") is None:
+            missing_id_runs += 1
+            continue
         base = compute_basic_proxies(run)
         band_energies = run.get("band_energies_gev", [])
         # mass/lock proxies (already computed in run_sweep)
@@ -235,6 +244,17 @@ def analyze(case: str, sm_universe: Path, output: Path, results_path: Path | Non
                 base[f"{name}_is_match"] = False
                 base[f"{name}_n_levels_sim"] = len(levels)
         rows.append(base)
+
+    if empty_runs:
+        print(
+            f"[ola1_proxies] WARNING: skipped empty run records (missing sweep data). "
+            f"{empty_runs}/{total_runs}"
+        )
+    if missing_id_runs:
+        print(
+            f"[ola1_proxies] WARNING: skipped runs missing run_id. "
+            f"{missing_id_runs}/{total_runs}"
+        )
 
     output_dir.mkdir(parents=True, exist_ok=True)
     # Save CSV using proper quoting to avoid column shifts
