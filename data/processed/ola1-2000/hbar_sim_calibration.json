@@ -1,0 +1,25 @@
+{
+  "hbar_sim": 0.31957356272804305,
+  "units": "GeV per rad/time_unit",
+  "n_used": 408,
+  "n_rejected": 224,
+  "omega0": 6.044137173172515,
+  "cluster_tol_rel": 0.1,
+  "fallback_reason": null,
+  "h_i_percentiles": {
+    "p10": 0.30789109169960704,
+    "p50": 0.319599266473887,
+    "p90": 0.3326851301365245
+  },
+  "mode": "auto",
+  "seed_particle": null,
+  "selection": {
+    "auto": {
+      "q_lock_min": 0.85,
+      "d_total_max": 3.0,
+      "min_band_count": 2
+    },
+    "seed": null,
+    "grade_filter": "A/B with enough_levels_full"
+  }
+}

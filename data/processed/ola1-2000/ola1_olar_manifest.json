@@ -1,0 +1,31 @@
+{
+  "schema_version": "ola1_olar_manifest_v1",
+  "timestamp_utc": "2026-01-06T02:44:13Z",
+  "inputs": {
+    "runs_full_jsonl": "data/processed/ola1-2000/runs_full.jsonl",
+    "dna_csv": "data/processed/ola1-2000/dof_dna_catalog.csv"
+  },
+  "outputs": {
+    "blocks_json": "data/processed/ola1-2000/simple_blocks_canonical.json",
+    "dna_csv": "data/processed/ola1-2000/dof_dna_catalog_by_block_id.csv"
+  },
+  "hashes": {
+    "runs_full_jsonl": "sha256:c579e97966c48d9f0d40ca3cbbce313d7e96d2e99d324e6262ba53e59c0ab988",
+    "dna_csv": "sha256:d265870af368b7665196503cfbb06a19d941c737bbe34fb1c4711b0823758d73",
+    "blocks_json": "sha256:7e3ca73db48ea0933806ab07f4a21815c0059eed6e0493750f8d4eb1e8bc0b66",
+    "code_hash": "sha256:28dda3b6fd46dec6c51b83a6329ff94c29f749dad5a2970c0c89429c94a4a10f"
+  },
+  "counts": {
+    "runs_full": 1977,
+    "dna_rows": 1977,
+    "blocks": 1977,
+    "missing_runs": 0
+  },
+  "machine": {
+    "python": "3.13.9",
+    "platform": "macOS-26.2-x86_64-i386-64bit-Mach-O"
+  },
+  "notes": {
+    "block_id_policy": "run_id"
+  }
+}
