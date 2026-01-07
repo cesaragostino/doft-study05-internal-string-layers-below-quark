@@ -1392,8 +1392,14 @@ def main() -> None:
     parser.add_argument("--olas", help="Comma-separated ola numbers (e.g. 2,3,4).")
     parser.add_argument("--processed-root", default="data/processed")
     parser.add_argument("--ola-dir", action="append", help="Explicit ola directory (repeatable).")
-    parser.add_argument("--out-root", default="data/processed/paper")
+    parser.add_argument("--out-root", default="data/processed/paper/data")
+    parser.add_argument("--skip-plots", action="store_true", help="Skip plot generation (data-only).")
     parser.add_argument("--all", action="store_true", help="Generate consolidated output in /all.")
+    parser.add_argument(
+        "--all-only",
+        action="store_true",
+        help="Generate only consolidated output in /all (skip per-ola outputs).",
+    )
     args = parser.parse_args()
 
     all_rows: List[Dict[str, Any]] = []
@@ -1432,111 +1438,114 @@ def main() -> None:
         for key, total in list(density_by_template.items()):
             count = density_counts.get(key, 0)
             density_by_template[key] = total / count if count else total
-        out_dir = Path(args.out_root) / ola_name
-        out_dir.mkdir(parents=True, exist_ok=True)
-
         paper_rows = _paper_rows(rows, ola_label=ola_name)
         fieldnames = list(paper_rows[0].keys()) if paper_rows else []
-        _write_csv(out_dir / f"paper_metrics_{ola_name}.csv", fieldnames, paper_rows)
+        if not args.all_only:
+            out_dir = Path(args.out_root) / ola_name
+            out_dir.mkdir(parents=True, exist_ok=True)
+            _write_csv(out_dir / f"paper_metrics_{ola_name}.csv", fieldnames, paper_rows)
 
-        agg_rows = _aggregate_rates_by_node_count(rollups_by_template, taxonomy_by_template)
-        _plot_rates_vs_n(agg_rows, out_dir / "rates_vs_n.png")
-        _plot_candidate_rate_regression(rollups_by_template, out_dir / "candidate_rate_regression.png")
-        _plot_candidate_rate_heatmap(rollups_by_template, out_dir / "candidate_rate_heatmap.png")
-        _plot_heatmap(rows, out_dir / "heatmap_template_vs_n.png")
-        _plot_scatter(rows, out_dir / "scatter_R_vs_PE.png")
-        _plot_robustness(rows, out_dir / "robustness_vs_n.png")
-        _plot_h_part(rows, out_dir / "h_part_vs_n.png")
-        _plot_coherence_decay(rows, out_dir / "coherence_decay_vs_n.png")
-        _plot_memory_s2(rows, out_dir / "memory_s2_vs_n.png")
-        _plot_r_threshold(rows, out_dir / "r_mean_lastw_vs_n.png", 0.75)
-        model = _fit_candidate_rate_model(rollups_by_template, density_by_template)
-        if model:
-            (out_dir / "candidate_rate_model.json").write_text(json.dumps(model, indent=2))
-            _plot_candidate_rate_residuals(
-                rollups_by_template,
-                density_by_template,
-                model,
-                out_dir / "candidate_rate_residuals.png",
-            )
-        attempts_path = ola_dir / "raw" / "attempts.jsonl"
-        if attempts_path.exists():
-            attempts_rows = _load_jsonl(attempts_path)
-            _plot_explorer_fail_boxplots(attempts_rows, out_dir / "explorer_fail_boxplots.png")
-            particle_lib = _resolve_particle_library(Path("."))
-            if particle_lib is not None:
-                enrichment_rows = _build_particle_enrichment(attempts_rows, particle_lib)
-                if enrichment_rows:
-                    _write_csv(out_dir / "particle_enrichment_by_template.csv", list(enrichment_rows[0].keys()), enrichment_rows)
-                    _plot_particle_enrichment_heatmap(
-                        enrichment_rows, out_dir / "particle_enrichment_heatmap.png"
-                    )
-                lineage_data = _build_lineage_links(
-                    attempts_rows, particle_lib, _taxonomy_lookup(catalog_dir)
+        plots: List[str] = []
+        if not args.skip_plots and not args.all_only:
+            agg_rows = _aggregate_rates_by_node_count(rollups_by_template, taxonomy_by_template)
+            _plot_rates_vs_n(agg_rows, out_dir / "rates_vs_n.png")
+            _plot_candidate_rate_regression(rollups_by_template, out_dir / "candidate_rate_regression.png")
+            _plot_candidate_rate_heatmap(rollups_by_template, out_dir / "candidate_rate_heatmap.png")
+            _plot_heatmap(rows, out_dir / "heatmap_template_vs_n.png")
+            _plot_scatter(rows, out_dir / "scatter_R_vs_PE.png")
+            _plot_robustness(rows, out_dir / "robustness_vs_n.png")
+            _plot_h_part(rows, out_dir / "h_part_vs_n.png")
+            _plot_coherence_decay(rows, out_dir / "coherence_decay_vs_n.png")
+            _plot_memory_s2(rows, out_dir / "memory_s2_vs_n.png")
+            _plot_r_threshold(rows, out_dir / "r_mean_lastw_vs_n.png", 0.75)
+            model = _fit_candidate_rate_model(rollups_by_template, density_by_template)
+            if model:
+                (out_dir / "candidate_rate_model.json").write_text(json.dumps(model, indent=2))
+                _plot_candidate_rate_residuals(
+                    rollups_by_template,
+                    density_by_template,
+                    model,
+                    out_dir / "candidate_rate_residuals.png",
                 )
-                if lineage_data:
-                    stages, link_counts = lineage_data
-                    edges = [
-                        {"stage_index": idx, "source": src, "target": dst, "count": count}
-                        for (idx, src, dst), count in link_counts.items()
-                    ]
-                    _write_csv(
-                        out_dir / "lineage_sankey_edges.csv",
-                        ["stage_index", "source", "target", "count"],
-                        edges,
+            attempts_path = ola_dir / "raw" / "attempts.jsonl"
+            if attempts_path.exists():
+                attempts_rows = _load_jsonl(attempts_path)
+                _plot_explorer_fail_boxplots(attempts_rows, out_dir / "explorer_fail_boxplots.png")
+                particle_lib = _resolve_particle_library(Path("."))
+                if particle_lib is not None:
+                    enrichment_rows = _build_particle_enrichment(attempts_rows, particle_lib)
+                    if enrichment_rows:
+                        _write_csv(out_dir / "particle_enrichment_by_template.csv", list(enrichment_rows[0].keys()), enrichment_rows)
+                        _plot_particle_enrichment_heatmap(
+                            enrichment_rows, out_dir / "particle_enrichment_heatmap.png"
+                        )
+                    lineage_data = _build_lineage_links(
+                        attempts_rows, particle_lib, _taxonomy_lookup(catalog_dir)
                     )
-                    _plot_lineage_sankey(
-                        stages, link_counts, out_dir / "lineage_sankey.png"
-                    )
-        _plot_candidate_rate_vs_density(
-            rollups_by_template, density_by_template, out_dir / "candidate_rate_vs_density.png"
-        )
-        _plot_robustness_vs_density(rows, out_dir / "robustness_vs_density.png")
-
-        plots = [
-            "rates_vs_n.png",
-            "candidate_rate_regression.png",
-            "candidate_rate_heatmap.png",
-            "heatmap_template_vs_n.png",
-            "scatter_R_vs_PE.png",
-            "robustness_vs_n.png",
-            "h_part_vs_n.png",
-            "coherence_decay_vs_n.png",
-            "memory_s2_vs_n.png",
-            "r_mean_lastw_vs_n.png",
-        ]
-        if (out_dir / "candidate_rate_residuals.png").exists():
-            plots.append("candidate_rate_residuals.png")
-        if (out_dir / "explorer_fail_boxplots.png").exists():
-            plots.append("explorer_fail_boxplots.png")
-        if (out_dir / "particle_enrichment_heatmap.png").exists():
-            plots.append("particle_enrichment_heatmap.png")
-        if (out_dir / "particle_enrichment_by_template.csv").exists():
-            plots.append("particle_enrichment_by_template.csv")
-        if (out_dir / "lineage_sankey.png").exists():
-            plots.append("lineage_sankey.png")
-        if (out_dir / "lineage_sankey_edges.csv").exists():
-            plots.append("lineage_sankey_edges.csv")
-        if (out_dir / "candidate_rate_vs_density.png").exists():
-            plots.append("candidate_rate_vs_density.png")
-        if (out_dir / "robustness_vs_density.png").exists():
-            plots.append("robustness_vs_density.png")
-        summary = {
-            "ola_dir": str(ola_dir),
-            "taxonomy_csv": str(taxonomy_csv),
-            "paper_csv": str(out_dir / f"paper_metrics_{ola_name}.csv"),
-            "plots": plots,
-            "rows": len(rows),
-        }
-        (out_dir / "paper_metrics_manifest.json").write_text(json.dumps(summary, indent=2))
-        summary_from_rows = _paper_summary(rows)
-        summary_from_paper = _paper_summary_from_paper_rows(paper_rows)
-        if summary_from_rows != summary_from_paper:
-            raise RuntimeError(
-                "paper_metrics_summary mismatch: summary derived from taxonomy rows does not match paper CSV rows"
+                    if lineage_data:
+                        stages, link_counts = lineage_data
+                        edges = [
+                            {"stage_index": idx, "source": src, "target": dst, "count": count}
+                            for (idx, src, dst), count in link_counts.items()
+                        ]
+                        _write_csv(
+                            out_dir / "lineage_sankey_edges.csv",
+                            ["stage_index", "source", "target", "count"],
+                            edges,
+                        )
+                        _plot_lineage_sankey(
+                            stages, link_counts, out_dir / "lineage_sankey.png"
+                        )
+            _plot_candidate_rate_vs_density(
+                rollups_by_template, density_by_template, out_dir / "candidate_rate_vs_density.png"
             )
-        (out_dir / "paper_metrics_summary.json").write_text(json.dumps(summary_from_paper, indent=2))
-        print(f"[paper_pack] wrote {out_dir}")
+            _plot_robustness_vs_density(rows, out_dir / "robustness_vs_density.png")
+
+            plots = [
+                "rates_vs_n.png",
+                "candidate_rate_regression.png",
+                "candidate_rate_heatmap.png",
+                "heatmap_template_vs_n.png",
+                "scatter_R_vs_PE.png",
+                "robustness_vs_n.png",
+                "h_part_vs_n.png",
+                "coherence_decay_vs_n.png",
+                "memory_s2_vs_n.png",
+                "r_mean_lastw_vs_n.png",
+            ]
+            if (out_dir / "candidate_rate_residuals.png").exists():
+                plots.append("candidate_rate_residuals.png")
+            if (out_dir / "explorer_fail_boxplots.png").exists():
+                plots.append("explorer_fail_boxplots.png")
+            if (out_dir / "particle_enrichment_heatmap.png").exists():
+                plots.append("particle_enrichment_heatmap.png")
+            if (out_dir / "particle_enrichment_by_template.csv").exists():
+                plots.append("particle_enrichment_by_template.csv")
+            if (out_dir / "lineage_sankey.png").exists():
+                plots.append("lineage_sankey.png")
+            if (out_dir / "lineage_sankey_edges.csv").exists():
+                plots.append("lineage_sankey_edges.csv")
+            if (out_dir / "candidate_rate_vs_density.png").exists():
+                plots.append("candidate_rate_vs_density.png")
+            if (out_dir / "robustness_vs_density.png").exists():
+                plots.append("robustness_vs_density.png")
+        if not args.all_only:
+            summary = {
+                "ola_dir": str(ola_dir),
+                "taxonomy_csv": str(taxonomy_csv),
+                "paper_csv": str(out_dir / f"paper_metrics_{ola_name}.csv"),
+                "plots": plots,
+                "rows": len(rows),
+            }
+            (out_dir / "paper_metrics_manifest.json").write_text(json.dumps(summary, indent=2))
+            summary_from_rows = _paper_summary(rows)
+            summary_from_paper = _paper_summary_from_paper_rows(paper_rows)
+            if summary_from_rows != summary_from_paper:
+                raise RuntimeError(
+                    "paper_metrics_summary mismatch: summary derived from taxonomy rows does not match paper CSV rows"
+                )
+            (out_dir / "paper_metrics_summary.json").write_text(json.dumps(summary_from_paper, indent=2))
+            print(f"[paper_pack] wrote {out_dir}")
 
         all_rows.extend(rows)
         all_paper_rows.extend(paper_rows)
@@ -1562,45 +1571,47 @@ def main() -> None:
         for key, total in list(density_by_template.items()):
             count = density_counts.get(key, 0)
             density_by_template[key] = total / count if count else total
-        agg_rows = _aggregate_rates_by_node_count(all_rollups_by_template, all_taxonomy_by_template)
-        _plot_rates_vs_n(agg_rows, out_dir / "rates_vs_n.png")
-        _plot_candidate_rate_regression(all_rollups_by_template, out_dir / "candidate_rate_regression.png")
-        _plot_candidate_rate_heatmap(all_rollups_by_template, out_dir / "candidate_rate_heatmap.png")
-        _plot_heatmap(all_rows, out_dir / "heatmap_template_vs_n.png")
-        _plot_scatter(all_rows, out_dir / "scatter_R_vs_PE.png")
-        _plot_robustness(all_rows, out_dir / "robustness_vs_n.png")
-        _plot_h_part(all_rows, out_dir / "h_part_vs_n.png")
-        _plot_coherence_decay(all_rows, out_dir / "coherence_decay_vs_n.png")
-        _plot_memory_s2(all_rows, out_dir / "memory_s2_vs_n.png")
-        _plot_r_threshold(all_rows, out_dir / "r_mean_lastw_vs_n.png", 0.75)
-        model = _fit_candidate_rate_model(all_rollups_by_template, density_by_template)
-        if model:
-            (out_dir / "candidate_rate_model.json").write_text(json.dumps(model, indent=2))
-            _plot_candidate_rate_residuals(
-                all_rollups_by_template,
-                density_by_template,
-                model,
-                out_dir / "candidate_rate_residuals.png",
+        plots = []
+        if not args.skip_plots:
+            agg_rows = _aggregate_rates_by_node_count(all_rollups_by_template, all_taxonomy_by_template)
+            _plot_rates_vs_n(agg_rows, out_dir / "rates_vs_n.png")
+            _plot_candidate_rate_regression(all_rollups_by_template, out_dir / "candidate_rate_regression.png")
+            _plot_candidate_rate_heatmap(all_rollups_by_template, out_dir / "candidate_rate_heatmap.png")
+            _plot_heatmap(all_rows, out_dir / "heatmap_template_vs_n.png")
+            _plot_scatter(all_rows, out_dir / "scatter_R_vs_PE.png")
+            _plot_robustness(all_rows, out_dir / "robustness_vs_n.png")
+            _plot_h_part(all_rows, out_dir / "h_part_vs_n.png")
+            _plot_coherence_decay(all_rows, out_dir / "coherence_decay_vs_n.png")
+            _plot_memory_s2(all_rows, out_dir / "memory_s2_vs_n.png")
+            _plot_r_threshold(all_rows, out_dir / "r_mean_lastw_vs_n.png", 0.75)
+            model = _fit_candidate_rate_model(all_rollups_by_template, density_by_template)
+            if model:
+                (out_dir / "candidate_rate_model.json").write_text(json.dumps(model, indent=2))
+                _plot_candidate_rate_residuals(
+                    all_rollups_by_template,
+                    density_by_template,
+                    model,
+                    out_dir / "candidate_rate_residuals.png",
+                )
+            _plot_candidate_rate_vs_density(
+                all_rollups_by_template, density_by_template, out_dir / "candidate_rate_vs_density.png"
             )
-        _plot_candidate_rate_vs_density(
-            all_rollups_by_template, density_by_template, out_dir / "candidate_rate_vs_density.png"
-        )
-        _plot_robustness_vs_density(all_rows, out_dir / "robustness_vs_density.png")
-        plots = [
-            "rates_vs_n.png",
-            "heatmap_template_vs_n.png",
-            "scatter_R_vs_PE.png",
-            "robustness_vs_n.png",
-            "h_part_vs_n.png",
-            "coherence_decay_vs_n.png",
-            "memory_s2_vs_n.png",
-        ]
-        if (out_dir / "candidate_rate_residuals.png").exists():
-            plots.append("candidate_rate_residuals.png")
-        if (out_dir / "candidate_rate_vs_density.png").exists():
-            plots.append("candidate_rate_vs_density.png")
-        if (out_dir / "robustness_vs_density.png").exists():
-            plots.append("robustness_vs_density.png")
+            _plot_robustness_vs_density(all_rows, out_dir / "robustness_vs_density.png")
+            plots = [
+                "rates_vs_n.png",
+                "heatmap_template_vs_n.png",
+                "scatter_R_vs_PE.png",
+                "robustness_vs_n.png",
+                "h_part_vs_n.png",
+                "coherence_decay_vs_n.png",
+                "memory_s2_vs_n.png",
+            ]
+            if (out_dir / "candidate_rate_residuals.png").exists():
+                plots.append("candidate_rate_residuals.png")
+            if (out_dir / "candidate_rate_vs_density.png").exists():
+                plots.append("candidate_rate_vs_density.png")
+            if (out_dir / "robustness_vs_density.png").exists():
+                plots.append("robustness_vs_density.png")
         summary = {
             "olas": sorted({row.get("ola") for row in all_paper_rows}),
             "paper_csv": str(out_dir / "paper_metrics_all.csv"),
