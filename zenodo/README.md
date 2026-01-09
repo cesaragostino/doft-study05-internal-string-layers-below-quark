@@ -43,7 +43,9 @@ study05-doft/
 ├── data/                         # MODEL DATA
 │   └── processed/
 │       └── ola1_paper/
-│           └── promoted/         # Ola1 blocks (needed for Ola2+)
+│           ├── simple_blocks_canonical.json
+│           ├── dof_dna_catalog_by_block_id.csv
+│           └── promoted/         # Ola1 blocks (optional)
 │               ├── simple_blocks.json
 │               └── dof_dna_catalog.csv
 │
@@ -74,21 +76,7 @@ pdflatex main.tex
 
 All figures and data are included—no code execution required.
 
-### 2. Regenerate Figures from Data
-
-To regenerate figures from the included CSV:
-
-```bash
-pip install numpy pandas matplotlib scipy
-
-PYTHONPATH=src python3 scripts/paper_figures_final.py \
-  --metrics-all paper/data/paper_metrics_all.csv \
-  --out-dir paper/figures
-```
-
-**Time:** ~2 minutes
-
-### 3. Run the Full Model
+### 2. Run the Full Model
 
 See [Running the Model](#running-the-model) below.
 
@@ -137,7 +125,7 @@ pip install numpy pandas matplotlib scipy
 
 ### Option A: Start from Ola1 Blocks (Recommended, ~14 hours)
 
-The repository includes pre-computed Ola1 blocks, so you can skip the 3-day Ola1 sweep:
+The repository includes pre-computed Ola1 blocks (canonical + DNA by block_id), so you can skip the 3-day Ola1 sweep:
 
 ```bash
 # Ola2 (~4 hours)
@@ -152,7 +140,7 @@ PYTHONPATH=src python3 -m olar.pipeline \
 PYTHONPATH=src python3 -m olar.pipeline \
   --sequence config/ola4_paper/run_sequence_ola4_paper.json
 
-# Generate paper outputs
+# Generate paper outputs (paper/data + paper/figures)
 PYTHONPATH=src python3 scripts/paper_build.py
 ```
 
