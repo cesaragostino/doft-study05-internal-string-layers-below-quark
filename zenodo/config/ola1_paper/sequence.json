@@ -9,9 +9,9 @@
       "seed": 123,
       "band_min": 0.1,
       "band_max": 3.0,
-      "layer_states": "data/config/ola1/layer_states.yaml",
+      "layer_states": "config/ola1_paper/layer_states.yaml",
       "output_root": "data/processed/ola1",
-      "engine_config": "data/config/ola1/engine_core3.json",
+      "engine_config": "config/ola1_paper/engine_core3.json",
       "no_plots": true
     }
   },
@@ -30,7 +30,7 @@
     "module": "study06.match_sm_ola1",
     "args": {
       "proxies_csv": "data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv",
-      "sm_universe": "data/config/ola1/sm_universe.json",
+      "sm_universe": "config/ola1_paper/sm_universe.json",
       "output": "data/processed/ola1"
     }
   },
@@ -41,8 +41,8 @@
     "args": {
       "proxies_csv": "data/processed/ola1/Core3L_Hadron_all_runs_proxies.csv",
       "zoo_matches_csv": "data/processed/ola1/zoo_matches.csv",
-      "sm_universe": "data/config/ola1/sm_universe.json",
-      "selection_config": "data/config/ola1/wave1_selection.json",
+      "sm_universe": "config/ola1_paper/sm_universe.json",
+      "selection_config": "config/ola1_paper/wave1_selection.json",
       "selection_log": "data/processed/ola1/ola1_blocks_selection.csv",
       "output": "data/processed/ola1/simple_blocks.json",
       "digest": "data/processed/digest/ola1"
@@ -55,7 +55,7 @@
     "args": {
       "wave2_config": "data/raw/wave2_compounds.json",
       "blocks_json": "data/processed/ola1/simple_blocks.json",
-      "sm_universe": "data/config/ola1/sm_universe.json",
+      "sm_universe": "config/ola1_paper/sm_universe.json",
       "templates_json": "data/raw/compound_templates.json",
       "output_root": "data/processed/ola2"
     }

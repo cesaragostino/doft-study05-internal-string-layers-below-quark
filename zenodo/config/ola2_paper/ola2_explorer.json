@@ -55,7 +55,7 @@
   "inputs": {
     "blocks_json": "data/processed/ola1_paper/simple_blocks_canonical.json",
     "dof_dna_catalog_csv": "data/processed/ola1_paper/dof_dna_catalog_by_block_id.csv",
-    "templates_json": "data/config/ola2_paper/ola2_templates.json"
+    "templates_json": "config/ola2_paper/ola2_templates.json"
   },
   "outputs": {
     "raw_dir": "data/processed/ola2_paper/raw",

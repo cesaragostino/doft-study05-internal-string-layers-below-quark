@@ -1,9 +1,0 @@
-tiers:
-  # thresholds sobre shares relativas
-  T_Q_rel_min: 0.20   # BAJADO de 0.35 a 0.20
-  T_S1_rel_min: 0.08
-  T_S2_rel_min: 0.06
-
-s2_state:
-  none_max: 0.015     # SUBIDO levemente para tolerar ruido
-  latent_max: 0.15    # BAJADO de 0.20 a 0.15 (más fácil ser Structural)
