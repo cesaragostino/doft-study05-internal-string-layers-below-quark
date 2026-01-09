@@ -1,6 +1,6 @@
 # Study05 – DOFT Internal Layers Simulator
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18200973.svg)](https://doi.org/10.5281/zenodo.18200973)
 
 This repository contains the computational framework and paper materials for:
 
@@ -43,9 +43,7 @@ study05-doft/
 ├── data/                         # MODEL DATA
 │   └── processed/
 │       └── ola1_paper/
-│           ├── simple_blocks_canonical.json
-│           ├── dof_dna_catalog_by_block_id.csv
-│           └── promoted/         # Ola1 blocks (optional)
+│           └── promoted/         # Ola1 blocks (needed for Ola2+)
 │               ├── simple_blocks.json
 │               └── dof_dna_catalog.csv
 │
@@ -76,7 +74,21 @@ pdflatex main.tex
 
 All figures and data are included—no code execution required.
 
-### 2. Run the Full Model
+### 2. Regenerate Figures from Data
+
+To regenerate figures from the included CSV:
+
+```bash
+pip install numpy pandas matplotlib scipy
+
+PYTHONPATH=src python3 scripts/paper_figures_final.py \
+  --metrics-all paper/data/paper_metrics_all.csv \
+  --out-dir paper/figures
+```
+
+**Time:** ~2 minutes
+
+### 3. Run the Full Model
 
 See [Running the Model](#running-the-model) below.
 
@@ -125,7 +137,7 @@ pip install numpy pandas matplotlib scipy
 
 ### Option A: Start from Ola1 Blocks (Recommended, ~14 hours)
 
-The repository includes pre-computed Ola1 blocks (canonical + DNA by block_id), so you can skip the 3-day Ola1 sweep:
+The repository includes pre-computed Ola1 blocks, so you can skip the 3-day Ola1 sweep:
 
 ```bash
 # Ola2 (~4 hours)
@@ -140,7 +152,7 @@ PYTHONPATH=src python3 -m olar.pipeline \
 PYTHONPATH=src python3 -m olar.pipeline \
   --sequence config/ola4_paper/run_sequence_ola4_paper.json
 
-# Generate paper outputs (paper/data + paper/figures)
+# Generate paper outputs
 PYTHONPATH=src python3 scripts/paper_build.py
 ```
 
@@ -292,7 +304,7 @@ Check `dt` alignment between Explorer and Sweep configs. See the Tuning Guide ap
   title = {DOFT Framework: Code and Data for Coherence Scaling},
   year = {2026},
   publisher = {Zenodo},
-  doi = {10.5281/zenodo.XXXXXXX}
+  doi = {10.5281/zenodo.18200973}
 }
 ```
 
@@ -319,20 +331,22 @@ MIT License. See [LICENSE](LICENSE).
 
 Misaligned `dt` causes 70%+ false positives and wasted computation.
 
-### Recommended Configuration (dt=1.0)
+### Recommended Configuration (dt=0.0025)
+
+The paper results use fine temporal resolution for accurate physics:
 
 **Explorer:**
 ```json
 {
   "engine_defaults": {
-    "T_ticks": 1200,
-    "W": 400,
-    "dt": 1.0
+    "T_ticks": 20000,
+    "W": 4000,
+    "dt": 0.0025
   },
   "tagging_thresholds": {
     "R_mean_lastW_min": 0.75,
     "quality_lock_min": 0.70,
-    "phase_var_lastW_max": 0.08
+    "phase_var_lastW_max": 0.05
   }
 }
 ```
@@ -341,19 +355,23 @@ Misaligned `dt` causes 70%+ false positives and wasted computation.
 ```json
 {
   "engine_defaults": {
-    "T_ticks": 3000,
-    "W": 600,
-    "dt": 1.0
+    "T_ticks": 20000,
+    "W": 4000,
+    "dt": 0.0025
   }
 }
 ```
+
+### Key Insight
+
+The main factor affecting execution time is **seeds per entity**, not `dt`. Reducing seeds speeds up runs but reduces statistical robustness.
 
 ### Parameter Relationships
 
 ```python
 dt_explorer = dt_sweep              # MUST be equal
-T_explorer  = ceil(T_sweep * 0.35)  # Explorer ~35% of Sweep
-W_explorer  = ceil(W_sweep * 0.7)   # Large window for convergence
+T_explorer  = T_sweep               # Same integration length
+W_explorer  = W_sweep               # Same window size
 ```
 
 ### Performance Comparison
@@ -361,21 +379,6 @@ W_explorer  = ceil(W_sweep * 0.7)   # Large window for convergence
 | Configuration | Time | Viable Rate |
 |---------------|------|-------------|
 | Misaligned dt | ~80 hrs | 23% |
-| Aligned dt=1.0 | ~24 hrs | 67% |
-
-### Convergence Test
-
-Before a full run, test whether dt=1.0 captures your physics:
-
-```python
-# Run same structure with dt=1.0 and dt=0.1
-# If R_final differs by >5%, use dt=0.1 (slower but accurate)
-```
-
-### When to Use dt=0.1
-
-- Strong coupling (R > 0.9)
-- Fast collective modes
-- Convergence test fails
+| Aligned dt=0.0025 | ~14 hrs | 67% |
 
 For the complete tuning guide with examples and troubleshooting, see the extended documentation in `docs/tuning_guide.md`.
