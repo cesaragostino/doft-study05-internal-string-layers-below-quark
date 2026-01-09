@@ -1,0 +1,7 @@
+{
+  "schema_version": "ola1_export_dna_block_id_v1",
+  "blocks_json": "data/processed/ola1/simple_blocks.json",
+  "dna_csv": "data/processed/ola1/dof_dna_catalog.csv",
+  "output_csv": "data/processed/ola1/dof_dna_catalog_by_block_id.csv",
+  "allow_missing_dna": false
+}

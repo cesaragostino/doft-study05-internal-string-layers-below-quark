@@ -1,0 +1,9 @@
+{
+  "schema_version": "ola1_export_dna_v1",
+  "proxies_csv": "data/processed/ola1/Ola1_3-2-5_all_runs_proxies.csv",
+  "output_csv": "data/processed/ola1/dof_dna_catalog.csv",
+  "sm_universe": "data/raw/sm_universe.json",
+  "with_sm_trace": false,
+  "update_proxies": false,
+  "cluster_radii": false
+}

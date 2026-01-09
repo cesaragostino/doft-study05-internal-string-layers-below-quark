@@ -27,6 +27,19 @@ All commands are run from the repo root and use:
 PYTHONPATH=src
 ```
 
+## Parallelism (Ola1 + Olar)
+
+Both pipelines are parallel:
+- **Ola1 sweep** uses multicore workers (`--workers` flag).
+- **Olar sweep** uses multi-worker shards (see `sweep_workers/`).
+
+Monitor sweep progress:
+```bash
+PYTHONPATH=src python3 scripts/monitor_sweep_progress.py \
+  --shards-root data/processed/ola3_paper/sweep_workers \
+  --shard-count 12
+```
+
 ## Ola1 Sweep + Pipeline (Paper Example)
 
 ```bash

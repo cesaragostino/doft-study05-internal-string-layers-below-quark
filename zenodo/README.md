@@ -62,7 +62,7 @@ study05-doft/
 
 ### 1. Compile the Paper (Fastest)
 
-The `paper/` directory is self-contained. To compile:
+The `paper/` directory is self-contained—all figures and data are included. To compile:
 
 ```bash
 cd paper
@@ -72,25 +72,11 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 
-All figures and data are included—no code execution required.
+No code execution required.
 
-### 2. Regenerate Figures from Data
+### 2. Run the Model and Regenerate Paper Outputs
 
-To regenerate figures from the included CSV:
-
-```bash
-pip install numpy pandas matplotlib scipy
-
-PYTHONPATH=src python3 scripts/paper_figures_final.py \
-  --metrics-all paper/data/paper_metrics_all.csv \
-  --out-dir paper/figures
-```
-
-**Time:** ~2 minutes
-
-### 3. Run the Full Model
-
-See [Running the Model](#running-the-model) below.
+If you want to reproduce the results from scratch, see [Running the Model](#running-the-model) and [Regenerate Paper Outputs](#regenerate-paper-outputs).
 
 ---
 
@@ -135,6 +121,19 @@ Time_your_machine ≈ Time_reference × (8 / your_cores) × (2.3 / your_GHz)
 pip install numpy pandas matplotlib scipy
 ```
 
+### Parallelism
+
+Both pipelines support parallel execution:
+- **Ola1 sweep** uses multicore workers (`--workers` flag)
+- **Olar sweep** uses multi-worker shards (see `sweep_workers/`)
+
+Monitor sweep progress:
+```bash
+PYTHONPATH=src python3 scripts/monitor_sweep_progress.py \
+  --shards-root data/processed/ola3_paper/sweep_workers \
+  --shard-count 12
+```
+
 ### Option A: Start from Ola1 Blocks (Recommended, ~14 hours)
 
 The repository includes pre-computed Ola1 blocks, so you can skip the 3-day Ola1 sweep:
@@ -151,10 +150,9 @@ PYTHONPATH=src python3 -m olar.pipeline \
 # Ola4 (~4 hours)
 PYTHONPATH=src python3 -m olar.pipeline \
   --sequence config/ola4_paper/run_sequence_ola4_paper.json
-
-# Generate paper outputs
-PYTHONPATH=src python3 scripts/paper_build.py
 ```
+
+After running, see [Regenerate Paper Outputs](#regenerate-paper-outputs) to create figures and data files.
 
 ### Option B: Full Reproduction from Scratch (~3+ days)
 
@@ -210,6 +208,47 @@ PYTHONPATH=src python3 -m ola1.run_sweep \
   --band-min 0.05 --band-max 5.0 \
   --output-root data/processed/ola1_test \
   --no-plots
+```
+
+---
+
+## Regenerate Paper Outputs
+
+After running the model (Ola2–4), you can regenerate the paper data and figures.
+
+### All at once (recommended)
+
+```bash
+PYTHONPATH=src python3 scripts/paper_build.py
+```
+
+This generates both metrics CSVs and figures in `paper/`.
+
+### Step by step
+
+**1. Consolidate metrics:**
+
+```bash
+PYTHONPATH=src python3 scripts/paper_metrics_pack.py \
+  --out-root paper/data \
+  --skip-plots \
+  --all \
+  --ola-dir data/processed/ola2_paper \
+  --ola-dir data/processed/ola3_paper \
+  --ola-dir data/processed/ola4_paper
+```
+
+**2. Generate figures:**
+
+```bash
+PYTHONPATH=src python3 scripts/paper_figures_final.py \
+  --metrics-ola2 paper/data/ola2_paper/paper_metrics_ola2_paper.csv \
+  --metrics-ola3 paper/data/ola3_paper/paper_metrics_ola3_paper.csv \
+  --metrics-ola4 paper/data/ola4_paper/paper_metrics_ola4_paper.csv \
+  --genome-ola2 paper/data/genome_layers_ola2_paper.csv \
+  --genome-ola3 paper/data/genome_layers_ola3_paper.csv \
+  --genome-ola4 paper/data/genome_layers_ola4_paper.csv \
+  --out-dir paper/figures
 ```
 
 ---
