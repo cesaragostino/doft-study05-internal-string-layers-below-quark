@@ -73,10 +73,8 @@ The `paper/` directory is self-contained — all figures and data are included.
 
 ```bash
 cd paper
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
+pdflatex main
+pdflatex main
 ```
 
 No model execution required.
