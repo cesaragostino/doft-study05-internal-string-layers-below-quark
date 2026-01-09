@@ -7,7 +7,10 @@ This repo contains the Ola1/Ola2/Ola3 pipeline for recursive DOFT exploration an
   - `src/olar/` pipeline + explorer + sweep
   - `src/core/` catalog/taxonomy/promotion
   - `src/ola1/` Ola1 export/assembly
-- Configs: `data/processed/olaN/config/`
+- Configs:
+  - Ola1 paper: `data/config/ola1_paper/` (engine, layer states, selection, sm_universe)
+  - Ola2+ paper runs: `data/config/olaN_paper/`
+- Raw inputs: `data/raw/` (legacy + auxiliary inputs)
 - Raw outputs: `data/processed/olaN/raw/`
 - Sweep workers: `data/processed/olaN/sweep_workers/`
 - Merge output: `data/processed/olaN/sweep_merged/`
@@ -22,6 +25,67 @@ This repo contains the Ola1/Ola2/Ola3 pipeline for recursive DOFT exploration an
 All commands are run from the repo root and use:
 ```
 PYTHONPATH=src
+```
+
+## Ola1 Sweep + Pipeline (Paper Example)
+
+```bash
+PYTHONPATH=src python3 -m ola1.run_sweep \
+  --case Ola1_3-2-5 \
+  --runs 2000 \
+  --seed 42 \
+  --max-complexity 35 \
+  --engine-config data/config/ola1_paper/engine_core3.json \
+  --layer-states data/config/ola1_paper/layer_states.yaml \
+  --band-min 0.05 --band-max 5.0 \
+  --stop-file /tmp/stop_sweep \
+  --output-root data/processed/ola1_paper \
+  --no-plots \
+  --partial-flush-every 2
+```
+
+```bash
+PYTHONPATH=src python3 -m ola1.run_ola1_pipeline \
+  --case Ola1_3-2-5 \
+  --processed-dir data/processed/ola1_paper \
+  --results-json data/processed/ola1_paper/partial/runs_partial.jsonl \
+  --sm-universe data/config/ola1_paper/sm_universe.json \
+  --selection-config data/config/ola1_paper/wave1_selection.json \
+  --digest-dir data/processed/digest/ola1_paper \
+  --max-blocks-per-particle 10000 \
+  --runs-full-jsonl data/processed/ola1_paper/global/runs_full.jsonl
+```
+
+Note: Ola2 configs read Ola1 paper outputs from
+`data/processed/ola1_paper/simple_blocks_canonical.json` and
+`data/processed/ola1_paper/dof_dna_catalog_by_block_id.csv`
+(not the `promoted/` folder).
+
+## Paper Data + Figures
+
+Generate consolidated metrics and figures:
+```bash
+PYTHONPATH=src python3 scripts/paper_build.py
+```
+
+Or run them separately:
+```bash
+PYTHONPATH=src python3 scripts/paper_metrics_pack.py \
+  --out-root paper/data \
+  --skip-plots \
+  --all \
+  --ola-dir data/processed/ola2_paper \
+  --ola-dir data/processed/ola3_paper \
+  --ola-dir data/processed/ola4_paper
+
+PYTHONPATH=src python3 scripts/paper_figures_final.py \
+  --metrics-ola2 paper/data/ola2_paper/paper_metrics_ola2_paper.csv \
+  --metrics-ola3 paper/data/ola3_paper/paper_metrics_ola3_paper.csv \
+  --metrics-ola4 paper/data/ola4_paper/paper_metrics_ola4_paper.csv \
+  --genome-ola2 paper/data/genome_layers_ola2_paper.csv \
+  --genome-ola3 paper/data/genome_layers_ola3_paper.csv \
+  --genome-ola4 paper/data/genome_layers_ola4_paper.csv \
+  --out-dir paper/figures
 ```
 
 ## ⚙️ Explorer-Sweep Tuning Guide

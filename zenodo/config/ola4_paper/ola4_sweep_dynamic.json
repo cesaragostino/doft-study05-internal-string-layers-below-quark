@@ -1,0 +1,7 @@
+{
+  "schema_version": "olar_sweep_dynamic_v1",
+  "sweep_config": "data/config/ola4_paper/ola4_sweep.json",
+  "max_parallel": 12,
+  "worker_output_root": "data/processed/ola4_paper/sweep_workers",
+  "claim_log": "data/processed/ola4_paper/sweep_workers/claims.jsonl"
+}

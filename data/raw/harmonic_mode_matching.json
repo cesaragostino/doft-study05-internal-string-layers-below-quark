@@ -1,6 +1,0 @@
-{
-  "schema_version": "harmonic_mode_matching_v1",
-  "sector_confidence_min": 0.6,
-  "policy_on_low_conf": "ignore",
-  "action_on_mismatch": "reject"
-}

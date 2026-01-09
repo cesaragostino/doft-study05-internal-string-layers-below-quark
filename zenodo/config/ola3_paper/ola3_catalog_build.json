@@ -1,0 +1,19 @@
+{
+  "schema_version": "core_catalog_build_v1",
+  "ola": 3,
+  "inputs": {
+    "attempts_jsonl": "../../../data/processed/ola3_paper/raw/attempts.jsonl",
+    "entities_candidates_jsonl": "../../../data/processed/ola3_paper/raw/entities_candidates.jsonl",
+    "evaluations_jsonl": "../../../data/processed/ola3_paper/sweep_merged/evaluations.jsonl",
+    "templates_json": "ola3_templates.json",
+    "promote_config": "ola3_promote_blocks.json"
+  },
+  "outputs": {
+    "catalog_dir": "data/processed/ola3_paper/catalog",
+    "entities_jsonl": "data/processed/ola3_paper/catalog/entities.jsonl",
+    "genome_layer_csv": "data/processed/ola3_paper/catalog/genome_layers_ola3_paper.csv",
+    "rollups_json": "data/processed/ola3_paper/catalog/rollups.json",
+    "explorer_report_md": "data/processed/ola3_paper/explorer_report.md",
+    "sweep_report_md": "data/processed/ola3_paper/sweep_report.md"
+  }
+}

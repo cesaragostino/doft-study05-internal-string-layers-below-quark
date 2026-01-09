@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this study or its code/data, please cite it as below."
+title: "DOFT Study 05 – Internal String Layers Below Quark"
+type: software
+authors:
+  - family-names: Agostino
+    given-names: Cesar
+repository-code: "https://github.com/cesaragostino/doft-study05-internal-string-layers-below-quark.git"
+version: "v0.1.0"
+date-released: 2025-01-11
+doi: 10.5281/zenodo.18200973
+preferred-citation:
+  type: article
+  title: "Coherence Scaling in Hierarchical Oscillator Networks:
+Power-Law Decay, Memory Overhead, and Topological Constraints with Parallels to Disordered Condensed Matter"
+  authors:
+    - family-names: Agostino
+      given-names: Cesar
+  year: 2025
+  # Update these fields once the paper or preprint is public.
+  journal: "to be updated"
+  # doi: 10.5281/zenodo.18200973
+  # url: "https://arxiv.org/abs/XXXX.XXXXX"
+

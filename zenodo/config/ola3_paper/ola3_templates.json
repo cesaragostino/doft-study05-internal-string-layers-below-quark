@@ -1,0 +1,65 @@
+{
+  "schema_version": "olar_templates_v1",
+  "templates": [
+    {
+      "name": "ring_6",
+      "nodes": 6,
+      "edges": [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0]],
+      "notes": "Hexagon. Ciclo N=6 (compuesto 2x3)"
+    },
+    {
+      "name": "ring_7",
+      "nodes": 7,
+      "edges": [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0]],
+      "notes": "Heptagon. Ciclo N=7 (primo). Caso crítico para test prime-effect"
+    },
+    {
+      "name": "ladder_3",
+      "nodes": 6,
+      "edges": [[0,1],[1,2],[3,4],[4,5],[0,3],[1,4],[2,5]],
+      "notes": "Ladder 3 rungs (N=6). Control semi-sparse"
+    },
+    {
+      "name": "bipartite_3_3",
+      "nodes": 6,
+      "edges": [[0,3],[0,4],[0,5],[1,3],[1,4],[1,5],[2,3],[2,4],[2,5]],
+      "notes": "K_{3,3}. Bipartito balanceado N=6 (control denso)"
+    },
+
+    {
+      "name": "ring_8",
+      "nodes": 8,
+      "edges": [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0]],
+      "notes": "Octagon. Ciclo N=8 (compuesto). Extiende ventana a N=8"
+    },
+    {
+      "name": "bipartite_4_4",
+      "nodes": 8,
+      "edges": [
+        [0,4],[0,5],[0,6],[0,7],
+        [1,4],[1,5],[1,6],[1,7],
+        [2,4],[2,5],[2,6],[2,7],
+        [3,4],[3,5],[3,6],[3,7]
+      ],
+      "notes": "K_{4,4}. Bipartito balanceado N=8 (control denso)"
+    },
+
+    {
+      "name": "ring_9",
+      "nodes": 9,
+      "edges": [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,0]],
+      "notes": "Nonagon. Ciclo N=9 (compuesto 3x3). Punto de solape con ola4 (N=9–12)"
+    },
+    {
+      "name": "bipartite_4_5",
+      "nodes": 9,
+      "edges": [
+        [0,4],[0,5],[0,6],[0,7],[0,8],
+        [1,4],[1,5],[1,6],[1,7],[1,8],
+        [2,4],[2,5],[2,6],[2,7],[2,8],
+        [3,4],[3,5],[3,6],[3,7],[3,8]
+      ],
+      "notes": "K_{4,5}. Bipartito N=9 (control denso, partición 4+5)"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "doft_run_sequence_v1",
+  "steps": [
+    {
+      "id": "ola4_paper_explorer",
+      "type": "olar_explorer",
+      "config": "data/config/ola4_paper/ola4_explorer.json",
+      "halt_if_no_candidates": true,
+      "enabled": true
+    },
+    {
+      "id": "ola4_paper_sweep_dynamic",
+      "type": "olar_sweep_dynamic",
+      "config": "data/config/ola4_paper/ola4_sweep_dynamic.json",
+      "enabled": true
+    },
+    {
+      "id": "ola4_paper_merge_evaluations",
+      "type": "merge_evaluations",
+      "config": "data/config/ola4_paper/ola4_merge_evaluations.json",
+      "enabled": true
+    },
+    {
+      "id": "ola4_paper_catalog_build",
+      "type": "core_catalog_build",
+      "config": "data/config/ola4_paper/ola4_catalog_build.json",
+      "enabled": true
+    },
+    {
+      "id": "ola4_paper_taxonomy",
+      "type": "core_taxonomy",
+      "config": "data/config/ola4_paper/ola4_taxonomy.json",
+      "enabled": true
+    },
+    {
+      "id": "ola4_paper_promote_blocks",
+      "type": "core_promote_blocks",
+      "config": "data/config/ola4_paper/ola4_promote_blocks.json",
+      "enabled": true
+    },
+    {
+      "id": "ola4_paper_catalog_reports",
+      "type": "core_catalog_build",
+      "config": "data/config/ola4_paper/ola4_catalog_build.json",
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "schema_version": "olar_templates_v1",
+  "templates": [
+    {
+      "name": "ring_2",
+      "nodes": 2,
+      "edges": [
+        [
+          0,
+          1
+        ]
+      ],
+      "notes": "Dimer. Base minima."
+    },
+    {
+      "name": "ring_3",
+      "nodes": 3,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "notes": "Triangle. Primo 3 (e_3=0.7)"
+    },
+    {
+      "name": "ring_4",
+      "nodes": 4,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "notes": "Square. Compuesto 2^2"
+    },
+    {
+      "name": "ring_5",
+      "nodes": 5,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "notes": "Pentagon. Primo 5 (e_5=0.5)"
+    },
+    {
+      "name": "complete_4",
+      "nodes": 4,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "notes": "K4. Extremo denso N=4"
+    },
+    {
+      "name": "complete_5",
+      "nodes": 5,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "notes": "K5. Extremo denso N=5"
+    },
+    {
+      "name": "ladder_2",
+      "nodes": 4,
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "notes": "Ladder 2 rungs (N=4). Topologia modular"
+    },
+    {
+      "name": "bipartite_2_2",
+      "nodes": 4,
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "notes": "K_{2,2}. Bipartito balanceado N=4"
+    }
+  ]
+}

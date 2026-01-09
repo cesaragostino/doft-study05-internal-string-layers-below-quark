@@ -1,0 +1,372 @@
+"""Promote OlaN entities into Ola(N+1) blocks (V1)."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import math
+import platform
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+from core.ids.hashing import hash_file
+from core.ids.time import utc_now_iso
+from core.io.jsonl import iter_jsonl
+from core.io.schema_validation import validate_theta_internal
+
+
+def _load_json(path: Path) -> Any:
+    return json.loads(path.read_text())
+
+
+
+def _as_float(val: Any) -> Optional[float]:
+    try:
+        f = float(val)
+        if math.isfinite(f):
+            return f
+    except Exception:
+        return None
+    return None
+
+
+def _has_jsonl_rows(path: Path) -> bool:
+    if not path.exists():
+        return False
+    for _ in iter_jsonl(path):
+        return True
+    return False
+
+
+def _has_csv_rows(path: Path) -> bool:
+    if not path.exists():
+        return False
+    with path.open() as f:
+        reader = csv.DictReader(f)
+        for _ in reader:
+            return True
+    return False
+
+
+def _load_blocks(blocks_path: Path, key_field: str = "block_id") -> Dict[str, Dict[str, Any]]:
+    data = _load_json(blocks_path)
+    if not isinstance(data, list):
+        raise ValueError("simple_blocks.json must be a list.")
+    blocks: Dict[str, Dict[str, Any]] = {}
+    for row in data:
+        if not isinstance(row, dict):
+            continue
+        key = row.get(key_field)
+        if not key:
+            continue
+        blocks[str(key)] = row
+    return blocks
+
+
+def _load_genome_rows(genome_path: Path) -> Dict[str, Dict[str, Any]]:
+    rows: Dict[str, Dict[str, Any]] = {}
+    with genome_path.open() as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            eid = row.get("entity_id")
+            if not eid:
+                continue
+            rows[str(eid)] = row
+    return rows
+
+
+def _resolve_prev_blocks(
+    blocks_prev_override: Optional[Path],
+) -> Path:
+    if blocks_prev_override is not None:
+        return blocks_prev_override
+    raise ValueError("Missing --blocks-prev (run-inputs is no longer supported).")
+
+
+def _build_nodes(
+    block_ids: List[Any],
+    blocks_by_id: Dict[str, Dict[str, Any]],
+    require_node_theta_internal: bool,
+) -> Tuple[List[Dict[str, Any]], List[float]]:
+    nodes: List[Dict[str, Any]] = []
+    omega_refs: List[float] = []
+    for idx, block_id in enumerate(block_ids):
+        block_key = str(block_id)
+        block = blocks_by_id.get(block_key)
+        if block is None:
+            raise ValueError(f"Missing block_id in simple_blocks.json: {block_key}")
+        omega_ref = _as_float(block.get("omega_ref"))
+        if omega_ref is None:
+            raise ValueError(f"Missing omega_ref in block {block_key}")
+        theta_internal = block.get("theta_internal")
+        if theta_internal is None:
+            raise ValueError(f"Missing theta_internal in block {block_key}")
+        if require_node_theta_internal:
+            if not isinstance(theta_internal, dict):
+                raise ValueError(f"Invalid theta_internal in block {block_key}")
+            validate_theta_internal(theta_internal)
+        nodes.append(
+            {
+                "node_index": idx,
+                "block_id": block_key,
+                "source_block_id": block_key,
+                "omega_ref": omega_ref,
+                "theta_internal": theta_internal,
+            }
+        )
+        omega_refs.append(omega_ref)
+    return nodes, omega_refs
+
+
+def promote_blocks(
+    entities_path: Path,
+    genome_path: Path,
+    blocks_prev_path: Path,
+    blocks_prev_id_key: str,
+    output_path: Path,
+    dna_output_path: Optional[Path],
+    ola_from: int,
+    ola_to: int,
+    require_node_theta_internal: bool,
+    allowed_grades: List[str],
+) -> int:
+    entities_hash = f"sha256:{hash_file(entities_path)}"
+    genome_hash = f"sha256:{hash_file(genome_path)}"
+    blocks_prev_hash = f"sha256:{hash_file(blocks_prev_path)}"
+    code_hash = f"sha256:{hash_file(Path(__file__))}"
+
+    genome_rows = _load_genome_rows(genome_path)
+    blocks_by_id = _load_blocks(blocks_prev_path, key_field=blocks_prev_id_key)
+
+    selected: List[Tuple[str, Dict[str, Any], Dict[str, Any]]] = []
+    for entity in iter_jsonl(entities_path):
+        eid = entity.get("entity_id")
+        if not eid:
+            continue
+        genome_row = genome_rows.get(str(eid))
+        if not genome_row:
+            continue
+        attractor_class = genome_row.get("attractor_class")
+        evals_total = _as_float(genome_row.get("sweep_evals_total"))
+        if attractor_class != "FUNCTIONAL_LOCK":
+            continue
+        if evals_total is None or int(evals_total) <= 0:
+            continue
+        selected.append((str(eid), entity, genome_row))
+
+    selected.sort(key=lambda item: item[0])
+    promoted: List[Dict[str, Any]] = []
+    dna_rows: List[Dict[str, str]] = []
+    allowed = {str(g).upper() for g in allowed_grades if str(g).strip()}
+    for eid, entity, genome_row in selected:
+        assignment = entity.get("assignment")
+        if not isinstance(assignment, dict):
+            raise ValueError(f"Entity {eid} missing assignment.")
+        block_ids = assignment.get("block_ids")
+        if not isinstance(block_ids, list):
+            raise ValueError(f"Entity {eid} missing assignment.block_ids list.")
+        block_key_used = assignment.get("block_key_used")
+        if block_key_used != "block_id":
+            raise ValueError(f"Entity {eid} block_key_used must be block_id.")
+        template_name = entity.get("template_name")
+        if not template_name:
+            raise ValueError(f"Entity {eid} missing template_name.")
+        edges = entity.get("edges")
+        if not isinstance(edges, list):
+            raise ValueError(f"Entity {eid} missing edges list.")
+        canonical = entity.get("canonical_node_order")
+        if not isinstance(canonical, list):
+            raise ValueError(f"Entity {eid} missing canonical_node_order list.")
+        if len(block_ids) != len(canonical):
+            raise ValueError(f"Entity {eid} block_ids length mismatch with canonical_node_order.")
+
+        nodes, omega_refs = _build_nodes(block_ids, blocks_by_id, require_node_theta_internal)
+        if not nodes:
+            raise ValueError(f"Entity {eid} missing nodes for promotion.")
+        node0_theta = nodes[0].get("theta_internal")
+        if not isinstance(node0_theta, dict):
+            raise ValueError(f"Entity {eid} missing node0 theta_internal.")
+        validate_theta_internal(node0_theta)
+        omega_ref_proxy = _as_float(genome_row.get("omega_ref_proxy"))
+        if omega_ref_proxy is None:
+            omega_ref_proxy = sum(omega_refs) / len(omega_refs) if omega_refs else None
+        if omega_ref_proxy is None or not math.isfinite(omega_ref_proxy):
+            raise ValueError(f"Entity {eid} missing omega_ref_proxy.")
+
+        # Contract: S6 ignores any *_friendly columns from genome layers.
+        dof_grade = str(genome_row.get("dof_grade") or "U").upper()
+        if dof_grade not in allowed:
+            print(f"[core_promotion] skipped_unknown_grade entity_id={eid} dof_grade={dof_grade}")
+            continue
+        dof_family_id = genome_row.get("confirmed_family_id") or ""
+        family_friendly = dof_family_id
+        if not dof_family_id:
+            print(f"[core_promotion] WARNING: Promoting block {eid} without family classification.")
+        genes_min = genome_row.get("genes_min")
+        if isinstance(genes_min, str):
+            try:
+                genes_min = json.loads(genes_min)
+            except Exception:
+                genes_min = {}
+        if not isinstance(genes_min, dict):
+            genes_min = {}
+
+        theta_internal_network = {
+            "schema_version": "theta_internal_network_v1",
+            "template_name": entity.get("template_name"),
+            "edges": edges,
+            "canonical_node_order": canonical,
+            "nodes": nodes,
+            "assignment": assignment,
+            "parent_ids": entity.get("parent_ids") or [],
+            "provenance": {
+                "entities_hash": entities_hash,
+                "genome_hash": genome_hash,
+                "blocks_prev_hash": blocks_prev_hash,
+            },
+        }
+        promoted.append(
+            {
+                "schema_version": "olar_block_v1",
+                "ola_from": ola_from,
+                "ola_to": ola_to,
+                "block_id": eid,
+                "omega_ref": omega_ref_proxy,
+                "dof_grade": str(dof_grade),
+                "dof_family_id": str(dof_family_id),
+                "dof_family_friendly": str(family_friendly),
+                "genes_min": genes_min,
+                "theta_internal": node0_theta,
+                "theta_internal_network": theta_internal_network,
+                "provenance": {
+                    "source_entity_id": eid,
+                    "source_ola": ola_from,
+                    "inputs": {
+                        "entities_hash": entities_hash,
+                        "genome_hash": genome_hash,
+                        "blocks_prev_hash": blocks_prev_hash,
+                    },
+                    "code_hash": code_hash,
+                    "timestamp_utc": utc_now_iso(),
+                    "machine": {
+                        "python": platform.python_version(),
+                        "platform": platform.platform(),
+                    },
+                },
+            }
+        )
+        print(
+            "[core_promotion] block_id="
+            f"{eid} network_nodes={len(nodes)} edges={len(edges)} theta_internal_source=node0"
+        )
+        dna_rows.append(
+            {
+                "block_id": eid,
+                "omega_ref_proxy": f"{omega_ref_proxy:.12g}",
+                "dof_grade": str(dof_grade),
+                "dof_family_id": str(dof_family_id),
+                "dof_family_friendly": str(family_friendly),
+                "genes_min": json.dumps(genes_min, sort_keys=True, separators=(",", ":")),
+            }
+        )
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(promoted, indent=2, ensure_ascii=True))
+    if dna_output_path is not None:
+        dna_output_path.parent.mkdir(parents=True, exist_ok=True)
+        with dna_output_path.open("w", newline="") as f:
+            writer = csv.DictWriter(
+                f,
+                fieldnames=[
+                    "block_id",
+                    "omega_ref_proxy",
+                    "dof_grade",
+                    "dof_family_id",
+                    "dof_family_friendly",
+                    "genes_min",
+                ],
+            )
+            writer.writeheader()
+            writer.writerows(dna_rows)
+    return len(promoted)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Promote OlaN entities into Ola(N+1) blocks (V1).")
+    parser.add_argument("--ola-from", type=int, required=True, help="Source Ola number.")
+    parser.add_argument("--ola-to", type=int, required=True, help="Target Ola number.")
+    parser.add_argument("--entities", type=Path, help="Override entities.jsonl path.")
+    parser.add_argument("--genome", type=Path, help="Override genome_layers_olaN_taxonomy.csv path.")
+    parser.add_argument("--blocks-prev", type=Path, help="Override simple_blocks.json from Ola(N-1).")
+    parser.add_argument("--blocks-prev-id-key", type=str, default="block_id")
+    parser.add_argument("--require-node-theta-internal", action="store_true")
+    parser.add_argument(
+        "--allowed-grades",
+        type=str,
+        default="A,B",
+        help="Comma-separated dof_grade values to promote (default: A,B).",
+    )
+    parser.add_argument("--output", type=Path, help="Output blocks JSON path.")
+    parser.add_argument("--dna-output", type=Path, help="Output dof_dna_catalog.csv path.")
+    args = parser.parse_args()
+
+    base_dir = Path.cwd()
+    ola_from = args.ola_from
+    ola_to = args.ola_to
+    entities_path = args.entities or Path(f"data/processed/ola{ola_from}/catalog/entities.jsonl")
+    genome_path = args.genome or Path(
+        f"data/processed/ola{ola_from}/catalog/genome_layers_ola{ola_from}_taxonomy.csv"
+    )
+    blocks_prev_path = _resolve_prev_blocks(args.blocks_prev)
+    blocks_prev_id_key = str(args.blocks_prev_id_key or "block_id")
+    output_path = args.output or Path(f"data/processed/ola{ola_to}/inputs/blocks_from_ola{ola_from}.json")
+    dna_output_path = args.dna_output or Path(
+        f"data/processed/ola{ola_to}/inputs/dof_dna_catalog_from_ola{ola_from}.csv"
+    )
+
+    print("[core_promotion] Wiring Check:")
+    print(f"- entities_jsonl={entities_path.resolve()}")
+    print(f"- genome_layers_csv={genome_path.resolve()}")
+    print(f"- blocks_prev_json={blocks_prev_path.resolve()}")
+    print(f"- output_blocks_json={output_path.resolve()}")
+    print(f"- output_dna_csv={dna_output_path.resolve()}")
+
+    if not _has_jsonl_rows(entities_path):
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"entities_jsonl={entities_path}"
+        )
+        return
+    if not _has_csv_rows(genome_path):
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"genome_layers_csv={genome_path}"
+        )
+        return
+    blocks_prev_data = _load_json(blocks_prev_path)
+    if not isinstance(blocks_prev_data, list) or not blocks_prev_data:
+        print(
+            "WARNING - STOPPED: no input data found; no processing performed. "
+            f"blocks_prev_json={blocks_prev_path}"
+        )
+        return
+
+    allowed_grades = [g.strip().upper() for g in str(args.allowed_grades).split(",") if g.strip()]
+    count = promote_blocks(
+        entities_path=entities_path,
+        genome_path=genome_path,
+        blocks_prev_path=blocks_prev_path,
+        blocks_prev_id_key=blocks_prev_id_key,
+        output_path=output_path,
+        dna_output_path=dna_output_path,
+        ola_from=ola_from,
+        ola_to=ola_to,
+        require_node_theta_internal=bool(args.require_node_theta_internal),
+        allowed_grades=allowed_grades,
+    )
+    print(f"[core_promotion] promoted_blocks={count}")
+
+
+if __name__ == "__main__":
+    main()
