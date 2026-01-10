@@ -83,7 +83,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Monitor sweep progress across shards.")
     parser.add_argument(
         "--sweep-config",
-        default="data/processed/ola2/config/ola2_sweep.json",
+        default="config/ola2_paper/ola2_sweep.json",
         help="Base sweep config (for seeds/bins expectations).",
     )
     parser.add_argument(

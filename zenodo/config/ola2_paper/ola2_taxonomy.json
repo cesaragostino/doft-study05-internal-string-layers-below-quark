@@ -3,8 +3,8 @@
   "ola": 2,
   "taxonomy_version": "ola2_taxonomy_v1",
   "inputs": {
-    "genome_layer_csv": "../../../data/processed/ola2_paper/catalog/genome_layers_ola2_paper.csv",
-    "entities_jsonl": "../../../data/processed/ola2_paper/catalog/entities.jsonl",
+    "genome_layer_csv": "../../data/processed/ola2_paper/catalog/genome_layers_ola2_paper.csv",
+    "entities_jsonl": "../../data/processed/ola2_paper/catalog/entities.jsonl",
     "promote_config": "ola2_promote_blocks.json"
   },
   "thresholds": {

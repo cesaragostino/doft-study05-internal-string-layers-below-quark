@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 JAN 2026 20:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  9 JAN 2026 20:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -550,13 +550,13 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 [2{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }] [3]
-<figures/Figure_1_Coherence_Scaling.png, id=244, 722.7pt x 433.62pt>
+<figures/Figure_1_Coherence_Scaling.png, id=240, 722.7pt x 433.62pt>
 File: figures/Figure_1_Coherence_Scaling.png Graphic file (type png)
 <use figures/Figure_1_Coherence_Scaling.png>
 Package pdftex.def Info: figures/Figure_1_Coherence_Scaling.png  used on input 
 line 237.
 (pdftex.def)             Requested size: 246.0pt x 147.60088pt.
-<figures/Figure_2_Memory_Overhead.png, id=250, 722.7pt x 433.62pt>
+<figures/Figure_2_Memory_Overhead.png, id=246, 722.7pt x 433.62pt>
 File: figures/Figure_2_Memory_Overhead.png Graphic file (type png)
 <use figures/Figure_2_Memory_Overhead.png>
 Package pdftex.def Info: figures/Figure_2_Memory_Overhead.png  used on input li
@@ -564,19 +564,19 @@ ne 256.
 (pdftex.def)             Requested size: 246.0pt x 147.60088pt.
  [4 <./figures/Figure_1_Coherence_Scaling.png> <./figures/Figure_2_Memory_Overh
 ead.png>]
-<figures/Figure_4_Mechanism_Binned.png, id=267, 722.7pt x 433.62pt>
+<figures/Figure_4_Mechanism_Binned.png, id=263, 722.7pt x 433.62pt>
 File: figures/Figure_4_Mechanism_Binned.png Graphic file (type png)
 <use figures/Figure_4_Mechanism_Binned.png>
 Package pdftex.def Info: figures/Figure_4_Mechanism_Binned.png  used on input l
 ine 272.
 (pdftex.def)             Requested size: 246.0pt x 147.60088pt.
-<figures/Figure_3_Topology_Ceiling.png, id=269, 1084.05pt x 758.835pt>
+<figures/Figure_3_Topology_Ceiling.png, id=265, 1084.05pt x 758.835pt>
 File: figures/Figure_3_Topology_Ceiling.png Graphic file (type png)
 <use figures/Figure_3_Topology_Ceiling.png>
 Package pdftex.def Info: figures/Figure_3_Topology_Ceiling.png  used on input l
 ine 285.
 (pdftex.def)             Requested size: 246.0pt x 172.18944pt.
-<figures/Figure5_Critical_Heterogeneity_Onset.png, id=272, 722.7pt x 433.62pt>
+<figures/Figure5_Critical_Heterogeneity_Onset.png, id=268, 722.7pt x 433.62pt>
 File: figures/Figure5_Critical_Heterogeneity_Onset.png Graphic file (type png)
 <use figures/Figure5_Critical_Heterogeneity_Onset.png>
 Package pdftex.def Info: figures/Figure5_Critical_Heterogeneity_Onset.png  used
@@ -598,11 +598,8 @@ Underfull \hbox (badness 7397) in paragraph at lines 390--391
 \T1/cmr/m/n/10 correlation-length scal-ing in dis-or-dered con-densed
  []
 
-(./main.bbl
+No file main.bbl.
 
-Package natbib Warning: Empty `thebibliography' environment on input line 53.
-
-)
 Underfull \hbox (badness 1189) in paragraph at lines 405--408
  []\T1/cmr/m/n/9 G. Blat-ter, M. V. Feigel'man, V. B. Geshken-bein,
  []
@@ -629,18 +626,19 @@ Underfull \hbox (badness 4353) in paragraph at lines 440--443
  \T1/cmr/m/n/9 ing and a di-men-sional crossover in single-crystal
  []
 
-(./main.bbl)
+No file main.bbl.
+
 Overfull \hbox (1.52151pt too wide) detected at line 473
 []
  []
 
-<figures/Appendix_A_Pipeline_Handshake.png, id=304, 433.62pt x 361.35pt>
+<figures/Appendix_A_Pipeline_Handshake.png, id=299, 433.62pt x 361.35pt>
 File: figures/Appendix_A_Pipeline_Handshake.png Graphic file (type png)
 <use figures/Appendix_A_Pipeline_Handshake.png>
 Package pdftex.def Info: figures/Appendix_A_Pipeline_Handshake.png  used on inp
 ut line 483.
 (pdftex.def)             Requested size: 246.0pt x 205.00122pt.
-<figures/Appendix_B_Sensitivity_of_Scaling.png, id=306, 650.43pt x 433.62pt>
+<figures/Appendix_B_Sensitivity_of_Scaling.png, id=301, 650.43pt x 433.62pt>
 File: figures/Appendix_B_Sensitivity_of_Scaling.png Graphic file (type png)
 <use figures/Appendix_B_Sensitivity_of_Scaling.png>
 Package pdftex.def Info: figures/Appendix_B_Sensitivity_of_Scaling.png  used on
@@ -656,13 +654,13 @@ LaTeX Warning: A float is stuck (cannot be placed) on input line 504.
 
 Class revtex4-2 Warning: Deferred float stuck during \clearpage processing.
 
-<figures/Appendix_C_spearman_rho_by_n.png, id=325, 722.7pt x 433.62pt>
+<figures/Appendix_C_spearman_rho_by_n.png, id=320, 722.7pt x 433.62pt>
 File: figures/Appendix_C_spearman_rho_by_n.png Graphic file (type png)
 <use figures/Appendix_C_spearman_rho_by_n.png>
 Package pdftex.def Info: figures/Appendix_C_spearman_rho_by_n.png  used on inpu
 t line 507.
 (pdftex.def)             Requested size: 246.0pt x 147.60088pt.
-<figures/Appendix_D_Raw_Scatter.png, id=327, 505.89pt x 361.35pt>
+<figures/Appendix_D_Raw_Scatter.png, id=322, 505.89pt x 361.35pt>
 File: figures/Appendix_D_Raw_Scatter.png Graphic file (type png)
 <use figures/Appendix_D_Raw_Scatter.png>
 Package pdftex.def Info: figures/Appendix_D_Raw_Scatter.png  used on input line
@@ -673,13 +671,13 @@ Underfull \hbox (badness 2245) in paragraph at lines 527--528
 []\T1/cmr/m/n/10 Figure []10[] quan-ti-fies the vari-abil-ity (in-terquar-tile
  []
 
-<figures/Appendix_F_Fluctuation_Peak.png, id=329, 686.565pt x 542.025pt>
+<figures/Appendix_F_Fluctuation_Peak.png, id=324, 686.565pt x 542.025pt>
 File: figures/Appendix_F_Fluctuation_Peak.png Graphic file (type png)
 <use figures/Appendix_F_Fluctuation_Peak.png>
 Package pdftex.def Info: figures/Appendix_F_Fluctuation_Peak.png  used on input
  line 531.
 (pdftex.def)             Requested size: 246.0pt x 194.20253pt.
-<figures/Appendix_G_Critical_Dynamics.png, id=331, 686.565pt x 542.025pt>
+<figures/Appendix_G_Critical_Dynamics.png, id=326, 686.565pt x 542.025pt>
 File: figures/Appendix_G_Critical_Dynamics.png Graphic file (type png)
 <use figures/Appendix_G_Critical_Dynamics.png>
 Package pdftex.def Info: figures/Appendix_G_Critical_Dynamics.png  used on inpu
@@ -707,13 +705,13 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7B7C9D5221ED6D908CAB1EE3361B8221;8394.
+(rerunfilecheck)             Checksum: 82DD6AFCEAEC5C4DF792DB016EA67CAD;8288.
  ) 
 Here is how much of TeX's memory you used:
- 16320 strings out of 473190
- 307897 string characters out of 5715801
+ 16305 strings out of 473190
+ 307746 string characters out of 5715801
  694319 words of memory out of 5000000
- 39272 multiletter control sequences out of 15000+600000
+ 39263 multiletter control sequences out of 15000+600000
  581501 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,80p,928b,1124s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -744,10 +742,10 @@ nts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2025/texmf-dist/font
 s/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2025/texmf-dist/fonts/
 type1/public/cm-super/sfti0900.pfb></usr/local/texlive/2025/texmf-dist/fonts/ty
 pe1/public/cm-super/sfti1000.pfb>
-Output written on main.pdf (9 pages, 2720594 bytes).
+Output written on main.pdf (9 pages, 2720487 bytes).
 PDF statistics:
- 493 PDF objects out of 1000 (max. 8388607)
- 398 compressed objects within 4 object streams
- 109 named destinations out of 1000 (max. 500000)
- 376 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 486 PDF objects out of 1000 (max. 8388607)
+ 392 compressed objects within 4 object streams
+ 108 named destinations out of 1000 (max. 500000)
+ 368 words of extra memory for PDF output out of 10000 (max. 10000000)
 

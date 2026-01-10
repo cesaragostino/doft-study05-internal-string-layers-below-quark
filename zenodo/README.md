@@ -161,7 +161,10 @@ export PYTHONPATH=src
 (Optional) monitor shard progress:
 
 ```bash
-PYTHONPATH=src python3 scripts/monitor_sweep_progress.py   --shards-root data/processed/ola3_paper/sweep_workers   --shard-count 12
+PYTHONPATH=src python3 scripts/monitor_sweep_progress.py \
+  --shards-root data/processed/ola3_paper/sweep_workers \
+  --shard-count 12 \
+  --sweep-config config/ola3_paper/ola3_sweep.json
 ```
 
 ### Option A: Start from included Ola1 blocks (**recommended**, ~14 hours)
@@ -198,7 +201,7 @@ PYTHONPATH=src python3 -m ola1.run_sweep   --case Ola1_3-2-5   --runs 2000   --s
 #### Step 2: Ola1 Assembly
 
 ```bash
-PYTHONPATH=src python3 -m ola1.run_ola1_pipeline   --case Ola1_3-2-5   --processed-dir data/processed/ola1_paper   --results-json data/processed/ola1_paper/partial/runs_partial.jsonl   --sm-universe config/ola1_paper/sm_universe.json   --selection-config config/ola1_paper/wave1_selection.json   --digest-dir data/processed/digest/ola1_paper   --max-blocks-per-particle 10000   --runs-full-jsonl data/processed/ola1_paper/global/runs_full.jsonl
+PYTHONPATH=src python3 -m ola1.run_ola1_pipeline   --case Ola1_3-2-5   --processed-dir data/processed/ola1_paper   --results-json data/processed/ola1_paper/Ola1_3-2-5_study05_sweep_results.json   --sm-universe config/ola1_paper/sm_universe.json   --selection-config config/ola1_paper/wave1_selection.json   --digest-dir data/processed/digest/ola1_paper   --max-blocks-per-particle 10000   --runs-full-jsonl data/processed/ola1_paper/global/runs_full.jsonl
 ```
 
 #### Steps 3–5: Ola2–Ola4

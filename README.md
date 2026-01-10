@@ -37,7 +37,8 @@ Monitor sweep progress:
 ```bash
 PYTHONPATH=src python3 scripts/monitor_sweep_progress.py \
   --shards-root data/processed/ola3_paper/sweep_workers \
-  --shard-count 12
+  --shard-count 12 \
+  --sweep-config config/ola3_paper/ola3_sweep.json
 ```
 
 ## Ola1 Sweep + Pipeline (Paper Example)
@@ -811,7 +812,8 @@ Monitor sweep progress:
 ```
 PYTHONPATH=src python3 scripts/monitor_sweep_progress.py \
   --shards-root data/processed/ola3/sweep_workers \
-  --shard-count 12
+  --shard-count 12 \
+  --sweep-config data/processed/ola3/config/ola3_sweep.json
 ```
 
 Merge evaluations (manual):
