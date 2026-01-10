@@ -62,12 +62,12 @@ PYTHONPATH=src python3 -m ola1.run_sweep \
 PYTHONPATH=src python3 -m ola1.run_ola1_pipeline \
   --case Ola1_3-2-5 \
   --processed-dir data/processed/ola1_paper \
-  --results-json data/processed/ola1_paper/partial/runs_partial.jsonl \
+  --results-json data/processed/ola1_paper/Ola1_3-2-5_study05_sweep_results.json \
   --sm-universe data/config/ola1_paper/sm_universe.json \
   --selection-config data/config/ola1_paper/wave1_selection.json \
   --digest-dir data/processed/digest/ola1_paper \
   --max-blocks-per-particle 10000 \
-  --runs-full-jsonl data/processed/ola1_paper/global/runs_full.jsonl
+  --runs-full-jsonl data/processed/ola1_paper/Ola1_3-2-5/runs_full.jsonl
 ```
 
 Note: Ola2 configs read Ola1 paper outputs from

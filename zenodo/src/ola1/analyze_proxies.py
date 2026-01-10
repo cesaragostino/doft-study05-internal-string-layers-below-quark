@@ -297,7 +297,7 @@ def main():
     parser.add_argument(
         "--sm-universe",
         type=Path,
-        default=Path("data/config/ola1_paper/sm_universe.json"),
+        default=Path("config/ola1_paper/sm_universe.json"),
         help="SM universe JSON.",
     )
     parser.add_argument("--output", type=Path, default=Path("data/processed"), help="Output directory root.")

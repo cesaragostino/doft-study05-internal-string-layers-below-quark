@@ -263,6 +263,8 @@ def main() -> None:
         else:
             runs_full = processed_dir / "runs_full.jsonl"
             if not runs_full.exists():
+                runs_full = processed_dir / args.case / "runs_full.jsonl"
+            if not runs_full.exists():
                 runs_full = processed_dir / "global" / "runs_full.jsonl"
         _run_step(
             "ola1_assemble_olar_inputs",
