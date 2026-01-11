@@ -584,7 +584,7 @@ def figure_3_phase_boundary_spearman(
     if metrics_ola4 and genome_ola4:
         frames.append(_load_s2_dataset(metrics_ola4, genome_ola4, "Wave 4"))
     df = pd.concat(frames, ignore_index=True)
-    r_col = _select_r_column(df)
+    r_col = "R_network_S1_mean"
     df[r_col] = _coerce_numeric(df[r_col])
     df["S2_Share"] = _coerce_numeric(df["S2_Share"])
     df = df[df[r_col].notna() & df["S2_Share"].notna()].copy()
@@ -1450,8 +1450,10 @@ def figure_5_critical_heterogeneity_onset(
     if "phase_var_lastW_mean" not in df.columns:
         print("[paper_figures] skip Figure5_Critical_Heterogeneity_Onset (missing phase_var_lastW_mean).")
         return
-    if "was_swept" in df.columns:
-        df = df[df["was_swept"] == True].copy()
+    if "sweep_passed" in df.columns:
+        df = df[df["sweep_passed"] == True].copy()
+    else:
+        df = df[df[r_col].notna()].copy()
     df["phase_var_lastW_mean"] = _coerce_numeric(df["phase_var_lastW_mean"])
     df = df[df["phase_var_lastW_mean"].notna()].copy()
 
@@ -1827,6 +1829,116 @@ def appendix_d_raw_scatter(
     plt.close()
 
 
+def memory_weighted_proxy_comparation(
+    df2: pd.DataFrame, df3: pd.DataFrame, out_dir: Path, df4: Optional[pd.DataFrame] = None
+) -> None:
+    _style()
+    frames = [df2, df3]
+    if df4 is not None:
+        frames.append(df4)
+    df = pd.concat(frames, ignore_index=True)
+    if "phase_var_lastW_mean" not in df.columns:
+        print("[paper_figures] skip memory_weighted_proxy_comparation (missing phase_var_lastW_mean).")
+        return
+    r_col = "R_network_S1_mean"
+    df[r_col] = _coerce_numeric(df[r_col])
+    df["H_part_norm_mean"] = _coerce_numeric(df["H_part_norm_mean"])
+    df["phase_var_lastW_mean"] = _coerce_numeric(df["phase_var_lastW_mean"])
+    if "sweep_passed" in df.columns:
+        df = df[df["sweep_passed"] == True].copy()
+    else:
+        df = df[df[r_col].notna()].copy()
+    df = df[df["H_part_norm_mean"].notna() & df["phase_var_lastW_mean"].notna()].copy()
+    df["E_disorder"] = (1.0 - df[r_col]) * df["H_part_norm_mean"]
+    df = df[df["E_disorder"].notna()].copy()
+    if df.empty:
+        print("[paper_figures] skip memory_weighted_proxy_comparation (empty data).")
+        return
+
+    def _panel_stats(df_in: pd.DataFrame, y_col: str) -> pd.DataFrame:
+        stats = df_in.groupby("node_count").agg(
+            mean=(y_col, "mean"),
+            std=(y_col, "std"),
+            n=(y_col, "count"),
+        ).reset_index().sort_values("node_count")
+        stats["se"] = stats["std"] / np.sqrt(stats["n"].clip(lower=1))
+        stats["lnN"] = np.log(stats["node_count"].astype(float))
+        return stats
+
+    def _fit_line(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, float]:
+        if x.size < 2:
+            return np.array([]), float("nan")
+        coeffs = np.polyfit(x, y, 1)
+        y_hat = coeffs[0] * x + coeffs[1]
+        ss_res = float(np.sum((y - y_hat) ** 2))
+        ss_tot = float(np.sum((y - np.mean(y)) ** 2))
+        r2 = 1.0 - ss_res / ss_tot if ss_tot > 0 else float("nan")
+        return y_hat, r2
+
+    stats_phase = _panel_stats(df, "phase_var_lastW_mean")
+    stats_disorder = _panel_stats(df, "E_disorder")
+    if stats_phase.empty or stats_disorder.empty:
+        print("[paper_figures] skip memory_weighted_proxy_comparation (insufficient stats).")
+        return
+
+    fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.6), sharex=False)
+    panel_cfgs = [
+        {
+            "ax": axes[0],
+            "stats": stats_phase,
+            "title": "(a) Phase variance proxy",
+            "y_label": "phase_var_lastW",
+            "marker": "o",
+            "color": "#d62728",
+        },
+        {
+            "ax": axes[1],
+            "stats": stats_disorder,
+            "title": "(b) Memory-weighted proxy",
+            "y_label": r"$E_{disorder} = (1 - R) \times H_{part}$",
+            "marker": "s",
+            "color": "#2ca02c",
+        },
+    ]
+
+    for cfg in panel_cfgs:
+        ax = cfg["ax"]
+        stats = cfg["stats"]
+        x = stats["lnN"].to_numpy()
+        y = stats["mean"].to_numpy()
+        y_hat, r2 = _fit_line(x, y)
+        ax.errorbar(
+            x,
+            y,
+            yerr=stats["se"].to_numpy(),
+            fmt=cfg["marker"],
+            color=cfg["color"],
+            ecolor=cfg["color"],
+            capsize=4,
+            markersize=7,
+            linestyle="none",
+            label="Data",
+        )
+        if y_hat.size:
+            ax.plot(x, y_hat, "--", color="#666666", linewidth=2, label=f"Fit: $R^2$ = {r2:.2f}")
+        ax.set_title(cfg["title"])
+        ax.set_xlabel("ln N")
+        ax.set_ylabel(cfg["y_label"])
+        ax.legend(loc="upper left")
+
+        top_ax = ax.secondary_xaxis("top")
+        tick_ns = [2, 3, 5, 7, 10, 12]
+        tick_ns = [n for n in tick_ns if n in stats["node_count"].tolist()]
+        if tick_ns:
+            top_ax.set_xticks(np.log(tick_ns))
+            top_ax.set_xticklabels([str(n) for n in tick_ns])
+        top_ax.set_xlabel("N")
+
+    plt.tight_layout()
+    plt.savefig(out_dir / "memory_weighted_proxy_comparation.png", dpi=300)
+    plt.close()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate final paper figures and appendix plots.")
     parser.add_argument("--metrics-ola2", required=True, help="CSV for ola2 paper metrics.")
@@ -1886,6 +1998,7 @@ def main() -> None:
     appendix_b_sensitivity_scaling(df2, df3, out_dir, df4=df4)
     appendix_a_pipeline_handshake(df2, df3, out_dir, df4=df4)
     appendix_d_raw_scatter(df2, df3, out_dir, df4=df4)
+    memory_weighted_proxy_comparation(df2, df3, out_dir, df4=df4)
 
     df2_s2 = _load_s2_dataset(Path(args.metrics_ola2), Path(args.genome_ola2), "Wave 2") if args.genome_ola2 else None
     df3_s2 = _load_s2_dataset(Path(args.metrics_ola3), Path(args.genome_ola3), "Wave 3")

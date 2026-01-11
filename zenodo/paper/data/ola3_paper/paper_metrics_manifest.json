@@ -1,0 +1,7 @@
+{
+  "ola_dir": "data/processed/ola3_paper",
+  "taxonomy_csv": "data/processed/ola3_paper/catalog/genome_layers_ola3_paper_taxonomy.csv",
+  "paper_csv": "paper/data/ola3_paper/paper_metrics_ola3_paper.csv",
+  "plots": [],
+  "rows": 3000
+}

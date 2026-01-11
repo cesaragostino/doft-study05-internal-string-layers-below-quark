@@ -187,6 +187,8 @@ where $p_\ell$ is the mean participation of layer $\ell$. High S2-share indicate
 
 \textbf{Phase variance:} Internal spread of phases, $\sigma^2_\theta = \text{Var}[\theta_j(t)]$, averaged over the late-time window.
 
+\textbf{Participation entropy $H_{\mathrm{part}}$:} Quantifies how broadly dynamical activity is distributed across internal layers. Defined as the normalized Shannon entropy of layer participation fractions; $H_{\mathrm{part}} = 0$ indicates activity concentrated in a single layer, while $H_{\mathrm{part}} = 1$ indicates uniform distribution. This measure is used in Appendix~\ref{app:disorder_proxy} to construct a roughness-like proxy.
+
 \subsection{Computational parameters}
 
 All integrations use: $T_{\mathrm{ticks}} = 20{,}000$, window $W = 4{,}000$, $dt = 0.0025$, 4 seeds per entity (results averaged over seeds). Coherence thresholds are applied at the Explorer candidate filter and at taxonomy/promotion. The sweep itself does not require a coherence threshold for completion or inclusion in reported statistics---it runs and reports metrics as long as primary observables are finite. Total computational time: approximately 10 days on dual 8-core systems.
@@ -340,6 +342,8 @@ The correspondences to disordered condensed matter (Table~\ref{tab:mapping}) are
 
 These correspondences motivate a \emph{phenomenological hypothesis}: DOFT networks may provide a minimal grammar for understanding coherence decay in systems where collective order competes with complexity-induced disorder. The vortex matter analogy is one concrete instantiation; other disordered systems might exhibit similar scaling.
 
+\textbf{Quantitative test: disorder-energy scaling.} A more stringent test of the Bragg-glass correspondence is whether a suitably defined roughness-like proxy scales logarithmically with $N$. In Appendix~\ref{app:disorder_proxy}, we show that the memory-weighted proxy $E_{\mathrm{disorder}} = (1-R) \times H_{\mathrm{part}}$ satisfies $E_{\mathrm{disorder}} \propto \ln N$ with $R^2 = 0.97$, consistent with Bragg-glass roughness predictions for pinned elastic media~\cite{GiamarchiLeDoussal1994,Giamarchi1995}. This provides a quantitative bridge between the phenomenological mapping (Table~\ref{tab:mapping}) and theoretical predictions for disordered vortex lattices.
+
 \subsection{What the results do \emph{not} establish}
 
 We emphasize what we are \emph{not} claiming:
@@ -445,6 +449,16 @@ Evidence for flux lattice melting and a dimensional crossover in single-crystal 
 U.~Yaron \emph{et al.},
 Neutron diffraction studies of flowing and pinned magnetic flux lattices in 2H-NbSe$_2$,
 \emph{Phys. Rev. Lett.} \textbf{73}, 2748 (1994).
+
+\bibitem{Giamarchi1995}
+T.~Giamarchi and P.~Le~Doussal,
+Elastic theory of flux lattices in the presence of weak disorder,
+\emph{Phys. Rev. B} \textbf{52}, 1242 (1995).
+
+\bibitem{Fasano2005}
+Y.~Fasano, M.~Menghini, F.~de~la~Cruz, Y.~Paltiel, Y.~Myasoedov, E.~Zeldov, M.~J.~Higgins, and S.~Bhattacharya,
+Order-disorder phase transition in NbSe$_2$: Absence of amorphous vortex matter,
+\emph{Phys. Rev. B} \textbf{71}, 224502 (2005).
 
 \bibitem{Agostino2025a}
 C.~Agostino,
@@ -582,5 +596,56 @@ The only $N$ value appearing in multiple pipeline stages is $N = 9$ (both Ola3 a
 \textbf{Result:} At $N = 9$, Ola3 yields $\langle R \rangle = 0.395 \pm 0.021$ ($n = 52$) and Ola4 yields $\langle R \rangle = 0.400 \pm 0.022$ ($n = 62$). A two-sample $t$-test gives $t = -1.12$, $p = 0.27$---no significant difference.
 
 This confirms that the coherence scaling is intrinsic to network size, not an artifact of the pipeline stage or threshold selection.
+
+\section{Memory-Weighted Disorder Proxy}
+\label{app:disorder_proxy}
+
+The mapping between DOFT networks and vortex phenomenology (Table~\ref{tab:mapping}) suggests that a disorder-related proxy should scale with network complexity. In Bragg-glass theory, roughness and displacement correlators grow logarithmically with the ratio of system size to correlation length~\cite{GiamarchiLeDoussal1994,Giamarchi1995}:
+\begin{equation}
+\langle u^2 \rangle \sim \ln(r/\ell)
+\label{eq:roughness}
+\end{equation}
+where $r$ is a characteristic scale, $\ell$ the lattice constant, and $u$ the displacement field. We construct an analogous roughness-like proxy for DOFT networks.
+
+\textbf{Naive proxy fails.} A first attempt using phase variance alone (phase\_var\_lastW) shows poor correlation with $\ln N$ ($R^2 = 0.08$; Figure~\ref{fig:proxy_comparison}a). This is expected: phase variance captures instantaneous spread but not the interplay between geometric order and memory stabilization.
+
+\textbf{Memory-weighted proxy.} We define a composite disorder proxy that multiplicatively couples coherence loss with entropic participation:
+\begin{equation}
+E_{\mathrm{disorder}} = (1 - R) \times H_{\mathrm{part}}
+\label{eq:E_disorder}
+\end{equation}
+where $R$ is the global coherence (R\_network\_S1\_mean) and $H_{\mathrm{part}}$ is the normalized partition entropy (H\_part\_norm\_mean). This form captures the intuition that disorder energy reflects both the failure of geometric coordination ($1-R$) and the entropic cost of maintaining residual order ($H_{\mathrm{part}}$).
+
+\textbf{Result.} Aggregating by network size $N$ (11 bins, $N = 2$--$12$) and fitting the bin means via ordinary least squares against $\ln N$ yields:
+\begin{equation}
+E_{\mathrm{disorder}} \approx 0.12 \cdot \ln N + 0.07, \quad R^2 = 0.97
+\label{eq:E_fit}
+\end{equation}
+(Figure~\ref{fig:proxy_comparison}b). The logarithmic scaling is consistent with Bragg-glass predictions under the identification $N \leftrightarrow r/\ell$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{memory_weighted_proxy_comparation.png}
+\caption{Comparison of disorder proxies versus network complexity $\ln N$. 
+\textbf{(a)}~Phase variance alone shows poor correlation ($R^2 = 0.08$). 
+\textbf{(b)}~The memory-weighted proxy $E_{\mathrm{disorder}} = (1-R) \times H_{\mathrm{part}}$ exhibits robust logarithmic scaling ($R^2 = 0.97$), consistent with Bragg-glass theory predictions. 
+Error bars indicate standard error of the mean across entities within each $N$ bin.}
+\label{fig:proxy_comparison}
+\end{figure}
+
+\textbf{Physical interpretation.} The multiplicative form $(1-R) \times H_{\mathrm{part}}$ is not arbitrary. At low $N$, coherence is high ($R \to 1$), so $(1-R) \to 0$ regardless of entropy---geometric order dominates. At high $N$, coherence degrades ($R \to 0.4$), and the entropic term $H_{\mathrm{part}}$ modulates how much ``disorder energy'' is required to maintain residual coordination. The product captures this crossover naturally.
+
+\textbf{Stability proxy.} Inverting the disorder energy defines a topological stability measure:
+\begin{equation}
+S_{\mathrm{topo}} = \frac{1}{E_{\mathrm{disorder}}} = \frac{1}{(1-R) \times H_{\mathrm{part}}}
+\label{eq:S_topo}
+\end{equation}
+which decreases monotonically with $N$ and correlates with survival probability. Entities with anomalously high $S_{\mathrm{topo}}$ at large $N$ tend to be survivors, suggesting this metric captures the ``cost of coherence'' that distinguishes promoted configurations.
+
+\textbf{Connection to vortex phenomenology.} In type-II superconductors, the peak effect---an anomalous increase in critical current near $H_{c2}$---is associated with softening of the vortex lattice and enhanced pinning~\cite{Paltiel2000}. The position of this peak typically occurs at $H/H_{c2} \approx 0.7$--$0.9$ depending on material and disorder~\cite{Fasano2005}. 
+
+In our data, a qualitative analog appears: survival rates show a local minimum at $N \approx 9$ followed by a slight rebound at $N = 10$--$12$ for certain topologies (bipartites). However, the statistical significance is marginal (based on 5--7 survivors at $N \geq 10$), and we present this observation as preliminary rather than established. The correspondence $N/N_{\max} = 10/12 \approx 0.83$ versus $H/H_{c2} \approx 0.8$ is suggestive but requires larger samples to confirm.
+
+\textbf{Limitations.} The mapping $N \leftrightarrow r/\ell$ is phenomenological, not derived. Network node count measures topological complexity, not spatial distance. The logarithmic scaling is empirical over one decade ($N = 2$--$12$); extension to larger $N$ is needed to test asymptotic behavior. We report this proxy as a \emph{quantitative tool} consistent with vortex phenomenology, not as proof of microscopic equivalence.
 
 \end{document}

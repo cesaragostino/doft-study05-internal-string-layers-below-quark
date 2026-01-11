@@ -4,7 +4,7 @@
     "3",
     "4"
   ],
-  "paper_csv": "data/processed/paper/data/all/paper_metrics_all.csv",
+  "paper_csv": "paper/data/paper_metrics_all.csv",
   "plots": [],
   "rows": 4323
 }

@@ -1288,6 +1288,14 @@ def _paper_rows(rows: List[Dict[str, Any]], ola_label: Optional[str] = None) -> 
     out = []
     for row in rows:
         ola_val = row.get("ola") or ola_label
+        r_mean = _to_float(row.get("R_network_S1_mean"))
+        h_part = _to_float(row.get("H_part_norm_mean"))
+        e_disorder = None
+        s_topo = None
+        if r_mean is not None and h_part is not None:
+            e_disorder = (1.0 - r_mean) * h_part
+            if e_disorder > 0:
+                s_topo = 1.0 / e_disorder
         out.append(
             {
                 "entity_id": row.get("entity_id"),
@@ -1317,6 +1325,8 @@ def _paper_rows(rows: List[Dict[str, Any]], ola_label: Optional[str] = None) -> 
                 "R_network_S1_mean": row.get("R_network_S1_mean"),
                 "PE_lockS1_norm_mean": row.get("PE_lockS1_norm_mean"),
                 "H_part_norm_mean": row.get("H_part_norm_mean"),
+                "E_disorder": e_disorder,
+                "S_topo": s_topo,
                 "R_mean_lastW_mean": row.get("R_mean_lastW_mean"),
                 "phase_var_lastW_mean": row.get("phase_var_lastW_mean"),
                 "QualityLock_mean": row.get("QualityLock_mean"),
